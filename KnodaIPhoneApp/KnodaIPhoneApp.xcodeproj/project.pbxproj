@@ -17,7 +17,8 @@
 		9E708838178AF68E00F036A8 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E708837178AF68E00F036A8 /* Default@2x.png */; };
 		9E70883A178AF68E00F036A8 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E708839178AF68E00F036A8 /* Default-568h@2x.png */; };
 		9E70883D178AF68E00F036A8 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E70883B178AF68E00F036A8 /* MainStoryboard.storyboard */; };
-		9E708840178AF68E00F036A8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E70883F178AF68E00F036A8 /* ViewController.m */; };
+		9E70884C178AFF2F00F036A8 /* BaseWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E708848178AFF2F00F036A8 /* BaseWebRequest.m */; };
+		9E70884D178AFF2F00F036A8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E70884B178AFF2F00F036A8 /* ViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,8 +36,10 @@
 		9E708837178AF68E00F036A8 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		9E708839178AF68E00F036A8 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		9E70883C178AF68E00F036A8 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		9E70883E178AF68E00F036A8 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		9E70883F178AF68E00F036A8 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		9E708847178AFF2F00F036A8 /* BaseWebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseWebRequest.h; sourceTree = "<group>"; };
+		9E708848178AFF2F00F036A8 /* BaseWebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseWebRequest.m; sourceTree = "<group>"; };
+		9E70884A178AFF2F00F036A8 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		9E70884B178AFF2F00F036A8 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,11 +86,11 @@
 		9E708829178AF68E00F036A8 /* KnodaIPhoneApp */ = {
 			isa = PBXGroup;
 			children = (
+				9E708846178AFF2F00F036A8 /* Networking */,
+				9E708849178AFF2F00F036A8 /* UI */,
 				9E708832178AF68E00F036A8 /* AppDelegate.h */,
 				9E708833178AF68E00F036A8 /* AppDelegate.m */,
 				9E70883B178AF68E00F036A8 /* MainStoryboard.storyboard */,
-				9E70883E178AF68E00F036A8 /* ViewController.h */,
-				9E70883F178AF68E00F036A8 /* ViewController.m */,
 				9E70882A178AF68E00F036A8 /* Supporting Files */,
 			);
 			path = KnodaIPhoneApp;
@@ -105,6 +108,24 @@
 				9E708839178AF68E00F036A8 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9E708846178AFF2F00F036A8 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				9E708847178AFF2F00F036A8 /* BaseWebRequest.h */,
+				9E708848178AFF2F00F036A8 /* BaseWebRequest.m */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		9E708849178AFF2F00F036A8 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				9E70884A178AFF2F00F036A8 /* ViewController.h */,
+				9E70884B178AFF2F00F036A8 /* ViewController.m */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -175,7 +196,8 @@
 			files = (
 				9E708830178AF68E00F036A8 /* main.m in Sources */,
 				9E708834178AF68E00F036A8 /* AppDelegate.m in Sources */,
-				9E708840178AF68E00F036A8 /* ViewController.m in Sources */,
+				9E70884C178AFF2F00F036A8 /* BaseWebRequest.m in Sources */,
+				9E70884D178AFF2F00F036A8 /* ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +285,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KnodaIPhoneApp/KnodaIPhoneApp-Prefix.pch";
 				INFOPLIST_FILE = "KnodaIPhoneApp/KnodaIPhoneApp-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -274,6 +297,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KnodaIPhoneApp/KnodaIPhoneApp-Prefix.pch";
 				INFOPLIST_FILE = "KnodaIPhoneApp/KnodaIPhoneApp-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

@@ -7,12 +7,15 @@
 //
 
 #import "AppDelegate.h"
+#import "PredictionsWebRequest.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] init];
+    [predictionsRequest executeWithCompletionBlock: ^{}];
+    
     return YES;
 }
 							

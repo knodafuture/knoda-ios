@@ -22,7 +22,7 @@
 @end
 
 
-#define PRODUCTION_ENVIRENMENT
+//#define PRODUCTION_ENVIRENMENT
 
 
 #ifdef PRODUCTION_ENVIRENMENT
@@ -31,7 +31,7 @@ static NSString* const kBaseURL = @"example.com";
 
 #else
 
-static NSString* const kBaseURL = @"dev.example.com";
+static NSString* const kBaseURL = @"192.168.195.57/";
 
 #endif
 
@@ -89,6 +89,12 @@ const NSInteger kInternetOfflineError = -1009;
 
 
 - (BOOL) requiresHTTPS
+{
+    return NO;
+}
+
+
+- (BOOL) requiresAuthToken
 {
     return NO;
 }
@@ -158,8 +164,6 @@ const NSInteger kInternetOfflineError = -1009;
         }
     }
     
-    [urlParameters appendString: @"&returnformat=json"];
-    
     return [urlParameters stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
 }
 
@@ -195,6 +199,11 @@ const NSInteger kInternetOfflineError = -1009;
     
     [request setHTTPMethod: [self httpMethod]];
     [request setTimeoutInterval: 20];
+    
+    if ([self requiresAuthToken])
+    {
+        [request setValue: @"_knoda_session=TFErYXlMaytNM2FlYjJjeWMwNmVXek53c203QzBhQm9TU3cwYlNQdFpWQVhhR2JYRVpid1BOYytQWWxqSkV0NFJoZHpLNWYzSi9udVVoRHhFVDh0THl2TWxZWGpWRXJOVmRoNktTVUtyREROU3JOdUszT1RqUHlCcEFtMTNrQnVsREp4c1cwN3RSWHJnOENGL3JMRk1yQXhxL01aeUdzVjk0aVVYTStxK3VHaGc1RkxjR1hjMW5URVhBZTVHS01XZmVsdHFRR0ZnczVidjNacSt4NmgzQlhjRk12aDlXekxsaUZjZWJyUUI3NHdtMHJhRnk1ZkdEL0hpNFRmNyt3Q0ZLaHlvZmdMaDN5bXRHeDlDNnMvbDRYeWxBOWt3YnNkQk5EUks3Uy9XY0IyY2JvNElKQTZCZkFoSGcrSTZTQVNIYjZsdE9sOFJUTEx2Tms3RXNQQXhuSmpWSy9VZ055VUhISjZWd3RnNC9DdWR1TUFzNzJCK1c2VGpaOXpMTHI5L1ZxaWN4NEpSbjh3MVJIRzVrT2pYdUpvdG9QMGIyYmZ4UkdnNGw2Wm9ZcEpFMjdWb3lJdG9LK0ZzcFlTaE5PRVlHTTJidEtCcUF3UFJldkEzUUxKTWc9PS0tazNMN0o1Qnh1YnhURkMrZGRCeStZUT09--2bf82f5746ffb6dad73f8d4310222c7e39070cf7" forHTTPHeaderField: @"Cookie"];
+    }
     
     NSLog(@"%@ Start request %@", NSStringFromClass([self class]), request.URL);
     
@@ -244,6 +253,8 @@ const NSInteger kInternetOfflineError = -1009;
         else
         {
             NSString* resultString = [[NSString alloc] initWithData: result encoding: NSUTF8StringEncoding];
+            
+             NSLog(@"%@ %@\nRequest result:\n%@",  NSStringFromClass([self class]), request.URL, resultString);
             
             if (resultString != nil)
             {

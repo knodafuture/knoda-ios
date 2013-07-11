@@ -7,15 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9E06636E178C3C7F00B3E974 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E066363178C3C7F00B3E974 /* NSObject+SBJSON.m */; };
-		9E06636F178C3C7F00B3E974 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E066365178C3C7F00B3E974 /* NSString+SBJSON.m */; };
-		9E066370178C3C7F00B3E974 /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E066367178C3C7F00B3E974 /* SBJSON.m */; };
-		9E066371178C3C7F00B3E974 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E066369178C3C7F00B3E974 /* SBJsonBase.m */; };
-		9E066372178C3C7F00B3E974 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E06636B178C3C7F00B3E974 /* SBJsonParser.m */; };
-		9E066373178C3C7F00B3E974 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E06636D178C3C7F00B3E974 /* SBJsonWriter.m */; };
+		9E06636E178C3C7F00B3E974 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E066363178C3C7F00B3E974 /* NSObject+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9E06636F178C3C7F00B3E974 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E066365178C3C7F00B3E974 /* NSString+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9E066370178C3C7F00B3E974 /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E066367178C3C7F00B3E974 /* SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9E066371178C3C7F00B3E974 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E066369178C3C7F00B3E974 /* SBJsonBase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9E066372178C3C7F00B3E974 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E06636B178C3C7F00B3E974 /* SBJsonParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9E066373178C3C7F00B3E974 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E06636D178C3C7F00B3E974 /* SBJsonWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9E066377178C3EFF00B3E974 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E066376178C3EFF00B3E974 /* User.m */; };
 		9E06637A178C407300B3E974 /* Prediction.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E066379178C407300B3E974 /* Prediction.m */; };
 		9E06637D178C560000B3E974 /* Topic.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E06637C178C560000B3E974 /* Topic.m */; };
+		9E066380178EAE2000B3E974 /* PredictionsWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E06637F178EAE2000B3E974 /* PredictionsWebRequest.m */; };
 		9E708824178AF68E00F036A8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E708823178AF68E00F036A8 /* UIKit.framework */; };
 		9E708826178AF68E00F036A8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E708825178AF68E00F036A8 /* Foundation.framework */; };
 		9E708828178AF68E00F036A8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E708827178AF68E00F036A8 /* CoreGraphics.framework */; };
@@ -50,6 +51,8 @@
 		9E066379178C407300B3E974 /* Prediction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Prediction.m; sourceTree = "<group>"; };
 		9E06637B178C560000B3E974 /* Topic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Topic.h; sourceTree = "<group>"; };
 		9E06637C178C560000B3E974 /* Topic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Topic.m; sourceTree = "<group>"; };
+		9E06637E178EAE2000B3E974 /* PredictionsWebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PredictionsWebRequest.h; sourceTree = "<group>"; };
+		9E06637F178EAE2000B3E974 /* PredictionsWebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PredictionsWebRequest.m; sourceTree = "<group>"; };
 		9E708820178AF68E00F036A8 /* KnodaIPhoneApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KnodaIPhoneApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E708823178AF68E00F036A8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9E708825178AF68E00F036A8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -186,6 +189,8 @@
 			children = (
 				9E708847178AFF2F00F036A8 /* BaseWebRequest.h */,
 				9E708848178AFF2F00F036A8 /* BaseWebRequest.m */,
+				9E06637E178EAE2000B3E974 /* PredictionsWebRequest.h */,
+				9E06637F178EAE2000B3E974 /* PredictionsWebRequest.m */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -278,6 +283,7 @@
 				9E066377178C3EFF00B3E974 /* User.m in Sources */,
 				9E06637A178C407300B3E974 /* Prediction.m in Sources */,
 				9E06637D178C560000B3E974 /* Topic.m in Sources */,
+				9E066380178EAE2000B3E974 /* PredictionsWebRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

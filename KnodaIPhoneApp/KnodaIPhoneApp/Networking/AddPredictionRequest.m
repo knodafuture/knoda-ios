@@ -20,7 +20,7 @@
                                 @"prediction[expires_at(1i)]" : [NSNumber numberWithInteger: year],
                                 @"prediction[expires_at(2i)]" : [NSNumber numberWithInteger: month],
                                 @"prediction[expires_at(3i)]" : [NSNumber numberWithInteger: day],
-                                @"prediction[outcome]" : [NSNumber numberWithBool: NO]};
+                                @"prediction[outcome]" : [NSNumber numberWithBool: NO], @"prediction[tag_list]" : @"dsfds, sdfdsf"};
     
     self = [super initWithParameters: theParams];
     return self;

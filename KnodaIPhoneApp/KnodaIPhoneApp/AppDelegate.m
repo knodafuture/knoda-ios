@@ -7,14 +7,32 @@
 //
 
 #import "AppDelegate.h"
+
+//! TODO: remove test headers
 #import "PredictionsWebRequest.h"
+#import "LoginWebRequest.h"
+#import "SignUpRequest.h"
+#import "AddPredictionRequest.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] init];
-    [predictionsRequest executeWithCompletionBlock: ^{}];
+    LoginWebRequest* loginRequest = [[LoginWebRequest alloc] initWithUsername: @"" password: @""];
+    [loginRequest executeWithCompletionBlock: ^
+    {
+        self.user = loginRequest.user;
+        
+        AddPredictionRequest* addPredictionRequest = [[AddPredictionRequest alloc] initWithBody: @"" expirationDay: 17 expirationMonth: 11 expirationYear: 2015];
+        [addPredictionRequest executeWithCompletionBlock: ^
+        {
+            PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] init];
+            [predictionsRequest executeWithCompletionBlock: ^{}];
+        }];
+    }];
+    
+    //SignUpRequest* signUpRequest = [[SignUpRequest alloc] initWithUsername: @"" email: @"" password: @""];
+    //[signUpRequest executeWithCompletionBlock: ^{}];
     
     return YES;
 }

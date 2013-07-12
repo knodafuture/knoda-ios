@@ -13,5 +13,6 @@
 @property (nonatomic, strong) NSString* name;
 @property (nonatomic, strong) NSString* email;
 @property (nonatomic, strong) UIImage* profileImage;
+@property (nonatomic, strong) NSString* token;
 
 @end

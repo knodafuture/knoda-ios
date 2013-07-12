@@ -7,6 +7,7 @@
 //
 
 #import "BaseWebRequest.h"
+#import "AppDelegate.h"
 
 
 @interface BaseWebRequest ()
@@ -18,6 +19,8 @@
 
 @property (nonatomic, strong) id <NSObject> resultObject;
 @property (nonatomic, strong) NSDictionary* parameters;
+
+@property (nonatomic, readonly) AppDelegate* appDelegate;
 
 @end
 
@@ -31,7 +34,7 @@ static NSString* const kBaseURL = @"example.com";
 
 #else
 
-static NSString* const kBaseURL = @"192.168.195.57/";
+static NSString* const kBaseURL = @"192.168.195.57/api/";
 
 #endif
 
@@ -57,6 +60,13 @@ const NSInteger kInternetOfflineError = -1009;
 {
     return self.state == kRequestStateCancelled;
 }
+
+
+- (AppDelegate*) appDelegate
+{
+    return [UIApplication sharedApplication].delegate;
+}
+
 
 #pragma mark - Init
 
@@ -123,6 +133,11 @@ const NSInteger kInternetOfflineError = -1009;
 {
     NSMutableString* urlString = [NSMutableString stringWithFormat: @"%@%@%@", ([self requiresHTTPS]) ? @"https://" : @"http://", kBaseURL, [self methodName]];
     
+    if ([self requiresAuthToken])
+    {
+        [urlString appendFormat: @"?auth_token=%@", self.appDelegate.user.token];
+    }
+    
     if ([[self httpMethod] isEqualToString: @"GET"])
     {
         [urlString appendString: [self formParametersString]];
@@ -137,6 +152,7 @@ const NSInteger kInternetOfflineError = -1009;
 - (NSString*) formParametersString
 {
     NSMutableString* urlParameters = [NSMutableString stringWithString: @""];
+    
     NSArray* keys = [self.parameters allKeys];
     
     for (NSString* key in keys)
@@ -145,24 +161,31 @@ const NSInteger kInternetOfflineError = -1009;
         
         if ([value isKindOfClass: [NSString class]])
         {
-            [urlParameters appendFormat: @"&%@=%@", key, value];
+            [urlParameters appendFormat: @"%@=%@", key, value];
         }
         else if ([value isKindOfClass: [NSNumber class]])
         {
             if (strcmp([value objCType], @encode(BOOL)) == 0)
             {
-                [urlParameters appendFormat: @"&%@=%@", key, ([value boolValue] == YES) ? @"true" : @"false"];
+                [urlParameters appendFormat: @"%@=%@", key, ([value boolValue] == YES) ? @"true" : @"false"];
             }
             else if (strcmp([value objCType], @encode(int)) == 0)
             {
-                [urlParameters appendFormat: @"&%@=%i", key, [value intValue]];
+                [urlParameters appendFormat: @"%@=%i", key, [value intValue]];
             }
             else if (strcmp([value objCType], @encode(float)) == 0 || strcmp([value objCType], @encode(double)) == 0 )
             {
-                [urlParameters appendFormat: @"&%@=%f", key, [value floatValue]];
+                [urlParameters appendFormat: @"%@=%f", key, [value floatValue]];
             }
         }
+        
+        if ([keys lastObject] != key)
+        {
+            [urlParameters appendString: @"&"];
+        }
     }
+    
+    NSLog(@"URL parameters: %@", urlParameters);
     
     return [urlParameters stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
 }
@@ -200,11 +223,6 @@ const NSInteger kInternetOfflineError = -1009;
     [request setHTTPMethod: [self httpMethod]];
     [request setTimeoutInterval: 20];
     
-    if ([self requiresAuthToken])
-    {
-        [request setValue: @"_knoda_session=TFErYXlMaytNM2FlYjJjeWMwNmVXek53c203QzBhQm9TU3cwYlNQdFpWQVhhR2JYRVpid1BOYytQWWxqSkV0NFJoZHpLNWYzSi9udVVoRHhFVDh0THl2TWxZWGpWRXJOVmRoNktTVUtyREROU3JOdUszT1RqUHlCcEFtMTNrQnVsREp4c1cwN3RSWHJnOENGL3JMRk1yQXhxL01aeUdzVjk0aVVYTStxK3VHaGc1RkxjR1hjMW5URVhBZTVHS01XZmVsdHFRR0ZnczVidjNacSt4NmgzQlhjRk12aDlXekxsaUZjZWJyUUI3NHdtMHJhRnk1ZkdEL0hpNFRmNyt3Q0ZLaHlvZmdMaDN5bXRHeDlDNnMvbDRYeWxBOWt3YnNkQk5EUks3Uy9XY0IyY2JvNElKQTZCZkFoSGcrSTZTQVNIYjZsdE9sOFJUTEx2Tms3RXNQQXhuSmpWSy9VZ055VUhISjZWd3RnNC9DdWR1TUFzNzJCK1c2VGpaOXpMTHI5L1ZxaWN4NEpSbjh3MVJIRzVrT2pYdUpvdG9QMGIyYmZ4UkdnNGw2Wm9ZcEpFMjdWb3lJdG9LK0ZzcFlTaE5PRVlHTTJidEtCcUF3UFJldkEzUUxKTWc9PS0tazNMN0o1Qnh1YnhURkMrZGRCeStZUT09--2bf82f5746ffb6dad73f8d4310222c7e39070cf7" forHTTPHeaderField: @"Cookie"];
-    }
-    
     NSLog(@"%@ Start request %@", NSStringFromClass([self class]), request.URL);
     
     if ([request.HTTPMethod isEqualToString: @"POST"])
@@ -239,7 +257,7 @@ const NSInteger kInternetOfflineError = -1009;
             self.errorDescription = error.localizedDescription;
         }
         // Handle HTTP errors
-        else if (response.statusCode != 200)
+        else if (response.statusCode != 200 && response.statusCode != 201)
         {
             self.errorCode = response.statusCode;
             self.errorDescription = [NSHTTPURLResponse localizedStringForStatusCode: response.statusCode];

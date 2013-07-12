@@ -19,7 +19,7 @@
 
 - (void) fillResultObject: (id) parsedResult
 {
-    NSLog(@"Result: %@", parsedResult);
+    NSLog(@"Predictions Result: %@", parsedResult);
 }
 
 

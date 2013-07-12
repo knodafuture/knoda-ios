@@ -17,6 +17,9 @@
 		9E06637A178C407300B3E974 /* Prediction.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E066379178C407300B3E974 /* Prediction.m */; };
 		9E06637D178C560000B3E974 /* Topic.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E06637C178C560000B3E974 /* Topic.m */; };
 		9E066380178EAE2000B3E974 /* PredictionsWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E06637F178EAE2000B3E974 /* PredictionsWebRequest.m */; };
+		9E066383179026B200B3E974 /* LoginWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E066382179026B200B3E974 /* LoginWebRequest.m */; };
+		9E066386179038FE00B3E974 /* SignUpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E066385179038FE00B3E974 /* SignUpRequest.m */; };
+		9E06638917903C3A00B3E974 /* AddPredictionRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E06638817903C3A00B3E974 /* AddPredictionRequest.m */; };
 		9E708824178AF68E00F036A8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E708823178AF68E00F036A8 /* UIKit.framework */; };
 		9E708826178AF68E00F036A8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E708825178AF68E00F036A8 /* Foundation.framework */; };
 		9E708828178AF68E00F036A8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E708827178AF68E00F036A8 /* CoreGraphics.framework */; };
@@ -53,6 +56,12 @@
 		9E06637C178C560000B3E974 /* Topic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Topic.m; sourceTree = "<group>"; };
 		9E06637E178EAE2000B3E974 /* PredictionsWebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PredictionsWebRequest.h; sourceTree = "<group>"; };
 		9E06637F178EAE2000B3E974 /* PredictionsWebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PredictionsWebRequest.m; sourceTree = "<group>"; };
+		9E066381179026B100B3E974 /* LoginWebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginWebRequest.h; sourceTree = "<group>"; };
+		9E066382179026B200B3E974 /* LoginWebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginWebRequest.m; sourceTree = "<group>"; };
+		9E066384179038FE00B3E974 /* SignUpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpRequest.h; sourceTree = "<group>"; };
+		9E066385179038FE00B3E974 /* SignUpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpRequest.m; sourceTree = "<group>"; };
+		9E06638717903C3A00B3E974 /* AddPredictionRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPredictionRequest.h; sourceTree = "<group>"; };
+		9E06638817903C3A00B3E974 /* AddPredictionRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPredictionRequest.m; sourceTree = "<group>"; };
 		9E708820178AF68E00F036A8 /* KnodaIPhoneApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KnodaIPhoneApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E708823178AF68E00F036A8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9E708825178AF68E00F036A8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -191,6 +200,12 @@
 				9E708848178AFF2F00F036A8 /* BaseWebRequest.m */,
 				9E06637E178EAE2000B3E974 /* PredictionsWebRequest.h */,
 				9E06637F178EAE2000B3E974 /* PredictionsWebRequest.m */,
+				9E066381179026B100B3E974 /* LoginWebRequest.h */,
+				9E066382179026B200B3E974 /* LoginWebRequest.m */,
+				9E066384179038FE00B3E974 /* SignUpRequest.h */,
+				9E066385179038FE00B3E974 /* SignUpRequest.m */,
+				9E06638717903C3A00B3E974 /* AddPredictionRequest.h */,
+				9E06638817903C3A00B3E974 /* AddPredictionRequest.m */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -284,6 +299,9 @@
 				9E06637A178C407300B3E974 /* Prediction.m in Sources */,
 				9E06637D178C560000B3E974 /* Topic.m in Sources */,
 				9E066380178EAE2000B3E974 /* PredictionsWebRequest.m in Sources */,
+				9E066383179026B200B3E974 /* LoginWebRequest.m in Sources */,
+				9E066386179038FE00B3E974 /* SignUpRequest.m in Sources */,
+				9E06638917903C3A00B3E974 /* AddPredictionRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

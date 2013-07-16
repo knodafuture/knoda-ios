@@ -20,6 +20,17 @@
 		9E066383179026B200B3E974 /* LoginWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E066382179026B200B3E974 /* LoginWebRequest.m */; };
 		9E066386179038FE00B3E974 /* SignUpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E066385179038FE00B3E974 /* SignUpRequest.m */; };
 		9E06638917903C3A00B3E974 /* AddPredictionRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E06638817903C3A00B3E974 /* AddPredictionRequest.m */; };
+		9E06639417959A2100B3E974 /* greenBg.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E06639017959A2100B3E974 /* greenBg.png */; };
+		9E06639517959A2100B3E974 /* greenBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E06639117959A2100B3E974 /* greenBg@2x.png */; };
+		9E06639617959A2100B3E974 /* knoda_logo_lg.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E06639217959A2100B3E974 /* knoda_logo_lg.png */; };
+		9E06639717959A2100B3E974 /* knoda_logo_lg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E06639317959A2100B3E974 /* knoda_logo_lg@2x.png */; };
+		9E06639A17959A4C00B3E974 /* HelveticaNeue.dfont in Resources */ = {isa = PBXBuildFile; fileRef = 9E06639817959A4C00B3E974 /* HelveticaNeue.dfont */; };
+		9E06639B17959A4C00B3E974 /* KronaOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9E06639917959A4C00B3E974 /* KronaOne-Regular.ttf */; };
+		9E5792461795A43300979928 /* circleArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5792441795A43300979928 /* circleArrow.png */; };
+		9E5792471795A43300979928 /* circleArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5792451795A43300979928 /* circleArrow@2x.png */; };
+		9E57924A1795A4D500979928 /* knoda_logo_sm.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5792481795A4D500979928 /* knoda_logo_sm.png */; };
+		9E57924B1795A4D500979928 /* knoda_logo_sm@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5792491795A4D500979928 /* knoda_logo_sm@2x.png */; };
+		9E57924E1795A8D300979928 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E57924D1795A8D300979928 /* LoginViewController.m */; };
 		9E708824178AF68E00F036A8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E708823178AF68E00F036A8 /* UIKit.framework */; };
 		9E708826178AF68E00F036A8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E708825178AF68E00F036A8 /* Foundation.framework */; };
 		9E708828178AF68E00F036A8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E708827178AF68E00F036A8 /* CoreGraphics.framework */; };
@@ -31,7 +42,7 @@
 		9E70883A178AF68E00F036A8 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E708839178AF68E00F036A8 /* Default-568h@2x.png */; };
 		9E70883D178AF68E00F036A8 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E70883B178AF68E00F036A8 /* MainStoryboard.storyboard */; };
 		9E70884C178AFF2F00F036A8 /* BaseWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E708848178AFF2F00F036A8 /* BaseWebRequest.m */; };
-		9E70884D178AFF2F00F036A8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E70884B178AFF2F00F036A8 /* ViewController.m */; };
+		9E70884D178AFF2F00F036A8 /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E70884B178AFF2F00F036A8 /* WelcomeViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +73,18 @@
 		9E066385179038FE00B3E974 /* SignUpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpRequest.m; sourceTree = "<group>"; };
 		9E06638717903C3A00B3E974 /* AddPredictionRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPredictionRequest.h; sourceTree = "<group>"; };
 		9E06638817903C3A00B3E974 /* AddPredictionRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPredictionRequest.m; sourceTree = "<group>"; };
+		9E06639017959A2100B3E974 /* greenBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenBg.png; sourceTree = "<group>"; };
+		9E06639117959A2100B3E974 /* greenBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "greenBg@2x.png"; sourceTree = "<group>"; };
+		9E06639217959A2100B3E974 /* knoda_logo_lg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = knoda_logo_lg.png; sourceTree = "<group>"; };
+		9E06639317959A2100B3E974 /* knoda_logo_lg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "knoda_logo_lg@2x.png"; sourceTree = "<group>"; };
+		9E06639817959A4C00B3E974 /* HelveticaNeue.dfont */ = {isa = PBXFileReference; lastKnownFileType = file; name = HelveticaNeue.dfont; path = Fonts/HelveticaNeue.dfont; sourceTree = "<group>"; };
+		9E06639917959A4C00B3E974 /* KronaOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "KronaOne-Regular.ttf"; path = "Fonts/KronaOne-Regular.ttf"; sourceTree = "<group>"; };
+		9E5792441795A43300979928 /* circleArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circleArrow.png; sourceTree = "<group>"; };
+		9E5792451795A43300979928 /* circleArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circleArrow@2x.png"; sourceTree = "<group>"; };
+		9E5792481795A4D500979928 /* knoda_logo_sm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = knoda_logo_sm.png; sourceTree = "<group>"; };
+		9E5792491795A4D500979928 /* knoda_logo_sm@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "knoda_logo_sm@2x.png"; sourceTree = "<group>"; };
+		9E57924C1795A8D300979928 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		9E57924D1795A8D300979928 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		9E708820178AF68E00F036A8 /* KnodaIPhoneApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KnodaIPhoneApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E708823178AF68E00F036A8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9E708825178AF68E00F036A8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -78,8 +101,8 @@
 		9E70883C178AF68E00F036A8 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		9E708847178AFF2F00F036A8 /* BaseWebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseWebRequest.h; sourceTree = "<group>"; };
 		9E708848178AFF2F00F036A8 /* BaseWebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseWebRequest.m; sourceTree = "<group>"; };
-		9E70884A178AFF2F00F036A8 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		9E70884B178AFF2F00F036A8 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		9E70884A178AFF2F00F036A8 /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
+		9E70884B178AFF2F00F036A8 /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +160,31 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		9E06638A179598FC00B3E974 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9E06639817959A4C00B3E974 /* HelveticaNeue.dfont */,
+				9E06639917959A4C00B3E974 /* KronaOne-Regular.ttf */,
+				9E06638B179598FD00B3E974 /* Images */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		9E06638B179598FD00B3E974 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				9E5792481795A4D500979928 /* knoda_logo_sm.png */,
+				9E5792491795A4D500979928 /* knoda_logo_sm@2x.png */,
+				9E5792441795A43300979928 /* circleArrow.png */,
+				9E5792451795A43300979928 /* circleArrow@2x.png */,
+				9E06639017959A2100B3E974 /* greenBg.png */,
+				9E06639117959A2100B3E974 /* greenBg@2x.png */,
+				9E06639217959A2100B3E974 /* knoda_logo_lg.png */,
+				9E06639317959A2100B3E974 /* knoda_logo_lg@2x.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		9E708817178AF68E00F036A8 = {
 			isa = PBXGroup;
 			children = (
@@ -167,6 +215,7 @@
 		9E708829178AF68E00F036A8 /* KnodaIPhoneApp */ = {
 			isa = PBXGroup;
 			children = (
+				9E06638A179598FC00B3E974 /* Resources */,
 				9E066374178C3EE200B3E974 /* Model */,
 				9E06635F178C3C7F00B3E974 /* Thirdparty */,
 				9E708846178AFF2F00F036A8 /* Networking */,
@@ -213,8 +262,10 @@
 		9E708849178AFF2F00F036A8 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				9E70884A178AFF2F00F036A8 /* ViewController.h */,
-				9E70884B178AFF2F00F036A8 /* ViewController.m */,
+				9E70884A178AFF2F00F036A8 /* WelcomeViewController.h */,
+				9E70884B178AFF2F00F036A8 /* WelcomeViewController.m */,
+				9E57924C1795A8D300979928 /* LoginViewController.h */,
+				9E57924D1795A8D300979928 /* LoginViewController.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -275,6 +326,16 @@
 				9E708838178AF68E00F036A8 /* Default@2x.png in Resources */,
 				9E70883A178AF68E00F036A8 /* Default-568h@2x.png in Resources */,
 				9E70883D178AF68E00F036A8 /* MainStoryboard.storyboard in Resources */,
+				9E06639417959A2100B3E974 /* greenBg.png in Resources */,
+				9E06639517959A2100B3E974 /* greenBg@2x.png in Resources */,
+				9E06639617959A2100B3E974 /* knoda_logo_lg.png in Resources */,
+				9E06639717959A2100B3E974 /* knoda_logo_lg@2x.png in Resources */,
+				9E06639A17959A4C00B3E974 /* HelveticaNeue.dfont in Resources */,
+				9E06639B17959A4C00B3E974 /* KronaOne-Regular.ttf in Resources */,
+				9E5792461795A43300979928 /* circleArrow.png in Resources */,
+				9E5792471795A43300979928 /* circleArrow@2x.png in Resources */,
+				9E57924A1795A4D500979928 /* knoda_logo_sm.png in Resources */,
+				9E57924B1795A4D500979928 /* knoda_logo_sm@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,7 +349,7 @@
 				9E708830178AF68E00F036A8 /* main.m in Sources */,
 				9E708834178AF68E00F036A8 /* AppDelegate.m in Sources */,
 				9E70884C178AFF2F00F036A8 /* BaseWebRequest.m in Sources */,
-				9E70884D178AFF2F00F036A8 /* ViewController.m in Sources */,
+				9E70884D178AFF2F00F036A8 /* WelcomeViewController.m in Sources */,
 				9E06636E178C3C7F00B3E974 /* NSObject+SBJSON.m in Sources */,
 				9E06636F178C3C7F00B3E974 /* NSString+SBJSON.m in Sources */,
 				9E066370178C3C7F00B3E974 /* SBJSON.m in Sources */,
@@ -302,6 +363,7 @@
 				9E066383179026B200B3E974 /* LoginWebRequest.m in Sources */,
 				9E066386179038FE00B3E974 /* SignUpRequest.m in Sources */,
 				9E06638917903C3A00B3E974 /* AddPredictionRequest.m in Sources */,
+				9E57924E1795A8D300979928 /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

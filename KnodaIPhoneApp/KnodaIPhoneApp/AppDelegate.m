@@ -18,7 +18,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    LoginWebRequest* loginRequest = [[LoginWebRequest alloc] initWithUsername: @"" password: @""];
+/*    LoginWebRequest* loginRequest = [[LoginWebRequest alloc] initWithUsername: @"" password: @""];
     [loginRequest executeWithCompletionBlock: ^
     {
         self.user = loginRequest.user;
@@ -29,7 +29,7 @@
             PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] init];
             [predictionsRequest executeWithCompletionBlock: ^{}];
         }];
-    }];
+    }];*/
     
     //SignUpRequest* signUpRequest = [[SignUpRequest alloc] initWithUsername: @"" email: @"" password: @""];
     //[signUpRequest executeWithCompletionBlock: ^{}];

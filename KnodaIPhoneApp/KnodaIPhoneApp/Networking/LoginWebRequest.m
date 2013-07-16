@@ -14,7 +14,7 @@
 
 - (id) initWithUsername: (NSString*) userName password: (NSString*) password
 {
-    NSDictionary* theParameters = @{@"user_login[login]" : @"test", @"user_login[password]" : @"password"};
+    NSDictionary* theParameters = @{@"user_login[login]" : userName, @"user_login[password]" : password};
     
     self = [super initWithParameters: theParameters];
     return self;

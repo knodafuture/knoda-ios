@@ -2,7 +2,7 @@
 //  BaseWebRequest.m
 //  KnodaIPhoneApp
 //
-//  Created by Elena Timofeeva on 2/6/13.
+//  Created by Elena Timofeeva on 7/8/13.
 //  Copyright (c) 2013 Knoda. All rights reserved.
 //
 

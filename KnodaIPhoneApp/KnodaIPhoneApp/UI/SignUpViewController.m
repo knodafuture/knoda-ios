@@ -1,24 +1,26 @@
 //
-//  LoginViewController.m
+//  SignUpViewController.m
 //  KnodaIPhoneApp
 //
-//  Created by Elena Timofeeva on 7/16/13.
+//  Created by Elena Timofeeva on 7/18/13.
 //  Copyright (c) 2013 Knoda. All rights reserved.
 //
 
-#import "LoginViewController.h"
+#import "SignUpViewController.h"
 
 #import "AppDelegate.h"
 
-#import "LoginWebRequest.h"
+#import "SignUpRequest.h"
 #import "PredictionsWebRequest.h"
 
-@interface LoginViewController ()
+
+@interface SignUpViewController ()
 
 @property (nonatomic, readonly) AppDelegate* appDelegate;
 
 @property (nonatomic, strong) IBOutlet UITextField* usernameTextField;
 @property (nonatomic, strong) IBOutlet UITextField* passwordTextField;
+@property (nonatomic, strong) IBOutlet UITextField* emailTextFiled;
 @property (nonatomic, strong) IBOutlet UIView* containerView;
 @property (nonatomic, strong) IBOutlet UIView* activityView;
 @property (nonatomic, strong) IBOutlet UIView* errorView;
@@ -28,8 +30,7 @@
 
 @end
 
-@implementation LoginViewController
-
+@implementation SignUpViewController
 
 - (void) viewDidUnload
 {
@@ -67,9 +68,14 @@
 }
 
 
-- (IBAction) loginButtonPressed: (id) sender
+- (IBAction) signUpButtonPressed: (id) sender
 {
     self.activityView.hidden = NO;
+    
+    if ([self.emailTextFiled isFirstResponder])
+    {
+        [self.emailTextFiled resignFirstResponder];
+    }
     
     if ([self.usernameTextField isFirstResponder])
     {
@@ -83,26 +89,26 @@
     
     [self hideError];
     
-    LoginWebRequest* loginRequest = [[LoginWebRequest alloc] initWithUsername: self.usernameTextField.text password: self.passwordTextField.text];
-    [loginRequest executeWithCompletionBlock: ^
-    {
-        self.activityView.hidden = YES;
-        
-        if (loginRequest.errorCode == 0)
-        {
-            self.appDelegate.user = loginRequest.user;
-            
-            PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] init];
-            [predictionsRequest executeWithCompletionBlock: ^{}];
-        }
-        else if (loginRequest.errorCode == 403)
-        {
-            [self showError: NSLocalizedString(@"Invalid username or password", @"")];
-        }
-        else
-        {
-            [self showError: NSLocalizedString(@"Unknown error. Please try later.", @"")];
-        }
+    SignUpRequest* signUpRequest = [[SignUpRequest alloc] initWithUsername: self.usernameTextField.text email: self.emailTextFiled.text password: self.passwordTextField.text];
+    [signUpRequest executeWithCompletionBlock: ^
+     {
+         self.activityView.hidden = YES;
+         
+         if (signUpRequest.errorCode == 0)
+         {
+             self.appDelegate.user = signUpRequest.user;
+             
+             PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] init];
+             [predictionsRequest executeWithCompletionBlock: ^{}];
+         }
+         else if (signUpRequest.errorCode == 403)
+         {
+             [self showError: NSLocalizedString(@"Invalid username or password", @"")];
+         }
+         else
+         {
+             [self showError: NSLocalizedString(@"Unknown error. Please try later.", @"")];
+         }
      }];
 }
 
@@ -112,7 +118,7 @@
 
 - (void) willShowKeyboardNotificationDidRecieve: (NSNotification*) notification
 {
-    if ([self.usernameTextField isFirstResponder] || [self.passwordTextField isFirstResponder])
+    if ([self.emailTextFiled isFirstResponder] || [self.usernameTextField isFirstResponder] || [self.passwordTextField isFirstResponder])
     {
         NSTimeInterval animationDuration = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
         CGRect endFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
@@ -124,7 +130,7 @@
 
 - (void) willHideKeyboardNotificationDidRecieve: (NSNotification*) notification
 {
-    if ([self.usernameTextField isFirstResponder] || [self.passwordTextField isFirstResponder])
+    if ([self.emailTextFiled isFirstResponder] || [self.usernameTextField isFirstResponder] || [self.passwordTextField isFirstResponder])
     {
         NSTimeInterval animationDuration = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
         CGRect endFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
@@ -157,9 +163,9 @@ withAnimationDuration: (NSTimeInterval)animationDuration
     }
     
     [UIView animateWithDuration:animationDuration delay:0.0 options:(animationCurve << 16) animations:^
-    {
-        self.containerView.frame = newContainerFrame;
-    } completion: NULL];
+     {
+         self.containerView.frame = newContainerFrame;
+     } completion: NULL];
 }
 
 
@@ -168,16 +174,26 @@ withAnimationDuration: (NSTimeInterval)animationDuration
 
 - (BOOL) textFieldShouldReturn: (UITextField*) textField
 {
-    if (textField == self.usernameTextField)
+    if (textField == self.emailTextFiled)
+    {
+        [self.usernameTextField becomeFirstResponder];
+    }
+    else if (textField == self.usernameTextField)
     {
         [self.passwordTextField becomeFirstResponder];
     }
     else if (textField == self.passwordTextField)
     {
-        [self loginButtonPressed: self];
+        [self signUpButtonPressed: self];
     }
     
     return NO;
+}
+
+
+- (BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    
 }
 
 
@@ -219,6 +235,5 @@ withAnimationDuration: (NSTimeInterval)animationDuration
          }];
     }
 }
-
 
 @end

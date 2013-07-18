@@ -11,6 +11,8 @@
 @interface WelcomeViewController ()
 
 @property (nonatomic, strong) IBOutlet UILabel* promotionLabel;
+@property (nonatomic, strong) IBOutlet UIScrollView* pagingScroll;
+@property (nonatomic, strong) IBOutlet UIView* contentView;
 
 @end
 
@@ -21,6 +23,7 @@
     [super viewDidLoad];
 	
     self.promotionLabel.font = [UIFont fontWithName: @"Krona One" size: 13];
+    self.pagingScroll.contentSize = self.contentView.frame.size;
 }
 
 - (void) viewDidUnload

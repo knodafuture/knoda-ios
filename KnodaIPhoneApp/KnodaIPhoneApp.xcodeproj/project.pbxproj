@@ -31,6 +31,32 @@
 		9E57924A1795A4D500979928 /* knoda_logo_sm.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5792481795A4D500979928 /* knoda_logo_sm.png */; };
 		9E57924B1795A4D500979928 /* knoda_logo_sm@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5792491795A4D500979928 /* knoda_logo_sm@2x.png */; };
 		9E57924E1795A8D300979928 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E57924D1795A8D300979928 /* LoginViewController.m */; };
+		9E5792521796C3B900979928 /* CustomizedTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E5792511796C3B900979928 /* CustomizedTextField.m */; };
+		9E57925B1796E04D00979928 /* btn_login_green.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5792531796E04D00979928 /* btn_login_green.png */; };
+		9E57925C1796E04D00979928 /* btn_login_green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5792541796E04D00979928 /* btn_login_green@2x.png */; };
+		9E57925D1796E04D00979928 /* btn_login_light.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5792551796E04D00979928 /* btn_login_light.png */; };
+		9E57925E1796E04D00979928 /* btn_login_light@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5792561796E04D00979928 /* btn_login_light@2x.png */; };
+		9E57925F1796E04D00979928 /* btn_signup_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5792571796E04D00979928 /* btn_signup_gray.png */; };
+		9E5792601796E04D00979928 /* btn_signup_gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5792581796E04D00979928 /* btn_signup_gray@2x.png */; };
+		9E5792611796E04D00979928 /* btn_signup_green.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5792591796E04D00979928 /* btn_signup_green.png */; };
+		9E5792621796E04D00979928 /* btn_signup_green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E57925A1796E04D00979928 /* btn_signup_green@2x.png */; };
+		9E5792651798345400979928 /* errormessage.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5792631798345400979928 /* errormessage.png */; };
+		9E5792661798345400979928 /* errormessage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5792641798345400979928 /* errormessage@2x.png */; };
+		9E57926D17983CE300979928 /* field_btm.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E57926717983CE200979928 /* field_btm.png */; };
+		9E57926E17983CE300979928 /* field_btm@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E57926817983CE200979928 /* field_btm@2x.png */; };
+		9E57926F17983CE300979928 /* field_middle.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E57926917983CE300979928 /* field_middle.png */; };
+		9E57927017983CE300979928 /* field_middle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E57926A17983CE300979928 /* field_middle@2x.png */; };
+		9E57927117983CE300979928 /* field_top.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E57926B17983CE300979928 /* field_top.png */; };
+		9E57927217983CE300979928 /* field_top@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E57926C17983CE300979928 /* field_top@2x.png */; };
+		9E57927B179841B100979928 /* down_login_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E579273179841AF00979928 /* down_login_small.png */; };
+		9E57927C179841B100979928 /* down_login_small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E579274179841AF00979928 /* down_login_small@2x.png */; };
+		9E57927D179841B100979928 /* down_login.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E579275179841AF00979928 /* down_login.png */; };
+		9E57927E179841B100979928 /* down_login@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E579276179841AF00979928 /* down_login@2x.png */; };
+		9E57927F179841B100979928 /* down_signup_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E579277179841B000979928 /* down_signup_small.png */; };
+		9E579280179841B100979928 /* down_signup_small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E579278179841B000979928 /* down_signup_small@2x.png */; };
+		9E579281179841B100979928 /* down_signup.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E579279179841B000979928 /* down_signup.png */; };
+		9E579282179841B100979928 /* down_signup@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E57927A179841B000979928 /* down_signup@2x.png */; };
+		9E5792851798466100979928 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E5792841798466100979928 /* SignUpViewController.m */; };
 		9E708824178AF68E00F036A8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E708823178AF68E00F036A8 /* UIKit.framework */; };
 		9E708826178AF68E00F036A8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E708825178AF68E00F036A8 /* Foundation.framework */; };
 		9E708828178AF68E00F036A8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E708827178AF68E00F036A8 /* CoreGraphics.framework */; };
@@ -85,6 +111,34 @@
 		9E5792491795A4D500979928 /* knoda_logo_sm@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "knoda_logo_sm@2x.png"; sourceTree = "<group>"; };
 		9E57924C1795A8D300979928 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		9E57924D1795A8D300979928 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		9E5792501796C3B900979928 /* CustomizedTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomizedTextField.h; sourceTree = "<group>"; };
+		9E5792511796C3B900979928 /* CustomizedTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomizedTextField.m; sourceTree = "<group>"; };
+		9E5792531796E04D00979928 /* btn_login_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_login_green.png; sourceTree = "<group>"; };
+		9E5792541796E04D00979928 /* btn_login_green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_login_green@2x.png"; sourceTree = "<group>"; };
+		9E5792551796E04D00979928 /* btn_login_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_login_light.png; sourceTree = "<group>"; };
+		9E5792561796E04D00979928 /* btn_login_light@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_login_light@2x.png"; sourceTree = "<group>"; };
+		9E5792571796E04D00979928 /* btn_signup_gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_signup_gray.png; sourceTree = "<group>"; };
+		9E5792581796E04D00979928 /* btn_signup_gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_signup_gray@2x.png"; sourceTree = "<group>"; };
+		9E5792591796E04D00979928 /* btn_signup_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_signup_green.png; sourceTree = "<group>"; };
+		9E57925A1796E04D00979928 /* btn_signup_green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_signup_green@2x.png"; sourceTree = "<group>"; };
+		9E5792631798345400979928 /* errormessage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = errormessage.png; sourceTree = "<group>"; };
+		9E5792641798345400979928 /* errormessage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "errormessage@2x.png"; sourceTree = "<group>"; };
+		9E57926717983CE200979928 /* field_btm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = field_btm.png; sourceTree = "<group>"; };
+		9E57926817983CE200979928 /* field_btm@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "field_btm@2x.png"; sourceTree = "<group>"; };
+		9E57926917983CE300979928 /* field_middle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = field_middle.png; sourceTree = "<group>"; };
+		9E57926A17983CE300979928 /* field_middle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "field_middle@2x.png"; sourceTree = "<group>"; };
+		9E57926B17983CE300979928 /* field_top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = field_top.png; sourceTree = "<group>"; };
+		9E57926C17983CE300979928 /* field_top@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "field_top@2x.png"; sourceTree = "<group>"; };
+		9E579273179841AF00979928 /* down_login_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down_login_small.png; sourceTree = "<group>"; };
+		9E579274179841AF00979928 /* down_login_small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down_login_small@2x.png"; sourceTree = "<group>"; };
+		9E579275179841AF00979928 /* down_login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down_login.png; sourceTree = "<group>"; };
+		9E579276179841AF00979928 /* down_login@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down_login@2x.png"; sourceTree = "<group>"; };
+		9E579277179841B000979928 /* down_signup_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down_signup_small.png; sourceTree = "<group>"; };
+		9E579278179841B000979928 /* down_signup_small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down_signup_small@2x.png"; sourceTree = "<group>"; };
+		9E579279179841B000979928 /* down_signup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down_signup.png; sourceTree = "<group>"; };
+		9E57927A179841B000979928 /* down_signup@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down_signup@2x.png"; sourceTree = "<group>"; };
+		9E5792831798466100979928 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
+		9E5792841798466100979928 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		9E708820178AF68E00F036A8 /* KnodaIPhoneApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KnodaIPhoneApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E708823178AF68E00F036A8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9E708825178AF68E00F036A8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -173,6 +227,30 @@
 		9E06638B179598FD00B3E974 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				9E579273179841AF00979928 /* down_login_small.png */,
+				9E579274179841AF00979928 /* down_login_small@2x.png */,
+				9E579275179841AF00979928 /* down_login.png */,
+				9E579276179841AF00979928 /* down_login@2x.png */,
+				9E579277179841B000979928 /* down_signup_small.png */,
+				9E579278179841B000979928 /* down_signup_small@2x.png */,
+				9E579279179841B000979928 /* down_signup.png */,
+				9E57927A179841B000979928 /* down_signup@2x.png */,
+				9E57926717983CE200979928 /* field_btm.png */,
+				9E57926817983CE200979928 /* field_btm@2x.png */,
+				9E57926917983CE300979928 /* field_middle.png */,
+				9E57926A17983CE300979928 /* field_middle@2x.png */,
+				9E57926B17983CE300979928 /* field_top.png */,
+				9E57926C17983CE300979928 /* field_top@2x.png */,
+				9E5792631798345400979928 /* errormessage.png */,
+				9E5792641798345400979928 /* errormessage@2x.png */,
+				9E5792531796E04D00979928 /* btn_login_green.png */,
+				9E5792541796E04D00979928 /* btn_login_green@2x.png */,
+				9E5792551796E04D00979928 /* btn_login_light.png */,
+				9E5792561796E04D00979928 /* btn_login_light@2x.png */,
+				9E5792571796E04D00979928 /* btn_signup_gray.png */,
+				9E5792581796E04D00979928 /* btn_signup_gray@2x.png */,
+				9E5792591796E04D00979928 /* btn_signup_green.png */,
+				9E57925A1796E04D00979928 /* btn_signup_green@2x.png */,
 				9E5792481795A4D500979928 /* knoda_logo_sm.png */,
 				9E5792491795A4D500979928 /* knoda_logo_sm@2x.png */,
 				9E5792441795A43300979928 /* circleArrow.png */,
@@ -183,6 +261,15 @@
 				9E06639317959A2100B3E974 /* knoda_logo_lg@2x.png */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		9E57924F1796C39200979928 /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				9E5792501796C3B900979928 /* CustomizedTextField.h */,
+				9E5792511796C3B900979928 /* CustomizedTextField.m */,
+			);
+			path = Controls;
 			sourceTree = "<group>";
 		};
 		9E708817178AF68E00F036A8 = {
@@ -262,10 +349,13 @@
 		9E708849178AFF2F00F036A8 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				9E57924F1796C39200979928 /* Controls */,
 				9E70884A178AFF2F00F036A8 /* WelcomeViewController.h */,
 				9E70884B178AFF2F00F036A8 /* WelcomeViewController.m */,
 				9E57924C1795A8D300979928 /* LoginViewController.h */,
 				9E57924D1795A8D300979928 /* LoginViewController.m */,
+				9E5792831798466100979928 /* SignUpViewController.h */,
+				9E5792841798466100979928 /* SignUpViewController.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -336,6 +426,30 @@
 				9E5792471795A43300979928 /* circleArrow@2x.png in Resources */,
 				9E57924A1795A4D500979928 /* knoda_logo_sm.png in Resources */,
 				9E57924B1795A4D500979928 /* knoda_logo_sm@2x.png in Resources */,
+				9E57925B1796E04D00979928 /* btn_login_green.png in Resources */,
+				9E57925C1796E04D00979928 /* btn_login_green@2x.png in Resources */,
+				9E57925D1796E04D00979928 /* btn_login_light.png in Resources */,
+				9E57925E1796E04D00979928 /* btn_login_light@2x.png in Resources */,
+				9E57925F1796E04D00979928 /* btn_signup_gray.png in Resources */,
+				9E5792601796E04D00979928 /* btn_signup_gray@2x.png in Resources */,
+				9E5792611796E04D00979928 /* btn_signup_green.png in Resources */,
+				9E5792621796E04D00979928 /* btn_signup_green@2x.png in Resources */,
+				9E5792651798345400979928 /* errormessage.png in Resources */,
+				9E5792661798345400979928 /* errormessage@2x.png in Resources */,
+				9E57926D17983CE300979928 /* field_btm.png in Resources */,
+				9E57926E17983CE300979928 /* field_btm@2x.png in Resources */,
+				9E57926F17983CE300979928 /* field_middle.png in Resources */,
+				9E57927017983CE300979928 /* field_middle@2x.png in Resources */,
+				9E57927117983CE300979928 /* field_top.png in Resources */,
+				9E57927217983CE300979928 /* field_top@2x.png in Resources */,
+				9E57927B179841B100979928 /* down_login_small.png in Resources */,
+				9E57927C179841B100979928 /* down_login_small@2x.png in Resources */,
+				9E57927D179841B100979928 /* down_login.png in Resources */,
+				9E57927E179841B100979928 /* down_login@2x.png in Resources */,
+				9E57927F179841B100979928 /* down_signup_small.png in Resources */,
+				9E579280179841B100979928 /* down_signup_small@2x.png in Resources */,
+				9E579281179841B100979928 /* down_signup.png in Resources */,
+				9E579282179841B100979928 /* down_signup@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,6 +478,8 @@
 				9E066386179038FE00B3E974 /* SignUpRequest.m in Sources */,
 				9E06638917903C3A00B3E974 /* AddPredictionRequest.m in Sources */,
 				9E57924E1795A8D300979928 /* LoginViewController.m in Sources */,
+				9E5792521796C3B900979928 /* CustomizedTextField.m in Sources */,
+				9E5792851798466100979928 /* SignUpViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

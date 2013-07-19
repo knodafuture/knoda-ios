@@ -81,9 +81,6 @@ static const NSInteger kMaxPasswordLength = 20;
     {
         result = NO;
         
-        //UIAlertView* alert = [[UIAlertView alloc] initWithTitle: @"" message: NSLocalizedString(@"Email should not be empty", @"") delegate: nil cancelButtonTitle: NSLocalizedString(@"OK", @"") otherButtonTitles: nil];
-        //[alert show];
-        
         [self showError: NSLocalizedString(@"Email should not be empty", @"")];
         
         [self.emailTextFiled becomeFirstResponder];
@@ -91,10 +88,7 @@ static const NSInteger kMaxPasswordLength = 20;
     else if (self.usernameTextField.text.length == 0)
     {
         result = NO;
-        
-        //UIAlertView* alert = [[UIAlertView alloc] initWithTitle: @"" message: NSLocalizedString(@"Username should not be empty", @"") delegate: nil cancelButtonTitle: NSLocalizedString(@"OK", @"") otherButtonTitles: nil];
-        //[alert show];
-        
+                
         [self showError: NSLocalizedString(@"Username should not be empty", @"")];
         
         [self.usernameTextField becomeFirstResponder];
@@ -103,10 +97,7 @@ static const NSInteger kMaxPasswordLength = 20;
     {
         
         result = NO;
-        
-        //UIAlertView* alert = [[UIAlertView alloc] initWithTitle: @"" message: NSLocalizedString(@"Password should be between 6 and 20 characters length", @"") delegate: nil cancelButtonTitle: NSLocalizedString(@"OK", @"") otherButtonTitles: nil];
-        //[alert show];
-        
+                
         [self showError: NSLocalizedString(@"Password should be between 6 and 20 chars lenght", @"")];
         
         [self.passwordTextField becomeFirstResponder];

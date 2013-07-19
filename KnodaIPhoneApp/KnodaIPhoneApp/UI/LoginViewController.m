@@ -67,43 +67,71 @@
 }
 
 
+- (BOOL) checkTextFields
+{
+    BOOL result = YES;
+    
+    if (self.usernameTextField.text.length == 0)
+    {
+        result = NO;
+        
+        [self showError: NSLocalizedString(@"Username should not be empty", @"")];
+        
+        [self.usernameTextField becomeFirstResponder];
+    }
+    else if (self.passwordTextField.text.length == 0)
+    {
+        result = NO;
+        
+        [self showError: NSLocalizedString(@"Password should not be empty", @"")];
+        
+        [self.passwordTextField becomeFirstResponder];
+    }
+
+    return result;
+}
+
+
 - (IBAction) loginButtonPressed: (id) sender
 {
-    self.activityView.hidden = NO;
-    
-    if ([self.usernameTextField isFirstResponder])
+    if ([self checkTextFields])
     {
-        [self.usernameTextField resignFirstResponder];
-    }
-    
-    if ([self.passwordTextField isFirstResponder])
-    {
-        [self.passwordTextField resignFirstResponder];
-    }
-    
-    [self hideError];
-    
-    LoginWebRequest* loginRequest = [[LoginWebRequest alloc] initWithUsername: self.usernameTextField.text password: self.passwordTextField.text];
-    [loginRequest executeWithCompletionBlock: ^
-    {
-        self.activityView.hidden = YES;
+        self.activityView.hidden = NO;
         
-        if (loginRequest.errorCode == 0)
+        if ([self.usernameTextField isFirstResponder])
         {
-            self.appDelegate.user = loginRequest.user;
-            
-            PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] init];
-            [predictionsRequest executeWithCompletionBlock: ^{}];
+            [self.usernameTextField resignFirstResponder];
         }
-        else if (loginRequest.errorCode == 403)
+        
+        if ([self.passwordTextField isFirstResponder])
         {
-            [self showError: NSLocalizedString(@"Invalid username or password", @"")];
+            [self.passwordTextField resignFirstResponder];
         }
-        else
-        {
-            [self showError: NSLocalizedString(@"Unknown error. Please try later.", @"")];
-        }
-     }];
+        
+        [self hideError];
+        
+        LoginWebRequest* loginRequest = [[LoginWebRequest alloc] initWithUsername: self.usernameTextField.text password: self.passwordTextField.text];
+        [loginRequest executeWithCompletionBlock: ^
+         {
+             self.activityView.hidden = YES;
+             
+             if (loginRequest.errorCode == 0)
+             {
+                 self.appDelegate.user = loginRequest.user;
+                 
+                 PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] init];
+                 [predictionsRequest executeWithCompletionBlock: ^{}];
+             }
+             else if (loginRequest.errorCode == 403)
+             {
+                 [self showError: NSLocalizedString(@"Invalid username or password", @"")];
+             }
+             else
+             {
+                 [self showError: NSLocalizedString(@"Unknown error. Please try later.", @"")];
+             }
+         }];
+    }
 }
 
 

@@ -14,6 +14,11 @@
 #import "PredictionsWebRequest.h"
 
 
+static const NSInteger kMaxUsernameLength = 15;
+static const NSInteger kMinPasswordLength = 6;
+static const NSInteger kMaxPasswordLength = 20;
+
+
 @interface SignUpViewController ()
 
 @property (nonatomic, readonly) AppDelegate* appDelegate;
@@ -68,48 +73,94 @@
 }
 
 
+- (BOOL) checkTextFields
+{
+    BOOL result = YES;
+    
+    if (self.emailTextFiled.text.length == 0)
+    {
+        result = NO;
+        
+        //UIAlertView* alert = [[UIAlertView alloc] initWithTitle: @"" message: NSLocalizedString(@"Email should not be empty", @"") delegate: nil cancelButtonTitle: NSLocalizedString(@"OK", @"") otherButtonTitles: nil];
+        //[alert show];
+        
+        [self showError: NSLocalizedString(@"Email should not be empty", @"")];
+        
+        [self.emailTextFiled becomeFirstResponder];
+    }
+    else if (self.usernameTextField.text.length == 0)
+    {
+        result = NO;
+        
+        //UIAlertView* alert = [[UIAlertView alloc] initWithTitle: @"" message: NSLocalizedString(@"Username should not be empty", @"") delegate: nil cancelButtonTitle: NSLocalizedString(@"OK", @"") otherButtonTitles: nil];
+        //[alert show];
+        
+        [self showError: NSLocalizedString(@"Username should not be empty", @"")];
+        
+        [self.usernameTextField becomeFirstResponder];
+    }
+    else if (self.passwordTextField.text.length < kMinPasswordLength)
+    {
+        
+        result = NO;
+        
+        //UIAlertView* alert = [[UIAlertView alloc] initWithTitle: @"" message: NSLocalizedString(@"Password should be between 6 and 20 characters length", @"") delegate: nil cancelButtonTitle: NSLocalizedString(@"OK", @"") otherButtonTitles: nil];
+        //[alert show];
+        
+        [self showError: NSLocalizedString(@"Password should be between 6 and 20 chars lenght", @"")];
+        
+        [self.passwordTextField becomeFirstResponder];
+    }
+    
+    return result;
+}
+
+
 - (IBAction) signUpButtonPressed: (id) sender
 {
-    self.activityView.hidden = NO;
-    
-    if ([self.emailTextFiled isFirstResponder])
+    if ([self checkTextFields])
     {
-        [self.emailTextFiled resignFirstResponder];
-    }
-    
-    if ([self.usernameTextField isFirstResponder])
-    {
-        [self.usernameTextField resignFirstResponder];
-    }
-    
-    if ([self.passwordTextField isFirstResponder])
-    {
-        [self.passwordTextField resignFirstResponder];
-    }
-    
-    [self hideError];
-    
-    SignUpRequest* signUpRequest = [[SignUpRequest alloc] initWithUsername: self.usernameTextField.text email: self.emailTextFiled.text password: self.passwordTextField.text];
-    [signUpRequest executeWithCompletionBlock: ^
-     {
-         self.activityView.hidden = YES;
-         
-         if (signUpRequest.errorCode == 0)
+        self.activityView.hidden = NO;
+        
+        if ([self.emailTextFiled isFirstResponder])
+        {
+            [self.emailTextFiled resignFirstResponder];
+        }
+        
+        if ([self.usernameTextField isFirstResponder])
+        {
+            [self.usernameTextField resignFirstResponder];
+        }
+        
+        if ([self.passwordTextField isFirstResponder])
+        {
+            [self.passwordTextField resignFirstResponder];
+        }
+        
+        [self hideError];
+        
+        SignUpRequest* signUpRequest = [[SignUpRequest alloc] initWithUsername: self.usernameTextField.text email: self.emailTextFiled.text password: self.passwordTextField.text];
+        [signUpRequest executeWithCompletionBlock: ^
          {
-             self.appDelegate.user = signUpRequest.user;
+             self.activityView.hidden = YES;
              
-             PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] init];
-             [predictionsRequest executeWithCompletionBlock: ^{}];
-         }
-         else if (signUpRequest.errorCode == 403)
-         {
-             [self showError: NSLocalizedString(@"Invalid username or password", @"")];
-         }
-         else
-         {
-             [self showError: NSLocalizedString(@"Unknown error. Please try later.", @"")];
-         }
-     }];
+             if (signUpRequest.errorCode == 0)
+             {
+                 self.appDelegate.user = signUpRequest.user;
+                 
+                 PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] init];
+                 [predictionsRequest executeWithCompletionBlock: ^{}];
+             }
+             else if (signUpRequest.errorCode == 403)
+             {
+                 [self showError: NSLocalizedString(@"Invalid username or password", @"")];
+             }
+             else
+             {
+                 [self showError: NSLocalizedString(@"Unknown error. Please try later.", @"")];
+             }
+         }];
+    }
 }
 
 
@@ -169,6 +220,21 @@ withAnimationDuration: (NSTimeInterval)animationDuration
 }
 
 
+- (BOOL) checkUsernameSubstring: (NSString*) usernameSubstring
+{
+    BOOL result = YES;
+    
+    for (int i = 0; i < usernameSubstring.length; i++)
+    {
+        char ch = [usernameSubstring characterAtIndex: i];
+        
+        result = ((ch >= '0' && ch <= '9') || (ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z') || ch == '_');
+    }
+    
+    return result;
+}
+
+
 #pragma mark UITextFieldDelegate
 
 
@@ -191,9 +257,43 @@ withAnimationDuration: (NSTimeInterval)animationDuration
 }
 
 
-- (BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+- (BOOL) textField: (UITextField*) textField shouldChangeCharactersInRange: (NSRange) range replacementString: (NSString*) string
 {
+    BOOL result = YES;
     
+    if (textField == self.usernameTextField)
+    {
+        if ([self checkUsernameSubstring: string])
+        {
+            NSString* resultString = [textField.text stringByReplacingCharactersInRange: range withString: string];
+            
+            if (resultString.length > kMaxUsernameLength)
+            {
+                result = NO;
+                
+                resultString = [resultString substringToIndex: kMaxUsernameLength - 1];
+                textField.text = resultString;
+            }
+        }
+        else
+        {
+            result = NO;
+        }
+    }
+    else if (textField == self.passwordTextField)
+    {
+        NSString* resultString = [textField.text stringByReplacingCharactersInRange: range withString: string];
+        
+        if (resultString.length > kMaxPasswordLength)
+        {
+            result = NO;
+            
+            resultString = [resultString substringToIndex: kMaxPasswordLength - 1];
+            textField.text = resultString;
+        }
+    }
+    
+    return result;
 }
 
 

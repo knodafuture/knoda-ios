@@ -10,6 +10,10 @@
 
 @implementation CustomizedTextField
 
-
+- (void) drawPlaceholderInRect: (CGRect) rect
+{
+    [[UIColor lightGrayColor] setFill];
+    [[self placeholder] drawInRect: rect withFont: [UIFont fontWithName: @"HelveticaNeue-Italic" size: 14]];
+}
 
 @end

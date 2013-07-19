@@ -29,6 +29,9 @@
 - (void) viewDidUnload
 {
     self.promotionLabel = nil;
+    self.pagingScroll = nil;
+    self.contentView = nil;
+    
     [super viewDidUnload];
 }
 

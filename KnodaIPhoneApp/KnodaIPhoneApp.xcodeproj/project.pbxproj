@@ -57,6 +57,16 @@
 		9E579281179841B100979928 /* down_signup.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E579279179841B000979928 /* down_signup.png */; };
 		9E579282179841B100979928 /* down_signup@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E57927A179841B000979928 /* down_signup@2x.png */; };
 		9E5792851798466100979928 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E5792841798466100979928 /* SignUpViewController.m */; };
+		9E579288179971F100979928 /* headerBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E579286179971F000979928 /* headerBar.png */; };
+		9E579289179971F100979928 /* headerBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E579287179971F000979928 /* headerBar@2x.png */; };
+		9E57928C179977EF00979928 /* TermsOfServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E57928B179977EF00979928 /* TermsOfServiceViewController.m */; };
+		9E57928F17997B4B00979928 /* backArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E57928D17997B4A00979928 /* backArrow.png */; };
+		9E57929017997B4B00979928 /* backArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E57928E17997B4A00979928 /* backArrow@2x.png */; };
+		9E579293179982C000979928 /* ForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E579292179982C000979928 /* ForgotPasswordViewController.m */; };
+		9E5792981799881F00979928 /* makePrediction.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5792941799881D00979928 /* makePrediction.png */; };
+		9E5792991799881F00979928 /* makePrediction@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5792951799881D00979928 /* makePrediction@2x.png */; };
+		9E57929A1799881F00979928 /* nav.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5792961799881D00979928 /* nav.png */; };
+		9E57929B1799881F00979928 /* nav@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5792971799881E00979928 /* nav@2x.png */; };
 		9E708824178AF68E00F036A8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E708823178AF68E00F036A8 /* UIKit.framework */; };
 		9E708826178AF68E00F036A8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E708825178AF68E00F036A8 /* Foundation.framework */; };
 		9E708828178AF68E00F036A8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E708827178AF68E00F036A8 /* CoreGraphics.framework */; };
@@ -139,6 +149,18 @@
 		9E57927A179841B000979928 /* down_signup@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down_signup@2x.png"; sourceTree = "<group>"; };
 		9E5792831798466100979928 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		9E5792841798466100979928 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
+		9E579286179971F000979928 /* headerBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = headerBar.png; sourceTree = "<group>"; };
+		9E579287179971F000979928 /* headerBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "headerBar@2x.png"; sourceTree = "<group>"; };
+		9E57928A179977EF00979928 /* TermsOfServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TermsOfServiceViewController.h; sourceTree = "<group>"; };
+		9E57928B179977EF00979928 /* TermsOfServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TermsOfServiceViewController.m; sourceTree = "<group>"; };
+		9E57928D17997B4A00979928 /* backArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backArrow.png; sourceTree = "<group>"; };
+		9E57928E17997B4A00979928 /* backArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backArrow@2x.png"; sourceTree = "<group>"; };
+		9E579291179982C000979928 /* ForgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotPasswordViewController.h; sourceTree = "<group>"; };
+		9E579292179982C000979928 /* ForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordViewController.m; sourceTree = "<group>"; };
+		9E5792941799881D00979928 /* makePrediction.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = makePrediction.png; sourceTree = "<group>"; };
+		9E5792951799881D00979928 /* makePrediction@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "makePrediction@2x.png"; sourceTree = "<group>"; };
+		9E5792961799881D00979928 /* nav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav.png; sourceTree = "<group>"; };
+		9E5792971799881E00979928 /* nav@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav@2x.png"; sourceTree = "<group>"; };
 		9E708820178AF68E00F036A8 /* KnodaIPhoneApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KnodaIPhoneApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E708823178AF68E00F036A8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9E708825178AF68E00F036A8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -227,6 +249,14 @@
 		9E06638B179598FD00B3E974 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				9E5792941799881D00979928 /* makePrediction.png */,
+				9E5792951799881D00979928 /* makePrediction@2x.png */,
+				9E5792961799881D00979928 /* nav.png */,
+				9E5792971799881E00979928 /* nav@2x.png */,
+				9E57928D17997B4A00979928 /* backArrow.png */,
+				9E57928E17997B4A00979928 /* backArrow@2x.png */,
+				9E579286179971F000979928 /* headerBar.png */,
+				9E579287179971F000979928 /* headerBar@2x.png */,
 				9E579273179841AF00979928 /* down_login_small.png */,
 				9E579274179841AF00979928 /* down_login_small@2x.png */,
 				9E579275179841AF00979928 /* down_login.png */,
@@ -356,6 +386,10 @@
 				9E57924D1795A8D300979928 /* LoginViewController.m */,
 				9E5792831798466100979928 /* SignUpViewController.h */,
 				9E5792841798466100979928 /* SignUpViewController.m */,
+				9E57928A179977EF00979928 /* TermsOfServiceViewController.h */,
+				9E57928B179977EF00979928 /* TermsOfServiceViewController.m */,
+				9E579291179982C000979928 /* ForgotPasswordViewController.h */,
+				9E579292179982C000979928 /* ForgotPasswordViewController.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -450,6 +484,14 @@
 				9E579280179841B100979928 /* down_signup_small@2x.png in Resources */,
 				9E579281179841B100979928 /* down_signup.png in Resources */,
 				9E579282179841B100979928 /* down_signup@2x.png in Resources */,
+				9E579288179971F100979928 /* headerBar.png in Resources */,
+				9E579289179971F100979928 /* headerBar@2x.png in Resources */,
+				9E57928F17997B4B00979928 /* backArrow.png in Resources */,
+				9E57929017997B4B00979928 /* backArrow@2x.png in Resources */,
+				9E5792981799881F00979928 /* makePrediction.png in Resources */,
+				9E5792991799881F00979928 /* makePrediction@2x.png in Resources */,
+				9E57929A1799881F00979928 /* nav.png in Resources */,
+				9E57929B1799881F00979928 /* nav@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,6 +522,8 @@
 				9E57924E1795A8D300979928 /* LoginViewController.m in Sources */,
 				9E5792521796C3B900979928 /* CustomizedTextField.m in Sources */,
 				9E5792851798466100979928 /* SignUpViewController.m in Sources */,
+				9E57928C179977EF00979928 /* TermsOfServiceViewController.m in Sources */,
+				9E579293179982C000979928 /* ForgotPasswordViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

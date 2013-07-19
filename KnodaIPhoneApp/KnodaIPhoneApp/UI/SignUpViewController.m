@@ -41,6 +41,7 @@ static const NSInteger kMaxPasswordLength = 20;
 {
     self.usernameTextField = nil;
     self.passwordTextField = nil;
+    self.emailTextFiled = nil;
     self.containerView = nil;
     self.activityView = nil;
     self.errorView = nil;
@@ -54,7 +55,7 @@ static const NSInteger kMaxPasswordLength = 20;
 {
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(willShowKeyboardNotificationDidRecieve:) name: UIKeyboardWillShowNotification object: nil];
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(willHideKeyboardNotificationDidRecieve:) name: UIKeyboardWillHideNotification object: nil];
-    
+        
     [super viewWillAppear: animated];
 }
 
@@ -105,6 +106,9 @@ static const NSInteger kMaxPasswordLength = 20;
     
     return result;
 }
+
+
+#pragma mark IBAction
 
 
 - (IBAction) signUpButtonPressed: (id) sender

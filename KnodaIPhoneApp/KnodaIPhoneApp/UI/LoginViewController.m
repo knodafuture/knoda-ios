@@ -13,6 +13,9 @@
 #import "LoginWebRequest.h"
 #import "PredictionsWebRequest.h"
 
+#import "ForgotPasswordViewController.h"
+
+
 @interface LoginViewController ()
 
 @property (nonatomic, readonly) AppDelegate* appDelegate;
@@ -58,6 +61,15 @@
     [[NSNotificationCenter defaultCenter] removeObserver: self];
     
     [super viewWillDisappear: animated];
+}
+
+
+- (void) prepareForSegue: (UIStoryboardSegue*) segue sender: (id) sender
+{
+    if ([segue.identifier isEqualToString: @"ForgotPasswordSegue"] && [self.usernameTextField.text rangeOfString: @"@"].location != NSNotFound)
+    {
+        ((ForgotPasswordViewController*)segue.destinationViewController).email = self.usernameTextField.text;
+    }
 }
 
 

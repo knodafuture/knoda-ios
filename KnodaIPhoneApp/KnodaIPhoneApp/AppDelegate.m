@@ -34,6 +34,17 @@
     //SignUpRequest* signUpRequest = [[SignUpRequest alloc] initWithUsername: @"" email: @"" password: @""];
     //[signUpRequest executeWithCompletionBlock: ^{}];
     
+    UIImage* navBackgroundImage = [UIImage imageNamed: @"headerBar"];
+    [[UINavigationBar appearance] setBackgroundImage: navBackgroundImage forBarMetrics: UIBarMetricsDefault];
+    
+    [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
+                                                           [UIColor whiteColor], UITextAttributeTextColor,
+                                                           [UIColor blackColor], UITextAttributeTextShadowColor,
+                                                           [NSValue valueWithUIOffset: UIOffsetMake(0, -1)], UITextAttributeTextShadowOffset,
+                                                           [UIFont fontWithName: @"Krona One" size: 13], UITextAttributeFont, nil]];
+    
+    [UIApplication sharedApplication].keyWindow.backgroundColor = [UIColor whiteColor];
+    
     return YES;
 }
 							

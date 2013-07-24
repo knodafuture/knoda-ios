@@ -34,7 +34,7 @@ static NSString* const kBaseURL = @"example.com";
 
 #else
 
-static NSString* const kBaseURL = @"192.168.195.57/api/";
+static NSString* const kBaseURL = @"89.22.50.128/api/";
 
 #endif
 

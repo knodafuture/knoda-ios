@@ -133,6 +133,8 @@
                  
                  PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] init];
                  [predictionsRequest executeWithCompletionBlock: ^{}];
+                 
+                 [self performSegueWithIdentifier: @"ApplicationNavigationSegue" sender: self];
              }
              else if (loginRequest.errorCode == 403)
              {

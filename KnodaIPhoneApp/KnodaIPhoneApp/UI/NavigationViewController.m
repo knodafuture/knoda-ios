@@ -18,6 +18,8 @@
 @property (nonatomic, strong) IBOutlet UIView* movingView;
 @property (nonatomic, assign) BOOL appeared;
 
+@property (nonatomic, assign) BOOL masterShown;
+
 @end
 
 @implementation NavigationViewController
@@ -72,6 +74,8 @@
 
 - (void) moveToDetails
 {
+    self.masterShown = NO;
+    
     CGRect newFrame = self.movingView.frame;
     newFrame.origin.x -= self.masterView.frame.size.width;
     self.movingView.frame = newFrame;
@@ -80,12 +84,27 @@
 
 - (void) moveToMaster
 {
+    self.masterShown = YES;
+    
     [UIView animateWithDuration: 0.3 animations: ^
      {
          CGRect newFrame = self.movingView.frame;
          newFrame.origin.x += self.masterView.frame.size.width;
          self.movingView.frame = newFrame;
      }];
+}
+
+
+- (void) toggleNavigationPanel
+{
+    if (self.masterShown)
+    {
+        [self moveToDetailsAnimated: YES];
+    }
+    else
+    {
+        [self moveToMaster];
+    }
 }
 
 

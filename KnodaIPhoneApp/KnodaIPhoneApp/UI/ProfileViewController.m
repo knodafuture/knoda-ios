@@ -1,29 +1,27 @@
 //
-//  HomeViewController.m
+//  ProfileViewController.m
 //  KnodaIPhoneApp
 //
-//  Created by Elena Timofeeva on 7/24/13.
+//  Created by Elena Timofeeva on 7/25/13.
 //  Copyright (c) 2013 Knoda. All rights reserved.
 //
 
-#import "HomeViewController.h"
-#import "NavigationViewController.h"
+#import "ProfileViewController.h"
 #import "PreditionCell.h"
+#import "NavigationViewController.h"
 
-@interface HomeViewController ()
+@interface ProfileViewController ()
 
 @end
 
-
-
-@implementation HomeViewController
+@implementation ProfileViewController
 
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-	self.navigationController.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, self.navigationController.navigationBar.frame.size.height);
+	
+    self.navigationController.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, self.navigationController.navigationBar.frame.size.height);
 }
 
 
@@ -50,10 +48,8 @@
     
     PreditionCell* cell = [tableView dequeueReusableCellWithIdentifier: @"Cell"];
     
-    UIPanGestureRecognizer* recognizer = [[UIPanGestureRecognizer alloc] init];
-    [cell addPanGestureRecognizer: recognizer];
-    
     return cell;
 }
+
 
 @end

@@ -10,6 +10,6 @@
 
 @interface NavigationViewController : UIViewController <UITableViewDataSource>
 
-- (void) moveToMaster;
+- (void) toggleNavigationPanel;
 
 @end

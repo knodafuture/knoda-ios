@@ -21,6 +21,8 @@
 @property (nonatomic, strong) IBOutlet UIImageView* agreeImage;
 @property (nonatomic, strong) IBOutlet UIImageView* disagreeImage;
 
+@property (nonatomic, strong) IBOutlet UIImageView* guessMarkImage;
+
 @end
 
 

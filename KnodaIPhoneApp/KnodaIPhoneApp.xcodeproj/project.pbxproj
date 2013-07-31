@@ -115,6 +115,8 @@
 		9E8421ED17A267A700D14D0A /* single_txt_field.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E8421DF17A267A700D14D0A /* single_txt_field.png */; };
 		9E8421EE17A267A700D14D0A /* single_txt_field@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E8421E017A267A700D14D0A /* single_txt_field@2x.png */; };
 		9E8421F117A26ECB00D14D0A /* PushWithoutAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E8421F017A26ECB00D14D0A /* PushWithoutAnimationSegue.m */; };
+		9E8421F417A2817000D14D0A /* ForgotPasswordWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E8421F317A2817000D14D0A /* ForgotPasswordWebRequest.m */; };
+		9E8421F717A7E10D00D14D0A /* Chellange.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E8421F617A7E10C00D14D0A /* Chellange.m */; };
 		9E930203179FCB0B00FFB166 /* alertsIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E9301F5179FCB0B00FFB166 /* alertsIcon.png */; };
 		9E930204179FCB0B00FFB166 /* alertsIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E9301F6179FCB0B00FFB166 /* alertsIcon@2x.png */; };
 		9E930205179FCB0B00FFB166 /* badgesIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E9301F7179FCB0B00FFB166 /* badgesIcon.png */; };
@@ -293,6 +295,10 @@
 		9E8421E017A267A700D14D0A /* single_txt_field@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "single_txt_field@2x.png"; sourceTree = "<group>"; };
 		9E8421EF17A26ECB00D14D0A /* PushWithoutAnimationSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushWithoutAnimationSegue.h; sourceTree = "<group>"; };
 		9E8421F017A26ECB00D14D0A /* PushWithoutAnimationSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushWithoutAnimationSegue.m; sourceTree = "<group>"; };
+		9E8421F217A2817000D14D0A /* ForgotPasswordWebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotPasswordWebRequest.h; sourceTree = "<group>"; };
+		9E8421F317A2817000D14D0A /* ForgotPasswordWebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordWebRequest.m; sourceTree = "<group>"; };
+		9E8421F517A7E10C00D14D0A /* Chellange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chellange.h; sourceTree = "<group>"; };
+		9E8421F617A7E10C00D14D0A /* Chellange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chellange.m; sourceTree = "<group>"; };
 		9E9301F5179FCB0B00FFB166 /* alertsIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alertsIcon.png; sourceTree = "<group>"; };
 		9E9301F6179FCB0B00FFB166 /* alertsIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alertsIcon@2x.png"; sourceTree = "<group>"; };
 		9E9301F7179FCB0B00FFB166 /* badgesIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = badgesIcon.png; sourceTree = "<group>"; };
@@ -388,6 +394,8 @@
 				9E066379178C407300B3E974 /* Prediction.m */,
 				9E06637B178C560000B3E974 /* Topic.h */,
 				9E06637C178C560000B3E974 /* Topic.m */,
+				9E8421F517A7E10C00D14D0A /* Chellange.h */,
+				9E8421F617A7E10C00D14D0A /* Chellange.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -586,6 +594,8 @@
 				9E066385179038FE00B3E974 /* SignUpRequest.m */,
 				9E06638717903C3A00B3E974 /* AddPredictionRequest.h */,
 				9E06638817903C3A00B3E974 /* AddPredictionRequest.m */,
+				9E8421F217A2817000D14D0A /* ForgotPasswordWebRequest.h */,
+				9E8421F317A2817000D14D0A /* ForgotPasswordWebRequest.m */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -850,6 +860,8 @@
 				9E8421CF17A17DE400D14D0A /* BadgesViewController.m in Sources */,
 				9E8421D217A1858600D14D0A /* ProfileViewController.m in Sources */,
 				9E8421F117A26ECB00D14D0A /* PushWithoutAnimationSegue.m in Sources */,
+				9E8421F417A2817000D14D0A /* ForgotPasswordWebRequest.m in Sources */,
+				9E8421F717A7E10D00D14D0A /* Chellange.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

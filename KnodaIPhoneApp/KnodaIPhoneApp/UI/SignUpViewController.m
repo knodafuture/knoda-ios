@@ -145,6 +145,8 @@ static const NSInteger kMaxPasswordLength = 20;
                  
                  PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] init];
                  [predictionsRequest executeWithCompletionBlock: ^{}];
+                 
+                 [self performSegueWithIdentifier: @"ApplicationNavigationSegue" sender: self];
              }
              else if (signUpRequest.errorCode == 403)
              {

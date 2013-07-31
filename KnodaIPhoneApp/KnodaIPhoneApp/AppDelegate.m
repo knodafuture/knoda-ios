@@ -41,7 +41,7 @@
                                                            [UIColor whiteColor], UITextAttributeTextColor,
                                                            [UIColor blackColor], UITextAttributeTextShadowColor,
                                                            [NSValue valueWithUIOffset: UIOffsetMake(0, -1)], UITextAttributeTextShadowOffset,
-                                                           [UIFont fontWithName: @"Krona One" size: 13], UITextAttributeFont, nil]];
+                                                           [UIFont fontWithName: @"Krona One" size: 15], UITextAttributeFont, nil]];
     
     [UIApplication sharedApplication].keyWindow.backgroundColor = [UIColor whiteColor];
     

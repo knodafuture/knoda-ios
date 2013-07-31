@@ -10,4 +10,8 @@
 
 @interface PredictionsWebRequest : BaseWebRequest
 
+@property (nonatomic, readonly) NSArray* predictions;
+
+- (id) initWithPageNumber: (NSInteger) page;
+
 @end

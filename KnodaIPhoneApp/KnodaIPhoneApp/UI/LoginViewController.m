@@ -11,7 +11,10 @@
 #import "AppDelegate.h"
 
 #import "LoginWebRequest.h"
+
+//! TODO: remove these headers
 #import "PredictionsWebRequest.h"
+#import "AddPredictionRequest.h"
 
 #import "ForgotPasswordViewController.h"
 
@@ -49,6 +52,8 @@
 
 - (void) viewWillAppear: (BOOL) animated
 {
+    [self hideError];
+    
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(willShowKeyboardNotificationDidRecieve:) name: UIKeyboardWillShowNotification object: nil];
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(willHideKeyboardNotificationDidRecieve:) name: UIKeyboardWillHideNotification object: nil];
     
@@ -131,9 +136,20 @@
              {
                  self.appDelegate.user = loginRequest.user;
                  
-                 PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] init];
-                 [predictionsRequest executeWithCompletionBlock: ^{}];
-                 
+/*                 AddPredictionRequest* addPredictionRequest = [[AddPredictionRequest alloc] initWithBody: @"The old republic to be reconstructed I predict again and again" expirationDay: 17 expirationMonth: 11 expirationYear: 2015 expirationHour: 12 expirationMinute: 35 category: @"Social"];
+                 [addPredictionRequest executeWithCompletionBlock: ^
+                  {
+                      AddPredictionRequest* addPredictionRequest2 = [[AddPredictionRequest alloc] initWithBody: @"The new iPad will come soon" expirationDay: 17 expirationMonth: 9 expirationYear: 2013 expirationHour: 16 expirationMinute: 48 category: @"Entertainment"];
+                      [addPredictionRequest2 executeWithCompletionBlock: ^
+                      {
+                          AddPredictionRequest* addPredictionRequest3 = [[AddPredictionRequest alloc] initWithBody: @"The new iPod will come very soon" expirationDay: 1 expirationMonth: 8 expirationYear: 2013 expirationHour: 3 expirationMinute: 5 category: @"Entertainment"];
+                          [addPredictionRequest3 executeWithCompletionBlock: ^
+                           {}];
+//                          PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] init];
+//                          [predictionsRequest executeWithCompletionBlock: ^{}];
+                      }];
+                  }];
+*/
                  [self performSegueWithIdentifier: @"ApplicationNavigationSegue" sender: self];
              }
              else if (loginRequest.errorCode == 403)

@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
-@interface HomeViewController : UIViewController <UITableViewDataSource>
+@interface HomeViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @end

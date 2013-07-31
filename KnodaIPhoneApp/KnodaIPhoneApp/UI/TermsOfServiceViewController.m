@@ -10,6 +10,9 @@
 
 @interface TermsOfServiceViewController ()
 
+@property (nonatomic, strong) IBOutlet UIView* activityView;
+@property (nonatomic, strong) IBOutlet UIWebView* webView;
+
 @end
 
 @implementation TermsOfServiceViewController
@@ -22,25 +25,20 @@
 }
 
 
-- (IBAction) backButtonPressed: (id) sender
+- (void) viewWillAppear: (BOOL) animated
 {
-    [self.navigationController popViewControllerAnimated: YES];
-}
-
-
-/*- (void) viewWillAppear: (BOOL) animated
-{
-    self.navigationController.navigationBarHidden = NO;
+    //self.activityView.hidden = NO;
+    
+    [self.webView loadHTMLString: @"<html><body><h2 align='center'>Terms of Service</h2><p>Will be placed here</p></body></html>" baseURL: nil];
     
     [super viewWillAppear: animated];
 }
 
 
-- (void) viewWillDisappear: (BOOL) animated
+- (IBAction) backButtonPressed: (id) sender
 {
-    self.navigationController.navigationBarHidden = YES;
-    [super viewWillDisappear: animated];
-}*/
+    [self.navigationController popViewControllerAnimated: YES];
+}
 
 
 @end

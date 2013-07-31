@@ -13,6 +13,9 @@
 - (id) initWithBody: (NSString*) body
       expirationDay: (NSInteger) day
     expirationMonth: (NSInteger) month
-     expirationYear: (NSInteger) year;
+     expirationYear: (NSInteger) year
+     expirationHour: (NSInteger) hour
+   expirationMinute: (NSInteger) minute
+           category: (NSString*) category;
 
 @end

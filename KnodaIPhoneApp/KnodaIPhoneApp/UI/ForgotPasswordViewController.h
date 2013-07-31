@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ForgotPasswordViewController : UIViewController
+@interface ForgotPasswordViewController : UIViewController <UITextFieldDelegate>
 
 @property (nonatomic, strong) NSString* email;
 

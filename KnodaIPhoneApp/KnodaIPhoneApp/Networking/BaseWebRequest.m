@@ -34,7 +34,8 @@ static NSString* const kBaseURL = @"example.com";
 
 #else
 
-static NSString* const kBaseURL = @"89.22.50.128/api/";
+//static NSString* const kBaseURL = @"89.22.50.128/api/";
+static NSString* const kBaseURL = @"54.213.86.248/api/";
 
 #endif
 
@@ -135,7 +136,7 @@ const NSInteger kInternetOfflineError = -1009;
     
     if ([self requiresAuthToken])
     {
-        [urlString appendFormat: @"?auth_token=%@", self.appDelegate.user.token];
+        [urlString appendFormat: @"?auth_token=%@&", self.appDelegate.user.token];
     }
     
     if ([[self httpMethod] isEqualToString: @"GET"])
@@ -257,7 +258,7 @@ const NSInteger kInternetOfflineError = -1009;
             self.errorDescription = error.localizedDescription;
         }
         // Handle HTTP errors
-        else if (response.statusCode != 200 && response.statusCode != 201)
+        else if (response.statusCode < 200 && response.statusCode > 299)
         {
             self.errorCode = response.statusCode;
             self.errorDescription = [NSHTTPURLResponse localizedStringForStatusCode: response.statusCode];
@@ -274,7 +275,7 @@ const NSInteger kInternetOfflineError = -1009;
             
              NSLog(@"%@ %@\nRequest result:\n%@",  NSStringFromClass([self class]), request.URL, resultString);
             
-            if (resultString != nil)
+            if (resultString.length != 0)
             {
                 id parsedResult = [resultString JSONValue];
                 

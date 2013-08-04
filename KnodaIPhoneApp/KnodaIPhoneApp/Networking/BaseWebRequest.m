@@ -258,7 +258,7 @@ const NSInteger kInternetOfflineError = -1009;
             self.errorDescription = error.localizedDescription;
         }
         // Handle HTTP errors
-        else if (response.statusCode < 200 && response.statusCode > 299)
+        else if (response.statusCode < 200 || response.statusCode > 299)
         {
             self.errorCode = response.statusCode;
             self.errorDescription = [NSHTTPURLResponse localizedStringForStatusCode: response.statusCode];

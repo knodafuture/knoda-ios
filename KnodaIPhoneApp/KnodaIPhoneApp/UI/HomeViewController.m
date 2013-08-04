@@ -49,6 +49,14 @@
 }
 
 
+- (void) viewDidAppear: (BOOL) animated
+{
+    NSLog(@"View frame: %f, %f, %f, %f", self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
+    
+    [super viewDidAppear: animated];
+}
+
+
 - (IBAction) menuButtonPressed: (id) sender
 {
     [((NavigationViewController*)self.navigationController.parentViewController) toggleNavigationPanel];

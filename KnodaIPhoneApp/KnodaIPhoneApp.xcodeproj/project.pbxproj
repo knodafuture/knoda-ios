@@ -117,6 +117,8 @@
 		9E8421F117A26ECB00D14D0A /* PushWithoutAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E8421F017A26ECB00D14D0A /* PushWithoutAnimationSegue.m */; };
 		9E8421F417A2817000D14D0A /* ForgotPasswordWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E8421F317A2817000D14D0A /* ForgotPasswordWebRequest.m */; };
 		9E8421F717A7E10D00D14D0A /* Chellange.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E8421F617A7E10C00D14D0A /* Chellange.m */; };
+		9E8421FA17AFC91700D14D0A /* AddPredictionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E8421F917AFC91700D14D0A /* AddPredictionViewController.m */; };
+		9E8421FD17AFEB4900D14D0A /* CategoriesWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E8421FC17AFEB4900D14D0A /* CategoriesWebRequest.m */; };
 		9E930203179FCB0B00FFB166 /* alertsIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E9301F5179FCB0B00FFB166 /* alertsIcon.png */; };
 		9E930204179FCB0B00FFB166 /* alertsIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E9301F6179FCB0B00FFB166 /* alertsIcon@2x.png */; };
 		9E930205179FCB0B00FFB166 /* badgesIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E9301F7179FCB0B00FFB166 /* badgesIcon.png */; };
@@ -299,6 +301,10 @@
 		9E8421F317A2817000D14D0A /* ForgotPasswordWebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordWebRequest.m; sourceTree = "<group>"; };
 		9E8421F517A7E10C00D14D0A /* Chellange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chellange.h; sourceTree = "<group>"; };
 		9E8421F617A7E10C00D14D0A /* Chellange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chellange.m; sourceTree = "<group>"; };
+		9E8421F817AFC91700D14D0A /* AddPredictionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPredictionViewController.h; sourceTree = "<group>"; };
+		9E8421F917AFC91700D14D0A /* AddPredictionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPredictionViewController.m; sourceTree = "<group>"; };
+		9E8421FB17AFEB4900D14D0A /* CategoriesWebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoriesWebRequest.h; sourceTree = "<group>"; };
+		9E8421FC17AFEB4900D14D0A /* CategoriesWebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoriesWebRequest.m; sourceTree = "<group>"; };
 		9E9301F5179FCB0B00FFB166 /* alertsIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alertsIcon.png; sourceTree = "<group>"; };
 		9E9301F6179FCB0B00FFB166 /* alertsIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alertsIcon@2x.png"; sourceTree = "<group>"; };
 		9E9301F7179FCB0B00FFB166 /* badgesIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = badgesIcon.png; sourceTree = "<group>"; };
@@ -596,6 +602,8 @@
 				9E06638817903C3A00B3E974 /* AddPredictionRequest.m */,
 				9E8421F217A2817000D14D0A /* ForgotPasswordWebRequest.h */,
 				9E8421F317A2817000D14D0A /* ForgotPasswordWebRequest.m */,
+				9E8421FB17AFEB4900D14D0A /* CategoriesWebRequest.h */,
+				9E8421FC17AFEB4900D14D0A /* CategoriesWebRequest.m */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -636,6 +644,8 @@
 				9E8421CE17A17DE400D14D0A /* BadgesViewController.m */,
 				9E8421D017A1858600D14D0A /* ProfileViewController.h */,
 				9E8421D117A1858600D14D0A /* ProfileViewController.m */,
+				9E8421F817AFC91700D14D0A /* AddPredictionViewController.h */,
+				9E8421F917AFC91700D14D0A /* AddPredictionViewController.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -862,6 +872,8 @@
 				9E8421F117A26ECB00D14D0A /* PushWithoutAnimationSegue.m in Sources */,
 				9E8421F417A2817000D14D0A /* ForgotPasswordWebRequest.m in Sources */,
 				9E8421F717A7E10D00D14D0A /* Chellange.m in Sources */,
+				9E8421FA17AFC91700D14D0A /* AddPredictionViewController.m in Sources */,
+				9E8421FD17AFEB4900D14D0A /* CategoriesWebRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

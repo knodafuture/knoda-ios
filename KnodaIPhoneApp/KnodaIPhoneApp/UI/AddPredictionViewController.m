@@ -249,6 +249,7 @@
         self.activityView.hidden = NO;
         
         NSCalendar* gregorian = [[NSCalendar alloc] initWithCalendarIdentifier: NSGregorianCalendar];
+        [gregorian setTimeZone: [NSTimeZone timeZoneWithAbbreviation: @"GMT"]];
         NSDateComponents* dateComponents = [gregorian components: NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit fromDate: [self expirationDate]];
         
         AddPredictionRequest* request = [[AddPredictionRequest alloc] initWithBody: self.textView.text expirationDay: dateComponents.day expirationMonth: dateComponents.month expirationYear: dateComponents.year expirationHour: dateComponents.hour expirationMinute: dateComponents.minute category: self.categoryLabel.text];

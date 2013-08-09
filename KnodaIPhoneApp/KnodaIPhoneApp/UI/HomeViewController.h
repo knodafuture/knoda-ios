@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
+#import "AddPredictionViewController.h"
 
-@interface HomeViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface HomeViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, AddPredictionViewControllerDelegate>
 
 @end

@@ -1,98 +1,43 @@
 //
-//  HomeViewController.m
+//  PredictionDetailsViewController.m
 //  KnodaIPhoneApp
 //
-//  Created by Elena Timofeeva on 7/24/13.
+//  Created by Elena Timofeeva on 8/6/13.
 //  Copyright (c) 2013 Knoda. All rights reserved.
 //
 
-#import "HomeViewController.h"
-#import "NavigationViewController.h"
-#import "PreditionCell.h"
-
-#import "PredictionsWebRequest.h"
-#import "Prediction.h"
-
 #import "PredictionDetailsViewController.h"
 
+#import "PreditionCell.h"
+#import "PredictionCategoryCell.h"
 
-@interface HomeViewController ()
 
-@property (nonatomic, strong) NSMutableArray* predictions;
+@interface PredictionDetailsViewController ()
 
 @end
 
+@implementation PredictionDetailsViewController
 
-
-@implementation HomeViewController
-
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-	self.navigationController.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, self.navigationController.navigationBar.frame.size.height);
-    
-    PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] initWithOffset: 0];
-    [predictionsRequest executeWithCompletionBlock: ^
-    {
-        if (predictionsRequest.errorCode == 0)
-        {
-            self.predictions = [NSMutableArray arrayWithArray: predictionsRequest.predictions];
-            [self.tableView reloadData];
-        }
-    }];
-    
-    UIRefreshControl* refreshControl = [[UIRefreshControl alloc] init];
-    [refreshControl addTarget: self action: @selector(refresh:) forControlEvents: UIControlEventValueChanged];
-    
-    self.refreshControl = refreshControl;
+	// Do any additional setup after loading the view.
 }
 
-
-- (void) prepareForSegue: (UIStoryboardSegue*) segue sender: (id) sender
+- (void)didReceiveMemoryWarning
 {
-    if ([segue.identifier isEqualToString: @"AddPredictionSegue"])
-    {
-        ((AddPredictionViewController*)segue.destinationViewController).delegate = self;
-    }
-    else if ([segue.identifier isEqualToString: @"PredicionDetailsSegue"])
-    {
-        NSIndexPath* indexPath = [self.tableView indexPathForSelectedRow];
-        
-        [self.tableView deselectRowAtIndexPath: indexPath animated: YES];
-        ((PredictionDetailsViewController*)segue.destinationViewController).prediction = [self.predictions objectAtIndex: indexPath.row];
-    }
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
-
-
-#pragma mark - Actions
-
-
-- (IBAction) menuButtonPressed: (id) sender
-{
-    [((NavigationViewController*)self.navigationController.parentViewController) toggleNavigationPanel];
-}
-
-
-- (void) refresh: (UIRefreshControl*) refresh
-{
-    PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] initWithOffset: 0];
-    [predictionsRequest executeWithCompletionBlock: ^
-     {
-         [refresh endRefreshing];
-         
-         if (predictionsRequest.errorCode == 0)
-         {
-             self.predictions = [NSMutableArray arrayWithArray: predictionsRequest.predictions];
-             [self.tableView reloadData];
-         }
-     }];
-}
-
-
-#pragma mark -
-
 
 - (NSString*) predictionCreatedIntervalString: (Prediction*) prediciton
 {
@@ -184,25 +129,22 @@
     }
     else if (interval < (secondsInMinute * minutesInHour * hoursInDay * daysInMonth))
     {
-        NSInteger days = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay)) + 1;
+        NSInteger days = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay));
         result = [NSString stringWithFormat: NSLocalizedString(@"exp %dd%@", @""), days, (expired) ? @" ago" : @""];
     }
     else if (interval < (secondsInMinute * minutesInHour * hoursInDay * daysInMonth * monthInYear))
     {
-        NSInteger month = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay * daysInMonth)) + 1;
+        NSInteger month = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay * daysInMonth));
         result = [NSString stringWithFormat: NSLocalizedString(@"exp %dmth%@", @""), month, (expired) ? @" ago" : @""];
     }
     else
     {
-        NSInteger year = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay * daysInMonth * monthInYear)) + 1;
+        NSInteger year = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay * daysInMonth * monthInYear));
         result = [NSString stringWithFormat: NSLocalizedString(@"exp %dyr%@", @""), year, (year != 1) ? @"s" : @"", (expired) ? @" ago" : @""];
     }
     
     return result;
 }
-
-
-#pragma mark - UITableViewDataSource
 
 
 - (NSInteger) numberOfSectionsInTableView: (UITableView*) tableView
@@ -213,7 +155,7 @@
 
 - (NSInteger) tableView: (UITableView*) tableView numberOfRowsInSection: (NSInteger) section
 {
-    return (self.predictions.count != 0) ? ((self.predictions.count >= [PredictionsWebRequest limitByPage]) ? self.predictions.count + 1 : self.predictions.count) : 0;
+    return 3;
 }
 
 
@@ -221,23 +163,21 @@
 {
     UITableViewCell* tableCell;
     
-    if (indexPath.row != self.predictions.count)
+    if (indexPath.row == 0)
     {
-        Prediction* prediction = [self.predictions objectAtIndex: indexPath.row];
+        PreditionCell* cell = [tableView dequeueReusableCellWithIdentifier: @"PredictionBreifCell"];
         
-        PreditionCell* cell = [tableView dequeueReusableCellWithIdentifier: @"Cell"];
-        
-        cell.usernameLabel.text = prediction.userName;
-        cell.bodyLabel.text = prediction.body;
+        cell.usernameLabel.text = self.prediction.userName;
+        cell.bodyLabel.text = self.prediction.body;
         cell.metadataLabel.text = [NSString stringWithFormat: NSLocalizedString(@"%@ | %@ | %d%% agree", @""),
-                                   [self predictionExpiresIntervalString: prediction],
-                                   [self predictionCreatedIntervalString: prediction],
-                                   prediction.agreedPercent];
+                                   [self predictionExpiresIntervalString: self.prediction],
+                                   [self predictionCreatedIntervalString: self.prediction],
+                                   self.prediction.agreedPercent];
         
         CGRect rect = cell.bodyLabel.frame;
         CGSize maximumLabelSize = CGSizeMake(218, 37);
         
-        CGSize expectedLabelSize = [cell.bodyLabel.text sizeWithFont:[UIFont fontWithName: @"HelveticaNeue" size: 15] constrainedToSize:maximumLabelSize lineBreakMode:NSLineBreakByWordWrapping];
+        CGSize expectedLabelSize = [cell.bodyLabel.text sizeWithFont: [UIFont fontWithName: @"HelveticaNeue" size: 15] constrainedToSize: maximumLabelSize lineBreakMode: NSLineBreakByWordWrapping];
         rect.size.height = expectedLabelSize.height;
         cell.bodyLabel.frame = rect;
         
@@ -246,9 +186,22 @@
         
         tableCell = cell;
     }
+    else if (indexPath.row == 1)
+    {
+        PredictionCategoryCell* cell = [tableView dequeueReusableCellWithIdentifier: @"CategoryCell"];
+        
+        cell.label.text = self.prediction.category;
+        [cell.label sizeToFit];
+        
+        CGRect newButtonFrame = cell.button.frame;
+        newButtonFrame.size.width = cell.label.frame.size.width + 40;
+        cell.button.frame = newButtonFrame;
+        
+        tableCell = cell;
+    }
     else
     {
-        UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier: @"LoadingCell"];
+        UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier: @"OutcomeCell"];
         tableCell = cell;
     }
     
@@ -259,43 +212,20 @@
 #pragma mark - UITableViewDelegate
 
 
-- (void) tableView: (UITableView*) tableView willDisplayCell: (UITableViewCell*) cell forRowAtIndexPath: (NSIndexPath*) indexPath
+- (CGFloat) tableView: (UITableView*) tableView heightForRowAtIndexPath: (NSIndexPath*) indexPath
 {
-    if (indexPath.row == self.predictions.count)
+    if (indexPath.row == 0)
     {
-        PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] initWithLastID: ((Prediction*)[self.predictions lastObject]).ID];
-        [predictionsRequest executeWithCompletionBlock: ^
-         {
-             if (predictionsRequest.errorCode == 0 && predictionsRequest.predictions.count != 0)
-             {
-                 [self.predictions addObjectsFromArray: [NSMutableArray arrayWithArray: predictionsRequest.predictions] ];
-                 [self.tableView reloadData];
-             }
-             else
-             {
-                 [self.tableView scrollToRowAtIndexPath: [NSIndexPath indexPathForRow: indexPath.row - 1 inSection: 0] atScrollPosition: UITableViewScrollPositionBottom animated: YES];
-             }
-         }];
+        return 88;
     }
-}
-
-
-#pragma mark - AddPredictionViewControllerDelegate
-
-
-- (void) predictinMade
-{
-    [self dismissViewControllerAnimated: YES completion: nil];
-    
-    PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] initWithOffset: 0];
-    [predictionsRequest executeWithCompletionBlock: ^
-     {
-         if (predictionsRequest.errorCode == 0)
-         {
-             self.predictions = [NSMutableArray arrayWithArray: predictionsRequest.predictions];
-             [self.tableView reloadData];
-         }
-     }];
+    else if (indexPath.row == 1)
+    {
+        return 44;
+    }
+    else
+    {
+        return 92;
+    }
 }
 
 

@@ -11,7 +11,11 @@
 @interface PredictionsWebRequest : BaseWebRequest
 
 @property (nonatomic, readonly) NSArray* predictions;
+@property (nonatomic, readonly) NSInteger totalPredictionsCount;
 
-- (id) initWithPageNumber: (NSInteger) page;
++ (NSInteger) limitByPage;
+
+- (id) initWithOffset: (NSInteger) offset;
+- (id) initWithLastID: (NSInteger) lastID;
 
 @end

@@ -11,12 +11,13 @@
 #import "Chellange.h"
 
 
-static const NSInteger kPageResultsLimit = 5;
+static const NSInteger kPageResultsLimit = 7;
 
 
 @interface PredictionsWebRequest ()
 
 @property (nonatomic, strong) NSArray* predictions;
+@property (nonatomic, assign) NSInteger totalPredictionsCount;
 
 @end
 
@@ -24,9 +25,24 @@ static const NSInteger kPageResultsLimit = 5;
 @implementation PredictionsWebRequest
 
 
-- (id) initWithPageNumber: (NSInteger) page
++ (NSInteger) limitByPage
 {
-    NSDictionary* params = @{@"recent": @"true", @"limit" : [NSNumber numberWithInteger: kPageResultsLimit], @"offset" : [NSNumber numberWithInteger: (page * kPageResultsLimit)]};
+    return kPageResultsLimit;
+}
+
+
+- (id) initWithOffset: (NSInteger) offset
+{
+    NSDictionary* params = @{@"recent": @"true", @"limit" : [NSNumber numberWithInteger: kPageResultsLimit], @"offset" : [NSNumber numberWithInteger: offset]};
+    
+    self = [super initWithParameters: params];
+    return self;
+}
+
+
+- (id) initWithLastID: (NSInteger) lastID
+{
+    NSDictionary* params = @{@"recent": @"true", @"limit" : [NSNumber numberWithInteger: kPageResultsLimit], @"id_lt" : [NSNumber numberWithInteger: lastID]};
     
     self = [super initWithParameters: params];
     return self;
@@ -42,6 +58,8 @@ static const NSInteger kPageResultsLimit = 5;
 - (void) fillResultObject: (id) parsedResult
 {
     NSLog(@"Predictions Result: %@", parsedResult);
+    
+    self.totalPredictionsCount = [[[parsedResult objectForKey: @"meta"] objectForKey: @"count"] integerValue];
     
     NSMutableArray* predictionArray = [[NSMutableArray alloc] initWithCapacity: 0];
     
@@ -76,15 +94,15 @@ static const NSInteger kPageResultsLimit = 5;
         if ([predictionDictionary objectForKey: @"created_at"] != nil && ![[predictionDictionary objectForKey: @"created_at"] isKindOfClass: [NSNull class]])
         {
             NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
-            [dateFormatter setDateFormat: @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
-            prediction.creationDate = [dateFormatter dateFromString: [predictionDictionary objectForKey: @"created_at"]];
+            [dateFormatter setDateFormat: @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'zzz"];
+            prediction.creationDate = [dateFormatter dateFromString: [[predictionDictionary objectForKey: @"created_at"] stringByAppendingString: @"GMT"]];
         }
         
         if ([predictionDictionary objectForKey: @"expires_at"] != nil && ![[predictionDictionary objectForKey: @"expires_at"] isKindOfClass: [NSNull class]])
         {
             NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
-            [dateFormatter setDateFormat: @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
-            prediction.expirationDate = [dateFormatter dateFromString: [predictionDictionary objectForKey: @"expires_at"]];
+            [dateFormatter setDateFormat: @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'zzz"];
+            prediction.expirationDate = [dateFormatter dateFromString: [[predictionDictionary objectForKey: @"expires_at"] stringByAppendingString: @"GMT"]];
         }
         
         if ([predictionDictionary objectForKey: @"my_challenge"] != nil && ![[predictionDictionary objectForKey: @"my_challenge"] isKindOfClass: [NSNull class]])

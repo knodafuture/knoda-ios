@@ -19,6 +19,7 @@
 @interface HomeViewController ()
 
 @property (nonatomic, strong) NSMutableArray* predictions;
+@property (nonatomic, strong) NSTimer* cellUpdateTimer;
 
 @end
 
@@ -47,6 +48,34 @@
     [refreshControl addTarget: self action: @selector(refresh:) forControlEvents: UIControlEventValueChanged];
     
     self.refreshControl = refreshControl;
+}
+
+
+- (void) viewDidAppear: (BOOL) animated
+{
+    [super viewDidAppear: animated];
+    
+    self.cellUpdateTimer = [NSTimer scheduledTimerWithTimeInterval: 60.0 target: self selector: @selector(updateVisibleCells) userInfo: nil repeats: YES];
+}
+
+
+- (void) viewWillDisappear: (BOOL) animated
+{
+    [self.cellUpdateTimer invalidate];
+    self.cellUpdateTimer = nil;
+    
+    [super viewWillDisappear: animated];
+}
+
+
+- (void) updateVisibleCells
+{
+    NSArray* visibleCells = [self.tableView visibleCells];
+    
+    for (PreditionCell* cell in visibleCells)
+    {
+        [cell updateDates];
+    }
 }
 
 
@@ -91,117 +120,6 @@
 }
 
 
-#pragma mark -
-
-
-- (NSString*) predictionCreatedIntervalString: (Prediction*) prediciton
-{
-    NSString* result;
-    
-    NSDate* now = [NSDate date];
-    
-    NSTimeInterval interval = [now timeIntervalSinceDate: prediciton.creationDate];
-    
-    NSInteger secondsInMinute = 60;
-    NSInteger minutesInHour = 60;
-    NSInteger hoursInDay = 24;
-    NSInteger daysInMonth = 30;
-    NSInteger monthInYear = 12;
-    
-    if (interval < secondsInMinute)
-    {
-        result = [NSString stringWithFormat: NSLocalizedString(@"made %ds ago", @""), (NSInteger)interval];
-    }
-    else if (interval < (secondsInMinute * minutesInHour * hoursInDay))
-    {
-        NSInteger minutes = ((NSInteger)interval / secondsInMinute) % minutesInHour;
-        NSInteger hours = (NSInteger)interval / (secondsInMinute * minutesInHour);
-        
-        NSString* hoursString = (hours != 0) ? [NSString stringWithFormat: NSLocalizedString(@"%dh", @""), hours] : @"";
-        NSString* minutesString = (minutes != 0) ? [NSString stringWithFormat: NSLocalizedString(@"%dm", @""), minutes] : @"";
-        NSString* space = (hours != 0 && minutes != 0) ? @" " : @"";
-        
-        result = [NSString stringWithFormat: NSLocalizedString(@"made %@%@%@ ago", @""), hoursString, space, minutesString];
-    }
-    else if (interval < (secondsInMinute * minutesInHour * hoursInDay * daysInMonth))
-    {
-        NSInteger days = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay));
-        result = [NSString stringWithFormat: NSLocalizedString(@"made %dd ago", @""), days];
-    }
-    else if (interval < (secondsInMinute * minutesInHour * hoursInDay * daysInMonth * monthInYear))
-    {
-        NSInteger month = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay * daysInMonth));
-        result = [NSString stringWithFormat: NSLocalizedString(@"made %dmth ago", @""), month];
-    }
-    else
-    {
-        NSInteger year = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay * daysInMonth * monthInYear));
-        result = [NSString stringWithFormat: NSLocalizedString(@"made %dyr%@ ago", @""), year, (year != 1) ? @"s" : @""];
-    }
-    
-    return result;
-}
-
-
-- (NSString*) predictionExpiresIntervalString: (Prediction*) prediciton
-{
-    NSString* result;
-    
-    NSTimeInterval interval = 0;
-    NSDate* now = [NSDate date];
-    BOOL expired = NO;
-    
-    if ([now compare: prediciton.expirationDate] == NSOrderedAscending)
-    {
-        interval = [prediciton.expirationDate timeIntervalSinceDate: now];
-    }
-    else
-    {
-        interval = [now timeIntervalSinceDate: prediciton.expirationDate];
-        expired = YES;
-    }
-    
-    NSInteger secondsInMinute = 60;
-    NSInteger minutesInHour = 60;
-    NSInteger hoursInDay = 24;
-    NSInteger daysInMonth = 30;
-    NSInteger monthInYear = 12;
-    
-    if (interval < secondsInMinute)
-    {
-        result = [NSString stringWithFormat: NSLocalizedString(@"exp %ds%@", @""), (NSInteger)interval, (expired) ? @" ago" : @""];
-    }
-    else if (interval < (secondsInMinute * minutesInHour * hoursInDay))
-    {
-        NSInteger minutes = ((NSInteger)interval / secondsInMinute) % minutesInHour;
-        NSInteger hours = (NSInteger)interval / (secondsInMinute * minutesInHour);
-        
-        NSString* hoursString = (hours != 0) ? [NSString stringWithFormat: NSLocalizedString(@"%dh", @""), hours] : @"";
-        NSString* minutesString = (minutes != 0) ? [NSString stringWithFormat: NSLocalizedString(@"%dm", @""), minutes] : @"";
-        NSString* space = (hours != 0 && minutes != 0) ? @" " : @"";
-        
-        result = [NSString stringWithFormat: NSLocalizedString(@"exp %@%@%@%@", @""), hoursString, space, minutesString, (expired) ? @" ago" : @""];
-    }
-    else if (interval < (secondsInMinute * minutesInHour * hoursInDay * daysInMonth))
-    {
-        NSInteger days = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay)) + 1;
-        result = [NSString stringWithFormat: NSLocalizedString(@"exp %dd%@", @""), days, (expired) ? @" ago" : @""];
-    }
-    else if (interval < (secondsInMinute * minutesInHour * hoursInDay * daysInMonth * monthInYear))
-    {
-        NSInteger month = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay * daysInMonth)) + 1;
-        result = [NSString stringWithFormat: NSLocalizedString(@"exp %dmth%@", @""), month, (expired) ? @" ago" : @""];
-    }
-    else
-    {
-        NSInteger year = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay * daysInMonth * monthInYear)) + 1;
-        result = [NSString stringWithFormat: NSLocalizedString(@"exp %dyr%@", @""), year, (year != 1) ? @"s" : @"", (expired) ? @" ago" : @""];
-    }
-    
-    return result;
-}
-
-
 #pragma mark - UITableViewDataSource
 
 
@@ -227,19 +145,7 @@
         
         PreditionCell* cell = [tableView dequeueReusableCellWithIdentifier: @"Cell"];
         
-        cell.usernameLabel.text = prediction.userName;
-        cell.bodyLabel.text = prediction.body;
-        cell.metadataLabel.text = [NSString stringWithFormat: NSLocalizedString(@"%@ | %@ | %d%% agree", @""),
-                                   [self predictionExpiresIntervalString: prediction],
-                                   [self predictionCreatedIntervalString: prediction],
-                                   prediction.agreedPercent];
-        
-        CGRect rect = cell.bodyLabel.frame;
-        CGSize maximumLabelSize = CGSizeMake(218, 37);
-        
-        CGSize expectedLabelSize = [cell.bodyLabel.text sizeWithFont:[UIFont fontWithName: @"HelveticaNeue" size: 15] constrainedToSize:maximumLabelSize lineBreakMode:NSLineBreakByWordWrapping];
-        rect.size.height = expectedLabelSize.height;
-        cell.bodyLabel.frame = rect;
+        [cell fillWithPrediction: prediction];
         
         UIPanGestureRecognizer* recognizer = [[UIPanGestureRecognizer alloc] init];
         [cell addPanGestureRecognizer: recognizer];

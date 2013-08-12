@@ -7,6 +7,8 @@
 //
 
 #import "PreditionCell.h"
+#import "Prediction.h"
+#import "Chellange.h"
 
 
 @interface PreditionCell ()
@@ -23,6 +25,14 @@
 
 @property (nonatomic, strong) IBOutlet UIImageView* guessMarkImage;
 
+@property (nonatomic, strong) IBOutlet UILabel* usernameLabel;
+@property (nonatomic, strong) IBOutlet UILabel* bodyLabel;
+@property (nonatomic, strong) IBOutlet UILabel* metadataLabel;
+@property (nonatomic, strong) IBOutlet UILabel* expirationDateLabel;
+@property (nonatomic, strong) IBOutlet UIImageView* imageView;
+
+@property (nonatomic, strong) Prediction* prediction;
+
 @end
 
 
@@ -31,6 +41,61 @@
     BOOL agreed;
     BOOL disagreed;
 }
+
+
+#pragma mark Fill data
+
+
+- (void) fillWithPrediction: (Prediction*) prediction
+{
+    self.prediction = prediction;
+    
+    [self resetAgreedDisagreed];
+    
+    self.usernameLabel.text = prediction.userName;
+    self.bodyLabel.text = prediction.body;
+    
+    BOOL expiresInLowerThen10Minutes = NO;
+    NSString* expirationString = [self predictionExpiresIntervalString: self.prediction lowerThen10Minutes: &expiresInLowerThen10Minutes];
+    NSString* creationString = [self predictionCreatedIntervalString: self.prediction];
+    
+    self.metadataLabel.text = [NSString stringWithFormat: NSLocalizedString(@"%@ | %@ | %d%% agree", @""),
+                               expirationString,
+                               creationString,
+                               self.prediction.agreedPercent];
+    
+    self.expirationDateLabel.text = expirationString;
+    self.expirationDateLabel.textColor = (expiresInLowerThen10Minutes) ? ([UIColor redColor]) : (self.metadataLabel.textColor);
+    
+    CGRect rect = self.bodyLabel.frame;
+    CGSize maximumLabelSize = CGSizeMake(218, 37);
+    
+    CGSize expectedLabelSize = [self.bodyLabel.text sizeWithFont: [UIFont fontWithName: @"HelveticaNeue" size: 15] constrainedToSize: maximumLabelSize lineBreakMode: NSLineBreakByWordWrapping];
+    rect.size.height = expectedLabelSize.height;
+    self.bodyLabel.frame = rect;
+    
+    self.agreed = (prediction.chellange != nil) && (prediction.chellange.agree);
+    self.disagreed = (prediction.chellange != nil) && !(prediction.chellange.agree);
+}
+
+
+- (void) updateDates
+{
+    BOOL expiresInLowerThen10Minutes = NO;
+    NSString* expirationString = [self predictionExpiresIntervalString: self.prediction lowerThen10Minutes: &expiresInLowerThen10Minutes];
+    NSString* creationString = [self predictionCreatedIntervalString: self.prediction];
+    
+    self.metadataLabel.text = [NSString stringWithFormat: NSLocalizedString(@"%@ | %@ | %d%% agree", @""),
+                               expirationString,
+                               creationString,
+                               self.prediction.agreedPercent];
+    
+    self.expirationDateLabel.text = expirationString;
+    self.expirationDateLabel.textColor = (expiresInLowerThen10Minutes) ? ([UIColor redColor]) : (self.metadataLabel.textColor);
+}
+
+
+#pragma mark Handle gestures
 
 
 - (void) handlePanFrom: (UIPanGestureRecognizer*) recognizer
@@ -110,6 +175,16 @@
 #pragma mark Properties
 
 
+- (void) resetAgreedDisagreed
+{
+    agreed = NO;
+    disagreed = NO;
+    
+    self.agreeImage.hidden = YES;
+    self.disagreeImage.hidden = YES;
+}
+
+
 - (BOOL) agreed
 {
     return agreed;
@@ -151,6 +226,122 @@
     self.recognizingRightGesture = ([gestureRecognizer locationInView: self.contentView].x >= CGRectGetWidth(self.contentView.frame) - 50 && !self.agreed && ! self.disagreed);
     
     return (self.recognizingLeftGesture || self.recognizingRightGesture);
+}
+
+
+#pragma mark Calculate dates
+
+
+- (NSString*) predictionCreatedIntervalString: (Prediction*) prediciton
+{
+    NSString* result;
+    
+    NSDate* now = [NSDate date];
+    
+    NSTimeInterval interval = [now timeIntervalSinceDate: prediciton.creationDate];
+    
+    NSInteger secondsInMinute = 60;
+    NSInteger minutesInHour = 60;
+    NSInteger hoursInDay = 24;
+    NSInteger daysInMonth = 30;
+    NSInteger monthInYear = 12;
+    
+    if (interval < secondsInMinute)
+    {
+        result = [NSString stringWithFormat: NSLocalizedString(@"made %ds ago", @""), (NSInteger)interval];
+    }
+    else if (interval < (secondsInMinute * minutesInHour * hoursInDay))
+    {
+        NSInteger minutes = ((NSInteger)interval / secondsInMinute) % minutesInHour;
+        NSInteger hours = (NSInteger)interval / (secondsInMinute * minutesInHour);
+        
+        NSString* hoursString = (hours != 0) ? [NSString stringWithFormat: NSLocalizedString(@"%dh", @""), hours] : @"";
+        NSString* minutesString = (minutes != 0) ? [NSString stringWithFormat: NSLocalizedString(@"%dm", @""), minutes] : @"";
+        NSString* space = (hours != 0 && minutes != 0) ? @" " : @"";
+        
+        result = [NSString stringWithFormat: NSLocalizedString(@"made %@%@%@ ago", @""), hoursString, space, minutesString];
+    }
+    else if (interval < (secondsInMinute * minutesInHour * hoursInDay * daysInMonth))
+    {
+        NSInteger days = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay));
+        result = [NSString stringWithFormat: NSLocalizedString(@"made %dd ago", @""), days];
+    }
+    else if (interval < (secondsInMinute * minutesInHour * hoursInDay * daysInMonth * monthInYear))
+    {
+        NSInteger month = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay * daysInMonth));
+        result = [NSString stringWithFormat: NSLocalizedString(@"made %dmth ago", @""), month];
+    }
+    else
+    {
+        NSInteger year = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay * daysInMonth * monthInYear));
+        result = [NSString stringWithFormat: NSLocalizedString(@"made %dyr%@ ago", @""), year, (year != 1) ? @"s" : @""];
+    }
+    
+    return result;
+}
+
+
+- (NSString*) predictionExpiresIntervalString: (Prediction*) prediciton lowerThen10Minutes: (BOOL*) lowerThen10Minutes
+{
+    NSString* result;
+    
+    NSTimeInterval interval = 0;
+    NSDate* now = [NSDate date];
+    BOOL expired = NO;
+    
+    if ([now compare: prediciton.expirationDate] == NSOrderedAscending)
+    {
+        interval = [prediciton.expirationDate timeIntervalSinceDate: now];
+    }
+    else
+    {
+        interval = [now timeIntervalSinceDate: prediciton.expirationDate];
+        expired = YES;
+    }
+    
+    NSInteger secondsInMinute = 60;
+    NSInteger minutesInHour = 60;
+    NSInteger hoursInDay = 24;
+    NSInteger daysInMonth = 30;
+    NSInteger monthInYear = 12;
+    
+    if (interval < secondsInMinute)
+    {
+        result = [NSString stringWithFormat: NSLocalizedString(@"exp %ds%@", @""), (NSInteger)interval, (expired) ? @" ago" : @""];
+    }
+    else if (interval < (secondsInMinute * minutesInHour * hoursInDay))
+    {
+        NSInteger minutes = ((NSInteger)interval / secondsInMinute) % minutesInHour;
+        NSInteger hours = (NSInteger)interval / (secondsInMinute * minutesInHour);
+        
+        NSString* hoursString = (hours != 0) ? [NSString stringWithFormat: NSLocalizedString(@"%dh", @""), hours] : @"";
+        NSString* minutesString = (minutes != 0) ? [NSString stringWithFormat: NSLocalizedString(@"%dm", @""), minutes] : @"";
+        NSString* space = (hours != 0 && minutes != 0) ? @" " : @"";
+        
+        result = [NSString stringWithFormat: NSLocalizedString(@"exp %@%@%@%@", @""), hoursString, space, minutesString, (expired) ? @" ago" : @""];
+    }
+    else if (interval < (secondsInMinute * minutesInHour * hoursInDay * daysInMonth))
+    {
+        NSInteger days = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay)) + 1;
+        result = [NSString stringWithFormat: NSLocalizedString(@"exp %dd%@", @""), days, (expired) ? @" ago" : @""];
+    }
+    else if (interval < (secondsInMinute * minutesInHour * hoursInDay * daysInMonth * monthInYear))
+    {
+        NSInteger month = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay * daysInMonth)) + 1;
+        result = [NSString stringWithFormat: NSLocalizedString(@"exp %dmth%@", @""), month, (expired) ? @" ago" : @""];
+    }
+    else
+    {
+        NSInteger year = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay * daysInMonth * monthInYear)) + 1;
+        result = [NSString stringWithFormat: NSLocalizedString(@"exp %dyr%@", @""), year, (year != 1) ? @"s" : @"", (expired) ? @" ago" : @""];
+    }
+    
+    if (interval < (secondsInMinute * 10))
+    {
+        *lowerThen10Minutes = YES;
+    }
+    
+    return result;
 }
 
 

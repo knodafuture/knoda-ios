@@ -166,7 +166,7 @@
     if (indexPath.row == 0)
     {
         PreditionCell* cell = [tableView dequeueReusableCellWithIdentifier: @"PredictionBreifCell"];
-        
+/*
         cell.usernameLabel.text = self.prediction.userName;
         cell.bodyLabel.text = self.prediction.body;
         cell.metadataLabel.text = [NSString stringWithFormat: NSLocalizedString(@"%@ | %@ | %d%% agree", @""),
@@ -180,7 +180,7 @@
         CGSize expectedLabelSize = [cell.bodyLabel.text sizeWithFont: [UIFont fontWithName: @"HelveticaNeue" size: 15] constrainedToSize: maximumLabelSize lineBreakMode: NSLineBreakByWordWrapping];
         rect.size.height = expectedLabelSize.height;
         cell.bodyLabel.frame = rect;
-        
+*/        
         UIPanGestureRecognizer* recognizer = [[UIPanGestureRecognizer alloc] init];
         [cell addPanGestureRecognizer: recognizer];
         

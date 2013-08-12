@@ -529,7 +529,7 @@
                                             </imageView>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="5wM-fc-N8C">
                                                 <rect key="frame" x="0.0" y="53" width="265" height="222"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <prototypes>
                                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="HomeCell" id="49Q-uL-PGQ">
@@ -1056,7 +1056,7 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </view>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="youda_avatar.jpg" id="SBo-Dg-hof">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="youda_avatar.jpg" id="SBo-Dg-hof">
                                             <rect key="frame" x="15" y="12" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <userDefinedRuntimeAttributes>
@@ -1081,6 +1081,13 @@
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="2h 5m ago | 55%  agree" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LMf-Yv-aIL">
+                                            <rect key="frame" x="82" y="64" width="225" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                            <color key="textColor" red="0.51519874499999996" green="0.51832116169999998" blue="0.51207632839999995" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="2h 5m ago" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UAP-lv-z5B">
                                             <rect key="frame" x="82" y="64" width="225" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
@@ -1149,9 +1156,11 @@
                                     <outlet property="bodyLabel" destination="fi7-fU-AHz" id="MJq-IU-Qfx"/>
                                     <outlet property="disagreeImage" destination="Mti-BN-S8Q" id="Lmv-T8-Rq8"/>
                                     <outlet property="disagreeQuestionView" destination="OsV-0K-Dct" id="KaD-Gj-NZx"/>
+                                    <outlet property="expirationDateLabel" destination="UAP-lv-z5B" id="q2k-wE-dEC"/>
                                     <outlet property="guessMarkImage" destination="lo9-4c-Tnx" id="Eeq-Vo-kvA"/>
                                     <outlet property="metadataLabel" destination="LMf-Yv-aIL" id="sKB-G3-89k"/>
                                     <outlet property="usernameLabel" destination="3e6-Ox-aKM" id="FUo-Ig-eQy"/>
+                                    <segue destination="wNN-TM-pOg" kind="push" identifier="PredicionDetailsSegue" id="Yh8-Zj-Yzz"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="LoadingCell" id="d4Z-77-28S">
@@ -1195,6 +1204,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="menuButtonPressed:" destination="gWi-vh-dHM" eventType="touchUpInside" id="XhA-zR-Zak"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" id="Otp-jN-kwc">
@@ -1209,6 +1221,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="ZCK-dQ-2af" kind="modal" identifier="AddPredictionSegue" id="IMX-a1-Bbr"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
@@ -1222,7 +1237,7 @@
             <objects>
                 <viewController id="wNN-TM-pOg" customClass="PredictionDetailsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hDO-dV-CXd">
-                        <rect key="frame" x="0.0" y="20" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="darkBg.png" id="Lef-27-XfU">
@@ -1671,6 +1686,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="ob0-OU-rD2"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
@@ -2893,10 +2909,6 @@
         <class className="AddPredictionViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AddPredictionViewController.h"/>
             <relationships>
-                <relationship kind="action" name="cancel:"/>
-                <relationship kind="action" name="predict:"/>
-                <relationship kind="action" name="selectCategoryPressed:"/>
-                <relationship kind="action" name="selectExpirationPressed:"/>
                 <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="categoryButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="categoryLabel" candidateClass="UILabel"/>
@@ -2911,9 +2923,6 @@
         <class className="AlertsViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AlertsViewController.h"/>
             <relationships>
-                <relationship kind="action" name="lerfButtonPressed:"/>
-                <relationship kind="action" name="menuButtonPressed:"/>
-                <relationship kind="action" name="rightButtonPressed:"/>
                 <relationship kind="outlet" name="detailsView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="segmentedControlImage" candidateClass="UIImageView"/>
             </relationships>
@@ -2923,9 +2932,6 @@
         </class>
         <class className="BadgesViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/BadgesViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="menuButtonPressed:"/>
-            </relationships>
         </class>
         <class className="CustomizedTextField" superclassName="UITextField">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomizedTextField.h"/>
@@ -2936,6 +2942,8 @@
         <class className="ForgotPasswordViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ForgotPasswordViewController.h"/>
             <relationships>
+                <relationship kind="action" name="cancelButtonPressed:"/>
+                <relationship kind="action" name="sendButtonPressed:"/>
                 <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="errorLabel" candidateClass="UILabel"/>
@@ -2946,19 +2954,20 @@
         <class className="HistoryViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/HistoryViewController.h"/>
             <relationships>
+                <relationship kind="action" name="lerfButtonPressed:"/>
+                <relationship kind="action" name="menuButtonPressed:"/>
+                <relationship kind="action" name="rightButtonPressed:"/>
                 <relationship kind="outlet" name="detailsView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="segmentedControlImage" candidateClass="UIImageView"/>
             </relationships>
         </class>
         <class className="HomeViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/HomeViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="menuButtonPressed:"/>
-            </relationships>
         </class>
         <class className="LoginViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
             <relationships>
+                <relationship kind="action" name="loginButtonPressed:"/>
                 <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="errorLabel" candidateClass="UILabel"/>
@@ -2999,6 +3008,7 @@
                 <relationship kind="outlet" name="bodyLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="disagreeImage" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="disagreeQuestionView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="expirationDateLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="guessMarkImage" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="metadataLabel" candidateClass="UILabel"/>
@@ -3011,7 +3021,6 @@
         <class className="SignUpViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SignUpViewController.h"/>
             <relationships>
-                <relationship kind="action" name="signUpButtonPressed:"/>
                 <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="emailTextFiled" candidateClass="UITextField"/>
@@ -3024,7 +3033,6 @@
         <class className="TermsOfServiceViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TermsOfServiceViewController.h"/>
             <relationships>
-                <relationship kind="action" name="backButtonPressed:"/>
                 <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
             </relationships>

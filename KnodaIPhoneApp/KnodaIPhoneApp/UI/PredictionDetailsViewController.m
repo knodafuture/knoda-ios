@@ -11,27 +11,36 @@
 #import "Prediction.h"
 #import "Chellange.h"
 
-#import "PreditionCell.h"
+#import "PredictionDetailsCell.h"
 #import "PredictionCategoryCell.h"
 #import "PredictionStatusCell.h"
 #import "MakePredictionCell.h"
 #import "OutcomeCell.h"
+#import "LoadingCell.h"
 
 #import "PredictorsCountCell.h"
 #import "PredictorCell.h"
 
+#import "AddPredictionViewController.h"
+
 typedef enum {
-    RowPrediction = 1,
+    RowEmpty = 0,
+    RowPrediction,
     RowCategory,
     RowStatus,
     RowPredictorsCount,
     RowMakePrediction,
     RowOutcome,
     RowPredictor,
+    RowLoading,
     TableRowsBaseCount = RowPredictorsCount,
 } CellType;
 
-@interface PredictionDetailsViewController ()
+static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
+
+@interface PredictionDetailsViewController () <AddPredictionViewControllerDelegate> {
+    BOOL _loadingUsers;
+}
 
 @property (nonatomic) NSArray *agreedUsers;
 @property (nonatomic) NSArray *disagreedUsers;
@@ -40,31 +49,13 @@ typedef enum {
 
 @implementation PredictionDetailsViewController
 
+#pragma mark View lifecycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.agreedUsers = @[@"User1", @"User2", @"User3"];
-    self.disagreedUsers = @[@"User1", @"User2"];
-}
-
-- (CellType)cellTypeForIndexpath:(NSIndexPath *)indexPath {
-    switch (indexPath.row) {
-        case 0: return RowPrediction;
-        case 1: return RowCategory;
-        case 2: return RowOutcome; //self.prediction.chellange.isFinished ? RowStatus : RowMakePrediction;
-        case 3: return RowPredictorsCount;
-        default: return RowPredictor;
-    }
-}
-
-- (Class)cellClassForIndexpath:(NSIndexPath *)indexPath {
-    switch ([self cellTypeForIndexpath:indexPath]) {
-        case RowPrediction:         return [PreditionCell class];
-        case RowCategory:           return [PredictionCategoryCell class];
-        case RowStatus:             return [PredictionStatusCell class];
-        case RowMakePrediction:     return [MakePredictionCell class];
-        case RowOutcome: return [OutcomeCell class];
-        case RowPredictorsCount:    return [PredictorsCountCell class];
-        case RowPredictor:          return [PredictorCell class];
+    
+    if(self.prediction.agreeCount || self.prediction.disagreeCount) {
+        _loadingUsers = YES;
     }
 }
 
@@ -74,42 +65,88 @@ typedef enum {
     [self.navigationController popViewControllerAnimated: YES];
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:kAddPredictionSegue]) {
+        ((AddPredictionViewController*)segue.destinationViewController).delegate = self;
+    }
+}
+
+#pragma mark Private
+
+- (CellType)cellTypeForIndexpath:(NSIndexPath *)indexPath {
+    switch (indexPath.row) {
+        case 0: return RowPrediction;
+        case 1: return RowCategory;
+        case 2:
+            if(self.prediction.outcome) {
+                return RowStatus;
+            }
+            else if(self.prediction.chellange.isOwn) {
+                return RowOutcome;
+            }
+            else if(!self.prediction.chellange) {
+                return RowMakePrediction;
+            }
+            return RowEmpty;
+        case 3:  return RowPredictorsCount;
+        default: return _loadingUsers ? RowLoading : RowPredictor;
+    }
+}
+
+- (Class)cellClassForIndexpath:(NSIndexPath *)indexPath {
+    switch ([self cellTypeForIndexpath:indexPath]) {
+        case RowPrediction:         return [PredictionDetailsCell class];
+        case RowCategory:           return [PredictionCategoryCell class];
+        case RowStatus:             return [PredictionStatusCell class];
+        case RowMakePrediction:     return [MakePredictionCell class];
+        case RowOutcome:            return [OutcomeCell class];
+        case RowPredictorsCount:    return [PredictorsCountCell class];
+        case RowPredictor:          return [PredictorCell class];
+        case RowEmpty:              return [BaseTableViewCell class];
+        case RowLoading:            return [LoadingCell class];
+    }
+}
+
 #pragma mark UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return TableRowsBaseCount + MAX(self.agreedUsers.count, self.disagreedUsers.count);
+    return TableRowsBaseCount + (_loadingUsers ? 1 : MAX(self.agreedUsers.count, self.disagreedUsers.count));
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    Class cellClass = [self cellClassForIndexpath:indexPath];
+    Class cellClass = [self cellClassForIndexpath:indexPath];    
     BaseTableViewCell *baseCell = (BaseTableViewCell *)[tableView dequeueReusableCellWithIdentifier:[cellClass reuseIdentifier]];
     
-    if([baseCell isKindOfClass:[PreditionCell class]]) {
-        PreditionCell *cell = (PreditionCell *)baseCell;
+    if([baseCell isKindOfClass:[PredictionDetailsCell class]]) {
+        PredictionDetailsCell *cell = (PredictionDetailsCell *)baseCell;
         [cell fillWithPrediction:self.prediction];
     }
     else if([baseCell isKindOfClass:[PredictionCategoryCell class]]) {
-        //PredictionDetailsCategoryCell *cell = (PredictionDetailsCategoryCell *)baseCell;
+        PredictionCategoryCell *cell = (PredictionCategoryCell *)baseCell;
+        [cell setCategory:self.prediction.category];
     }
     else if([baseCell isKindOfClass:[PredictionStatusCell class]]) {
         PredictionStatusCell *cell = (PredictionStatusCell *)baseCell;
         [cell setupCellWithPrediction:self.prediction];
     }
     else if([baseCell isKindOfClass:[MakePredictionCell class]]) {
-        //MakePredictionCell *cell = (MakePredictionCell *)baseCell;
         
     }
     else if([baseCell isKindOfClass:[PredictorsCountCell class]]) {
         PredictorsCountCell *cell = (PredictorsCountCell *)baseCell;
-        cell.agreedCount    = self.agreedUsers.count;
-        cell.disagreedCount = self.disagreedUsers.count;
+        cell.agreedCount    = self.prediction.agreeCount;
+        cell.disagreedCount = self.prediction.disagreeCount;
     }
     else if([baseCell isKindOfClass:[PredictorCell class]]) {
         PredictorCell *cell = (PredictorCell *)baseCell;
         int idx = indexPath.row - TableRowsBaseCount;
         cell.agreedUserName.text    = self.agreedUsers.count > idx ? self.agreedUsers[idx] : @"";
         cell.disagreedUserName.text = self.disagreedUsers.count > idx ? self.disagreedUsers[idx] : @"";
+    }
+    else if([baseCell isKindOfClass:[OutcomeCell class]]) {
+        OutcomeCell *cell = (OutcomeCell *)baseCell;
+        [cell setupCellWithPrediction:self.prediction];
     }
     
     return baseCell;
@@ -120,10 +157,24 @@ typedef enum {
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch ([self cellTypeForIndexpath:indexPath]) {
         case RowStatus:
-            return [PredictionStatusCell heightForPrediction:self.prediction];
+            return [PredictionStatusCell cellHeightForPrediction:self.prediction];
+        case RowPrediction:
+            return [PredictionDetailsCell cellHeightForPrediction:self.prediction];
+        case RowOutcome:
+            return [OutcomeCell cellHeightForPrediction:self.prediction];
+        case RowEmpty:
+            return 0.0;
+        case RowLoading:
+            return 44.0;
         default:
             return [[self cellClassForIndexpath:indexPath] cellHeight];
     }
+}
+
+#pragma mark AddPredictionViewControllerDelegate
+
+- (void) predictinMade {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

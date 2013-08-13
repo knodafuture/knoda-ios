@@ -26,8 +26,6 @@
 @property (nonatomic, strong) IBOutlet UIImageView* guessMarkImage;
 
 @property (nonatomic, strong) IBOutlet UILabel* usernameLabel;
-@property (nonatomic, strong) IBOutlet UILabel* bodyLabel;
-@property (nonatomic, strong) IBOutlet UILabel* metadataLabel;
 @property (nonatomic, strong) IBOutlet UILabel* expirationDateLabel;
 @property (nonatomic, strong) IBOutlet UIImageView* imageView;
 

@@ -8,6 +8,12 @@
 
 #import "PredictionCategoryCell.h"
 
+@interface PredictionCategoryCell()
+
+@property (nonatomic, strong) IBOutlet UIButton* button;
+    
+@end
+
 @implementation PredictionCategoryCell
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
@@ -19,8 +25,13 @@
     return self;
 }
 
+- (void)setCategory:(NSString *)category {
+    [self.button setTitle:category forState:UIControlStateNormal];
+    [self.button setTitle:category forState:UIControlStateHighlighted];
+}
+
 + (CGFloat)cellHeight {
-    return 35.0;
+    return 40.0;
 }
 
 @end

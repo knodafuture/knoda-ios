@@ -12,7 +12,6 @@
 
 @interface PredictionCategoryCell : BaseTableViewCell
 
-@property (nonatomic, strong) IBOutlet UIButton* button;
-@property (nonatomic, strong) IBOutlet UILabel* label;
+@property (nonatomic) NSString *category;
 
 @end

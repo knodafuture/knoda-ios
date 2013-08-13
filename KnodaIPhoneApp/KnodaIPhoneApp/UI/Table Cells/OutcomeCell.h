@@ -8,6 +8,12 @@
 
 #import "BaseTableViewCell.h"
 
+@class Prediction;
+
 @interface OutcomeCell : BaseTableViewCell
+
+- (void)setupCellWithPrediction:(Prediction *)prediction;
+
++ (CGFloat)cellHeightForPrediction:(Prediction *)prediction;
 
 @end

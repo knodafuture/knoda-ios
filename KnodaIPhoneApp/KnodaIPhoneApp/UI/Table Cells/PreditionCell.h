@@ -24,6 +24,9 @@
 
 @interface PreditionCell : BaseTableViewCell <UIGestureRecognizerDelegate>
 
+@property (nonatomic, strong) IBOutlet UILabel* bodyLabel;
+@property (nonatomic, strong) IBOutlet UILabel* metadataLabel;
+
 @property (nonatomic, assign) BOOL agreed;
 @property (nonatomic, assign) BOOL disagreed;
 

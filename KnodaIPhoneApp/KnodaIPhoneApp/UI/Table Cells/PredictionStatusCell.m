@@ -22,6 +22,14 @@ static const float kBSTopPadding       = 10.0;
 static const float kCellBottomPadding  = 10.0;
 static const float kBSHeight           = 44.0;
 
+@interface PredictionStatusCell()
+
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *pointsLabel;
+@property (weak, nonatomic) IBOutlet UIView  *bsView;
+
+@end
+
 @implementation PredictionStatusCell
 
 - (void)setIsRight:(BOOL)isRight {
@@ -56,25 +64,38 @@ static const float kBSHeight           = 44.0;
     [self adjustLayouts];
 }
 
++ (NSString *)marketSizeNameForPoints:(NSInteger)points {
+    switch (points) {
+        case 1:
+        case 2:  return NSLocalizedString(@"Favorite", @"");
+        case 3:
+        case 4:  return NSLocalizedString(@"Underdog", @"");
+        default: return NSLocalizedString(@"Longshot", @"");
+    }
+}
+
 + (NSString *)buildPointsString:(Chellange *)challenge {
     __block NSMutableString *string = [NSMutableString string];
     
-    void (^addPoint)(int, NSString*, NSString*) = ^(int point, NSString *singleName, NSString *plName) {
+    void (^addPoint)(int, NSString*, NSString*, NSString*) = ^(int point, NSString *name, NSString *singlePoint, NSString *plPoint) {
         if(point > 0) {
             BOOL single = point == 1;
-            [string appendFormat:@"+%d %@\n", point, single ? singleName : plName];
+            [string appendFormat:@"+%d %@ %@\n", point, name, (single ? singlePoint : plPoint)];
         }
     };
     
-    addPoint(challenge.basePoints, NSLocalizedString(@"Base point", @""), NSLocalizedString(@"Base points", @""));
-    addPoint(challenge.outcomePoints, NSLocalizedString(@"Outcome point", @""), NSLocalizedString(@"Outcome points", @""));
-    addPoint(challenge.marketSizePoints, NSLocalizedString(@"Market size point", @""), NSLocalizedString(@"Market size points", @""));
-    addPoint(challenge.predictionMarketPoints, NSLocalizedString(@"Prediction market point", @""), NSLocalizedString(@"Prediction market points", @""));
+    NSString *point = NSLocalizedString(@"Point", @"");
+    NSString *points = NSLocalizedString(@"Points", @"");
+    
+    addPoint(challenge.basePoints, NSLocalizedString(@"Base", @""), point, points);
+    addPoint(challenge.outcomePoints, NSLocalizedString(@"Outcome", @""), point, points);
+    addPoint(challenge.marketSizePoints, NSLocalizedString(@"Market size", @""), point, points);
+    addPoint(challenge.predictionMarketPoints, [self marketSizeNameForPoints:challenge.predictionMarketPoints], point, points);
     
     return string;
 }
 
-+ (CGFloat)heightForPrediction:(Prediction *)prediction {
++ (CGFloat)cellHeightForPrediction:(Prediction *)prediction {
     float height = kCellBaseHeight + kTitleBottomPadding;
     
     NSString *points = [self buildPointsString:prediction.chellange];

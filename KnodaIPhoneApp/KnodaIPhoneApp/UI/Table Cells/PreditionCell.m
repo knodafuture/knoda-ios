@@ -336,7 +336,7 @@
         result = [NSString stringWithFormat: NSLocalizedString(@"exp %dyr%@", @""), year, (year != 1) ? @"s" : @"", (expired) ? @" ago" : @""];
     }
     
-    if (interval < (secondsInMinute * 10))
+    if (interval < (secondsInMinute * 10) && !expired)
     {
         *lowerThen10Minutes = YES;
     }

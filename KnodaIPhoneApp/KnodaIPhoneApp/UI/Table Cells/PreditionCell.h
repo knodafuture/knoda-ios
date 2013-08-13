@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+#import "BaseTableViewCell.h"
 
 @class Prediction;
 
-
-@interface PreditionCell : UITableViewCell <UIGestureRecognizerDelegate>
+@interface PreditionCell : BaseTableViewCell <UIGestureRecognizerDelegate>
 
 @property (nonatomic, assign) BOOL agreed;
 @property (nonatomic, assign) BOOL disagreed;

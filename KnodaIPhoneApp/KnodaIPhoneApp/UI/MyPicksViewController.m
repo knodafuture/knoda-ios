@@ -52,7 +52,7 @@
 - (UITableViewCell*) tableView: (UITableView*) tableView cellForRowAtIndexPath: (NSIndexPath*) indexPath
 {
     
-    PreditionCell* cell = [tableView dequeueReusableCellWithIdentifier: @"Cell"];
+    PreditionCell* cell = [tableView dequeueReusableCellWithIdentifier:[PreditionCell reuseIdentifier]];
     
     if (indexPath.row % 2 != 0)
     {

@@ -7,10 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+
 #import "Prediction.h"
+
+@class Prediction;
 
 @interface PredictionDetailsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, strong) Prediction* prediction;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@property (nonatomic, strong) Prediction *prediction;
+
+- (IBAction)backButtonPressed:(id)sender;
 
 @end

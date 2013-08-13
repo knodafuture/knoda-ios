@@ -228,6 +228,9 @@
     return (self.recognizingLeftGesture || self.recognizingRightGesture);
 }
 
++ (CGFloat)cellHeight {
+    return 88.0;
+}
 
 #pragma mark Calculate dates
 

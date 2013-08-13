@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PredictionCategoryCell : UITableViewCell
+#import "BaseTableViewCell.h"
+
+@interface PredictionCategoryCell : BaseTableViewCell
 
 @property (nonatomic, strong) IBOutlet UIButton* button;
 @property (nonatomic, strong) IBOutlet UILabel* label;

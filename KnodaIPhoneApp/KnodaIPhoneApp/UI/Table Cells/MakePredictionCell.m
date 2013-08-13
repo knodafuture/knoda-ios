@@ -1,14 +1,14 @@
 //
-//  PredictionCategoryCell.m
+//  MakePredictionCell.m
 //  KnodaIPhoneApp
 //
-//  Created by Elena Timofeeva on 8/6/13.
+//  Created by Viktor Levschanov on 8/13/13.
 //  Copyright (c) 2013 Knoda. All rights reserved.
 //
 
-#import "PredictionCategoryCell.h"
+#import "MakePredictionCell.h"
 
-@implementation PredictionCategoryCell
+@implementation MakePredictionCell
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     if(self = [super initWithCoder:aDecoder]) {
@@ -20,7 +20,8 @@
 }
 
 + (CGFloat)cellHeight {
-    return 35.0;
+    return 60.0;
 }
+
 
 @end

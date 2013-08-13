@@ -15,6 +15,8 @@
 
 #import "PredictionDetailsViewController.h"
 
+static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
+static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
 
 @interface HomeViewController ()
 
@@ -67,7 +69,6 @@
     [super viewWillDisappear: animated];
 }
 
-
 - (void) updateVisibleCells
 {
     NSArray* visibleCells = [self.tableView visibleCells];
@@ -81,16 +82,12 @@
 
 - (void) prepareForSegue: (UIStoryboardSegue*) segue sender: (id) sender
 {
-    if ([segue.identifier isEqualToString: @"AddPredictionSegue"])
-    {
+    if ([segue.identifier isEqualToString:kAddPredictionSegue]) {
         ((AddPredictionViewController*)segue.destinationViewController).delegate = self;
     }
-    else if ([segue.identifier isEqualToString: @"PredicionDetailsSegue"])
-    {
-        NSIndexPath* indexPath = [self.tableView indexPathForSelectedRow];
-        
-        [self.tableView deselectRowAtIndexPath: indexPath animated: YES];
-        ((PredictionDetailsViewController*)segue.destinationViewController).prediction = [self.predictions objectAtIndex: indexPath.row];
+    else if([segue.identifier isEqualToString:kPredictionDetailsSegue]) {
+        PredictionDetailsViewController *vc = (PredictionDetailsViewController *)segue.destinationViewController;
+        vc.prediction = sender;
     }
 }
 
@@ -143,7 +140,7 @@
     {
         Prediction* prediction = [self.predictions objectAtIndex: indexPath.row];
         
-        PreditionCell* cell = [tableView dequeueReusableCellWithIdentifier: @"Cell"];
+        PreditionCell* cell = [tableView dequeueReusableCellWithIdentifier:[PreditionCell reuseIdentifier]];
         
         [cell fillWithPrediction: prediction];
         
@@ -185,6 +182,10 @@
     }
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    Prediction* prediction = [self.predictions objectAtIndex: indexPath.row];
+    [self performSegueWithIdentifier:kPredictionDetailsSegue sender:prediction];
+}
 
 #pragma mark - AddPredictionViewControllerDelegate
 

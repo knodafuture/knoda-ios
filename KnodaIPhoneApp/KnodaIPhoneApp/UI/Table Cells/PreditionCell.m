@@ -43,6 +43,11 @@
 }
 
 
++ (CGFloat)cellHeight {
+    return 88.0;
+}
+
+
 #pragma mark Fill data
 
 
@@ -74,8 +79,8 @@
     rect.size.height = expectedLabelSize.height;
     self.bodyLabel.frame = rect;
     
-    self.agreed = (prediction.chellange != nil) && (prediction.chellange.agree);
-    self.disagreed = (prediction.chellange != nil) && !(prediction.chellange.agree);
+    self.agreed = (prediction.chellange != nil) && (prediction.chellange.agree) && (!self.prediction.chellange.isOwn);
+    self.disagreed = (prediction.chellange != nil) && !(prediction.chellange.agree) && (!self.prediction.chellange.isOwn);
 }
 
 
@@ -143,6 +148,11 @@
             
             self.agreed = location > self.contentView.frame.size.width / 2;
             
+            if (self.agreed && [self.delegate respondsToSelector: @selector(predictionAgreed:inCell:)])
+            {
+                [self.delegate predictionAgreed: self.prediction inCell: self];
+            }
+            
             self.recognizingLeftGesture = NO;
         }
         else if (self.recognizingRightGesture)
@@ -156,6 +166,11 @@
             }];
             
             self.disagreed = location < self.contentView.frame.size.width / 2;
+            
+            if (self.disagreed && [self.delegate respondsToSelector: @selector(predictionDisagreed:inCell:)])
+            {
+                [self.delegate predictionDisagreed: self.prediction inCell: self];
+            }
             
             self.recognizingRightGesture = NO;
         }
@@ -222,15 +237,12 @@
 
 - (BOOL) gestureRecognizerShouldBegin: (UIGestureRecognizer*) gestureRecognizer
 {
-    self.recognizingLeftGesture = ([gestureRecognizer locationInView: self.contentView].x <= 50 && !self.agreed && !self.disagreed);
-    self.recognizingRightGesture = ([gestureRecognizer locationInView: self.contentView].x >= CGRectGetWidth(self.contentView.frame) - 50 && !self.agreed && ! self.disagreed);
+    self.recognizingLeftGesture = ([gestureRecognizer locationInView: self.contentView].x <= 50 && !self.agreed && !self.disagreed && !self.prediction.chellange.isOwn);
+    self.recognizingRightGesture = ([gestureRecognizer locationInView: self.contentView].x >= CGRectGetWidth(self.contentView.frame) - 50 && !self.agreed && ! self.disagreed && !self.prediction.chellange.isOwn);
     
     return (self.recognizingLeftGesture || self.recognizingRightGesture);
 }
 
-+ (CGFloat)cellHeight {
-    return 88.0;
-}
 
 #pragma mark Calculate dates
 

@@ -8,10 +8,13 @@
 
 #import "HomeViewController.h"
 #import "NavigationViewController.h"
-#import "PreditionCell.h"
 
 #import "PredictionsWebRequest.h"
 #import "Prediction.h"
+
+#import "PredictionAgreeWebRequest.h"
+#import "PredictionDisagreeWebRequest.h"
+#import "ChellangeByPredictionWebRequest.h"
 
 #import "PredictionDetailsViewController.h"
 
@@ -143,6 +146,7 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
         PreditionCell* cell = [tableView dequeueReusableCellWithIdentifier:[PreditionCell reuseIdentifier]];
         
         [cell fillWithPrediction: prediction];
+        cell.delegate = self;
         
         UIPanGestureRecognizer* recognizer = [[UIPanGestureRecognizer alloc] init];
         [cell addPanGestureRecognizer: recognizer];
@@ -201,6 +205,63 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
          {
              self.predictions = [NSMutableArray arrayWithArray: predictionsRequest.predictions];
              [self.tableView reloadData];
+         }
+     }];
+}
+
+
+#pragma mark - PredictionCellDelegate
+
+
+- (void) predictionAgreed: (Prediction*) prediction inCell: (PreditionCell*) cell
+{
+    PredictionAgreeWebRequest* request = [[PredictionAgreeWebRequest alloc] initWithPredictionID: prediction.ID];
+    [request executeWithCompletionBlock: ^
+    {
+        if (request.errorCode == 0)
+        {
+            ChellangeByPredictionWebRequest* chellangeRequest = [[ChellangeByPredictionWebRequest alloc] initWithPredictionID: prediction.ID];
+            [chellangeRequest executeWithCompletionBlock: ^
+            {
+                if (chellangeRequest.errorCode == 0)
+                {
+                    prediction.chellange = chellangeRequest.chellange;
+                }
+            }];
+        }
+        else
+        {
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle: @"" message: NSLocalizedString(@"Unable to agree this prediction at this time. Please try again later.", @"") delegate: nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles: nil];
+            [alert show];
+            
+            [cell resetAgreedDisagreed];
+        }
+    }];
+}
+
+
+- (void) predictionDisagreed: (Prediction*) prediction inCell: (PreditionCell*) cell
+{
+    PredictionDisagreeWebRequest* request = [[PredictionDisagreeWebRequest alloc] initWithPredictionID: prediction.ID];
+    [request executeWithCompletionBlock: ^
+     {
+         if (request.errorCode == 0)
+         {
+             ChellangeByPredictionWebRequest* chellangeRequest = [[ChellangeByPredictionWebRequest alloc] initWithPredictionID: prediction.ID];
+             [chellangeRequest executeWithCompletionBlock: ^
+              {
+                  if (chellangeRequest.errorCode == 0)
+                  {
+                      prediction.chellange = chellangeRequest.chellange;
+                  }
+              }];
+         }
+         else
+         {
+             UIAlertView* alert = [[UIAlertView alloc] initWithTitle: @"" message: NSLocalizedString(@"Unable to disagree this prediction at this time. Please try again later.", @"") delegate: nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles: nil];
+             [alert show];
+             
+             [cell resetAgreedDisagreed];
          }
      }];
 }

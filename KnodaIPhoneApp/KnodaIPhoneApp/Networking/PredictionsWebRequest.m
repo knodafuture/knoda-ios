@@ -123,6 +123,8 @@ static const NSInteger kPageResultsLimit = 7;
             chellange.marketSizePoints = [[pointsDictionary objectForKey: @"market_size_points"] integerValue];
             chellange.outcomePoints = [[pointsDictionary objectForKey: @"outcome_points"] integerValue];
             chellange.predictionMarketPoints = [[pointsDictionary objectForKey: @"prediction_market_points"] integerValue];
+            
+            prediction.chellange = chellange;
         }
         
         [predictionArray addObject: prediction];

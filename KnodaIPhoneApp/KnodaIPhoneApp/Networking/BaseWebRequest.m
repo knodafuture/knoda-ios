@@ -273,7 +273,7 @@ const NSInteger kInternetOfflineError = -1009;
         {
             NSString* resultString = [[NSString alloc] initWithData: result encoding: NSUTF8StringEncoding];
             
-             NSLog(@"%@ %@\nRequest result:\n%@",  NSStringFromClass([self class]), request.URL, resultString);
+            NSLog(@"%@ %@\nRequest result:\n%@",  NSStringFromClass([self class]), request.URL, resultString);
             
             if (resultString.length != 0)
             {

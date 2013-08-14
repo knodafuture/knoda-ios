@@ -1,12 +1,12 @@
 //
-//  LoginWebRequest.m
+//  HistoryMyPicksWebRequest.m
 //  KnodaIPhoneApp
 //
-//  Created by Elena Timofeeva on 7/11/13.
+//  Created by Elena Timofeeva on 8/14/13.
 //  Copyright (c) 2013 Knoda. All rights reserved.
 //
 
-#import "PredictionsWebRequest.h"
+#import "HistoryMyPicksWebRequest.h"
 #import "Prediction.h"
 #import "Chellange.h"
 
@@ -14,15 +14,7 @@
 static const NSInteger kPageResultsLimit = 7;
 
 
-@interface PredictionsWebRequest ()
-
-@property (nonatomic, strong) NSArray* predictions;
-
-@end
-
-
-@implementation PredictionsWebRequest
-
+@implementation HistoryMyPicksWebRequest
 
 + (NSInteger) limitByPage
 {
@@ -30,9 +22,9 @@ static const NSInteger kPageResultsLimit = 7;
 }
 
 
-- (id) initWithOffset: (NSInteger) offset
+- (id) init
 {
-    NSDictionary* params = @{@"recent": @"true", @"limit" : [NSNumber numberWithInteger: kPageResultsLimit], @"offset" : [NSNumber numberWithInteger: offset]};
+    NSDictionary* params = @{@"list": @"picks"};
     
     self = [super initWithParameters: params];
     return self;
@@ -41,7 +33,7 @@ static const NSInteger kPageResultsLimit = 7;
 
 - (id) initWithLastID: (NSInteger) lastID
 {
-    NSDictionary* params = @{@"recent": @"true", @"limit" : [NSNumber numberWithInteger: kPageResultsLimit], @"id_lt" : [NSNumber numberWithInteger: lastID]};
+    NSDictionary* params = @{@"list": @"picks", @"limit" : [NSNumber numberWithInteger: kPageResultsLimit], @"id_lt" : [NSNumber numberWithInteger: lastID]};
     
     self = [super initWithParameters: params];
     return self;
@@ -50,20 +42,41 @@ static const NSInteger kPageResultsLimit = 7;
 
 - (NSString*) methodName
 {
-    return @"predictions.json";
+    return @"challenges.json";
+}
+
+
+- (BOOL) requiresAuthToken
+{
+    return YES;
 }
 
 
 - (void) fillResultObject: (id) parsedResult
 {
-    NSLog(@"Predictions Result: %@", parsedResult);
+    NSLog(@"My picks result: %@", parsedResult);
     
-    NSMutableArray* predictionArray = [[NSMutableArray alloc] initWithCapacity: 0];
+    NSMutableArray* predictionsMutable = [NSMutableArray arrayWithCapacity: 0];
     
-    NSArray* resultArray = [parsedResult objectForKey: @"predictions"];
+    NSArray* challengeArray = [parsedResult objectForKey: @"challenges"];
     
-    for (NSDictionary* predictionDictionary in resultArray)
+    for (NSDictionary* challengeDictionary in challengeArray)
     {
+        Chellange* chellange = [[Chellange alloc] init];
+        chellange.seen = [[parsedResult objectForKey: @"seen"] boolValue];
+        chellange.agree = [[parsedResult objectForKey: @"agree"] boolValue];
+        chellange.isOwn = [[parsedResult objectForKey: @"is_own"] boolValue];
+        chellange.isRight = [[parsedResult objectForKey: @"is_right"] boolValue];
+        chellange.isFinished = [[parsedResult objectForKey: @"is_finished"] boolValue];
+        
+        NSDictionary* pointsDictionary = [parsedResult objectForKey: @"points_details"];
+        
+        chellange.basePoints = [[pointsDictionary objectForKey: @"base_points"] integerValue];
+        chellange.marketSizePoints = [[pointsDictionary objectForKey: @"market_size_points"] integerValue];
+        chellange.outcomePoints = [[pointsDictionary objectForKey: @"outcome_points"] integerValue];
+        chellange.predictionMarketPoints = [[pointsDictionary objectForKey: @"prediction_market_points"] integerValue];
+        
+        NSDictionary* predictionDictionary = [challengeDictionary objectForKey: @"prediction"];
         Prediction* prediction = [[Prediction alloc] init];
         
         prediction.ID = [[predictionDictionary objectForKey: @"id"] integerValue];
@@ -102,39 +115,12 @@ static const NSInteger kPageResultsLimit = 7;
             prediction.expirationDate = [dateFormatter dateFromString: [[predictionDictionary objectForKey: @"expires_at"] stringByAppendingString: @"GMT"]];
         }
         
-        if ([predictionDictionary objectForKey: @"my_challenge"] != nil && ![[predictionDictionary objectForKey: @"my_challenge"] isKindOfClass: [NSNull class]])
-        {
-            NSDictionary* chellangeDictionary = [predictionDictionary objectForKey: @"my_challenge"];
-            
-            Chellange* chellange = [[Chellange alloc] init];
-            chellange.ID = [[chellangeDictionary objectForKey: @"id"] integerValue];
-            chellange.seen = [[chellangeDictionary objectForKey: @"seen"] boolValue];
-            chellange.agree = [[chellangeDictionary objectForKey: @"agree"] boolValue];
-            chellange.isOwn = [[chellangeDictionary objectForKey: @"is_own"] boolValue];
-            chellange.isRight = [[chellangeDictionary objectForKey: @"is_right"] boolValue];
-            chellange.isFinished = [[chellangeDictionary objectForKey: @"is_finished"] boolValue];
-            
-            NSDictionary* pointsDictionary = [chellangeDictionary objectForKey: @"my_points"];
-            
-            chellange.basePoints = [[pointsDictionary objectForKey: @"base_points"] integerValue];
-            chellange.marketSizePoints = [[pointsDictionary objectForKey: @"market_size_points"] integerValue];
-            chellange.outcomePoints = [[pointsDictionary objectForKey: @"outcome_points"] integerValue];
-            chellange.predictionMarketPoints = [[pointsDictionary objectForKey: @"prediction_market_points"] integerValue];
-            
-            prediction.chellange = chellange;
-        }
+        prediction.chellange = chellange;
         
-        [predictionArray addObject: prediction];
+        [predictionsMutable addObject: prediction];
     }
     
-    self.predictions = [NSArray arrayWithArray: predictionArray];
+    self.predictions = [NSArray arrayWithArray: predictionsMutable];
 }
-
-
-- (BOOL) requiresAuthToken
-{
-    return YES;
-}
-
 
 @end

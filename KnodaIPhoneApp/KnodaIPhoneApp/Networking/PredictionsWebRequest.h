@@ -11,7 +11,6 @@
 @interface PredictionsWebRequest : BaseWebRequest
 
 @property (nonatomic, readonly) NSArray* predictions;
-@property (nonatomic, readonly) NSInteger totalPredictionsCount;
 
 + (NSInteger) limitByPage;
 

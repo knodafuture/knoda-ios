@@ -8,10 +8,15 @@
 
 #import "MyPicksViewController.h"
 #import "PreditionCell.h"
+#import "HistoryMyPicksWebRequest.h"
+
 
 @interface MyPicksViewController ()
 
+@property (nonatomic, strong) NSArray* predictions;
+
 @end
+
 
 @implementation MyPicksViewController
 
@@ -27,7 +32,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+	
+    HistoryMyPicksWebRequest* request = [[HistoryMyPicksWebRequest alloc] init];
+    [request executeWithCompletionBlock: ^
+     {
+         if (request.errorCode == 0)
+         {
+             self.predictions = request.predictions;
+         }
+     }];
 }
 
 - (void)didReceiveMemoryWarning

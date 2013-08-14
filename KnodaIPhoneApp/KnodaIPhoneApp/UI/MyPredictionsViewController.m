@@ -8,6 +8,7 @@
 
 #import "MyPredictionsViewController.h"
 #import "PreditionCell.h"
+#import "HistoryMyPredictionsRequest.h"
 
 @interface MyPredictionsViewController ()
 
@@ -27,7 +28,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+	
+    HistoryMyPredictionsRequest* request = [[HistoryMyPredictionsRequest alloc] init];
+    [request executeWithCompletionBlock: ^
+    {
+    }];
 }
 
 - (void)didReceiveMemoryWarning

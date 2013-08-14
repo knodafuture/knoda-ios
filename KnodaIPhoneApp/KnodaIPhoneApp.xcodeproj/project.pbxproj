@@ -179,6 +179,8 @@
 		9E9348E317BA71EB00046B6E /* PredictionAgreeWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9348E217BA71EB00046B6E /* PredictionAgreeWebRequest.m */; };
 		9E9348E617BA74C200046B6E /* ChellangeByPredictionWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9348E517BA74C200046B6E /* ChellangeByPredictionWebRequest.m */; };
 		9E9348E917BA808A00046B6E /* PredictionDisagreeWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9348E817BA808900046B6E /* PredictionDisagreeWebRequest.m */; };
+		9E9348EC17BBB68B00046B6E /* HistoryMyPredictionsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9348EB17BBB68B00046B6E /* HistoryMyPredictionsRequest.m */; };
+		9E9348EF17BBBC9100046B6E /* HistoryMyPicksWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9348EE17BBBC9100046B6E /* HistoryMyPicksWebRequest.m */; };
 		9EC05ADA17A1558400D67DA2 /* agree_lose@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EC05AD017A1558400D67DA2 /* agree_lose@2x.png */; };
 		9EC05ADB17A1558400D67DA2 /* agree_win@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EC05AD117A1558400D67DA2 /* agree_win@2x.png */; };
 		9EC05ADC17A1558400D67DA2 /* agree.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EC05AD217A1558400D67DA2 /* agree.png */; };
@@ -422,6 +424,10 @@
 		9E9348E517BA74C200046B6E /* ChellangeByPredictionWebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChellangeByPredictionWebRequest.m; sourceTree = "<group>"; };
 		9E9348E717BA808900046B6E /* PredictionDisagreeWebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PredictionDisagreeWebRequest.h; sourceTree = "<group>"; };
 		9E9348E817BA808900046B6E /* PredictionDisagreeWebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PredictionDisagreeWebRequest.m; sourceTree = "<group>"; };
+		9E9348EA17BBB68B00046B6E /* HistoryMyPredictionsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryMyPredictionsRequest.h; sourceTree = "<group>"; };
+		9E9348EB17BBB68B00046B6E /* HistoryMyPredictionsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryMyPredictionsRequest.m; sourceTree = "<group>"; };
+		9E9348ED17BBBC9100046B6E /* HistoryMyPicksWebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryMyPicksWebRequest.h; sourceTree = "<group>"; };
+		9E9348EE17BBBC9100046B6E /* HistoryMyPicksWebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryMyPicksWebRequest.m; sourceTree = "<group>"; };
 		9EC05AD017A1558400D67DA2 /* agree_lose@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "agree_lose@2x.png"; sourceTree = "<group>"; };
 		9EC05AD117A1558400D67DA2 /* agree_win@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "agree_win@2x.png"; sourceTree = "<group>"; };
 		9EC05AD217A1558400D67DA2 /* agree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = agree.png; sourceTree = "<group>"; };
@@ -775,6 +781,10 @@
 				9E9348E817BA808900046B6E /* PredictionDisagreeWebRequest.m */,
 				9E9348E417BA74C200046B6E /* ChellangeByPredictionWebRequest.h */,
 				9E9348E517BA74C200046B6E /* ChellangeByPredictionWebRequest.m */,
+				9E9348EA17BBB68B00046B6E /* HistoryMyPredictionsRequest.h */,
+				9E9348EB17BBB68B00046B6E /* HistoryMyPredictionsRequest.m */,
+				9E9348ED17BBBC9100046B6E /* HistoryMyPicksWebRequest.h */,
+				9E9348EE17BBBC9100046B6E /* HistoryMyPicksWebRequest.m */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -1094,6 +1104,8 @@
 				9E9348E917BA808A00046B6E /* PredictionDisagreeWebRequest.m in Sources */,
 				5746F29A17BA8CAE00C835FA /* LoadingCell.m in Sources */,
 				5746F29D17BA8CB700C835FA /* PredictionDetailsCell.m in Sources */,
+				9E9348EC17BBB68B00046B6E /* HistoryMyPredictionsRequest.m in Sources */,
+				9E9348EF17BBBC9100046B6E /* HistoryMyPicksWebRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

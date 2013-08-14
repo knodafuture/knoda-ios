@@ -20,9 +20,12 @@
 @property (nonatomic, assign) BOOL isOwn;
 @property (nonatomic, assign) BOOL isRight;
 @property (nonatomic, assign) BOOL isFinished;
+@property (nonatomic, assign) BOOL isBS;
 @property (nonatomic, assign) NSInteger basePoints;
 @property (nonatomic, assign) NSInteger outcomePoints;
 @property (nonatomic, assign) NSInteger marketSizePoints;
 @property (nonatomic, assign) NSInteger predictionMarketPoints;
+
+- (id)initWithDictionary:(NSDictionary *)dictionary;
 
 @end

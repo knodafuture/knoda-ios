@@ -23,6 +23,8 @@
 
 #import "AddPredictionViewController.h"
 
+#import "PredictionUsersWebRequest.h"
+
 typedef enum {
     RowEmpty = 0,
     RowPrediction,
@@ -42,6 +44,9 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
     BOOL _loadingUsers;
 }
 
+@property (nonatomic) PredictionUsersWebRequest *requestAgreed;
+@property (nonatomic) PredictionUsersWebRequest *requestDisagreed;
+
 @property (nonatomic) NSArray *agreedUsers;
 @property (nonatomic) NSArray *disagreedUsers;
 
@@ -56,12 +61,32 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
     
     if(self.prediction.agreeCount || self.prediction.disagreeCount) {
         _loadingUsers = YES;
+        
+        __weak PredictionDetailsViewController *weakSelf = self;
+        
+        self.requestAgreed = [[PredictionUsersWebRequest alloc] initWithPredictionId:self.prediction.ID forAgreedUsers:YES];
+        [self.requestAgreed executeWithCompletionBlock:^{
+            PredictionDetailsViewController *strongSelf = weakSelf;
+            if(strongSelf) {
+                [strongSelf updatePredictionUsersAgreed:YES];
+            }
+        }];
+        
+        self.requestDisagreed = [[PredictionUsersWebRequest alloc] initWithPredictionId:self.prediction.ID forAgreedUsers:NO];
+        [self.requestDisagreed executeWithCompletionBlock:^{
+            PredictionDetailsViewController *strongSelf = weakSelf;
+            if(strongSelf) {
+                [strongSelf updatePredictionUsersAgreed:NO];
+            }
+        }];
     }
 }
 
 #pragma mark Actions
 
 - (IBAction)backButtonPressed:(id)sender {
+    [self.requestAgreed cancel];
+    [self.requestDisagreed cancel];
     [self.navigationController popViewControllerAnimated: YES];
 }
 
@@ -72,6 +97,28 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 }
 
 #pragma mark Private
+
+- (void)updatePredictionUsersAgreed:(BOOL)agreed {
+    if(agreed) {
+        self.agreedUsers = self.requestAgreed.users;
+    }
+    else {
+        self.disagreedUsers = self.requestDisagreed.users;
+    }
+    
+    if(self.agreedUsers && self.disagreedUsers) {
+        _loadingUsers = NO;
+        
+        //add own user prediction to users list
+        if(self.agreedUsers.count < self.prediction.agreeCount) {
+            self.agreedUsers = [self.agreedUsers arrayByAddingObject:self.prediction.userName];
+        }
+        else if(self.disagreedUsers.count < self.prediction.disagreeCount) {
+            self.disagreedUsers = [self.disagreedUsers arrayByAddingObject:self.prediction.userName];
+        }
+        [self.tableView reloadData];
+    }
+}
 
 - (CellType)cellTypeForIndexpath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {

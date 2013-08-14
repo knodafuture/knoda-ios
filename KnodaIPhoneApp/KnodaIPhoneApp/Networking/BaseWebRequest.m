@@ -210,8 +210,10 @@ const NSInteger kInternetOfflineError = -1009;
 #pragma mark Public methods
 
 
-- (void) executeWithCompletionBlock: (void (^)(void)) completion
+- (void) executeWithCompletionBlock: (RequestCompletionBlock) completion
 {
+    RequestCompletionBlock completionBlock = completion ? [completion copy] : nil;
+    
     self.state = kRequestStateStarted;
     
     self.errorCode = 0;
@@ -341,9 +343,9 @@ const NSInteger kInternetOfflineError = -1009;
         }
         
         // Notify about completion
-        if (completion != nil)
+        if (completionBlock != nil)
         {
-            dispatch_async(dispatch_get_main_queue(), completion);
+            dispatch_async(dispatch_get_main_queue(), completionBlock);
         }
     });
 }

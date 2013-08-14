@@ -37,6 +37,7 @@ typedef enum _RequestState
     kRequestStateCancelled
 } RequestState;
 
+typedef void (^RequestCompletionBlock)(void);
 
 @interface BaseWebRequest : NSObject {
 @protected
@@ -52,7 +53,7 @@ typedef enum _RequestState
 
 - (id) initWithParameters: (NSDictionary*) parameters;
 
-- (void) executeWithCompletionBlock: (void (^)(void)) completion;
+- (void) executeWithCompletionBlock: (RequestCompletionBlock) completion;
 - (void) cancel;
 
 @end

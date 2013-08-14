@@ -105,23 +105,7 @@ static const NSInteger kPageResultsLimit = 7;
         if ([predictionDictionary objectForKey: @"my_challenge"] != nil && ![[predictionDictionary objectForKey: @"my_challenge"] isKindOfClass: [NSNull class]])
         {
             NSDictionary* chellangeDictionary = [predictionDictionary objectForKey: @"my_challenge"];
-            
-            Chellange* chellange = [[Chellange alloc] init];
-            chellange.ID = [[chellangeDictionary objectForKey: @"id"] integerValue];
-            chellange.seen = [[chellangeDictionary objectForKey: @"seen"] boolValue];
-            chellange.agree = [[chellangeDictionary objectForKey: @"agree"] boolValue];
-            chellange.isOwn = [[chellangeDictionary objectForKey: @"is_own"] boolValue];
-            chellange.isRight = [[chellangeDictionary objectForKey: @"is_right"] boolValue];
-            chellange.isFinished = [[chellangeDictionary objectForKey: @"is_finished"] boolValue];
-            
-            NSDictionary* pointsDictionary = [chellangeDictionary objectForKey: @"my_points"];
-            
-            chellange.basePoints = [[pointsDictionary objectForKey: @"base_points"] integerValue];
-            chellange.marketSizePoints = [[pointsDictionary objectForKey: @"market_size_points"] integerValue];
-            chellange.outcomePoints = [[pointsDictionary objectForKey: @"outcome_points"] integerValue];
-            chellange.predictionMarketPoints = [[pointsDictionary objectForKey: @"prediction_market_points"] integerValue];
-            
-            prediction.chellange = chellange;
+            prediction.chellange = [[Chellange alloc] initWithDictionary:chellangeDictionary];
         }
         
         [predictionArray addObject: prediction];

@@ -18,6 +18,12 @@
 
 @property (nonatomic, strong) Prediction *prediction;
 
-- (IBAction)backButtonPressed:(id)sender;
+- (IBAction)backButtonPressed:(UIButton *)sender;
+- (IBAction)bsButtonTapped:(UIButton *)sender;
+- (IBAction)agreeButtonTapped:(UIButton *)sender;
+- (IBAction)disagreeButtonTapped:(UIButton *)sender;
+- (IBAction)yesButtonTapped:(UIButton *)sender;
+- (IBAction)noButtonTapped:(UIButton *)sender;
+- (IBAction)unfinishButtonTapped:(UIButton *)sender;
 
 @end

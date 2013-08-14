@@ -10,4 +10,6 @@
 
 @interface MakePredictionCell : BaseTableViewCell
 
+@property (nonatomic, assign) BOOL loading;
+
 @end

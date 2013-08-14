@@ -12,6 +12,8 @@
 
 @interface OutcomeCell : BaseTableViewCell
 
+@property (nonatomic, assign) BOOL loading;
+
 - (void)setupCellWithPrediction:(Prediction *)prediction;
 
 + (CGFloat)cellHeightForPrediction:(Prediction *)prediction;

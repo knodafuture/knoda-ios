@@ -1451,7 +1451,7 @@
                                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
                                                             <connections>
-                                                                <action selector="bsButtonTapped:" destination="kKr-mf-7M8" eventType="touchUpInside" id="63F-Pd-qHy"/>
+                                                                <action selector="bsButtonTapped:" destination="wNN-TM-pOg" eventType="touchUpInside" id="NuQ-s1-gJn"/>
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Was this the correct outcome?" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iyP-UW-2GK">
@@ -1468,6 +1468,7 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <connections>
+                                            <outlet property="bsButton" destination="Inz-N7-Clq" id="SAZ-Ew-rVR"/>
                                             <outlet property="bsView" destination="Pde-Bk-TYM" id="sju-aP-IvP"/>
                                             <outlet property="pointsLabel" destination="VpC-Fp-orS" id="MLF-1T-hwl"/>
                                             <outlet property="titleLabel" destination="ZhH-Sb-Cyh" id="xcA-sI-QNK"/>
@@ -1496,6 +1497,9 @@
                                                     <state key="highlighted" image="AgreeBtn_pressed.png">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="agreeButtonTapped:" destination="wNN-TM-pOg" eventType="touchUpInside" id="nGp-oH-rfg"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uSM-fN-mi4">
                                                     <rect key="frame" x="161" y="8" width="154" height="44"/>
@@ -1508,10 +1512,27 @@
                                                     <state key="highlighted" image="DisagreeBtn_pressed.png">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="disagreeButtonTapped:" destination="wNN-TM-pOg" eventType="touchUpInside" id="yZF-Uj-k2y"/>
+                                                    </connections>
                                                 </button>
+                                                <view contentMode="scaleToFill" id="mwS-1n-rlX">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <subviews>
+                                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="whiteLarge" id="gUq-hl-6QO">
+                                                            <rect key="frame" x="141" y="11" width="37" height="37"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        </activityIndicatorView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.29999999999999999" colorSpace="calibratedWhite"/>
+                                                </view>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <connections>
+                                            <outlet property="loadingView" destination="mwS-1n-rlX" id="fpI-RX-dlK"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="OutcomeCell" rowHeight="151" id="hgc-Ku-y1f" customClass="OutcomeCell">
                                         <rect key="frame" x="0.0" y="352" width="320" height="151"/>
@@ -1538,6 +1559,9 @@
                                                     <state key="highlighted" image="YesBtn_pressed.png">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="yesButtonTapped:" destination="wNN-TM-pOg" eventType="touchUpInside" id="Cma-g5-oXs"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cNj-Pp-EEh">
                                                     <rect key="frame" x="162" y="45" width="127" height="44"/>
@@ -1550,6 +1574,9 @@
                                                     <state key="highlighted" image="NoBtn_pressed.png">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="noButtonTapped:" destination="wNN-TM-pOg" eventType="touchUpInside" id="ASw-RG-I5X"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="pw6-FG-ZGy">
                                                     <rect key="frame" x="30" y="97" width="259" height="44"/>
@@ -1562,11 +1589,26 @@
                                                     <state key="highlighted" image="unfinished_press.png">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="unfinishButtonTapped:" destination="wNN-TM-pOg" eventType="touchUpInside" id="Kq7-ik-NMB"/>
+                                                    </connections>
                                                 </button>
+                                                <view contentMode="scaleToFill" id="svs-cK-uXR">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
+                                                    <subviews>
+                                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="whiteLarge" id="S5M-WH-y62">
+                                                            <rect key="frame" x="141" y="57" width="37" height="37"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                        </activityIndicatorView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.29999999999999999" colorSpace="calibratedWhite"/>
+                                                </view>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <connections>
+                                            <outlet property="loadingView" destination="svs-cK-uXR" id="3Xa-xs-iJf"/>
                                             <outlet property="unfinishedButton" destination="pw6-FG-ZGy" id="LhX-on-TwB"/>
                                         </connections>
                                     </tableViewCell>
@@ -3123,10 +3165,6 @@
         <class className="AddPredictionViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AddPredictionViewController.h"/>
             <relationships>
-                <relationship kind="action" name="cancel:"/>
-                <relationship kind="action" name="predict:"/>
-                <relationship kind="action" name="selectCategoryPressed:"/>
-                <relationship kind="action" name="selectExpirationPressed:"/>
                 <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="categoryButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="categoryLabel" candidateClass="UILabel"/>
@@ -3141,9 +3179,6 @@
         <class className="AlertsViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AlertsViewController.h"/>
             <relationships>
-                <relationship kind="action" name="lerfButtonPressed:"/>
-                <relationship kind="action" name="menuButtonPressed:"/>
-                <relationship kind="action" name="rightButtonPressed:"/>
                 <relationship kind="outlet" name="detailsView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="segmentedControlImage" candidateClass="UIImageView"/>
             </relationships>
@@ -3176,18 +3211,12 @@
         <class className="HistoryViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/HistoryViewController.h"/>
             <relationships>
-                <relationship kind="action" name="lerfButtonPressed:"/>
-                <relationship kind="action" name="menuButtonPressed:"/>
-                <relationship kind="action" name="rightButtonPressed:"/>
                 <relationship kind="outlet" name="detailsView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="segmentedControlImage" candidateClass="UIImageView"/>
             </relationships>
         </class>
         <class className="HomeViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/HomeViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="menuButtonPressed:"/>
-            </relationships>
         </class>
         <class className="LoadingCell" superclassName="BaseTableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LoadingCell.h"/>
@@ -3205,6 +3234,9 @@
         </class>
         <class className="MakePredictionCell" superclassName="BaseTableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MakePredictionCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="loadingView" candidateClass="UIView"/>
+            </relationships>
         </class>
         <class className="MyPicksViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MyPicksViewController.h"/>
@@ -3223,6 +3255,7 @@
         <class className="OutcomeCell" superclassName="BaseTableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/OutcomeCell.h"/>
             <relationships>
+                <relationship kind="outlet" name="loadingView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="unfinishedButton" candidateClass="UIButton"/>
             </relationships>
         </class>
@@ -3238,14 +3271,20 @@
         <class className="PredictionDetailsViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PredictionDetailsViewController.h"/>
             <relationships>
-                <relationship kind="action" name="backButtonPressed:"/>
+                <relationship kind="action" name="agreeButtonTapped:" candidateClass="UIButton"/>
+                <relationship kind="action" name="backButtonPressed:" candidateClass="UIButton"/>
+                <relationship kind="action" name="bsButtonTapped:" candidateClass="UIButton"/>
+                <relationship kind="action" name="disagreeButtonTapped:" candidateClass="UIButton"/>
+                <relationship kind="action" name="noButtonTapped:" candidateClass="UIButton"/>
+                <relationship kind="action" name="unfinishButtonTapped:" candidateClass="UIButton"/>
+                <relationship kind="action" name="yesButtonTapped:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
         </class>
         <class className="PredictionStatusCell" superclassName="BaseTableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PredictionStatusCell.h"/>
             <relationships>
-                <relationship kind="action" name="bsButtonTapped:" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="bsButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="bsView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="pointsLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
@@ -3286,7 +3325,6 @@
         <class className="SignUpViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SignUpViewController.h"/>
             <relationships>
-                <relationship kind="action" name="signUpButtonPressed:"/>
                 <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="emailTextFiled" candidateClass="UITextField"/>
@@ -3299,7 +3337,6 @@
         <class className="TermsOfServiceViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TermsOfServiceViewController.h"/>
             <relationships>
-                <relationship kind="action" name="backButtonPressed:"/>
                 <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
             </relationships>

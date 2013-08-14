@@ -13,8 +13,7 @@
 @interface PredictionStatusCell : BaseTableViewCell
 
 @property (nonatomic) BOOL isRight;
-
-- (IBAction)bsButtonTapped:(UIButton *)sender;
+@property (nonatomic) BOOL isBS;
 
 - (void)setupCellWithPrediction:(Prediction *)prediction;
 

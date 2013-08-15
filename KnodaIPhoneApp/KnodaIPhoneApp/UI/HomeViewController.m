@@ -131,7 +131,7 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
 
 - (NSInteger) tableView: (UITableView*) tableView numberOfRowsInSection: (NSInteger) section
 {
-    return (self.predictions.count != 0) ? ((self.predictions.count >= [PredictionsWebRequest limitByPage]) ? self.predictions.count + 1 : self.predictions.count) : 0;
+    return (self.predictions.count != 0) ? ((self.predictions.count >= [PredictionsWebRequest limitByPage]) ? self.predictions.count + 1 : self.predictions.count) : 1;
 }
 
 
@@ -168,7 +168,7 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
 
 - (void) tableView: (UITableView*) tableView willDisplayCell: (UITableViewCell*) cell forRowAtIndexPath: (NSIndexPath*) indexPath
 {
-    if (indexPath.row == self.predictions.count)
+    if ((self.predictions.count >= [PredictionsWebRequest limitByPage]) && indexPath.row == self.predictions.count)
     {
         PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] initWithLastID: ((Prediction*)[self.predictions lastObject]).ID];
         [predictionsRequest executeWithCompletionBlock: ^

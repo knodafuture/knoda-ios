@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MyPicksViewController : UIViewController <UITableViewDataSource>
+@interface MyPicksViewController : UITableViewController <UITableViewDataSource>
 
 @end

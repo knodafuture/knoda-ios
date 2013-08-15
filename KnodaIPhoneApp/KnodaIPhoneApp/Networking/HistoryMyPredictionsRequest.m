@@ -23,16 +23,16 @@ static const NSInteger kPageResultsLimit = 7;
 
 - (id) init
 {
-    NSDictionary* params = @{@"list": @"own"};
+    NSDictionary* params = @{@"list": @"own", @"limit" : [NSNumber numberWithInteger: kPageResultsLimit], @"offset" : [NSNumber numberWithInteger: 0]};
     
     self = [super initWithParameters: params];
     return self;
 }
 
 
-- (id) initWithLastID: (NSInteger) lastID
+- (id) initWithLastCreatedDate: (NSDate*) lastCreatedDate
 {
-    NSDictionary* params = @{@"list": @"own", @"limit" : [NSNumber numberWithInteger: kPageResultsLimit], @"id_lt" : [NSNumber numberWithInteger: lastID]};
+    NSDictionary* params = @{@"list": @"own", @"limit" : [NSNumber numberWithInteger: kPageResultsLimit], @"created_at_lt" : lastCreatedDate};
     
     self = [super initWithParameters: params];
     return self;
@@ -62,13 +62,14 @@ static const NSInteger kPageResultsLimit = 7;
     for (NSDictionary* challengeDictionary in challengeArray)
     {
         Chellange* chellange = [[Chellange alloc] init];
-        chellange.seen = [[parsedResult objectForKey: @"seen"] boolValue];
-        chellange.agree = [[parsedResult objectForKey: @"agree"] boolValue];
-        chellange.isOwn = [[parsedResult objectForKey: @"is_own"] boolValue];
-        chellange.isRight = [[parsedResult objectForKey: @"is_right"] boolValue];
-        chellange.isFinished = [[parsedResult objectForKey: @"is_finished"] boolValue];
+        chellange.ID = [[challengeDictionary objectForKey: @"id"] integerValue];
+        chellange.seen = [[challengeDictionary objectForKey: @"seen"] boolValue];
+        chellange.agree = [[challengeDictionary objectForKey: @"agree"] boolValue];
+        chellange.isOwn = [[challengeDictionary objectForKey: @"is_own"] boolValue];
+        chellange.isRight = [[challengeDictionary objectForKey: @"is_right"] boolValue];
+        chellange.isFinished = [[challengeDictionary objectForKey: @"is_finished"] boolValue];
         
-        NSDictionary* pointsDictionary = [parsedResult objectForKey: @"points_details"];
+        NSDictionary* pointsDictionary = [challengeDictionary objectForKey: @"points_details"];
         
         chellange.basePoints = [[pointsDictionary objectForKey: @"base_points"] integerValue];
         chellange.marketSizePoints = [[pointsDictionary objectForKey: @"market_size_points"] integerValue];

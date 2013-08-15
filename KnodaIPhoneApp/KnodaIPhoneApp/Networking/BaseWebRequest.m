@@ -164,6 +164,18 @@ const NSInteger kInternetOfflineError = -1009;
         {
             [urlParameters appendFormat: @"%@=%@", key, value];
         }
+        else if ([value isKindOfClass: [NSDate class]])
+        {
+            NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat: @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
+            [dateFormatter setTimeZone: [NSTimeZone timeZoneWithAbbreviation: @"GMT"]];
+            NSString* dateString = [dateFormatter stringFromDate: value];
+            
+            if (dateString != nil)
+            {
+                [urlParameters appendFormat: @"%@=%@", key, dateString];
+            }
+        }
         else if ([value isKindOfClass: [NSNumber class]])
         {
             if (strcmp([value objCType], @encode(BOOL)) == 0)

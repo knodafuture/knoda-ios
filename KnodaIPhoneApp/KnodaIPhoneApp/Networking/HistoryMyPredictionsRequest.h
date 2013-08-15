@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong) NSArray* predictions;
 
-- (id) initWithLastID: (NSInteger) lastID;
++ (NSInteger) limitByPage;
+- (id) initWithLastCreatedDate: (NSDate*) lastCreatedDate;
 
 @end

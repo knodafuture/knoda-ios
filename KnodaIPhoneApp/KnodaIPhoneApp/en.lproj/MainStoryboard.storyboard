@@ -1755,7 +1755,8 @@ outcome of your prediction</string>
                                         <nil key="highlightedColor"/>
                                         <color key="shadowColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <size key="shadowOffset" width="1" height="1"/>
-                                        <string key="userLabel">Label - When do you want to be reminded to determine the outcome of your prediction</string>
+                                        <string key="userLabel">Label - When do you want to be reminded to determine the
+ outcome of your prediction</string>
                                     </label>
                                     <pickerView contentMode="scaleToFill" id="UUh-NH-Uzt">
                                         <rect key="frame" x="0.0" y="118" width="320" height="216"/>
@@ -2726,7 +2727,7 @@ outcome of your prediction</string>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="Cell" id="2Lb-Yy-hei" customClass="PreditionCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="PreditionCell" id="2Lb-Yy-hei" customClass="PreditionCell">
                                         <rect key="frame" x="0.0" y="22" width="320" height="120"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -3212,6 +3213,10 @@ outcome of your prediction</string>
         <class className="AddPredictionViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AddPredictionViewController.h"/>
             <relationships>
+                <relationship kind="action" name="cancel:"/>
+                <relationship kind="action" name="predict:"/>
+                <relationship kind="action" name="selectCategoryPressed:"/>
+                <relationship kind="action" name="selectExpirationPressed:"/>
                 <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="categoryButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="categoryLabel" candidateClass="UILabel"/>
@@ -3226,6 +3231,9 @@ outcome of your prediction</string>
         <class className="AlertsViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AlertsViewController.h"/>
             <relationships>
+                <relationship kind="action" name="lerfButtonPressed:"/>
+                <relationship kind="action" name="menuButtonPressed:"/>
+                <relationship kind="action" name="rightButtonPressed:"/>
                 <relationship kind="outlet" name="detailsView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="segmentedControlImage" candidateClass="UIImageView"/>
             </relationships>
@@ -3258,6 +3266,9 @@ outcome of your prediction</string>
         <class className="HistoryViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/HistoryViewController.h"/>
             <relationships>
+                <relationship kind="action" name="lerfButtonPressed:"/>
+                <relationship kind="action" name="menuButtonPressed:"/>
+                <relationship kind="action" name="rightButtonPressed:"/>
                 <relationship kind="outlet" name="detailsView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="segmentedControlImage" candidateClass="UIImageView"/>
             </relationships>
@@ -3391,7 +3402,6 @@ outcome of your prediction</string>
         <class className="TermsOfServiceViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TermsOfServiceViewController.h"/>
             <relationships>
-                <relationship kind="action" name="backButtonPressed:"/>
                 <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
             </relationships>

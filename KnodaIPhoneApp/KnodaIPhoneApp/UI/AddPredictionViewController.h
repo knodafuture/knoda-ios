@@ -21,5 +21,6 @@
 @property (nonatomic, weak) id<AddPredictionViewControllerDelegate> delegate;
 
 + (NSArray *)expirationStrings;
++ (NSDate *)dateForExpirationString:(NSString *)expString;
 
 @end

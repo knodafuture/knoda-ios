@@ -49,4 +49,8 @@
     return YES;
 }
 
+- (NSString *)userFriendlyErrorDescription {
+    return NSLocalizedString(@"Unable to disagree this prediction at this time. Please try again later.", @"");
+}
+
 @end

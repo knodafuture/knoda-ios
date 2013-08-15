@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11G63b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ZKQ-aW-8t7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12A269" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ZKQ-aW-8t7">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -1239,7 +1239,7 @@
             <objects>
                 <viewController id="wNN-TM-pOg" customClass="PredictionDetailsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hDO-dV-CXd">
-                        <rect key="frame" x="0.0" y="64" width="320" height="588"/>
+                        <rect key="frame" x="0.0" y="44" width="320" height="588"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="OOz-U0-cxm">
@@ -1447,6 +1447,7 @@
                                                                 <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
+                                                            <state key="selected" image="BS_unsigned.png"/>
                                                             <state key="highlighted" image="BS_pressed.png">
                                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
@@ -1454,6 +1455,10 @@
                                                                 <action selector="bsButtonTapped:" destination="wNN-TM-pOg" eventType="touchUpInside" id="NuQ-s1-gJn"/>
                                                             </connections>
                                                         </button>
+                                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" animating="YES" style="gray" id="vOf-SY-vew">
+                                                            <rect key="frame" x="232" y="12" width="20" height="20"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        </activityIndicatorView>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Was this the correct outcome?" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iyP-UW-2GK">
                                                             <rect key="frame" x="15" y="0.0" width="156" height="44"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1468,8 +1473,10 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <connections>
+                                            <outlet property="activityIndicator" destination="vOf-SY-vew" id="7lg-Wu-AfV"/>
                                             <outlet property="bsButton" destination="Inz-N7-Clq" id="SAZ-Ew-rVR"/>
                                             <outlet property="bsView" destination="Pde-Bk-TYM" id="sju-aP-IvP"/>
+                                            <outlet property="loadingView" destination="vOf-SY-vew" id="rUA-xv-21n"/>
                                             <outlet property="pointsLabel" destination="VpC-Fp-orS" id="MLF-1T-hwl"/>
                                             <outlet property="titleLabel" destination="ZhH-Sb-Cyh" id="xcA-sI-QNK"/>
                                         </connections>
@@ -1531,6 +1538,7 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <connections>
+                                            <outlet property="activityIndicator" destination="gUq-hl-6QO" id="ydn-TW-v0P"/>
                                             <outlet property="loadingView" destination="mwS-1n-rlX" id="fpI-RX-dlK"/>
                                         </connections>
                                     </tableViewCell>
@@ -1608,6 +1616,7 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <connections>
+                                            <outlet property="activityIndicator" destination="S5M-WH-y62" id="3cg-6C-RiY"/>
                                             <outlet property="loadingView" destination="svs-cK-uXR" id="3Xa-xs-iJf"/>
                                             <outlet property="unfinishedButton" destination="pw6-FG-ZGy" id="LhX-on-TwB"/>
                                         </connections>
@@ -1727,7 +1736,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="wdr-o9-9oJ">
-                                        <rect key="frame" x="0.0" y="4" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                         <items>
                                             <barButtonItem systemItem="cancel" id="GCZ-rf-d17">
@@ -1746,7 +1755,7 @@
                                     </toolbar>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="itr-XP-mPu">
                                         <rect key="frame" x="0.0" y="44" width="320" height="74"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" red="0.0" green="0.32941176470588235" blue="0.16470588235294117" alpha="1" colorSpace="calibratedRGB"/>
                                         <string key="text">When do you want to be reminded to determine the
 outcome of your prediction</string>
@@ -1760,7 +1769,7 @@ outcome of your prediction</string>
                                     </label>
                                     <pickerView contentMode="scaleToFill" id="UUh-NH-Uzt">
                                         <rect key="frame" x="0.0" y="118" width="320" height="216"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                         <connections>
                                             <outlet property="dataSource" destination="wNN-TM-pOg" id="GF1-OP-DPt"/>
                                             <outlet property="delegate" destination="wNN-TM-pOg" id="JlS-eB-Vmc"/>
@@ -1811,7 +1820,7 @@ outcome of your prediction</string>
                     </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
-                        <outlet property="pickerView" destination="TYc-zT-kgA" id="aGg-6R-A0h"/>
+                        <outlet property="pickerViewHolder" destination="TYc-zT-kgA" id="ICN-lm-atA"/>
                         <outlet property="tableView" destination="OOz-U0-cxm" id="pNl-1W-oha"/>
                     </connections>
                 </viewController>
@@ -2101,6 +2110,7 @@ outcome of your prediction</string>
                     <connections>
                         <outlet property="detailsView" destination="zEY-Jj-RUS" id="HEL-7f-wdy"/>
                         <outlet property="segmentedControlImage" destination="Jd4-pj-wvm" id="3Ac-i1-gkk"/>
+                        <segue destination="wNN-TM-pOg" kind="push" identifier="PredictionDetailsSegue" id="3A2-wc-onf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S6f-8M-BPr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2586,6 +2596,7 @@ outcome of your prediction</string>
                     <connections>
                         <outlet property="detailsView" destination="EOO-9x-cK4" id="9P1-yN-aeb"/>
                         <outlet property="segmentedControlImage" destination="iOh-au-mBx" id="wvc-ZN-vsp"/>
+                        <segue destination="wNN-TM-pOg" kind="push" identifier="PredictionDetailsSegue" id="aEL-ES-XbV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aRA-dv-pss" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3213,6 +3224,7 @@ outcome of your prediction</string>
         <image name="AgreeBtn_pressed.png" width="154" height="44"/>
         <image name="BS.png" width="127" height="44"/>
         <image name="BS_pressed.png" width="127" height="44"/>
+        <image name="BS_unsigned.png" width="127" height="44"/>
         <image name="DisagreeBtn.png" width="154" height="44"/>
         <image name="DisagreeBtn_pressed.png" width="154" height="44"/>
         <image name="NoBtn.png" width="127" height="44"/>
@@ -3270,10 +3282,6 @@ outcome of your prediction</string>
         <class className="AddPredictionViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AddPredictionViewController.h"/>
             <relationships>
-                <relationship kind="action" name="cancel:"/>
-                <relationship kind="action" name="predict:"/>
-                <relationship kind="action" name="selectCategoryPressed:"/>
-                <relationship kind="action" name="selectExpirationPressed:"/>
                 <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="categoryButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="categoryLabel" candidateClass="UILabel"/>
@@ -3288,9 +3296,6 @@ outcome of your prediction</string>
         <class className="AlertsViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AlertsViewController.h"/>
             <relationships>
-                <relationship kind="action" name="lerfButtonPressed:"/>
-                <relationship kind="action" name="menuButtonPressed:"/>
-                <relationship kind="action" name="rightButtonPressed:"/>
                 <relationship kind="outlet" name="detailsView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="segmentedControlImage" candidateClass="UIImageView"/>
             </relationships>
@@ -3313,6 +3318,8 @@ outcome of your prediction</string>
         <class className="ForgotPasswordViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ForgotPasswordViewController.h"/>
             <relationships>
+                <relationship kind="action" name="cancelButtonPressed:"/>
+                <relationship kind="action" name="sendButtonPressed:"/>
                 <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="errorLabel" candidateClass="UILabel"/>
@@ -3333,6 +3340,13 @@ outcome of your prediction</string>
         <class className="HomeViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/HomeViewController.h"/>
         </class>
+        <class className="LoadableCell" superclassName="BaseTableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoadableCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="loadingView" candidateClass="UIView"/>
+            </relationships>
+        </class>
         <class className="LoadingCell" superclassName="BaseTableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LoadingCell.h"/>
         </class>
@@ -3347,11 +3361,8 @@ outcome of your prediction</string>
                 <relationship kind="outlet" name="usernameTextField" candidateClass="UITextField"/>
             </relationships>
         </class>
-        <class className="MakePredictionCell" superclassName="BaseTableViewCell">
+        <class className="MakePredictionCell" superclassName="LoadableCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MakePredictionCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="loadingView" candidateClass="UIView"/>
-            </relationships>
         </class>
         <class className="MyPicksViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MyPicksViewController.h"/>
@@ -3367,10 +3378,9 @@ outcome of your prediction</string>
                 <relationship kind="outlet" name="movingView" candidateClass="UIView"/>
             </relationships>
         </class>
-        <class className="OutcomeCell" superclassName="BaseTableViewCell">
+        <class className="OutcomeCell" superclassName="LoadableCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/OutcomeCell.h"/>
             <relationships>
-                <relationship kind="outlet" name="loadingView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="unfinishedButton" candidateClass="UIButton"/>
             </relationships>
         </class>
@@ -3395,11 +3405,11 @@ outcome of your prediction</string>
                 <relationship kind="action" name="unfinishButtonTapped:" candidateClass="UIButton"/>
                 <relationship kind="action" name="unfinishPrediction:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="action" name="yesButtonTapped:" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="pickerView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="pickerViewHolder" candidateClass="UIView"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
         </class>
-        <class className="PredictionStatusCell" superclassName="BaseTableViewCell">
+        <class className="PredictionStatusCell" superclassName="LoadableCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PredictionStatusCell.h"/>
             <relationships>
                 <relationship kind="outlet" name="bsButton" candidateClass="UIButton"/>
@@ -3475,6 +3485,7 @@ outcome of your prediction</string>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="Ef7-FX-Fpl"/>
-        <segue reference="IMX-a1-Bbr"/>
+        <segue reference="3A2-wc-onf"/>
+        <segue reference="ONf-EH-HA5"/>
     </inferredMetricsTieBreakers>
 </document>

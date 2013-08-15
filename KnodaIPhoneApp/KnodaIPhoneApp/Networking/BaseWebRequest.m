@@ -127,6 +127,10 @@ const NSInteger kInternetOfflineError = -1009;
     }
 }
 
+- (NSString *)userFriendlyErrorDescription {
+    return NSLocalizedString(@"Oops! Something went wrong. Please try again later.", @"");
+}
+
 #pragma mark Private methods
 
 
@@ -240,7 +244,7 @@ const NSInteger kInternetOfflineError = -1009;
     
     NSLog(@"%@ Start request %@", NSStringFromClass([self class]), request.URL);
     
-    if ([request.HTTPMethod isEqualToString: @"POST"])
+    if ([request.HTTPMethod isEqualToString: @"POST"] || [request.HTTPMethod isEqualToString:@"PATCH"])
     {
         NSString* body = [self formParametersString];
         [request setHTTPBody: [body dataUsingEncoding: NSUTF8StringEncoding]];

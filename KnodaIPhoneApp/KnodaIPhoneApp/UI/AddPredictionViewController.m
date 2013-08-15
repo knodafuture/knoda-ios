@@ -109,51 +109,13 @@
     [self moveUpOrDown: NO withAnimationDuration: duration animationCurve: animationCurve keyboardFrame: newFrame];
 }
 
-
 - (NSDate*) expirationDate
 {
     NSDate* result = nil;
     
     if (![self.expirationLabel.text isEqualToString: NSLocalizedString(@"Set Time", @"")])
     {
-        NSInteger index = [self.expirationStrings indexOfObject: self.expirationLabel.text];
-        NSTimeInterval timeInterval = 0;
-        
-        switch (index) {
-            case 0:
-                // 10 minutes
-                timeInterval = 10*60;
-                break;
-            case 1:
-                // 1 hour
-                timeInterval = 1 * 60 * 60;
-                break;
-            case 2:
-                // 3 hours
-                timeInterval = 3 * 60 * 60;
-                break;
-            case 3:
-                // 6 hours
-                timeInterval = 6 * 60 * 60;
-                break;
-            case 4:
-                // 1 day
-                timeInterval = 1 * 24 * 60 * 60;
-                break;
-            case 5:
-                // 3 days
-                timeInterval = 3 * 24 * 60 * 60;
-                break;
-            case 6:
-                // 1 week
-                timeInterval = 7 * 24 * 60 * 60;
-                break;
-                
-            default:
-                break;
-        }
-        
-        result = [NSDate dateWithTimeIntervalSinceNow: timeInterval];
+        result = [[self class] dateForExpirationString:self.expirationLabel.text];
     }
     
     return result;
@@ -241,11 +203,9 @@
         
         self.activityView.hidden = NO;
         
-        NSCalendar* gregorian = [[NSCalendar alloc] initWithCalendarIdentifier: NSGregorianCalendar];
-        [gregorian setTimeZone: [NSTimeZone timeZoneWithAbbreviation: @"GMT"]];
-        NSDateComponents* dateComponents = [gregorian components: NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit fromDate: [self expirationDate]];
-        
-        AddPredictionRequest* request = [[AddPredictionRequest alloc] initWithBody: self.textView.text expirationDay: dateComponents.day expirationMonth: dateComponents.month expirationYear: dateComponents.year expirationHour: dateComponents.hour expirationMinute: dateComponents.minute category: self.categoryLabel.text];
+        AddPredictionRequest* request = [[AddPredictionRequest alloc] initWithBody:self.textView.text
+                                                                    expirationDate:[self expirationDate]
+                                                                          category:self.categoryLabel.text];
         [request executeWithCompletionBlock: ^
         {
             self.activityView.hidden = YES;
@@ -409,6 +369,47 @@ withAnimationDuration: (NSTimeInterval)animationDuration
                        NSLocalizedString(@"1 week", @"")];
     });
     return expStrings;
+}
+
++ (NSDate *)dateForExpirationString:(NSString *)expString {
+    NSInteger index = [[self expirationStrings] indexOfObject:expString];
+    NSTimeInterval timeInterval = 0;
+    
+    switch (index) {
+        case 0:
+            // 10 minutes
+            timeInterval = 10*60;
+            break;
+        case 1:
+            // 1 hour
+            timeInterval = 1 * 60 * 60;
+            break;
+        case 2:
+            // 3 hours
+            timeInterval = 3 * 60 * 60;
+            break;
+        case 3:
+            // 6 hours
+            timeInterval = 6 * 60 * 60;
+            break;
+        case 4:
+            // 1 day
+            timeInterval = 1 * 24 * 60 * 60;
+            break;
+        case 5:
+            // 3 days
+            timeInterval = 3 * 24 * 60 * 60;
+            break;
+        case 6:
+            // 1 week
+            timeInterval = 7 * 24 * 60 * 60;
+            break;
+            
+        default:
+            break;
+    }
+    
+    return [NSDate dateWithTimeIntervalSinceNow: timeInterval];
 }
 
 @end

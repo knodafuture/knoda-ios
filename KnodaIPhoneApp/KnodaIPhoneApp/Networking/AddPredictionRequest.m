@@ -7,30 +7,22 @@
 //
 
 #import "AddPredictionRequest.h"
+#import "NSDate+Utils.h"
 
 @implementation AddPredictionRequest
 
-
-- (id) initWithBody: (NSString*) body
-      expirationDay: (NSInteger) day
-    expirationMonth: (NSInteger) month
-     expirationYear: (NSInteger) year
-     expirationHour: (NSInteger) hour
-   expirationMinute: (NSInteger) minute
-           category: (NSString*) category
-{
-    NSDictionary* theParams = @{@"prediction[body]" : body,
-                                @"prediction[expires_at(1i)]" : [NSNumber numberWithInteger: year],
-                                @"prediction[expires_at(2i)]" : [NSNumber numberWithInteger: month],
-                                @"prediction[expires_at(3i)]" : [NSNumber numberWithInteger: day],
-                                @"prediction[expires_at(4i)]" : [NSNumber numberWithInteger: hour],
-                                @"prediction[expires_at(5i)]" : [NSNumber numberWithInteger: minute],
-                                @"prediction[tag_list][]" : category};
-    
-    self = [super initWithParameters: theParams];
+- (id)initWithBody:(NSString *)body expirationDate:(NSDate *)date category:(NSString *)category {    
+    NSDateComponents *dc = [date gmtDateComponents];    
+    NSDictionary *params = @{@"prediction[body]" : body,
+                             @"prediction[expires_at(1i)]" : @(dc.year),
+                             @"prediction[expires_at(2i)]" : @(dc.month),
+                             @"prediction[expires_at(3i)]" : @(dc.day),
+                             @"prediction[expires_at(4i)]" : @(dc.hour),
+                             @"prediction[expires_at(5i)]" : @(dc.minute),
+                             @"prediction[tag_list][]" : category};
+    self = [super initWithParameters:params];
     return self;
 }
-
 
 - (NSString*) methodName
 {

@@ -6,10 +6,8 @@
 //  Copyright (c) 2013 Knoda. All rights reserved.
 //
 
-#import "BaseTableViewCell.h"
+#import "LoadableCell.h"
 
-@interface MakePredictionCell : BaseTableViewCell
-
-@property (nonatomic, assign) BOOL loading;
+@interface MakePredictionCell : LoadableCell
 
 @end

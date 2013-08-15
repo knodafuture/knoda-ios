@@ -30,5 +30,6 @@
 @property (nonatomic, strong) UIImage* userAvatar;
 @property (nonatomic, strong) Chellange* chellange;
 
+- (id)initWithDictionary:(NSDictionary *)dictionary;
 
 @end

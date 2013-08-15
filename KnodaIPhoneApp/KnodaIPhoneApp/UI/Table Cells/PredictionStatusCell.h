@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 Knoda. All rights reserved.
 //
 
-#import "BaseTableViewCell.h"
+#import "LoadableCell.h"
 
 @class Prediction;
 
-@interface PredictionStatusCell : BaseTableViewCell
+@interface PredictionStatusCell : LoadableCell
 
 @property (nonatomic) BOOL isRight;
 @property (nonatomic) BOOL isBS;

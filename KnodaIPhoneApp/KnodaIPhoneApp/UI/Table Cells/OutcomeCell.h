@@ -6,13 +6,11 @@
 //  Copyright (c) 2013 Knoda. All rights reserved.
 //
 
-#import "BaseTableViewCell.h"
+#import "LoadableCell.h"
 
 @class Prediction;
 
-@interface OutcomeCell : BaseTableViewCell
-
-@property (nonatomic, assign) BOOL loading;
+@interface OutcomeCell : LoadableCell
 
 - (void)setupCellWithPrediction:(Prediction *)prediction;
 

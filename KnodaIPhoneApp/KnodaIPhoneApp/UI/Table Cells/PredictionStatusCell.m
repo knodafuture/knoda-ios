@@ -51,6 +51,11 @@ static const float kBSHeight           = 44.0;
     self.pointsLabel.hidden = self.pointsLabel.text.length == 0;
 }
 
+- (void)setLoading:(BOOL)loading {
+    [super setLoading:loading];
+    self.bsButton.selected = loading;
+}
+
 - (void)adjustLayouts {
     if(!self.bsView.hidden) {
         float y = self.pointsLabel.hidden ? CGRectGetMinY(self.pointsLabel.frame) : (CGRectGetMaxY(self.pointsLabel.frame) + kBSTopPadding);

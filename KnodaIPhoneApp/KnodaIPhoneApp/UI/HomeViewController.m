@@ -231,7 +231,7 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
         }
         else
         {
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle: @"" message: NSLocalizedString(@"Unable to agree this prediction at this time. Please try again later.", @"") delegate: nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles: nil];
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle: @"" message: request.userFriendlyErrorDescription delegate: nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles: nil];
             [alert show];
             
             [cell resetAgreedDisagreed];
@@ -258,7 +258,7 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
          }
          else
          {
-             UIAlertView* alert = [[UIAlertView alloc] initWithTitle: @"" message: NSLocalizedString(@"Unable to disagree this prediction at this time. Please try again later.", @"") delegate: nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles: nil];
+             UIAlertView* alert = [[UIAlertView alloc] initWithTitle: @"" message: request.userFriendlyErrorDescription delegate: nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles: nil];
              [alert show];
              
              [cell resetAgreedDisagreed];

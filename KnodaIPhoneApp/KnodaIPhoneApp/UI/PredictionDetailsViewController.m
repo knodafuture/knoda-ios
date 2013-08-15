@@ -29,6 +29,7 @@
 #import "ChellangeByPredictionWebRequest.h"
 #import "PredictionAgreeWebRequest.h"
 #import "PredictionDisagreeWebRequest.h"
+#import "PredictionUpdateWebRequest.h"
 
 typedef enum {
     RowEmpty = -1,
@@ -53,12 +54,14 @@ static const int kBSAlertTag = 1001;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UIView *pickerView;
+@property (weak, nonatomic) IBOutlet UIView *pickerViewHolder;
 
 @property (nonatomic) NSArray *agreedUsers;
 @property (nonatomic) NSArray *disagreedUsers;
 
 @property (nonatomic) NSMutableArray *requests;
+
+@property (nonatomic) NSString *expString;
 
 @end
 
@@ -73,6 +76,12 @@ static const int kBSAlertTag = 1001;
     
     _loadingUsers = YES;
     [self updateUsers];
+    
+    self.expString = [[AddPredictionViewController expirationStrings] objectAtIndex:0];
+    
+    CGRect frame = self.pickerViewHolder.frame;
+    frame.origin.y = self.view.frame.size.height;
+    self.pickerViewHolder.frame = frame;
 }
 
 #pragma mark Actions
@@ -109,15 +118,38 @@ static const int kBSAlertTag = 1001;
 }
 
 - (IBAction)unfinishButtonTapped:(UIButton *)sender {
-    [self showView:self.pickerView];
+    [self showView:self.pickerViewHolder];
 }
 
 - (IBAction)hidePicker:(UIBarButtonItem *)sender {
-    [self hideView:self.pickerView];
+    [self hideView:self.pickerViewHolder];
 }
 
 - (IBAction)unfinishPrediction:(UIBarButtonItem *)sender {
-    //TODO:
+    _updatingStatus = YES;
+    
+    NSDate *expDate = [AddPredictionViewController dateForExpirationString:self.expString];
+    
+    __weak PredictionDetailsViewController *weakSelf = self;
+    
+    PredictionUpdateWebRequest *updateRequest = [[PredictionUpdateWebRequest alloc] initWithPredictionId:self.prediction.ID extendTill:expDate];
+    [updateRequest executeWithCompletionBlock:^{
+        PredictionDetailsViewController *strongSelf = weakSelf;
+        if(strongSelf) {
+            [strongSelf.requests removeObject:updateRequest];
+            
+            strongSelf->_updatingStatus = NO;
+            
+            if(!updateRequest.isSucceeded) {
+                [strongSelf showErrorFromRequest:updateRequest];
+            }
+            [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowOutcome]] withRowAnimation:UITableViewRowAnimationNone];
+        }
+    }];
+    [self.requests addObject:updateRequest];
+    
+    [self.tableView reloadRowsAtIndexPaths:@[[self indexPathForCellType:RowOutcome]] withRowAnimation:UITableViewRowAnimationNone];
+    [self hideView:self.pickerViewHolder];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -203,6 +235,14 @@ static const int kBSAlertTag = 1001;
 
 #pragma mark Requests
 
+- (void)showErrorFromRequest:(BaseWebRequest *)request {
+    [[[UIAlertView alloc] initWithTitle:@""
+                                message:request.userFriendlyErrorDescription
+                               delegate:nil
+                      cancelButtonTitle:NSLocalizedString(@"OK", @"")
+                      otherButtonTitles:nil] show];
+}
+
 - (void)updateUsers {
     if(self.prediction.agreeCount || self.prediction.disagreeCount) {
         
@@ -250,43 +290,36 @@ static const int kBSAlertTag = 1001;
     [request executeWithCompletionBlock:^{
         PredictionDetailsViewController *strongSelf = weakSelf;
         if(strongSelf) {
+            [strongSelf.requests removeObject:request];
+            
             if(request.isSucceeded) {
                 ChellangeByPredictionWebRequest *challengeRequest = [[ChellangeByPredictionWebRequest alloc] initWithPredictionID:strongSelf.prediction.ID];
                 [strongSelf.requests addObject:challengeRequest];
                 
                 [challengeRequest executeWithCompletionBlock:^{
-                    _updatingStatus = NO;
+                    [strongSelf.requests removeObject:challengeRequest];
+                    
+                    strongSelf->_updatingStatus = NO;
+                    
+                    strongSelf.prediction.chellange = challengeRequest.chellange;
                     
                     if(challengeRequest.isSucceeded) {
-                        strongSelf.prediction.chellange = challengeRequest.chellange;
                         [strongSelf updateUsers];
                     }
                     else {
-                        strongSelf.prediction.outcome = NO;
-                        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Oops! Something went wrong", @"")
-                                                    message:challengeRequest.errorDescription
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil] show];
+                        [strongSelf showErrorFromRequest:request];
                     }
                     
                     //update related cells
                     [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowMakePrediction], [strongSelf indexPathForCellType:RowPrediction]]
                                                 withRowAnimation:UITableViewRowAnimationAutomatic];
-                    
-                    [strongSelf.requests removeObject:challengeRequest];
                 }];
             }
             else {
-                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Oops! Something went wrong", @"")
-                                            message:request.errorDescription
-                                           delegate:nil
-                                  cancelButtonTitle:@"OK"
-                                  otherButtonTitles:nil] show];
-                _updatingStatus = NO;
+                [strongSelf showErrorFromRequest:request];
+                strongSelf->_updatingStatus = NO;
             }
             [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowMakePrediction]] withRowAnimation:UITableViewRowAnimationNone];
-            [strongSelf.requests removeObject:request];
         }
     }];
     [self.tableView reloadRowsAtIndexPaths:@[[self indexPathForCellType:RowMakePrediction]] withRowAnimation:UITableViewRowAnimationNone];
@@ -305,40 +338,34 @@ static const int kBSAlertTag = 1001;
         
         PredictionDetailsViewController *strongSelf = weakSelf;        
         if(strongSelf) {
+            
+            [strongSelf.requests removeObject:outcomeRequest];
+            
             if(outcomeRequest.isSucceeded) {
                 
-                _updatingStatus = NO;
+                PredictionUpdateWebRequest *updateRequest = [[PredictionUpdateWebRequest alloc] initWithPredictionId:strongSelf.prediction.ID];
+                [strongSelf.requests addObject:updateRequest];
                 
-                ChellangeByPredictionWebRequest *challengeRequest = [[ChellangeByPredictionWebRequest alloc] initWithPredictionID:strongSelf.prediction.ID];
-                [strongSelf.requests addObject:challengeRequest];
-                
-                [challengeRequest executeWithCompletionBlock:^{
+                [updateRequest executeWithCompletionBlock:^{
+                    [strongSelf.requests removeObject:updateRequest];
                     
-                    if(challengeRequest.isSucceeded) {
-                        strongSelf.prediction.outcome = YES;
-                        strongSelf.prediction.chellange = challengeRequest.chellange;
+                    strongSelf->_updatingStatus = NO;
+                    
+                    if(updateRequest.isSucceeded) {
+                        strongSelf.prediction = updateRequest.prediction;
                     }
                     else {
-                        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Oops! Something went wrong", @"")
-                                                    message:challengeRequest.errorDescription
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil] show];
+                        [strongSelf showErrorFromRequest:outcomeRequest];
                     }
                     [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowOutcome]] withRowAnimation:UITableViewRowAnimationAutomatic];
-                    [strongSelf.requests removeObject:challengeRequest];
                 }];
             }
             else {
-                _updatingStatus = NO;
+                strongSelf->_updatingStatus = NO;
                 
                 [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowOutcome]] withRowAnimation:UITableViewRowAnimationNone];
                 
-                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Oops! Something went wrong", @"")
-                                            message:outcomeRequest.errorDescription
-                                           delegate:nil
-                                  cancelButtonTitle:@"OK"
-                                  otherButtonTitles:nil] show];
+                [strongSelf showErrorFromRequest:outcomeRequest];
             }
         }
     }];
@@ -346,7 +373,8 @@ static const int kBSAlertTag = 1001;
 }
 
 - (void)sendBS {    
-    self.prediction.chellange.isBS = YES;
+    
+    _updatingStatus = YES;
     
     __weak PredictionDetailsViewController *weakSelf = self;
 
@@ -354,16 +382,30 @@ static const int kBSAlertTag = 1001;
     [bsRequest executeWithCompletionBlock:^{
         PredictionDetailsViewController *strongSelf = weakSelf;
         if(strongSelf) {
-            if(!bsRequest.isSucceeded) {
-                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Oops! Something went wrong", @"")
-                                            message:bsRequest.errorDescription
-                                           delegate:nil
-                                  cancelButtonTitle:@"OK"
-                                  otherButtonTitles:nil] show];
-                strongSelf.prediction.chellange.isBS = NO;
-            }
             [strongSelf.requests removeObject:bsRequest];
-            [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowStatus]] withRowAnimation:UITableViewRowAnimationAutomatic];
+            if(bsRequest.isSucceeded) {
+                PredictionUpdateWebRequest *updateRequest = [[PredictionUpdateWebRequest alloc] initWithPredictionId:strongSelf.prediction.ID];
+                [strongSelf.requests addObject:updateRequest];
+                
+                [updateRequest executeWithCompletionBlock:^{
+                    [strongSelf.requests removeObject:updateRequest];
+                    
+                    strongSelf->_updatingStatus = NO;
+                    
+                    if(updateRequest.isSucceeded) {
+                        strongSelf.prediction = updateRequest.prediction;
+                    }
+                    else {
+                        [strongSelf showErrorFromRequest:updateRequest];
+                    }
+                    [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowStatus]] withRowAnimation:UITableViewRowAnimationAutomatic];
+                }];
+            }
+            else {
+                strongSelf->_updatingStatus = NO;
+                [strongSelf showErrorFromRequest:bsRequest];
+                [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowStatus]] withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
         }
     }];
     [self.requests addObject:bsRequest];
@@ -392,6 +434,7 @@ static const int kBSAlertTag = 1001;
     else if([baseCell isKindOfClass:[PredictionStatusCell class]]) {
         PredictionStatusCell *cell = (PredictionStatusCell *)baseCell;
         [cell setupCellWithPrediction:self.prediction];
+        cell.loading = _updatingStatus;
     }
     else if([baseCell isKindOfClass:[MakePredictionCell class]]) {
         MakePredictionCell *cell = (MakePredictionCell *)baseCell;
@@ -467,7 +510,7 @@ static const int kBSAlertTag = 1001;
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    
+    self.expString = [self pickerView:pickerView titleForRow:row forComponent:component];
 }
 
 #pragma mark - Date Picker
@@ -509,7 +552,7 @@ withAnimationDuration: (NSTimeInterval)animationDuration
 {
     CGRect newContainerFrame = self.tableView.frame;
     
-    if (up) {
+    if(up) {
         newContainerFrame.size.height = self.view.frame.size.height - [self.tableView.superview convertRect: keyboardFrame fromView: self.view.window].size.height;
     }
     else {
@@ -518,7 +561,9 @@ withAnimationDuration: (NSTimeInterval)animationDuration
     
     [UIView animateWithDuration: animationDuration delay: 0.0 options: (animationCurve << 16) animations:^{
         self.tableView.frame = newContainerFrame;
-    } completion: NULL];
+    } completion:^(BOOL finished) {
+        [self.tableView scrollToRowAtIndexPath:[self indexPathForCellType:RowOutcome] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+    }];
 }
 
 @end

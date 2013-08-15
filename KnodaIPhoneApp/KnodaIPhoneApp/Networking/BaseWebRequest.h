@@ -51,6 +51,8 @@ typedef void (^RequestCompletionBlock)(void);
 @property (atomic, readonly) BOOL isSucceeded;
 @property (atomic, readonly) BOOL isCancelled;
 
+@property (nonatomic, readonly) NSString *userFriendlyErrorDescription;
+
 - (id) initWithParameters: (NSDictionary*) parameters;
 
 - (void) executeWithCompletionBlock: (RequestCompletionBlock) completion;

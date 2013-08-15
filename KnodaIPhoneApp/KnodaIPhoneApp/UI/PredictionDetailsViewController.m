@@ -52,6 +52,9 @@ static const int kBSAlertTag = 1001;
     BOOL _updatingStatus;
 }
 
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *pickerView;
+
 @property (nonatomic) NSArray *agreedUsers;
 @property (nonatomic) NSArray *disagreedUsers;
 
@@ -106,7 +109,15 @@ static const int kBSAlertTag = 1001;
 }
 
 - (IBAction)unfinishButtonTapped:(UIButton *)sender {
-    //TODO
+    [self showView:self.pickerView];
+}
+
+- (IBAction)hidePicker:(UIBarButtonItem *)sender {
+    [self hideView:self.pickerView];
+}
+
+- (IBAction)unfinishPrediction:(UIBarButtonItem *)sender {
+    //TODO:
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -437,6 +448,77 @@ static const int kBSAlertTag = 1001;
 
 - (void) predictinMade {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - UIPickerViewDataSource
+
+- (NSInteger) numberOfComponentsInPickerView: (UIPickerView*) pickerView {
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return [AddPredictionViewController expirationStrings].count;
+}
+
+#pragma mark UIPickerViewDelegate
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    return [[AddPredictionViewController expirationStrings] objectAtIndex:row];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    
+}
+
+#pragma mark - Date Picker
+
+- (void)showView:(UIView *)view {    
+    UIViewAnimationCurve animationCurve = UIViewAnimationCurveEaseInOut;
+    NSTimeInterval duration = 0.3;
+    
+    CGRect newFrame = view.frame;
+    newFrame.origin.y = self.view.frame.size.height - newFrame.size.height;
+    
+    [UIView animateWithDuration: duration delay: 0.0 options: (animationCurve << 16) animations:^
+     {
+         view.frame = newFrame;
+     } completion: NULL];
+    
+    [self moveUpOrDown: YES withAnimationDuration: duration animationCurve: animationCurve keyboardFrame: newFrame];
+}
+
+
+- (void)hideView:(UIView *)view {
+    UIViewAnimationCurve animationCurve = UIViewAnimationCurveEaseInOut;
+    NSTimeInterval duration = 0.3;
+    
+    CGRect newFrame = view.frame;
+    newFrame.origin.y = self.view.frame.size.height;
+    
+    [UIView animateWithDuration: duration delay: 0.0 options: (animationCurve << 16) animations:^{
+        view.frame = newFrame;
+    } completion: NULL];
+    
+    [self moveUpOrDown: NO withAnimationDuration: duration animationCurve: animationCurve keyboardFrame: newFrame];
+}
+
+- (void) moveUpOrDown: (BOOL) up
+withAnimationDuration: (NSTimeInterval)animationDuration
+       animationCurve: (UIViewAnimationCurve)animationCurve
+        keyboardFrame: (CGRect)keyboardFrame
+{
+    CGRect newContainerFrame = self.tableView.frame;
+    
+    if (up) {
+        newContainerFrame.size.height = self.view.frame.size.height - [self.tableView.superview convertRect: keyboardFrame fromView: self.view.window].size.height;
+    }
+    else {
+        newContainerFrame.size.height = self.view.frame.size.height;
+    }
+    
+    [UIView animateWithDuration: animationDuration delay: 0.0 options: (animationCurve << 16) animations:^{
+        self.tableView.frame = newContainerFrame;
+    } completion: NULL];
 }
 
 @end

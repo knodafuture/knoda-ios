@@ -1722,6 +1722,52 @@
                                     <outlet property="delegate" destination="wNN-TM-pOg" id="guR-lm-EWw"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" id="TYc-zT-kgA">
+                                <rect key="frame" x="0.0" y="588" width="320" height="334"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <subviews>
+                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="wdr-o9-9oJ">
+                                        <rect key="frame" x="0.0" y="4" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                        <items>
+                                            <barButtonItem systemItem="cancel" id="GCZ-rf-d17">
+                                                <connections>
+                                                    <action selector="hidePicker:" destination="wNN-TM-pOg" id="xFu-3k-tUU"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="WvD-vR-RCn"/>
+                                            <barButtonItem systemItem="done" id="7U9-LR-Xba">
+                                                <connections>
+                                                    <action selector="unfinishPrediction:" destination="wNN-TM-pOg" id="kQP-8y-imt"/>
+                                                </connections>
+                                            </barButtonItem>
+                                        </items>
+                                        <color key="tintColor" red="0.0" green="0.32941176470588235" blue="0.16470588235294117" alpha="1" colorSpace="calibratedRGB"/>
+                                    </toolbar>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="itr-XP-mPu">
+                                        <rect key="frame" x="0.0" y="44" width="320" height="74"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="0.32941176470588235" blue="0.16470588235294117" alpha="1" colorSpace="calibratedRGB"/>
+                                        <string key="text">When do you want to be reminded to determine the
+outcome of your prediction</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                        <color key="shadowColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <size key="shadowOffset" width="1" height="1"/>
+                                        <string key="userLabel">Label - When do you want to be reminded to determine the outcome of your prediction</string>
+                                    </label>
+                                    <pickerView contentMode="scaleToFill" id="UUh-NH-Uzt">
+                                        <rect key="frame" x="0.0" y="118" width="320" height="216"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="wNN-TM-pOg" id="GF1-OP-DPt"/>
+                                            <outlet property="delegate" destination="wNN-TM-pOg" id="JlS-eB-Vmc"/>
+                                        </connections>
+                                    </pickerView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -1764,6 +1810,7 @@
                     </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="pickerView" destination="TYc-zT-kgA" id="aGg-6R-A0h"/>
                         <outlet property="tableView" destination="OOz-U0-cxm" id="pNl-1W-oha"/>
                     </connections>
                 </viewController>
@@ -3217,6 +3264,9 @@
         </class>
         <class className="HomeViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/HomeViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="menuButtonPressed:"/>
+            </relationships>
         </class>
         <class className="LoadingCell" superclassName="BaseTableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LoadingCell.h"/>
@@ -3275,9 +3325,12 @@
                 <relationship kind="action" name="backButtonPressed:" candidateClass="UIButton"/>
                 <relationship kind="action" name="bsButtonTapped:" candidateClass="UIButton"/>
                 <relationship kind="action" name="disagreeButtonTapped:" candidateClass="UIButton"/>
+                <relationship kind="action" name="hidePicker:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="action" name="noButtonTapped:" candidateClass="UIButton"/>
                 <relationship kind="action" name="unfinishButtonTapped:" candidateClass="UIButton"/>
+                <relationship kind="action" name="unfinishPrediction:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="action" name="yesButtonTapped:" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="pickerView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
         </class>
@@ -3325,6 +3378,7 @@
         <class className="SignUpViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SignUpViewController.h"/>
             <relationships>
+                <relationship kind="action" name="signUpButtonPressed:"/>
                 <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="emailTextFiled" candidateClass="UITextField"/>
@@ -3337,6 +3391,7 @@
         <class className="TermsOfServiceViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TermsOfServiceViewController.h"/>
             <relationships>
+                <relationship kind="action" name="backButtonPressed:"/>
                 <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
             </relationships>

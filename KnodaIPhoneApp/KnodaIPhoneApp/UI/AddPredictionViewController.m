@@ -30,18 +30,11 @@
 
 @implementation AddPredictionViewController
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.expirationStrings = @[NSLocalizedString(@"10 minutes", @""),
-                               NSLocalizedString(@"1 hour", @""),
-                               NSLocalizedString(@"3 hours", @""),
-                               NSLocalizedString(@"6 hours", @""),
-                               NSLocalizedString(@"1 day", @""),
-                               NSLocalizedString(@"3 days", @""),
-                               NSLocalizedString(@"1 week", @"")];
+    self.expirationStrings = [[self class] expirationStrings];
     
     NSString* categoriesKey = @"Categories";
 	
@@ -401,5 +394,21 @@ withAnimationDuration: (NSTimeInterval)animationDuration
     }
 }
 
+#pragma mark Expiration strings
+
++ (NSArray *)expirationStrings {
+    static NSArray *expStrings = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        expStrings = @[NSLocalizedString(@"10 minutes", @""),
+                       NSLocalizedString(@"1 hour", @""),
+                       NSLocalizedString(@"3 hours", @""),
+                       NSLocalizedString(@"6 hours", @""),
+                       NSLocalizedString(@"1 day", @""),
+                       NSLocalizedString(@"3 days", @""),
+                       NSLocalizedString(@"1 week", @"")];
+    });
+    return expStrings;
+}
 
 @end

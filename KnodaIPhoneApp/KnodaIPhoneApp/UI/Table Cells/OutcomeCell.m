@@ -16,6 +16,7 @@ static const float kSmallCellHeight = 99.0;
 @interface OutcomeCell()
 
 @property (nonatomic, weak) IBOutlet UIButton *unfinishedButton;
+@property (nonatomic, weak) IBOutlet UIView *loadingView;
 
 @end
 
@@ -23,6 +24,11 @@ static const float kSmallCellHeight = 99.0;
 
 - (void)setupCellWithPrediction:(Prediction *)prediction {
     self.unfinishedButton.hidden = !prediction.expired;
+}
+
+- (void)setLoading:(BOOL)loading {
+    _loading = loading;
+    self.loadingView.hidden = !loading;
 }
 
 + (CGFloat)cellHeightForPrediction:(Prediction *)prediction {

@@ -12,12 +12,18 @@
 
 @class Prediction;
 
-@interface PredictionDetailsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
-
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@interface PredictionDetailsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (nonatomic, strong) Prediction *prediction;
 
-- (IBAction)backButtonPressed:(id)sender;
+- (IBAction)backButtonPressed:(UIButton *)sender;
+- (IBAction)bsButtonTapped:(UIButton *)sender;
+- (IBAction)agreeButtonTapped:(UIButton *)sender;
+- (IBAction)disagreeButtonTapped:(UIButton *)sender;
+- (IBAction)yesButtonTapped:(UIButton *)sender;
+- (IBAction)noButtonTapped:(UIButton *)sender;
+- (IBAction)unfinishButtonTapped:(UIButton *)sender;
+- (IBAction)hidePicker:(UIBarButtonItem *)sender;
+- (IBAction)unfinishPrediction:(UIBarButtonItem *)sender;
 
 @end

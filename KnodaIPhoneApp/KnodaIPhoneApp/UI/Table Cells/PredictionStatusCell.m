@@ -24,9 +24,10 @@ static const float kBSHeight           = 44.0;
 
 @interface PredictionStatusCell()
 
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *pointsLabel;
-@property (weak, nonatomic) IBOutlet UIView  *bsView;
+@property (weak, nonatomic) IBOutlet UILabel  *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel  *pointsLabel;
+@property (weak, nonatomic) IBOutlet UIView   *bsView;
+@property (weak, nonatomic) IBOutlet UIButton *bsButton;
 
 @end
 
@@ -38,8 +39,10 @@ static const float kBSHeight           = 44.0;
     self.titleLabel.textColor = isRight ? WIN_COLOR : LOSE_COLOR;
 }
 
-- (IBAction)bsButtonTapped:(UIButton *)sender {
-    
+- (void)setIsBS:(BOOL)isBS {
+    _isBS = isBS;
+    self.bsButton.highlighted = isBS;
+    self.bsButton.userInteractionEnabled = !isBS;
 }
 
 - (void)setupPoints:(Chellange *)challenge {
@@ -58,9 +61,10 @@ static const float kBSHeight           = 44.0;
 }
 
 - (void)setupCellWithPrediction:(Prediction *)prediction {
-    self.isRight = prediction.chellange.isRight;
-    [self setupPoints:prediction.chellange];
+    self.isRight       = prediction.chellange.isRight;
     self.bsView.hidden = prediction.chellange.isOwn;
+    self.isBS          = prediction.chellange.isBS;
+    [self setupPoints:prediction.chellange];
     [self adjustLayouts];
 }
 

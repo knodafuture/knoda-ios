@@ -24,9 +24,14 @@
 #import "AddPredictionViewController.h"
 
 #import "PredictionUsersWebRequest.h"
+#import "BSWebRequest.h"
+#import "OutcomeWebRequest.h"
+#import "ChellangeByPredictionWebRequest.h"
+#import "PredictionAgreeWebRequest.h"
+#import "PredictionDisagreeWebRequest.h"
 
 typedef enum {
-    RowEmpty = 0,
+    RowEmpty = -1,
     RowPrediction,
     RowCategory,
     RowStatus,
@@ -35,20 +40,25 @@ typedef enum {
     RowOutcome,
     RowPredictor,
     RowLoading,
-    TableRowsBaseCount = RowPredictorsCount,
+    TableRowsBaseCount = RowPredictorsCount + 1,
 } CellType;
 
 static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 
-@interface PredictionDetailsViewController () <AddPredictionViewControllerDelegate> {
+static const int kBSAlertTag = 1001;
+
+@interface PredictionDetailsViewController () <AddPredictionViewControllerDelegate, UIAlertViewDelegate> {
     BOOL _loadingUsers;
+    BOOL _updatingStatus;
 }
 
-@property (nonatomic) PredictionUsersWebRequest *requestAgreed;
-@property (nonatomic) PredictionUsersWebRequest *requestDisagreed;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *pickerView;
 
 @property (nonatomic) NSArray *agreedUsers;
 @property (nonatomic) NSArray *disagreedUsers;
+
+@property (nonatomic) NSMutableArray *requests;
 
 @end
 
@@ -59,35 +69,55 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    if(self.prediction.agreeCount || self.prediction.disagreeCount) {
-        _loadingUsers = YES;
-        
-        __weak PredictionDetailsViewController *weakSelf = self;
-        
-        self.requestAgreed = [[PredictionUsersWebRequest alloc] initWithPredictionId:self.prediction.ID forAgreedUsers:YES];
-        [self.requestAgreed executeWithCompletionBlock:^{
-            PredictionDetailsViewController *strongSelf = weakSelf;
-            if(strongSelf) {
-                [strongSelf updatePredictionUsersAgreed:YES];
-            }
-        }];
-        
-        self.requestDisagreed = [[PredictionUsersWebRequest alloc] initWithPredictionId:self.prediction.ID forAgreedUsers:NO];
-        [self.requestDisagreed executeWithCompletionBlock:^{
-            PredictionDetailsViewController *strongSelf = weakSelf;
-            if(strongSelf) {
-                [strongSelf updatePredictionUsersAgreed:NO];
-            }
-        }];
-    }
+    self.requests = [NSMutableArray array];
+    
+    _loadingUsers = YES;
+    [self updateUsers];
 }
 
 #pragma mark Actions
 
-- (IBAction)backButtonPressed:(id)sender {
-    [self.requestAgreed cancel];
-    [self.requestDisagreed cancel];
-    [self.navigationController popViewControllerAnimated: YES];
+- (IBAction)backButtonPressed:(UIButton *)sender {
+    [self.requests makeObjectsPerformSelector:@selector(cancel)];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)bsButtonTapped:(UIButton *)sender {
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Don't be lame. Tell the truth. It's more fun this way. Is this really the wrong outcome?", @"")
+                                                        message:nil
+                                                       delegate:self
+                                              cancelButtonTitle:NSLocalizedString(@"Cancel", @"")
+                                              otherButtonTitles:NSLocalizedString(@"Yes", @""), nil];
+    alertView.tag = kBSAlertTag;
+    [alertView show];
+}
+
+- (IBAction)agreeButtonTapped:(UIButton *)sender {
+    [self sendAgree:YES];
+}
+
+- (IBAction)disagreeButtonTapped:(UIButton *)sender {
+    [self sendAgree:NO];
+}
+
+- (IBAction)yesButtonTapped:(UIButton *)sender {
+    [self sendOutcome:YES];
+}
+
+- (IBAction)noButtonTapped:(UIButton *)sender {
+    [self sendOutcome:NO];
+}
+
+- (IBAction)unfinishButtonTapped:(UIButton *)sender {
+    [self showView:self.pickerView];
+}
+
+- (IBAction)hidePicker:(UIBarButtonItem *)sender {
+    [self hideView:self.pickerView];
+}
+
+- (IBAction)unfinishPrediction:(UIBarButtonItem *)sender {
+    //TODO:
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -98,25 +128,42 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 
 #pragma mark Private
 
-- (void)updatePredictionUsersAgreed:(BOOL)agreed {
+- (void)updatePredictionUsers:(NSArray *)users agreed:(BOOL)agreed {
     if(agreed) {
-        self.agreedUsers = self.requestAgreed.users;
+        self.agreedUsers = [users arrayByAddingObject:self.prediction.userName];
     }
     else {
-        self.disagreedUsers = self.requestDisagreed.users;
+        self.disagreedUsers = users;
     }
     
     if(self.agreedUsers && self.disagreedUsers) {
         _loadingUsers = NO;
         
-        //add own user prediction to users list
-        if(self.agreedUsers.count < self.prediction.agreeCount) {
-            self.agreedUsers = [self.agreedUsers arrayByAddingObject:self.prediction.userName];
-        }
-        else if(self.disagreedUsers.count < self.prediction.disagreeCount) {
-            self.disagreedUsers = [self.disagreedUsers arrayByAddingObject:self.prediction.userName];
-        }
+        //update prediction counters in case they're out of date
+        self.prediction.agreeCount    = self.agreedUsers.count;
+        self.prediction.disagreeCount = self.disagreedUsers.count;
+        
         [self.tableView reloadData];
+    }
+}
+
+- (BaseTableViewCell *)cellForCellType:(CellType)cellType {
+    return (BaseTableViewCell *)[self.tableView cellForRowAtIndexPath:[self indexPathForCellType:cellType]];
+}
+
+- (NSIndexPath *)indexPathForCellType:(CellType)cellType {
+    switch (cellType) {
+        case RowOutcome:
+        case RowMakePrediction:
+            return [NSIndexPath indexPathForRow:RowStatus inSection:0];
+            
+        case RowEmpty:
+        case RowLoading:
+        case RowPredictor:
+            return nil;
+            
+        default:
+            return [NSIndexPath indexPathForRow:cellType inSection:0];
     }
 }
 
@@ -154,6 +201,175 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
     }
 }
 
+#pragma mark Requests
+
+- (void)updateUsers {
+    if(self.prediction.agreeCount || self.prediction.disagreeCount) {
+        
+        __weak PredictionDetailsViewController *weakSelf = self;
+        
+        PredictionUsersWebRequest *requestAgreed = [[PredictionUsersWebRequest alloc] initWithPredictionId:self.prediction.ID forAgreedUsers:YES];
+        [requestAgreed executeWithCompletionBlock:^{
+            PredictionDetailsViewController *strongSelf = weakSelf;
+            if(strongSelf) {
+                [strongSelf updatePredictionUsers:requestAgreed.users agreed:YES];
+                [strongSelf.requests removeObject:requestAgreed];
+            }
+        }];
+        [self.requests addObject:requestAgreed];
+        
+        PredictionUsersWebRequest *requestDisagreed = [[PredictionUsersWebRequest alloc] initWithPredictionId:self.prediction.ID forAgreedUsers:NO];
+        [requestDisagreed executeWithCompletionBlock:^{
+            PredictionDetailsViewController *strongSelf = weakSelf;
+            if(strongSelf) {
+                [strongSelf updatePredictionUsers:requestDisagreed.users agreed:NO];
+                [strongSelf.requests removeObject:requestDisagreed];
+            }
+        }];
+        [self.requests addObject:requestDisagreed];
+    }
+}
+
+- (void)sendAgree:(BOOL)agree {
+    
+    _updatingStatus = YES;
+    
+    BaseWebRequest *request;
+    
+    if(agree) {
+        request = [[PredictionAgreeWebRequest alloc] initWithPredictionID:self.prediction.ID];
+    }
+    else {
+        request = [[PredictionDisagreeWebRequest alloc] initWithPredictionID:self.prediction.ID];
+    }
+    
+    [self.requests addObject:request];
+    
+    __weak PredictionDetailsViewController *weakSelf = self;
+    
+    [request executeWithCompletionBlock:^{
+        PredictionDetailsViewController *strongSelf = weakSelf;
+        if(strongSelf) {
+            if(request.isSucceeded) {
+                ChellangeByPredictionWebRequest *challengeRequest = [[ChellangeByPredictionWebRequest alloc] initWithPredictionID:strongSelf.prediction.ID];
+                [strongSelf.requests addObject:challengeRequest];
+                
+                [challengeRequest executeWithCompletionBlock:^{
+                    _updatingStatus = NO;
+                    
+                    if(challengeRequest.isSucceeded) {
+                        strongSelf.prediction.chellange = challengeRequest.chellange;
+                        [strongSelf updateUsers];
+                    }
+                    else {
+                        strongSelf.prediction.outcome = NO;
+                        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Oops! Something went wrong", @"")
+                                                    message:challengeRequest.errorDescription
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil] show];
+                    }
+                    
+                    //update related cells
+                    [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowMakePrediction], [strongSelf indexPathForCellType:RowPrediction]]
+                                                withRowAnimation:UITableViewRowAnimationAutomatic];
+                    
+                    [strongSelf.requests removeObject:challengeRequest];
+                }];
+            }
+            else {
+                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Oops! Something went wrong", @"")
+                                            message:request.errorDescription
+                                           delegate:nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil] show];
+                _updatingStatus = NO;
+            }
+            [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowMakePrediction]] withRowAnimation:UITableViewRowAnimationNone];
+            [strongSelf.requests removeObject:request];
+        }
+    }];
+    [self.tableView reloadRowsAtIndexPaths:@[[self indexPathForCellType:RowMakePrediction]] withRowAnimation:UITableViewRowAnimationNone];
+}
+
+- (void)sendOutcome:(BOOL)realise {
+    
+    _updatingStatus = YES;
+    
+    OutcomeWebRequest *outcomeRequest = [[OutcomeWebRequest alloc] initWithPredictionId:self.prediction.ID realise:realise];
+    [self.requests addObject:outcomeRequest];
+    
+    __weak PredictionDetailsViewController *weakSelf = self;
+    
+    [outcomeRequest executeWithCompletionBlock:^{
+        
+        PredictionDetailsViewController *strongSelf = weakSelf;        
+        if(strongSelf) {
+            if(outcomeRequest.isSucceeded) {
+                
+                _updatingStatus = NO;
+                
+                ChellangeByPredictionWebRequest *challengeRequest = [[ChellangeByPredictionWebRequest alloc] initWithPredictionID:strongSelf.prediction.ID];
+                [strongSelf.requests addObject:challengeRequest];
+                
+                [challengeRequest executeWithCompletionBlock:^{
+                    
+                    if(challengeRequest.isSucceeded) {
+                        strongSelf.prediction.outcome = YES;
+                        strongSelf.prediction.chellange = challengeRequest.chellange;
+                    }
+                    else {
+                        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Oops! Something went wrong", @"")
+                                                    message:challengeRequest.errorDescription
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil] show];
+                    }
+                    [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowOutcome]] withRowAnimation:UITableViewRowAnimationAutomatic];
+                    [strongSelf.requests removeObject:challengeRequest];
+                }];
+            }
+            else {
+                _updatingStatus = NO;
+                
+                [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowOutcome]] withRowAnimation:UITableViewRowAnimationNone];
+                
+                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Oops! Something went wrong", @"")
+                                            message:outcomeRequest.errorDescription
+                                           delegate:nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil] show];
+            }
+        }
+    }];
+    [self.tableView reloadRowsAtIndexPaths:@[[self indexPathForCellType:RowOutcome]] withRowAnimation:UITableViewRowAnimationNone];
+}
+
+- (void)sendBS {    
+    self.prediction.chellange.isBS = YES;
+    
+    __weak PredictionDetailsViewController *weakSelf = self;
+
+    BSWebRequest *bsRequest = [[BSWebRequest alloc] initWithPredictionId:self.prediction.ID];
+    [bsRequest executeWithCompletionBlock:^{
+        PredictionDetailsViewController *strongSelf = weakSelf;
+        if(strongSelf) {
+            if(!bsRequest.isSucceeded) {
+                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Oops! Something went wrong", @"")
+                                            message:bsRequest.errorDescription
+                                           delegate:nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil] show];
+                strongSelf.prediction.chellange.isBS = NO;
+            }
+            [strongSelf.requests removeObject:bsRequest];
+            [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowStatus]] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+    }];
+    [self.requests addObject:bsRequest];
+    [self.tableView reloadRowsAtIndexPaths:@[[self indexPathForCellType:RowStatus]] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
 #pragma mark UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -178,7 +394,8 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
         [cell setupCellWithPrediction:self.prediction];
     }
     else if([baseCell isKindOfClass:[MakePredictionCell class]]) {
-        
+        MakePredictionCell *cell = (MakePredictionCell *)baseCell;
+        cell.loading = _updatingStatus;
     }
     else if([baseCell isKindOfClass:[PredictorsCountCell class]]) {
         PredictorsCountCell *cell = (PredictorsCountCell *)baseCell;
@@ -194,6 +411,7 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
     else if([baseCell isKindOfClass:[OutcomeCell class]]) {
         OutcomeCell *cell = (OutcomeCell *)baseCell;
         [cell setupCellWithPrediction:self.prediction];
+        cell.loading = _updatingStatus;
     }
     
     return baseCell;
@@ -218,10 +436,89 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
     }
 }
 
+#pragma mark UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if(alertView.tag == kBSAlertTag && alertView.cancelButtonIndex != buttonIndex) {
+        [self sendBS];
+    }
+}
+
 #pragma mark AddPredictionViewControllerDelegate
 
 - (void) predictinMade {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - UIPickerViewDataSource
+
+- (NSInteger) numberOfComponentsInPickerView: (UIPickerView*) pickerView {
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return [AddPredictionViewController expirationStrings].count;
+}
+
+#pragma mark UIPickerViewDelegate
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    return [[AddPredictionViewController expirationStrings] objectAtIndex:row];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    
+}
+
+#pragma mark - Date Picker
+
+- (void)showView:(UIView *)view {    
+    UIViewAnimationCurve animationCurve = UIViewAnimationCurveEaseInOut;
+    NSTimeInterval duration = 0.3;
+    
+    CGRect newFrame = view.frame;
+    newFrame.origin.y = self.view.frame.size.height - newFrame.size.height;
+    
+    [UIView animateWithDuration: duration delay: 0.0 options: (animationCurve << 16) animations:^
+     {
+         view.frame = newFrame;
+     } completion: NULL];
+    
+    [self moveUpOrDown: YES withAnimationDuration: duration animationCurve: animationCurve keyboardFrame: newFrame];
+}
+
+
+- (void)hideView:(UIView *)view {
+    UIViewAnimationCurve animationCurve = UIViewAnimationCurveEaseInOut;
+    NSTimeInterval duration = 0.3;
+    
+    CGRect newFrame = view.frame;
+    newFrame.origin.y = self.view.frame.size.height;
+    
+    [UIView animateWithDuration: duration delay: 0.0 options: (animationCurve << 16) animations:^{
+        view.frame = newFrame;
+    } completion: NULL];
+    
+    [self moveUpOrDown: NO withAnimationDuration: duration animationCurve: animationCurve keyboardFrame: newFrame];
+}
+
+- (void) moveUpOrDown: (BOOL) up
+withAnimationDuration: (NSTimeInterval)animationDuration
+       animationCurve: (UIViewAnimationCurve)animationCurve
+        keyboardFrame: (CGRect)keyboardFrame
+{
+    CGRect newContainerFrame = self.tableView.frame;
+    
+    if (up) {
+        newContainerFrame.size.height = self.view.frame.size.height - [self.tableView.superview convertRect: keyboardFrame fromView: self.view.window].size.height;
+    }
+    else {
+        newContainerFrame.size.height = self.view.frame.size.height;
+    }
+    
+    [UIView animateWithDuration: animationDuration delay: 0.0 options: (animationCurve << 16) animations:^{
+        self.tableView.frame = newContainerFrame;
+    } completion: NULL];
 }
 
 @end

@@ -48,7 +48,7 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 
 static const int kBSAlertTag = 1001;
 
-@interface PredictionDetailsViewController () <AddPredictionViewControllerDelegate, UIAlertViewDelegate> {
+@interface PredictionDetailsViewController () <UIAlertViewDelegate> {
     BOOL _loadingUsers;
     BOOL _updatingStatus;
 }
@@ -132,21 +132,40 @@ static const int kBSAlertTag = 1001;
     
     __weak PredictionDetailsViewController *weakSelf = self;
     
-    PredictionUpdateWebRequest *updateRequest = [[PredictionUpdateWebRequest alloc] initWithPredictionId:self.prediction.ID extendTill:expDate];
-    [updateRequest executeWithCompletionBlock:^{
+    PredictionUpdateWebRequest *request = [[PredictionUpdateWebRequest alloc] initWithPredictionId:self.prediction.ID extendTill:expDate];
+    [request executeWithCompletionBlock:^{
         PredictionDetailsViewController *strongSelf = weakSelf;
         if(strongSelf) {
-            [strongSelf.requests removeObject:updateRequest];
+            [strongSelf.requests removeObject:request];
             
-            strongSelf->_updatingStatus = NO;
-            
-            if(!updateRequest.isSucceeded) {
-                [strongSelf showErrorFromRequest:updateRequest];
+            if(request.isSucceeded) {
+                
+                PredictionUpdateWebRequest *updateRequest = [[PredictionUpdateWebRequest alloc] initWithPredictionId:strongSelf.prediction.ID];
+                [strongSelf.requests addObject:updateRequest];
+                
+                [updateRequest executeWithCompletionBlock:^{
+                    [strongSelf.requests removeObject:updateRequest];
+                    
+                    strongSelf->_updatingStatus = NO;
+                    
+                    if(updateRequest.isSucceeded) {
+                        [strongSelf.prediction updateWithObject:updateRequest.prediction];
+                    }
+                    else {
+                        [strongSelf showErrorFromRequest:request];
+                    }
+                    
+                    [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowOutcome]] withRowAnimation:UITableViewRowAnimationAutomatic];
+                }];
             }
-            [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowOutcome]] withRowAnimation:UITableViewRowAnimationNone];
+            else {
+                strongSelf->_updatingStatus = NO;
+                [strongSelf showErrorFromRequest:request];
+                [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowOutcome]] withRowAnimation:UITableViewRowAnimationNone];
+            }
         }
     }];
-    [self.requests addObject:updateRequest];
+    [self.requests addObject:request];
     
     [self.tableView reloadRowsAtIndexPaths:@[[self indexPathForCellType:RowOutcome]] withRowAnimation:UITableViewRowAnimationNone];
     [self hideView:self.pickerViewHolder];
@@ -154,7 +173,7 @@ static const int kBSAlertTag = 1001;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:kAddPredictionSegue]) {
-        ((AddPredictionViewController*)segue.destinationViewController).delegate = self;
+        ((AddPredictionViewController*)segue.destinationViewController).delegate = self.addPredictionDelegate;
     }
 }
 
@@ -204,10 +223,10 @@ static const int kBSAlertTag = 1001;
         case 0: return RowPrediction;
         case 1: return RowCategory;
         case 2:
-            if(self.prediction.outcome) {
+            if(self.prediction.hasOutcome) {
                 return RowStatus;
             }
-            else if(self.prediction.chellange.isOwn) {
+            else if(self.prediction.chellange.isOwn && self.prediction.expired) {
                 return RowOutcome;
             }
             else if(!self.prediction.chellange) {
@@ -352,7 +371,7 @@ static const int kBSAlertTag = 1001;
                     strongSelf->_updatingStatus = NO;
                     
                     if(updateRequest.isSucceeded) {
-                        strongSelf.prediction = updateRequest.prediction;
+                        [strongSelf.prediction updateWithObject:updateRequest.prediction];
                     }
                     else {
                         [strongSelf showErrorFromRequest:outcomeRequest];
@@ -393,7 +412,7 @@ static const int kBSAlertTag = 1001;
                     strongSelf->_updatingStatus = NO;
                     
                     if(updateRequest.isSucceeded) {
-                        strongSelf.prediction = updateRequest.prediction;
+                        [strongSelf.prediction updateWithObject:updateRequest.prediction];
                     }
                     else {
                         [strongSelf showErrorFromRequest:updateRequest];
@@ -485,12 +504,6 @@ static const int kBSAlertTag = 1001;
     if(alertView.tag == kBSAlertTag && alertView.cancelButtonIndex != buttonIndex) {
         [self sendBS];
     }
-}
-
-#pragma mark AddPredictionViewControllerDelegate
-
-- (void) predictinMade {
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - UIPickerViewDataSource

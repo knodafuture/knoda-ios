@@ -66,7 +66,7 @@ static const float kBSHeight           = 44.0;
 }
 
 - (void)setupCellWithPrediction:(Prediction *)prediction {
-    self.isRight       = prediction.chellange.isRight;
+    self.isRight       = prediction.chellange.agree == prediction.outcome;
     self.bsView.hidden = prediction.chellange.isOwn;
     self.isBS          = prediction.chellange.isBS;
     [self setupPoints:prediction.chellange];

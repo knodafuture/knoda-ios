@@ -53,6 +53,7 @@
 		578E9B6617BA21D900A7B304 /* PredictionStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 578E9B5D17BA21D900A7B304 /* PredictionStatusCell.m */; };
 		578E9B6717BA21D900A7B304 /* PredictorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 578E9B5F17BA21D900A7B304 /* PredictorCell.m */; };
 		578E9B6817BA21D900A7B304 /* PredictorsCountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 578E9B6117BA21D900A7B304 /* PredictorsCountCell.m */; };
+		57BAB54517BE136200581186 /* BaseModelObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BAB54417BE136200581186 /* BaseModelObject.m */; };
 		9E06636E178C3C7F00B3E974 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E066363178C3C7F00B3E974 /* NSObject+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9E06636F178C3C7F00B3E974 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E066365178C3C7F00B3E974 /* NSString+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9E066370178C3C7F00B3E974 /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E066367178C3C7F00B3E974 /* SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -272,6 +273,8 @@
 		578E9B5F17BA21D900A7B304 /* PredictorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PredictorCell.m; sourceTree = "<group>"; };
 		578E9B6017BA21D900A7B304 /* PredictorsCountCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PredictorsCountCell.h; sourceTree = "<group>"; };
 		578E9B6117BA21D900A7B304 /* PredictorsCountCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PredictorsCountCell.m; sourceTree = "<group>"; };
+		57BAB54317BE136200581186 /* BaseModelObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseModelObject.h; sourceTree = "<group>"; };
+		57BAB54417BE136200581186 /* BaseModelObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseModelObject.m; sourceTree = "<group>"; };
 		9E066361178C3C7F00B3E974 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		9E066362178C3C7F00B3E974 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
 		9E066363178C3C7F00B3E974 /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
@@ -596,6 +599,8 @@
 		9E066374178C3EE200B3E974 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				57BAB54317BE136200581186 /* BaseModelObject.h */,
+				57BAB54417BE136200581186 /* BaseModelObject.m */,
 				9E066375178C3EFF00B3E974 /* User.h */,
 				9E066376178C3EFF00B3E974 /* User.m */,
 				9E066378178C407300B3E974 /* Prediction.h */,
@@ -1156,6 +1161,7 @@
 				572D465417BD0665008164A5 /* PredictionUpdateWebRequest.m in Sources */,
 				572D465B17BD14AA008164A5 /* LoadableCell.m in Sources */,
 				572D465E17BD1B62008164A5 /* NSDate+Utils.m in Sources */,
+				57BAB54517BE136200581186 /* BaseModelObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

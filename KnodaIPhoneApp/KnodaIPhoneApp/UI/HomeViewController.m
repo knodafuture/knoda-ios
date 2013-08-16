@@ -28,10 +28,7 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
 
 @end
 
-
-
 @implementation HomeViewController
-
 
 - (void)viewDidLoad
 {
@@ -91,6 +88,7 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
     else if([segue.identifier isEqualToString:kPredictionDetailsSegue]) {
         PredictionDetailsViewController *vc = (PredictionDetailsViewController *)segue.destinationViewController;
         vc.prediction = sender;
+        vc.addPredictionDelegate = self;
     }
 }
 
@@ -265,6 +263,5 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
          }
      }];
 }
-
 
 @end

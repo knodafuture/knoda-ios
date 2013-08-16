@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Knoda. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "BaseModelObject.h"
 
-@interface User : NSObject
+@interface User : BaseModelObject
 
 @property (nonatomic, strong) NSString* name;
 @property (nonatomic, strong) NSString* email;

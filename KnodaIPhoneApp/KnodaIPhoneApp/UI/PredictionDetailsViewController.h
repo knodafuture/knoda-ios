@@ -12,9 +12,13 @@
 
 @class Prediction;
 
+@protocol AddPredictionViewControllerDelegate;
+
 @interface PredictionDetailsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (nonatomic, strong) Prediction *prediction;
+
+@property (nonatomic, weak) id<AddPredictionViewControllerDelegate> addPredictionDelegate;
 
 - (IBAction)backButtonPressed:(UIButton *)sender;
 - (IBAction)bsButtonTapped:(UIButton *)sender;

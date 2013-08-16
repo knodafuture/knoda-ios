@@ -10,9 +10,12 @@
 #import "PreditionCell.h"
 #import "HistoryMyPicksWebRequest.h"
 #import "Prediction.h"
+#import "AddPredictionViewController.h"
+#import "PredictionDetailsViewController.h"
 
+static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 
-@interface MyPicksViewController ()
+@interface MyPicksViewController () <AddPredictionViewControllerDelegate>
 
 @property (nonatomic, strong) NSMutableArray* predictions;
 @property (nonatomic, strong) NSTimer* cellUpdateTimer;
@@ -62,6 +65,14 @@
     for (PreditionCell* cell in visibleCells)
     {
         [cell updateDates];
+    }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([segue.identifier isEqualToString:kPredictionDetailsSegue]) {
+        PredictionDetailsViewController *vc = (PredictionDetailsViewController *)segue.destinationViewController;
+        vc.prediction = sender;
+        vc.addPredictionDelegate = self;
     }
 }
 
@@ -130,8 +141,8 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    //Prediction* prediction = [self.predictions objectAtIndex: indexPath.row];
-    //[self performSegueWithIdentifier:kPredictionDetailsSegue sender:prediction];
+    Prediction* prediction = [self.predictions objectAtIndex: indexPath.row];
+    [self performSegueWithIdentifier:kPredictionDetailsSegue sender:prediction];
 }
 
 

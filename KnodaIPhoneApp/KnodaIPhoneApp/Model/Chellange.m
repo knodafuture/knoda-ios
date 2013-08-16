@@ -20,15 +20,15 @@
         self.isRight    = [[dictionary objectForKey: @"is_right"] boolValue];
         self.isFinished = [[dictionary objectForKey: @"is_finished"] boolValue];
         self.isBS       = [[dictionary objectForKey: @"bs"] boolValue];
-        
-        NSDictionary* pointsDictionary = [dictionary objectForKey: @"my_points"];
-        
-        self.basePoints             = [[pointsDictionary objectForKey: @"base_points"] integerValue];
-        self.marketSizePoints       = [[pointsDictionary objectForKey: @"market_size_points"] integerValue];
-        self.outcomePoints          = [[pointsDictionary objectForKey: @"outcome_points"] integerValue];
-        self.predictionMarketPoints = [[pointsDictionary objectForKey: @"prediction_market_points"] integerValue];
     }
     return self;
+}
+
+- (void)fillPoints:(NSDictionary *)dictionary {
+    self.basePoints             = [[dictionary objectForKey: @"base_points"] integerValue];
+    self.marketSizePoints       = [[dictionary objectForKey: @"market_size_points"] integerValue];
+    self.outcomePoints          = [[dictionary objectForKey: @"outcome_points"] integerValue];
+    self.predictionMarketPoints = [[dictionary objectForKey: @"prediction_market_points"] integerValue];
 }
 
 @end

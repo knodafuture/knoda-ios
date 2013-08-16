@@ -244,6 +244,10 @@ const NSInteger kInternetOfflineError = -1009;
     
     NSLog(@"%@ Start request %@", NSStringFromClass([self class]), request.URL);
     
+    if([request.HTTPMethod isEqualToString:@"PATCH"]) {
+        [request setValue:@"multipart/form-data" forHTTPHeaderField:@"Content-Type"];
+    }
+    
     if ([request.HTTPMethod isEqualToString: @"POST"] || [request.HTTPMethod isEqualToString:@"PATCH"])
     {
         NSString* body = [self formParametersString];

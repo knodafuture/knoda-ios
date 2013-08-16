@@ -6,13 +6,12 @@
 //  Copyright (c) 2013 Knoda. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
+#import "BaseModelObject.h"
 
 @class Prediction;
 
 
-@interface Chellange : NSObject
+@interface Chellange : BaseModelObject
 
 @property (nonatomic, assign) NSInteger ID;
 @property (nonatomic, assign) BOOL seen;
@@ -27,5 +26,7 @@
 @property (nonatomic, assign) NSInteger predictionMarketPoints;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
+
+- (void)fillPoints:(NSDictionary *)dictionary;
 
 @end

@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 Knoda. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "BaseModelObject.h"
 
 @class Chellange;
 
-@interface Prediction : NSObject
+@interface Prediction : BaseModelObject
 
 @property (nonatomic, assign) NSInteger ID;
 @property (nonatomic, copy) NSString* category;
@@ -22,6 +22,7 @@
 @property (nonatomic, assign) NSInteger voitedUsersCount;
 @property (nonatomic, assign) NSInteger agreedPercent;
 @property (nonatomic, assign) BOOL expired;
+@property (nonatomic, assign) BOOL hasOutcome;
 @property (nonatomic, assign) BOOL outcome;
 @property (nonatomic, assign) BOOL settled;
 @property (nonatomic, assign) NSInteger userId;

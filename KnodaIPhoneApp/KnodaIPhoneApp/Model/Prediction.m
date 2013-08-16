@@ -52,10 +52,16 @@ static NSString* const kResponseDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'zzz";
         {
             NSDictionary* chellangeDictionary = [dictionary objectForKey: @"my_challenge"];
             self.chellange = [[Chellange alloc] initWithDictionary:chellangeDictionary];
+            [self.chellange fillPoints:[dictionary objectForKey:@"my_points"]];
         }
 
     }
     return self;
+}
+
+- (void)setOutcome:(BOOL)outcome {
+    _outcome = outcome;
+    self.hasOutcome = YES;
 }
 
 @end

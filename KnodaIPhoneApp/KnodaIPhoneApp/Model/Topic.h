@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Knoda. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "BaseModelObject.h"
 
-@interface Topic : NSObject
+@interface Topic : BaseModelObject
 
 @property (nonatomic, strong) NSString* ID;
 @property (nonatomic, strong) NSString* title;

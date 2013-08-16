@@ -10,6 +10,28 @@
 #import "Prediction.h"
 #import "Chellange.h"
 
+static const int kObserverKeyCount = 19;
+static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
+    @"doNotObserve",
+    @"category",
+    @"body",
+    @"expirationDate",
+    @"agreedPercent",
+    @"expired",
+    @"outcome",
+    @"settled",
+    @"userId",
+    @"userName",
+    @"userAvatarURL",
+    @"userAvatar",
+    @"chellange",
+    @"chellange.ID",
+    @"chellange.seen",
+    @"chellange.agree",
+    @"chellange.isOwn",
+    @"chellange.isRight",
+    @"chellange.isFinished"
+};
 
 @interface PreditionCell ()
 
@@ -33,7 +55,6 @@
 
 @end
 
-
 @implementation PreditionCell
 {
     BOOL agreed;
@@ -45,18 +66,62 @@
     return 88.0;
 }
 
+- (void)dealloc {
+    [self removeKVO];
+}
+
+#pragma mark KVO
+
+- (void)addKVO {
+    if(![self isMemberOfClass:[PreditionCell class]]) {
+        return;
+    }
+    for(int i = 0; i < kObserverKeyCount; i++) {
+        [self.prediction addObserver:self forKeyPath:PREDICTION_OBSERVER_KEYS[i] options:NSKeyValueObservingOptionNew context:nil];
+    }
+}
+
+- (void)removeKVO {
+    if(![self isMemberOfClass:[PreditionCell class]]) {
+        return;
+    }
+    for(int i = 0; i < kObserverKeyCount; i++) {
+        [self.prediction removeObserver:self forKeyPath:PREDICTION_OBSERVER_KEYS[i]];
+    }
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if([object isKindOfClass:[Prediction class]]) {
+        if(![(Prediction *)object doNotObserve]) {
+            [self update];
+        }
+    }
+    else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
+}
+
+#pragma mark -
+
+- (void)setPrediction:(Prediction *)prediction {
+    if(_prediction != prediction) {
+        if(_prediction) {
+            [self removeKVO];
+        }
+        _prediction = prediction;
+        if(_prediction) {
+            [self addKVO];
+        }
+    }
+}
 
 #pragma mark Fill data
 
-
-- (void) fillWithPrediction: (Prediction*) prediction
-{
-    self.prediction = prediction;
-    
+- (void)update {
     [self resetAgreedDisagreed];
     
-    self.usernameLabel.text = prediction.userName;
-    self.bodyLabel.text = prediction.body;
+    self.usernameLabel.text = self.prediction.userName;
+    self.bodyLabel.text = self.prediction.body;
     
     BOOL expiresInLowerThen10Minutes = NO;
     NSString* expirationString = [self predictionExpiresIntervalString: self.prediction lowerThen10Minutes: &expiresInLowerThen10Minutes];
@@ -77,8 +142,15 @@
     rect.size.height = expectedLabelSize.height;
     self.bodyLabel.frame = rect;
     
-    self.agreed = (prediction.chellange != nil) && (prediction.chellange.agree) && (!self.prediction.chellange.isOwn);
-    self.disagreed = (prediction.chellange != nil) && !(prediction.chellange.agree) && (!self.prediction.chellange.isOwn);
+    self.agreed = (self.prediction.chellange != nil) && (self.prediction.chellange.agree) && (!self.prediction.chellange.isOwn);
+    self.disagreed = (self.prediction.chellange != nil) && !(self.prediction.chellange.agree) && (!self.prediction.chellange.isOwn);
+}
+
+- (void) fillWithPrediction: (Prediction*) prediction
+{
+    self.prediction = prediction;
+    
+    [self update];
 }
 
 
@@ -356,6 +428,5 @@
     
     return result;
 }
-
 
 @end

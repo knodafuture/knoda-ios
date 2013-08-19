@@ -161,7 +161,6 @@
 		9E8421C817A17CFC00D14D0A /* starBadge@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E8421C617A17CFC00D14D0A /* starBadge@2x.png */; };
 		9E8421CB17A17DA900D14D0A /* longshotBadge.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E8421C917A17DA900D14D0A /* longshotBadge.png */; };
 		9E8421CC17A17DA900D14D0A /* longshotBadge@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E8421CA17A17DA900D14D0A /* longshotBadge@2x.png */; };
-		9E8421CF17A17DE400D14D0A /* BadgesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E8421CE17A17DE400D14D0A /* BadgesViewController.m */; };
 		9E8421D217A1858600D14D0A /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E8421D117A1858600D14D0A /* ProfileViewController.m */; };
 		9E8421E117A267A700D14D0A /* cancel_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E8421D317A267A700D14D0A /* cancel_button.png */; };
 		9E8421E217A267A700D14D0A /* cancel_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E8421D417A267A700D14D0A /* cancel_button@2x.png */; };
@@ -429,8 +428,6 @@
 		9E8421C617A17CFC00D14D0A /* starBadge@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "starBadge@2x.png"; sourceTree = "<group>"; };
 		9E8421C917A17DA900D14D0A /* longshotBadge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = longshotBadge.png; sourceTree = "<group>"; };
 		9E8421CA17A17DA900D14D0A /* longshotBadge@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "longshotBadge@2x.png"; sourceTree = "<group>"; };
-		9E8421CD17A17DE400D14D0A /* BadgesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadgesViewController.h; sourceTree = "<group>"; };
-		9E8421CE17A17DE400D14D0A /* BadgesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BadgesViewController.m; sourceTree = "<group>"; };
 		9E8421D017A1858600D14D0A /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		9E8421D117A1858600D14D0A /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		9E8421D317A267A700D14D0A /* cancel_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel_button.png; sourceTree = "<group>"; };
@@ -923,8 +920,6 @@
 				9E8421C017A17AE900D14D0A /* AllAlertsViewController.m */,
 				9E8421C217A17B1A00D14D0A /* ExpiredAlertsViewController.h */,
 				9E8421C317A17B1A00D14D0A /* ExpiredAlertsViewController.m */,
-				9E8421CD17A17DE400D14D0A /* BadgesViewController.h */,
-				9E8421CE17A17DE400D14D0A /* BadgesViewController.m */,
 				9E8421D017A1858600D14D0A /* ProfileViewController.h */,
 				9E8421D117A1858600D14D0A /* ProfileViewController.m */,
 				9E8421F817AFC91700D14D0A /* AddPredictionViewController.h */,
@@ -1205,7 +1200,6 @@
 				9E8421BE17A179C500D14D0A /* AlertsViewController.m in Sources */,
 				9E8421C117A17AE900D14D0A /* AllAlertsViewController.m in Sources */,
 				9E8421C417A17B1A00D14D0A /* ExpiredAlertsViewController.m in Sources */,
-				9E8421CF17A17DE400D14D0A /* BadgesViewController.m in Sources */,
 				9E8421D217A1858600D14D0A /* ProfileViewController.m in Sources */,
 				9E8421F117A26ECB00D14D0A /* PushWithoutAnimationSegue.m in Sources */,
 				9E8421F417A2817000D14D0A /* ForgotPasswordWebRequest.m in Sources */,

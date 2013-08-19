@@ -64,4 +64,13 @@ static NSString* const kResponseDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'zzz";
     self.hasOutcome = YES;
 }
 
+
+- (NSString*) description
+{
+    NSString* result = [NSString stringWithFormat: @"\r\r***PREDICTION***\rid: %d\rcategory: %@\rbody: %@\rcreationDate: %@\rexpirationDate: %@\ragreeCount: %d\rdisagreeCount: %d\rvoitedUsersCount: %d\ragreePersent: %d\rexpired: %@\rhasOutcome: %@\routcome: %@\rsettled: %@\ruserId: %d\ruserName: %@\ruserAvatarUrl: %@\ruserAvatar: %@\rchellange: %@\r***", self.ID, self.category, self.body, self.creationDate, self.expirationDate, self.agreeCount, self.disagreeCount, self.voitedUsersCount, self.agreedPercent, (self.expired) ? @"YES" : @"NO", (self.hasOutcome) ? @"YES" : @"NO", (self.outcome) ? @"YES" : @"NO", (self.settled) ? @"YES" : @"NO", self.userId, self.userName, self.userAvatarURL, self.userAvatar, self.chellange];
+    
+    return result;
+}
+
+
 @end

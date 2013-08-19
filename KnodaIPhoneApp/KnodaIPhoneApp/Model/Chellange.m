@@ -31,4 +31,13 @@
     self.predictionMarketPoints = [[dictionary objectForKey: @"prediction_market_points"] integerValue];
 }
 
+
+- (NSString*) description
+{
+    NSString* result = [NSString stringWithFormat: @"\r~~CHELLANGE~~\rid: %d\rseen: %@\ragree: %@\risOwn: %@\risRight: %@\risFinished: %@\risBS: %@\rbasePoints: %d\routcomePoints: %d\rmarketSizePoints: %d\rpredictionMarketPoints: %d\r~~", self.ID, (self.seen) ? @"YES" : @"NO", (self.agree) ? @"YES" : @"NO", (self.isOwn) ? @"YES" : @"NO", (self.isRight) ? @"YES" : @"NO", (self.isFinished) ? @"YES" : @"NO", (self.isBS) ? @"YES" : @"NO", self.basePoints, self.outcomePoints, self.marketSizePoints, self.predictionMarketPoints];
+    
+    return result;
+}
+
+
 @end

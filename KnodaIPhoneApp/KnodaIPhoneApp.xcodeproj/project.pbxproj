@@ -73,6 +73,7 @@
 		9E06639717959A2100B3E974 /* knoda_logo_lg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E06639317959A2100B3E974 /* knoda_logo_lg@2x.png */; };
 		9E06639A17959A4C00B3E974 /* HelveticaNeue.dfont in Resources */ = {isa = PBXBuildFile; fileRef = 9E06639817959A4C00B3E974 /* HelveticaNeue.dfont */; };
 		9E06639B17959A4C00B3E974 /* KronaOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9E06639917959A4C00B3E974 /* KronaOne-Regular.ttf */; };
+		9E3BD6E117C239000087529A /* AllAlertsWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E3BD6E017C239000087529A /* AllAlertsWebRequest.m */; };
 		9E5792461795A43300979928 /* circleArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5792441795A43300979928 /* circleArrow.png */; };
 		9E5792471795A43300979928 /* circleArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5792451795A43300979928 /* circleArrow@2x.png */; };
 		9E57924A1795A4D500979928 /* knoda_logo_sm.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5792481795A4D500979928 /* knoda_logo_sm.png */; };
@@ -308,6 +309,8 @@
 		9E06639317959A2100B3E974 /* knoda_logo_lg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "knoda_logo_lg@2x.png"; sourceTree = "<group>"; };
 		9E06639817959A4C00B3E974 /* HelveticaNeue.dfont */ = {isa = PBXFileReference; lastKnownFileType = file; name = HelveticaNeue.dfont; path = Fonts/HelveticaNeue.dfont; sourceTree = "<group>"; };
 		9E06639917959A4C00B3E974 /* KronaOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "KronaOne-Regular.ttf"; path = "Fonts/KronaOne-Regular.ttf"; sourceTree = "<group>"; };
+		9E3BD6DF17C239000087529A /* AllAlertsWebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllAlertsWebRequest.h; sourceTree = "<group>"; };
+		9E3BD6E017C239000087529A /* AllAlertsWebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllAlertsWebRequest.m; sourceTree = "<group>"; };
 		9E5792441795A43300979928 /* circleArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circleArrow.png; sourceTree = "<group>"; };
 		9E5792451795A43300979928 /* circleArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circleArrow@2x.png"; sourceTree = "<group>"; };
 		9E5792481795A4D500979928 /* knoda_logo_sm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = knoda_logo_sm.png; sourceTree = "<group>"; };
@@ -831,6 +834,8 @@
 				5746F2AB17BBC01800C835FA /* OutcomeWebRequest.m */,
 				572D465217BD0664008164A5 /* PredictionUpdateWebRequest.h */,
 				572D465317BD0665008164A5 /* PredictionUpdateWebRequest.m */,
+				9E3BD6DF17C239000087529A /* AllAlertsWebRequest.h */,
+				9E3BD6E017C239000087529A /* AllAlertsWebRequest.m */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -1162,6 +1167,7 @@
 				572D465B17BD14AA008164A5 /* LoadableCell.m in Sources */,
 				572D465E17BD1B62008164A5 /* NSDate+Utils.m in Sources */,
 				57BAB54517BE136200581186 /* BaseModelObject.m in Sources */,
+				9E3BD6E117C239000087529A /* AllAlertsWebRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

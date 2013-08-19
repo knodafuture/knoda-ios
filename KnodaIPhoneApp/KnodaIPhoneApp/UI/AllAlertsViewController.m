@@ -7,7 +7,10 @@
 //
 
 #import "AllAlertsViewController.h"
+
 #import "PreditionCell.h"
+#import "AllAlertsWebRequest.h"
+
 
 @interface AllAlertsViewController ()
 
@@ -27,7 +30,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+	
+    AllAlertsWebRequest* request = [[AllAlertsWebRequest alloc] init];
+    [request executeWithCompletionBlock: ^
+    {
+        if (request.errorCode == 0)
+        {
+            NSLog(@"All alerts: %@", request.predictions);
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning

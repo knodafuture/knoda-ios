@@ -51,8 +51,6 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
 @property (nonatomic, strong) IBOutlet UILabel* expirationDateLabel;
 @property (nonatomic, strong) IBOutlet UIImageView* imageView;
 
-@property (nonatomic, strong) Prediction* prediction;
-
 @end
 
 @implementation PreditionCell

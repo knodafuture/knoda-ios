@@ -32,10 +32,14 @@
 
 @property (nonatomic, weak) id<PredictionCellDelegate> delegate;
 
+@property (nonatomic, strong) Prediction* prediction;
+
 - (void) addPanGestureRecognizer: (UIPanGestureRecognizer*) recognizer;
 - (void) fillWithPrediction: (Prediction*) prediction;
 - (void) resetAgreedDisagreed;
 
 - (void) updateDates;
+
+- (void) update;
 
 @end

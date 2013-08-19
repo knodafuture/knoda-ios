@@ -8,24 +8,19 @@
 
 #import "AllAlertsViewController.h"
 
-#import "PreditionCell.h"
+#import "AlertCell.h"
 #import "AllAlertsWebRequest.h"
 
 
 @interface AllAlertsViewController ()
 
+@property (nonatomic, strong) NSArray* alerts;
+@property (nonatomic, strong) IBOutlet UITableView* tableView;
+
 @end
 
 @implementation AllAlertsViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -37,14 +32,11 @@
         if (request.errorCode == 0)
         {
             NSLog(@"All alerts: %@", request.predictions);
+            
+            self.alerts = request.predictions;
+            [self.tableView reloadData];
         }
     }];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 
@@ -56,14 +48,23 @@
 
 - (NSInteger) tableView: (UITableView*) tableView numberOfRowsInSection: (NSInteger) section
 {
-    return 30;
+    return (self.alerts.count == 0) ? 1 : self.alerts.count;
 }
 
 
 - (UITableViewCell*) tableView: (UITableView*) tableView cellForRowAtIndexPath: (NSIndexPath*) indexPath
 {
+    UITableViewCell* cell = nil;
     
-    PreditionCell* cell = [tableView dequeueReusableCellWithIdentifier:[PreditionCell reuseIdentifier]];
+    if (self.alerts.count != 0)
+    {
+        cell = [tableView dequeueReusableCellWithIdentifier: [AlertCell reuseIdentifier]];
+        [((AlertCell*)cell) fillWithPrediction: [self.alerts objectAtIndex: indexPath.row]];
+    }
+    else
+    {
+        cell = [tableView dequeueReusableCellWithIdentifier: @"LoadingCell"];
+    }
     
     return cell;
 }

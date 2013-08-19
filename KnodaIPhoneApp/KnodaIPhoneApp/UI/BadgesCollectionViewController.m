@@ -9,10 +9,12 @@
 #import "BadgesCollectionViewController.h"
 #import "BadgeCollectionViewCell.h"
 #import "NavigationViewController.h"
+#import "BadgesWebRequest.h"
 
 @interface BadgesCollectionViewController ()
 
-@property (nonatomic, strong) NSArray * badgesImagesArray;
+@property (nonatomic, strong) NSMutableArray * badgesImagesArray;
+@property (weak, nonatomic) IBOutlet UIView *activityView;
 
 @end
 
@@ -21,16 +23,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.activityView.hidden = NO;
     self.navigationController.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, self.navigationController.navigationBar.frame.size.height);
-    self.badgesImagesArray = [NSArray arrayWithObjects:
-                              [UIImage imageNamed:@"gold_founding"],
-                              [UIImage imageNamed:@"silver_founding"],
-                              [UIImage imageNamed:@"1_prediction"],
-                              [UIImage imageNamed:@"10_predictions"],
-                              [UIImage imageNamed:@"1_challenge"],
-                              [UIImage imageNamed:@"10_correct_predictions"],
-                              [UIImage imageNamed:@"10_incorrect_predictions"],nil];
+    [self setUpUsersBadges];
 }
+
+- (void) setUpUsersBadges {
+    BadgesWebRequest * badgesWebRequest = [[BadgesWebRequest alloc]init];
+    [badgesWebRequest executeWithCompletionBlock:^{
+        self.badgesImagesArray = badgesWebRequest.badgesImagesArray;
+        [self.collectionView reloadData];
+        self.activityView.hidden = YES;
+    }];
+}
+
+#pragma mark - Outlets actions
 
 - (IBAction)menuButtonPressed:(id)sender {
         [((NavigationViewController*)self.navigationController.parentViewController) toggleNavigationPanel];
@@ -50,11 +57,11 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    if (section == 3) {
-        return 1;
+    if ([self.badgesImagesArray count] - section * 2 > 1) {
+        return 2;
     }
     else {
-        return 2;
+        return 1;
     }
 }
 

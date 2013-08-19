@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3639B66717C26AB90092090A /* BadgesWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3639B66617C26AB90092090A /* BadgesWebRequest.m */; };
 		36A4054817C24DDD00406A12 /* BadgesCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A4054717C24DDD00406A12 /* BadgesCollectionViewController.m */; };
 		36A4054B17C24E5500406A12 /* BadgeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A4054A17C24E5500406A12 /* BadgeCollectionViewCell.m */; };
 		36A4055B17C2549500406A12 /* 10_correct_predictions.png in Resources */ = {isa = PBXBuildFile; fileRef = 36A4054D17C2549500406A12 /* 10_correct_predictions.png */; };
@@ -234,6 +235,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3639B66517C26AB90092090A /* BadgesWebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadgesWebRequest.h; sourceTree = "<group>"; };
+		3639B66617C26AB90092090A /* BadgesWebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BadgesWebRequest.m; sourceTree = "<group>"; };
 		36A4054617C24DDD00406A12 /* BadgesCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadgesCollectionViewController.h; sourceTree = "<group>"; };
 		36A4054717C24DDD00406A12 /* BadgesCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BadgesCollectionViewController.m; sourceTree = "<group>"; };
 		36A4054917C24E5500406A12 /* BadgeCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadgeCollectionViewCell.h; sourceTree = "<group>"; };
@@ -910,6 +913,8 @@
 				572D465317BD0665008164A5 /* PredictionUpdateWebRequest.m */,
 				9E3BD6DF17C239000087529A /* AllAlertsWebRequest.h */,
 				9E3BD6E017C239000087529A /* AllAlertsWebRequest.m */,
+				3639B66517C26AB90092090A /* BadgesWebRequest.h */,
+				3639B66617C26AB90092090A /* BadgesWebRequest.m */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -1268,6 +1273,7 @@
 				36A4054817C24DDD00406A12 /* BadgesCollectionViewController.m in Sources */,
 				36A4054B17C24E5500406A12 /* BadgeCollectionViewCell.m in Sources */,
 				9E30D16617C26E6E002D9ACE /* AlertCell.m in Sources */,
+				3639B66717C26AB90092090A /* BadgesWebRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

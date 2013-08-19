@@ -18,15 +18,6 @@
 
 @implementation BadgesCollectionViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -39,7 +30,6 @@
                               [UIImage imageNamed:@"1_challenge"],
                               [UIImage imageNamed:@"10_correct_predictions"],
                               [UIImage imageNamed:@"10_incorrect_predictions"],nil];
-	// Do any additional setup after loading the view.
 }
 
 - (IBAction)menuButtonPressed:(id)sender {
@@ -50,8 +40,12 @@
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 4;
-//    return [self.badgesImagesArray count] / 2;
+    if ( [self.badgesImagesArray count] % 2 == 0) {
+       return [self.badgesImagesArray count] / 2;
+    }
+    else {
+        return [self.badgesImagesArray count] / 2 + 1;
+    }
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -69,13 +63,6 @@
     BadgeCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BadgeCollectionViewCellIdentifier" forIndexPath:indexPath];
     cell.badgeImageView.image = self.badgesImagesArray[(indexPath.section*2 + indexPath.row)];
     return cell;
-}
-
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

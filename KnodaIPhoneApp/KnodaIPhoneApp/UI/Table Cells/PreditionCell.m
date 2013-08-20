@@ -140,8 +140,26 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
     rect.size.height = expectedLabelSize.height;
     self.bodyLabel.frame = rect;
     
+    if ([self.prediction.expirationDate compare: [NSDate date]] == NSOrderedAscending && self.prediction.chellange.isOwn)
+    {
+        self.guessMarkImage.image = [UIImage imageNamed: ((!self.prediction.settled) ? @"exclamation" : ((self.prediction.outcome) ? @"check" : @"x_lost"))];
+    }
+    else
+    {
+        self.guessMarkImage.image = nil;
+    }
+    
     self.agreed = (self.prediction.chellange != nil) && (self.prediction.chellange.agree) && (!self.prediction.chellange.isOwn);
     self.disagreed = (self.prediction.chellange != nil) && !(self.prediction.chellange.agree) && (!self.prediction.chellange.isOwn);
+    
+    if (self.agreed)
+    {
+        self.agreeImage.image = [UIImage imageNamed: (!self.prediction.settled) ? @"agree" : ((self.prediction.outcome == YES) ? @"agree_win" : @"agree_lose")];
+    }
+    else if (self.disagreed)
+    {
+        self.disagreeImage.image = [UIImage imageNamed: (!self.prediction.settled) ? @"disagree" : ((self.prediction.outcome == NO) ? @"disagree_win" : @"disagree_lose")];
+    }
 }
 
 - (void) fillWithPrediction: (Prediction*) prediction
@@ -165,6 +183,24 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
     
     self.expirationDateLabel.text = expirationString;
     self.expirationDateLabel.textColor = (expiresInLowerThen10Minutes) ? ([UIColor redColor]) : (self.metadataLabel.textColor);
+    
+    if ([self.prediction.expirationDate compare: [NSDate date]] == NSOrderedAscending && self.prediction.chellange.isOwn)
+    {
+        self.guessMarkImage.image = [UIImage imageNamed: ((!self.prediction.settled) ? @"exclamation" : ((self.prediction.outcome) ? @"check" : @"x_lost"))];
+    }
+    else
+    {
+        self.guessMarkImage.image = nil;
+    }
+    
+    if (self.agreed)
+    {
+        self.agreeImage.image = [UIImage imageNamed: (!self.prediction.settled) ? @"agree" : ((self.prediction.outcome == YES) ? @"agree_win" : @"agree_lose")];
+    }
+    else if (self.disagreed)
+    {
+        self.disagreeImage.image = [UIImage imageNamed: (!self.prediction.settled) ? @"disagree" : ((self.prediction.outcome == NO) ? @"disagree_win" : @"disagree_lose")];
+    }
 }
 
 

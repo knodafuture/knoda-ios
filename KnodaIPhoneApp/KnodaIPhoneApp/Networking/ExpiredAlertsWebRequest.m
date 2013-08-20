@@ -1,21 +1,20 @@
 //
-//  AllAlertsWebRequest.m
+//  ExpiredAlertsWebRequest.m
 //  KnodaIPhoneApp
 //
-//  Created by Elena Timofeeva on 8/19/13.
+//  Created by Elena Timofeeva on 8/20/13.
 //  Copyright (c) 2013 Knoda. All rights reserved.
 //
 
-#import "AllAlertsWebRequest.h"
-#import "Prediction.h"
+#import "ExpiredAlertsWebRequest.h"
 #import "Chellange.h"
+#import "Prediction.h"
 
-
-@implementation AllAlertsWebRequest
+@implementation ExpiredAlertsWebRequest
 
 - (id) init
 {
-    NSDictionary* params = @{@"list": @"notifications_unviewed"};
+    NSDictionary* params = @{@"list": @"expired"};
     
     self = [super initWithParameters: params];
     return self;
@@ -103,6 +102,5 @@
     
     self.predictions = [NSArray arrayWithArray: predictionsMutable];
 }
-
 
 @end

@@ -7,33 +7,36 @@
 //
 
 #import "ExpiredAlertsViewController.h"
-#import "PreditionCell.h"
+
+#import "ExpiredAlertsWebRequest.h"
+#import "AlertCell.h"
 
 @interface ExpiredAlertsViewController ()
 
+@property (nonatomic, strong) NSArray* alerts;
+@property (nonatomic, strong) IBOutlet UITableView* tableView;
+
 @end
+
 
 @implementation ExpiredAlertsViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+	
+    ExpiredAlertsWebRequest* request = [[ExpiredAlertsWebRequest alloc] init];
+    [request executeWithCompletionBlock: ^
+     {
+         if (request.errorCode == 0)
+         {
+             NSLog(@"Expired alerts: %@", request.predictions);
+             
+             self.alerts = request.predictions;
+             [self.tableView reloadData];
+         }
+     }];
 }
 
 
@@ -45,14 +48,23 @@
 
 - (NSInteger) tableView: (UITableView*) tableView numberOfRowsInSection: (NSInteger) section
 {
-    return 30;
+    return (self.alerts.count == 0) ? 1 : self.alerts.count;
 }
 
 
 - (UITableViewCell*) tableView: (UITableView*) tableView cellForRowAtIndexPath: (NSIndexPath*) indexPath
 {
+    UITableViewCell* cell = nil;
     
-    PreditionCell* cell = [tableView dequeueReusableCellWithIdentifier:[PreditionCell reuseIdentifier]];
+    if (self.alerts.count != 0)
+    {
+        cell = [self.tableView dequeueReusableCellWithIdentifier: [AlertCell reuseIdentifier]];
+        [((AlertCell*)cell) fillWithPrediction: [self.alerts objectAtIndex: indexPath.row]];
+    }
+    else
+    {
+        cell = [self.tableView dequeueReusableCellWithIdentifier: @"LoadingCell"];
+    }
     
     return cell;
 }

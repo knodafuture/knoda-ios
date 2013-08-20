@@ -215,6 +215,8 @@
 		9E9348E917BA808A00046B6E /* PredictionDisagreeWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9348E817BA808900046B6E /* PredictionDisagreeWebRequest.m */; };
 		9E9348EC17BBB68B00046B6E /* HistoryMyPredictionsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9348EB17BBB68B00046B6E /* HistoryMyPredictionsRequest.m */; };
 		9E9348EF17BBBC9100046B6E /* HistoryMyPicksWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9348EE17BBBC9100046B6E /* HistoryMyPicksWebRequest.m */; };
+		9EA9D72C17C3B2740001C415 /* ExpiredAlertsWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EA9D72B17C3B2740001C415 /* ExpiredAlertsWebRequest.m */; };
+		9EA9D72F17C3CAFE0001C415 /* SetSeenAlertsWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EA9D72E17C3CAFE0001C415 /* SetSeenAlertsWebRequest.m */; };
 		9EC05ADA17A1558400D67DA2 /* agree_lose@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EC05AD017A1558400D67DA2 /* agree_lose@2x.png */; };
 		9EC05ADB17A1558400D67DA2 /* agree_win@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EC05AD117A1558400D67DA2 /* agree_win@2x.png */; };
 		9EC05ADC17A1558400D67DA2 /* agree.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EC05AD217A1558400D67DA2 /* agree.png */; };
@@ -508,6 +510,10 @@
 		9E9348EB17BBB68B00046B6E /* HistoryMyPredictionsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryMyPredictionsRequest.m; sourceTree = "<group>"; };
 		9E9348ED17BBBC9100046B6E /* HistoryMyPicksWebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryMyPicksWebRequest.h; sourceTree = "<group>"; };
 		9E9348EE17BBBC9100046B6E /* HistoryMyPicksWebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryMyPicksWebRequest.m; sourceTree = "<group>"; };
+		9EA9D72A17C3B2740001C415 /* ExpiredAlertsWebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpiredAlertsWebRequest.h; sourceTree = "<group>"; };
+		9EA9D72B17C3B2740001C415 /* ExpiredAlertsWebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpiredAlertsWebRequest.m; sourceTree = "<group>"; };
+		9EA9D72D17C3CAFE0001C415 /* SetSeenAlertsWebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetSeenAlertsWebRequest.h; sourceTree = "<group>"; };
+		9EA9D72E17C3CAFE0001C415 /* SetSeenAlertsWebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetSeenAlertsWebRequest.m; sourceTree = "<group>"; };
 		9EC05AD017A1558400D67DA2 /* agree_lose@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "agree_lose@2x.png"; sourceTree = "<group>"; };
 		9EC05AD117A1558400D67DA2 /* agree_win@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "agree_win@2x.png"; sourceTree = "<group>"; };
 		9EC05AD217A1558400D67DA2 /* agree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = agree.png; sourceTree = "<group>"; };
@@ -913,8 +919,12 @@
 				572D465317BD0665008164A5 /* PredictionUpdateWebRequest.m */,
 				9E3BD6DF17C239000087529A /* AllAlertsWebRequest.h */,
 				9E3BD6E017C239000087529A /* AllAlertsWebRequest.m */,
+				9EA9D72A17C3B2740001C415 /* ExpiredAlertsWebRequest.h */,
+				9EA9D72B17C3B2740001C415 /* ExpiredAlertsWebRequest.m */,
 				3639B66517C26AB90092090A /* BadgesWebRequest.h */,
 				3639B66617C26AB90092090A /* BadgesWebRequest.m */,
+				9EA9D72D17C3CAFE0001C415 /* SetSeenAlertsWebRequest.h */,
+				9EA9D72E17C3CAFE0001C415 /* SetSeenAlertsWebRequest.m */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -1274,6 +1284,8 @@
 				36A4054B17C24E5500406A12 /* BadgeCollectionViewCell.m in Sources */,
 				9E30D16617C26E6E002D9ACE /* AlertCell.m in Sources */,
 				3639B66717C26AB90092090A /* BadgesWebRequest.m in Sources */,
+				9EA9D72C17C3B2740001C415 /* ExpiredAlertsWebRequest.m in Sources */,
+				9EA9D72F17C3CAFE0001C415 /* SetSeenAlertsWebRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -30,7 +30,7 @@ static NSString* const kResponseDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'zzz";
         
         if ([dictionary objectForKey: @"user_avatar"] != nil && ![[dictionary objectForKey: @"user_avatar"] isKindOfClass: [NSNull class]])
         {
-            self.userAvatarURL = [NSURL URLWithString: [dictionary objectForKey: @"user_avatar"]];
+            self.userAvatarURL = [NSURL URLWithString: [[dictionary objectForKey: @"user_avatar"] objectForKey: @"small"]];
         }
         
         if (![[dictionary objectForKey: @"outcome"] isKindOfClass: [NSNull class]])

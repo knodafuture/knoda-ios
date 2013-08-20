@@ -7,11 +7,16 @@
 //
 
 #import "NavigationViewController.h"
+#import "AppDelegate.h"
 
 #import "NavigationSegue.h"
 
+#import "SelectPictureViewController.h"
 
-@interface NavigationViewController ()
+static NSString* const kHomeSegue = @"HomeSegue";
+static NSString* const kSelectPictureSegue = @"SelectPictureSegue";
+
+@interface NavigationViewController () <SelectPictureDelegate>
 
 @property (nonatomic, strong) IBOutlet UIView* masterView;
 @property (nonatomic, strong) IBOutlet UIView* detailsView;
@@ -25,11 +30,16 @@
 @implementation NavigationViewController
 
 
-- (void) viewDidLoad
-{
+- (void) viewDidLoad {
     [super viewDidLoad];
-	
-    [self performSegueWithIdentifier: @"HomeSegue" sender: self];
+
+	[self performSegueWithIdentifier: kHomeSegue sender: self];
+//    if([[(AppDelegate *)[[UIApplication sharedApplication] delegate] user] profileImage]) {
+//        [self performSegueWithIdentifier: kHomeSegue sender: self];
+//    }
+//    else {
+//        [self performSegueWithIdentifier: kSelectPictureSegue sender: self];
+//    }
 }
 
 
@@ -51,9 +61,16 @@
 
 - (void) prepareForSegue: (UIStoryboardSegue*) segue sender: (id) sender
 {
-    ((NavigationSegue*)segue).detailsView = self.detailsView;
-    ((NavigationSegue*)segue).completion = ^{[self moveToDetailsAnimated: self.appeared];};
+    if([segue isKindOfClass:[NavigationSegue class]]) {
+        ((NavigationSegue*)segue).detailsView = self.detailsView;
+        ((NavigationSegue*)segue).completion = ^{[self moveToDetailsAnimated: self.appeared];};
+    }
+    else if([segue.identifier isEqualToString:kSelectPictureSegue]) {
+        SelectPictureViewController *vc = (SelectPictureViewController *)segue.destinationViewController;
+        vc.delegate = self;
+    }
 }
+
 
 
 - (void) moveToDetailsAnimated: (BOOL) animated
@@ -153,5 +170,11 @@
     return cell;
 }
 
+#pragma mark SelectPictureDelegate
+
+- (void)hideViewController:(SelectPictureViewController *)vc {
+    [vc.navigationController popViewControllerAnimated:NO];
+    [self performSegueWithIdentifier: kHomeSegue sender: self];
+}
 
 @end

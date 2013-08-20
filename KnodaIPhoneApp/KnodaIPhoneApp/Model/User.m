@@ -10,4 +10,12 @@
 
 @implementation User
 
+- (id)initWithDictionary:(NSDictionary *)dictionary {
+    if(self = [super init]) {
+        self.name  = [dictionary objectForKey: @"username"];
+        self.email = [dictionary objectForKey: @"email"];
+    }
+    return self;
+}
+
 @end

@@ -37,9 +37,7 @@
 {
     NSLog(@"Login Result: %@", parsedResult);
     
-    self.user = [[User alloc] init];
-    self.user.name = [parsedResult objectForKey: @"username"];
-    self.user.email = [parsedResult objectForKey: @"email"];
+    self.user = [[User alloc] initWithDictionary:parsedResult];
     self.user.token = [parsedResult objectForKey: @"auth_token"];
 }
 

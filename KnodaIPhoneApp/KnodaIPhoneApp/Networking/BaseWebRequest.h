@@ -13,6 +13,7 @@
 extern const NSInteger kRequestTimeoutError;
 extern const NSInteger kInternetOfflineError;
 
+extern NSString* const kImages;
 
 typedef enum _InternalErrorCodes
 {
@@ -50,6 +51,7 @@ typedef void (^RequestCompletionBlock)(void);
 @property (atomic, readonly, assign) RequestState state;
 @property (atomic, readonly) BOOL isSucceeded;
 @property (atomic, readonly) BOOL isCancelled;
+@property (atomic, readonly) BOOL isMultipartData;
 
 @property (nonatomic, readonly) NSString *userFriendlyErrorDescription;
 

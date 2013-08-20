@@ -43,6 +43,8 @@ static NSString* const kBaseURL = @"54.213.86.248/api/";
 const NSInteger kRequestTimeoutError = -1001;
 const NSInteger kInternetOfflineError = -1009;
 
+NSString* const kImages = @"Images";
+static const char *MULTIPART_CHARS = "1234567890_-qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
 
 @implementation BaseWebRequest
 
@@ -131,6 +133,10 @@ const NSInteger kInternetOfflineError = -1009;
     return NSLocalizedString(@"Oops! Something went wrong. Please try again later.", @"");
 }
 
+- (BOOL)isMultipartData {
+    return NO;
+}
+
 #pragma mark Private methods
 
 
@@ -207,6 +213,52 @@ const NSInteger kInternetOfflineError = -1009;
     return [urlParameters stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
 }
 
++ (NSString *)generateBoundary {
+    NSMutableString *boundary = [NSMutableString string];
+
+    static NSUInteger multCharsLen = 0;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        multCharsLen = strlen(MULTIPART_CHARS);
+    });
+    
+    for (int i = 0; i < multCharsLen; i++) {
+        [boundary appendFormat:@"%c", MULTIPART_CHARS[arc4random() % multCharsLen]];
+    }
+    return boundary;
+}
+
+- (NSData *)formParametersMultipartDataWithBoundary:(NSString *)boundary {
+    
+    NSMutableData *body = [NSMutableData data];
+    
+    for(NSString *key in [self.parameters allKeys]) {
+        if([key isEqualToString:kImages]) {
+            continue;
+        }
+        [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", key] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"%@\r\n", self.parameters[key]] dataUsingEncoding:NSUTF8StringEncoding]];
+    }
+    
+    NSDictionary *imgDict = self.parameters[kImages];
+    for(NSString *key in imgDict) {
+        NSData *data = imgDict[key];
+        
+        [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"image.png\"\r\n", key] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[@"Content-Type: image/png\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:data];
+        [body appendData:[[NSString stringWithFormat:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    }
+    
+    [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    DLog(@"%@", [[NSString alloc] initWithData:body encoding:NSUTF8StringEncoding]);
+    
+    return body;
+}
+
 
 + (NSString*) serverErrorDescriptionByCode: (NSInteger) code
 {
@@ -244,16 +296,18 @@ const NSInteger kInternetOfflineError = -1009;
     
     NSLog(@"%@ Start request %@", NSStringFromClass([self class]), request.URL);
     
-    if([request.HTTPMethod isEqualToString:@"PATCH"]) {
-        [request setValue:@"multipart/form-data" forHTTPHeaderField:@"Content-Type"];
-    }
-    
     if ([request.HTTPMethod isEqualToString: @"POST"] || [request.HTTPMethod isEqualToString:@"PATCH"])
     {
-        NSString* body = [self formParametersString];
-        [request setHTTPBody: [body dataUsingEncoding: NSUTF8StringEncoding]];
-        
-        NSLog(@"%@ %@\nRequest body:\n%@",  NSStringFromClass([self class]), request.URL, body);
+        if([self isMultipartData]) {
+            NSString *boundary = [[self class] generateBoundary];
+            [request setValue:[NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary] forHTTPHeaderField:@"Content-Type"];
+            [request setHTTPBody:[self formParametersMultipartDataWithBoundary:boundary]];
+        }
+        else {
+            NSString* body = [self formParametersString];
+            [request setHTTPBody: [body dataUsingEncoding: NSUTF8StringEncoding]];
+            NSLog(@"%@ %@\nRequest body:\n%@",  NSStringFromClass([self class]), request.URL, body);
+        }
     }
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^

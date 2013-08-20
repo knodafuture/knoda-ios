@@ -59,6 +59,10 @@
     return YES;
 }
 
+- (BOOL)isMultipartData {
+    return _patch;
+}
+
 - (void)fillResultObject:(id)parsedResult {
     DLog(@"%@", parsedResult);
     

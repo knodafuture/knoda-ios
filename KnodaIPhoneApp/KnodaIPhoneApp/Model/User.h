@@ -15,4 +15,6 @@
 @property (nonatomic, strong) UIImage* profileImage;
 @property (nonatomic, strong) NSString* token;
 
+- (id)initWithDictionary:(NSDictionary *)dictionary;
+
 @end

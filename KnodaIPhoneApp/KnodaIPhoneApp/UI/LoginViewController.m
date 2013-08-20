@@ -18,6 +18,9 @@
 
 #import "ForgotPasswordViewController.h"
 
+#import "ProfileWebRequest.h"
+
+static NSString* const kApplicationSegue = @"ApplicationNavigationSegue";
 
 @interface LoginViewController ()
 
@@ -136,21 +139,16 @@
              {
                  self.appDelegate.user = loginRequest.user;
                  
-/*                 AddPredictionRequest* addPredictionRequest = [[AddPredictionRequest alloc] initWithBody: @"The old republic to be reconstructed I predict again and again" expirationDay: 17 expirationMonth: 11 expirationYear: 2015 expirationHour: 12 expirationMinute: 35 category: @"Social"];
-                 [addPredictionRequest executeWithCompletionBlock: ^
-                  {
-                      AddPredictionRequest* addPredictionRequest2 = [[AddPredictionRequest alloc] initWithBody: @"The new iPad will come soon" expirationDay: 17 expirationMonth: 9 expirationYear: 2013 expirationHour: 16 expirationMinute: 48 category: @"Entertainment"];
-                      [addPredictionRequest2 executeWithCompletionBlock: ^
-                      {
-                          AddPredictionRequest* addPredictionRequest3 = [[AddPredictionRequest alloc] initWithBody: @"The new iPod will come very soon" expirationDay: 1 expirationMonth: 8 expirationYear: 2013 expirationHour: 3 expirationMinute: 5 category: @"Entertainment"];
-                          [addPredictionRequest3 executeWithCompletionBlock: ^
-                           {}];
-//                          PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] init];
-//                          [predictionsRequest executeWithCompletionBlock: ^{}];
-                      }];
-                  }];
-*/
-                 [self performSegueWithIdentifier: @"ApplicationNavigationSegue" sender: self];
+                 ProfileWebRequest *profileRequest = [ProfileWebRequest new];
+                 [profileRequest executeWithCompletionBlock:^{
+                     if(profileRequest.isSucceeded) {
+                         //TODO: update user
+                         [self performSegueWithIdentifier: kApplicationSegue  sender: self];
+                     }
+                     else {
+                         [self showError:profileRequest.userFriendlyErrorDescription];
+                     }
+                 }];
              }
              else if (loginRequest.errorCode == 403)
              {

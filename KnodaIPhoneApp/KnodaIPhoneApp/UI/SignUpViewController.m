@@ -18,6 +18,7 @@ static const NSInteger kMaxUsernameLength = 15;
 static const NSInteger kMinPasswordLength = 6;
 static const NSInteger kMaxPasswordLength = 20;
 
+static NSString* const kApplicationSegue   = @"ApplicationNavigationSegue";
 
 @interface SignUpViewController ()
 
@@ -146,7 +147,7 @@ static const NSInteger kMaxPasswordLength = 20;
                  PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] init];
                  [predictionsRequest executeWithCompletionBlock: ^{}];
                  
-                 [self performSegueWithIdentifier: @"ApplicationNavigationSegue" sender: self];
+                 [self performSegueWithIdentifier: kApplicationSegue sender: self];
              }
              else if (signUpRequest.errorCode == 403)
              {

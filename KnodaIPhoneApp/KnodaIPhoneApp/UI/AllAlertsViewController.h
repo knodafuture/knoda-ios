@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AllAlertsViewController : UIViewController <UITableViewDataSource>
+@interface AllAlertsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @end

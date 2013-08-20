@@ -11,6 +11,11 @@
 #import "AlertCell.h"
 #import "AllAlertsWebRequest.h"
 
+#import "Chellange.h"
+#import "Prediction.h"
+
+#import "SetSeenAlertsWebRequest.h"
+
 
 @interface AllAlertsViewController ()
 
@@ -35,6 +40,32 @@
             
             self.alerts = request.predictions;
             [self.tableView reloadData];
+            
+            NSArray* visibleCells = [self.tableView visibleCells];
+            NSMutableArray* chellangeIDs = [NSMutableArray arrayWithCapacity: 0];
+            
+            for (PreditionCell* cell in visibleCells)
+            {
+                if (cell.prediction.settled)
+                {
+                    [chellangeIDs addObject: [NSNumber numberWithInteger: cell.prediction.chellange.ID]];
+                }
+            }
+            
+            if (chellangeIDs.count != 0)
+            {
+                SetSeenAlertsWebRequest* request = [[SetSeenAlertsWebRequest alloc] initWithIDs: chellangeIDs];
+                [request executeWithCompletionBlock: ^
+                 {
+                     if (request.errorCode != 0)
+                     {
+                         for (PreditionCell* cell in visibleCells)
+                         {
+                             cell.prediction.chellange.seen = YES;
+                         }
+                     }
+                 }];
+            }
         }
     }];
 }
@@ -58,15 +89,48 @@
     
     if (self.alerts.count != 0)
     {
-        cell = [tableView dequeueReusableCellWithIdentifier: [AlertCell reuseIdentifier]];
+        cell = [self.tableView dequeueReusableCellWithIdentifier: [AlertCell reuseIdentifier]];
         [((AlertCell*)cell) fillWithPrediction: [self.alerts objectAtIndex: indexPath.row]];
     }
     else
     {
-        cell = [tableView dequeueReusableCellWithIdentifier: @"LoadingCell"];
+        cell = [self.tableView dequeueReusableCellWithIdentifier: @"LoadingCell"];
     }
     
     return cell;
+}
+
+
+- (void) scrollViewDidEndScrollingAnimation: (UIScrollView*) scrollView
+{
+    if (self.alerts.count != 0)
+    {
+        NSArray* visibleCells = [self.tableView visibleCells];
+        NSMutableArray* chellangeIDs = [NSMutableArray arrayWithCapacity: 0];
+        
+        for (PreditionCell* cell in visibleCells)
+        {
+            if (cell.prediction.settled)
+            {
+                [chellangeIDs addObject: [NSNumber numberWithInteger: cell.prediction.chellange.ID]];
+            }
+        }
+        
+        if (chellangeIDs.count != 0)
+        {
+            SetSeenAlertsWebRequest* request = [[SetSeenAlertsWebRequest alloc] initWithIDs: chellangeIDs];
+            [request executeWithCompletionBlock: ^
+            {
+                if (request.errorCode != 0)
+                {
+                    for (PreditionCell* cell in visibleCells)
+                    {
+                        cell.prediction.chellange.seen = YES;
+                    }
+                }
+            }];
+        }
+    }
 }
 
 

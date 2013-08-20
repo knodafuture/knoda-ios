@@ -1440,8 +1440,8 @@
                                                     <rect key="frame" x="307" y="0.0" width="11" height="87"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="center" id="Z5f-k4-YFd">
-                                                    <rect key="frame" x="32" y="66" width="17" height="13"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="Z5f-k4-YFd">
+                                                    <rect key="frame" x="32" y="66" width="13" height="13"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" id="pGp-IA-adW">
@@ -2208,7 +2208,7 @@ outcome of your prediction</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="PreditionCell" rowHeight="88" id="ZEA-hC-e5q" customClass="PreditionCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="PreditionCell" rowHeight="88" id="ZEA-hC-e5q" customClass="PreditionCell">
                                 <rect key="frame" x="0.0" y="22" width="320" height="88"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -2318,8 +2318,8 @@ outcome of your prediction</string>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <imageView userInteractionEnabled="NO" contentMode="center" id="Uso-Fe-7el">
-                                            <rect key="frame" x="32" y="66" width="17" height="13"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="Uso-Fe-7el">
+                                            <rect key="frame" x="32" y="66" width="13" height="13"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
                                     </subviews>
@@ -2383,7 +2383,7 @@ outcome of your prediction</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="PreditionCell" id="CUW-1s-afG" customClass="PreditionCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="PreditionCell" id="CUW-1s-afG" customClass="PreditionCell">
                                 <rect key="frame" x="0.0" y="22" width="320" height="88"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -2501,8 +2501,8 @@ outcome of your prediction</string>
                                             <rect key="frame" x="307" y="0.0" width="11" height="87"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
-                                        <imageView userInteractionEnabled="NO" contentMode="center" id="QjG-Un-Hol">
-                                            <rect key="frame" x="32" y="66" width="17" height="13"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="QjG-Un-Hol">
+                                            <rect key="frame" x="32" y="66" width="13" height="13"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
                                     </subviews>
@@ -2703,7 +2703,7 @@ outcome of your prediction</string>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="AlertCell" id="jhZ-MB-bii" customClass="AlertCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="AlertCell" id="jhZ-MB-bii" customClass="AlertCell">
                                         <rect key="frame" x="0.0" y="22" width="320" height="120"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -2791,14 +2791,24 @@ outcome of your prediction</string>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.89555027173913038" green="0.89555027173913038" blue="0.89555027173913038" alpha="1" colorSpace="calibratedRGB"/>
                                                 </view>
+                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="agree.png" id="b6D-7m-HOX">
+                                                    <rect key="frame" x="2" y="35" width="11" height="87"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="disagree.png" id="WOM-fv-duO">
+                                                    <rect key="frame" x="308" y="32" width="11" height="87"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <gestureRecognizers/>
                                         <connections>
+                                            <outlet property="agreeImage" destination="b6D-7m-HOX" id="c5f-uG-OO8"/>
                                             <outlet property="alertMarkImageView" destination="Lfr-0x-QR7" id="PYf-IJ-GmF"/>
                                             <outlet property="alertTitle" destination="jPp-w9-wLT" id="F72-Yd-VJ9"/>
                                             <outlet property="bodyLabel" destination="r6y-zi-vHd" id="ahw-95-2es"/>
+                                            <outlet property="disagreeImage" destination="WOM-fv-duO" id="PeF-U4-azG"/>
                                             <outlet property="expirationDateLabel" destination="jU5-ce-3zr" id="h9p-v4-FQX"/>
                                             <outlet property="metadataLabel" destination="gy7-Bh-P1o" id="CWG-yt-TSN"/>
                                             <outlet property="usernameLabel" destination="nHq-53-u6f" id="HSu-xe-rM2"/>
@@ -2829,6 +2839,7 @@ outcome of your prediction</string>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="kaP-3O-9VE" id="fLK-qj-8ku"/>
+                                    <outlet property="delegate" destination="kaP-3O-9VE" id="1WK-Mo-4fb"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -2858,7 +2869,7 @@ outcome of your prediction</string>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="PreditionCell" id="2Lb-Yy-hei" customClass="PreditionCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="AlertCell" id="2Lb-Yy-hei" customClass="AlertCell">
                                         <rect key="frame" x="0.0" y="22" width="320" height="120"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -2914,17 +2925,20 @@ outcome of your prediction</string>
                                                     <color key="textColor" red="0.1576086957" green="0.1419212644" blue="0.14378415119999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="2h 5m ago | 55%  agree" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Bfv-56-4qq">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="2h 5m ago | 55%  agree" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="A8U-hT-VDH">
                                                     <rect key="frame" x="85" y="98" width="218" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                                     <color key="textColor" red="0.51519874499999996" green="0.51832116169999998" blue="0.51207632839999995" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="center" id="cFg-di-5S5">
-                                                    <rect key="frame" x="35" y="98" width="17" height="13"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="2h 5m ago" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6xk-s8-vuF">
+                                                    <rect key="frame" x="85" y="98" width="225" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                                    <color key="textColor" red="0.51519874499999996" green="0.51832116169999998" blue="0.51207632839999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
                                                 <view contentMode="scaleToFill" id="HYz-9a-ycv">
                                                     <rect key="frame" x="18" y="0.0" width="282" height="36"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2947,6 +2961,36 @@ outcome of your prediction</string>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <gestureRecognizers/>
+                                        <connections>
+                                            <outlet property="alertMarkImageView" destination="jGW-bh-Uh9" id="VIS-0a-Ud4"/>
+                                            <outlet property="alertTitle" destination="6pn-A8-1LU" id="AiS-Du-4pb"/>
+                                            <outlet property="bodyLabel" destination="zMc-0O-kFA" id="mF9-jX-g0A"/>
+                                            <outlet property="expirationDateLabel" destination="6xk-s8-vuF" id="5aG-dH-Ihg"/>
+                                            <outlet property="metadataLabel" destination="A8U-hT-VDH" id="SoG-j3-enr"/>
+                                            <outlet property="usernameLabel" destination="jax-ob-F2u" id="z3m-eR-xgb"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="LoadingCell" id="7rz-GY-sUY">
+                                        <rect key="frame" x="0.0" y="142" width="320" height="120"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="119"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Loading..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YiV-HD-pyZ">
+                                                    <rect key="frame" x="53" y="44" width="92" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.83493970790000005" green="0.83493970790000005" blue="0.83493970790000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="gray" id="UEl-xj-gM3">
+                                                    <rect key="frame" x="151" y="45" width="20" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </activityIndicatorView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -2959,6 +3003,7 @@ outcome of your prediction</string>
                     <nil key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="tableView" destination="tYC-6h-Nmh" id="RxN-Mv-CyQ"/>
                         <segue destination="wNN-TM-pOg" kind="push" identifier="PredictionDetailsSegue" id="2Xa-rF-3p5"/>
                     </connections>
                 </viewController>
@@ -3567,6 +3612,10 @@ outcome of your prediction</string>
         <class className="AddPredictionViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AddPredictionViewController.h"/>
             <relationships>
+                <relationship kind="action" name="cancel:"/>
+                <relationship kind="action" name="predict:"/>
+                <relationship kind="action" name="selectCategoryPressed:"/>
+                <relationship kind="action" name="selectExpirationPressed:"/>
                 <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="categoryButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="categoryLabel" candidateClass="UILabel"/>
@@ -3588,6 +3637,9 @@ outcome of your prediction</string>
         <class className="AlertsViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AlertsViewController.h"/>
             <relationships>
+                <relationship kind="action" name="lerfButtonPressed:"/>
+                <relationship kind="action" name="menuButtonPressed:"/>
+                <relationship kind="action" name="rightButtonPressed:"/>
                 <relationship kind="outlet" name="detailsView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="segmentedControlImage" candidateClass="UIImageView"/>
             </relationships>
@@ -3607,6 +3659,7 @@ outcome of your prediction</string>
         <class className="BadgesCollectionViewController" superclassName="UICollectionViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/BadgesCollectionViewController.h"/>
             <relationships>
+                <relationship kind="action" name="menuButtonPressed:"/>
                 <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
             </relationships>
         </class>
@@ -3618,10 +3671,15 @@ outcome of your prediction</string>
         </class>
         <class className="ExpiredAlertsViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ExpiredAlertsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
         </class>
         <class className="ForgotPasswordViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ForgotPasswordViewController.h"/>
             <relationships>
+                <relationship kind="action" name="cancelButtonPressed:"/>
+                <relationship kind="action" name="sendButtonPressed:"/>
                 <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="errorLabel" candidateClass="UILabel"/>
@@ -3632,6 +3690,9 @@ outcome of your prediction</string>
         <class className="HistoryViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/HistoryViewController.h"/>
             <relationships>
+                <relationship kind="action" name="lerfButtonPressed:"/>
+                <relationship kind="action" name="menuButtonPressed:"/>
+                <relationship kind="action" name="rightButtonPressed:"/>
                 <relationship kind="outlet" name="detailsView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="segmentedControlImage" candidateClass="UIImageView"/>
             </relationships>
@@ -3652,6 +3713,7 @@ outcome of your prediction</string>
         <class className="LoginViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
             <relationships>
+                <relationship kind="action" name="loginButtonPressed:"/>
                 <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="errorLabel" candidateClass="UILabel"/>
@@ -3758,17 +3820,7 @@ outcome of your prediction</string>
                 <relationship kind="outlet" name="userNameLabel" candidateClass="UILabel"/>
             </relationships>
         </class>
-        <class className="ProfileViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfileViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="accountDetailsTableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="loginLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="pointsLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="profileImageView" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="SelectPictureViewController" superclassName="UIViewController">
+                <class className="SelectPictureViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SelectPictureViewController.h"/>
             <relationships>
                 <relationship kind="action" name="backButtonPressed:" candidateClass="UIButton"/>
@@ -3781,6 +3833,7 @@ outcome of your prediction</string>
         <class className="SignUpViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SignUpViewController.h"/>
             <relationships>
+                <relationship kind="action" name="signUpButtonPressed:"/>
                 <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="emailTextFiled" candidateClass="UITextField"/>
@@ -3808,6 +3861,9 @@ outcome of your prediction</string>
         </class>
         <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
+        </class>
+        <class className="UICollectionViewLayout" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewLayout.h"/>
         </class>
         <class className="WelcomeViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/WelcomeViewController.h"/>

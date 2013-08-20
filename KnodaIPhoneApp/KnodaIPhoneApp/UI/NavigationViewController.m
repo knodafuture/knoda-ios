@@ -8,22 +8,31 @@
 
 #import "NavigationViewController.h"
 #import "AppDelegate.h"
-
+#import "ProfileCell.h"
 #import "NavigationSegue.h"
 
 #import "SelectPictureViewController.h"
 
 static NSString* const kHomeSegue = @"HomeSegue";
 static NSString* const kSelectPictureSegue = @"SelectPictureSegue";
+static NSString* const kAppUser = @"";
 
 @interface NavigationViewController () <SelectPictureDelegate>
+
+@property (weak, nonatomic) IBOutlet UILabel *pointsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *wonLostLabel;
+@property (weak, nonatomic) IBOutlet UILabel *wonPercantageLabel;
+@property (weak, nonatomic) IBOutlet UILabel *steakLabel;
 
 @property (nonatomic, strong) IBOutlet UIView* masterView;
 @property (nonatomic, strong) IBOutlet UIView* detailsView;
 @property (nonatomic, strong) IBOutlet UIView* movingView;
+@property (weak, nonatomic) IBOutlet UITableView *menuItemsTableView;
 @property (nonatomic, assign) BOOL appeared;
 
 @property (nonatomic, assign) BOOL masterShown;
+
+@property (nonatomic, strong) AppDelegate * appDelegate;
 
 @end
 
@@ -32,7 +41,6 @@ static NSString* const kSelectPictureSegue = @"SelectPictureSegue";
 
 - (void) viewDidLoad {
     [super viewDidLoad];
-
 	[self performSegueWithIdentifier: kHomeSegue sender: self];
 //    if([[(AppDelegate *)[[UIApplication sharedApplication] delegate] user] profileImage]) {
 //        [self performSegueWithIdentifier: kHomeSegue sender: self];
@@ -41,7 +49,6 @@ static NSString* const kSelectPictureSegue = @"SelectPictureSegue";
 //        [self performSegueWithIdentifier: kSelectPictureSegue sender: self];
 //    }
 }
-
 
 - (void) viewDidUnload
 {
@@ -103,6 +110,8 @@ static NSString* const kSelectPictureSegue = @"SelectPictureSegue";
 {
     self.masterShown = YES;
     
+    [self updateUserInfo];
+    
     [UIView animateWithDuration: 0.3 animations: ^
      {
          CGRect newFrame = self.movingView.frame;
@@ -124,6 +133,27 @@ static NSString* const kSelectPictureSegue = @"SelectPictureSegue";
     }
 }
 
+
+- (AppDelegate*) appDelegate
+{
+    return [UIApplication sharedApplication].delegate;
+}
+
+#pragma mark - User's info update 
+
+
+- (void) updateUserInfo {
+    User * user = self.appDelegate.user;
+    self.pointsLabel.text = [NSString stringWithFormat:@"%d",user.points];
+    self.wonLostLabel.text = [NSString stringWithFormat:@"%d-%d",user.won,user.lost];
+    self.wonPercantageLabel.text = ![user.winningPercentage isEqual: @0] ? [NSString stringWithFormat:@"%@%@",user.winningPercentage,@"%"] : @"0%";
+    self.steakLabel.text = [user.streak length] > 0 ? user.streak : @"-";
+    
+    [self.menuItemsTableView beginUpdates];    
+    [self.menuItemsTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:4 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.menuItemsTableView endUpdates];
+
+}
 
 #pragma mark - UITableViewDataSource
 
@@ -164,10 +194,16 @@ static NSString* const kSelectPictureSegue = @"SelectPictureSegue";
         default:
             break;
     }
-    
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier: identefier];
-    
-    return cell;
+    if (indexPath.row != 4) {
+        UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier: identefier];
+        return cell;
+    }
+    else {
+        ProfileCell * cell = [tableView dequeueReusableCellWithIdentifier: identefier];
+        cell.userNameLabel.text = self.appDelegate.user.name;
+        return cell;
+
+    }
 }
 
 #pragma mark SelectPictureDelegate

@@ -9,8 +9,16 @@
 #import "ProfileViewController.h"
 #import "PreditionCell.h"
 #import "NavigationViewController.h"
+#import <QuartzCore/QuartzCore.h>
+#import "AppDelegate.h"
+#import "SignOutWebRequest.h"
+
+static NSString * const accountDetailsTableViewCellIdentifier = @"accountDetailsTableViewCellIdentifier";
 
 @interface ProfileViewController ()
+
+@property (nonatomic, strong) AppDelegate * appDelegate;
+@property (nonatomic, strong) NSArray * accountDetailsArray;
 
 @end
 
@@ -20,34 +28,77 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
+	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"darkBgPattern"]];
+    self.accountDetailsTableView.backgroundView = nil;
+    [self makeProfileImageRoundedCorners];
+    [self fillInUsersInformation];
     self.navigationController.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, self.navigationController.navigationBar.frame.size.height);
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[self navigationController] setNavigationBarHidden:NO animated:NO];
+}
 
-- (IBAction) menuButtonPressed: (id) sender
-{
+- (void) makeProfileImageRoundedCorners {
+    self.profileImageView.layer.cornerRadius = 10.0;
+    self.profileImageView.layer.masksToBounds = YES;
+    self.profileImageView.layer.borderWidth = 2.0;
+    self.profileImageView.layer.borderColor = [UIColor blackColor].CGColor;
+}
+
+- (void) fillInUsersInformation {
+    User * user = self.appDelegate.user;
+    self.profileImageView.image = user.profileImage;
+    self.loginLabel.text = user.name;
+    self.pointsLabel.text = [NSString stringWithFormat:@"%d points",user.points];    
+    self.accountDetailsArray = [NSArray arrayWithObjects:self.appDelegate.user.name,user.email,@"Change Password", nil];
+    [self.accountDetailsTableView reloadData];
+}
+
+- (IBAction)menuButtonPress:(id)sender {
     [((NavigationViewController*)self.navigationController.parentViewController) toggleNavigationPanel];
 }
 
+- (AppDelegate*) appDelegate
+{
+    return [UIApplication sharedApplication].delegate;
+}
+
+#pragma mark - Segues
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"SignOutSegue"])
+    {
+        SignOutWebRequest * signOutWebRequest = [[SignOutWebRequest alloc]init];
+        [signOutWebRequest executeWithCompletionBlock:^{
+        }];
+    }
+}
+
+#pragma mark - TableView datasource
 
 - (NSInteger) numberOfSectionsInTableView: (UITableView*) tableView
 {
     return 1;
 }
 
-
 - (NSInteger) tableView: (UITableView*) tableView numberOfRowsInSection: (NSInteger) section
 {
-    return 30;
+    return [self.accountDetailsArray count];
 }
 
 
 - (UITableViewCell*) tableView: (UITableView*) tableView cellForRowAtIndexPath: (NSIndexPath*) indexPath
 {
-    
-    PreditionCell* cell = [tableView dequeueReusableCellWithIdentifier:[PreditionCell reuseIdentifier]];
-    
+    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:accountDetailsTableViewCellIdentifier];
+    if (!cell) {
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:accountDetailsTableViewCellIdentifier];
+    }
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.textLabel.text = self.accountDetailsArray[indexPath.row];
     return cell;
 }
 

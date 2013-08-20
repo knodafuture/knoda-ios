@@ -21,6 +21,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];
+
 	// Do any additional setup after loading the view.
 }
 
@@ -28,7 +30,7 @@
 - (void) viewWillAppear: (BOOL) animated
 {
     //self.activityView.hidden = NO;
-    
+
     [self.webView loadHTMLString: @"<html><body><h2 align='center'>Terms of Service</h2><p>Will be placed here</p></body></html>" baseURL: nil];
     
     [super viewWillAppear: animated];

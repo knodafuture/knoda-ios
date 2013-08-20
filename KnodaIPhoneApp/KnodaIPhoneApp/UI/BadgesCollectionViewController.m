@@ -31,8 +31,10 @@
 - (void) setUpUsersBadges {
     BadgesWebRequest * badgesWebRequest = [[BadgesWebRequest alloc]init];
     [badgesWebRequest executeWithCompletionBlock:^{
-        self.badgesImagesArray = badgesWebRequest.badgesImagesArray;
-        [self.collectionView reloadData];
+        if (badgesWebRequest.errorCode == 0) {
+            self.badgesImagesArray = badgesWebRequest.badgesImagesArray;
+            [self.collectionView reloadData];
+        }
         self.activityView.hidden = YES;
     }];
 }

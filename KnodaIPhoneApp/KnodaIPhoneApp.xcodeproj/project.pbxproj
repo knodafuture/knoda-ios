@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		367EE77917C38CC400764C85 /* btn_signOut.png in Resources */ = {isa = PBXBuildFile; fileRef = 367EE77517C38CC400764C85 /* btn_signOut.png */; };
+		367EE77A17C38CC400764C85 /* btn_signOut@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 367EE77617C38CC400764C85 /* btn_signOut@2x.png */; };
+		367EE77B17C38CC400764C85 /* down_signOut.png in Resources */ = {isa = PBXBuildFile; fileRef = 367EE77717C38CC400764C85 /* down_signOut.png */; };
+		367EE77C17C38CC400764C85 /* down_signOut@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 367EE77817C38CC400764C85 /* down_signOut@2x.png */; };
+		367EE77F17C3C5E400764C85 /* ProfileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 367EE77E17C3C5E300764C85 /* ProfileCell.m */; };
+		367EE78217C3D17F00764C85 /* SignOutSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 367EE78117C3D17E00764C85 /* SignOutSegue.m */; };
+		367EE78517C3D41900764C85 /* SignOutWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 367EE78417C3D41800764C85 /* SignOutWebRequest.m */; };
 		36A4054817C24DDD00406A12 /* BadgesCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A4054717C24DDD00406A12 /* BadgesCollectionViewController.m */; };
 		36A4054B17C24E5500406A12 /* BadgeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A4054A17C24E5500406A12 /* BadgeCollectionViewCell.m */; };
 		36A4055B17C2549500406A12 /* 10_correct_predictions.png in Resources */ = {isa = PBXBuildFile; fileRef = 36A4054D17C2549500406A12 /* 10_correct_predictions.png */; };
@@ -249,6 +256,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		367EE77517C38CC400764C85 /* btn_signOut.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_signOut.png; sourceTree = "<group>"; };
+		367EE77617C38CC400764C85 /* btn_signOut@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_signOut@2x.png"; sourceTree = "<group>"; };
+		367EE77717C38CC400764C85 /* down_signOut.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down_signOut.png; sourceTree = "<group>"; };
+		367EE77817C38CC400764C85 /* down_signOut@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down_signOut@2x.png"; sourceTree = "<group>"; };
+		367EE77D17C3C5E300764C85 /* ProfileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileCell.h; sourceTree = "<group>"; };
+		367EE77E17C3C5E300764C85 /* ProfileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileCell.m; sourceTree = "<group>"; };
+		367EE78017C3D17D00764C85 /* SignOutSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignOutSegue.h; sourceTree = "<group>"; };
+		367EE78117C3D17E00764C85 /* SignOutSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignOutSegue.m; sourceTree = "<group>"; };
+		367EE78317C3D41700764C85 /* SignOutWebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignOutWebRequest.h; sourceTree = "<group>"; };
+		367EE78417C3D41800764C85 /* SignOutWebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignOutWebRequest.m; sourceTree = "<group>"; };
 		36A4054617C24DDD00406A12 /* BadgesCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadgesCollectionViewController.h; sourceTree = "<group>"; };
 		36A4054717C24DDD00406A12 /* BadgesCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BadgesCollectionViewController.m; sourceTree = "<group>"; };
 		36A4054917C24E5500406A12 /* BadgeCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadgeCollectionViewCell.h; sourceTree = "<group>"; };
@@ -746,6 +763,10 @@
 		9E06638B179598FD00B3E974 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				367EE77517C38CC400764C85 /* btn_signOut.png */,
+				367EE77617C38CC400764C85 /* btn_signOut@2x.png */,
+				367EE77717C38CC400764C85 /* down_signOut.png */,
+				367EE77817C38CC400764C85 /* down_signOut@2x.png */,
 				57D525A317C388D40031C1EE /* choosePhoto.png */,
 				57D525A417C388D40031C1EE /* choosePhoto@2x.png */,
 				57D5258E17C388CB0031C1EE /* avatars */,
@@ -967,6 +988,8 @@
 				9E3BD6E017C239000087529A /* AllAlertsWebRequest.m */,
 				57D525A917C388F80031C1EE /* ProfileWebRequest.h */,
 				57D525AA17C388F80031C1EE /* ProfileWebRequest.m */,
+				367EE78317C3D41700764C85 /* SignOutWebRequest.h */,
+				367EE78417C3D41800764C85 /* SignOutWebRequest.m */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -1031,6 +1054,8 @@
 				36A4054A17C24E5500406A12 /* BadgeCollectionViewCell.m */,
 				9E30D16417C26E6E002D9ACE /* AlertCell.h */,
 				9E30D16517C26E6E002D9ACE /* AlertCell.m */,
+				367EE77D17C3C5E300764C85 /* ProfileCell.h */,
+				367EE77E17C3C5E300764C85 /* ProfileCell.m */,
 			);
 			path = "Table Cells";
 			sourceTree = "<group>";
@@ -1042,6 +1067,8 @@
 				9E93021A179FF11F00FFB166 /* NavigationSegue.m */,
 				9E8421EF17A26ECB00D14D0A /* PushWithoutAnimationSegue.h */,
 				9E8421F017A26ECB00D14D0A /* PushWithoutAnimationSegue.m */,
+				367EE78017C3D17D00764C85 /* SignOutSegue.h */,
+				367EE78117C3D17E00764C85 /* SignOutSegue.m */,
 			);
 			path = Segues;
 			sourceTree = "<group>";
@@ -1263,6 +1290,10 @@
 				57D525A217C388CB0031C1EE /* avatar_5@2x.png in Resources */,
 				57D525A517C388D40031C1EE /* choosePhoto.png in Resources */,
 				57D525A617C388D40031C1EE /* choosePhoto@2x.png in Resources */,
+				367EE77917C38CC400764C85 /* btn_signOut.png in Resources */,
+				367EE77A17C38CC400764C85 /* btn_signOut@2x.png in Resources */,
+				367EE77B17C38CC400764C85 /* down_signOut.png in Resources */,
+				367EE77C17C38CC400764C85 /* down_signOut@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1342,6 +1373,9 @@
 				57D525AB17C388F80031C1EE /* BadgesWebRequest.m in Sources */,
 				57D525AC17C388F80031C1EE /* ProfileWebRequest.m in Sources */,
 				57D525AF17C389360031C1EE /* SelectPictureViewController.m in Sources */,
+				367EE77F17C3C5E400764C85 /* ProfileCell.m in Sources */,
+				367EE78217C3D17F00764C85 /* SignOutSegue.m in Sources */,
+				367EE78517C3D41900764C85 /* SignOutWebRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -30,7 +30,7 @@ static NSString* const kResponseDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'zzz";
         
         if ([dictionary objectForKey: @"user_avatar"] != nil && ![[dictionary objectForKey: @"user_avatar"] isKindOfClass: [NSNull class]])
         {
-            self.userAvatarURL = [NSURL URLWithString: [[dictionary objectForKey: @"user_avatar"] objectForKey: @"small"]];
+            self.userAvatars = [dictionary objectForKey: @"user_avatar"];
         }
         
         if (![[dictionary objectForKey: @"outcome"] isKindOfClass: [NSNull class]])
@@ -59,6 +59,18 @@ static NSString* const kResponseDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'zzz";
     return self;
 }
 
+- (NSString *)thumbAvatar {
+    return self.userAvatars[@"thumb"];
+}
+
+- (NSString *)smallAvatar {
+    return self.userAvatars[@"small"];
+}
+
+- (NSString *)bigAvatar {
+    return self.userAvatars[@"big"];
+}
+
 - (void)setOutcome:(BOOL)outcome {
     _outcome = outcome;
     self.hasOutcome = YES;
@@ -67,7 +79,8 @@ static NSString* const kResponseDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'zzz";
 
 - (NSString*) description
 {
-    NSString* result = [NSString stringWithFormat: @"\r\r***PREDICTION***\rid: %d\rcategory: %@\rbody: %@\rcreationDate: %@\rexpirationDate: %@\ragreeCount: %d\rdisagreeCount: %d\rvoitedUsersCount: %d\ragreePersent: %d\rexpired: %@\rhasOutcome: %@\routcome: %@\rsettled: %@\ruserId: %d\ruserName: %@\ruserAvatarUrl: %@\ruserAvatar: %@\rchellange: %@\r***", self.ID, self.category, self.body, self.creationDate, self.expirationDate, self.agreeCount, self.disagreeCount, self.voitedUsersCount, self.agreedPercent, (self.expired) ? @"YES" : @"NO", (self.hasOutcome) ? @"YES" : @"NO", (self.outcome) ? @"YES" : @"NO", (self.settled) ? @"YES" : @"NO", self.userId, self.userName, self.userAvatarURL, self.userAvatar, self.chellange];
+    
+    NSString* result = [NSString stringWithFormat: @"\r\r***PREDICTION***\rid: %d\rcategory: %@\rbody: %@\rcreationDate: %@\rexpirationDate: %@\ragreeCount: %d\rdisagreeCount: %d\rvoitedUsersCount: %d\ragreePersent: %d\rexpired: %@\rhasOutcome: %@\routcome: %@\rsettled: %@\ruserId: %d\ruserName: %@\ruserAvatars: %@\rchellange: %@\r***", self.ID, self.category, self.body, self.creationDate, self.expirationDate, self.agreeCount, self.disagreeCount, self.voitedUsersCount, self.agreedPercent, (self.expired) ? @"YES" : @"NO", (self.hasOutcome) ? @"YES" : @"NO", (self.outcome) ? @"YES" : @"NO", (self.settled) ? @"YES" : @"NO", self.userId, self.userName, self.userAvatars, self.chellange];
     
     return result;
 }

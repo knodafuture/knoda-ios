@@ -9,6 +9,7 @@
 #import "PreditionCell.h"
 #import "Prediction.h"
 #import "Chellange.h"
+#import "BindableView.h"
 
 static const int kObserverKeyCount = 19;
 static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
@@ -49,7 +50,8 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
 
 @property (nonatomic, strong) IBOutlet UILabel* usernameLabel;
 @property (nonatomic, strong) IBOutlet UILabel* expirationDateLabel;
-@property (nonatomic, strong) IBOutlet UIImageView* imageView;
+
+@property (nonatomic, strong) IBOutlet BindableView *avatarView;
 
 @end
 
@@ -99,7 +101,7 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
     }
 }
 
-#pragma mark -
+#pragma mark Accessors
 
 - (void)setPrediction:(Prediction *)prediction {
     if(_prediction != prediction) {
@@ -160,6 +162,8 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
     {
         self.disagreeImage.image = [UIImage imageNamed: (!self.prediction.settled) ? @"disagree" : ((self.prediction.outcome == NO) ? @"disagree_win" : @"disagree_lose")];
     }
+    
+    [self.avatarView bindToURL:self.prediction.smallAvatar creationDate:nil];
 }
 
 - (void) fillWithPrediction: (Prediction*) prediction

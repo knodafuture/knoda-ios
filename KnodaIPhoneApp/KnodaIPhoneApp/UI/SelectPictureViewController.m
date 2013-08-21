@@ -9,6 +9,8 @@
 #import "SelectPictureViewController.h"
 #import "ProfileWebRequest.h"
 
+static const int kDefaultAvatarsCount = 5;
+
 @interface SelectPictureViewController () <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic) UIImage *avatarImage;
@@ -26,11 +28,6 @@
     
     return newImage;
 }
-
-//+ (UIColor *)getRandomColor {
-//    NSArray *colors = DEFAULT_COLORS;
-//    return colors[(arc4random() % colors.count)];
-//}
 
 #pragma mark View lifecycle
 
@@ -86,12 +83,14 @@
 }
 
 - (void)setDefaultAvatar {
-    self.avatarImage = [UIImage imageNamed:@"avatar_1.png"];
+    NSString *imgName = [NSString stringWithFormat:@"avatar_%d.png", (arc4random() % kDefaultAvatarsCount + 1)];    
+    self.avatarImage = [UIImage imageNamed:imgName];
     [self.pictureButton setImage:self.avatarImage forState:UIControlStateNormal];
 }
 
 - (void)sendAvatar {
-    ProfileWebRequest *profileRequest = [[ProfileWebRequest alloc] initWithAvatar:self.avatarImage];    
+    ProfileWebRequest *profileRequest = [[ProfileWebRequest alloc] initWithAvatar:self.avatarImage];
+    //TODO: add activity indicator
     [profileRequest executeWithCompletionBlock:^{
         if(profileRequest.isSucceeded) {
             [self.delegate hideViewController:self];

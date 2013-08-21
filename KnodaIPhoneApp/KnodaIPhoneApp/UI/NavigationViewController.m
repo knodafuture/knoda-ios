@@ -41,13 +41,13 @@ static NSString* const kAppUser = @"";
 
 - (void) viewDidLoad {
     [super viewDidLoad];
-	[self performSegueWithIdentifier: kHomeSegue sender: self];
-//    if([[(AppDelegate *)[[UIApplication sharedApplication] delegate] user] profileImage]) {
-//        [self performSegueWithIdentifier: kHomeSegue sender: self];
-//    }
-//    else {
-//        [self performSegueWithIdentifier: kSelectPictureSegue sender: self];
-//    }
+
+    if([[(AppDelegate *)[[UIApplication sharedApplication] delegate] user] hasAvatar]) {
+        [self performSegueWithIdentifier: kHomeSegue sender: self];
+    }
+    else {
+        [self performSegueWithIdentifier: kSelectPictureSegue sender: self];
+    }
 }
 
 - (void) viewDidUnload

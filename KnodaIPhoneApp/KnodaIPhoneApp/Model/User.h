@@ -12,7 +12,6 @@
 
 @property (nonatomic, strong) NSString* name;
 @property (nonatomic, strong) NSString* email;
-@property (nonatomic, strong) UIImage* profileImage;
 @property (nonatomic, strong) NSString* token;
 @property (nonatomic, assign) NSUInteger points;
 @property (nonatomic, assign) NSUInteger won;
@@ -23,6 +22,12 @@
 @property (nonatomic, assign) NSUInteger alerts;
 @property (nonatomic, assign) NSUInteger badges;
 @property (nonatomic, assign) BOOL notificationsOn;
+
+@property (nonatomic, strong) NSString* bigImage;
+@property (nonatomic, strong) NSString* smallImage;
+@property (nonatomic, strong) NSString* thumbImage;
+
+@property (nonatomic, readonly) BOOL hasAvatar;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 

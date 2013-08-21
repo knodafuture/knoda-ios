@@ -27,9 +27,12 @@
 @property (nonatomic, assign) BOOL settled;
 @property (nonatomic, assign) NSInteger userId;
 @property (nonatomic, copy) NSString* userName;
-@property (nonatomic, strong) NSURL* userAvatarURL;
-@property (nonatomic, strong) UIImage* userAvatar;
+@property (nonatomic, strong) NSDictionary* userAvatars;
 @property (nonatomic, strong) Chellange* chellange;
+
+@property (nonatomic, readonly) NSString *thumbAvatar;
+@property (nonatomic, readonly) NSString *smallAvatar;
+@property (nonatomic, readonly) NSString *bigAvatar;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 

@@ -33,6 +33,8 @@ static NSString * const accountDetailsTableViewCellIdentifier = @"accountDetails
     [self makeProfileImageRoundedCorners];
     [self fillInUsersInformation];
     self.navigationController.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, self.navigationController.navigationBar.frame.size.height);
+    
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -41,15 +43,15 @@ static NSString * const accountDetailsTableViewCellIdentifier = @"accountDetails
 }
 
 - (void) makeProfileImageRoundedCorners {
-    self.profileImageView.layer.cornerRadius = 10.0;
-    self.profileImageView.layer.masksToBounds = YES;
-    self.profileImageView.layer.borderWidth = 2.0;
-    self.profileImageView.layer.borderColor = [UIColor blackColor].CGColor;
+    self.profileAvatarView.layer.cornerRadius = 10.0;
+    self.profileAvatarView.layer.masksToBounds = YES;
+    self.profileAvatarView.layer.borderWidth = 2.0;
+    self.profileAvatarView.layer.borderColor = [UIColor blackColor].CGColor;
 }
 
 - (void) fillInUsersInformation {
     User * user = self.appDelegate.user;
-    self.profileImageView.image = user.profileImage;
+    [self.profileAvatarView bindToURL:user.bigImage creationDate:nil];
     self.loginLabel.text = user.name;
     self.pointsLabel.text = [NSString stringWithFormat:@"%d points",user.points];    
     self.accountDetailsArray = [NSArray arrayWithObjects:self.appDelegate.user.name,user.email,@"Change Password", nil];

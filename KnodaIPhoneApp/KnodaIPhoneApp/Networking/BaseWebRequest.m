@@ -35,7 +35,7 @@ static NSString* const kBaseURL = @"example.com";
 #else
 
 //static NSString* const kBaseURL = @"89.22.50.128/api/";
-static NSString* const kBaseURL = @"54.213.86.248/api/";
+NSString* const kBaseURL = @"54.213.86.248";
 
 #endif
 
@@ -142,7 +142,7 @@ static const char *MULTIPART_CHARS = "1234567890_-qwertyuiopasdfghjklzxcvbnmQWER
 
 - (NSURL*) url
 {
-    NSMutableString* urlString = [NSMutableString stringWithFormat: @"%@%@%@", ([self requiresHTTPS]) ? @"https://" : @"http://", kBaseURL, [self methodName]];
+    NSMutableString* urlString = [NSMutableString stringWithFormat: @"%@%@/api/%@", ([self requiresHTTPS]) ? @"https://" : @"http://", kBaseURL, [self methodName]];
     
     if ([self requiresAuthToken])
     {
@@ -241,6 +241,8 @@ static const char *MULTIPART_CHARS = "1234567890_-qwertyuiopasdfghjklzxcvbnmQWER
         [body appendData:[[NSString stringWithFormat:@"%@\r\n", self.parameters[key]] dataUsingEncoding:NSUTF8StringEncoding]];
     }
     
+    DLog(@"%@", [[NSString alloc] initWithData:body encoding:NSUTF8StringEncoding]);
+    
     NSDictionary *imgDict = self.parameters[kImages];
     for(NSString *key in imgDict) {
         NSData *data = imgDict[key];
@@ -253,8 +255,6 @@ static const char *MULTIPART_CHARS = "1234567890_-qwertyuiopasdfghjklzxcvbnmQWER
     }
     
     [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    DLog(@"%@", [[NSString alloc] initWithData:body encoding:NSUTF8StringEncoding]);
     
     return body;
 }

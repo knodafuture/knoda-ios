@@ -7,10 +7,11 @@
 //
 
 #import "BaseTableViewCell.h"
+#import "BindableView.h"
 
 @interface ProfileCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
+@property (weak, nonatomic) IBOutlet BindableView *profileAvatarView;
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 
 @end

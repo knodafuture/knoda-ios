@@ -23,8 +23,19 @@
         self.totalPredictions = [[dictionary objectForKey: @"total_predictions"]integerValue];
         self.alerts = [[dictionary objectForKey: @"alerts"]integerValue];
         self.badges = [[dictionary objectForKey: @"badges"]integerValue];
+        
+        NSDictionary *avatarImages = dictionary[@"avatar_image"];
+        if(avatarImages.count) {
+            self.thumbImage = avatarImages[@"thumb"];
+            self.smallImage = avatarImages[@"small"];
+            self.bigImage   = avatarImages[@"big"];
+        }
     }
     return self;
+}
+
+- (BOOL)hasAvatar {
+    return self.thumbImage && self.smallImage && self.bigImage;
 }
 
 @end

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "JSON.h"
 
+extern NSString* const kBaseURL;
 
 extern const NSInteger kRequestTimeoutError;
 extern const NSInteger kInternetOfflineError;

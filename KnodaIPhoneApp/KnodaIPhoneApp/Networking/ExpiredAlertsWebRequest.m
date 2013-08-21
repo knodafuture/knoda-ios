@@ -73,7 +73,7 @@
         
         if ([predictionDictionary objectForKey: @"user_avatar"] != nil && ![[predictionDictionary objectForKey: @"user_avatar"] isKindOfClass: [NSNull class]])
         {
-            prediction.userAvatarURL = [NSURL URLWithString: [[predictionDictionary objectForKey: @"user_avatar"] objectForKey: @"small"]];
+            prediction.userAvatars = predictionDictionary[@"user_avatar"];
         }
         
         if (![[predictionDictionary objectForKey: @"outcome"] isKindOfClass: [NSNull class]])

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ZKQ-aW-8t7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12A269" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ZKQ-aW-8t7">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -688,10 +688,31 @@
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                                 </view>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="youda_avatar.jpg" id="srI-P4-rUb">
+                                                                <view contentMode="scaleToFill" id="ZVu-GC-gui" customClass="BindableView">
                                                                     <rect key="frame" x="17" y="11" width="20" height="20"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                </imageView>
+                                                                    <subviews>
+                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="DTS-3W-gZ0">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                        </imageView>
+                                                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" style="gray" id="rJP-5Z-kkJ">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                        </activityIndicatorView>
+                                                                    </subviews>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                            <real key="value" value="3"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                    <connections>
+                                                                        <outlet property="activityIndicator" destination="rJP-5Z-kkJ" id="O03-ux-7Es"/>
+                                                                        <outlet property="imageView" destination="DTS-3W-gZ0" id="uSX-CT-Ics"/>
+                                                                    </connections>
+                                                                </view>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="YodaTheMaster" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="S4S-hy-vz5">
                                                                     <rect key="frame" x="50" y="11.5" width="140" height="21"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -703,7 +724,7 @@
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         </view>
                                                         <connections>
-                                                            <outlet property="profileImageView" destination="srI-P4-rUb" id="gSi-RP-31B"/>
+                                                            <outlet property="profileAvatarView" destination="ZVu-GC-gui" id="Geq-Q7-0Gr"/>
                                                             <outlet property="selectedBackgroundView" destination="cdU-lp-zgO" id="7rE-Mx-vPb"/>
                                                             <outlet property="userNameLabel" destination="S4S-hy-vz5" id="jps-O0-rVb"/>
                                                             <segue destination="E4W-rX-Wd1" kind="custom" customClass="NavigationSegue" id="3vp-zO-L2k"/>
@@ -1139,16 +1160,31 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </view>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="youda_avatar.jpg" id="SBo-Dg-hof">
+                                        <view contentMode="scaleToFill" id="aKR-z6-Ow2" customClass="BindableView">
                                             <rect key="frame" x="15" y="12" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="SBo-Dg-hof">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" style="gray" id="YvK-0d-ZAE">
+                                                    <rect key="frame" x="15" y="15" width="20" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </activityIndicatorView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                     <real key="value" value="3"/>
                                                 </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                             </userDefinedRuntimeAttributes>
-                                        </imageView>
+                                            <connections>
+                                                <outlet property="activityIndicator" destination="YvK-0d-ZAE" id="kgC-d1-h7b"/>
+                                                <outlet property="imageView" destination="SBo-Dg-hof" id="mYL-0L-22y"/>
+                                            </connections>
+                                        </view>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="YodaTheMaster" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3e6-Ox-aKM">
                                             <rect key="frame" x="82" y="5" width="218" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1236,6 +1272,7 @@
                                 <connections>
                                     <outlet property="agreeImage" destination="4Ja-gL-nlx" id="b4x-Hu-pkF"/>
                                     <outlet property="agreeQuestionView" destination="iSF-kP-QWs" id="ygO-jH-gek"/>
+                                    <outlet property="avatarView" destination="aKR-z6-Ow2" id="cXJ-GG-sec"/>
                                     <outlet property="bodyLabel" destination="fi7-fU-AHz" id="MJq-IU-Qfx"/>
                                     <outlet property="disagreeImage" destination="Mti-BN-S8Q" id="Lmv-T8-Rq8"/>
                                     <outlet property="disagreeQuestionView" destination="OsV-0K-Dct" id="KaD-Gj-NZx"/>
@@ -1322,7 +1359,7 @@
             <objects>
                 <viewController id="wNN-TM-pOg" customClass="PredictionDetailsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hDO-dV-CXd">
-                        <rect key="frame" x="0.0" y="64" width="320" height="588"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="588"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="OOz-U0-cxm">
@@ -1361,16 +1398,31 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="youda_avatar.jpg" id="sI9-2B-IZ5">
+                                                <view contentMode="scaleToFill" id="XNe-GN-86T" customClass="BindableView">
                                                     <rect key="frame" x="15" y="12" width="50" height="50"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="a1R-dF-6iB">
+                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        </imageView>
+                                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" style="gray" id="8JH-b7-jbP">
+                                                            <rect key="frame" x="15" y="15" width="20" height="20"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        </activityIndicatorView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <real key="value" value="3"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
-                                                </imageView>
+                                                    <connections>
+                                                        <outlet property="activityIndicator" destination="8JH-b7-jbP" id="und-75-cJ0"/>
+                                                        <outlet property="imageView" destination="a1R-dF-6iB" id="Xv8-xB-kPj"/>
+                                                    </connections>
+                                                </view>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="YodaTheMaster" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hCW-FK-Xme">
                                                     <rect key="frame" x="82" y="5" width="218" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1457,6 +1509,7 @@
                                         <connections>
                                             <outlet property="agreeImage" destination="m0c-mN-I23" id="ARx-fi-nWI"/>
                                             <outlet property="agreeQuestionView" destination="81H-Om-HOL" id="0N2-6O-HXI"/>
+                                            <outlet property="avatarView" destination="XNe-GN-86T" id="l00-oW-xpc"/>
                                             <outlet property="bodyLabel" destination="Asd-pU-mEc" id="gzg-hM-iy0"/>
                                             <outlet property="disagreeImage" destination="Km1-CJ-GYX" id="JLe-Oh-Ihy"/>
                                             <outlet property="disagreeQuestionView" destination="PdB-xd-WF7" id="LDF-iy-Si6"/>
@@ -2234,22 +2287,31 @@ outcome of your prediction</string>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </view>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="youda_avatar.jpg" id="ib0-EE-Hmx">
-                                            <rect key="frame" x="15" y="12" width="50" height="49"/>
+                                        <view contentMode="scaleToFill" id="jj9-X3-ihj" customClass="BindableView">
+                                            <rect key="frame" x="15" y="12" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="VaC-r2-kGf">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" style="gray" id="pzv-Ij-CRY">
+                                                    <rect key="frame" x="15" y="15" width="20" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </activityIndicatorView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                     <real key="value" value="3"/>
                                                 </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                                <userDefinedRuntimeAttribute type="size" keyPath="layer.shadowOffset">
-                                                    <size key="value" width="2" height="2"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowOpacity">
-                                                    <real key="value" value="1"/>
-                                                </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
-                                        </imageView>
+                                            <connections>
+                                                <outlet property="activityIndicator" destination="pzv-Ij-CRY" id="DlN-wO-AOm"/>
+                                                <outlet property="imageView" destination="VaC-r2-kGf" id="vPG-Ad-OMQ"/>
+                                            </connections>
+                                        </view>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="YodaTheMaster" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IUX-EV-4qj">
                                             <rect key="frame" x="82" y="5" width="218" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2328,6 +2390,7 @@ outcome of your prediction</string>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outlet property="agreeQuestionView" destination="dxB-5T-dQm" id="PHx-jx-P9g"/>
+                                    <outlet property="avatarView" destination="jj9-X3-ihj" id="1vN-5L-nZH"/>
                                     <outlet property="bodyLabel" destination="rqN-bx-KIR" id="pHP-QK-wiz"/>
                                     <outlet property="disagreeQuestionView" destination="A3w-DT-grX" id="KVy-mb-7Vc"/>
                                     <outlet property="expirationDateLabel" destination="qXT-Ed-mUX" id="WRv-bN-Bx2"/>
@@ -2409,22 +2472,31 @@ outcome of your prediction</string>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </view>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="youda_avatar.jpg" id="uia-Ad-73Z">
-                                            <rect key="frame" x="15" y="12" width="50" height="49"/>
+                                        <view contentMode="scaleToFill" id="kz3-sk-Req" customClass="BindableView">
+                                            <rect key="frame" x="15" y="12" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="9Tb-hn-gSU">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" style="gray" id="Ejy-ym-RHW">
+                                                    <rect key="frame" x="15" y="15" width="20" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </activityIndicatorView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                     <real key="value" value="3"/>
                                                 </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                                <userDefinedRuntimeAttribute type="size" keyPath="layer.shadowOffset">
-                                                    <size key="value" width="2" height="2"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowOpacity">
-                                                    <real key="value" value="1"/>
-                                                </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
-                                        </imageView>
+                                            <connections>
+                                                <outlet property="activityIndicator" destination="Ejy-ym-RHW" id="Ddy-un-Wvr"/>
+                                                <outlet property="imageView" destination="9Tb-hn-gSU" id="Vt9-rV-X0z"/>
+                                            </connections>
+                                        </view>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="YodaTheMaster" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Fzf-6P-Dvt">
                                             <rect key="frame" x="82" y="5" width="218" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2512,6 +2584,7 @@ outcome of your prediction</string>
                                 <connections>
                                     <outlet property="agreeImage" destination="GR7-iW-A61" id="DgS-mj-ZEU"/>
                                     <outlet property="agreeQuestionView" destination="82x-5d-2cd" id="t1N-3Z-zqw"/>
+                                    <outlet property="avatarView" destination="kz3-sk-Req" id="wVc-rx-5zW"/>
                                     <outlet property="bodyLabel" destination="Tg5-yo-R65" id="Hug-SS-af1"/>
                                     <outlet property="disagreeImage" destination="GVV-Pd-h5O" id="KXs-24-sCT"/>
                                     <outlet property="disagreeQuestionView" destination="ft5-BM-QyQ" id="hFa-JV-52W"/>
@@ -2729,22 +2802,31 @@ outcome of your prediction</string>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="youda_avatar.jpg" id="kCw-Ue-205">
-                                                    <rect key="frame" x="18" y="44" width="50" height="49"/>
+                                                <view contentMode="scaleToFill" id="veM-ZS-qhV" customClass="BindableView">
+                                                    <rect key="frame" x="18" y="44" width="50" height="50"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="81Q-ZO-idL">
+                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        </imageView>
+                                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" style="gray" id="qfn-og-G3B">
+                                                            <rect key="frame" x="15" y="15" width="20" height="20"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        </activityIndicatorView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <real key="value" value="3"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                                        <userDefinedRuntimeAttribute type="size" keyPath="layer.shadowOffset">
-                                                            <size key="value" width="2" height="2"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowOpacity">
-                                                            <real key="value" value="1"/>
-                                                        </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
-                                                </imageView>
+                                                    <connections>
+                                                        <outlet property="activityIndicator" destination="qfn-og-G3B" id="xm2-AR-SRK"/>
+                                                        <outlet property="imageView" destination="81Q-ZO-idL" id="HH8-R1-K3U"/>
+                                                    </connections>
+                                                </view>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="YodaTheMaster" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nHq-53-u6f">
                                                     <rect key="frame" x="85" y="37" width="218" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2895,22 +2977,31 @@ outcome of your prediction</string>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="youda_avatar.jpg" id="CuM-Ra-pGU">
-                                                    <rect key="frame" x="18" y="44" width="50" height="49"/>
+                                                <view contentMode="scaleToFill" id="sJE-oh-ahx" customClass="BindableView">
+                                                    <rect key="frame" x="18" y="44" width="50" height="50"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="u2s-Qj-x3S">
+                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        </imageView>
+                                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" style="gray" id="Enk-oX-tmo">
+                                                            <rect key="frame" x="15" y="15" width="20" height="20"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        </activityIndicatorView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <real key="value" value="3"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                                        <userDefinedRuntimeAttribute type="size" keyPath="layer.shadowOffset">
-                                                            <size key="value" width="2" height="2"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowOpacity">
-                                                            <real key="value" value="1"/>
-                                                        </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
-                                                </imageView>
+                                                    <connections>
+                                                        <outlet property="activityIndicator" destination="Enk-oX-tmo" id="YGV-9H-JfI"/>
+                                                        <outlet property="imageView" destination="u2s-Qj-x3S" id="Tkn-JX-Nof"/>
+                                                    </connections>
+                                                </view>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="YodaTheMaster" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jax-ob-F2u">
                                                     <rect key="frame" x="85" y="37" width="218" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2964,6 +3055,7 @@ outcome of your prediction</string>
                                         <connections>
                                             <outlet property="alertMarkImageView" destination="jGW-bh-Uh9" id="VIS-0a-Ud4"/>
                                             <outlet property="alertTitle" destination="6pn-A8-1LU" id="AiS-Du-4pb"/>
+                                            <outlet property="avatarView" destination="sJE-oh-ahx" id="Hpx-ts-t5v"/>
                                             <outlet property="bodyLabel" destination="zMc-0O-kFA" id="mF9-jX-g0A"/>
                                             <outlet property="expirationDateLabel" destination="6xk-s8-vuF" id="5aG-dH-Ihg"/>
                                             <outlet property="metadataLabel" destination="A8U-hT-VDH" id="SoG-j3-enr"/>
@@ -3193,22 +3285,31 @@ outcome of your prediction</string>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="youda_avatar.jpg" id="eGr-WV-whq">
-                                <rect key="frame" x="15" y="10" width="50" height="49"/>
+                            <view contentMode="scaleToFill" id="Wwv-Ps-wNC" customClass="BindableView">
+                                <rect key="frame" x="15" y="10" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="waw-zN-n2i">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" style="gray" id="Ad4-Ia-Tw2">
+                                        <rect key="frame" x="15" y="15" width="20" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <real key="value" value="3"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="size" keyPath="layer.shadowOffset">
-                                        <size key="value" width="2" height="2"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowOpacity">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
-                            </imageView>
+                                <connections>
+                                    <outlet property="activityIndicator" destination="Ad4-Ia-Tw2" id="D49-Ja-OCF"/>
+                                    <outlet property="imageView" destination="waw-zN-n2i" id="qlk-TA-bwN"/>
+                                </connections>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="88" sectionHeaderHeight="22" sectionFooterHeight="22" id="DKL-NF-JLd">
                                 <rect key="frame" x="0.0" y="74" width="320" height="494"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3240,22 +3341,31 @@ outcome of your prediction</string>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="youda_avatar.jpg" id="TPg-Ew-frU">
-                                                    <rect key="frame" x="15" y="12" width="50" height="49"/>
+                                                <view contentMode="scaleToFill" id="25c-K8-JiP" customClass="BindableView">
+                                                    <rect key="frame" x="15" y="12" width="50" height="50"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="nEB-4i-36G">
+                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        </imageView>
+                                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" style="gray" id="LYc-vx-LlQ">
+                                                            <rect key="frame" x="15" y="15" width="20" height="20"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        </activityIndicatorView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <real key="value" value="3"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                                        <userDefinedRuntimeAttribute type="size" keyPath="layer.shadowOffset">
-                                                            <size key="value" width="2" height="2"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowOpacity">
-                                                            <real key="value" value="1"/>
-                                                        </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
-                                                </imageView>
+                                                    <connections>
+                                                        <outlet property="activityIndicator" destination="LYc-vx-LlQ" id="gP1-Tc-Sjx"/>
+                                                        <outlet property="imageView" destination="nEB-4i-36G" id="8aQ-OE-nZy"/>
+                                                    </connections>
+                                                </view>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="YodaTheMaster" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="y2t-fC-qLu">
                                                     <rect key="frame" x="82" y="5" width="218" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -3336,6 +3446,7 @@ outcome of your prediction</string>
                                         <connections>
                                             <outlet property="agreeImage" destination="Stc-fS-Rry" id="eMb-2S-CAf"/>
                                             <outlet property="agreeQuestionView" destination="Z30-Wj-ktI" id="cmC-Ts-2aH"/>
+                                            <outlet property="avatarView" destination="25c-K8-JiP" id="cl2-6m-uBZ"/>
                                             <outlet property="disagreeImage" destination="5q1-j0-jxC" id="Qdv-T9-nfk"/>
                                             <outlet property="disagreeQuestionView" destination="gyY-fr-hjl" id="3YC-EP-i1y"/>
                                         </connections>
@@ -3470,10 +3581,25 @@ outcome of your prediction</string>
                                     <segue destination="sd8-UN-EgX" kind="push" identifier="ProfileToTermsOfUseSegue" id="ebR-4n-eVY"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Default.png" id="6Pq-8a-A9d">
+                            <view contentMode="scaleToFill" id="mcr-h0-wFk" customClass="BindableView">
                                 <rect key="frame" x="20" y="13" width="157" height="157"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                            </imageView>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" id="B3w-ew-Q0F">
+                                        <rect key="frame" x="0.0" y="0.0" width="157" height="157"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" style="gray" id="qS7-fX-ebg">
+                                        <rect key="frame" x="68" y="68" width="20" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="activityIndicator" destination="qS7-fX-ebg" id="7QF-Im-RVY"/>
+                                    <outlet property="imageView" destination="B3w-ew-Q0F" id="PJb-Dm-Uin"/>
+                                </connections>
+                            </view>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Login" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BOq-cn-2MG">
                                 <rect key="frame" x="185" y="27" width="115" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -3539,7 +3665,7 @@ outcome of your prediction</string>
                         <outlet property="accountDetailsTableView" destination="kQT-OI-osY" id="c30-GG-eyH"/>
                         <outlet property="loginLabel" destination="BOq-cn-2MG" id="Ahp-4c-FNQ"/>
                         <outlet property="pointsLabel" destination="ZZh-i2-KNf" id="21s-Xw-NZ4"/>
-                        <outlet property="profileImageView" destination="6Pq-8a-A9d" id="V0n-5p-KIc"/>
+                        <outlet property="profileAvatarView" destination="mcr-h0-wFk" id="q0V-TA-fsV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lgo-yb-njz" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3553,7 +3679,6 @@ outcome of your prediction</string>
         <image name="BS.png" width="127" height="44"/>
         <image name="BS_pressed.png" width="127" height="44"/>
         <image name="BS_unsigned.png" width="127" height="44"/>
-        <image name="Default.png" width="320" height="480"/>
         <image name="DisagreeBtn.png" width="154" height="44"/>
         <image name="DisagreeBtn_pressed.png" width="154" height="44"/>
         <image name="NoBtn.png" width="127" height="44"/>
@@ -3606,16 +3731,11 @@ outcome of your prediction</string>
         <image name="unfinished.png" width="259" height="44"/>
         <image name="unfinished_press.png" width="259" height="44"/>
         <image name="xIcon.png" width="13" height="13"/>
-        <image name="youda_avatar.jpg" width="80" height="80"/>
     </resources>
     <classes>
         <class className="AddPredictionViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AddPredictionViewController.h"/>
             <relationships>
-                <relationship kind="action" name="cancel:"/>
-                <relationship kind="action" name="predict:"/>
-                <relationship kind="action" name="selectCategoryPressed:"/>
-                <relationship kind="action" name="selectExpirationPressed:"/>
                 <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="categoryButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="categoryLabel" candidateClass="UILabel"/>
@@ -3632,14 +3752,12 @@ outcome of your prediction</string>
             <relationships>
                 <relationship kind="outlet" name="alertMarkImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="alertTitle" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="avatarView" candidateClass="BindableView"/>
             </relationships>
         </class>
         <class className="AlertsViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AlertsViewController.h"/>
             <relationships>
-                <relationship kind="action" name="lerfButtonPressed:"/>
-                <relationship kind="action" name="menuButtonPressed:"/>
-                <relationship kind="action" name="rightButtonPressed:"/>
                 <relationship kind="outlet" name="detailsView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="segmentedControlImage" candidateClass="UIImageView"/>
             </relationships>
@@ -3659,12 +3777,18 @@ outcome of your prediction</string>
         <class className="BadgesCollectionViewController" superclassName="UICollectionViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/BadgesCollectionViewController.h"/>
             <relationships>
-                <relationship kind="action" name="menuButtonPressed:"/>
                 <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
             </relationships>
         </class>
         <class className="BaseTableViewCell" superclassName="UITableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/BaseTableViewCell.h"/>
+        </class>
+        <class className="BindableView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/BindableView.h"/>
+            <relationships>
+                <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+            </relationships>
         </class>
         <class className="CustomizedTextField" superclassName="UITextField">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomizedTextField.h"/>
@@ -3678,8 +3802,6 @@ outcome of your prediction</string>
         <class className="ForgotPasswordViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ForgotPasswordViewController.h"/>
             <relationships>
-                <relationship kind="action" name="cancelButtonPressed:"/>
-                <relationship kind="action" name="sendButtonPressed:"/>
                 <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="errorLabel" candidateClass="UILabel"/>
@@ -3690,9 +3812,6 @@ outcome of your prediction</string>
         <class className="HistoryViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/HistoryViewController.h"/>
             <relationships>
-                <relationship kind="action" name="lerfButtonPressed:"/>
-                <relationship kind="action" name="menuButtonPressed:"/>
-                <relationship kind="action" name="rightButtonPressed:"/>
                 <relationship kind="outlet" name="detailsView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="segmentedControlImage" candidateClass="UIImageView"/>
             </relationships>
@@ -3713,7 +3832,6 @@ outcome of your prediction</string>
         <class className="LoginViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
             <relationships>
-                <relationship kind="action" name="loginButtonPressed:"/>
                 <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="errorLabel" candidateClass="UILabel"/>
@@ -3803,12 +3921,12 @@ outcome of your prediction</string>
             <relationships>
                 <relationship kind="outlet" name="agreeImage" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="agreeQuestionView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="avatarView" candidateClass="BindableView"/>
                 <relationship kind="outlet" name="bodyLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="disagreeImage" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="disagreeQuestionView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="expirationDateLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="guessMarkImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="metadataLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="usernameLabel" candidateClass="UILabel"/>
             </relationships>
@@ -3816,11 +3934,21 @@ outcome of your prediction</string>
         <class className="ProfileCell" superclassName="UITableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfileCell.h"/>
             <relationships>
-                <relationship kind="outlet" name="profileImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="profileAvatarView" candidateClass="BindableView"/>
                 <relationship kind="outlet" name="userNameLabel" candidateClass="UILabel"/>
             </relationships>
         </class>
-                <class className="SelectPictureViewController" superclassName="UIViewController">
+        <class className="ProfileViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfileViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="accountDetailsTableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="loginLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="pointsLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="profileAvatarView" candidateClass="BindableView"/>
+            </relationships>
+        </class>
+        <class className="SelectPictureViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SelectPictureViewController.h"/>
             <relationships>
                 <relationship kind="action" name="backButtonPressed:" candidateClass="UIButton"/>
@@ -3833,7 +3961,6 @@ outcome of your prediction</string>
         <class className="SignUpViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SignUpViewController.h"/>
             <relationships>
-                <relationship kind="action" name="signUpButtonPressed:"/>
                 <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="emailTextFiled" candidateClass="UITextField"/>
@@ -3862,9 +3989,6 @@ outcome of your prediction</string>
         <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
         </class>
-        <class className="UICollectionViewLayout" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewLayout.h"/>
-        </class>
         <class className="WelcomeViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/WelcomeViewController.h"/>
             <relationships>
@@ -3880,9 +4004,9 @@ outcome of your prediction</string>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="CM5-5K-qH1"/>
         <segue reference="Ef7-FX-Fpl"/>
-        <segue reference="ebR-4n-eVY"/>
+        <segue reference="7J3-4U-wrw"/>
         <segue reference="IMX-a1-Bbr"/>
+        <segue reference="ebR-4n-eVY"/>
     </inferredMetricsTieBreakers>
 </document>

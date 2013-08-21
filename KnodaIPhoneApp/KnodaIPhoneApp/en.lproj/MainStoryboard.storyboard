@@ -888,12 +888,24 @@
                                     <action selector="pictureButtonTapped:" destination="PRf-Zf-DSQ" eventType="touchUpInside" id="gI4-3z-JBp"/>
                                 </connections>
                             </button>
+                            <view hidden="YES" contentMode="scaleToFill" id="S5F-0G-YgU">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="528"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="whiteLarge" id="pna-Ff-BKs">
+                                        <rect key="frame" x="141" y="246" width="37" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.59999999999999998" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.38823529411764707" green="0.68627450980392157" blue="0.082352941176470587" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="oSO-jt-SBd"/>
                     <connections>
                         <outlet property="doneButton" destination="e6O-Uw-EdF" id="Ey1-dV-Zwz"/>
+                        <outlet property="loadingView" destination="S5F-0G-YgU" id="lgx-wJ-a6I"/>
                         <outlet property="pictureButton" destination="aUc-kD-TO4" id="cdu-Wy-FNn"/>
                     </connections>
                 </viewController>
@@ -3594,7 +3606,7 @@ outcome of your prediction</string>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     </activityIndicatorView>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="activityIndicator" destination="qS7-fX-ebg" id="7QF-Im-RVY"/>
                                     <outlet property="imageView" destination="B3w-ew-Q0F" id="PJb-Dm-Uin"/>
@@ -3955,6 +3967,7 @@ outcome of your prediction</string>
                 <relationship kind="action" name="doneButtontapped:"/>
                 <relationship kind="action" name="pictureButtonTapped:"/>
                 <relationship kind="outlet" name="doneButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="loadingView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="pictureButton" candidateClass="UIButton"/>
             </relationships>
         </class>

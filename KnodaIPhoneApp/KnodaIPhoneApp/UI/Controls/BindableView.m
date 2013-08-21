@@ -26,7 +26,7 @@
     }
 }
 
-- (void)bindToURL:(NSString *)imgUrl creationDate:(NSDate *)date {
+- (void)bindToURL:(NSString *)imgUrl {
     [[ImageCache instance] bindImage:imgUrl toView:self];
 }
 

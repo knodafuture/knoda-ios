@@ -51,7 +51,7 @@ static NSString * const accountDetailsTableViewCellIdentifier = @"accountDetails
 
 - (void) fillInUsersInformation {
     User * user = self.appDelegate.user;
-    [self.profileAvatarView bindToURL:user.bigImage creationDate:nil];
+    [self.profileAvatarView bindToURL:user.bigImage];
     self.loginLabel.text = user.name;
     self.pointsLabel.text = [NSString stringWithFormat:@"%d points",user.points];    
     self.accountDetailsArray = [NSArray arrayWithObjects:self.appDelegate.user.name,user.email,@"Change Password", nil];

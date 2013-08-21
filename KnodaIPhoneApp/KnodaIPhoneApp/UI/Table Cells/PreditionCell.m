@@ -163,7 +163,7 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
         self.disagreeImage.image = [UIImage imageNamed: (!self.prediction.settled) ? @"disagree" : ((self.prediction.outcome == NO) ? @"disagree_win" : @"disagree_lose")];
     }
     
-    [self.avatarView bindToURL:self.prediction.smallAvatar creationDate:nil];
+    [self.avatarView bindToURL:self.prediction.smallAvatar];
 }
 
 - (void) fillWithPrediction: (Prediction*) prediction

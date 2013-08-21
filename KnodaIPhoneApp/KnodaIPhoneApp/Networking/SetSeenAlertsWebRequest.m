@@ -21,7 +21,7 @@
         [parameterString appendFormat: @"&ids[]=%d", [chellangeID integerValue]];
     }
     
-    NSDictionary* params = @{@"ids[]=": parameterString};
+    NSDictionary* params = @{@"ids[]": parameterString};
     
     self = [super initWithParameters: params];
     return self;

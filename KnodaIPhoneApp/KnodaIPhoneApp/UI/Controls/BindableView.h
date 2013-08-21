@@ -15,6 +15,6 @@
 
 @property (nonatomic, assign) BOOL loading;
 
-- (void)bindToURL:(NSString *)imgUrl creationDate:(NSDate *)date;
+- (void)bindToURL:(NSString *)imgUrl;
 
 @end

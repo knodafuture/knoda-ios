@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ZKQ-aW-8t7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12A269" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ZKQ-aW-8t7">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -724,7 +724,7 @@
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         </view>
                                                         <connections>
-                                                            <outlet property="profileAvatarView" destination="ZVu-GC-gui" id="Geq-Q7-0Gr"/>
+                                                            <outlet property="avatarView" destination="ZVu-GC-gui" id="TV8-uO-DE6"/>
                                                             <outlet property="selectedBackgroundView" destination="cdU-lp-zgO" id="7rE-Mx-vPb"/>
                                                             <outlet property="userNameLabel" destination="S4S-hy-vz5" id="jps-O0-rVb"/>
                                                             <segue destination="E4W-rX-Wd1" kind="custom" customClass="NavigationSegue" id="3vp-zO-L2k"/>
@@ -2836,7 +2836,7 @@ outcome of your prediction</string>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <outlet property="activityIndicator" destination="qfn-og-G3B" id="xm2-AR-SRK"/>
-                                                        <outlet property="imageView" destination="81Q-ZO-idL" id="HH8-R1-K3U"/>
+                                                        <outlet property="imageView" destination="81Q-ZO-idL" id="NYm-lu-Hed"/>
                                                     </connections>
                                                 </view>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="YodaTheMaster" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nHq-53-u6f">
@@ -2901,6 +2901,7 @@ outcome of your prediction</string>
                                             <outlet property="agreeImage" destination="b6D-7m-HOX" id="c5f-uG-OO8"/>
                                             <outlet property="alertMarkImageView" destination="Lfr-0x-QR7" id="PYf-IJ-GmF"/>
                                             <outlet property="alertTitle" destination="jPp-w9-wLT" id="F72-Yd-VJ9"/>
+                                            <outlet property="avatarView" destination="veM-ZS-qhV" id="mGT-AA-cND"/>
                                             <outlet property="bodyLabel" destination="r6y-zi-vHd" id="ahw-95-2es"/>
                                             <outlet property="disagreeImage" destination="WOM-fv-duO" id="PeF-U4-azG"/>
                                             <outlet property="expirationDateLabel" destination="jU5-ce-3zr" id="h9p-v4-FQX"/>
@@ -3857,6 +3858,9 @@ outcome of your prediction</string>
         <image name="btnGreen.png" width="302" height="46"/>
         <image name="btn_login_green.png" width="273" height="42"/>
         <image name="btn_login_light.png" width="126" height="43"/>
+        <image name="btnChangePassword.png" width="302" height="46"/>
+        <image name="btn_login_green.png" width="273" height="42"/>
+        <image name="btn_login_light.png" width="126" height="43"/>
         <image name="btn_signup_gray.png" width="126" height="43"/>
         <image name="btn_signup_green.png" width="273" height="41"/>
         <image name="cancel_button.png" width="137" height="41"/>
@@ -3870,6 +3874,10 @@ outcome of your prediction</string>
         <image name="downGreenBtn.png" width="302" height="46"/>
         <image name="down_login.png" width="273" height="40"/>
         <image name="down_login_small.png" width="126" height="43"/>
+        <image name="downChangePassword.png" width="302" height="46"/>
+        <image name="down_login.png" width="273" height="40"/>
+        <image name="down_login_small.png" width="126" height="43"/>
+        <image name="down_signOut.png" width="302" height="46"/>
         <image name="down_signup.png" width="273" height="40"/>
         <image name="down_signup_small.png" width="126" height="43"/>
         <image name="errormessage.png" width="320" height="47"/>
@@ -4049,12 +4057,6 @@ outcome of your prediction</string>
                 <relationship kind="outlet" name="unfinishedButton" candidateClass="UIButton"/>
             </relationships>
         </class>
-        <class className="PasswordCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PasswordCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="passWordTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
         <class className="PredictionCategoryCell" superclassName="BaseTableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PredictionCategoryCell.h"/>
             <relationships>
@@ -4121,7 +4123,7 @@ outcome of your prediction</string>
         <class className="ProfileCell" superclassName="UITableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfileCell.h"/>
             <relationships>
-                <relationship kind="outlet" name="profileAvatarView" candidateClass="BindableView"/>
+                <relationship kind="outlet" name="avatarView" candidateClass="BindableView"/>
                 <relationship kind="outlet" name="userNameLabel" candidateClass="UILabel"/>
             </relationships>
         </class>
@@ -4184,6 +4186,12 @@ outcome of your prediction</string>
                 <relationship kind="outlet" name="promotionLabel" candidateClass="UILabel"/>
             </relationships>
         </class>
+    <class className="PasswordCell" superclassName="UITableViewCell">
+    <source key="sourceIdentifier" type="project" relativePath="./Classes/PasswordCell.h"/>
+    <relationships>
+    <relationship kind="outlet" name="passWordTextField" candidateClass="UITextField"/>
+    </relationships>
+    </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

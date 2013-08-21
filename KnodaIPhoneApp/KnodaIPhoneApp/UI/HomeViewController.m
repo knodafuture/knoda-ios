@@ -63,7 +63,6 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
 
 - (void) viewWillDisappear: (BOOL) animated
 {
-    [self.cellUpdateTimer invalidate];
     self.cellUpdateTimer = nil;
     
     [super viewWillDisappear: animated];

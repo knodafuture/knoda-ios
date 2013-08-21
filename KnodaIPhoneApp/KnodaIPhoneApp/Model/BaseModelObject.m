@@ -21,22 +21,16 @@ NSString* const kSelfObserverKey = @"selfObserver";
 @synthesize doNotObserve = doNotObserve;
 
 + (NSSet *)propertyKeys {
+    NSMutableSet *keys = [NSMutableSet set];
+    unsigned int count;
     
-    static NSMutableSet *keys = nil;
-    static dispatch_once_t onceToken;
+    objc_property_t *properties = class_copyPropertyList([self class], &count);
     
-    dispatch_once(&onceToken, ^{
-        
-        keys = [NSMutableSet set];
-        unsigned int count;
-        
-        objc_property_t *properties = class_copyPropertyList([self class], &count);
-        
-        for (size_t i = 0; i < count; ++i) {
-            [keys addObject:[NSString stringWithCString:property_getName(properties[i]) encoding:NSASCIIStringEncoding]];
-        }
-        free(properties);
-    });
+    for (size_t i = 0; i < count; ++i) {
+        [keys addObject:[NSString stringWithCString:property_getName(properties[i]) encoding:NSASCIIStringEncoding]];
+    }
+    free(properties);
+    
     return keys;
 }
 

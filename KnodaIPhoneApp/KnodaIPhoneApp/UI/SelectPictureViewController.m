@@ -72,8 +72,8 @@ static const int kDefaultAvatarsCount = 5;
     UIImagePickerController *pickerVC = [UIImagePickerController new];
     
     pickerVC.sourceType    = sourceType;
-    pickerVC.allowsEditing  = NO;
-    pickerVC.delegate        = self;
+    pickerVC.allowsEditing = NO;
+    pickerVC.delegate      = self;
     
     [self presentViewController:pickerVC animated:YES completion:nil];
 }
@@ -136,7 +136,7 @@ static const int kDefaultAvatarsCount = 5;
     [self dismissViewControllerAnimated:YES completion:^{
         UIImage *img = info[UIImagePickerControllerOriginalImage];
         if(img) {
-            self.avatarImage = [img scaledCroppedToSize:self.pictureButton.frame.size];
+            self.avatarImage = [img scaledToSize:self.pictureButton.frame.size];
             [self.pictureButton setImage:self.avatarImage forState:UIControlStateNormal];
         }
     }];

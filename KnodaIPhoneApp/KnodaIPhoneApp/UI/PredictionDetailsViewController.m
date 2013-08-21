@@ -226,7 +226,7 @@ static const int kBSAlertTag = 1001;
             if(self.prediction.hasOutcome) {
                 return RowStatus;
             }
-            else if(self.prediction.chellange.isOwn && self.prediction.expired) {
+            else if(self.prediction.chellange.isOwn && [self.prediction isExpired]) {
                 return RowOutcome;
             }
             else if(!self.prediction.chellange) {

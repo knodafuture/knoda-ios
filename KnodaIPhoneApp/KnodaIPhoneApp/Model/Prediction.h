@@ -36,4 +36,6 @@
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 
+- (BOOL)isExpired;
+
 @end

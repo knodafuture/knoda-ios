@@ -22,11 +22,11 @@ static const float kSmallCellHeight = 99.0;
 @implementation OutcomeCell
 
 - (void)setupCellWithPrediction:(Prediction *)prediction {
-    self.unfinishedButton.hidden = !prediction.expired;
+    self.unfinishedButton.hidden = ![prediction isExpired];
 }
 
 + (CGFloat)cellHeightForPrediction:(Prediction *)prediction {
-    return prediction.expired ? kBigCellHeight : kSmallCellHeight;
+    return [prediction isExpired] ? kBigCellHeight : kSmallCellHeight;
 }
 
 @end

@@ -132,15 +132,16 @@ static NSString* const kApplicationSegue = @"ApplicationNavigationSegue";
         
         LoginWebRequest* loginRequest = [[LoginWebRequest alloc] initWithUsername: self.usernameTextField.text password: self.passwordTextField.text];
         [loginRequest executeWithCompletionBlock: ^
-         {
-             self.activityView.hidden = YES;
-             
+         {             
              if (loginRequest.errorCode == 0)
              {
                  self.appDelegate.user = loginRequest.user;
                  
                  ProfileWebRequest *profileRequest = [ProfileWebRequest new];
                  [profileRequest executeWithCompletionBlock:^{
+                     
+                     self.activityView.hidden = YES;
+                     
                      if(profileRequest.isSucceeded) {
                          [self.appDelegate.user updateWithObject:profileRequest.user];
                          [self performSegueWithIdentifier: kApplicationSegue  sender: self];
@@ -150,13 +151,16 @@ static NSString* const kApplicationSegue = @"ApplicationNavigationSegue";
                      }
                  }];
              }
-             else if (loginRequest.errorCode == 403)
-             {
-                 [self showError: NSLocalizedString(@"Invalid username or password", @"")];
-             }
-             else
-             {
-                 [self showError: NSLocalizedString(@"Unknown error. Please try later.", @"")];
+             else {
+                 self.activityView.hidden = YES;
+                 if (loginRequest.errorCode == 403)
+                 {
+                     [self showError: NSLocalizedString(@"Invalid username or password", @"")];
+                 }
+                 else
+                 {
+                     [self showError: NSLocalizedString(@"Unknown error. Please try later.", @"")];
+                 }
              }
          }];
     }

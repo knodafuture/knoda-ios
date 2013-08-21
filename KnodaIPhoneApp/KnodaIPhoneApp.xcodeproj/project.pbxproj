@@ -49,6 +49,7 @@
 		5746F2A617BB88F200C835FA /* NSDictionary+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5746F2A517BB88F200C835FA /* NSDictionary+Utils.m */; };
 		5746F2A917BB99FB00C835FA /* BSWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5746F2A817BB99FA00C835FA /* BSWebRequest.m */; };
 		5746F2AC17BBC01800C835FA /* OutcomeWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5746F2AB17BBC01800C835FA /* OutcomeWebRequest.m */; };
+		575B100E17C4FBDB00782E6B /* SelectPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 575B100D17C4FBDB00782E6B /* SelectPictureViewController.m */; };
 		578E9B1D17BA218500A7B304 /* UILabel+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 578E9B1C17BA218500A7B304 /* UILabel+Utils.m */; };
 		578E9B3917BA219B00A7B304 /* AgreeBtn_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 578E9B1F17BA219B00A7B304 /* AgreeBtn_pressed.png */; };
 		578E9B3A17BA219B00A7B304 /* AgreeBtn_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 578E9B2017BA219B00A7B304 /* AgreeBtn_pressed@2x.png */; };
@@ -97,7 +98,6 @@
 		57D525A617C388D40031C1EE /* choosePhoto@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57D525A417C388D40031C1EE /* choosePhoto@2x.png */; };
 		57D525AB17C388F80031C1EE /* BadgesWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D525A817C388F80031C1EE /* BadgesWebRequest.m */; };
 		57D525AC17C388F80031C1EE /* ProfileWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D525AA17C388F80031C1EE /* ProfileWebRequest.m */; };
-		57D525AF17C389360031C1EE /* SelectPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D525AE17C389360031C1EE /* SelectPictureViewController.m */; };
 		57D525C217C4C2BD0031C1EE /* BindableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D525C117C4C2BD0031C1EE /* BindableView.m */; };
 		57D525C917C4C2C70031C1EE /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D525C617C4C2C70031C1EE /* ImageCache.m */; };
 		57D525CA17C4C2C70031C1EE /* ImageEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D525C817C4C2C70031C1EE /* ImageEntry.m */; };
@@ -328,6 +328,7 @@
 		5746F2A817BB99FA00C835FA /* BSWebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSWebRequest.m; sourceTree = "<group>"; };
 		5746F2AA17BBC01800C835FA /* OutcomeWebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutcomeWebRequest.h; sourceTree = "<group>"; };
 		5746F2AB17BBC01800C835FA /* OutcomeWebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutcomeWebRequest.m; sourceTree = "<group>"; };
+		575B100D17C4FBDB00782E6B /* SelectPictureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectPictureViewController.m; sourceTree = "<group>"; };
 		578E9B1B17BA218500A7B304 /* UILabel+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+Utils.h"; sourceTree = "<group>"; };
 		578E9B1C17BA218500A7B304 /* UILabel+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Utils.m"; sourceTree = "<group>"; };
 		578E9B1F17BA219B00A7B304 /* AgreeBtn_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AgreeBtn_pressed.png; sourceTree = "<group>"; };
@@ -386,7 +387,6 @@
 		57D525A817C388F80031C1EE /* BadgesWebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BadgesWebRequest.m; sourceTree = "<group>"; };
 		57D525A917C388F80031C1EE /* ProfileWebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileWebRequest.h; sourceTree = "<group>"; };
 		57D525AA17C388F80031C1EE /* ProfileWebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileWebRequest.m; sourceTree = "<group>"; };
-		57D525AE17C389360031C1EE /* SelectPictureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectPictureViewController.m; sourceTree = "<group>"; };
 		57D525C017C4C2BD0031C1EE /* BindableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindableView.h; sourceTree = "<group>"; };
 		57D525C117C4C2BD0031C1EE /* BindableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindableView.m; sourceTree = "<group>"; };
 		57D525C417C4C2C70031C1EE /* ImageBindable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageBindable.h; sourceTree = "<group>"; };
@@ -1098,13 +1098,12 @@
 				9ECECC3A17B10F4E00B48465 /* PredictionDetailsViewController.m */,
 				36A4054617C24DDD00406A12 /* BadgesCollectionViewController.h */,
 				36A4054717C24DDD00406A12 /* BadgesCollectionViewController.m */,
-				57D525AE17C389360031C1EE /* SelectPictureViewController.m */,
 				3638773A17C4D6EA00703475 /* AnotherProfileViewController.h */,
 				3638773B17C4D6EA00703475 /* AnotherProfileViewController.m */,
 				3638773C17C4D6EA00703475 /* ChangePasswordViewController.h */,
 				3638773D17C4D6EA00703475 /* ChangePasswordViewController.m */,
 				3638773E17C4D6EA00703475 /* SelectPictureViewController.h */,
-				57D525AE17C389360031C1EE /* SelectPictureViewController.m */,
+				575B100D17C4FBDB00782E6B /* SelectPictureViewController.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1447,7 +1446,6 @@
 				9EA9D72F17C3CAFE0001C415 /* SetSeenAlertsWebRequest.m in Sources */,
 				57D525AB17C388F80031C1EE /* BadgesWebRequest.m in Sources */,
 				57D525AC17C388F80031C1EE /* ProfileWebRequest.m in Sources */,
-				57D525AF17C389360031C1EE /* SelectPictureViewController.m in Sources */,
 				367EE77F17C3C5E400764C85 /* ProfileCell.m in Sources */,
 				367EE78217C3D17F00764C85 /* SignOutSegue.m in Sources */,
 				367EE78517C3D41900764C85 /* SignOutWebRequest.m in Sources */,
@@ -1458,6 +1456,7 @@
 				57D525D017C4D6CB0031C1EE /* UIImage+Utils.m in Sources */,
 				3638773F17C4D6EA00703475 /* AnotherProfileViewController.m in Sources */,
 				3638774017C4D6EA00703475 /* ChangePasswordViewController.m in Sources */,
+				575B100E17C4FBDB00782E6B /* SelectPictureViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

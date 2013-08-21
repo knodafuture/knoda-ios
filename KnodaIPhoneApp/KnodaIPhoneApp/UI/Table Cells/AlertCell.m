@@ -28,7 +28,7 @@
     [super update];
     self.alertMarkImageView.image = [UIImage imageNamed: ((self.prediction.chellange.isOwn) ? @"exclamation" : ((self.prediction.chellange.isRight) ? @"check" : @"x_lost"))];
     self.alertTitle.text = NSLocalizedString(((self.prediction.chellange.isOwn) ? @"Your prediction expired." : ((self.prediction.chellange.isRight) ? @"You won." : @"You lost.")), @"");
-    [self.avatarView bindToURL:self.prediction.smallAvatar creationDate:nil];
+    [self.avatarView bindToURL:self.prediction.smallAvatar];
 }
 
 

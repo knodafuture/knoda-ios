@@ -200,9 +200,8 @@ static NSString* const kAppUser = @"";
     }
     else {
         ProfileCell * cell = [tableView dequeueReusableCellWithIdentifier: identefier];
-        cell.userNameLabel.text = self.appDelegate.user.name;
+        [cell setupWithUser:self.appDelegate.user];
         return cell;
-
     }
 }
 

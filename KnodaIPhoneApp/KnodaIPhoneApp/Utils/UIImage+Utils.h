@@ -10,6 +10,6 @@
 
 @interface UIImage (Utils)
 
-- (UIImage *)scaledCroppedToSize:(CGSize)size;
+- (UIImage *)scaledToSize:(CGSize)size;
 
 @end

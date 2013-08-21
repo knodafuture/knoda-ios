@@ -6,26 +6,22 @@
 //  Copyright (c) 2013 Knoda. All rights reserved.
 //
 
+#import "User.h"
 #import "ProfileCell.h"
+#import "BindableView.h"
+
+@interface ProfileCell()
+
+@property (weak, nonatomic) IBOutlet BindableView *avatarView;
+@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
+
+@end
 
 @implementation ProfileCell
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
-    return self;
+- (void)setupWithUser:(User *)user {
+    self.userNameLabel.text = user.name;
+    [self.avatarView bindToURL:user.thumbImage];
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end

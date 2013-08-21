@@ -9,6 +9,7 @@
 #import "SelectPictureViewController.h"
 #import "ProfileWebRequest.h"
 #import "UIImage+Utils.h"
+#import "AppDelegate.h"
 
 static const int kDefaultAvatarsCount = 5;
 
@@ -71,8 +72,8 @@ static const int kDefaultAvatarsCount = 5;
     UIImagePickerController *pickerVC = [UIImagePickerController new];
     
     pickerVC.sourceType    = sourceType;
-    pickerVC.allowsEditing  = NO;
-    pickerVC.delegate        = self;
+    pickerVC.allowsEditing = NO;
+    pickerVC.delegate      = self;
     
     [self presentViewController:pickerVC animated:YES completion:nil];
 }
@@ -89,8 +90,14 @@ static const int kDefaultAvatarsCount = 5;
     self.loadingView.hidden = NO;
     
     [profileRequest executeWithCompletionBlock:^{
-        if(profileRequest.isSucceeded) {            
-            [self.delegate hideViewController:self];
+        if(profileRequest.isSucceeded) {
+            ProfileWebRequest *updateRequest = [ProfileWebRequest new];
+            [updateRequest executeWithCompletionBlock:^{
+                if(updateRequest.isSucceeded) {
+                    [[(AppDelegate *)[[UIApplication sharedApplication] delegate] user] updateWithObject:updateRequest.user];
+                }
+                [self.delegate hideViewController:self];
+            }];
         }
         else {
             self.loadingView.hidden = YES;
@@ -107,12 +114,17 @@ static const int kDefaultAvatarsCount = 5;
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     switch (buttonIndex) {
-        case 0:
-        case 1:
+        case 0: //take photo
+        case 1: //choose existing photo
             [self showImagePickerWithSource:(buttonIndex ? UIImagePickerControllerSourceTypePhotoLibrary : UIImagePickerControllerSourceTypeCamera)];
             break;
-        default:
+        case 2: //skip
             [self setDefaultAvatar];
+            [self sendAvatar];
+        default: //continue
+            if(!self.avatarImage) {
+                [self setDefaultAvatar];
+            }
             break;
     }
 }
@@ -124,7 +136,7 @@ static const int kDefaultAvatarsCount = 5;
     [self dismissViewControllerAnimated:YES completion:^{
         UIImage *img = info[UIImagePickerControllerOriginalImage];
         if(img) {
-            self.avatarImage = [img scaledCroppedToSize:self.pictureButton.frame.size];
+            self.avatarImage = [img scaledToSize:self.pictureButton.frame.size];
             [self.pictureButton setImage:self.avatarImage forState:UIControlStateNormal];
         }
     }];

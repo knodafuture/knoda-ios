@@ -6,14 +6,14 @@
 //  Copyright (c) 2013 Knoda. All rights reserved.
 //
 
-#import "AnotherProfileViewController.h"
+#import "AnotherUsersProfileViewController.h"
 #import "NavigationViewController.h"
 #import "AppDelegate.h"
 #import "PredictionsWebRequest.h"
 
 static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
 
-@interface AnotherProfileViewController ()
+@interface AnotherUsersProfileViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *userPointsLabel;
@@ -27,7 +27,7 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
 
 @end
 
-@implementation AnotherProfileViewController
+@implementation AnotherUsersProfileViewController
 
 - (void)viewDidLoad
 {

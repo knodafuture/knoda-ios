@@ -76,6 +76,10 @@ static NSString* const kResponseDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'zzz";
     self.hasOutcome = YES;
 }
 
+- (BOOL)isExpired {
+    return [self.expirationDate timeIntervalSinceNow] < 0;
+}
+
 
 - (NSString*) description
 {

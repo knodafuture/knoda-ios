@@ -10,22 +10,15 @@
 
 @implementation UIImage (Utils)
 
-- (UIImage *)scaledCroppedToSize:(CGSize)size; {
-    float w = self.size.width;
-    float h = self.size.height;
-    
-    float scaleFactor = (w < h) ? size.width / w : size.height / h;
-    
-    CGSize newSize = CGSizeMake(fminf(w * scaleFactor, size.width), fminf(h * scaleFactor, size.height));
-
+- (UIImage *)scaledToSize:(CGSize)size; {
     if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
-        UIGraphicsBeginImageContextWithOptions(newSize, NO, [[UIScreen mainScreen] scale]);
+        UIGraphicsBeginImageContextWithOptions(size, NO, [[UIScreen mainScreen] scale]);
     }
     else {
-        UIGraphicsBeginImageContext(newSize);
+        UIGraphicsBeginImageContext(size);
     }
     
-    [self drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    [self drawInRect:CGRectMake(0, 0, size.width, size.height)];
     
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     

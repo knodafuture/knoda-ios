@@ -10,6 +10,7 @@
 #import "CategoriesWebRequest.h"
 #import "AddPredictionRequest.h"
 
+static const int kPredictionCharsLimit = 300;
 
 @interface AddPredictionViewController ()
 
@@ -19,12 +20,15 @@
 @property (nonatomic, strong) IBOutlet UIPickerView* categoryPicker;
 @property (nonatomic, strong) IBOutlet UIPickerView* expirationPicker;
 @property (nonatomic, strong) IBOutlet UIButton* categoryButton;
-@property (nonatomic, strong) IBOutlet UILabel* categoryLabel;
 @property (nonatomic, strong) IBOutlet UILabel* expirationLabel;
 @property (nonatomic, strong) IBOutlet UIView* activityView;
+@property (nonatomic, strong) IBOutlet UILabel* charsLabel;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *predictBarButton;
 
 @property (nonatomic, strong) NSArray* categories;
 @property (nonatomic, strong) NSArray* expirationStrings;
+
+@property (nonatomic, strong) NSString* categoryText;
 
 @end
 
@@ -51,6 +55,12 @@
             [self.categoryPicker reloadAllComponents];
         }
     }];
+    
+    UIImage *categoryBgImg = [[UIImage imageNamed:@"category_bg.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 12, 0, 12)];
+    [self.categoryButton setBackgroundImage:categoryBgImg forState:UIControlStateNormal];
+    
+    [self.textView becomeFirstResponder];
+    self.predictBarButton.enabled = NO;
 }
 
 
@@ -129,15 +139,18 @@
 {
     [self hidePicker: self.expirationPicker];
     
-    if (self.categoryLabel.text.length == 0)
+    if (self.categoryText.length == 0)
     {
         if (self.categories.count != 0)
         {
-            self.categoryLabel.text = [self.categories objectAtIndex: 0];
-            [self.categoryLabel sizeToFit];
+            self.categoryText = [self.categories objectAtIndex: 0];
+            
+            [self.categoryButton setTitle:self.categoryText forState:UIControlStateNormal];
+            
+            [self.self.categoryButton.titleLabel sizeToFit];
             
             CGRect newButtonFrame = self.categoryButton.frame;
-            newButtonFrame.size.width = self.categoryLabel.frame.size.width + 40;
+            newButtonFrame.size.width = self.categoryButton.titleLabel.frame.size.width + 40;
             self.categoryButton.frame = newButtonFrame;
             
             self.categoryButton.hidden = NO;
@@ -145,7 +158,7 @@
     }
     else
     {
-        [self.categoryPicker selectRow: [self.categories indexOfObject: self.categoryLabel.text] inComponent: 0 animated: NO];
+        [self.categoryPicker selectRow: [self.categories indexOfObject: self.categoryText] inComponent: 0 animated: NO];
     }
     
     [self showPicker: self.categoryPicker];
@@ -162,7 +175,7 @@
     }
     else
     {
-        [self.expirationPicker selectRow: [self.expirationStrings indexOfObject: self.categoryLabel.text] inComponent: 0 animated: NO];
+        [self.expirationPicker selectRow: [self.expirationStrings indexOfObject: self.expirationLabel.text] inComponent: 0 animated: NO];
     }
     
     [self showPicker: self.expirationPicker];
@@ -181,7 +194,7 @@
     {
         errorMessage = NSLocalizedString(@"Please select an expiration date", @"");
     }
-    else if (self.categoryLabel.text.length == 0)
+    else if (self.categoryText.length == 0)
     {
         errorMessage = NSLocalizedString(@"Please select a category", @"");
     }
@@ -205,7 +218,7 @@
         
         AddPredictionRequest* request = [[AddPredictionRequest alloc] initWithBody:self.textView.text
                                                                     expirationDate:[self expirationDate]
-                                                                          category:self.categoryLabel.text];
+                                                                          category:self.categoryText];
         [request executeWithCompletionBlock: ^
         {
             self.activityView.hidden = YES;
@@ -234,6 +247,21 @@
     [self dismissViewControllerAnimated: YES completion: nil];
 }
 
+#pragma mark UITextViewDelegate
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {    
+    
+    int len = textView.text.length - range.length + text.length;
+    
+    if(len <= kPredictionCharsLimit) {
+        self.charsLabel.text = [NSString stringWithFormat:@"%d", kPredictionCharsLimit - len];
+        self.predictBarButton.enabled = len > 0;
+        
+        return YES;
+    }
+    
+    return NO;
+}
 
 #pragma mark - Keyboard show/hide handlers
 
@@ -339,11 +367,13 @@ withAnimationDuration: (NSTimeInterval)animationDuration
 {
     if (pickerView == self.categoryPicker)
     {
-        self.categoryLabel.text = [self.categories objectAtIndex: row];
-        [self.categoryLabel sizeToFit];
+        self.categoryText = [self.categories objectAtIndex: row];
+        [self.categoryButton setTitle:self.categoryText forState:UIControlStateNormal];
+        
+        [self.categoryButton.titleLabel sizeToFit];
         
         CGRect newButtonFrame = self.categoryButton.frame;
-        newButtonFrame.size.width = self.categoryLabel.frame.size.width + 40;
+        newButtonFrame.size.width = self.categoryButton.titleLabel.frame.size.width + 40;
         self.categoryButton.frame = newButtonFrame;
         
         self.categoryButton.hidden = NO;

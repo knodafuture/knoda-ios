@@ -1371,7 +1371,7 @@
             <objects>
                 <viewController id="wNN-TM-pOg" customClass="PredictionDetailsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hDO-dV-CXd">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="588"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="588"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="OOz-U0-cxm">
@@ -1547,7 +1547,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                                     <inset key="titleEdgeInsets" minX="0.0" minY="1" maxX="0.0" maxY="0.0"/>
-                                                    <state key="normal" title="KC ROYALS" backgroundImage="category_bg.png">
+                                                    <state key="normal" title="KC ROYALS">
                                                         <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
@@ -1992,20 +1992,51 @@ outcome of your prediction</string>
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
-                                    <navigationItem id="J8X-i6-zwO">
-                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="l6g-2b-4WR">
-                                            <connections>
-                                                <action selector="cancel:" destination="ZCK-dQ-2af" id="OAD-I0-XpB"/>
-                                            </connections>
+                                    <navigationItem id="JhW-5I-hma">
+                                        <barButtonItem key="leftBarButtonItem" id="MJN-TD-o6O">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2wU-Gh-uq3">
+                                                <rect key="frame" x="5" y="7" width="62" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                <state key="normal" title="Button" image="AP_cancel_button.png">
+                                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="highlighted" image="AP_cancel_pressed.png">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="cancel:" destination="ZCK-dQ-2af" eventType="touchUpInside" id="3eP-In-5lV"/>
+                                                </connections>
+                                            </button>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Predict" id="J0I-5G-Vbr">
-                                            <connections>
-                                                <action selector="predict:" destination="ZCK-dQ-2af" id="PVa-Hi-BSN"/>
-                                            </connections>
+                                        <barButtonItem key="rightBarButtonItem" id="39n-bh-KjR">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wwv-bS-Du5">
+                                                <rect key="frame" x="253" y="7" width="62" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                <state key="normal" image="AP_predict_button.png">
+                                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="highlighted" image="AP_predict_pressed.png">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="predict:" destination="ZCK-dQ-2af" eventType="touchUpInside" id="yUh-au-sTT"/>
+                                                </connections>
+                                            </button>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="300" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="z8s-ts-wEt">
+                                <rect key="frame" x="218" y="12" width="34" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" id="dmx-b7-jVW">
                                 <rect key="frame" x="0.0" y="44" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
@@ -2016,11 +2047,13 @@ outcome of your prediction</string>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="ZCK-dQ-2af" id="e5s-Xt-T4c"/>
+                                        </connections>
                                     </textView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="lL5-BF-jNA">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="AP_expire_panel.png" id="lL5-BF-jNA">
                                         <rect key="frame" x="0.0" y="398" width="320" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <color key="backgroundColor" red="0.0" green="0.32975968070652173" blue="0.16485279527339874" alpha="1" colorSpace="calibratedRGB"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="single_txt_field.png" id="JFx-h4-8NP">
                                         <rect key="frame" x="11" y="406" width="298" height="44"/>
@@ -2067,30 +2100,24 @@ outcome of your prediction</string>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="YE3-Kr-XLe">
-                                        <rect key="frame" x="125" y="465" width="154" height="31"/>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="YE3-Kr-XLe">
+                                        <rect key="frame" x="125" y="468" width="154" height="25"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                        <inset key="titleEdgeInsets" minX="0.0" minY="2" maxX="0.0" maxY="0.0"/>
                                         <state key="normal">
-                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="B87-k7-oXh">
-                                        <rect key="frame" x="135" y="470" width="144" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                        <color key="textColor" red="0.27058823529999998" green="0.27058823529999998" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" id="siT-3p-8x3">
-                                        <rect key="frame" x="283" y="466" width="29" height="29"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="siT-3p-8x3">
+                                        <rect key="frame" x="283" y="466" width="29" height="28"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal">
+                                        <state key="normal" image="AP_plus_button.png">
                                             <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -2140,12 +2167,13 @@ outcome of your prediction</string>
                     <connections>
                         <outlet property="activityView" destination="ZJ3-PL-7di" id="VM7-a8-Rsq"/>
                         <outlet property="categoryButton" destination="YE3-Kr-XLe" id="J9O-X2-ZDq"/>
-                        <outlet property="categoryLabel" destination="B87-k7-oXh" id="Ap4-C5-t98"/>
                         <outlet property="categoryPicker" destination="ye8-Of-uMl" id="RPj-rN-Yz2"/>
+                        <outlet property="charsLabel" destination="z8s-ts-wEt" id="znd-kU-TU2"/>
                         <outlet property="containerView" destination="dmx-b7-jVW" id="vKJ-jE-4l8"/>
                         <outlet property="expirationLabel" destination="m7f-Ma-vK8" id="h7K-h3-Xiq"/>
                         <outlet property="expirationPicker" destination="H7w-Fr-LXB" id="c4z-Ik-smQ"/>
                         <outlet property="navigationBar" destination="1X6-6p-sx3" id="CIz-4c-yYF"/>
+                        <outlet property="predictBarButton" destination="39n-bh-KjR" id="bNY-Ea-3eO"/>
                         <outlet property="textView" destination="SgB-Q1-SA3" id="nlm-UX-JjY"/>
                     </connections>
                 </viewController>
@@ -3840,6 +3868,12 @@ outcome of your prediction</string>
         </scene>
     </scenes>
     <resources>
+        <image name="AP_cancel_button.png" width="62" height="30"/>
+        <image name="AP_cancel_pressed.png" width="62" height="30"/>
+        <image name="AP_expire_panel.png" width="1" height="67"/>
+        <image name="AP_plus_button.png" width="29" height="28"/>
+        <image name="AP_predict_button.png" width="62" height="30"/>
+        <image name="AP_predict_pressed.png" width="62" height="30"/>
         <image name="AgreeBtn.png" width="154" height="44"/>
         <image name="AgreeBtn_pressed.png" width="154" height="44"/>
         <image name="BS.png" width="127" height="44"/>
@@ -3858,14 +3892,11 @@ outcome of your prediction</string>
         <image name="btnGreen.png" width="302" height="46"/>
         <image name="btn_login_green.png" width="273" height="42"/>
         <image name="btn_login_light.png" width="126" height="43"/>
-        <image name="btnChangePassword.png" width="302" height="46"/>
-        <image name="btn_login_green.png" width="273" height="42"/>
-        <image name="btn_login_light.png" width="126" height="43"/>
         <image name="btn_signup_gray.png" width="126" height="43"/>
         <image name="btn_signup_green.png" width="273" height="41"/>
         <image name="cancel_button.png" width="137" height="41"/>
         <image name="cancel_pressed.png" width="137" height="41"/>
-        <image name="category_bg.png" width="113" height="25"/>
+        <image name="category_bg.png" width="16" height="16"/>
         <image name="checkmark.png" width="17" height="13"/>
         <image name="choosePhoto.png" width="172" height="172"/>
         <image name="circleArrow.png" width="32" height="32"/>
@@ -3874,10 +3905,6 @@ outcome of your prediction</string>
         <image name="downGreenBtn.png" width="302" height="46"/>
         <image name="down_login.png" width="273" height="40"/>
         <image name="down_login_small.png" width="126" height="43"/>
-        <image name="downChangePassword.png" width="302" height="46"/>
-        <image name="down_login.png" width="273" height="40"/>
-        <image name="down_login_small.png" width="126" height="43"/>
-        <image name="down_signOut.png" width="302" height="46"/>
         <image name="down_signup.png" width="273" height="40"/>
         <image name="down_signup_small.png" width="126" height="43"/>
         <image name="errormessage.png" width="320" height="47"/>
@@ -3909,14 +3936,17 @@ outcome of your prediction</string>
         <class className="AddPredictionViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AddPredictionViewController.h"/>
             <relationships>
+                <relationship kind="action" name="cancel:"/>
+                <relationship kind="action" name="predict:"/>
                 <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="categoryButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="categoryLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="categoryPicker" candidateClass="UIPickerView"/>
+                <relationship kind="outlet" name="charsLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="expirationLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="expirationPicker" candidateClass="UIPickerView"/>
                 <relationship kind="outlet" name="navigationBar" candidateClass="UINavigationBar"/>
+                <relationship kind="outlet" name="predictBarButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="textView" candidateClass="UITextView"/>
             </relationships>
         </class>
@@ -4057,6 +4087,12 @@ outcome of your prediction</string>
                 <relationship kind="outlet" name="unfinishedButton" candidateClass="UIButton"/>
             </relationships>
         </class>
+        <class className="PasswordCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PasswordCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="passWordTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
         <class className="PredictionCategoryCell" superclassName="BaseTableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PredictionCategoryCell.h"/>
             <relationships>
@@ -4186,12 +4222,6 @@ outcome of your prediction</string>
                 <relationship kind="outlet" name="promotionLabel" candidateClass="UILabel"/>
             </relationships>
         </class>
-    <class className="PasswordCell" superclassName="UITableViewCell">
-    <source key="sourceIdentifier" type="project" relativePath="./Classes/PasswordCell.h"/>
-    <relationships>
-    <relationship kind="outlet" name="passWordTextField" candidateClass="UITextField"/>
-    </relationships>
-    </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
@@ -4199,10 +4229,10 @@ outcome of your prediction</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="CM5-5K-qH1"/>
         <segue reference="Ef7-FX-Fpl"/>
         <segue reference="tga-wH-5aw"/>
         <segue reference="ebR-4n-eVY"/>
-        <segue reference="IMX-a1-Bbr"/>
-        <segue reference="7J3-4U-wrw"/>
+        <segue reference="ONf-EH-HA5"/>
     </inferredMetricsTieBreakers>
 </document>

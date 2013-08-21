@@ -16,11 +16,14 @@
 @end
 
 
-@interface AddPredictionViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
+@interface AddPredictionViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate>
 
 @property (nonatomic, weak) id<AddPredictionViewControllerDelegate> delegate;
 
 + (NSArray *)expirationStrings;
 + (NSDate *)dateForExpirationString:(NSString *)expString;
+
+- (IBAction) predict: (id) sender;
+- (IBAction) cancel: (id) sender;
 
 @end

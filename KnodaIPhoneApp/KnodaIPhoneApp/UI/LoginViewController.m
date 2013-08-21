@@ -142,7 +142,7 @@ static NSString* const kApplicationSegue = @"ApplicationNavigationSegue";
                  ProfileWebRequest *profileRequest = [ProfileWebRequest new];
                  [profileRequest executeWithCompletionBlock:^{
                      if(profileRequest.isSucceeded) {
-                         self.appDelegate.user = profileRequest.user;
+                         [self.appDelegate.user updateWithObject:profileRequest.user];
                          [self performSegueWithIdentifier: kApplicationSegue  sender: self];
                      }
                      else {

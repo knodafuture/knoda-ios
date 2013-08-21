@@ -41,17 +41,44 @@ NSString* const kSelfObserverKey = @"selfObserver";
 }
 
 - (void)updateWithObject:(BaseModelObject *)object {
+    [self updateWithObject:object shouldReplaceWithNull:NO];
+}
+
+- (void)replaceWithObject:(BaseModelObject *)object {
+    [self updateWithObject:object shouldReplaceWithNull:YES];
+}
+
+- (void)updateWithObject:(BaseModelObject *)object shouldReplaceWithNull:(BOOL)shouldReplace {
     if([object isMemberOfClass:[self class]]) {
         self.doNotObserve = YES;
         
         NSDictionary *dict = [object dictionaryWithValuesForKeys:[[[self class] propertyKeys] allObjects]];
-        [self setValuesForKeysWithDictionary:dict];
+        
+        NSEnumerator *enumerator = [dict keyEnumerator];
+        NSString *key;
+        while ((key = [enumerator nextObject])) {
+            if([key isEqualToString:@"doNotObserve"]) {
+                continue;
+            }
+            id value = dict[key];
+            if(shouldReplace || (value && ![value isKindOfClass:[NSNull class]])) {
+                SEL selector = NSSelectorFromString([NSString stringWithFormat:@"set%@:", [key stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[key substringToIndex:1] uppercaseString]]]);
+                if([self respondsToSelector:selector]) {
+                    [self setValue:value forKey:key];
+                }
+            }
+        };
         
         self.doNotObserve = NO;
     }
     else {
         DLog(@"Trying to update from wrong object!!! (%@)", object);
     }
+}
+
+- (NSString *)description {
+    return [[self dictionaryWithValuesForKeys:[[[self class] propertyKeys] allObjects]] description];
+    
 }
 
 @end

@@ -25,7 +25,7 @@
         self.badges = [[dictionary objectForKey: @"badges"]integerValue];
         
         NSDictionary *avatarImages = dictionary[@"avatar_image"];
-        if(avatarImages.count) {
+        if(![avatarImages isKindOfClass:[NSNull class]] && avatarImages.count) {
             self.thumbImage = avatarImages[@"thumb"];
             self.smallImage = avatarImages[@"small"];
             self.bigImage   = avatarImages[@"big"];
@@ -35,7 +35,7 @@
 }
 
 - (BOOL)hasAvatar {
-    return self.thumbImage && self.smallImage && self.bigImage;
+    return self.thumbImage.length && self.smallImage.length && self.bigImage.length;
 }
 
 @end

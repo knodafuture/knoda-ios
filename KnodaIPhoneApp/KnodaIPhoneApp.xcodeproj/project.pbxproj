@@ -1098,9 +1098,8 @@
 				9ECECC3A17B10F4E00B48465 /* PredictionDetailsViewController.m */,
 				36A4054617C24DDD00406A12 /* BadgesCollectionViewController.h */,
 				36A4054717C24DDD00406A12 /* BadgesCollectionViewController.m */,
-				57D525AD17C389360031C1EE /* SelectPictureViewController.h */,
 				57D525AE17C389360031C1EE /* SelectPictureViewController.m */,
-                3638773A17C4D6EA00703475 /* AnotherProfileViewController.h */,
+				3638773A17C4D6EA00703475 /* AnotherProfileViewController.h */,
 				3638773B17C4D6EA00703475 /* AnotherProfileViewController.m */,
 				3638773C17C4D6EA00703475 /* ChangePasswordViewController.h */,
 				3638773D17C4D6EA00703475 /* ChangePasswordViewController.m */,
@@ -1457,7 +1456,7 @@
 				57D525CA17C4C2C70031C1EE /* ImageEntry.m in Sources */,
 				57D525CD17C4C2DB0031C1EE /* NSString+Utils.m in Sources */,
 				57D525D017C4D6CB0031C1EE /* UIImage+Utils.m in Sources */,
-                3638773F17C4D6EA00703475 /* AnotherProfileViewController.m in Sources */,
+				3638773F17C4D6EA00703475 /* AnotherProfileViewController.m in Sources */,
 				3638774017C4D6EA00703475 /* ChangePasswordViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

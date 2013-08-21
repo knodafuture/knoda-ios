@@ -8,26 +8,21 @@
 
 #import "SelectPictureViewController.h"
 #import "ProfileWebRequest.h"
+#import "UIImage+Utils.h"
 
 static const int kDefaultAvatarsCount = 5;
 
 @interface SelectPictureViewController () <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+
+@property (weak, nonatomic) IBOutlet UIButton *pictureButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
+@property (weak, nonatomic) IBOutlet UIView *loadingView;
 
 @property (nonatomic) UIImage *avatarImage;
 
 @end
 
 @implementation SelectPictureViewController
-
-+ (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
-    
-    UIGraphicsBeginImageContext(newSize);
-    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
-    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return newImage;
-}
 
 #pragma mark View lifecycle
 
@@ -75,9 +70,9 @@ static const int kDefaultAvatarsCount = 5;
     
     UIImagePickerController *pickerVC = [UIImagePickerController new];
     
-    pickerVC.sourceType        = sourceType;
-    pickerVC.allowsEditing     = NO;
-    pickerVC.delegate          = self;
+    pickerVC.sourceType    = sourceType;
+    pickerVC.allowsEditing  = NO;
+    pickerVC.delegate        = self;
     
     [self presentViewController:pickerVC animated:YES completion:nil];
 }
@@ -90,12 +85,15 @@ static const int kDefaultAvatarsCount = 5;
 
 - (void)sendAvatar {
     ProfileWebRequest *profileRequest = [[ProfileWebRequest alloc] initWithAvatar:self.avatarImage];
-    //TODO: add activity indicator
+    
+    self.loadingView.hidden = NO;
+    
     [profileRequest executeWithCompletionBlock:^{
-        if(profileRequest.isSucceeded) {
+        if(profileRequest.isSucceeded) {            
             [self.delegate hideViewController:self];
         }
         else {
+            self.loadingView.hidden = YES;
             [[[UIAlertView alloc] initWithTitle:nil
                                         message:profileRequest.userFriendlyErrorDescription
                                        delegate:nil
@@ -126,7 +124,7 @@ static const int kDefaultAvatarsCount = 5;
     [self dismissViewControllerAnimated:YES completion:^{
         UIImage *img = info[UIImagePickerControllerOriginalImage];
         if(img) {
-            self.avatarImage = [[self class] imageWithImage:img scaledToSize:self.pictureButton.frame.size];
+            self.avatarImage = [img scaledCroppedToSize:self.pictureButton.frame.size];
             [self.pictureButton setImage:self.avatarImage forState:UIControlStateNormal];
         }
     }];

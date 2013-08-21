@@ -15,5 +15,6 @@ extern NSString* const kSelfObserverKey;
 @property (nonatomic, assign) BOOL doNotObserve;
 
 - (void)updateWithObject:(BaseModelObject *)object;
+- (void)replaceWithObject:(BaseModelObject *)object;
 
 @end

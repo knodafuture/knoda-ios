@@ -14,9 +14,6 @@
 
 @property (nonatomic, weak) id<SelectPictureDelegate> delegate;
 
-@property (weak, nonatomic) IBOutlet UIButton *pictureButton;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
-
 - (IBAction)backButtonPressed:(UIButton *)sender;
 - (IBAction)pictureButtonTapped:(id)sender;
 - (IBAction)doneButtontapped:(id)sender;

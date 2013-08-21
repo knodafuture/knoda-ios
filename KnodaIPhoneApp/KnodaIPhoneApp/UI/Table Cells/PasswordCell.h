@@ -1,5 +1,5 @@
 //
-//  ChangePasswordViewController.h
+//  PasswordCell.h
 //  KnodaIPhoneApp
 //
 //  Created by Vyacheslav Nechiporenko on 8/21/13.
@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ChangePasswordViewController : UIViewController <UITextFieldDelegate>
+@interface PasswordCell : UITableViewCell
+
+@property (weak, nonatomic) IBOutlet UITextField *passWordTextField;
 
 @end

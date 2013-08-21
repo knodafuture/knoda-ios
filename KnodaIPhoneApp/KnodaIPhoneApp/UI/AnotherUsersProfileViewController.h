@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "AddPredictionViewController.h"
 
-@interface AnotherProfileViewController : UIViewController <AddPredictionViewControllerDelegate>
+@interface AnotherUsersProfileViewController : UIViewController <AddPredictionViewControllerDelegate>
 
 @end

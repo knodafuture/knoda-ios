@@ -7,16 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3638773017C4D65300703475 /* btnChangePassword.png in Resources */ = {isa = PBXBuildFile; fileRef = 3638772C17C4D65300703475 /* btnChangePassword.png */; };
-		3638773117C4D65300703475 /* btnChangePassword@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3638772D17C4D65300703475 /* btnChangePassword@2x.png */; };
-		3638773217C4D65300703475 /* downChangePassword.png in Resources */ = {isa = PBXBuildFile; fileRef = 3638772E17C4D65300703475 /* downChangePassword.png */; };
-		3638773317C4D65300703475 /* downChangePassword@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3638772F17C4D65300703475 /* downChangePassword@2x.png */; };
-		3638773F17C4D6EA00703475 /* AnotherProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3638773B17C4D6EA00703475 /* AnotherProfileViewController.m */; };
+		3638773F17C4D6EA00703475 /* AnotherUsersProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3638773B17C4D6EA00703475 /* AnotherUsersProfileViewController.m */; };
 		3638774017C4D6EA00703475 /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3638773D17C4D6EA00703475 /* ChangePasswordViewController.m */; };
-		367EE77917C38CC400764C85 /* btn_signOut.png in Resources */ = {isa = PBXBuildFile; fileRef = 367EE77517C38CC400764C85 /* btn_signOut.png */; };
-		367EE77A17C38CC400764C85 /* btn_signOut@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 367EE77617C38CC400764C85 /* btn_signOut@2x.png */; };
-		367EE77B17C38CC400764C85 /* down_signOut.png in Resources */ = {isa = PBXBuildFile; fileRef = 367EE77717C38CC400764C85 /* down_signOut.png */; };
-		367EE77C17C38CC400764C85 /* down_signOut@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 367EE77817C38CC400764C85 /* down_signOut@2x.png */; };
+		3638774317C4F37000703475 /* PasswordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3638774217C4F37000703475 /* PasswordCell.m */; };
+		3638774617C4F6A100703475 /* ChangePasswordRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3638774517C4F6A100703475 /* ChangePasswordRequest.m */; };
+		3638774B17C4F9BB00703475 /* btnGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 3638774717C4F9BB00703475 /* btnGreen.png */; };
+		3638774C17C4F9BB00703475 /* btnGreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3638774817C4F9BB00703475 /* btnGreen@2x.png */; };
+		3638774D17C4F9BB00703475 /* downGreenBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 3638774917C4F9BB00703475 /* downGreenBtn.png */; };
+		3638774E17C4F9BB00703475 /* downGreenBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3638774A17C4F9BB00703475 /* downGreenBtn@2x.png */; };
 		367EE77F17C3C5E400764C85 /* ProfileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 367EE77E17C3C5E300764C85 /* ProfileCell.m */; };
 		367EE78217C3D17F00764C85 /* SignOutSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 367EE78117C3D17E00764C85 /* SignOutSegue.m */; };
 		367EE78517C3D41900764C85 /* SignOutWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 367EE78417C3D41800764C85 /* SignOutWebRequest.m */; };
@@ -269,19 +267,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3638772C17C4D65300703475 /* btnChangePassword.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btnChangePassword.png; sourceTree = "<group>"; };
-		3638772D17C4D65300703475 /* btnChangePassword@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btnChangePassword@2x.png"; sourceTree = "<group>"; };
-		3638772E17C4D65300703475 /* downChangePassword.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downChangePassword.png; sourceTree = "<group>"; };
-		3638772F17C4D65300703475 /* downChangePassword@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "downChangePassword@2x.png"; sourceTree = "<group>"; };
-		3638773A17C4D6EA00703475 /* AnotherProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnotherProfileViewController.h; sourceTree = "<group>"; };
-		3638773B17C4D6EA00703475 /* AnotherProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnotherProfileViewController.m; sourceTree = "<group>"; };
+		3638773A17C4D6EA00703475 /* AnotherUsersProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnotherUsersProfileViewController.h; sourceTree = "<group>"; };
+		3638773B17C4D6EA00703475 /* AnotherUsersProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnotherUsersProfileViewController.m; sourceTree = "<group>"; };
 		3638773C17C4D6EA00703475 /* ChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordViewController.h; sourceTree = "<group>"; };
 		3638773D17C4D6EA00703475 /* ChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordViewController.m; sourceTree = "<group>"; };
 		3638773E17C4D6EA00703475 /* SelectPictureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectPictureViewController.h; sourceTree = "<group>"; };
-		367EE77517C38CC400764C85 /* btn_signOut.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_signOut.png; sourceTree = "<group>"; };
-		367EE77617C38CC400764C85 /* btn_signOut@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_signOut@2x.png"; sourceTree = "<group>"; };
-		367EE77717C38CC400764C85 /* down_signOut.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down_signOut.png; sourceTree = "<group>"; };
-		367EE77817C38CC400764C85 /* down_signOut@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down_signOut@2x.png"; sourceTree = "<group>"; };
+		3638774117C4F37000703475 /* PasswordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordCell.h; sourceTree = "<group>"; };
+		3638774217C4F37000703475 /* PasswordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordCell.m; sourceTree = "<group>"; };
+		3638774417C4F6A100703475 /* ChangePasswordRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordRequest.h; sourceTree = "<group>"; };
+		3638774517C4F6A100703475 /* ChangePasswordRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordRequest.m; sourceTree = "<group>"; };
+		3638774717C4F9BB00703475 /* btnGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btnGreen.png; sourceTree = "<group>"; };
+		3638774817C4F9BB00703475 /* btnGreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btnGreen@2x.png"; sourceTree = "<group>"; };
+		3638774917C4F9BB00703475 /* downGreenBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downGreenBtn.png; sourceTree = "<group>"; };
+		3638774A17C4F9BB00703475 /* downGreenBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "downGreenBtn@2x.png"; sourceTree = "<group>"; };
 		367EE77D17C3C5E300764C85 /* ProfileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileCell.h; sourceTree = "<group>"; };
 		367EE77E17C3C5E300764C85 /* ProfileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileCell.m; sourceTree = "<group>"; };
 		367EE78017C3D17D00764C85 /* SignOutSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignOutSegue.h; sourceTree = "<group>"; };
@@ -815,14 +813,10 @@
 		9E06638B179598FD00B3E974 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				3638772C17C4D65300703475 /* btnChangePassword.png */,
-				3638772D17C4D65300703475 /* btnChangePassword@2x.png */,
-				3638772E17C4D65300703475 /* downChangePassword.png */,
-				3638772F17C4D65300703475 /* downChangePassword@2x.png */,
-				367EE77517C38CC400764C85 /* btn_signOut.png */,
-				367EE77617C38CC400764C85 /* btn_signOut@2x.png */,
-				367EE77717C38CC400764C85 /* down_signOut.png */,
-				367EE77817C38CC400764C85 /* down_signOut@2x.png */,
+				3638774717C4F9BB00703475 /* btnGreen.png */,
+				3638774817C4F9BB00703475 /* btnGreen@2x.png */,
+				3638774917C4F9BB00703475 /* downGreenBtn.png */,
+				3638774A17C4F9BB00703475 /* downGreenBtn@2x.png */,
 				57D525A317C388D40031C1EE /* choosePhoto.png */,
 				57D525A417C388D40031C1EE /* choosePhoto@2x.png */,
 				57D5258E17C388CB0031C1EE /* avatars */,
@@ -1054,6 +1048,8 @@
 				367EE78417C3D41800764C85 /* SignOutWebRequest.m */,
 				57D525A717C388F80031C1EE /* BadgesWebRequest.h */,
 				57D525A817C388F80031C1EE /* BadgesWebRequest.m */,
+				3638774417C4F6A100703475 /* ChangePasswordRequest.h */,
+				3638774517C4F6A100703475 /* ChangePasswordRequest.m */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -1098,10 +1094,9 @@
 				9ECECC3A17B10F4E00B48465 /* PredictionDetailsViewController.m */,
 				36A4054617C24DDD00406A12 /* BadgesCollectionViewController.h */,
 				36A4054717C24DDD00406A12 /* BadgesCollectionViewController.m */,
-				57D525AD17C389360031C1EE /* SelectPictureViewController.h */,
 				57D525AE17C389360031C1EE /* SelectPictureViewController.m */,
-                3638773A17C4D6EA00703475 /* AnotherProfileViewController.h */,
-				3638773B17C4D6EA00703475 /* AnotherProfileViewController.m */,
+				3638773A17C4D6EA00703475 /* AnotherUsersProfileViewController.h */,
+				3638773B17C4D6EA00703475 /* AnotherUsersProfileViewController.m */,
 				3638773C17C4D6EA00703475 /* ChangePasswordViewController.h */,
 				3638773D17C4D6EA00703475 /* ChangePasswordViewController.m */,
 				3638773E17C4D6EA00703475 /* SelectPictureViewController.h */,
@@ -1126,6 +1121,8 @@
 				9E30D16517C26E6E002D9ACE /* AlertCell.m */,
 				367EE77D17C3C5E300764C85 /* ProfileCell.h */,
 				367EE77E17C3C5E300764C85 /* ProfileCell.m */,
+				3638774117C4F37000703475 /* PasswordCell.h */,
+				3638774217C4F37000703475 /* PasswordCell.m */,
 			);
 			path = "Table Cells";
 			sourceTree = "<group>";
@@ -1360,14 +1357,10 @@
 				57D525A217C388CB0031C1EE /* avatar_5@2x.png in Resources */,
 				57D525A517C388D40031C1EE /* choosePhoto.png in Resources */,
 				57D525A617C388D40031C1EE /* choosePhoto@2x.png in Resources */,
-				367EE77917C38CC400764C85 /* btn_signOut.png in Resources */,
-				367EE77A17C38CC400764C85 /* btn_signOut@2x.png in Resources */,
-				367EE77B17C38CC400764C85 /* down_signOut.png in Resources */,
-				367EE77C17C38CC400764C85 /* down_signOut@2x.png in Resources */,
-				3638773017C4D65300703475 /* btnChangePassword.png in Resources */,
-				3638773117C4D65300703475 /* btnChangePassword@2x.png in Resources */,
-				3638773217C4D65300703475 /* downChangePassword.png in Resources */,
-				3638773317C4D65300703475 /* downChangePassword@2x.png in Resources */,
+				3638774B17C4F9BB00703475 /* btnGreen.png in Resources */,
+				3638774C17C4F9BB00703475 /* btnGreen@2x.png in Resources */,
+				3638774D17C4F9BB00703475 /* downGreenBtn.png in Resources */,
+				3638774E17C4F9BB00703475 /* downGreenBtn@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1457,8 +1450,10 @@
 				57D525CA17C4C2C70031C1EE /* ImageEntry.m in Sources */,
 				57D525CD17C4C2DB0031C1EE /* NSString+Utils.m in Sources */,
 				57D525D017C4D6CB0031C1EE /* UIImage+Utils.m in Sources */,
-                3638773F17C4D6EA00703475 /* AnotherProfileViewController.m in Sources */,
+				3638773F17C4D6EA00703475 /* AnotherUsersProfileViewController.m in Sources */,
 				3638774017C4D6EA00703475 /* ChangePasswordViewController.m in Sources */,
+				3638774317C4F37000703475 /* PasswordCell.m in Sources */,
+				3638774617C4F6A100703475 /* ChangePasswordRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

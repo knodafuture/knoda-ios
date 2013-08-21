@@ -9,12 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "BindableView.h"
 
-@interface ProfileViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface ProfileViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate>
 
 @property (weak, nonatomic) IBOutlet BindableView *profileAvatarView;
 @property (weak, nonatomic) IBOutlet UITableView *accountDetailsTableView;
 @property (weak, nonatomic) IBOutlet UILabel *loginLabel;
 @property (weak, nonatomic) IBOutlet UILabel *pointsLabel;
-@property (weak, nonatomic) IBOutlet UIView *activityView;
 
 @end

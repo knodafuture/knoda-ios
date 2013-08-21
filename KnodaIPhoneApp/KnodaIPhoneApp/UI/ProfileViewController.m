@@ -57,6 +57,10 @@ static NSString * const accountDetailsTableViewCellIdentifier = @"accountDetails
     self.accountDetailsArray = [NSArray arrayWithObjects:self.appDelegate.user.name,user.email,@"Change Password", nil];
     [self.accountDetailsTableView reloadData];
 }
+- (IBAction)signOut:(id)sender {
+    UIActionSheet * actionSheet = [[UIActionSheet alloc]initWithTitle:@"Are you sure you want to log out?" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"Log Out" otherButtonTitles:@"Cancel", nil];
+    [actionSheet showInView:self.view];
+}
 
 - (IBAction)menuButtonPress:(id)sender {
     [((NavigationViewController*)self.navigationController.parentViewController) toggleNavigationPanel];
@@ -77,6 +81,26 @@ static NSString * const accountDetailsTableViewCellIdentifier = @"accountDetails
         [signOutWebRequest executeWithCompletionBlock:^{
         }];
     }
+}
+
+#pragma mark - UIActionSheet delegate
+
+- (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        [self performSegueWithIdentifier:@"SignOutSegue" sender:self];
+    }
+    else {
+        [actionSheet dismissWithClickedButtonIndex:1 animated:YES];
+    }
+}
+
+#pragma mark - TableView datasource
+
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 2) {
+        [self performSegueWithIdentifier:@"ChangePasswordSegue" sender:self];
+    }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - TableView datasource
@@ -103,6 +127,5 @@ static NSString * const accountDetailsTableViewCellIdentifier = @"accountDetails
     cell.textLabel.text = self.accountDetailsArray[indexPath.row];
     return cell;
 }
-
 
 @end

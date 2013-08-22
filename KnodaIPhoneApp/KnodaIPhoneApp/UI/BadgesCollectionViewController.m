@@ -10,8 +10,11 @@
 #import "BadgeCollectionViewCell.h"
 #import "NavigationViewController.h"
 #import "BadgesWebRequest.h"
+#import "AddPredictionViewController.h"
 
-@interface BadgesCollectionViewController ()
+static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
+
+@interface BadgesCollectionViewController () <AddPredictionViewControllerDelegate>
 
 @property (nonatomic, strong) NSMutableArray * badgesImagesArray;
 @property (weak, nonatomic) IBOutlet UIView *activityView;
@@ -37,6 +40,13 @@
         }
         self.activityView.hidden = YES;
     }];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:kAddPredictionSegue]) {
+        AddPredictionViewController *vc =(AddPredictionViewController*)segue.destinationViewController;
+        vc.delegate = self;
+    }
 }
 
 #pragma mark - Outlets actions
@@ -73,5 +83,13 @@
     cell.badgeImageView.image = self.badgesImagesArray[(indexPath.section*2 + indexPath.row)];
     return cell;
 }
+
+#pragma mark - AddPredictionViewControllerDelegate
+
+- (void) predictionWasMadeInController:(AddPredictionViewController *)vc
+{
+    [vc dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 @end

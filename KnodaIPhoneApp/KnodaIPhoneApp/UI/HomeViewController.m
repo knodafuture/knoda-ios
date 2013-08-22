@@ -191,9 +191,9 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
 #pragma mark - AddPredictionViewControllerDelegate
 
 
-- (void) predictinMade
+- (void) predictionWasMadeInController:(AddPredictionViewController *)vc
 {
-    [self dismissViewControllerAnimated: YES completion: nil];
+    [vc dismissViewControllerAnimated:YES completion:nil];
     
     PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] initWithOffset: 0];
     [predictionsRequest executeWithCompletionBlock: ^

@@ -48,7 +48,7 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 
 static const int kBSAlertTag = 1001;
 
-@interface PredictionDetailsViewController () <UIAlertViewDelegate> {
+@interface PredictionDetailsViewController () <UIAlertViewDelegate, AddPredictionViewControllerDelegate> {
     BOOL _loadingUsers;
     BOOL _updatingStatus;
 }
@@ -82,6 +82,10 @@ static const int kBSAlertTag = 1001;
     CGRect frame = self.pickerViewHolder.frame;
     frame.origin.y = self.view.frame.size.height;
     self.pickerViewHolder.frame = frame;
+    
+    if(!self.addPredictionDelegate) {
+        self.addPredictionDelegate = self;
+    }
 }
 
 #pragma mark Actions
@@ -429,6 +433,12 @@ static const int kBSAlertTag = 1001;
     }];
     [self.requests addObject:bsRequest];
     [self.tableView reloadRowsAtIndexPaths:@[[self indexPathForCellType:RowStatus]] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+#pragma mark AddPredictionViewControllerDelegate
+
+- (void) predictionWasMadeInController:(AddPredictionViewController *)vc {
+    [vc dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark UITableViewDataSource

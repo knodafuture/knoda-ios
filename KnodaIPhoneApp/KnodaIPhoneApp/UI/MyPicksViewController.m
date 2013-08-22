@@ -10,12 +10,11 @@
 #import "PreditionCell.h"
 #import "HistoryMyPicksWebRequest.h"
 #import "Prediction.h"
-#import "AddPredictionViewController.h"
 #import "PredictionDetailsViewController.h"
 
 static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 
-@interface MyPicksViewController () <AddPredictionViewControllerDelegate>
+@interface MyPicksViewController ()
 
 @property (nonatomic, strong) NSMutableArray* predictions;
 @property (nonatomic, strong) NSTimer* cellUpdateTimer;
@@ -25,25 +24,12 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 
 @implementation MyPicksViewController
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	
-    HistoryMyPicksWebRequest* request = [[HistoryMyPicksWebRequest alloc] init];
-    [request executeWithCompletionBlock: ^
-     {
-         if (request.errorCode == 0)
-         {
-             self.predictions = [NSMutableArray arrayWithArray: request.predictions];
-             [self.tableView reloadData];
-         }
-     }];
-}
-
 
 - (void) viewDidAppear: (BOOL) animated
 {
     [super viewDidAppear: animated];
+    
+    [self refresh];
     
     self.cellUpdateTimer = [NSTimer scheduledTimerWithTimeInterval: 60.0 target: self selector: @selector(updateVisibleCells) userInfo: nil repeats: YES];
 }
@@ -67,11 +53,22 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
     }
 }
 
+- (void)refresh {
+    HistoryMyPicksWebRequest* request = [[HistoryMyPicksWebRequest alloc] init];
+    [request executeWithCompletionBlock: ^
+     {
+         if (request.errorCode == 0)
+         {
+             self.predictions = [NSMutableArray arrayWithArray: request.predictions];
+             [self.tableView reloadData];
+         }
+     }];
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:kPredictionDetailsSegue]) {
         PredictionDetailsViewController *vc = (PredictionDetailsViewController *)segue.destinationViewController;
         vc.prediction = sender;
-        vc.addPredictionDelegate = self;
     }
 }
 
@@ -143,25 +140,5 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
     Prediction* prediction = [self.predictions objectAtIndex: indexPath.row];
     [self performSegueWithIdentifier:kPredictionDetailsSegue sender:prediction];
 }
-
-
-#pragma mark - AddPredictionViewControllerDelegate
-
-
-- (void) predictinMade
-{
-    [self dismissViewControllerAnimated: YES completion: nil];
-    
-    HistoryMyPicksWebRequest* predictionsRequest = [[HistoryMyPicksWebRequest alloc] init];
-    [predictionsRequest executeWithCompletionBlock: ^
-     {
-         if (predictionsRequest.errorCode == 0)
-         {
-             self.predictions = [NSMutableArray arrayWithArray: predictionsRequest.predictions];
-             [self.tableView reloadData];
-         }
-     }];
-}
-
 
 @end

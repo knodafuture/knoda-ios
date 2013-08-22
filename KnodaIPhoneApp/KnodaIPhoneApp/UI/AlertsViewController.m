@@ -9,12 +9,16 @@
 #import "AlertsViewController.h"
 #import "NavigationViewController.h"
 #import "NavigationSegue.h"
+#import "AddPredictionViewController.h"
 
+static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 
-@interface AlertsViewController ()
+@interface AlertsViewController () <AddPredictionViewControllerDelegate>
 
 @property (nonatomic, strong) IBOutlet UIView* detailsView;
 @property (nonatomic, strong) IBOutlet UIImageView* segmentedControlImage;
+
+@property (nonatomic, weak) UIViewController *detailsViewController;
 
 @end
 
@@ -34,7 +38,14 @@
 
 - (void) prepareForSegue: (UIStoryboardSegue*) segue sender: (id) sender
 {
-    ((NavigationSegue*)segue).detailsView = self.detailsView;
+    if([segue isKindOfClass:[NavigationSegue class]]) {
+        ((NavigationSegue*)segue).detailsView = self.detailsView;
+        self.detailsViewController = segue.destinationViewController;
+    }
+    else if ([segue.identifier isEqualToString:kAddPredictionSegue]) {
+        AddPredictionViewController *vc = (AddPredictionViewController *)segue.destinationViewController;
+        vc.delegate = self;
+    }
 }
 
 
@@ -55,5 +66,15 @@
     self.segmentedControlImage.image = [UIImage imageNamed: @"sort_right-green"];
 }
 
+#pragma mark - AddPredictionViewControllerDelegate
+
+- (void) predictionWasMadeInController:(AddPredictionViewController *)vc
+{
+    [vc dismissViewControllerAnimated:YES completion:^{
+        if([self.detailsViewController conformsToProtocol:@protocol(AddPredictionViewControllerDelegate)]) {
+            [(id<AddPredictionViewControllerDelegate>)self.detailsViewController predictionWasMadeInController:nil];
+        }
+    }];
+}
 
 @end

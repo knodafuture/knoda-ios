@@ -12,10 +12,7 @@
 #import "PredictionDetailsViewController.h"
 #import "AlertCell.h"
 
-
 static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
-static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
-
 
 @interface ExpiredAlertsViewController ()
 
@@ -24,14 +21,14 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
 
 @end
 
-
 @implementation ExpiredAlertsViewController
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self refresh];
+}
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	
+- (void)refresh {
     ExpiredAlertsWebRequest* request = [[ExpiredAlertsWebRequest alloc] init];
     [request executeWithCompletionBlock: ^
      {
@@ -45,16 +42,13 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
      }];
 }
 
-
 - (void) prepareForSegue: (UIStoryboardSegue*) segue sender: (id) sender
 {
     if([segue.identifier isEqualToString: kPredictionDetailsSegue]) {
         PredictionDetailsViewController *vc = (PredictionDetailsViewController *)segue.destinationViewController;
         vc.prediction = sender;
-        vc.addPredictionDelegate = self;
     }
 }
-
 
 - (NSInteger) numberOfSectionsInTableView: (UITableView*) tableView
 {
@@ -85,33 +79,10 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
     return cell;
 }
 
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath: indexPath animated: YES];
     Prediction* prediction = [self.alerts objectAtIndex: indexPath.row];
     [self performSegueWithIdentifier:kPredictionDetailsSegue sender:prediction];
 }
-
-
-#pragma mark - AddPredictionViewControllerDelegate
-
-
-- (void) predictinMade
-{
-    [self dismissViewControllerAnimated: YES completion: nil];
-    
-    ExpiredAlertsWebRequest* request = [[ExpiredAlertsWebRequest alloc] init];
-    [request executeWithCompletionBlock: ^
-     {
-         if (request.errorCode == 0)
-         {
-             NSLog(@"Expired alerts: %@", request.predictions);
-             
-             self.alerts = request.predictions;
-             [self.tableView reloadData];
-         }
-     }];
-}
-
 
 @end

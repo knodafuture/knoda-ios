@@ -76,6 +76,7 @@
 		57066AA417C5258F0080797B /* AP_predict_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57066A9617C5258F0080797B /* AP_predict_button@2x.png */; };
 		57066AA517C5258F0080797B /* AP_predict_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 57066A9717C5258F0080797B /* AP_predict_pressed.png */; };
 		57066AA617C5258F0080797B /* AP_predict_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57066A9817C5258F0080797B /* AP_predict_pressed@2x.png */; };
+		57066AA717C63C8E0080797B /* SelectPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 575B100D17C4FBDB00782E6B /* SelectPictureViewController.m */; };
 		572D465417BD0665008164A5 /* PredictionUpdateWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 572D465317BD0665008164A5 /* PredictionUpdateWebRequest.m */; };
 		572D465717BD0B37008164A5 /* BS_unsigned.png in Resources */ = {isa = PBXBuildFile; fileRef = 572D465517BD0B37008164A5 /* BS_unsigned.png */; };
 		572D465817BD0B37008164A5 /* BS_unsigned@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 572D465617BD0B37008164A5 /* BS_unsigned@2x.png */; };
@@ -1623,6 +1624,7 @@
 				3638774317C4F37000703475 /* PasswordCell.m in Sources */,
 				3638774617C4F6A100703475 /* ChangePasswordRequest.m in Sources */,
 				3638773F17C4D6EA00703475 /* AnotherUsersProfileViewController.m in Sources */,
+				57066AA717C63C8E0080797B /* SelectPictureViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

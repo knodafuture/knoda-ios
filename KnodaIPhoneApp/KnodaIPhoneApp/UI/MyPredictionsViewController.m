@@ -30,15 +30,7 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 {
     [super viewDidLoad];
 	
-    HistoryMyPredictionsRequest* request = [[HistoryMyPredictionsRequest alloc] init];
-    [request executeWithCompletionBlock: ^
-    {
-        if (request.errorCode == 0)
-        {
-            self.predictions = [NSMutableArray arrayWithArray: request.predictions];
-            [self.tableView reloadData];
-        }
-    }];
+    [self refresh];
 }
 
 
@@ -66,6 +58,18 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
     {
         [cell updateDates];
     }
+}
+
+- (void)refresh {
+    HistoryMyPredictionsRequest* request = [[HistoryMyPredictionsRequest alloc] init];
+    [request executeWithCompletionBlock: ^
+     {
+         if (request.errorCode == 0)
+         {
+             self.predictions = [NSMutableArray arrayWithArray: request.predictions];
+             [self.tableView reloadData];
+         }
+     }];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -147,21 +151,9 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 
 #pragma mark - AddPredictionViewControllerDelegate
 
-
-- (void) predictinMade
-{
-    [self dismissViewControllerAnimated: YES completion: nil];
-    
-    HistoryMyPredictionsRequest* predictionsRequest = [[HistoryMyPredictionsRequest alloc] init];
-    [predictionsRequest executeWithCompletionBlock: ^
-     {
-         if (predictionsRequest.errorCode == 0)
-         {
-             self.predictions = [NSMutableArray arrayWithArray: predictionsRequest.predictions];
-             [self.tableView reloadData];
-         }
-     }];
+- (void) predictionWasMadeInController:(AddPredictionViewController *)vc {
+    [vc dismissViewControllerAnimated:YES completion:nil];
+    [self refresh];
 }
-
 
 @end

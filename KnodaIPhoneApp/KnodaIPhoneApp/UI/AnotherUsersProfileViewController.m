@@ -11,9 +11,11 @@
 #import "AppDelegate.h"
 #import "PredictionsWebRequest.h"
 
-static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
+#import "AddPredictionViewController.h"
 
-@interface AnotherUsersProfileViewController ()
+static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
+
+@interface AnotherUsersProfileViewController () <AddPredictionViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *userPointsLabel;
@@ -57,9 +59,9 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
 #pragma mark - AddPredictionViewControllerDelegate
 
 
-- (void) predictinMade
+- (void) predictionWasMadeInController:(AddPredictionViewController *)vc
 {
-
+    [vc dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - TableView datasource

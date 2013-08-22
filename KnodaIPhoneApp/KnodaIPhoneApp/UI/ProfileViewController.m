@@ -13,9 +13,13 @@
 #import "AppDelegate.h"
 #import "SignOutWebRequest.h"
 
+#import "AddPredictionViewController.h"
+
 static NSString * const accountDetailsTableViewCellIdentifier = @"accountDetailsTableViewCellIdentifier";
 
-@interface ProfileViewController ()
+static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
+
+@interface ProfileViewController () <AddPredictionViewControllerDelegate>
 
 @property (nonatomic, strong) AppDelegate * appDelegate;
 @property (nonatomic, strong) NSArray * accountDetailsArray;
@@ -81,6 +85,10 @@ static NSString * const accountDetailsTableViewCellIdentifier = @"accountDetails
         [signOutWebRequest executeWithCompletionBlock:^{
         }];
     }
+    else if ([segue.identifier isEqualToString:kAddPredictionSegue]) {
+        AddPredictionViewController *vc =(AddPredictionViewController*)segue.destinationViewController;
+        vc.delegate = self;
+    }
 }
 
 #pragma mark - UIActionSheet delegate
@@ -126,6 +134,13 @@ static NSString * const accountDetailsTableViewCellIdentifier = @"accountDetails
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.textLabel.text = self.accountDetailsArray[indexPath.row];
     return cell;
+}
+
+#pragma mark - AddPredictionViewControllerDelegate
+
+- (void) predictionWasMadeInController:(AddPredictionViewController *)vc
+{
+    [vc dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

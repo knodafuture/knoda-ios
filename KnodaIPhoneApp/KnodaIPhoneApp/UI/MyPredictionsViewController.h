@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MyPredictionsViewController : UITableViewController <UITableViewDataSource>
+@interface MyPredictionsViewController : UITableViewController
 
 @end

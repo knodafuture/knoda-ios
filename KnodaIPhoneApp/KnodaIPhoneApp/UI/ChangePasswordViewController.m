@@ -42,6 +42,10 @@ static NSString * const kRetypeNewPasswordCellIdentifier = @"NewPasswordRetypeCe
 }
 
 - (IBAction)changeButtonPressed:(id)sender {
+    [self changePassword];
+}
+
+- (void) changePassword {
     if (![self passwordsFilledInCorrect]) {
         return;
     }
@@ -91,6 +95,19 @@ static NSString * const kRetypeNewPasswordCellIdentifier = @"NewPasswordRetypeCe
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
+    switch (textField.tag) {
+        case 101:
+            [(UITextField *)[self.view viewWithTag:102]becomeFirstResponder];
+            break;
+        case 102:
+            [(UITextField *)[self.view viewWithTag:103]becomeFirstResponder];
+            break;
+        case 103:
+            [self changePassword];
+            break;
+        default:
+            break;
+    }
     return YES;
 }
 

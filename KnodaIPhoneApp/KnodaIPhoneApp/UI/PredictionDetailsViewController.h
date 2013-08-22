@@ -20,6 +20,8 @@
 
 @property (nonatomic, weak) id<AddPredictionViewControllerDelegate> addPredictionDelegate;
 
+@property (nonatomic, assign) BOOL shouldNotOpenCategory;
+
 - (IBAction)backButtonPressed:(UIButton *)sender;
 - (IBAction)bsButtonTapped:(UIButton *)sender;
 - (IBAction)agreeButtonTapped:(UIButton *)sender;
@@ -29,5 +31,6 @@
 - (IBAction)unfinishButtonTapped:(UIButton *)sender;
 - (IBAction)hidePicker:(UIBarButtonItem *)sender;
 - (IBAction)unfinishPrediction:(UIBarButtonItem *)sender;
+- (IBAction)categoryButtonTapped:(UIButton *)sender;
 
 @end

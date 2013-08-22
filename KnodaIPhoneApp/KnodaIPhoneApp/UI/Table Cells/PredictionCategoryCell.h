@@ -13,5 +13,6 @@
 @interface PredictionCategoryCell : BaseTableViewCell
 
 @property (nonatomic) NSString *category;
+@property (nonatomic) BOOL buttonEnabled;
 
 @end

@@ -30,6 +30,7 @@
 #import "PredictionAgreeWebRequest.h"
 #import "PredictionDisagreeWebRequest.h"
 #import "PredictionUpdateWebRequest.h"
+#import "CategoryPredictionsViewController.h"
 
 typedef enum {
     RowEmpty = -1,
@@ -45,6 +46,7 @@ typedef enum {
 } CellType;
 
 static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
+static NSString* const kCategorySegue      = @"CategoryPredictionsSegue";
 
 static const int kBSAlertTag = 1001;
 
@@ -175,9 +177,19 @@ static const int kBSAlertTag = 1001;
     [self hideView:self.pickerViewHolder];
 }
 
+- (IBAction)categoryButtonTapped:(UIButton *)sender {
+    [self performSegueWithIdentifier:kCategorySegue sender:nil];
+}
+
+#pragma mark Segue
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:kAddPredictionSegue]) {
         ((AddPredictionViewController*)segue.destinationViewController).delegate = self.addPredictionDelegate;
+    }
+    else if([segue.identifier isEqualToString:kCategorySegue]) {
+        CategoryPredictionsViewController *vc = (CategoryPredictionsViewController *)segue.destinationViewController;
+        vc.category = self.prediction.category;
     }
 }
 
@@ -459,6 +471,7 @@ static const int kBSAlertTag = 1001;
     else if([baseCell isKindOfClass:[PredictionCategoryCell class]]) {
         PredictionCategoryCell *cell = (PredictionCategoryCell *)baseCell;
         [cell setCategory:self.prediction.category];
+        cell.buttonEnabled = !self.shouldNotOpenCategory;
     }
     else if([baseCell isKindOfClass:[PredictionStatusCell class]]) {
         PredictionStatusCell *cell = (PredictionStatusCell *)baseCell;

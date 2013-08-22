@@ -36,6 +36,11 @@
     [self.button setTitle:category forState:UIControlStateHighlighted];
 }
 
+- (void)setButtonEnabled:(BOOL)buttonEnabled {
+    _buttonEnabled = buttonEnabled;
+    self.button.userInteractionEnabled = buttonEnabled;
+}
+
 + (CGFloat)cellHeight {
     return 40.0;
 }

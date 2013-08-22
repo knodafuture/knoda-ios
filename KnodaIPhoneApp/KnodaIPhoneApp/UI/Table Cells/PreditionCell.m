@@ -37,6 +37,7 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
 @interface PreditionCell ()
 
 @property (nonatomic, strong) UIPanGestureRecognizer* gestureRecognizer;
+@property (nonatomic, strong) UITapGestureRecognizer* profileGestureRecognizer;
 @property (nonatomic, assign) BOOL recognizingLeftGesture;
 @property (nonatomic, assign) BOOL recognizingRightGesture;
 
@@ -164,6 +165,7 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
     }
     
     [self.avatarView bindToURL:self.prediction.smallAvatar];
+    
 }
 
 - (void) fillWithPrediction: (Prediction*) prediction
@@ -294,6 +296,18 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
     [self.gestureRecognizer addTarget: self action: @selector(handlePanFrom:)];
 }
 
+- (void) setUpUserProfileTapGestures : (UITapGestureRecognizer*) recognizer {
+    self.profileGestureRecognizer = recognizer;
+    [self.avatarView addGestureRecognizer:recognizer];
+    [self.usernameLabel addGestureRecognizer:recognizer];
+    [self.gestureRecognizer addTarget: self action: @selector(userAvatarLoginTapped)];
+}
+
+- (void) userAvatarLoginTapped {
+    if ([self.delegate respondsToSelector:@selector(profileSelectedWithUserId:inCell:)]) {
+        [self.delegate profileSelectedWithUserId:self.prediction.userId inCell:self];
+    }
+}
 
 #pragma mark Properties
 
@@ -349,6 +363,7 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
     self.recognizingRightGesture = ([gestureRecognizer locationInView: self.contentView].x >= CGRectGetWidth(self.contentView.frame) - 50 && !self.agreed && ! self.disagreed && !self.prediction.chellange.isOwn);
     
     return (self.recognizingLeftGesture || self.recognizingRightGesture);
+
 }
 
 

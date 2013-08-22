@@ -1326,6 +1326,7 @@
                     </navigationItem>
                     <connections>
                         <segue destination="wNN-TM-pOg" kind="push" identifier="PredictionDetailsSegue" id="CM5-5K-qH1"/>
+                        <segue destination="bkd-uK-mBb" kind="push" identifier="UserProfileSegue" id="vCM-j3-I2J"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uGo-2X-fCD" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1936,6 +1937,7 @@ outcome of your prediction</string>
                     <connections>
                         <outlet property="pickerViewHolder" destination="TYc-zT-kgA" id="ICN-lm-atA"/>
                         <outlet property="tableView" destination="OOz-U0-cxm" id="pNl-1W-oha"/>
+                        <segue destination="bkd-uK-mBb" kind="push" identifier="UserProfileSegue" id="m1B-jn-2wq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KLM-69-mFS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3257,11 +3259,11 @@ outcome of your prediction</string>
             <objects>
                 <viewController id="bkd-uK-mBb" customClass="AnotherUsersProfileViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WnQ-TW-CJ3">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="44" width="320" height="436"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="darkBg.png" id="GzR-PB-8Oy">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="436"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="YodaTheMaster" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zi2-DT-IRL">
@@ -3330,11 +3332,11 @@ outcome of your prediction</string>
                                 </connections>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="88" sectionHeaderHeight="22" sectionFooterHeight="22" id="DKL-NF-JLd">
-                                <rect key="frame" x="0.0" y="74" width="320" height="406"/>
+                                <rect key="frame" x="0.0" y="74" width="320" height="362"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="Cell" id="hVu-hY-AZv" customClass="PreditionCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="PreditionCell" id="hVu-hY-AZv" customClass="PreditionCell">
                                         <rect key="frame" x="0.0" y="22" width="320" height="88"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -3473,18 +3475,30 @@ outcome of your prediction</string>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="bkd-uK-mBb" id="n27-b3-i8u"/>
+                                    <outlet property="delegate" destination="bkd-uK-mBb" id="kKP-vy-UhV"/>
                                 </connections>
                             </tableView>
+                            <view hidden="YES" alpha="0.40000000596046448" contentMode="scaleToFill" id="aVM-QY-KvM">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="436"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="whiteLarge" id="7wq-aR-jxm">
+                                        <rect key="frame" x="142" y="235" width="37" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="PROFILE" id="b97-6h-RbC">
-                        <barButtonItem key="leftBarButtonItem" id="Mmz-zJ-6El">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Vpd-s4-ThN">
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="t7H-SC-sIU">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="tbw-rg-wTG">
                                 <rect key="frame" x="5" y="5" width="44" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Button" image="nav.png">
+                                <state key="normal" image="backArrow.png">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -3492,9 +3506,12 @@ outcome of your prediction</string>
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="menuButtonPressed:" destination="bkd-uK-mBb" eventType="touchUpInside" id="2gK-s7-Ax9"/>
+                                    <action selector="backButtonPress:" destination="bkd-uK-mBb" eventType="touchUpInside" id="iw7-5R-oBN"/>
                                 </connections>
                             </button>
+                            <connections>
+                                <action selector="backButtonPressed:" destination="bkd-uK-mBb" id="dld-hx-ixG"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" id="QRL-Ln-w9o">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Pl1-mM-5Mo">
@@ -3508,14 +3525,27 @@ outcome of your prediction</string>
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="ZCK-dQ-2af" kind="modal" identifier="AddPredictionSegue" id="esW-Qq-HJ8"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
                     <nil key="simulatedStatusBarMetrics"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="activityView" destination="aVM-QY-KvM" id="2fU-zT-U3c"/>
+                        <outlet property="predictionsTableView" destination="DKL-NF-JLd" id="yyX-pJ-pCd"/>
+                        <outlet property="userAvatarView" destination="Wwv-Ps-wNC" id="fh4-L4-3cb"/>
+                        <outlet property="userNameLabel" destination="zi2-DT-IRL" id="xIe-Ak-255"/>
+                        <outlet property="userPointsLabel" destination="7GF-yO-lul" id="B7u-6Z-Ox8"/>
+                        <outlet property="userTotalPredictionsLabel" destination="a02-gi-5IQ" id="LVB-2n-ovN"/>
+                        <segue destination="wNN-TM-pOg" kind="push" identifier="PredictionDetailsSegue" id="Xdg-c4-S6o"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ygb-jv-EIe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2185" y="4406"/>
+            <point key="canvasLocation" x="2497" y="2546"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jTS-cy-I2n">
@@ -3959,7 +3989,9 @@ outcome of your prediction</string>
         <class className="AnotherUsersProfileViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AnotherUsersProfileViewController.h"/>
             <relationships>
+                <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="predictionsTableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="userAvatarView" candidateClass="BindableView"/>
                 <relationship kind="outlet" name="userNameLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="userPointsLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="userProfileImageView" candidateClass="UIImageView"/>
@@ -4183,7 +4215,6 @@ outcome of your prediction</string>
         <class className="TermsOfServiceViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TermsOfServiceViewController.h"/>
             <relationships>
-                <relationship kind="action" name="backButtonPressed:"/>
                 <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
             </relationships>
@@ -4215,10 +4246,11 @@ outcome of your prediction</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="vCM-j3-I2J"/>
         <segue reference="mnN-YR-PTq"/>
         <segue reference="tga-wH-5aw"/>
-        <segue reference="CM5-5K-qH1"/>
-        <segue reference="W7Q-BW-b5o"/>
         <segue reference="ebR-4n-eVY"/>
+        <segue reference="CM5-5K-qH1"/>
+        <segue reference="IMX-a1-Bbr"/>
     </inferredMetricsTieBreakers>
 </document>

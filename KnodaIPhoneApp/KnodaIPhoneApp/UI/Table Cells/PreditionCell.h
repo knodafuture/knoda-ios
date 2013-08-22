@@ -17,6 +17,7 @@
 
 - (void) predictionAgreed: (Prediction*) prediction inCell: (PreditionCell*) cell;
 - (void) predictionDisagreed: (Prediction*) prediction inCell: (PreditionCell*) cell;
+- (void) profileSelectedWithUserId: (NSInteger) userId inCell: (PreditionCell*) cell;
 
 @end
 
@@ -34,6 +35,7 @@
 @property (nonatomic, strong) Prediction* prediction;
 
 - (void) addPanGestureRecognizer: (UIPanGestureRecognizer*) recognizer;
+- (void) setUpUserProfileTapGestures : (UITapGestureRecognizer*) recognizer;
 - (void) fillWithPrediction: (Prediction*) prediction;
 - (void) resetAgreedDisagreed;
 

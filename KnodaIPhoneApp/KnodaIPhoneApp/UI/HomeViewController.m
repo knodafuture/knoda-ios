@@ -11,7 +11,7 @@
 
 #import "PredictionsWebRequest.h"
 #import "Prediction.h"
-
+#import "AnotherUsersProfileViewController.h"
 #import "PredictionAgreeWebRequest.h"
 #import "PredictionDisagreeWebRequest.h"
 #import "ChellangeByPredictionWebRequest.h"
@@ -20,6 +20,7 @@
 
 static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
+static NSString* const kUserProfileSegue       = @"UserProfileSegue";
 
 @interface HomeViewController ()
 
@@ -89,6 +90,10 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
         vc.prediction = sender;
         vc.addPredictionDelegate = self;
     }
+    else if([segue.identifier isEqualToString:kUserProfileSegue]) {
+        AnotherUsersProfileViewController *vc = (AnotherUsersProfileViewController *)segue.destinationViewController;
+        vc.userId = [sender integerValue];
+    }
 }
 
 
@@ -147,7 +152,8 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
         
         UIPanGestureRecognizer* recognizer = [[UIPanGestureRecognizer alloc] init];
         [cell addPanGestureRecognizer: recognizer];
-        
+        UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]init];
+        [cell setUpUserProfileTapGestures:tapGesture];
         tableCell = cell;
     }
     else
@@ -155,7 +161,6 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
         UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier: @"LoadingCell"];
         tableCell = cell;
     }
-    
     return tableCell;
 }
 
@@ -236,7 +241,6 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
     }];
 }
 
-
 - (void) predictionDisagreed: (Prediction*) prediction inCell: (PreditionCell*) cell
 {
     PredictionDisagreeWebRequest* request = [[PredictionDisagreeWebRequest alloc] initWithPredictionID: prediction.ID];
@@ -261,6 +265,10 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
              [cell resetAgreedDisagreed];
          }
      }];
+}
+
+- (void) profileSelectedWithUserId:(NSInteger)userId inCell:(PreditionCell *)cell {
+    [self performSegueWithIdentifier:kUserProfileSegue sender:[NSNumber numberWithInteger:userId]];
 }
 
 @end

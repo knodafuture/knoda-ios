@@ -7,7 +7,7 @@
 //
 
 #import "PredictionDetailsViewController.h"
-
+#import "AnotherUsersProfileViewController.h"
 #import "Prediction.h"
 #import "Chellange.h"
 
@@ -45,6 +45,8 @@ typedef enum {
 } CellType;
 
 static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
+static NSString* const kUserProfileSegue = @"UserProfileSegue";
+
 
 static const int kBSAlertTag = 1001;
 
@@ -178,6 +180,9 @@ static const int kBSAlertTag = 1001;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:kAddPredictionSegue]) {
         ((AddPredictionViewController*)segue.destinationViewController).delegate = self.addPredictionDelegate;
+    }
+    else if ([segue.identifier isEqualToString:kUserProfileSegue]) {
+        ((AnotherUsersProfileViewController*)segue.destinationViewController).userId = self.prediction.userId;
     }
 }
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11G63b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ZKQ-aW-8t7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ZKQ-aW-8t7">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -57,17 +57,10 @@
                                                 <rect key="frame" x="320" y="0.0" width="320" height="548"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="greenBg.png" id="Inx-j1-LNu">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="welcomeMakePredictions.png" id="Inx-j1-LNu">
                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     </imageView>
-                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TTj-cA-Fsc">
-                                                        <rect key="frame" x="94" y="141" width="132" height="153"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="49"/>
-                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
                                                     <view contentMode="scaleToFill" id="Itt-ld-nbE">
                                                         <rect key="frame" x="0.0" y="459" width="320" height="89"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -80,17 +73,10 @@
                                                 <rect key="frame" x="640" y="0.0" width="320" height="548"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="greenBg.png" id="wr4-If-VG5">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="welcomeOtherPredictions.png" id="wr4-If-VG5">
                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     </imageView>
-                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rUX-wK-USS">
-                                                        <rect key="frame" x="94" y="141" width="132" height="153"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="49"/>
-                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
                                                     <view contentMode="scaleToFill" id="jE3-MS-hfU">
                                                         <rect key="frame" x="0.0" y="459" width="320" height="89"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -103,17 +89,10 @@
                                                 <rect key="frame" x="960" y="0.0" width="320" height="548"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="greenBg.png" id="DB8-qk-UO6">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="welcomeAgreeDisagree.png" id="DB8-qk-UO6">
                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     </imageView>
-                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0iE-gM-XVB">
-                                                        <rect key="frame" x="94" y="141" width="132" height="153"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="49"/>
-                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
                                                     <view contentMode="scaleToFill" id="qUL-n8-6s0">
                                                         <rect key="frame" x="0.0" y="459" width="320" height="89"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -126,17 +105,10 @@
                                                 <rect key="frame" x="1280" y="0.0" width="320" height="548"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="greenBg.png" id="OpF-X0-xxy">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="welcomeAgreeDisagree.png" id="OpF-X0-xxy">
                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     </imageView>
-                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="4" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Nfw-6Y-YEc">
-                                                        <rect key="frame" x="94" y="141" width="132" height="153"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="49"/>
-                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
                                                     <view contentMode="scaleToFill" id="f9Q-Xg-l1J">
                                                         <rect key="frame" x="0.0" y="459" width="320" height="89"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -149,17 +121,10 @@
                                                 <rect key="frame" x="1600" y="0.0" width="320" height="548"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="greenBg.png" id="Qrn-qu-t8I">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="welcomePointsBadges.png" id="Qrn-qu-t8I">
                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     </imageView>
-                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IsT-0k-sJP">
-                                                        <rect key="frame" x="94" y="141" width="132" height="153"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="49"/>
-                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
                                                     <view contentMode="scaleToFill" id="suZ-HG-2np">
                                                         <rect key="frame" x="0.0" y="459" width="320" height="89"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -3768,7 +3733,7 @@ outcome of your prediction</string>
                                             <rect key="frame" x="10" y="1" width="282" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Current Password" minimumFontSize="17" id="ako-pH-rIZ">
+                                                <textField opaque="NO" clipsSubviews="YES" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Current Password" minimumFontSize="17" id="ako-pH-rIZ" customClass="CustomizedTextField">
                                                     <rect key="frame" x="20" y="7" width="242" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -3791,7 +3756,7 @@ outcome of your prediction</string>
                                             <rect key="frame" x="10" y="0.0" width="282" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="New Password" minimumFontSize="17" id="CsJ-R7-CXv">
+                                                <textField opaque="NO" clipsSubviews="YES" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="New Password" minimumFontSize="17" id="CsJ-R7-CXv" customClass="CustomizedTextField">
                                                     <rect key="frame" x="20" y="7" width="242" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -3814,11 +3779,11 @@ outcome of your prediction</string>
                                             <rect key="frame" x="10" y="0.0" width="282" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Re-type new Password" minimumFontSize="17" id="qlE-m2-Iky">
+                                                <textField opaque="NO" clipsSubviews="YES" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Re-type new Password" minimumFontSize="17" id="qlE-m2-Iky" customClass="CustomizedTextField">
                                                     <rect key="frame" x="20" y="7" width="242" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="go" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="iWN-09-37c" id="eZi-aV-1nf"/>
                                                     </connections>
@@ -3933,6 +3898,10 @@ outcome of your prediction</string>
         <image name="statsIcon.png" width="18" height="18"/>
         <image name="unfinished.png" width="259" height="44"/>
         <image name="unfinished_press.png" width="259" height="44"/>
+        <image name="welcomeAgreeDisagree.png" width="320" height="568"/>
+        <image name="welcomeMakePredictions.png" width="320" height="568"/>
+        <image name="welcomeOtherPredictions.png" width="320" height="568"/>
+        <image name="welcomePointsBadges.png" width="320" height="568"/>
         <image name="xIcon.png" width="13" height="13"/>
     </resources>
     <classes>
@@ -3977,7 +3946,6 @@ outcome of your prediction</string>
         <class className="AnotherUsersProfileViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AnotherUsersProfileViewController.h"/>
             <relationships>
-                <relationship kind="action" name="menuButtonPress:"/>
                 <relationship kind="outlet" name="predictionsTableView" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="userNameLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="userPointsLabel" candidateClass="UILabel"/>
@@ -4010,6 +3978,9 @@ outcome of your prediction</string>
         <class className="ChangePasswordViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ChangePasswordViewController.h"/>
             <relationships>
+                <relationship kind="action" name="backButtonPress:"/>
+                <relationship kind="action" name="cancelButtonPress:"/>
+                <relationship kind="action" name="changeButtonPressed:"/>
                 <relationship kind="outlet" name="passwordsTableView" candidateClass="UITableView"/>
             </relationships>
         </class>
@@ -4025,8 +3996,6 @@ outcome of your prediction</string>
         <class className="ForgotPasswordViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ForgotPasswordViewController.h"/>
             <relationships>
-                <relationship kind="action" name="cancelButtonPressed:"/>
-                <relationship kind="action" name="sendButtonPressed:"/>
                 <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="errorLabel" candidateClass="UILabel"/>
@@ -4057,7 +4026,6 @@ outcome of your prediction</string>
         <class className="LoginViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
             <relationships>
-                <relationship kind="action" name="loginButtonPressed:"/>
                 <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="errorLabel" candidateClass="UILabel"/>
@@ -4173,8 +4141,6 @@ outcome of your prediction</string>
         <class className="ProfileViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfileViewController.h"/>
             <relationships>
-                <relationship kind="action" name="menuButtonPress:"/>
-                <relationship kind="action" name="signOut:"/>
                 <relationship kind="outlet" name="accountDetailsTableView" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="loginLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="pointsLabel" candidateClass="UILabel"/>

@@ -10,4 +10,8 @@
 
 @implementation PasswordCell
 
+- (void) setUpPasswordTextFieldFirstResponder {
+    [self.passWordTextField becomeFirstResponder];
+}
+
 @end

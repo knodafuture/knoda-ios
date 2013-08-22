@@ -10,15 +10,15 @@
                 <viewController id="2" customClass="WelcomeViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="drb-l3-jKr">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="5et-OW-apG">
                                         <rect key="frame" x="0.0" y="0.0" width="1920" height="548"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" id="rjs-IK-RXs">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
@@ -55,7 +55,7 @@
                                             </view>
                                             <view contentMode="scaleToFill" id="jT5-hZ-ELD">
                                                 <rect key="frame" x="320" y="0.0" width="320" height="548"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="greenBg.png" id="Inx-j1-LNu">
                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
@@ -70,7 +70,7 @@
                                                     </label>
                                                     <view contentMode="scaleToFill" id="Itt-ld-nbE">
                                                         <rect key="frame" x="0.0" y="459" width="320" height="89"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
                                                         <color key="backgroundColor" red="0.066146918224447585" green="0.36171025815217395" blue="0.044152824500716246" alpha="1" colorSpace="calibratedRGB"/>
                                                     </view>
                                                 </subviews>
@@ -78,7 +78,7 @@
                                             </view>
                                             <view contentMode="scaleToFill" id="gcb-6j-hxm">
                                                 <rect key="frame" x="640" y="0.0" width="320" height="548"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="greenBg.png" id="wr4-If-VG5">
                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
@@ -93,7 +93,7 @@
                                                     </label>
                                                     <view contentMode="scaleToFill" id="jE3-MS-hfU">
                                                         <rect key="frame" x="0.0" y="459" width="320" height="89"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
                                                         <color key="backgroundColor" red="0.066146918220000003" green="0.36171025820000002" blue="0.0441528245" alpha="1" colorSpace="calibratedRGB"/>
                                                     </view>
                                                 </subviews>
@@ -116,7 +116,7 @@
                                                     </label>
                                                     <view contentMode="scaleToFill" id="qUL-n8-6s0">
                                                         <rect key="frame" x="0.0" y="459" width="320" height="89"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
                                                         <color key="backgroundColor" red="0.066146918220000003" green="0.36171025820000002" blue="0.0441528245" alpha="1" colorSpace="calibratedRGB"/>
                                                     </view>
                                                 </subviews>
@@ -124,7 +124,7 @@
                                             </view>
                                             <view contentMode="scaleToFill" id="UkS-Xj-FaS">
                                                 <rect key="frame" x="1280" y="0.0" width="320" height="548"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="greenBg.png" id="OpF-X0-xxy">
                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
@@ -139,7 +139,7 @@
                                                     </label>
                                                     <view contentMode="scaleToFill" id="f9Q-Xg-l1J">
                                                         <rect key="frame" x="0.0" y="459" width="320" height="89"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
                                                         <color key="backgroundColor" red="0.066146918220000003" green="0.36171025820000002" blue="0.0441528245" alpha="1" colorSpace="calibratedRGB"/>
                                                     </view>
                                                 </subviews>
@@ -147,7 +147,7 @@
                                             </view>
                                             <view contentMode="scaleToFill" id="HnR-1u-IGC">
                                                 <rect key="frame" x="1600" y="0.0" width="320" height="548"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="greenBg.png" id="Qrn-qu-t8I">
                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
@@ -162,7 +162,7 @@
                                                     </label>
                                                     <view contentMode="scaleToFill" id="suZ-HG-2np">
                                                         <rect key="frame" x="0.0" y="459" width="320" height="89"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
                                                         <color key="backgroundColor" red="0.066146918220000003" green="0.36171025820000002" blue="0.0441528245" alpha="1" colorSpace="calibratedRGB"/>
                                                     </view>
                                                 </subviews>
@@ -207,6 +207,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="ZyE-SA-ruD"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="contentView" destination="5et-OW-apG" id="mev-o5-TEC"/>
                         <outlet property="pagingScroll" destination="drb-l3-jKr" id="mlA-GT-Xo1"/>
@@ -3977,7 +3978,6 @@ outcome of your prediction</string>
         <class className="AnotherUsersProfileViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AnotherUsersProfileViewController.h"/>
             <relationships>
-                <relationship kind="action" name="menuButtonPress:"/>
                 <relationship kind="outlet" name="predictionsTableView" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="userNameLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="userPointsLabel" candidateClass="UILabel"/>
@@ -4025,8 +4025,6 @@ outcome of your prediction</string>
         <class className="ForgotPasswordViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ForgotPasswordViewController.h"/>
             <relationships>
-                <relationship kind="action" name="cancelButtonPressed:"/>
-                <relationship kind="action" name="sendButtonPressed:"/>
                 <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="errorLabel" candidateClass="UILabel"/>
@@ -4057,7 +4055,6 @@ outcome of your prediction</string>
         <class className="LoginViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
             <relationships>
-                <relationship kind="action" name="loginButtonPressed:"/>
                 <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="errorLabel" candidateClass="UILabel"/>
@@ -4173,8 +4170,6 @@ outcome of your prediction</string>
         <class className="ProfileViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfileViewController.h"/>
             <relationships>
-                <relationship kind="action" name="menuButtonPress:"/>
-                <relationship kind="action" name="signOut:"/>
                 <relationship kind="outlet" name="accountDetailsTableView" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="loginLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="pointsLabel" candidateClass="UILabel"/>

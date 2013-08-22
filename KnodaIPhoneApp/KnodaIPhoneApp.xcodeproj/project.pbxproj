@@ -131,6 +131,7 @@
 		9E06639717959A2100B3E974 /* knoda_logo_lg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E06639317959A2100B3E974 /* knoda_logo_lg@2x.png */; };
 		9E06639A17959A4C00B3E974 /* HelveticaNeue.dfont in Resources */ = {isa = PBXBuildFile; fileRef = 9E06639817959A4C00B3E974 /* HelveticaNeue.dfont */; };
 		9E06639B17959A4C00B3E974 /* KronaOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9E06639917959A4C00B3E974 /* KronaOne-Regular.ttf */; };
+		9E28686A17C63E380033FB3C /* SelectPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 575B100D17C4FBDB00782E6B /* SelectPictureViewController.m */; };
 		9E30D16617C26E6E002D9ACE /* AlertCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E30D16517C26E6E002D9ACE /* AlertCell.m */; };
 		9E30D16D17C270F8002D9ACE /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E30D16717C270F7002D9ACE /* check.png */; };
 		9E30D16E17C270F8002D9ACE /* check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E30D16817C270F7002D9ACE /* check@2x.png */; };
@@ -1507,6 +1508,7 @@
 				3638774317C4F37000703475 /* PasswordCell.m in Sources */,
 				3638774617C4F6A100703475 /* ChangePasswordRequest.m in Sources */,
 				3638773F17C4D6EA00703475 /* AnotherUsersProfileViewController.m in Sources */,
+				9E28686A17C63E380033FB3C /* SelectPictureViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

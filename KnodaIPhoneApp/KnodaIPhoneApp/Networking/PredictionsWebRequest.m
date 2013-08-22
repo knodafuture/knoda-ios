@@ -30,19 +30,29 @@ static const NSInteger kPageResultsLimit = 7;
 }
 
 
-- (id) initWithOffset: (NSInteger) offset
+- (id) initWithOffset: (NSInteger) offset andTag:(NSString *)tag
 {
-    NSDictionary* params = @{@"recent": @"true", @"limit" : [NSNumber numberWithInteger: kPageResultsLimit], @"offset" : [NSNumber numberWithInteger: offset]};
-    
+    NSMutableDictionary* params = [NSMutableDictionary dictionaryWithDictionary:
+                                   @{@"recent" : @"true",
+                                     @"limit"  : @(kPageResultsLimit),
+                                     @"offset" : @(offset)}];
+    if(tag.length) {
+        [params setObject:tag forKey:@"tag"];
+    }
     self = [super initWithParameters: params];
     return self;
 }
 
 
-- (id) initWithLastID: (NSInteger) lastID
+- (id) initWithLastID: (NSInteger) lastID andTag:(NSString *)tag
 {
-    NSDictionary* params = @{@"recent": @"true", @"limit" : [NSNumber numberWithInteger: kPageResultsLimit], @"id_lt" : [NSNumber numberWithInteger: lastID]};
-    
+    NSMutableDictionary* params = [NSMutableDictionary dictionaryWithDictionary:
+                                   @{@"recent": @"true",
+                                     @"limit" : @(kPageResultsLimit),
+                                     @"id_lt" : @(lastID)}];
+    if(tag.length) {
+        [params setObject:tag forKey:@"tag"];
+    }
     self = [super initWithParameters: params];
     return self;
 }

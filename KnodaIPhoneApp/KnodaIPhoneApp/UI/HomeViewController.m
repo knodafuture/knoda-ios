@@ -37,7 +37,7 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
     
 	self.navigationController.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, self.navigationController.navigationBar.frame.size.height);
     
-    PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] initWithOffset: 0];
+    PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] initWithOffset: 0 andTag:[self predictionsCategory]];
     [predictionsRequest executeWithCompletionBlock: ^
     {
         if (predictionsRequest.errorCode == 0)
@@ -73,9 +73,11 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
 {
     NSArray* visibleCells = [self.tableView visibleCells];
     
-    for (PreditionCell* cell in visibleCells)
+    for (UITableViewCell* cell in visibleCells)
     {
-        [cell updateDates];
+        if([cell isKindOfClass:[PreditionCell class]]) {
+            [(PreditionCell *)cell updateDates];
+        }
     }
 }
 
@@ -96,6 +98,11 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
     }
 }
 
+#pragma mark Override
+
+- (NSString *)predictionsCategory {
+    return nil;
+}
 
 #pragma mark - Actions
 
@@ -108,7 +115,7 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
 
 - (void) refresh: (UIRefreshControl*) refresh
 {
-    PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] initWithOffset: 0];
+    PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] initWithOffset: 0 andTag:[self predictionsCategory]];
     [predictionsRequest executeWithCompletionBlock: ^
      {
          [refresh endRefreshing];
@@ -172,7 +179,7 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
 {
     if ((self.predictions.count >= [PredictionsWebRequest limitByPage]) && indexPath.row == self.predictions.count)
     {
-        PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] initWithLastID: ((Prediction*)[self.predictions lastObject]).ID];
+        PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] initWithLastID: ((Prediction*)[self.predictions lastObject]).ID andTag:[self predictionsCategory]];
         [predictionsRequest executeWithCompletionBlock: ^
          {
              if (predictionsRequest.errorCode == 0 && predictionsRequest.predictions.count != 0)
@@ -200,7 +207,7 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
 {
     [vc dismissViewControllerAnimated:YES completion:nil];
     
-    PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] initWithOffset: 0];
+    PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] initWithOffset: 0 andTag:[self predictionsCategory]];
     [predictionsRequest executeWithCompletionBlock: ^
      {
          if (predictionsRequest.errorCode == 0)

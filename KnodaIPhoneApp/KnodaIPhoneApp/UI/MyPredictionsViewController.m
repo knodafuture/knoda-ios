@@ -54,9 +54,11 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 {
     NSArray* visibleCells = [self.tableView visibleCells];
     
-    for (PreditionCell* cell in visibleCells)
+    for (UITableViewCell* cell in visibleCells)
     {
-        [cell updateDates];
+        if([cell isKindOfClass:[PreditionCell class]]) {
+            [(PreditionCell *)cell updateDates];
+        }
     }
 }
 

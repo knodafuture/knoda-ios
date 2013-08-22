@@ -2033,7 +2033,7 @@ outcome of your prediction</string>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="300" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="z8s-ts-wEt">
                                 <rect key="frame" x="218" y="12" width="34" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -2045,7 +2045,8 @@ outcome of your prediction</string>
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="398"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         <connections>
                                             <outlet property="delegate" destination="ZCK-dQ-2af" id="e5s-Xt-T4c"/>
@@ -3974,6 +3975,7 @@ outcome of your prediction</string>
         <class className="AnotherUsersProfileViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AnotherUsersProfileViewController.h"/>
             <relationships>
+                <relationship kind="action" name="menuButtonPress:"/>
                 <relationship kind="outlet" name="predictionsTableView" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="userNameLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="userPointsLabel" candidateClass="UILabel"/>
@@ -4021,6 +4023,8 @@ outcome of your prediction</string>
         <class className="ForgotPasswordViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ForgotPasswordViewController.h"/>
             <relationships>
+                <relationship kind="action" name="cancelButtonPressed:"/>
+                <relationship kind="action" name="sendButtonPressed:"/>
                 <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="errorLabel" candidateClass="UILabel"/>
@@ -4051,6 +4055,7 @@ outcome of your prediction</string>
         <class className="LoginViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
             <relationships>
+                <relationship kind="action" name="loginButtonPressed:"/>
                 <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="errorLabel" candidateClass="UILabel"/>
@@ -4166,6 +4171,8 @@ outcome of your prediction</string>
         <class className="ProfileViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfileViewController.h"/>
             <relationships>
+                <relationship kind="action" name="menuButtonPress:"/>
+                <relationship kind="action" name="signOut:"/>
                 <relationship kind="outlet" name="accountDetailsTableView" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="loginLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="pointsLabel" candidateClass="UILabel"/>

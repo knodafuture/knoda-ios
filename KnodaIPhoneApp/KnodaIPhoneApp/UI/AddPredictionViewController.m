@@ -10,6 +10,9 @@
 #import "CategoriesWebRequest.h"
 #import "AddPredictionRequest.h"
 
+#define TEXT_FONT        [UIFont fontWithName:@"HelveticaNeue" size:15]
+#define PLACEHOLDER_FONT [UIFont fontWithName:@"HelveticaNeue-Italic" size:15]
+
 static const int kPredictionCharsLimit = 300;
 
 @interface AddPredictionViewController ()
@@ -29,6 +32,9 @@ static const int kPredictionCharsLimit = 300;
 @property (nonatomic, strong) NSArray* expirationStrings;
 
 @property (nonatomic, strong) NSString* categoryText;
+@property (nonatomic, strong) NSString* placeholderText;
+
+@property (nonatomic, assign) BOOL showPlaceholder;
 
 @end
 
@@ -37,6 +43,9 @@ static const int kPredictionCharsLimit = 300;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.placeholderText = NSLocalizedString(@"Type your prediction, enter between 1-5 topics associated with your prediction and enter the deadline date when other users can no longer agree or disagree with your prediction.", @"");
+    self.showPlaceholder = YES;
     
     self.expirationStrings = [[self class] expirationStrings];
     
@@ -59,7 +68,6 @@ static const int kPredictionCharsLimit = 300;
     UIImage *categoryBgImg = [[UIImage imageNamed:@"category_bg.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 12, 0, 12)];
     [self.categoryButton setBackgroundImage:categoryBgImg forState:UIControlStateNormal];
     
-    [self.textView becomeFirstResponder];
     self.predictBarButton.enabled = NO;
 }
 
@@ -131,6 +139,11 @@ static const int kPredictionCharsLimit = 300;
     return result;
 }
 
+- (void)setShowPlaceholder:(BOOL)showPlaceholder {
+    _showPlaceholder = showPlaceholder;
+    self.textView.text = _showPlaceholder ? self.placeholderText : @"";
+    self.textView.font = _showPlaceholder ? PLACEHOLDER_FONT : TEXT_FONT;
+}
 
 #pragma mark Actions
 
@@ -254,13 +267,25 @@ static const int kPredictionCharsLimit = 300;
     int len = textView.text.length - range.length + text.length;
     
     if(len <= kPredictionCharsLimit) {
-        self.charsLabel.text = [NSString stringWithFormat:@"%d", kPredictionCharsLimit - len];
-        self.predictBarButton.enabled = len > 0;
+        self.charsLabel.text = [NSString stringWithFormat:@"%d", (self.showPlaceholder ? kPredictionCharsLimit : (kPredictionCharsLimit - len))];
+        self.predictBarButton.enabled = !self.showPlaceholder && len > 0;
         
         return YES;
     }
     
     return NO;
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    if(self.showPlaceholder) {
+        self.showPlaceholder = NO;
+    }
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    if(!textView.text.length) {
+        self.showPlaceholder = YES;
+    }
 }
 
 #pragma mark - Keyboard show/hide handlers

@@ -27,6 +27,13 @@
     return @"PUT";
 }
 
+
+- (BOOL) requiresAuthToken
+{
+    return YES;
+}
+
+
 - (void) fillResultObject: (id) parsedResult
 {
 

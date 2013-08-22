@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12A269" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ZKQ-aW-8t7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11G63b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ZKQ-aW-8t7">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -1974,7 +1974,7 @@ outcome of your prediction</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KLM-69-mFS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2241" y="1465"/>
+            <point key="canvasLocation" x="2491" y="1411"/>
         </scene>
         <!--Add Prediction View Controller-->
         <scene sceneID="hMG-Zy-aQF">
@@ -2667,11 +2667,11 @@ outcome of your prediction</string>
             <objects>
                 <viewController id="YTu-lt-0He" customClass="AlertsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="F2V-01-qOW">
-                        <rect key="frame" x="0.0" y="44" width="320" height="436"/>
+                        <rect key="frame" x="0.0" y="44" width="320" height="524"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="EOO-9x-cK4">
-                                <rect key="frame" x="0.0" y="26" width="320" height="498"/>
+                                <rect key="frame" x="0.0" y="34" width="320" height="491"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
@@ -2782,7 +2782,7 @@ outcome of your prediction</string>
                 <viewController id="kaP-3O-9VE" customClass="AllAlertsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6F1-Iq-bB4">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="498"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="120" sectionHeaderHeight="22" sectionFooterHeight="22" id="qay-9m-qT1">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="498"/>
@@ -2958,7 +2958,7 @@ outcome of your prediction</string>
                 <viewController id="vbf-gQ-kwZ" customClass="ExpiredAlertsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PiT-Oy-v7c">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="498"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="120" sectionHeaderHeight="22" sectionFooterHeight="22" id="tYC-6h-Nmh">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="498"/>
@@ -3101,6 +3101,7 @@ outcome of your prediction</string>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="vbf-gQ-kwZ" id="RSc-XB-2JD"/>
+                                    <outlet property="delegate" destination="vbf-gQ-kwZ" id="uNv-8O-hNg"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -3859,9 +3860,6 @@ outcome of your prediction</string>
         <image name="btnGreen.png" width="302" height="46"/>
         <image name="btn_login_green.png" width="273" height="42"/>
         <image name="btn_login_light.png" width="126" height="43"/>
-        <image name="btnChangePassword.png" width="302" height="46"/>
-        <image name="btn_login_green.png" width="273" height="42"/>
-        <image name="btn_login_light.png" width="126" height="43"/>
         <image name="btn_signup_gray.png" width="126" height="43"/>
         <image name="btn_signup_green.png" width="273" height="41"/>
         <image name="cancel_button.png" width="137" height="41"/>
@@ -3875,10 +3873,6 @@ outcome of your prediction</string>
         <image name="downGreenBtn.png" width="302" height="46"/>
         <image name="down_login.png" width="273" height="40"/>
         <image name="down_login_small.png" width="126" height="43"/>
-        <image name="downChangePassword.png" width="302" height="46"/>
-        <image name="down_login.png" width="273" height="40"/>
-        <image name="down_login_small.png" width="126" height="43"/>
-        <image name="down_signOut.png" width="302" height="46"/>
         <image name="down_signup.png" width="273" height="40"/>
         <image name="down_signup_small.png" width="126" height="43"/>
         <image name="errormessage.png" width="320" height="47"/>
@@ -4058,6 +4052,12 @@ outcome of your prediction</string>
                 <relationship kind="outlet" name="unfinishedButton" candidateClass="UIButton"/>
             </relationships>
         </class>
+        <class className="PasswordCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PasswordCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="passWordTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
         <class className="PredictionCategoryCell" superclassName="BaseTableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PredictionCategoryCell.h"/>
             <relationships>
@@ -4187,12 +4187,6 @@ outcome of your prediction</string>
                 <relationship kind="outlet" name="promotionLabel" candidateClass="UILabel"/>
             </relationships>
         </class>
-    <class className="PasswordCell" superclassName="UITableViewCell">
-    <source key="sourceIdentifier" type="project" relativePath="./Classes/PasswordCell.h"/>
-    <relationships>
-    <relationship kind="outlet" name="passWordTextField" candidateClass="UITextField"/>
-    </relationships>
-    </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
@@ -4200,10 +4194,10 @@ outcome of your prediction</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="ebR-4n-eVY"/>
         <segue reference="Ef7-FX-Fpl"/>
         <segue reference="tga-wH-5aw"/>
-        <segue reference="ebR-4n-eVY"/>
-        <segue reference="IMX-a1-Bbr"/>
-        <segue reference="7J3-4U-wrw"/>
+        <segue reference="2Xa-rF-3p5"/>
+        <segue reference="ONf-EH-HA5"/>
     </inferredMetricsTieBreakers>
 </document>

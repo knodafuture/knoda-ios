@@ -118,6 +118,14 @@ static const char *MULTIPART_CHARS = "1234567890_-qwertyuiopasdfghjklzxcvbnmQWER
 }
 
 
+- (BOOL)isMultipartData {
+    return NO;
+}
+
+
+#pragma mark Private methods
+
+
 - (void) checkStateAfterFinished
 {
     if (self.errorCode == 0)
@@ -130,14 +138,8 @@ static const char *MULTIPART_CHARS = "1234567890_-qwertyuiopasdfghjklzxcvbnmQWER
 }
 
 - (NSString *)userFriendlyErrorDescription {
-    return NSLocalizedString(@"Oops! Something went wrong. Please try again later.", @"");
+    return NSLocalizedString(@"Unknown error. Please try again later.", @"");
 }
-
-- (BOOL)isMultipartData {
-    return NO;
-}
-
-#pragma mark Private methods
 
 
 - (NSURL*) url
@@ -146,7 +148,7 @@ static const char *MULTIPART_CHARS = "1234567890_-qwertyuiopasdfghjklzxcvbnmQWER
     
     if ([self requiresAuthToken])
     {
-        [urlString appendFormat: @"?auth_token=%@&", self.appDelegate.user.token];
+        [urlString appendFormat: @"?auth_token=%@", self.appDelegate.user.token];
     }
     
     if ([[self httpMethod] isEqualToString: @"GET"])
@@ -165,6 +167,11 @@ static const char *MULTIPART_CHARS = "1234567890_-qwertyuiopasdfghjklzxcvbnmQWER
     NSMutableString* urlParameters = [NSMutableString stringWithString: @""];
     
     NSArray* keys = [self.parameters allKeys];
+    
+    if (keys.count != 0 && [[self httpMethod] isEqualToString: @"GET"])
+    {
+        [urlParameters appendString: @"&"];
+    }
     
     for (NSString* key in keys)
     {
@@ -296,7 +303,7 @@ static const char *MULTIPART_CHARS = "1234567890_-qwertyuiopasdfghjklzxcvbnmQWER
     
     NSLog(@"%@ Start request %@", NSStringFromClass([self class]), request.URL);
     
-    if ([request.HTTPMethod isEqualToString: @"POST"] || [request.HTTPMethod isEqualToString:@"PATCH"])
+    if ([request.HTTPMethod isEqualToString: @"POST"] || [request.HTTPMethod isEqualToString:@"PATCH"] || [request.HTTPMethod isEqualToString:@"PUT"])
     {
         if([self isMultipartData]) {
             NSString *boundary = [[self class] generateBoundary];
@@ -321,6 +328,8 @@ static const char *MULTIPART_CHARS = "1234567890_-qwertyuiopasdfghjklzxcvbnmQWER
         }
         
         NSData* result = [NSURLConnection sendSynchronousRequest: request returningResponse: &response error: &error];
+        
+        NSLog(@"Status code: %d", response.statusCode);
         
         if (self.state == kRequestStateCancelled)
         {

@@ -47,7 +47,6 @@
 		5746F2A617BB88F200C835FA /* NSDictionary+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5746F2A517BB88F200C835FA /* NSDictionary+Utils.m */; };
 		5746F2A917BB99FB00C835FA /* BSWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5746F2A817BB99FA00C835FA /* BSWebRequest.m */; };
 		5746F2AC17BBC01800C835FA /* OutcomeWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5746F2AB17BBC01800C835FA /* OutcomeWebRequest.m */; };
-		575B100E17C4FBDB00782E6B /* SelectPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 575B100D17C4FBDB00782E6B /* SelectPictureViewController.m */; };
 		578E9B1D17BA218500A7B304 /* UILabel+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 578E9B1C17BA218500A7B304 /* UILabel+Utils.m */; };
 		578E9B3917BA219B00A7B304 /* AgreeBtn_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 578E9B1F17BA219B00A7B304 /* AgreeBtn_pressed.png */; };
 		578E9B3A17BA219B00A7B304 /* AgreeBtn_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 578E9B2017BA219B00A7B304 /* AgreeBtn_pressed@2x.png */; };
@@ -1042,8 +1041,8 @@
 				9EA9D72B17C3B2740001C415 /* ExpiredAlertsWebRequest.m */,
 				9EA9D72D17C3CAFE0001C415 /* SetSeenAlertsWebRequest.h */,
 				9EA9D72E17C3CAFE0001C415 /* SetSeenAlertsWebRequest.m */,
-				57D525A917C388F80031C1EE /* ProfileWebRequest.h */,
 				57D525AA17C388F80031C1EE /* ProfileWebRequest.m */,
+				57D525A917C388F80031C1EE /* ProfileWebRequest.h */,
 				367EE78317C3D41700764C85 /* SignOutWebRequest.h */,
 				367EE78417C3D41800764C85 /* SignOutWebRequest.m */,
 				57D525A717C388F80031C1EE /* BadgesWebRequest.h */,
@@ -1098,7 +1097,6 @@
 				3638773D17C4D6EA00703475 /* ChangePasswordViewController.m */,
 				3638773E17C4D6EA00703475 /* SelectPictureViewController.h */,
 				575B100D17C4FBDB00782E6B /* SelectPictureViewController.m */,
-                57D525AE17C389360031C1EE /* SelectPictureViewController.m */,
 				3638773A17C4D6EA00703475 /* AnotherUsersProfileViewController.h */,
 				3638773B17C4D6EA00703475 /* AnotherUsersProfileViewController.m */,
 			);
@@ -1452,9 +1450,7 @@
 				3638774017C4D6EA00703475 /* ChangePasswordViewController.m in Sources */,
 				3638774317C4F37000703475 /* PasswordCell.m in Sources */,
 				3638774617C4F6A100703475 /* ChangePasswordRequest.m in Sources */,
-                3638773F17C4D6EA00703475 /* AnotherUsersProfileViewController.m in Sources */,
-
-
+				3638773F17C4D6EA00703475 /* AnotherUsersProfileViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

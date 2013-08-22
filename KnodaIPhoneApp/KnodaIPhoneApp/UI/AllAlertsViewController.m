@@ -16,6 +16,11 @@
 
 #import "SetSeenAlertsWebRequest.h"
 
+#import "PredictionDetailsViewController.h"
+
+static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
+static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
+
 
 @interface AllAlertsViewController ()
 
@@ -68,6 +73,16 @@
             }
         }
     }];
+}
+
+
+- (void) prepareForSegue: (UIStoryboardSegue*) segue sender: (id) sender
+{
+    if([segue.identifier isEqualToString: kPredictionDetailsSegue]) {
+        PredictionDetailsViewController *vc = (PredictionDetailsViewController *)segue.destinationViewController;
+        vc.prediction = sender;
+        vc.addPredictionDelegate = self;
+    }
 }
 
 
@@ -131,6 +146,60 @@
             }];
         }
     }
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath: indexPath animated: YES];
+    Prediction* prediction = [self.alerts objectAtIndex: indexPath.row];
+    [self performSegueWithIdentifier:kPredictionDetailsSegue sender:prediction];
+}
+
+
+#pragma mark - AddPredictionViewControllerDelegate
+
+
+- (void) predictinMade
+{
+    [self dismissViewControllerAnimated: YES completion: nil];
+    
+    AllAlertsWebRequest* request = [[AllAlertsWebRequest alloc] init];
+    [request executeWithCompletionBlock: ^
+     {
+         if (request.errorCode == 0)
+         {
+             NSLog(@"All alerts: %@", request.predictions);
+             
+             self.alerts = request.predictions;
+             [self.tableView reloadData];
+             
+             NSArray* visibleCells = [self.tableView visibleCells];
+             NSMutableArray* chellangeIDs = [NSMutableArray arrayWithCapacity: 0];
+             
+             for (PreditionCell* cell in visibleCells)
+             {
+                 if (cell.prediction.settled)
+                 {
+                     [chellangeIDs addObject: [NSNumber numberWithInteger: cell.prediction.chellange.ID]];
+                 }
+             }
+             
+             if (chellangeIDs.count != 0)
+             {
+                 SetSeenAlertsWebRequest* request = [[SetSeenAlertsWebRequest alloc] initWithIDs: chellangeIDs];
+                 [request executeWithCompletionBlock: ^
+                  {
+                      if (request.errorCode != 0)
+                      {
+                          for (PreditionCell* cell in visibleCells)
+                          {
+                              cell.prediction.chellange.seen = YES;
+                          }
+                      }
+                  }];
+             }
+         }
+     }];
 }
 
 

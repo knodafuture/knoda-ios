@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AddPredictionViewController.h"
 
-@interface AllAlertsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface AllAlertsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, AddPredictionViewControllerDelegate>
 
 @end

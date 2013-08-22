@@ -25,6 +25,12 @@
     return self;
 }
 
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    UIImage *categoryBgImg = [[UIImage imageNamed:@"category_bg.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 12, 0, 12)];
+    [self.button setBackgroundImage:categoryBgImg forState:UIControlStateNormal];
+}
+
 - (void)setCategory:(NSString *)category {
     [self.button setTitle:category forState:UIControlStateNormal];
     [self.button setTitle:category forState:UIControlStateHighlighted];

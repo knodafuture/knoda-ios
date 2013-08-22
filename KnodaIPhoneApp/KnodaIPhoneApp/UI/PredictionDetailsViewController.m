@@ -376,7 +376,7 @@ static const int kBSAlertTag = 1001;
                     else {
                         [strongSelf showErrorFromRequest:outcomeRequest];
                     }
-                    [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowOutcome]] withRowAnimation:UITableViewRowAnimationAutomatic];
+                    [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowOutcome], [strongSelf indexPathForCellType:RowPrediction]] withRowAnimation:UITableViewRowAnimationAutomatic];
                 }];
             }
             else {

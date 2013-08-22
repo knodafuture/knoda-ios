@@ -11,6 +11,5 @@
 @interface PasswordCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UITextField *passWordTextField;
-- (void) setUpPasswordTextFieldFirstResponder;
 
 @end

@@ -3737,7 +3737,7 @@ outcome of your prediction</string>
                                                     <rect key="frame" x="20" y="7" width="242" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="iWN-09-37c" id="Vp1-Zo-hJX"/>
                                                     </connections>
@@ -3760,7 +3760,7 @@ outcome of your prediction</string>
                                                     <rect key="frame" x="20" y="7" width="242" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="iWN-09-37c" id="htg-HL-bwJ"/>
                                                     </connections>
@@ -3978,9 +3978,6 @@ outcome of your prediction</string>
         <class className="ChangePasswordViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ChangePasswordViewController.h"/>
             <relationships>
-                <relationship kind="action" name="backButtonPress:"/>
-                <relationship kind="action" name="cancelButtonPress:"/>
-                <relationship kind="action" name="changeButtonPressed:"/>
                 <relationship kind="outlet" name="passwordsTableView" candidateClass="UITableView"/>
             </relationships>
         </class>
@@ -4173,6 +4170,7 @@ outcome of your prediction</string>
         <class className="TermsOfServiceViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TermsOfServiceViewController.h"/>
             <relationships>
+                <relationship kind="action" name="backButtonPressed:"/>
                 <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
             </relationships>

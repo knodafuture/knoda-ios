@@ -97,10 +97,10 @@ static NSString * const kRetypeNewPasswordCellIdentifier = @"NewPasswordRetypeCe
     [textField resignFirstResponder];
     switch (textField.tag) {
         case 101:
-//            [[self.passwordsTableView dequeueReusableCellWithIdentifier:kNewPasswordCellIdentifier]setUpPasswordTextFieldFirstResponder];
+            [(UITextField *)[self.view viewWithTag:102]becomeFirstResponder];
             break;
         case 102:
-//            [[self.passwordsTableView dequeueReusableCellWithIdentifier:kRetypeNewPasswordCellIdentifier]setUpPasswordTextFieldFirstResponder];
+            [(UITextField *)[self.view viewWithTag:103]becomeFirstResponder];
             break;
         case 103:
             [self changePassword];

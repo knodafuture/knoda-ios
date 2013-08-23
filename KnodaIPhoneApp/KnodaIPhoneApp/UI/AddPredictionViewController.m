@@ -65,7 +65,7 @@ static const int kPredictionCharsLimit = 300;
         }
     }];
     
-    UIImage *categoryBgImg = [[UIImage imageNamed:@"category_bg.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 12, 0, 12)];
+    UIImage *categoryBgImg = [[UIImage imageNamed:@"AP_category_bg.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 12, 0, 12)];
     [self.categoryButton setBackgroundImage:categoryBgImg forState:UIControlStateNormal];
     
     self.predictBarButton.enabled = NO;

@@ -27,7 +27,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    UIImage *categoryBgImg = [[UIImage imageNamed:@"category_bg.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 12, 0, 12)];
+    UIImage *categoryBgImg = [[UIImage imageNamed:@"AP_category_bg.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 12, 0, 12)];
     [self.button setBackgroundImage:categoryBgImg forState:UIControlStateNormal];
 }
 

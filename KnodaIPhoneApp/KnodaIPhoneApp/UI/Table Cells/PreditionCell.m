@@ -10,25 +10,20 @@
 #import "Prediction.h"
 #import "Chellange.h"
 
-static const int kObserverKeyCount = 19;
+#import <QuartzCore/QuartzCore.h>
+
+static const int kObserverKeyCount = 12;
 static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
     @"doNotObserve",
-    @"category",
-    @"body",
     @"expirationDate",
     @"agreedPercent",
     @"expired",
     @"outcome",
     @"settled",
-    @"userId",
-    @"userName",
-    @"userAvatarURL",
-    @"userAvatar",
+    @"smallImage",
     @"chellange",
-    @"chellange.ID",
     @"chellange.seen",
     @"chellange.agree",
-    @"chellange.isOwn",
     @"chellange.isRight",
     @"chellange.isFinished"
 };
@@ -68,6 +63,13 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
 
 - (void)dealloc {
     [self removeKVO];
+}
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    
+    self.avatarView.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:self.avatarView.bounds cornerRadius:self.avatarView.layer.cornerRadius].CGPath;
+    self.avatarView.layer.rasterizationScale = [[UIScreen mainScreen] scale];
 }
 
 #pragma mark KVO

@@ -46,7 +46,7 @@ static const int kMaxFileNameLength = 254;
         }
     }
     else {
-        DLog(@"found image in memory %@", self.imgUrl);
+        //DLog(@"found image in memory %@", self.imgUrl);
     }
     
     block();
@@ -80,7 +80,7 @@ static const int kMaxFileNameLength = 254;
     NSString *fileName = [self getFileName];
     
     if([[NSFileManager defaultManager] fileExistsAtPath:fileName]) {
-        DLog(@"found img (%@) at storage", self.imgUrl);
+        //DLog(@"found img (%@) at storage", self.imgUrl);
         _image = [UIImage imageWithContentsOfFile:[self getFileName]];
         if(_image) {
             [self setupCreationDate:fileName];
@@ -89,7 +89,7 @@ static const int kMaxFileNameLength = 254;
 }
 
 - (void)loadFromServer {
-    DLog(@"downloading img from %@", [self getImageURL]);
+    //DLog(@"downloading img from %@", [self getImageURL]);
     NSError *error = nil;
     NSData *imgData = [NSData dataWithContentsOfURL:[self getImageURL] options:0 error:&error];
     _error = error;

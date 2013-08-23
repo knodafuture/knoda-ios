@@ -11,12 +11,8 @@
 @implementation UIImage (Utils)
 
 - (UIImage *)scaledToSize:(CGSize)size; {
-    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
-        UIGraphicsBeginImageContextWithOptions(size, NO, [[UIScreen mainScreen] scale]);
-    }
-    else {
-        UIGraphicsBeginImageContext(size);
-    }
+    
+    UIGraphicsBeginImageContextWithOptions(size, NO, [[UIScreen mainScreen] scale]);
     
     [self drawInRect:CGRectMake(0, 0, size.width, size.height)];
     

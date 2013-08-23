@@ -57,7 +57,7 @@ static const int kMaxSimultaneousLoading = 10;
     }
     
     if(!imgURL.length) {
-        DLog(@"img url is null");
+        //DLog(@"img url is null");
         [view didLoadImage:nil error:nil];
         return;
     }

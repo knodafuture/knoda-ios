@@ -22,9 +22,6 @@
 - (void)setLoading:(BOOL)loading {
     _loading = loading;
     self.activityIndicator.hidden = !_loading;
-    if(_loading) {
-        [self.activityIndicator startAnimating];
-    }
 }
 
 - (void)bindToURL:(NSString *)imgUrl {

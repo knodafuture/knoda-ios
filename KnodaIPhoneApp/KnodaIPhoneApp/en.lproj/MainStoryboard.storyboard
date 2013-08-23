@@ -4435,7 +4435,6 @@ outcome of your prediction</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-<<<<<<< HEAD
         <segue reference="Xdg-c4-S6o"/>
         <segue reference="ruA-3h-0de"/>
         <segue reference="f6a-Qd-4nc"/>

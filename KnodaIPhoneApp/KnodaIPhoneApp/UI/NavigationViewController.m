@@ -70,6 +70,7 @@ static NSString* const kSelectPictureSegue = @"SelectPictureSegue";
     if([segue isKindOfClass:[NavigationSegue class]]) {
         ((NavigationSegue*)segue).detailsView = self.detailsView;
         ((NavigationSegue*)segue).completion = ^{[self moveToDetailsAnimated: self.appeared];};
+        self.detailsController = segue.destinationViewController;
     }
     else if([segue.identifier isEqualToString:kSelectPictureSegue]) {
         SelectPictureViewController *vc = (SelectPictureViewController *)segue.destinationViewController;

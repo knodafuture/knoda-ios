@@ -21,6 +21,8 @@
 
 @interface BindableView : UIView <ImageBindable>
 
+@property (nonatomic, weak) IBOutlet UIImageView *imageView;
+
 @property (nonatomic, weak) id<BindableViewProtocol> delegate;
 @property (nonatomic, assign) BOOL loading;
 

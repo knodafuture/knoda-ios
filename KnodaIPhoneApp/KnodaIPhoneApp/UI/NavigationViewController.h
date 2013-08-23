@@ -10,6 +10,8 @@
 
 @interface NavigationViewController : UIViewController <UITableViewDataSource>
 
+@property (nonatomic, weak) UINavigationController *detailsController;
+
 - (void) toggleNavigationPanel;
 
 @end

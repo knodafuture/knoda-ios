@@ -8,12 +8,33 @@
 
 #import "BadgesWebRequest.h"
 
+NSString* const NewBadgeNotification = @"NewBadgeNotification";
+NSString* const kNewBadgeImages      = @"NewBadgeNotificationImages";
+
+@interface BadgesWebRequest() {
+    BOOL _forNew;
+}
+
+@end
+
 @implementation BadgesWebRequest
+
++ (void)checkNewBadges {
+    BadgesWebRequest *request = [BadgesWebRequest new];
+    request->_forNew = YES;
+    [request executeWithCompletionBlock:^{
+        if(request.isSucceeded && request.badgesImagesArray.count) {
+            NSDictionary *userInfo = @{kNewBadgeImages : request.badgesImagesArray};
+            [[NSNotificationCenter defaultCenter] postNotificationName:NewBadgeNotification object:nil userInfo:userInfo];
+        }
+    }];
+}
 
 - (NSString*) methodName
 {
-    return @"badges.json";
+    return _forNew ? @"badges/recent.json" : @"badges.json";
 }
+
 - (BOOL) requiresAuthToken
 {
     return YES;

@@ -13,6 +13,8 @@
 #import "LoginWebRequest.h"
 #import "SignUpRequest.h"
 #import "AddPredictionRequest.h"
+#import "BadgesWebRequest.h"
+#import "NewBadgeView.h"
 
 @implementation AppDelegate
 
@@ -47,6 +49,8 @@
     
     KeychainItemWrapper* wrapper = [[KeychainItemWrapper alloc] initWithIdentifier: @"Password" accessGroup: @"F489V4H5F6.com.Knoda.KnodaIPhoneApp"];
 	self.passwordItem = wrapper;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNewBadgeNotification:) name:NewBadgeNotification object:nil];
     
     return YES;
 }
@@ -115,6 +119,11 @@
     }
     
     return result;
+}
+
+- (void)handleNewBadgeNotification:(NSNotification *)notification {
+    NSArray *images = [notification userInfo][kNewBadgeImages];
+    [NewBadgeView showWithBadge:[images lastObject]];
 }
 
 @end

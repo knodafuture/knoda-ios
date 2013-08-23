@@ -58,7 +58,7 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 #pragma mark - Outlets actions
 
 - (IBAction)menuButtonPressed:(id)sender {
-        [((NavigationViewController*)self.navigationController.parentViewController) toggleNavigationPanel];
+    [((NavigationViewController*)self.navigationController.parentViewController) toggleNavigationPanel];
 }
 
 #pragma mark - UICollectionViewDataSource

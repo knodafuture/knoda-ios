@@ -8,7 +8,12 @@
 
 #import "BaseWebRequest.h"
 
+extern NSString* const NewBadgeNotification;
+extern NSString* const kNewBadgeImages;
+
 @interface BadgesWebRequest : BaseWebRequest
+
++ (void)checkNewBadges;
 
 @property (nonatomic, strong) NSMutableArray *badgesImagesArray;
 

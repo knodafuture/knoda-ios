@@ -14,9 +14,12 @@ static NSString * const kOldPasswordCellIdentifier = @"OldPasswordCell";
 static NSString * const kNewPasswordCellIdentifier = @"NewPasswordCell";
 static NSString * const kRetypeNewPasswordCellIdentifier = @"NewPasswordRetypeCell";
 
+static NSInteger const kKeyboardHeight = 216;
+
 @interface ChangePasswordViewController ()
 
 @property (weak, nonatomic) IBOutlet UITableView *passwordsTableView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property (nonatomic, strong) NSString *usersNewPassword;
 @property (nonatomic, strong) NSString *currentPassword;
@@ -30,6 +33,8 @@ static NSString * const kRetypeNewPasswordCellIdentifier = @"NewPasswordRetypeCe
 {
     [super viewDidLoad];
     self.passwordsTableView.backgroundView = nil;
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.scrollView.frame.size.height + 130);
+    self.scrollView.scrollEnabled = NO;
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"darkBgPattern"]];
 }
 
@@ -90,7 +95,17 @@ static NSString * const kRetypeNewPasswordCellIdentifier = @"NewPasswordRetypeCe
 #pragma mark - TextField delegate
 
 - (void) eraseTextFieldsText {
+    [(UITextField *)[self.view viewWithTag:101]setText:@""];
+    [(UITextField *)[self.view viewWithTag:102]setText:@""];
+    [(UITextField *)[self.view viewWithTag:103]setText:@""];
+    
+    [self.scrollView scrollsToTop];
+    self.scrollView.scrollEnabled = NO;
+}
 
+- (BOOL) textFieldShouldBeginEditing:(UITextField *)textField {
+    self.scrollView.scrollEnabled = YES;
+    return YES;
 }
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {

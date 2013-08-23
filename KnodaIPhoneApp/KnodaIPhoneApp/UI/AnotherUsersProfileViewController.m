@@ -158,6 +158,7 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Prediction* prediction = [self.predictions objectAtIndex: indexPath.row];
     [self performSegueWithIdentifier:kPredictionDetailsSegue sender:prediction];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - PredictionCellDelegate
@@ -213,10 +214,6 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
              [cell resetAgreedDisagreed];
          }
      }];
-}
-
-- (void) profileSelectedWithUserId:(NSInteger)userId inCell:(PreditionCell *)cell {
-//    [self performSegueWithIdentifier:kUserProfileSegue sender:[NSNumber numberWithInteger:userId]];
 }
 
 @end

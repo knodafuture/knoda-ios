@@ -12,6 +12,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "AppDelegate.h"
 #import "SignOutWebRequest.h"
+#import "AppDelegate.h"
 
 static NSString * const accountDetailsTableViewCellIdentifier = @"accountDetailsTableViewCellIdentifier";
 
@@ -77,6 +78,9 @@ static NSString * const accountDetailsTableViewCellIdentifier = @"accountDetails
 {
     if ([[segue identifier] isEqualToString:@"SignOutSegue"])
     {
+        AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
+        [appDelegate removePassword];
+        
         SignOutWebRequest * signOutWebRequest = [[SignOutWebRequest alloc]init];
         [signOutWebRequest executeWithCompletionBlock:^{
         }];

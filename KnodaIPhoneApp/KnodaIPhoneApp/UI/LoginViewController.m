@@ -138,15 +138,19 @@ static NSString* const kApplicationSegue = @"ApplicationNavigationSegue";
                  self.appDelegate.user = loginRequest.user;
                  
                  ProfileWebRequest *profileRequest = [ProfileWebRequest new];
-                 [profileRequest executeWithCompletionBlock:^{
-                     
+                 [profileRequest executeWithCompletionBlock: ^
+                 {
                      self.activityView.hidden = YES;
                      
-                     if(profileRequest.isSucceeded) {
+                     if (profileRequest.isSucceeded)
+                     {
                          [self.appDelegate.user updateWithObject:profileRequest.user];
+                         [self.appDelegate savePassword: self.passwordTextField.text];
+                         
                          [self performSegueWithIdentifier: kApplicationSegue  sender: self];
                      }
-                     else {
+                     else
+                     {
                          [self showError:profileRequest.userFriendlyErrorDescription];
                      }
                  }];

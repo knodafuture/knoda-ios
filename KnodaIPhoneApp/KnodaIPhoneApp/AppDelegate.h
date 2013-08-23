@@ -7,11 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+
 #import "User.h"
+#import "KeychainItemWrapper.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) User* user;
+
+@property (strong, nonatomic) KeychainItemWrapper *passwordItem;
+
+- (void) savePassword: (NSString*) password;
+- (void) removePassword;
+
+- (NSDictionary*) credentials;
 
 @end

@@ -12,6 +12,7 @@
 
 #import "SignUpRequest.h"
 #import "PredictionsWebRequest.h"
+#import "ProfileWebRequest.h"
 
 
 static const NSInteger kMaxUsernameLength = 15;
@@ -144,10 +145,23 @@ static NSString* const kApplicationSegue   = @"ApplicationNavigationSegue";
              {
                  self.appDelegate.user = signUpRequest.user;
                  
-                 PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] init];
-                 [predictionsRequest executeWithCompletionBlock: ^{}];
-                 
-                 [self performSegueWithIdentifier: kApplicationSegue sender: self];
+                 ProfileWebRequest *profileRequest = [ProfileWebRequest new];
+                 [profileRequest executeWithCompletionBlock: ^
+                  {
+                      self.activityView.hidden = YES;
+                      
+                      if (profileRequest.isSucceeded)
+                      {
+                          [self.appDelegate.user updateWithObject: profileRequest.user];
+                          [self.appDelegate savePassword: self.passwordTextField.text];
+                          
+                          [self performSegueWithIdentifier: kApplicationSegue  sender: self];
+                      }
+                      else
+                      {
+                          [self showError:profileRequest.userFriendlyErrorDescription];
+                      }
+                  }];
              }
              else if (signUpRequest.errorCode == 403)
              {

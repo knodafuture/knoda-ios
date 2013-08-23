@@ -45,6 +45,9 @@
     
     [UIApplication sharedApplication].keyWindow.backgroundColor = [UIColor whiteColor];
     
+    KeychainItemWrapper* wrapper = [[KeychainItemWrapper alloc] initWithIdentifier: @"Password" accessGroup: @"F489V4H5F6.com.Knoda.KnodaIPhoneApp"];
+	self.passwordItem = wrapper;
+    
     return YES;
 }
 							
@@ -73,6 +76,45 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+
+- (void) savePassword: (NSString*) password
+{
+    if (self.user.name.length != 0)
+    {
+        NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+        [userDefaults setObject: self.user.name forKey: @"User"];
+        
+        [self.passwordItem setObject: password forKey: ((__bridge id)kSecValueData)];
+    }
+}
+
+
+- (void) removePassword
+{
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey: @"User"];
+    [self.passwordItem resetKeychainItem];
+}
+
+
+- (NSDictionary*) credentials
+{
+    NSDictionary* result = nil;
+    
+    NSString* userName = [[NSUserDefaults standardUserDefaults] objectForKey: @"User"];
+    
+    if (userName.length != 0)
+    {
+        NSString* password = [self.passwordItem objectForKey: ((__bridge id)kSecValueData)];
+        
+        if (password.length != 0)
+        {
+            result = @{@"User": userName, @"Password": password};
+        }
+    }
+    
+    return result;
 }
 
 @end

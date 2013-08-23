@@ -156,9 +156,12 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    Prediction* prediction = [self.predictions objectAtIndex: indexPath.row];
-    [self performSegueWithIdentifier:kPredictionDetailsSegue sender:prediction];
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (self.predictions.count != 0)
+    {
+        [tableView deselectRowAtIndexPath: indexPath animated: YES];
+        Prediction* prediction = [self.predictions objectAtIndex: indexPath.row];
+        [self performSegueWithIdentifier:kPredictionDetailsSegue sender:prediction];
+    }
 }
 
 #pragma mark - PredictionCellDelegate

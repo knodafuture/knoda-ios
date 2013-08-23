@@ -147,8 +147,12 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath: indexPath animated: YES];
-    Prediction* prediction = [self.alerts objectAtIndex: indexPath.row];
-    [self performSegueWithIdentifier:kPredictionDetailsSegue sender:prediction];
+    
+    if (self.alerts.count != 0)
+    {
+        Prediction* prediction = [self.alerts objectAtIndex: indexPath.row];
+        [self performSegueWithIdentifier:kPredictionDetailsSegue sender:prediction];
+    }
 }
 
 @end

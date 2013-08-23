@@ -150,8 +150,11 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    Prediction* prediction = [self.predictions objectAtIndex: indexPath.row];
-    [self performSegueWithIdentifier:kPredictionDetailsSegue sender:prediction];
+    if (self.predictions.count != 0)
+    {
+        Prediction* prediction = [self.predictions objectAtIndex: indexPath.row];
+        [self performSegueWithIdentifier:kPredictionDetailsSegue sender:prediction];
+    }
 }
 
 #pragma mark - PredictionCellDelegate

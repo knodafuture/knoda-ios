@@ -10,6 +10,7 @@
 #import "NavigationViewController.h"
 #import "NavigationSegue.h"
 #import "AddPredictionViewController.h"
+#import "AppDelegate.h"
 
 static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 
@@ -17,8 +18,9 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 
 @property (nonatomic, strong) IBOutlet UIView* detailsView;
 @property (nonatomic, strong) IBOutlet UIImageView* segmentedControlImage;
-
+@property (nonatomic, strong) AppDelegate * appDelegate;
 @property (nonatomic, weak) UIViewController *detailsViewController;
+@property (weak, nonatomic) IBOutlet UIView *noContentView;
 
 @end
 
@@ -29,12 +31,22 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     self.navigationController.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, self.navigationController.navigationBar.frame.size.height);
-	
-    [self performSegueWithIdentifier: @"AllAlertsSegue" sender: self];
+    self.appDelegate.user.alerts > 0 ? [self performSegueWithIdentifier: @"AllAlertsSegue" sender: self] : [self setUpNoContentViewHidden:NO];
 }
 
+- (void) setUpNoContentViewHidden: (BOOL) hidden {
+    if (self.noContentView.hidden == hidden) {
+        return;
+    }
+    self.noContentView.hidden = hidden;
+    if (hidden) {
+        [self.noContentView removeFromSuperview];
+    }
+    else {
+        [self.view addSubview:self.noContentView];
+    }
+}
 
 - (void) prepareForSegue: (UIStoryboardSegue*) segue sender: (id) sender
 {
@@ -64,6 +76,11 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 - (IBAction) rightButtonPressed: (id) sender
 {
     self.segmentedControlImage.image = [UIImage imageNamed: @"sort_right-green"];
+}
+
+- (AppDelegate*) appDelegate
+{
+    return [UIApplication sharedApplication].delegate;
 }
 
 #pragma mark - AddPredictionViewControllerDelegate

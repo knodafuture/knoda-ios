@@ -30,6 +30,8 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
 @property (nonatomic, strong) NSTimer* cellUpdateTimer;
 @property (nonatomic, strong) AppDelegate * appDelegate;
 
+@property (weak, nonatomic) IBOutlet UIView *noContentView;
+
 @end
 
 @implementation HomeViewController
@@ -56,6 +58,19 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
     self.refreshControl = refreshControl;
 }
 
+- (void) setUpNoContentViewHidden: (BOOL) hidden {
+    if (self.noContentView.hidden == hidden) {
+        return;
+    }
+    
+    self.noContentView.hidden = hidden;
+    if (hidden) {
+        [self.noContentView removeFromSuperview];
+    }
+    else {
+        [self.view addSubview:self.noContentView];
+    }
+}
 
 - (void) viewDidAppear: (BOOL) animated
 {
@@ -132,6 +147,8 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
              self.predictions = [NSMutableArray arrayWithArray: predictionsRequest.predictions];
              [self.tableView reloadData];
          }
+         BOOL hideContentView = self.predictions.count > 0;
+         [self setUpNoContentViewHidden:hideContentView];
      }];
 }
 

@@ -19,6 +19,7 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
 
 @interface MyPicksViewController () <PredictionCellDelegate>
 
+@property (strong, nonatomic) IBOutlet UIView *noContentView;
 @property (nonatomic, strong) NSMutableArray* predictions;
 @property (nonatomic, strong) NSTimer* cellUpdateTimer;
 
@@ -31,7 +32,6 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
 - (void) viewDidAppear: (BOOL) animated
 {
     [super viewDidAppear: animated];
-    
     [self refresh];
     
     self.cellUpdateTimer = [NSTimer scheduledTimerWithTimeInterval: 60.0 target: self selector: @selector(updateVisibleCells) userInfo: nil repeats: YES];
@@ -66,6 +66,13 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
          {
              self.predictions = [NSMutableArray arrayWithArray: request.predictions];
              [self.tableView reloadData];
+
+             if ([self.predictions count] > 0) {
+                 [self.noContentView removeFromSuperview];
+             }
+             else {
+                 [self.view addSubview:self.noContentView];
+             }
          }
      }];
 }

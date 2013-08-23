@@ -17,19 +17,16 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 
 @property (nonatomic, strong) IBOutlet UIView* detailsView;
 @property (nonatomic, strong) IBOutlet UIImageView* segmentedControlImage;
-
+@property (weak, nonatomic) IBOutlet UIView *noContentView;
 @property (nonatomic, weak) UIViewController *detailsViewController;
 
 @end
 
-
 @implementation HistoryViewController
-
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     self.navigationController.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, self.navigationController.navigationBar.frame.size.height);
 	
     [self performSegueWithIdentifier: @"MyPredictionSegue" sender: self];
@@ -47,7 +44,6 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
         vc.delegate = self;
     }
 }
-
 
 - (IBAction) menuButtonPressed: (id) sender
 {

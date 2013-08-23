@@ -18,6 +18,7 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 
 @property (nonatomic, strong) NSMutableArray * badgesImagesArray;
 @property (weak, nonatomic) IBOutlet UIView *activityView;
+@property (weak, nonatomic) IBOutlet UIView *noContentView;
 
 @end
 
@@ -34,11 +35,16 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 - (void) setUpUsersBadges {
     BadgesWebRequest * badgesWebRequest = [[BadgesWebRequest alloc]init];
     [badgesWebRequest executeWithCompletionBlock:^{
+        self.activityView.hidden = YES;
         if (badgesWebRequest.errorCode == 0) {
             self.badgesImagesArray = badgesWebRequest.badgesImagesArray;
             [self.collectionView reloadData];
         }
-        self.activityView.hidden = YES;
+        
+        if ([self.badgesImagesArray count] == 0) {
+            self.noContentView.hidden = NO;
+            self.view = self.noContentView;
+        }
     }];
 }
 

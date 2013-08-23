@@ -22,6 +22,7 @@ static NSString* const kMyProfileSegue = @"MyProfileSegue";
 
 @property (nonatomic, strong) NSMutableArray* predictions;
 @property (nonatomic, strong) NSTimer* cellUpdateTimer;
+@property (strong, nonatomic) IBOutlet UIView *noContentView;
 
 @end
 
@@ -32,7 +33,6 @@ static NSString* const kMyProfileSegue = @"MyProfileSegue";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
     [self refresh];
 }
 
@@ -73,6 +73,13 @@ static NSString* const kMyProfileSegue = @"MyProfileSegue";
          {
              self.predictions = [NSMutableArray arrayWithArray: request.predictions];
              [self.tableView reloadData];
+             
+             if ([self.predictions count] > 0) {
+                 [self.noContentView removeFromSuperview];
+             }
+             else {
+                 [self.view addSubview:self.noContentView];
+             }
          }
      }];
 }

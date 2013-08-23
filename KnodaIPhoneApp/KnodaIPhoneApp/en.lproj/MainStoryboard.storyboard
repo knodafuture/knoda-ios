@@ -1360,7 +1360,7 @@
             <objects>
                 <viewController id="wNN-TM-pOg" customClass="PredictionDetailsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hDO-dV-CXd">
-                        <rect key="frame" x="0.0" y="64" width="320" height="588"/>
+                        <rect key="frame" x="0.0" y="44" width="320" height="588"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="OOz-U0-cxm">
@@ -3366,7 +3366,7 @@ outcome of your prediction</string>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="PreditionCell" id="hVu-hY-AZv" customClass="PreditionCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="PreditionCell" id="hVu-hY-AZv" customClass="PreditionCell">
                                         <rect key="frame" x="0.0" y="22" width="320" height="88"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -3431,10 +3431,17 @@ outcome of your prediction</string>
                                                     <color key="textColor" red="0.1576086957" green="0.1419212644" blue="0.14378415119999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="2h 5m ago | 55%  agree" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iYJ-gm-dLx">
-                                                    <rect key="frame" x="82" y="66" width="218" height="21"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="2h 5m ago" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kpQ-8e-muK">
+                                                    <rect key="frame" x="82" y="66" width="225" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                                    <color key="textColor" red="0.51519874499999996" green="0.51832116169999998" blue="0.51207632839999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="2h 5m ago | 55%  agree" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KPF-fb-DkS">
+                                                    <rect key="frame" x="82" y="66" width="225" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                                     <color key="textColor" red="0.51519874499999996" green="0.51832116169999998" blue="0.51207632839999995" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
@@ -3498,8 +3505,13 @@ outcome of your prediction</string>
                                             <outlet property="agreeImage" destination="Stc-fS-Rry" id="eMb-2S-CAf"/>
                                             <outlet property="agreeQuestionView" destination="Z30-Wj-ktI" id="cmC-Ts-2aH"/>
                                             <outlet property="avatarView" destination="25c-K8-JiP" id="cl2-6m-uBZ"/>
+                                            <outlet property="bodyLabel" destination="NSf-za-mTJ" id="5nv-V6-qNp"/>
                                             <outlet property="disagreeImage" destination="5q1-j0-jxC" id="Qdv-T9-nfk"/>
                                             <outlet property="disagreeQuestionView" destination="gyY-fr-hjl" id="3YC-EP-i1y"/>
+                                            <outlet property="expirationDateLabel" destination="kpQ-8e-muK" id="APP-qA-DF0"/>
+                                            <outlet property="guessMarkImage" destination="TAt-RR-kiw" id="Tdm-z1-TCw"/>
+                                            <outlet property="metadataLabel" destination="KPF-fb-DkS" id="ZMc-PH-yK8"/>
+                                            <outlet property="usernameLabel" destination="y2t-fC-qLu" id="LUB-Ml-Dea"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -3913,7 +3925,7 @@ outcome of your prediction</string>
             <objects>
                 <tableViewController id="7fT-Te-TB1" customClass="CategoryPredictionsViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="88" sectionHeaderHeight="22" sectionFooterHeight="22" id="2jP-nc-KCP">
-                        <rect key="frame" x="0.0" y="64" width="320" height="524"/>
+                        <rect key="frame" x="0.0" y="44" width="320" height="544"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -4214,12 +4226,12 @@ outcome of your prediction</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="mnN-YR-PTq"/>
+        <segue reference="Ef7-FX-Fpl"/>
         <segue reference="tga-wH-5aw"/>
         <segue reference="pyY-qR-NzL"/>
         <segue reference="vCM-j3-I2J"/>
-        <segue reference="CM5-5K-qH1"/>
+        <segue reference="esW-Qq-HJ8"/>
+        <segue reference="Xdg-c4-S6o"/>
         <segue reference="ebR-4n-eVY"/>
-        <segue reference="EE6-qF-5xk"/>
     </inferredMetricsTieBreakers>
 </document>

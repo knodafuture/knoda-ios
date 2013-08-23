@@ -12,10 +12,13 @@
 #import "Prediction.h"
 #import "PredictionDetailsViewController.h"
 #import "AddPredictionViewController.h"
+#import "AnotherUsersProfileViewController.h"
+
 
 static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
+static NSString* const kUserProfileSegue       = @"UserProfileSegue";
 
-@interface MyPredictionsViewController () <AddPredictionViewControllerDelegate>
+@interface MyPredictionsViewController () <AddPredictionViewControllerDelegate, PredictionCellDelegate>
 
 @property (nonatomic, strong) NSMutableArray* predictions;
 @property (nonatomic, strong) NSTimer* cellUpdateTimer;
@@ -80,6 +83,10 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
         vc.prediction = sender;
         vc.addPredictionDelegate = self;
     }
+    else if([segue.identifier isEqualToString:kUserProfileSegue]) {
+        AnotherUsersProfileViewController *vc = (AnotherUsersProfileViewController *)segue.destinationViewController;
+        vc.userId = [sender integerValue];
+    }
 }
 
 #pragma mark - UITableViewDataSource
@@ -106,6 +113,10 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
         Prediction* prediction = [self.predictions objectAtIndex: indexPath.row];
         
         PreditionCell* cell = [tableView dequeueReusableCellWithIdentifier:[PreditionCell reuseIdentifier]];
+        cell.delegate = self;
+        
+        UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]init];
+        [cell setUpUserProfileTapGestures:tapGesture];
         
         [cell fillWithPrediction: prediction];
                 
@@ -156,6 +167,11 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 - (void) predictionWasMadeInController:(AddPredictionViewController *)vc {
     [vc dismissViewControllerAnimated:YES completion:nil];
     [self refresh];
+}
+
+#pragma mark - PredictionCellDelegate
+- (void) profileSelectedWithUserId:(NSInteger)userId inCell:(PreditionCell *)cell {
+    [self performSegueWithIdentifier:kUserProfileSegue sender:[NSNumber numberWithInteger:userId]];
 }
 
 @end

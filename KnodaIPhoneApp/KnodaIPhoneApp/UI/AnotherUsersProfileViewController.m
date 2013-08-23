@@ -50,7 +50,7 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    self.cellUpdateTimer = [NSTimer scheduledTimerWithTimeInterval: 60.0 target: self selector: @selector(updatePredictionsCells) userInfo: nil repeats: YES];
+    self.cellUpdateTimer = [NSTimer scheduledTimerWithTimeInterval: 60.0 target: self selector: @selector(setUpUsersInfo) userInfo: nil repeats: YES];
 }
 
 - (void) viewWillDisappear: (BOOL) animated {
@@ -80,32 +80,26 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
         }
         
         [self setUpUserProfileInformationWithUser:profileWebRequest.user];
-        [self updatePredictionsCells];
-        
-        }];
-}
-
-- (void) updatePredictionsCells {
-    AnotherUserPredictionsWebRequest *predictionWebRequest = [[AnotherUserPredictionsWebRequest alloc]initWithUserId:self.userId];
-    [predictionWebRequest executeWithCompletionBlock:^{
-        
-        if (predictionWebRequest.errorCode != 0) {
+        AnotherUserPredictionsWebRequest *predictionWebRequest = [[AnotherUserPredictionsWebRequest alloc]initWithUserId:self.userId];
+        [predictionWebRequest executeWithCompletionBlock:^{
+            
+            if (predictionWebRequest.errorCode != 0) {
+                self.activityView.hidden = YES;
+                return;
+            }
+            
+            self.predictions = [NSMutableArray arrayWithArray: predictionWebRequest.predictions];
+            [self.predictionsTableView reloadData];
             self.activityView.hidden = YES;
-            return;
-        }
-        
-        self.predictions = [NSMutableArray arrayWithArray: predictionWebRequest.predictions];
-        [self.predictionsTableView reloadData];
-        self.activityView.hidden = YES;
-    }];
-
+        }];
+        }];
 }
 
 - (void) setUpUserProfileInformationWithUser : (User *) user {
     [self.userAvatarView bindToURL:user.smallImage];
     self.userNameLabel.text = user.name;
     self.userPointsLabel.text = [NSString stringWithFormat:@"%d points",user.points];
-    self.userTotalPredictionsLabel.text = [NSString stringWithFormat:@"%d total predictions",user.points];
+    self.userTotalPredictionsLabel.text = [NSString stringWithFormat:@"%d total predictions",user.totalPredictions];
 }
 
 

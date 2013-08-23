@@ -11,10 +11,13 @@
 #import "HistoryMyPicksWebRequest.h"
 #import "Prediction.h"
 #import "PredictionDetailsViewController.h"
+#import "AnotherUsersProfileViewController.h"
+
 
 static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
+static NSString* const kUserProfileSegue       = @"UserProfileSegue";
 
-@interface MyPicksViewController ()
+@interface MyPicksViewController () <PredictionCellDelegate>
 
 @property (nonatomic, strong) NSMutableArray* predictions;
 @property (nonatomic, strong) NSTimer* cellUpdateTimer;
@@ -72,6 +75,10 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
         PredictionDetailsViewController *vc = (PredictionDetailsViewController *)segue.destinationViewController;
         vc.prediction = sender;
     }
+    else if([segue.identifier isEqualToString:kUserProfileSegue]) {
+        AnotherUsersProfileViewController *vc = (AnotherUsersProfileViewController *)segue.destinationViewController;
+        vc.userId = [sender integerValue];
+    }
 }
 
 
@@ -99,8 +106,12 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
         Prediction* prediction = [self.predictions objectAtIndex: indexPath.row];
         
         PreditionCell* cell = [tableView dequeueReusableCellWithIdentifier:[PreditionCell reuseIdentifier]];
+        cell.delegate = self;
         
         [cell fillWithPrediction: prediction];
+        
+        UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]init];
+        [cell setUpUserProfileTapGestures:tapGesture];
         
         tableCell = cell;
     }
@@ -141,6 +152,11 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Prediction* prediction = [self.predictions objectAtIndex: indexPath.row];
     [self performSegueWithIdentifier:kPredictionDetailsSegue sender:prediction];
+}
+
+#pragma mark - PredictionCellDelegate
+- (void) profileSelectedWithUserId:(NSInteger)userId inCell:(PreditionCell *)cell {
+    [self performSegueWithIdentifier:kUserProfileSegue sender:[NSNumber numberWithInteger:userId]];
 }
 
 @end

@@ -52,7 +52,7 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 
 static const int kBSAlertTag = 1001;
 
-@interface PredictionDetailsViewController () <UIAlertViewDelegate, AddPredictionViewControllerDelegate> {
+@interface PredictionDetailsViewController () <UIAlertViewDelegate, AddPredictionViewControllerDelegate, PredictionCellDelegate> {
     BOOL _loadingUsers;
     BOOL _updatingStatus;
 }
@@ -472,6 +472,9 @@ static const int kBSAlertTag = 1001;
     if([baseCell isKindOfClass:[PredictionDetailsCell class]]) {
         PredictionDetailsCell *cell = (PredictionDetailsCell *)baseCell;
         [cell fillWithPrediction:self.prediction];
+        cell.delegate = self;
+        UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]init];
+        [cell setUpUserProfileTapGestures:tapGesture];
     }
     else if([baseCell isKindOfClass:[PredictionCategoryCell class]]) {
         PredictionCategoryCell *cell = (PredictionCategoryCell *)baseCell;
@@ -605,6 +608,12 @@ withAnimationDuration: (NSTimeInterval)animationDuration
     } completion:^(BOOL finished) {
         [self.tableView scrollToRowAtIndexPath:[self indexPathForCellType:RowOutcome] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
     }];
+}
+
+#pragma mark - Prediction Cell delegate
+
+- (void) profileSelectedWithUserId:(NSInteger)userId inCell:(PreditionCell *)cell {
+    [self performSegueWithIdentifier:kUserProfileSegue sender:[NSNumber numberWithInteger:userId]];
 }
 
 @end

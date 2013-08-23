@@ -9,7 +9,6 @@
 #import "PreditionCell.h"
 #import "Prediction.h"
 #import "Chellange.h"
-#import "BindableView.h"
 
 static const int kObserverKeyCount = 19;
 static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
@@ -297,16 +296,27 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
 }
 
 - (void) setUpUserProfileTapGestures : (UITapGestureRecognizer*) recognizer {
+    UITapGestureRecognizer * gestRec = [[UITapGestureRecognizer alloc]init];
+    [self.avatarView setUserInteractionEnabled:YES];
+    [self.avatarView addImageViewGestureRecognizer:gestRec];
+    self.avatarView.delegate = self;
+    
+    [self.usernameLabel setUserInteractionEnabled:YES];
     self.profileGestureRecognizer = recognizer;
-    [self.avatarView addGestureRecognizer:recognizer];
     [self.usernameLabel addGestureRecognizer:recognizer];
-    [self.gestureRecognizer addTarget: self action: @selector(userAvatarLoginTapped)];
+    [self.profileGestureRecognizer addTarget: self action: @selector(userAvatarLoginTapped)];
 }
 
 - (void) userAvatarLoginTapped {
     if ([self.delegate respondsToSelector:@selector(profileSelectedWithUserId:inCell:)]) {
         [self.delegate profileSelectedWithUserId:self.prediction.userId inCell:self];
     }
+}
+
+#pragma mark - Bindable View delegate
+
+- (void) userAvatarTappedWithGestureRecognizer:(UITapGestureRecognizer *)gestureRecognizer {
+    [self userAvatarLoginTapped];
 }
 
 #pragma mark Properties
@@ -363,7 +373,6 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
     self.recognizingRightGesture = ([gestureRecognizer locationInView: self.contentView].x >= CGRectGetWidth(self.contentView.frame) - 50 && !self.agreed && ! self.disagreed && !self.prediction.chellange.isOwn);
     
     return (self.recognizingLeftGesture || self.recognizingRightGesture);
-
 }
 
 

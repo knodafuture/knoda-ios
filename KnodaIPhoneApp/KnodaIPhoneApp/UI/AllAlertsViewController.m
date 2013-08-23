@@ -46,30 +46,33 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
              self.alerts = request.predictions;
              [self.tableView reloadData];
              
-             NSArray* visibleCells = [self.tableView visibleCells];
-             NSMutableArray* chellangeIDs = [NSMutableArray arrayWithCapacity: 0];
-             
-             for (PreditionCell* cell in visibleCells)
+             if (self.alerts.count != 0)
              {
-                 if (cell.prediction.settled)
+                 NSArray* visibleCells = [self.tableView visibleCells];
+                 NSMutableArray* chellangeIDs = [NSMutableArray arrayWithCapacity: 0];
+                 
+                 for (PreditionCell* cell in visibleCells)
                  {
-                     [chellangeIDs addObject: [NSNumber numberWithInteger: cell.prediction.chellange.ID]];
+                     if (cell.prediction.settled)
+                     {
+                         [chellangeIDs addObject: [NSNumber numberWithInteger: cell.prediction.chellange.ID]];
+                     }
                  }
-             }
-             
-             if (chellangeIDs.count != 0)
-             {
-                 SetSeenAlertsWebRequest* request = [[SetSeenAlertsWebRequest alloc] initWithIDs: chellangeIDs];
-                 [request executeWithCompletionBlock: ^
-                  {
-                      if (request.errorCode != 0)
+                 
+                 if (chellangeIDs.count != 0)
+                 {
+                     SetSeenAlertsWebRequest* request = [[SetSeenAlertsWebRequest alloc] initWithIDs: chellangeIDs];
+                     [request executeWithCompletionBlock: ^
                       {
-                          for (PreditionCell* cell in visibleCells)
+                          if (request.errorCode != 0)
                           {
-                              cell.prediction.chellange.seen = YES;
+                              for (PreditionCell* cell in visibleCells)
+                              {
+                                  cell.prediction.chellange.seen = YES;
+                              }
                           }
-                      }
-                  }];
+                      }];
+                 }
              }
          }
      }];

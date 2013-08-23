@@ -10,6 +10,7 @@
 
 @interface User : BaseModelObject
 
+@property (nonatomic, assign) NSInteger userId;
 @property (nonatomic, strong) NSString* name;
 @property (nonatomic, strong) NSString* email;
 @property (nonatomic, strong) NSString* token;

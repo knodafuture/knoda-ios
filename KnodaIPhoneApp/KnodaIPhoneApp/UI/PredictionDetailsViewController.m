@@ -10,14 +10,14 @@
 #import "AnotherUsersProfileViewController.h"
 #import "Prediction.h"
 #import "Chellange.h"
-
+#import "ProfileViewController.h"
 #import "PredictionDetailsCell.h"
 #import "PredictionCategoryCell.h"
 #import "PredictionStatusCell.h"
 #import "MakePredictionCell.h"
 #import "OutcomeCell.h"
 #import "LoadingCell.h"
-
+#import "User.h"
 #import "PredictorsCountCell.h"
 #import "PredictorCell.h"
 
@@ -31,6 +31,7 @@
 #import "PredictionDisagreeWebRequest.h"
 #import "PredictionUpdateWebRequest.h"
 #import "CategoryPredictionsViewController.h"
+#import "AppDelegate.h"
 
 typedef enum {
     RowEmpty = -1,
@@ -46,9 +47,9 @@ typedef enum {
 } CellType;
 
 static NSString* const kCategorySegue      = @"CategoryPredictionsSegue";
-static NSString* const kUserProfileSegue = @"UserProfileSegue";
+static NSString* const kUserProfileSegue   = @"UserProfileSegue";
 static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
-
+static NSString* const kMyProfileSegue     = @"MyProfileSegue";
 
 static const int kBSAlertTag = 1001;
 
@@ -56,6 +57,8 @@ static const int kBSAlertTag = 1001;
     BOOL _loadingUsers;
     BOOL _updatingStatus;
 }
+
+@property (nonatomic, strong) AppDelegate * appDelegate;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *pickerViewHolder;
@@ -195,6 +198,10 @@ static const int kBSAlertTag = 1001;
     }
     else if ([segue.identifier isEqualToString:kUserProfileSegue]) {
         ((AnotherUsersProfileViewController*)segue.destinationViewController).userId = self.prediction.userId;
+    }
+    else if([segue.identifier isEqualToString:kMyProfileSegue]) {
+        ProfileViewController *vc = (ProfileViewController *)segue.destinationViewController;
+        vc.leftButtonItemReturnsBack = YES;
     }
 }
 
@@ -613,7 +620,18 @@ withAnimationDuration: (NSTimeInterval)animationDuration
 #pragma mark - Prediction Cell delegate
 
 - (void) profileSelectedWithUserId:(NSInteger)userId inCell:(PreditionCell *)cell {
-    [self performSegueWithIdentifier:kUserProfileSegue sender:[NSNumber numberWithInteger:userId]];
+    if (self.appDelegate.user.userId == userId) {
+        [self performSegueWithIdentifier:kMyProfileSegue sender:self];
+    }
+    else {
+        [self performSegueWithIdentifier:kUserProfileSegue sender:[NSNumber numberWithInteger:userId]];
+    }}
+
+#pragma mark - AppDelegate
+
+- (AppDelegate*) appDelegate
+{
+    return [UIApplication sharedApplication].delegate;
 }
 
 @end

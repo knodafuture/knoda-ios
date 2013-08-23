@@ -1327,6 +1327,7 @@
                     <connections>
                         <segue destination="wNN-TM-pOg" kind="push" identifier="PredictionDetailsSegue" id="CM5-5K-qH1"/>
                         <segue destination="bkd-uK-mBb" kind="push" identifier="UserProfileSegue" id="vCM-j3-I2J"/>
+                        <segue destination="WNw-sS-s8V" kind="push" identifier="MyProfileSegue" id="pyY-qR-NzL"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uGo-2X-fCD" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1338,7 +1339,7 @@
             <objects>
                 <viewController id="wNN-TM-pOg" customClass="PredictionDetailsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hDO-dV-CXd">
-                        <rect key="frame" x="0.0" y="44" width="320" height="588"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="588"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="OOz-U0-cxm">
@@ -1943,6 +1944,7 @@ outcome of your prediction</string>
                         <outlet property="tableView" destination="OOz-U0-cxm" id="pNl-1W-oha"/>
                         <segue destination="7fT-Te-TB1" kind="push" identifier="CategoryPredictionsSegue" id="ISY-hT-jPF"/>
                         <segue destination="bkd-uK-mBb" kind="push" identifier="UserProfileSegue" id="m1B-jn-2wq"/>
+                        <segue destination="WNw-sS-s8V" kind="push" identifier="MyProfileSegue" id="qdw-34-WFW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KLM-69-mFS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2448,7 +2450,7 @@ outcome of your prediction</string>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <segue destination="wNN-TM-pOg" kind="push" identifier="PredictionDetailsSegue" id="yxq-7e-oVo"/>
-                        <segue destination="bkd-uK-mBb" kind="push" identifier="UserProfileSegue" id="DpG-bN-lOs"/>
+                        <segue destination="WNw-sS-s8V" kind="push" identifier="MyProfileSegue" id="xsI-cJ-L1d"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M9b-Bp-faG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3266,11 +3268,11 @@ outcome of your prediction</string>
             <objects>
                 <viewController id="bkd-uK-mBb" customClass="AnotherUsersProfileViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WnQ-TW-CJ3">
-                        <rect key="frame" x="0.0" y="44" width="320" height="454"/>
+                        <rect key="frame" x="0.0" y="44" width="320" height="436"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="darkBg.png" id="GzR-PB-8Oy">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="454"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="436"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="YodaTheMaster" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zi2-DT-IRL">
@@ -3339,7 +3341,7 @@ outcome of your prediction</string>
                                 </connections>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="88" sectionHeaderHeight="22" sectionFooterHeight="22" id="DKL-NF-JLd">
-                                <rect key="frame" x="0.0" y="74" width="320" height="380"/>
+                                <rect key="frame" x="0.0" y="74" width="320" height="362"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -3486,7 +3488,7 @@ outcome of your prediction</string>
                                 </connections>
                             </tableView>
                             <view hidden="YES" alpha="0.40000000596046448" contentMode="scaleToFill" id="aVM-QY-KvM">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="454"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="436"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="whiteLarge" id="7wq-aR-jxm">
@@ -3722,6 +3724,7 @@ outcome of your prediction</string>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="accountDetailsTableView" destination="kQT-OI-osY" id="c30-GG-eyH"/>
+                        <outlet property="leftNavigationBarItem" destination="EZM-wz-ONY" id="8nu-8C-XWH"/>
                         <outlet property="loginLabel" destination="BOq-cn-2MG" id="Ahp-4c-FNQ"/>
                         <outlet property="pointsLabel" destination="ZZh-i2-KNf" id="21s-Xw-NZ4"/>
                         <outlet property="profileAvatarView" destination="mcr-h0-wFk" id="q0V-TA-fsV"/>
@@ -3731,7 +3734,7 @@ outcome of your prediction</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lgo-yb-njz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1217" y="4660"/>
+            <point key="canvasLocation" x="1269" y="4660"/>
         </scene>
         <!--Change Password View Controller - ME-->
         <scene sceneID="E8Q-6f-E6W">
@@ -3889,7 +3892,7 @@ outcome of your prediction</string>
             <objects>
                 <tableViewController id="7fT-Te-TB1" customClass="CategoryPredictionsViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="88" sectionHeaderHeight="22" sectionFooterHeight="22" id="2jP-nc-KCP">
-                        <rect key="frame" x="0.0" y="44" width="320" height="544"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="524"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -4191,9 +4194,10 @@ outcome of your prediction</string>
     <inferredMetricsTieBreakers>
         <segue reference="mnN-YR-PTq"/>
         <segue reference="tga-wH-5aw"/>
+        <segue reference="pyY-qR-NzL"/>
+        <segue reference="vCM-j3-I2J"/>
+        <segue reference="CM5-5K-qH1"/>
         <segue reference="ebR-4n-eVY"/>
-        <segue reference="DpG-bN-lOs"/>
-        <segue reference="esW-Qq-HJ8"/>
-        <segue reference="Xdg-c4-S6o"/>
+        <segue reference="EE6-qF-5xk"/>
     </inferredMetricsTieBreakers>
 </document>

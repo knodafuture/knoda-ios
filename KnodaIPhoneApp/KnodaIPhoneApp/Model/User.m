@@ -12,6 +12,7 @@
 
 - (id)initWithDictionary:(NSDictionary *)dictionary {
     if(self = [super init]) {
+        self.userId = [[dictionary objectForKey: @"id"]integerValue];
         self.name  = [dictionary objectForKey: @"username"];
         self.email = [dictionary objectForKey: @"email"];
         self.points = [[dictionary objectForKey: @"points"]integerValue];

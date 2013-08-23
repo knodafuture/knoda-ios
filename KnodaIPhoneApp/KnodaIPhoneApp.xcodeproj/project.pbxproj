@@ -1641,7 +1641,7 @@
 				3638773F17C4D6EA00703475 /* AnotherUsersProfileViewController.m in Sources */,
 				57066AA717C63C8E0080797B /* SelectPictureViewController.m in Sources */,
 				57066AAA17C64E990080797B /* CategoryPredictionsViewController.m in Sources */,
-                365B7E1F17C64E6C00ED04D2 /* AnotherUserProfileWebRequest.m in Sources */,
+				365B7E1F17C64E6C00ED04D2 /* AnotherUserProfileWebRequest.m in Sources */,
 				365B7E2217C6548300ED04D2 /* AnotherUserPredictionsWebRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

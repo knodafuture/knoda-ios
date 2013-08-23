@@ -16,4 +16,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *loginLabel;
 @property (weak, nonatomic) IBOutlet UILabel *pointsLabel;
 
+@property (nonatomic, assign) BOOL leftButtonItemReturnsBack;
+
 @end

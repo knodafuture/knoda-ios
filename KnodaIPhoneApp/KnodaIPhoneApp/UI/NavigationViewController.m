@@ -15,7 +15,6 @@
 
 static NSString* const kHomeSegue = @"HomeSegue";
 static NSString* const kSelectPictureSegue = @"SelectPictureSegue";
-static NSString* const kAppUser = @"";
 
 @interface NavigationViewController () <SelectPictureDelegate>
 

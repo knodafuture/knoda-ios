@@ -13,10 +13,10 @@
 #import "PredictionDetailsViewController.h"
 #import "AddPredictionViewController.h"
 #import "AnotherUsersProfileViewController.h"
-
+#import "ProfileViewController.h"
 
 static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
-static NSString* const kUserProfileSegue       = @"UserProfileSegue";
+static NSString* const kMyProfileSegue = @"MyProfileSegue";
 
 @interface MyPredictionsViewController () <AddPredictionViewControllerDelegate, PredictionCellDelegate>
 
@@ -83,9 +83,9 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
         vc.prediction = sender;
         vc.addPredictionDelegate = self;
     }
-    else if([segue.identifier isEqualToString:kUserProfileSegue]) {
-        AnotherUsersProfileViewController *vc = (AnotherUsersProfileViewController *)segue.destinationViewController;
-        vc.userId = [sender integerValue];
+    else if([segue.identifier isEqualToString:kMyProfileSegue]) {
+        ProfileViewController *vc = (ProfileViewController *)segue.destinationViewController;
+        vc.leftButtonItemReturnsBack = YES;
     }
 }
 
@@ -170,8 +170,9 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
 }
 
 #pragma mark - PredictionCellDelegate
+
 - (void) profileSelectedWithUserId:(NSInteger)userId inCell:(PreditionCell *)cell {
-    [self performSegueWithIdentifier:kUserProfileSegue sender:[NSNumber numberWithInteger:userId]];
+    [self performSegueWithIdentifier:kMyProfileSegue sender:self];
 }
 
 @end

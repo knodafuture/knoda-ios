@@ -8,24 +8,27 @@
 
 #import "HomeViewController.h"
 #import "NavigationViewController.h"
-
+#import "ProfileViewController.h"
 #import "PredictionsWebRequest.h"
 #import "Prediction.h"
 #import "AnotherUsersProfileViewController.h"
 #import "PredictionAgreeWebRequest.h"
 #import "PredictionDisagreeWebRequest.h"
 #import "ChellangeByPredictionWebRequest.h"
-
+#import "AppDelegate.h"
 #import "PredictionDetailsViewController.h"
+#import "User.h"
 
 static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
 static NSString* const kUserProfileSegue       = @"UserProfileSegue";
+static NSString* const kMyProfileSegue         = @"MyProfileSegue";
 
 @interface HomeViewController ()
 
 @property (nonatomic, strong) NSMutableArray* predictions;
 @property (nonatomic, strong) NSTimer* cellUpdateTimer;
+@property (nonatomic, strong) AppDelegate * appDelegate;
 
 @end
 
@@ -95,6 +98,10 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
     else if([segue.identifier isEqualToString:kUserProfileSegue]) {
         AnotherUsersProfileViewController *vc = (AnotherUsersProfileViewController *)segue.destinationViewController;
         vc.userId = [sender integerValue];
+    }
+    else if([segue.identifier isEqualToString:kMyProfileSegue]) {
+        ProfileViewController *vc = (ProfileViewController *)segue.destinationViewController;
+        vc.leftButtonItemReturnsBack = YES;
     }
 }
 
@@ -275,7 +282,19 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
 }
 
 - (void) profileSelectedWithUserId:(NSInteger)userId inCell:(PreditionCell *)cell {
-    [self performSegueWithIdentifier:kUserProfileSegue sender:[NSNumber numberWithInteger:userId]];
+    if (self.appDelegate.user.userId == userId) {
+        [self performSegueWithIdentifier:kMyProfileSegue sender:self];
+    }
+    else {
+        [self performSegueWithIdentifier:kUserProfileSegue sender:[NSNumber numberWithInteger:userId]];
+    }
+}
+
+#pragma mark - AppDelegate
+
+- (AppDelegate*) appDelegate
+{
+    return [UIApplication sharedApplication].delegate;
 }
 
 @end

@@ -7,17 +7,17 @@
 //
 
 #import "PredictionDetailsViewController.h"
-
+#import "AnotherUsersProfileViewController.h"
 #import "Prediction.h"
 #import "Chellange.h"
-
+#import "ProfileViewController.h"
 #import "PredictionDetailsCell.h"
 #import "PredictionCategoryCell.h"
 #import "PredictionStatusCell.h"
 #import "MakePredictionCell.h"
 #import "OutcomeCell.h"
 #import "LoadingCell.h"
-
+#import "User.h"
 #import "PredictorsCountCell.h"
 #import "PredictorCell.h"
 
@@ -30,6 +30,8 @@
 #import "PredictionAgreeWebRequest.h"
 #import "PredictionDisagreeWebRequest.h"
 #import "PredictionUpdateWebRequest.h"
+#import "CategoryPredictionsViewController.h"
+#import "AppDelegate.h"
 
 typedef enum {
     RowEmpty = -1,
@@ -44,14 +46,19 @@ typedef enum {
     TableRowsBaseCount = RowPredictorsCount + 1,
 } CellType;
 
+static NSString* const kCategorySegue      = @"CategoryPredictionsSegue";
+static NSString* const kUserProfileSegue   = @"UserProfileSegue";
 static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
+static NSString* const kMyProfileSegue     = @"MyProfileSegue";
 
 static const int kBSAlertTag = 1001;
 
-@interface PredictionDetailsViewController () <UIAlertViewDelegate> {
+@interface PredictionDetailsViewController () <UIAlertViewDelegate, AddPredictionViewControllerDelegate, PredictionCellDelegate> {
     BOOL _loadingUsers;
     BOOL _updatingStatus;
 }
+
+@property (nonatomic, strong) AppDelegate * appDelegate;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *pickerViewHolder;
@@ -82,6 +89,10 @@ static const int kBSAlertTag = 1001;
     CGRect frame = self.pickerViewHolder.frame;
     frame.origin.y = self.view.frame.size.height;
     self.pickerViewHolder.frame = frame;
+    
+    if(!self.addPredictionDelegate) {
+        self.addPredictionDelegate = self;
+    }
 }
 
 #pragma mark Actions
@@ -171,9 +182,26 @@ static const int kBSAlertTag = 1001;
     [self hideView:self.pickerViewHolder];
 }
 
+- (IBAction)categoryButtonTapped:(UIButton *)sender {
+    [self performSegueWithIdentifier:kCategorySegue sender:nil];
+}
+
+#pragma mark Segue
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:kAddPredictionSegue]) {
         ((AddPredictionViewController*)segue.destinationViewController).delegate = self.addPredictionDelegate;
+    }
+    else if([segue.identifier isEqualToString:kCategorySegue]) {
+        CategoryPredictionsViewController *vc = (CategoryPredictionsViewController *)segue.destinationViewController;
+        vc.category = self.prediction.category;
+    }
+    else if ([segue.identifier isEqualToString:kUserProfileSegue]) {
+        ((AnotherUsersProfileViewController*)segue.destinationViewController).userId = self.prediction.userId;
+    }
+    else if([segue.identifier isEqualToString:kMyProfileSegue]) {
+        ProfileViewController *vc = (ProfileViewController *)segue.destinationViewController;
+        vc.leftButtonItemReturnsBack = YES;
     }
 }
 
@@ -431,6 +459,12 @@ static const int kBSAlertTag = 1001;
     [self.tableView reloadRowsAtIndexPaths:@[[self indexPathForCellType:RowStatus]] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
+#pragma mark AddPredictionViewControllerDelegate
+
+- (void) predictionWasMadeInController:(AddPredictionViewController *)vc {
+    [vc dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -445,10 +479,14 @@ static const int kBSAlertTag = 1001;
     if([baseCell isKindOfClass:[PredictionDetailsCell class]]) {
         PredictionDetailsCell *cell = (PredictionDetailsCell *)baseCell;
         [cell fillWithPrediction:self.prediction];
+        cell.delegate = self;
+        UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]init];
+        [cell setUpUserProfileTapGestures:tapGesture];
     }
     else if([baseCell isKindOfClass:[PredictionCategoryCell class]]) {
         PredictionCategoryCell *cell = (PredictionCategoryCell *)baseCell;
         [cell setCategory:self.prediction.category];
+        cell.buttonEnabled = !self.shouldNotOpenCategory;
     }
     else if([baseCell isKindOfClass:[PredictionStatusCell class]]) {
         PredictionStatusCell *cell = (PredictionStatusCell *)baseCell;
@@ -577,6 +615,23 @@ withAnimationDuration: (NSTimeInterval)animationDuration
     } completion:^(BOOL finished) {
         [self.tableView scrollToRowAtIndexPath:[self indexPathForCellType:RowOutcome] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
     }];
+}
+
+#pragma mark - Prediction Cell delegate
+
+- (void) profileSelectedWithUserId:(NSInteger)userId inCell:(PreditionCell *)cell {
+    if (self.appDelegate.user.userId == userId) {
+        [self performSegueWithIdentifier:kMyProfileSegue sender:self];
+    }
+    else {
+        [self performSegueWithIdentifier:kUserProfileSegue sender:[NSNumber numberWithInteger:userId]];
+    }}
+
+#pragma mark - AppDelegate
+
+- (AppDelegate*) appDelegate
+{
+    return [UIApplication sharedApplication].delegate;
 }
 
 @end

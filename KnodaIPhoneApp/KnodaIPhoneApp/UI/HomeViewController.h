@@ -11,6 +11,6 @@
 #import "AddPredictionViewController.h"
 #import "PreditionCell.h"
 
-@interface HomeViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, AddPredictionViewControllerDelegate, PredictionCellDelegate>
+@interface HomeViewController : UITableViewController <AddPredictionViewControllerDelegate, PredictionCellDelegate>
 
 @end

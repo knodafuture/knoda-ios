@@ -14,12 +14,17 @@
 #import "SignOutWebRequest.h"
 #import "AppDelegate.h"
 
+#import "AddPredictionViewController.h"
+
 static NSString * const accountDetailsTableViewCellIdentifier = @"accountDetailsTableViewCellIdentifier";
 
-@interface ProfileViewController ()
+static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
+
+@interface ProfileViewController () <AddPredictionViewControllerDelegate>
 
 @property (nonatomic, strong) AppDelegate * appDelegate;
 @property (nonatomic, strong) NSArray * accountDetailsArray;
+@property (weak, nonatomic) IBOutlet UIButton *leftNavigationBarItem;
 
 @end
 
@@ -35,7 +40,9 @@ static NSString * const accountDetailsTableViewCellIdentifier = @"accountDetails
     [self fillInUsersInformation];
     self.navigationController.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, self.navigationController.navigationBar.frame.size.height);
     
-    
+    if (self.leftButtonItemReturnsBack) {
+        [self.leftNavigationBarItem setImage:[UIImage imageNamed:@"backArrow.png"] forState:UIControlStateNormal];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -58,13 +65,19 @@ static NSString * const accountDetailsTableViewCellIdentifier = @"accountDetails
     self.accountDetailsArray = [NSArray arrayWithObjects:self.appDelegate.user.name,user.email,@"Change Password", nil];
     [self.accountDetailsTableView reloadData];
 }
+
 - (IBAction)signOut:(id)sender {
     UIActionSheet * actionSheet = [[UIActionSheet alloc]initWithTitle:@"Are you sure you want to log out?" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"Log Out" otherButtonTitles:@"Cancel", nil];
     [actionSheet showInView:self.view];
 }
 
 - (IBAction)menuButtonPress:(id)sender {
-    [((NavigationViewController*)self.navigationController.parentViewController) toggleNavigationPanel];
+    if (self.leftButtonItemReturnsBack) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else {
+        [((NavigationViewController*)self.navigationController.parentViewController) toggleNavigationPanel];
+    }
 }
 
 - (AppDelegate*) appDelegate
@@ -84,6 +97,10 @@ static NSString * const accountDetailsTableViewCellIdentifier = @"accountDetails
         SignOutWebRequest * signOutWebRequest = [[SignOutWebRequest alloc]init];
         [signOutWebRequest executeWithCompletionBlock:^{
         }];
+    }
+    else if ([segue.identifier isEqualToString:kAddPredictionSegue]) {
+        AddPredictionViewController *vc =(AddPredictionViewController*)segue.destinationViewController;
+        vc.delegate = self;
     }
 }
 
@@ -130,6 +147,13 @@ static NSString * const accountDetailsTableViewCellIdentifier = @"accountDetails
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.textLabel.text = self.accountDetailsArray[indexPath.row];
     return cell;
+}
+
+#pragma mark - AddPredictionViewControllerDelegate
+
+- (void) predictionWasMadeInController:(AddPredictionViewController *)vc
+{
+    [vc dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

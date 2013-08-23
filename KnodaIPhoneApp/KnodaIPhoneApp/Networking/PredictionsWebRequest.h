@@ -14,7 +14,7 @@
 
 + (NSInteger) limitByPage;
 
-- (id) initWithOffset: (NSInteger) offset;
-- (id) initWithLastID: (NSInteger) lastID;
+- (id) initWithOffset: (NSInteger) offset andTag:(NSString *)tag;
+- (id) initWithLastID: (NSInteger) lastID andTag:(NSString *)tag;
 
 @end

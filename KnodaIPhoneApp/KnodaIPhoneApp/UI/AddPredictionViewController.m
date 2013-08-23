@@ -238,7 +238,7 @@ static const int kPredictionCharsLimit = 300;
             
             if (request.errorCode == 0)
             {
-                [self.delegate predictinMade];
+                [self.delegate predictionWasMadeInController:self];
             }
             else if (request.errorCode == kRequestTimeoutError)
             {

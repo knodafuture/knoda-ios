@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AddPredictionViewController.h"
 
-@interface ExpiredAlertsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, AddPredictionViewControllerDelegate>
+@interface ExpiredAlertsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @end

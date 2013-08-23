@@ -10,12 +10,14 @@
 #import "PreditionCell.h"
 #import "HistoryMyPicksWebRequest.h"
 #import "Prediction.h"
-#import "AddPredictionViewController.h"
 #import "PredictionDetailsViewController.h"
+#import "AnotherUsersProfileViewController.h"
+
 
 static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
+static NSString* const kUserProfileSegue       = @"UserProfileSegue";
 
-@interface MyPicksViewController () <AddPredictionViewControllerDelegate>
+@interface MyPicksViewController () <PredictionCellDelegate>
 
 @property (nonatomic, strong) NSMutableArray* predictions;
 @property (nonatomic, strong) NSTimer* cellUpdateTimer;
@@ -25,25 +27,12 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 
 @implementation MyPicksViewController
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	
-    HistoryMyPicksWebRequest* request = [[HistoryMyPicksWebRequest alloc] init];
-    [request executeWithCompletionBlock: ^
-     {
-         if (request.errorCode == 0)
-         {
-             self.predictions = [NSMutableArray arrayWithArray: request.predictions];
-             [self.tableView reloadData];
-         }
-     }];
-}
-
 
 - (void) viewDidAppear: (BOOL) animated
 {
     [super viewDidAppear: animated];
+    
+    [self refresh];
     
     self.cellUpdateTimer = [NSTimer scheduledTimerWithTimeInterval: 60.0 target: self selector: @selector(updateVisibleCells) userInfo: nil repeats: YES];
 }
@@ -61,17 +50,34 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 {
     NSArray* visibleCells = [self.tableView visibleCells];
     
-    for (PreditionCell* cell in visibleCells)
+    for (UITableViewCell* cell in visibleCells)
     {
-        [cell updateDates];
+        if([cell isKindOfClass:[PreditionCell class]]) {
+            [(PreditionCell *)cell updateDates];
+        }
     }
+}
+
+- (void)refresh {
+    HistoryMyPicksWebRequest* request = [[HistoryMyPicksWebRequest alloc] init];
+    [request executeWithCompletionBlock: ^
+     {
+         if (request.errorCode == 0)
+         {
+             self.predictions = [NSMutableArray arrayWithArray: request.predictions];
+             [self.tableView reloadData];
+         }
+     }];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:kPredictionDetailsSegue]) {
         PredictionDetailsViewController *vc = (PredictionDetailsViewController *)segue.destinationViewController;
         vc.prediction = sender;
-        vc.addPredictionDelegate = self;
+    }
+    else if([segue.identifier isEqualToString:kUserProfileSegue]) {
+        AnotherUsersProfileViewController *vc = (AnotherUsersProfileViewController *)segue.destinationViewController;
+        vc.userId = [sender integerValue];
     }
 }
 
@@ -100,8 +106,12 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
         Prediction* prediction = [self.predictions objectAtIndex: indexPath.row];
         
         PreditionCell* cell = [tableView dequeueReusableCellWithIdentifier:[PreditionCell reuseIdentifier]];
+        cell.delegate = self;
         
         [cell fillWithPrediction: prediction];
+        
+        UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]init];
+        [cell setUpUserProfileTapGestures:tapGesture];
         
         tableCell = cell;
     }
@@ -144,24 +154,9 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
     [self performSegueWithIdentifier:kPredictionDetailsSegue sender:prediction];
 }
 
-
-#pragma mark - AddPredictionViewControllerDelegate
-
-
-- (void) predictinMade
-{
-    [self dismissViewControllerAnimated: YES completion: nil];
-    
-    HistoryMyPicksWebRequest* predictionsRequest = [[HistoryMyPicksWebRequest alloc] init];
-    [predictionsRequest executeWithCompletionBlock: ^
-     {
-         if (predictionsRequest.errorCode == 0)
-         {
-             self.predictions = [NSMutableArray arrayWithArray: predictionsRequest.predictions];
-             [self.tableView reloadData];
-         }
-     }];
+#pragma mark - PredictionCellDelegate
+- (void) profileSelectedWithUserId:(NSInteger)userId inCell:(PreditionCell *)cell {
+    [self performSegueWithIdentifier:kUserProfileSegue sender:[NSNumber numberWithInteger:userId]];
 }
-
 
 @end

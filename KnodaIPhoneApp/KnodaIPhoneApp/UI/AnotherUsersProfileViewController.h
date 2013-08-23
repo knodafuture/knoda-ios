@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AddPredictionViewController.h"
 
-@interface AnotherUsersProfileViewController : UIViewController <AddPredictionViewControllerDelegate>
+@interface AnotherUsersProfileViewController : UIViewController
+
+@property (nonatomic, assign) NSInteger userId;
 
 @end

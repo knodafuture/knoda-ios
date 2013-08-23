@@ -806,7 +806,7 @@
                         <outlet property="steakLabel" destination="dJK-Fq-zGj" id="WS2-z3-HAK"/>
                         <outlet property="wonLostLabel" destination="E2e-hz-W6K" id="3Ji-ap-4ZN"/>
                         <outlet property="wonPercantageLabel" destination="Uko-pR-NBe" id="ir4-Nr-AO6"/>
-                        <segue destination="PRf-Zf-DSQ" kind="push" identifier="SelectPictureSegue" id="IKc-fC-iFg"/>
+                        <segue destination="3dr-J6-vO2" kind="push" identifier="SelectPictureSegue" id="kdB-Q0-B2Y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5sP-Am-xxO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -814,20 +814,20 @@
             <point key="canvasLocation" x="385" y="1421"/>
         </scene>
         <!--Select Picture View Controller-->
-        <scene sceneID="uLJ-wd-9iR">
+        <scene sceneID="v9q-v4-n41">
             <objects>
-                <viewController id="PRf-Zf-DSQ" customClass="SelectPictureViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="io7-WM-C7d">
+                <viewController storyboardIdentifier="SelectPictureViewController" id="3dr-J6-vO2" customClass="SelectPictureViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="W8U-Lz-ChA">
                         <rect key="frame" x="0.0" y="20" width="320" height="528"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" id="58X-7N-BkR">
+                            <navigationBar contentMode="scaleToFill" id="TVa-nr-raA">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
-                                    <navigationItem title="KNODA" id="ydM-Zc-cXh">
-                                        <barButtonItem key="leftBarButtonItem" title="Item" id="PNG-jM-q3P">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uZw-9x-28a">
+                                    <navigationItem title="KNODA" id="zJq-Ty-K1a">
+                                        <barButtonItem key="leftBarButtonItem" title="Item" id="3sh-nL-2Ua">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="9Ni-38-baz">
                                                 <rect key="frame" x="5" y="5" width="44" height="33"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -839,27 +839,27 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="backButtonPressed:" destination="PRf-Zf-DSQ" eventType="touchUpInside" id="DUQ-VB-EfY"/>
-                                                    <action selector="backButtonPressed:" destination="sd8-UN-EgX" eventType="touchUpInside" id="nwb-Xy-Scj"/>
+                                                    <action selector="backButtonPressed:" destination="sd8-UN-EgX" eventType="touchUpInside" id="KSN-jE-Mjb"/>
+                                                    <action selector="backButtonPressed:" destination="3dr-J6-vO2" eventType="touchUpInside" id="UnJ-Xe-Ztf"/>
                                                 </connections>
                                             </button>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="e6O-Uw-EdF">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="KVQ-0n-eoX">
                                             <connections>
-                                                <action selector="doneButtontapped:" destination="PRf-Zf-DSQ" id="kUC-ZH-mLH"/>
+                                                <action selector="doneButtontapped:" destination="3dr-J6-vO2" id="2H8-ev-AXh"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Select a profile picture" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Sl9-92-4Yl">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Select a profile picture" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IMc-S1-iXx">
                                 <rect key="frame" x="0.0" y="54" width="320" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="aUc-kD-TO4">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jFm-Vj-9nU">
                                 <rect key="frame" x="74" y="84" width="172" height="172"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -871,14 +871,14 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="pictureButtonTapped:" destination="PRf-Zf-DSQ" eventType="touchUpInside" id="gI4-3z-JBp"/>
+                                    <action selector="pictureButtonTapped:" destination="3dr-J6-vO2" eventType="touchUpInside" id="mj8-LD-glM"/>
                                 </connections>
                             </button>
-                            <view hidden="YES" contentMode="scaleToFill" id="S5F-0G-YgU">
+                            <view hidden="YES" contentMode="scaleToFill" id="idE-k5-9Mb">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="528"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="whiteLarge" id="pna-Ff-BKs">
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="whiteLarge" id="4GQ-PY-4VS">
                                         <rect key="frame" x="141" y="246" width="37" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </activityIndicatorView>
@@ -886,18 +886,19 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.59999999999999998" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.38823529411764707" green="0.68627450980392157" blue="0.082352941176470587" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.38823529410000002" green="0.68627450980000004" blue="0.08235294118" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" id="oSO-jt-SBd"/>
+                    <navigationItem key="navigationItem" id="t3L-Ts-yMU"/>
                     <connections>
-                        <outlet property="doneButton" destination="e6O-Uw-EdF" id="Ey1-dV-Zwz"/>
-                        <outlet property="loadingView" destination="S5F-0G-YgU" id="lgx-wJ-a6I"/>
-                        <outlet property="pictureButton" destination="aUc-kD-TO4" id="cdu-Wy-FNn"/>
+                        <outlet property="doneButton" destination="KVQ-0n-eoX" id="SXR-Aa-DyJ"/>
+                        <outlet property="loadingView" destination="idE-k5-9Mb" id="ZpT-Nd-Egy"/>
+                        <outlet property="pictureButton" destination="jFm-Vj-9nU" id="Osa-L7-uNg"/>
+                        <outlet property="view" destination="W8U-Lz-ChA" id="oYK-zv-TGp"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="D0R-hH-rva" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LKE-Zb-qpc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-105" y="1421"/>
+            <point key="canvasLocation" x="-103" y="1421"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="KDj-Qz-gUa">
@@ -1346,6 +1347,8 @@
                     </navigationItem>
                     <connections>
                         <segue destination="wNN-TM-pOg" kind="push" identifier="PredictionDetailsSegue" id="CM5-5K-qH1"/>
+                        <segue destination="bkd-uK-mBb" kind="push" identifier="UserProfileSegue" id="vCM-j3-I2J"/>
+                        <segue destination="WNw-sS-s8V" kind="push" identifier="MyProfileSegue" id="pyY-qR-NzL"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uGo-2X-fCD" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1537,9 +1540,12 @@
                                                         <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
-                                                    <state key="highlighted" backgroundImage="category_bg.png">
+                                                    <state key="highlighted">
                                                         <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="categoryButtonTapped:" destination="wNN-TM-pOg" eventType="touchUpInside" id="nUC-xn-dGi"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1548,33 +1554,33 @@
                                             <outlet property="button" destination="lkC-UM-bE8" id="8Vt-RO-bdo"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PredictionStatusCell" rowHeight="142" id="kKr-mf-7M8" customClass="PredictionStatusCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="PredictionStatusCell" rowHeight="142" id="kKr-mf-7M8" customClass="PredictionStatusCell">
                                         <rect key="frame" x="0.0" y="150" width="320" height="142"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="141"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="141"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="YOU WON!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZhH-Sb-Cyh">
-                                                    <rect key="frame" x="0.0" y="14" width="320" height="23"/>
+                                                    <rect key="frame" x="0.0" y="14" width="300" height="23"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                     <color key="textColor" red="0.1176470588" green="0.36078431370000003" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="+3 Base Points" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VpC-Fp-orS">
-                                                    <rect key="frame" x="0.0" y="57" width="320" height="21"/>
+                                                    <rect key="frame" x="0.0" y="57" width="300" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" red="0.34901960780000002" green="0.34901960780000002" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" id="Pde-Bk-TYM">
-                                                    <rect key="frame" x="0.0" y="88" width="320" height="44"/>
+                                                    <rect key="frame" x="0.0" y="88" width="300" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Inz-N7-Clq">
-                                                            <rect key="frame" x="179" y="1" width="127" height="44"/>
+                                                            <rect key="frame" x="159" y="1" width="127" height="44"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                             <state key="normal" image="BS.png">
@@ -1952,10 +1958,14 @@ outcome of your prediction</string>
                             </button>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="pickerViewHolder" destination="TYc-zT-kgA" id="ICN-lm-atA"/>
                         <outlet property="tableView" destination="OOz-U0-cxm" id="pNl-1W-oha"/>
+                        <segue destination="7fT-Te-TB1" kind="push" identifier="CategoryPredictionsSegue" id="ISY-hT-jPF"/>
+                        <segue destination="bkd-uK-mBb" kind="push" identifier="UserProfileSegue" id="m1B-jn-2wq"/>
+                        <segue destination="WNw-sS-s8V" kind="push" identifier="MyProfileSegue" id="qdw-34-WFW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KLM-69-mFS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2087,7 +2097,7 @@ outcome of your prediction</string>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="YE3-Kr-XLe">
+                                    <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="YE3-Kr-XLe">
                                         <rect key="frame" x="125" y="468" width="154" height="25"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
@@ -2101,7 +2111,7 @@ outcome of your prediction</string>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="siT-3p-8x3">
-                                        <rect key="frame" x="283" y="466" width="29" height="28"/>
+                                        <rect key="frame" x="283" y="467" width="29" height="28"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" image="AP_plus_button.png">
@@ -2264,6 +2274,9 @@ outcome of your prediction</string>
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="ZCK-dQ-2af" kind="modal" identifier="AddPredictionSegue" id="MPy-oI-NNP"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
@@ -2458,6 +2471,7 @@ outcome of your prediction</string>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <segue destination="wNN-TM-pOg" kind="push" identifier="PredictionDetailsSegue" id="yxq-7e-oVo"/>
+                        <segue destination="WNw-sS-s8V" kind="push" identifier="MyProfileSegue" id="xsI-cJ-L1d"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M9b-Bp-faG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2653,6 +2667,7 @@ outcome of your prediction</string>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <segue destination="wNN-TM-pOg" kind="push" identifier="PredictionDetailsSegue" id="Jrd-MG-kXq"/>
+                        <segue destination="bkd-uK-mBb" kind="push" identifier="UserProfileSegue" id="87P-Dp-Rvj"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HzP-wr-QBD" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2776,6 +2791,9 @@ outcome of your prediction</string>
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="ZCK-dQ-2af" kind="modal" identifier="AddPredictionSegue" id="W7Q-BW-b5o"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
@@ -3216,6 +3234,9 @@ outcome of your prediction</string>
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="ZCK-dQ-2af" kind="modal" identifier="AddPredictionSegue" id="vOL-Z6-T0L"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
@@ -3268,11 +3289,11 @@ outcome of your prediction</string>
             <objects>
                 <viewController id="bkd-uK-mBb" customClass="AnotherUsersProfileViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WnQ-TW-CJ3">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="44" width="320" height="436"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="darkBg.png" id="GzR-PB-8Oy">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="436"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="YodaTheMaster" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zi2-DT-IRL">
@@ -3341,11 +3362,11 @@ outcome of your prediction</string>
                                 </connections>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="88" sectionHeaderHeight="22" sectionFooterHeight="22" id="DKL-NF-JLd">
-                                <rect key="frame" x="0.0" y="74" width="320" height="406"/>
+                                <rect key="frame" x="0.0" y="74" width="320" height="362"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="Cell" id="hVu-hY-AZv" customClass="PreditionCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="PreditionCell" id="hVu-hY-AZv" customClass="PreditionCell">
                                         <rect key="frame" x="0.0" y="22" width="320" height="88"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -3484,18 +3505,30 @@ outcome of your prediction</string>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="bkd-uK-mBb" id="n27-b3-i8u"/>
+                                    <outlet property="delegate" destination="bkd-uK-mBb" id="kKP-vy-UhV"/>
                                 </connections>
                             </tableView>
+                            <view hidden="YES" alpha="0.40000000596046448" contentMode="scaleToFill" id="aVM-QY-KvM">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="436"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="whiteLarge" id="7wq-aR-jxm">
+                                        <rect key="frame" x="142" y="235" width="37" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="PROFILE" id="b97-6h-RbC">
-                        <barButtonItem key="leftBarButtonItem" id="Mmz-zJ-6El">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Vpd-s4-ThN">
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="t7H-SC-sIU">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="tbw-rg-wTG">
                                 <rect key="frame" x="5" y="5" width="44" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Button" image="nav.png">
+                                <state key="normal" image="backArrow.png">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -3503,9 +3536,12 @@ outcome of your prediction</string>
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="menuButtonPressed:" destination="bkd-uK-mBb" eventType="touchUpInside" id="2gK-s7-Ax9"/>
+                                    <action selector="backButtonPress:" destination="bkd-uK-mBb" eventType="touchUpInside" id="iw7-5R-oBN"/>
                                 </connections>
                             </button>
+                            <connections>
+                                <action selector="backButtonPressed:" destination="bkd-uK-mBb" id="dld-hx-ixG"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" id="QRL-Ln-w9o">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Pl1-mM-5Mo">
@@ -3519,14 +3555,27 @@ outcome of your prediction</string>
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="ZCK-dQ-2af" kind="modal" identifier="AddPredictionSegue" id="esW-Qq-HJ8"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
                     <nil key="simulatedStatusBarMetrics"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="activityView" destination="aVM-QY-KvM" id="2fU-zT-U3c"/>
+                        <outlet property="predictionsTableView" destination="DKL-NF-JLd" id="yyX-pJ-pCd"/>
+                        <outlet property="userAvatarView" destination="Wwv-Ps-wNC" id="fh4-L4-3cb"/>
+                        <outlet property="userNameLabel" destination="zi2-DT-IRL" id="xIe-Ak-255"/>
+                        <outlet property="userPointsLabel" destination="7GF-yO-lul" id="B7u-6Z-Ox8"/>
+                        <outlet property="userTotalPredictionsLabel" destination="a02-gi-5IQ" id="LVB-2n-ovN"/>
+                        <segue destination="wNN-TM-pOg" kind="push" identifier="PredictionDetailsSegue" id="Xdg-c4-S6o"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ygb-jv-EIe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2185" y="4406"/>
+            <point key="canvasLocation" x="2597" y="2450"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jTS-cy-I2n">
@@ -3686,6 +3735,9 @@ outcome of your prediction</string>
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="ZCK-dQ-2af" kind="modal" identifier="AddPredictionSegue" id="EE6-qF-5xk"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
@@ -3693,6 +3745,7 @@ outcome of your prediction</string>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="accountDetailsTableView" destination="kQT-OI-osY" id="c30-GG-eyH"/>
+                        <outlet property="leftNavigationBarItem" destination="EZM-wz-ONY" id="8nu-8C-XWH"/>
                         <outlet property="loginLabel" destination="BOq-cn-2MG" id="Ahp-4c-FNQ"/>
                         <outlet property="pointsLabel" destination="ZZh-i2-KNf" id="21s-Xw-NZ4"/>
                         <outlet property="profileAvatarView" destination="mcr-h0-wFk" id="q0V-TA-fsV"/>
@@ -3702,7 +3755,7 @@ outcome of your prediction</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lgo-yb-njz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1217" y="4660"/>
+            <point key="canvasLocation" x="1269" y="4660"/>
         </scene>
         <!--Change Password View Controller - ME-->
         <scene sceneID="E8Q-6f-E6W">
@@ -3855,6 +3908,236 @@ outcome of your prediction</string>
             </objects>
             <point key="canvasLocation" x="1671" y="4668"/>
         </scene>
+        <!--Category Predictions View Controller-->
+        <scene sceneID="siw-ZO-zRi">
+            <objects>
+                <tableViewController id="7fT-Te-TB1" customClass="CategoryPredictionsViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="88" sectionHeaderHeight="22" sectionFooterHeight="22" id="2jP-nc-KCP">
+                        <rect key="frame" x="0.0" y="64" width="320" height="524"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="PreditionCell" id="yI6-nr-Fcs" customClass="PreditionCell">
+                                <rect key="frame" x="0.0" y="22" width="320" height="88"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="87"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" id="e4R-i4-9lK">
+                                            <rect key="frame" x="15" y="12" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="size" keyPath="layer.shadowOffset">
+                                                    <size key="value" width="0.0" height="1"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowOpacity">
+                                                    <real key="value" value="1"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowRadius">
+                                                    <real key="value" value="1"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <real key="value" value="3"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                        <view contentMode="scaleToFill" id="nbW-Ay-LI7" customClass="BindableView">
+                                            <rect key="frame" x="15" y="12" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="AWo-Xg-kvd">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" style="gray" id="R10-TC-pEA">
+                                                    <rect key="frame" x="15" y="15" width="20" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </activityIndicatorView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <real key="value" value="3"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <outlet property="activityIndicator" destination="R10-TC-pEA" id="Y8X-Vj-nmX"/>
+                                                <outlet property="imageView" destination="AWo-Xg-kvd" id="4ZE-9M-2Zr"/>
+                                            </connections>
+                                        </view>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="YodaTheMaster" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4hk-Hf-SRT">
+                                            <rect key="frame" x="82" y="5" width="218" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
+                                            <color key="textColor" red="0.41183338990000001" green="0.3708419463" blue="0.37570969139999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="The old republic to be reconstructed I predict" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gdn-wz-xXc">
+                                            <rect key="frame" x="82" y="27" width="218" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                            <color key="textColor" red="0.41183338990000001" green="0.3708419463" blue="0.37570969139999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="2h 5m ago | 55%  agree" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hh0-py-eMX">
+                                            <rect key="frame" x="82" y="64" width="225" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                            <color key="textColor" red="0.51519874499999996" green="0.51832116169999998" blue="0.51207632839999995" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="2h 5m ago" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rFh-yB-rxF">
+                                            <rect key="frame" x="82" y="64" width="225" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                            <color key="textColor" red="0.51519874499999996" green="0.51832116169999998" blue="0.51207632839999995" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <view contentMode="scaleToFill" id="gHd-Wg-yKh">
+                                            <rect key="frame" x="-200" y="0.0" width="200" height="87"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="prediction_overlay.png" id="ZYM-Uf-az8">
+                                                    <rect key="frame" x="0.0" y="0.0" width="200" height="87"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="You agree?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AYj-47-QJh">
+                                                    <rect key="frame" x="31" y="20" width="142" height="47"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="23"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <color key="shadowColor" red="0.51519874499999996" green="0.51832116169999998" blue="0.51207632839999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <size key="shadowOffset" width="0.0" height="2"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <view contentMode="scaleToFill" id="fOH-OL-2mq">
+                                            <rect key="frame" x="520" y="0.0" width="200" height="87"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="prediction_overlay.png" id="T8I-RN-gpY">
+                                                    <rect key="frame" x="0.0" y="0.0" width="200" height="87"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="You disagree?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wCx-dB-pBP">
+                                                    <rect key="frame" x="20" y="20" width="160" height="47"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="23"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <color key="shadowColor" red="0.51519874499999996" green="0.51832116169999998" blue="0.51207632839999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <size key="shadowOffset" width="0.0" height="2"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="agree.png" id="G0w-Qj-W78">
+                                            <rect key="frame" x="1" y="0.0" width="11" height="87"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="disagree.png" id="6Kq-Tt-5mh">
+                                            <rect key="frame" x="307" y="0.0" width="11" height="87"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="center" id="sri-p1-Yoi">
+                                            <rect key="frame" x="32" y="66" width="17" height="13"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outlet property="agreeImage" destination="G0w-Qj-W78" id="PHa-9t-2D4"/>
+                                    <outlet property="agreeQuestionView" destination="gHd-Wg-yKh" id="CPR-hb-XIF"/>
+                                    <outlet property="avatarView" destination="nbW-Ay-LI7" id="sfv-IK-mjJ"/>
+                                    <outlet property="bodyLabel" destination="gdn-wz-xXc" id="qbc-5K-3bn"/>
+                                    <outlet property="disagreeImage" destination="6Kq-Tt-5mh" id="j6b-AZ-KhL"/>
+                                    <outlet property="disagreeQuestionView" destination="fOH-OL-2mq" id="lHL-cG-aqg"/>
+                                    <outlet property="expirationDateLabel" destination="rFh-yB-rxF" id="fsL-JK-KjA"/>
+                                    <outlet property="guessMarkImage" destination="sri-p1-Yoi" id="JFN-c8-leb"/>
+                                    <outlet property="metadataLabel" destination="hh0-py-eMX" id="6Dc-dH-san"/>
+                                    <outlet property="usernameLabel" destination="4hk-Hf-SRT" id="puk-NR-Y4e"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="LoadingCell" id="pGy-db-t4b">
+                                <rect key="frame" x="0.0" y="110" width="320" height="88"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="87"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Loading..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Tb2-zm-tBC">
+                                            <rect key="frame" x="53" y="33" width="92" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.83493970790000005" green="0.83493970790000005" blue="0.83493970790000005" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="gray" id="Gj5-gq-z5W">
+                                            <rect key="frame" x="151" y="33" width="20" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </activityIndicatorView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="7fT-Te-TB1" id="HQ5-MG-Cai"/>
+                            <outlet property="delegate" destination="7fT-Te-TB1" id="1bC-yt-IeV"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="rXQ-OQ-RXz">
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="6gZ-Bf-dRd">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ZX8-dn-Qv1">
+                                <rect key="frame" x="5" y="5" width="44" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" image="backArrow.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backButtonPressed:" destination="wNN-TM-pOg" eventType="touchUpInside" id="48a-qX-ER3"/>
+                                    <action selector="backButtonPressed:" destination="7fT-Te-TB1" eventType="touchUpInside" id="bge-ql-doH"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" id="UdZ-Cs-eF4">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ZvS-yb-VGA">
+                                <rect key="frame" x="271" y="5" width="44" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" image="makePrediction.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="ZCK-dQ-2af" kind="modal" identifier="AddPredictionSegue" id="uvK-TE-9aB"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="wNN-TM-pOg" kind="push" identifier="PredictionDetailsSegue" id="tps-cU-HZ0"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jpK-aN-ecP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2979" y="1421"/>
+        </scene>
     </scenes>
     <resources>
         <image name="AP_cancel_button.png" width="62" height="30"/>
@@ -3885,7 +4168,6 @@ outcome of your prediction</string>
         <image name="btn_signup_green.png" width="273" height="41"/>
         <image name="cancel_button.png" width="137" height="41"/>
         <image name="cancel_pressed.png" width="137" height="41"/>
-        <image name="category_bg.png" width="16" height="16"/>
         <image name="checkmark.png" width="17" height="13"/>
         <image name="choosePhoto.png" width="172" height="172"/>
         <image name="circleArrow.png" width="32" height="32"/>
@@ -3932,10 +4214,12 @@ outcome of your prediction</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="mnN-YR-PTq"/>
         <segue reference="tga-wH-5aw"/>
-        <segue reference="Ef7-FX-Fpl"/>
+        <segue reference="pyY-qR-NzL"/>
+        <segue reference="vCM-j3-I2J"/>
         <segue reference="CM5-5K-qH1"/>
-        <segue reference="ONf-EH-HA5"/>
         <segue reference="ebR-4n-eVY"/>
+        <segue reference="EE6-qF-5xk"/>
     </inferredMetricsTieBreakers>
 </document>

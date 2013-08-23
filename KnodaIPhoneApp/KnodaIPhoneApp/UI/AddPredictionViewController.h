@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class AddPredictionViewController;
 
 @protocol AddPredictionViewControllerDelegate <NSObject>
 
-- (void) predictinMade;
+- (void)predictionWasMadeInController:(AddPredictionViewController *)vc;
 
 @end
 

@@ -11,8 +11,9 @@
 
 @interface BindableView()
 
-@property (nonatomic, weak) IBOutlet UIImageView *imageView;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, weak) IBOutlet UIImageView *imageView;
+@property (nonatomic, strong) UITapGestureRecognizer * gestureRecognizer;
 
 @end
 
@@ -41,6 +42,21 @@
 - (void)didStartImageLoading {
     //DLog(@"");
     self.loading = YES;
+}
+
+#pragma mark - Gesture Recognizing
+
+- (void) addImageViewGestureRecognizer : (UITapGestureRecognizer *) recognizer {
+    [self addGestureRecognizer:recognizer];
+    [self setUserInteractionEnabled:YES];
+    self.gestureRecognizer = recognizer;
+    [self.gestureRecognizer addTarget:self action:@selector(userAvatarTappedWithRecognizer:)];
+}
+
+- (void) userAvatarTappedWithRecognizer : (UITapGestureRecognizer *) recognizer {
+    if ([self.delegate respondsToSelector:@selector(userAvatarTappedWithGestureRecognizer:)]) {
+        [self.delegate userAvatarTappedWithGestureRecognizer:recognizer];
+    }
 }
 
 @end

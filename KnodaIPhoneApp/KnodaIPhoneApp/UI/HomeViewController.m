@@ -8,23 +8,27 @@
 
 #import "HomeViewController.h"
 #import "NavigationViewController.h"
-
+#import "ProfileViewController.h"
 #import "PredictionsWebRequest.h"
 #import "Prediction.h"
-
+#import "AnotherUsersProfileViewController.h"
 #import "PredictionAgreeWebRequest.h"
 #import "PredictionDisagreeWebRequest.h"
 #import "ChellangeByPredictionWebRequest.h"
-
+#import "AppDelegate.h"
 #import "PredictionDetailsViewController.h"
+#import "User.h"
 
 static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
+static NSString* const kUserProfileSegue       = @"UserProfileSegue";
+static NSString* const kMyProfileSegue         = @"MyProfileSegue";
 
 @interface HomeViewController ()
 
 @property (nonatomic, strong) NSMutableArray* predictions;
 @property (nonatomic, strong) NSTimer* cellUpdateTimer;
+@property (nonatomic, strong) AppDelegate * appDelegate;
 
 @end
 
@@ -36,7 +40,7 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
     
 	self.navigationController.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, self.navigationController.navigationBar.frame.size.height);
     
-    PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] initWithOffset: 0];
+    PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] initWithOffset: 0 andTag:[self predictionsCategory]];
     [predictionsRequest executeWithCompletionBlock: ^
     {
         if (predictionsRequest.errorCode == 0)
@@ -72,9 +76,11 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
 {
     NSArray* visibleCells = [self.tableView visibleCells];
     
-    for (PreditionCell* cell in visibleCells)
+    for (UITableViewCell* cell in visibleCells)
     {
-        [cell updateDates];
+        if([cell isKindOfClass:[PreditionCell class]]) {
+            [(PreditionCell *)cell updateDates];
+        }
     }
 }
 
@@ -89,8 +95,21 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
         vc.prediction = sender;
         vc.addPredictionDelegate = self;
     }
+    else if([segue.identifier isEqualToString:kUserProfileSegue]) {
+        AnotherUsersProfileViewController *vc = (AnotherUsersProfileViewController *)segue.destinationViewController;
+        vc.userId = [sender integerValue];
+    }
+    else if([segue.identifier isEqualToString:kMyProfileSegue]) {
+        ProfileViewController *vc = (ProfileViewController *)segue.destinationViewController;
+        vc.leftButtonItemReturnsBack = YES;
+    }
 }
 
+#pragma mark Override
+
+- (NSString *)predictionsCategory {
+    return nil;
+}
 
 #pragma mark - Actions
 
@@ -103,7 +122,7 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
 
 - (void) refresh: (UIRefreshControl*) refresh
 {
-    PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] initWithOffset: 0];
+    PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] initWithOffset: 0 andTag:[self predictionsCategory]];
     [predictionsRequest executeWithCompletionBlock: ^
      {
          [refresh endRefreshing];
@@ -147,7 +166,8 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
         
         UIPanGestureRecognizer* recognizer = [[UIPanGestureRecognizer alloc] init];
         [cell addPanGestureRecognizer: recognizer];
-        
+        UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]init];
+        [cell setUpUserProfileTapGestures:tapGesture];
         tableCell = cell;
     }
     else
@@ -155,7 +175,6 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
         UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier: @"LoadingCell"];
         tableCell = cell;
     }
-    
     return tableCell;
 }
 
@@ -167,7 +186,7 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
 {
     if ((self.predictions.count >= [PredictionsWebRequest limitByPage]) && indexPath.row == self.predictions.count)
     {
-        PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] initWithLastID: ((Prediction*)[self.predictions lastObject]).ID];
+        PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] initWithLastID: ((Prediction*)[self.predictions lastObject]).ID andTag:[self predictionsCategory]];
         [predictionsRequest executeWithCompletionBlock: ^
          {
              if (predictionsRequest.errorCode == 0 && predictionsRequest.predictions.count != 0)
@@ -191,11 +210,11 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
 #pragma mark - AddPredictionViewControllerDelegate
 
 
-- (void) predictinMade
+- (void) predictionWasMadeInController:(AddPredictionViewController *)vc
 {
-    [self dismissViewControllerAnimated: YES completion: nil];
+    [vc dismissViewControllerAnimated:YES completion:nil];
     
-    PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] initWithOffset: 0];
+    PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] initWithOffset: 0 andTag:[self predictionsCategory]];
     [predictionsRequest executeWithCompletionBlock: ^
      {
          if (predictionsRequest.errorCode == 0)
@@ -236,7 +255,6 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
     }];
 }
 
-
 - (void) predictionDisagreed: (Prediction*) prediction inCell: (PreditionCell*) cell
 {
     PredictionDisagreeWebRequest* request = [[PredictionDisagreeWebRequest alloc] initWithPredictionID: prediction.ID];
@@ -261,6 +279,22 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
              [cell resetAgreedDisagreed];
          }
      }];
+}
+
+- (void) profileSelectedWithUserId:(NSInteger)userId inCell:(PreditionCell *)cell {
+    if (self.appDelegate.user.userId == userId) {
+        [self performSegueWithIdentifier:kMyProfileSegue sender:self];
+    }
+    else {
+        [self performSegueWithIdentifier:kUserProfileSegue sender:[NSNumber numberWithInteger:userId]];
+    }
+}
+
+#pragma mark - AppDelegate
+
+- (AppDelegate*) appDelegate
+{
+    return [UIApplication sharedApplication].delegate;
 }
 
 @end

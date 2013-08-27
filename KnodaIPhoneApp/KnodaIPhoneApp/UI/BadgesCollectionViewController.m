@@ -27,6 +27,17 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    if(self.navigationController.viewControllers.count > 1) { //if it's not from menu - change the navigation items
+        UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 33)];
+        [btn setImage:[UIImage imageNamed:@"backArrow.png"] forState:UIControlStateNormal];
+        [btn addTarget:self action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIBarButtonItem *barBtn = [[UIBarButtonItem alloc] initWithCustomView:btn];
+        self.navigationItem.leftBarButtonItem  = barBtn;
+        self.navigationItem.rightBarButtonItem = nil;
+    }
+    
     self.activityView.hidden = NO;
     self.navigationController.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, self.navigationController.navigationBar.frame.size.height);
     [self setUpUsersBadges];
@@ -59,6 +70,10 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 
 - (IBAction)menuButtonPressed:(id)sender {
     [((NavigationViewController*)self.navigationController.parentViewController) toggleNavigationPanel];
+}
+
+- (IBAction)backButtonPressed:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - UICollectionViewDataSource

@@ -124,7 +124,7 @@
 
 - (void)handleNewBadgeNotification:(NSNotification *)notification {
     NSArray *images = [notification userInfo][kNewBadgeImages];
-    [NewBadgeView showWithBadge:[images lastObject]];
+    [NewBadgeView showWithBadge:[images lastObject] animated:YES];
 }
 
 @end

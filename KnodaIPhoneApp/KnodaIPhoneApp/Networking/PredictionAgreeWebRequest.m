@@ -7,7 +7,7 @@
 //
 
 #import "PredictionAgreeWebRequest.h"
-
+#import "BadgesWebRequest.h"
 
 @interface PredictionAgreeWebRequest ()
 
@@ -52,5 +52,17 @@
     return NSLocalizedString(@"Unable to agree this prediction at this time. Please try again later.", @"");
 }
 
+
+- (void)executeWithCompletionBlock:(RequestCompletionBlock)completion {
+    RequestCompletionBlock block = completion ? [completion copy] : nil;
+    [super executeWithCompletionBlock:^{
+        if(block) {
+            block();
+        }
+        if(self.isSucceeded) {
+            [BadgesWebRequest checkNewBadges];
+        }
+    }];
+}
 
 @end

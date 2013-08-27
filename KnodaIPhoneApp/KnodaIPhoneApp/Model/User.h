@@ -30,6 +30,8 @@
 
 @property (nonatomic, readonly) BOOL hasAvatar;
 
+@property (nonatomic, assign) BOOL justSignedUp;
+
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 
 @end

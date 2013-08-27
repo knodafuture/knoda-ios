@@ -44,14 +44,11 @@ static NSString* const kMyProfileSegue = @"MyProfileSegue";
     self.cellUpdateTimer = [NSTimer scheduledTimerWithTimeInterval: 60.0 target: self selector: @selector(updateVisibleCells) userInfo: nil repeats: YES];
 }
 
-
-- (void) viewWillDisappear: (BOOL) animated
-{
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [self.cellUpdateTimer invalidate];
     self.cellUpdateTimer = nil;
-    
-    [super viewWillDisappear: animated];
 }
-
 
 - (void) updateVisibleCells
 {

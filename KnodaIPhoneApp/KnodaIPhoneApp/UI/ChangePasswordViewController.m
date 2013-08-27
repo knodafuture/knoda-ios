@@ -59,7 +59,7 @@ static NSInteger const kKeyboardHeight = 216;
         
         [self eraseTextFieldsText];
         UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:nil message:nil delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        if (changePasswordRequest.errorCode == 201) {
+        if (changePasswordRequest.errorCode == 0) {
             alertView.title = @"Succes";
             alertView.message = @"Password has been changed succesfully";
         }

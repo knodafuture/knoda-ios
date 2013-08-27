@@ -48,13 +48,7 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
     [self setUpUsersInfo];
 }
 
-- (void) viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    self.cellUpdateTimer = [NSTimer scheduledTimerWithTimeInterval: 60.0 target: self selector: @selector(setUpUsersInfo) userInfo: nil repeats: YES];
-}
-
 - (void) viewWillDisappear: (BOOL) animated {
-    self.cellUpdateTimer = nil;    
     [super viewWillDisappear: animated];
 }
 
@@ -98,8 +92,8 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
 - (void) setUpUserProfileInformationWithUser : (User *) user {
     [self.userAvatarView bindToURL:user.smallImage];
     self.userNameLabel.text = user.name;
-    self.userPointsLabel.text = [NSString stringWithFormat:@"%d points",user.points];
-    self.userTotalPredictionsLabel.text = [NSString stringWithFormat:@"%d total predictions",user.totalPredictions];
+    self.userPointsLabel.text = [NSString stringWithFormat:@"%d @%@",user.points, NSLocalizedString(@"points", @"")];
+    self.userTotalPredictionsLabel.text = [NSString stringWithFormat:@"%d %@",user.totalPredictions, NSLocalizedString(@"total predictions", @"")];
 }
 
 
@@ -137,23 +131,59 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
 
 - (NSInteger) tableView: (UITableView*) tableView numberOfRowsInSection: (NSInteger) section
 {
-    return [self.predictions count];
+    return (self.predictions.count != 0) ? ((self.predictions.count >= [AnotherUserPredictionsWebRequest limitByPage]) ? self.predictions.count + 1 : self.predictions.count) : 1;
 }
 
 - (UITableViewCell*) tableView: (UITableView*) tableView cellForRowAtIndexPath: (NSIndexPath*) indexPath
 {
-    Prediction* prediction = [self.predictions objectAtIndex: indexPath.row];
+    UITableViewCell* tableCell;
     
-    PreditionCell* cell = [tableView dequeueReusableCellWithIdentifier:[PreditionCell reuseIdentifier]];
+    if (indexPath.row != self.predictions.count)
+    {
+        Prediction* prediction = [self.predictions objectAtIndex: indexPath.row];
+        
+        PreditionCell* cell = [tableView dequeueReusableCellWithIdentifier:[PreditionCell reuseIdentifier]];
+        
+        [cell fillWithPrediction: prediction];
+        cell.delegate = self;
+        
+        UIPanGestureRecognizer* recognizer = [[UIPanGestureRecognizer alloc] init];
+        [cell addPanGestureRecognizer: recognizer];
+        
+        tableCell = cell;
+    }
+    else
+    {
+        UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier: @"LoadingCell"];
+        tableCell = cell;
+    }
     
-    [cell fillWithPrediction: prediction];
-    cell.delegate = self;
-    
-    UIPanGestureRecognizer* recognizer = [[UIPanGestureRecognizer alloc] init];
-    [cell addPanGestureRecognizer: recognizer];
-    return cell;
-
+    return tableCell;
 }
+
+#pragma mark - TableView delegate
+
+- (void) tableView: (UITableView*) tableView willDisplayCell: (UITableViewCell*) cell forRowAtIndexPath: (NSIndexPath*) indexPath
+{
+    if ((self.predictions.count >= [AnotherUserPredictionsWebRequest limitByPage]) && indexPath.row == self.predictions.count)
+    {
+        AnotherUserPredictionsWebRequest* predictionsRequest = [[AnotherUserPredictionsWebRequest alloc] initWithLastId:((Prediction*)[self.predictions lastObject]).ID andUserID:self.userId];
+
+        [predictionsRequest executeWithCompletionBlock: ^
+         {
+             if (predictionsRequest.errorCode == 0 && predictionsRequest.predictions.count != 0)
+             {
+                 [self.predictions addObjectsFromArray: [NSMutableArray arrayWithArray: predictionsRequest.predictions] ];
+                 [self.predictionsTableView reloadData];
+             }
+             else
+             {
+                 [self.predictionsTableView scrollToRowAtIndexPath: [NSIndexPath indexPathForRow: indexPath.row - 1 inSection: 0] atScrollPosition: UITableViewScrollPositionBottom animated: YES];
+             }
+         }];
+    }
+}
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.predictions.count != 0)

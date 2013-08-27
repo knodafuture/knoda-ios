@@ -59,13 +59,13 @@ static NSInteger const kKeyboardHeight = 216;
         
         [self eraseTextFieldsText];
         UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:nil message:nil delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        if (changePasswordRequest.errorCode == 201) {
-            alertView.title = @"Succes";
-            alertView.message = @"Password has been changed succesfully";
+        if (changePasswordRequest.errorCode == 0) {
+            alertView.title = NSLocalizedString(@"Succes", @"");
+            alertView.message = NSLocalizedString(@"Password has been changed succesfully", @"");
         }
         else {
-            alertView.title = @"Error";
-            alertView.message = @"Old password is incorrect";
+            alertView.title = NSLocalizedString(@"Error", @"");
+            alertView.message = NSLocalizedString(@"Old password is incorrect", @"");
         }
         [alertView show];
     }];
@@ -74,19 +74,19 @@ static NSInteger const kKeyboardHeight = 216;
 #pragma mark - passwords chechs 
 
 - (BOOL) passwordsFilledInCorrect {
-    UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:nil delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") message:nil delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
     if (([self.currentPassword length] > 5)&&([self.usersNewPassword length] > 5)&&([self.retypeNewPassword length] > 5)) {
         if ([self.usersNewPassword isEqualToString:self.retypeNewPassword]) {
             return YES;
         }
         else {
-            alertView.message = @"Passwords do not match";
+            alertView.message =  NSLocalizedString(@"Passwords do not match", @"");
             [alertView show];
             return NO;
         }
     }
     else {
-        alertView.message = @"Minimum password length is 6 characters";
+        alertView.message =  NSLocalizedString(@"Minimum password length is 6 characters", @"");
         [alertView show];
         return NO;
     }

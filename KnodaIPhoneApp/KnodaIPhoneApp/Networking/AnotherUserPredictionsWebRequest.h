@@ -11,6 +11,9 @@
 @interface AnotherUserPredictionsWebRequest : BaseWebRequest
 
 @property (nonatomic, readonly) NSArray* predictions;
+
 - (id)initWithUserId:(NSInteger)userId;
+- (id) initWithLastId: (NSInteger) lastId andUserID : (NSInteger) userId;
++ (NSInteger) limitByPage;
 
 @end

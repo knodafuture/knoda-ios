@@ -72,14 +72,14 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
         User * user = self.appDelegate.user;
         [self.profileAvatarView bindToURL:user.bigImage];
         self.loginLabel.text = user.name;
-        self.pointsLabel.text = [NSString stringWithFormat:@"%d points",user.points];
-        self.accountDetailsArray = [NSArray arrayWithObjects:self.appDelegate.user.name,user.email,@"Change Password", nil];
+        self.pointsLabel.text = [NSString stringWithFormat:@"%d %@",user.points,NSLocalizedString(@"points", @"")];
+        self.accountDetailsArray = [NSArray arrayWithObjects:self.appDelegate.user.name,user.email,NSLocalizedString(@"Change Password", @""), nil];
         [self.accountDetailsTableView reloadData];
     }];
 }
 
 - (IBAction)signOut:(id)sender {
-    UIActionSheet * actionSheet = [[UIActionSheet alloc]initWithTitle:@"Are you sure you want to log out?" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"Log Out" otherButtonTitles:@"Cancel", nil];
+    UIActionSheet * actionSheet = [[UIActionSheet alloc]initWithTitle:NSLocalizedString(@"Are you sure you want to log out?", @"") delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"Log Out" otherButtonTitles:@"Cancel", nil];
     [actionSheet showInView:self.view];
 }
 

@@ -46,6 +46,28 @@ static const int kMaxSimultaneousLoading = 10;
     [self.imageEntries makeObjectsPerformSelector:@selector(unload)];
 }
 
+- (void)clear {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        [self.imageEntries makeObjectsPerformSelector:@selector(unload)];
+        
+        NSError *error      = nil;
+        NSFileManager *fm   = [NSFileManager defaultManager];
+        NSString *cachePath = [ImageEntry cachePath];
+        NSArray *images     = [fm contentsOfDirectoryAtPath:cachePath error:&error];
+        if(error) {
+            DLog(@"cannot clear cached images (%@)", error);
+            return;
+        }
+        for(NSString *imageFile in images) {
+            NSString *filePath = [cachePath stringByAppendingPathComponent:imageFile];
+            if(![fm removeItemAtPath:filePath error:&error]) {
+                DLog(@"cannot remove image at path: %@ Error: %@", filePath, error);
+            }
+        }
+        DLog(@"cached images were cleared");
+    });
+}
+
 - (void)bindImage:(NSString *)imgURL toView:(UIView<ImageBindable>*)bindableView creationData:(NSDate *)creationDate cornerRadius:(CGFloat)radius {
     
     //DLog(@"bind image %@", imgURL);

@@ -132,14 +132,24 @@ static const int kMaxFileNameLength = 254;
     return [NSURL URLWithString:[NSString stringWithFormat:@"http://%@%@", kBaseURL, self.imgUrl]];
 }
 
-- (NSString *)getFileName {
++ (NSString *)cachePath {
     static NSString *_cachePath = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _cachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
+        _cachePath = [_cachePath stringByAppendingPathComponent:@"images"];
+        if(![[NSFileManager defaultManager] fileExistsAtPath:_cachePath]) {
+            NSError *error = nil;
+            if(![[NSFileManager defaultManager] createDirectoryAtPath:_cachePath withIntermediateDirectories:NO attributes:nil error:&error]) {
+                DLog(@"cannot create cache directory for images (%@)", error);
+            }
+        }
     });
-    
-    NSString* path = [_cachePath stringByAppendingFormat:@"/%@", [self.imgUrl safeFileName]];
+    return _cachePath;
+}
+
+- (NSString *)getFileName {
+    NSString* path = [[[self class] cachePath] stringByAppendingPathComponent:[self.imgUrl safeFileName]];
     return path.length > kMaxFileNameLength ? [path substringToIndex:kMaxFileNameLength] : path;
 }
 

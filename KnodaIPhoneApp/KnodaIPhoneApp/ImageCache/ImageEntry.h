@@ -27,4 +27,6 @@ typedef void (^ImageLoadCompletionBlock) (void);
 - (void)unload;
 - (void)clear;
 
++ (NSString *)cachePath;
+
 @end

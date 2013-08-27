@@ -10,7 +10,7 @@
 
 @interface NewBadgeView : UIView
 
-+ (void)showWithBadge:(UIImage *)badgeImage;
++ (void)showWithBadge:(UIImage *)badgeImage animated:(BOOL)animated;
 
 - (IBAction)viewBadges:(UIButton *)sender;
 - (IBAction)close:(UIButton *)sender;

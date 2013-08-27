@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ZKQ-aW-8t7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12A269" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ZKQ-aW-8t7">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -639,7 +639,7 @@
                                                         </view>
                                                         <connections>
                                                             <outlet property="selectedBackgroundView" destination="lY9-hB-CYF" id="Hrx-Ca-l0N"/>
-                                                            <segue destination="OOJ-qX-5dW" kind="custom" customClass="NavigationSegue" id="xPp-pD-Yp1"/>
+                                                            <segue destination="OOJ-qX-5dW" kind="custom" identifier="AlertsSegue" customClass="NavigationSegue" id="xPp-pD-Yp1"/>
                                                         </connections>
                                                     </tableViewCell>
                                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="BadgesCell" id="0Wd-7P-eoE">
@@ -674,7 +674,7 @@
                                                         </view>
                                                         <connections>
                                                             <outlet property="selectedBackgroundView" destination="KAE-7K-Hvy" id="Log-qA-hbJ"/>
-                                                            <segue destination="9q4-uc-xGK" kind="custom" customClass="NavigationSegue" id="5qh-Va-DZI"/>
+                                                            <segue destination="9q4-uc-xGK" kind="custom" identifier="BadgesSegue" customClass="NavigationSegue" id="5qh-Va-DZI"/>
                                                         </connections>
                                                     </tableViewCell>
                                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="ProfileCell" id="mBr-sZ-COi" customClass="ProfileCell">
@@ -732,7 +732,7 @@
                                                             <outlet property="avatarView" destination="ZVu-GC-gui" id="TV8-uO-DE6"/>
                                                             <outlet property="selectedBackgroundView" destination="cdU-lp-zgO" id="7rE-Mx-vPb"/>
                                                             <outlet property="userNameLabel" destination="S4S-hy-vz5" id="jps-O0-rVb"/>
-                                                            <segue destination="E4W-rX-Wd1" kind="custom" customClass="NavigationSegue" id="3vp-zO-L2k"/>
+                                                            <segue destination="E4W-rX-Wd1" kind="custom" identifier="ProfileSegue" customClass="NavigationSegue" id="3vp-zO-L2k"/>
                                                         </connections>
                                                     </tableViewCell>
                                                 </prototypes>
@@ -973,7 +973,7 @@
                                         <rect key="frame" x="15" y="156" width="268" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                         <connections>
                                             <outlet property="delegate" destination="HpP-X1-pbb" id="Qqf-C8-IOI"/>
                                         </connections>
@@ -1389,7 +1389,8 @@
                             <rect key="frame" x="89" y="64" width="143" height="143"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Wow. There must be something wrong because I don't see any predictions. " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wV3-24-8Se">
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Wow. There must be something wrong because I don't see any predictions.
+" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wV3-24-8Se">
                             <rect key="frame" x="44" y="233" width="233" height="68"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
@@ -2763,7 +2764,8 @@ outcome of your prediction</string>
                                         <rect key="frame" x="89" y="64.5" width="143" height="143"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Waiting for you to win or lose a prediction. Or for one of your own predictions to expire. " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3wq-2v-XXc">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Waiting for you to win or lose a prediction. Or for one of your own predictions to expire.
+" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3wq-2v-XXc">
                                         <rect key="frame" x="44" y="233" width="233" height="68"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
@@ -3235,7 +3237,9 @@ outcome of your prediction</string>
                                             <rect key="frame" x="89" y="64" width="143" height="143"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="You don't have any badges yet. Maybe make a prediction  (hint,hint) " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MFp-0T-oNz">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="You don't have any badges yet.
+Maybe make a prediction  (hint,hint)
+" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MFp-0T-oNz">
                                             <rect key="frame" x="44" y="233" width="233" height="68"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
@@ -4407,6 +4411,8 @@ outcome of your prediction</string>
         <class className="ForgotPasswordViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ForgotPasswordViewController.h"/>
             <relationships>
+                <relationship kind="action" name="cancelButtonPressed:"/>
+                <relationship kind="action" name="sendButtonPressed:"/>
                 <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="errorLabel" candidateClass="UILabel"/>
@@ -4599,6 +4605,7 @@ outcome of your prediction</string>
             <relationships>
                 <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
+                <relationship kind="action" name="backButtonPressed:"/>
             </relationships>
         </class>
         <class className="UICollectionReusableView" superclassName="UIView">
@@ -4629,14 +4636,17 @@ outcome of your prediction</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="r3e-od-7h8"/>
         <segue reference="tga-wH-5aw"/>
-        <segue reference="xsI-cJ-L1d"/>
-        <segue reference="87P-Dp-Rvj"/>
-        <segue reference="esW-Qq-HJ8"/>
+        <segue reference="pyY-qR-NzL"/>
+        <segue reference="Ef7-FX-Fpl"/>
+        <segue reference="vOL-Z6-T0L"/>
+        <segue reference="vCM-j3-I2J"/>
         <segue reference="Xdg-c4-S6o"/>
         <segue reference="wUp-Tb-D78"/>
         <segue reference="H0s-oM-ZNm"/>
         <segue reference="bH8-Zv-3wa"/>
+        <segue reference="xsI-cJ-L1d"/>
+        <segue reference="87P-Dp-Rvj"/>
+        <segue reference="esW-Qq-HJ8"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -34,9 +34,10 @@
 }
 
 
-- (void) fillResultObject: (id) parsedResult
+- (BOOL) isMultipartData
 {
-
+    return YES;
 }
+
 
 @end

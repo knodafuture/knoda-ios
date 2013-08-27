@@ -14,6 +14,8 @@
 #import "SignOutWebRequest.h"
 #import "AppDelegate.h"
 #import "ProfileWebRequest.h"
+#import "ImageCache.h"
+
 #import "AddPredictionViewController.h"
 
 static NSString * const accountDetailsTableViewCellIdentifier = @"accountDetailsTableViewCellIdentifier";
@@ -108,6 +110,7 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
         
         SignOutWebRequest * signOutWebRequest = [[SignOutWebRequest alloc]init];
         [signOutWebRequest executeWithCompletionBlock:^{
+            [[ImageCache instance] clear];
         }];
     }
     else if ([segue.identifier isEqualToString:kAddPredictionSegue]) {

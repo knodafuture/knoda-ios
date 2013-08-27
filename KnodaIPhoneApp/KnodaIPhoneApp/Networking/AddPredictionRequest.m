@@ -8,6 +8,7 @@
 
 #import "AddPredictionRequest.h"
 #import "NSDate+Utils.h"
+#import "BadgesWebRequest.h"
 
 @implementation AddPredictionRequest
 
@@ -45,6 +46,18 @@
 - (BOOL) requiresAuthToken
 {
     return YES;
+}
+
+- (void)executeWithCompletionBlock:(RequestCompletionBlock)completion {
+    RequestCompletionBlock block = completion ? [completion copy] : nil;
+    [super executeWithCompletionBlock:^{
+        if(block) {
+            block();
+        }
+        if(self.isSucceeded) {
+            [BadgesWebRequest checkNewBadges];
+        }
+    }];
 }
 
 

@@ -155,6 +155,8 @@ static NSString* const kApplicationSegue   = @"ApplicationNavigationSegue";
                           [self.appDelegate.user updateWithObject: profileRequest.user];
                           [self.appDelegate savePassword: self.passwordTextField.text];
                           
+                          self.appDelegate.user.justSignedUp = YES;
+                          
                           [self performSegueWithIdentifier: kApplicationSegue  sender: self];
                       }
                       else

@@ -42,15 +42,7 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
     
 	self.navigationController.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, self.navigationController.navigationBar.frame.size.height);
     
-    PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] initWithOffset: 0 andTag:[self predictionsCategory]];
-    [predictionsRequest executeWithCompletionBlock: ^
-    {
-        if (predictionsRequest.errorCode == 0)
-        {
-            self.predictions = [NSMutableArray arrayWithArray: predictionsRequest.predictions];
-            [self.tableView reloadData];
-        }
-    }];
+    [self refresh:nil];
     
     UIRefreshControl* refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget: self action: @selector(refresh:) forControlEvents: UIControlEventValueChanged];
@@ -137,18 +129,25 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
 
 - (void) refresh: (UIRefreshControl*) refresh
 {
+    __weak HomeViewController *weakSelf = self;
+    
     PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] initWithOffset: 0 andTag:[self predictionsCategory]];
     [predictionsRequest executeWithCompletionBlock: ^
      {
+         HomeViewController *strongSelf = weakSelf;
+         if(!strongSelf) {
+             return;
+         }
+         
          [refresh endRefreshing];
          
          if (predictionsRequest.errorCode == 0)
          {
-             self.predictions = [NSMutableArray arrayWithArray: predictionsRequest.predictions];
-             [self.tableView reloadData];
+             strongSelf.predictions = [NSMutableArray arrayWithArray: predictionsRequest.predictions];
+             [strongSelf.tableView reloadData];
          }
-         BOOL hideContentView = self.predictions.count > 0;
-         [self setUpNoContentViewHidden:hideContentView];
+         BOOL hideContentView = strongSelf.predictions.count > 0;
+         [strongSelf setUpNoContentViewHidden:hideContentView];
      }];
 }
 
@@ -203,17 +202,24 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
 {
     if ((self.predictions.count >= [PredictionsWebRequest limitByPage]) && indexPath.row == self.predictions.count)
     {
+        __weak HomeViewController *weakSelf = self;
+        
         PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] initWithLastID: ((Prediction*)[self.predictions lastObject]).ID andTag:[self predictionsCategory]];
         [predictionsRequest executeWithCompletionBlock: ^
          {
+             HomeViewController *strongSelf = weakSelf;
+             if(!strongSelf) {
+                 return;
+             }
+             
              if (predictionsRequest.errorCode == 0 && predictionsRequest.predictions.count != 0)
              {
-                 [self.predictions addObjectsFromArray: [NSMutableArray arrayWithArray: predictionsRequest.predictions] ];
-                 [self.tableView reloadData];
+                 [strongSelf.predictions addObjectsFromArray: [NSMutableArray arrayWithArray: predictionsRequest.predictions] ];
+                 [strongSelf.tableView reloadData];
              }
              else
              {
-                 [self.tableView scrollToRowAtIndexPath: [NSIndexPath indexPathForRow: indexPath.row - 1 inSection: 0] atScrollPosition: UITableViewScrollPositionBottom animated: YES];
+                 [strongSelf.tableView scrollToRowAtIndexPath: [NSIndexPath indexPathForRow: indexPath.row - 1 inSection: 0] atScrollPosition: UITableViewScrollPositionBottom animated: YES];
              }
          }];
     }
@@ -234,15 +240,7 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
 {
     [vc dismissViewControllerAnimated:YES completion:nil];
     
-    PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] initWithOffset: 0 andTag:[self predictionsCategory]];
-    [predictionsRequest executeWithCompletionBlock: ^
-     {
-         if (predictionsRequest.errorCode == 0)
-         {
-             self.predictions = [NSMutableArray arrayWithArray: predictionsRequest.predictions];
-             [self.tableView reloadData];
-         }
-     }];
+    [self refresh:nil];
 }
 
 
@@ -251,9 +249,15 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
 
 - (void) predictionAgreed: (Prediction*) prediction inCell: (PreditionCell*) cell
 {
+    __weak HomeViewController *weakSelf = self;
+    
     PredictionAgreeWebRequest* request = [[PredictionAgreeWebRequest alloc] initWithPredictionID: prediction.ID];
     [request executeWithCompletionBlock: ^
     {
+        if(!weakSelf) {
+            return;
+        }
+        
         if (request.errorCode == 0)
         {
             ChellangeByPredictionWebRequest* chellangeRequest = [[ChellangeByPredictionWebRequest alloc] initWithPredictionID: prediction.ID];
@@ -277,9 +281,14 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
 
 - (void) predictionDisagreed: (Prediction*) prediction inCell: (PreditionCell*) cell
 {
+    __weak HomeViewController *weakSelf = self;
+    
     PredictionDisagreeWebRequest* request = [[PredictionDisagreeWebRequest alloc] initWithPredictionID: prediction.ID];
     [request executeWithCompletionBlock: ^
      {
+         if(!weakSelf) {
+             return;
+         }
          if (request.errorCode == 0)
          {
              ChellangeByPredictionWebRequest* chellangeRequest = [[ChellangeByPredictionWebRequest alloc] initWithPredictionID: prediction.ID];

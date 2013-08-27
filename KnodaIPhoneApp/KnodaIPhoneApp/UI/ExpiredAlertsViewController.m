@@ -29,15 +29,22 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 }
 
 - (void)refresh {
+    
+    __weak ExpiredAlertsViewController *weakSelf = self;
+    
     ExpiredAlertsWebRequest* request = [[ExpiredAlertsWebRequest alloc] init];
     [request executeWithCompletionBlock: ^
      {
+         ExpiredAlertsViewController *strongSelf = weakSelf;
+         if(!strongSelf) {
+             return;
+         }
          if (request.errorCode == 0)
          {
              NSLog(@"Expired alerts: %@", request.predictions);
              
-             self.alerts = request.predictions;
-             [self.tableView reloadData];
+             strongSelf.alerts = request.predictions;
+             [strongSelf.tableView reloadData];
          }
      }];
 }

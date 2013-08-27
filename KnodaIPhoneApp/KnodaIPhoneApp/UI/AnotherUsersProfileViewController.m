@@ -66,27 +66,36 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
     if (!self.userId) {
         return;
     }
+    
+    __weak AnotherUsersProfileViewController *weakSelf = self;
+    
     AnotherUserProfileWebRequest *profileWebRequest = [[AnotherUserProfileWebRequest alloc]initWithUserId:self.userId];
     [profileWebRequest executeWithCompletionBlock:^{
-        if (profileWebRequest.errorCode != 0) {
-            self.activityView.hidden = YES;
+        
+        AnotherUsersProfileViewController *strongSelf = weakSelf;
+        if(!strongSelf) {
             return;
         }
         
-        [self setUpUserProfileInformationWithUser:profileWebRequest.user];
-        AnotherUserPredictionsWebRequest *predictionWebRequest = [[AnotherUserPredictionsWebRequest alloc]initWithUserId:self.userId];
+        if (profileWebRequest.errorCode != 0) {
+            strongSelf.activityView.hidden = YES;
+            return;
+        }
+        
+        [strongSelf setUpUserProfileInformationWithUser:profileWebRequest.user];
+        AnotherUserPredictionsWebRequest *predictionWebRequest = [[AnotherUserPredictionsWebRequest alloc]initWithUserId:strongSelf.userId];
         [predictionWebRequest executeWithCompletionBlock:^{
             
             if (predictionWebRequest.errorCode != 0) {
-                self.activityView.hidden = YES;
+                strongSelf.activityView.hidden = YES;
                 return;
             }
             
-            self.predictions = [NSMutableArray arrayWithArray: predictionWebRequest.predictions];
-            [self.predictionsTableView reloadData];
-            self.activityView.hidden = YES;
+            strongSelf.predictions = [NSMutableArray arrayWithArray: predictionWebRequest.predictions];
+            [strongSelf.predictionsTableView reloadData];
+            strongSelf.activityView.hidden = YES;
         }];
-        }];
+    }];
 }
 
 - (void) setUpUserProfileInformationWithUser : (User *) user {
@@ -199,9 +208,15 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
 
 - (void) predictionAgreed: (Prediction*) prediction inCell: (PreditionCell*) cell
 {
+    __weak AnotherUsersProfileViewController *weakSelf = self;
+    
     PredictionAgreeWebRequest* request = [[PredictionAgreeWebRequest alloc] initWithPredictionID: prediction.ID];
     [request executeWithCompletionBlock: ^
      {
+         if(!weakSelf) {
+             return;
+         }
+         
          if (request.errorCode == 0)
          {
              ChellangeByPredictionWebRequest* chellangeRequest = [[ChellangeByPredictionWebRequest alloc] initWithPredictionID: prediction.ID];
@@ -225,9 +240,15 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
 
 - (void) predictionDisagreed: (Prediction*) prediction inCell: (PreditionCell*) cell
 {
+    __weak AnotherUsersProfileViewController *weakSelf = self;
+    
     PredictionDisagreeWebRequest* request = [[PredictionDisagreeWebRequest alloc] initWithPredictionID: prediction.ID];
     [request executeWithCompletionBlock: ^
      {
+         if(!weakSelf) {
+             return;
+         }
+         
          if (request.errorCode == 0)
          {
              ChellangeByPredictionWebRequest* chellangeRequest = [[ChellangeByPredictionWebRequest alloc] initWithPredictionID: prediction.ID];

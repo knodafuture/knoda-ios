@@ -13,7 +13,7 @@
 #import "AppDelegate.h"
 #import "SignOutWebRequest.h"
 #import "AppDelegate.h"
-
+#import "ProfileWebRequest.h"
 #import "AddPredictionViewController.h"
 
 static NSString * const accountDetailsTableViewCellIdentifier = @"accountDetailsTableViewCellIdentifier";
@@ -22,6 +22,7 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 
 @interface ProfileViewController () <AddPredictionViewControllerDelegate>
 
+@property (weak, nonatomic) IBOutlet UIView *activityView;
 @property (nonatomic, strong) AppDelegate * appDelegate;
 @property (nonatomic, strong) NSArray * accountDetailsArray;
 @property (weak, nonatomic) IBOutlet UIButton *leftNavigationBarItem;
@@ -58,12 +59,23 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 }
 
 - (void) fillInUsersInformation {
-    User * user = self.appDelegate.user;
-    [self.profileAvatarView bindToURL:user.bigImage];
-    self.loginLabel.text = user.name;
-    self.pointsLabel.text = [NSString stringWithFormat:@"%d points",user.points];    
-    self.accountDetailsArray = [NSArray arrayWithObjects:self.appDelegate.user.name,user.email,@"Change Password", nil];
-    [self.accountDetailsTableView reloadData];
+    self.activityView.hidden = NO;
+    ProfileWebRequest *profileWebRequest = [[ProfileWebRequest alloc]init];
+    [profileWebRequest executeWithCompletionBlock:^{
+        self.activityView.hidden = YES;
+        
+        if (profileWebRequest.isSucceeded)
+        {
+            [self.appDelegate.user updateWithObject:profileWebRequest.user];
+        }
+        
+        User * user = self.appDelegate.user;
+        [self.profileAvatarView bindToURL:user.bigImage];
+        self.loginLabel.text = user.name;
+        self.pointsLabel.text = [NSString stringWithFormat:@"%d points",user.points];
+        self.accountDetailsArray = [NSArray arrayWithObjects:self.appDelegate.user.name,user.email,@"Change Password", nil];
+        [self.accountDetailsTableView reloadData];
+    }];
 }
 
 - (IBAction)signOut:(id)sender {

@@ -10,7 +10,7 @@
 #import "AppDelegate.h"
 #import "ProfileCell.h"
 #import "NavigationSegue.h"
-
+#import "ProfileWebRequest.h"
 #import "SelectPictureViewController.h"
 
 static NSString* const kHomeSegue = @"HomeSegue";
@@ -29,6 +29,8 @@ static NSString* const kSelectPictureSegue = @"SelectPictureSegue";
 @property (weak, nonatomic) IBOutlet UITableView *menuItemsTableView;
 @property (nonatomic, assign) BOOL appeared;
 
+@property (nonatomic, strong) NSTimer* userUpdateTimer;
+
 @property (nonatomic, assign) BOOL masterShown;
 
 @property (nonatomic, strong) AppDelegate * appDelegate;
@@ -41,6 +43,8 @@ static NSString* const kSelectPictureSegue = @"SelectPictureSegue";
 - (void) viewDidLoad {
     [super viewDidLoad];
 
+    self.userUpdateTimer = [NSTimer scheduledTimerWithTimeInterval: 1800.0 target: self selector: @selector(reloadUserInfo) userInfo: nil repeats: YES];
+    
     if([[(AppDelegate *)[[UIApplication sharedApplication] delegate] user] hasAvatar]) {
         [self performSegueWithIdentifier: kHomeSegue sender: self];
     }
@@ -54,6 +58,7 @@ static NSString* const kSelectPictureSegue = @"SelectPictureSegue";
     self.masterView = nil;
     self.detailsView = nil;
     self.movingView = nil;
+    self.userUpdateTimer = nil;
     
     [super viewDidUnload];
 }
@@ -141,6 +146,16 @@ static NSString* const kSelectPictureSegue = @"SelectPictureSegue";
 
 #pragma mark - User's info update 
 
+- (void) reloadUserInfo {
+    ProfileWebRequest *profileWebRequest = [[ProfileWebRequest alloc]init];
+    [profileWebRequest executeWithCompletionBlock:^{
+        if (profileWebRequest.isSucceeded)
+        {
+            [self.appDelegate.user updateWithObject:profileWebRequest.user];
+        }
+        [self updateUserInfo];
+    }];
+}
 
 - (void) updateUserInfo {
     User * user = self.appDelegate.user;
@@ -152,7 +167,6 @@ static NSString* const kSelectPictureSegue = @"SelectPictureSegue";
     [self.menuItemsTableView beginUpdates];    
     [self.menuItemsTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:4 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
     [self.menuItemsTableView endUpdates];
-
 }
 
 #pragma mark - UITableViewDataSource

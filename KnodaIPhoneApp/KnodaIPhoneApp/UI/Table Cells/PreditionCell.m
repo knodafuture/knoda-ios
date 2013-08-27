@@ -70,8 +70,6 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
     
     self.avatarView.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:self.avatarView.bounds cornerRadius:self.avatarView.layer.cornerRadius].CGPath;
     self.avatarView.layer.rasterizationScale = [[UIScreen mainScreen] scale];
-    self.avatarView.imageView.layer.cornerRadius = 3.0;
-    self.avatarView.imageView.layer.masksToBounds = YES;
 }
 
 #pragma mark KVO
@@ -167,7 +165,7 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
         self.disagreeImage.image = [UIImage imageNamed: (!self.prediction.settled) ? @"disagree" : ((self.prediction.outcome == NO) ? @"disagree_win" : @"disagree_lose")];
     }
     
-    [self.avatarView bindToURL:self.prediction.smallAvatar];
+    [self.avatarView bindToURL:self.prediction.smallAvatar withCornerRadius:self.avatarView.layer.cornerRadius];
     
 }
 

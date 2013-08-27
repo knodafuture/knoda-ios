@@ -23,4 +23,24 @@
     return newImage;
 }
 
+- (UIImage *)roundedImageWithRadius:(CGFloat)radius {
+    UIGraphicsBeginImageContextWithOptions(self.size, NO, [[UIScreen mainScreen] scale]);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGRect rect = CGRectMake(0, 0, self.size.width, self.size.height);
+    
+    CGPathRef clippingPath = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:radius].CGPath;
+    CGContextAddPath(context, clippingPath);
+    CGContextClip(context);
+    
+    [self drawInRect:rect];
+    
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+
 @end

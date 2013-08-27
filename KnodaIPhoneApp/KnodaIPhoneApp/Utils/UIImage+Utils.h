@@ -11,5 +11,6 @@
 @interface UIImage (Utils)
 
 - (UIImage *)scaledToSize:(CGSize)size;
+- (UIImage *)roundedImageWithRadius:(CGFloat)radius;
 
 @end

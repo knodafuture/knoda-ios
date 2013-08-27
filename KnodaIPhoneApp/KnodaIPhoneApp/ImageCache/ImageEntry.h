@@ -22,7 +22,7 @@ typedef void (^ImageLoadCompletionBlock) (void);
 
 - (id)initWithURL:(NSString *)imgURL;
 
-- (void)loadImageWithCompletion:(ImageLoadCompletionBlock)completion;
+- (void)loadImageWithCornerRadius:(CGFloat)radius completion:(ImageLoadCompletionBlock)completion;
 
 - (void)unload;
 - (void)clear;

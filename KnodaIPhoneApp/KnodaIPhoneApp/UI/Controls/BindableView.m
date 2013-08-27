@@ -11,6 +11,7 @@
 
 @interface BindableView()
 
+@property (nonatomic, weak) IBOutlet UIImageView *imageView;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @property (nonatomic, strong) UITapGestureRecognizer * gestureRecognizer;
@@ -24,8 +25,12 @@
     self.activityIndicator.hidden = !_loading;
 }
 
+- (void)bindToURL:(NSString *)imgUrl withCornerRadius:(CGFloat)radius {
+    [[ImageCache instance] bindImage:imgUrl toView:self withCornerRadius:radius];
+}
+
 - (void)bindToURL:(NSString *)imgUrl {
-    [[ImageCache instance] bindImage:imgUrl toView:self];
+    [self bindToURL:imgUrl withCornerRadius:0.0];
 }
 
 #pragma mark ImageBindable

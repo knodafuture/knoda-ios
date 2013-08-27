@@ -46,7 +46,7 @@ static const int kMaxSimultaneousLoading = 10;
     [self.imageEntries makeObjectsPerformSelector:@selector(unload)];
 }
 
-- (void)bindImage:(NSString *)imgURL toView:(UIView<ImageBindable>*)bindableView creationData:(NSDate *)creationDate {
+- (void)bindImage:(NSString *)imgURL toView:(UIView<ImageBindable>*)bindableView creationData:(NSDate *)creationDate cornerRadius:(CGFloat)radius {
     
     //DLog(@"bind image %@", imgURL);
     
@@ -72,7 +72,7 @@ static const int kMaxSimultaneousLoading = 10;
         }
         
         if(!entry.isLoading && self.loadingsCount++ < kMaxSimultaneousLoading) {
-            [entry loadImageWithCompletion:^{
+            [entry loadImageWithCornerRadius:radius completion:^{
                 if(entry.error) {
                     DLog(@"%@", entry.error);
                 }
@@ -99,7 +99,11 @@ static const int kMaxSimultaneousLoading = 10;
 }
 
 - (void)bindImage:(NSString *)imgURL toView:(UIView<ImageBindable> *)bindableView {
-    [self bindImage:imgURL toView:bindableView creationData:nil];
+    [self bindImage:imgURL toView:bindableView creationData:nil cornerRadius:0.0];
+}
+
+- (void)bindImage:(NSString *)imgURL toView:(UIView<ImageBindable> *)bindableView withCornerRadius:(CGFloat)radius {
+    [self bindImage:imgURL toView:bindableView creationData:nil cornerRadius:radius];
 }
 
 - (void)bindNext {

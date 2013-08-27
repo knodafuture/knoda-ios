@@ -9,10 +9,13 @@
 #import "ImageEntry.h"
 #import "NSString+Utils.h"
 #import "BaseWebRequest.h"
+#import "UIImage+Utils.h"
 
 static const int kMaxFileNameLength = 254;
 
-@interface ImageEntry()
+@interface ImageEntry() {
+    CGFloat _cornerRadius;
+}
 
 @property (atomic, assign) BOOL isLoading;
 
@@ -29,13 +32,15 @@ static const int kMaxFileNameLength = 254;
     return self;
 }
 
-- (void)loadImageWithCompletion:(ImageLoadCompletionBlock)completion {
+- (void)loadImageWithCornerRadius:(CGFloat)radius completion:(ImageLoadCompletionBlock)completion {
     
     //DLog(@"obtaining image for URL : %@", self.imgUrl);
     
     assert(completion);
     
     self.isLoading = YES;
+    
+    _cornerRadius = radius;
     
     ImageLoadCompletionBlock block = [completion copy];
     
@@ -94,7 +99,11 @@ static const int kMaxFileNameLength = 254;
     NSData *imgData = [NSData dataWithContentsOfURL:[self getImageURL] options:0 error:&error];
     _error = error;
     if(!error && imgData) {
-        _image = [UIImage imageWithData:imgData];
+        _image = [UIImage imageWithData:imgData];        
+        if(_cornerRadius) {
+            _image = [_image roundedImageWithRadius:_cornerRadius];
+        }
+        
         [self writeImage];
     }
     else {

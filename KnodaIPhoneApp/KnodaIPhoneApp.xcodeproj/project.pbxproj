@@ -48,6 +48,7 @@
 		367EE77F17C3C5E400764C85 /* ProfileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 367EE77E17C3C5E300764C85 /* ProfileCell.m */; };
 		367EE78217C3D17F00764C85 /* SignOutSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 367EE78117C3D17E00764C85 /* SignOutSegue.m */; };
 		367EE78517C3D41900764C85 /* SignOutWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 367EE78417C3D41800764C85 /* SignOutWebRequest.m */; };
+		36997C1E17CCB48900424F4F /* LogInSignUpSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 36997C1D17CCB48900424F4F /* LogInSignUpSegue.m */; };
 		369C427917C78010008C8203 /* noContent.png in Resources */ = {isa = PBXBuildFile; fileRef = 369C427717C78010008C8203 /* noContent.png */; };
 		369C427A17C78010008C8203 /* noContent@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 369C427817C78010008C8203 /* noContent@2x.png */; };
 		36A4054817C24DDD00406A12 /* BadgesCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A4054717C24DDD00406A12 /* BadgesCollectionViewController.m */; };
@@ -372,6 +373,8 @@
 		367EE78117C3D17E00764C85 /* SignOutSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignOutSegue.m; sourceTree = "<group>"; };
 		367EE78317C3D41700764C85 /* SignOutWebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignOutWebRequest.h; sourceTree = "<group>"; };
 		367EE78417C3D41800764C85 /* SignOutWebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignOutWebRequest.m; sourceTree = "<group>"; };
+		36997C1C17CCB48900424F4F /* LogInSignUpSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInSignUpSegue.h; sourceTree = "<group>"; };
+		36997C1D17CCB48900424F4F /* LogInSignUpSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInSignUpSegue.m; sourceTree = "<group>"; };
 		369C427717C78010008C8203 /* noContent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noContent.png; sourceTree = "<group>"; };
 		369C427817C78010008C8203 /* noContent@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "noContent@2x.png"; sourceTree = "<group>"; };
 		36A4054617C24DDD00406A12 /* BadgesCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadgesCollectionViewController.h; sourceTree = "<group>"; };
@@ -1348,6 +1351,8 @@
 				9E8421F017A26ECB00D14D0A /* PushWithoutAnimationSegue.m */,
 				367EE78017C3D17D00764C85 /* SignOutSegue.h */,
 				367EE78117C3D17E00764C85 /* SignOutSegue.m */,
+				36997C1C17CCB48900424F4F /* LogInSignUpSegue.h */,
+				36997C1D17CCB48900424F4F /* LogInSignUpSegue.m */,
 			);
 			path = Segues;
 			sourceTree = "<group>";
@@ -1719,6 +1724,7 @@
 				365B7E1F17C64E6C00ED04D2 /* AnotherUserProfileWebRequest.m in Sources */,
 				365B7E2217C6548300ED04D2 /* AnotherUserPredictionsWebRequest.m in Sources */,
 				571B1D1C17C7BE620013AA41 /* NewBadgeView.m in Sources */,
+				36997C1E17CCB48900424F4F /* LogInSignUpSegue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -46,6 +46,7 @@
                                                            [UIFont fontWithName: @"Krona One" size: 15], UITextAttributeFont, nil]];
     
     [UIApplication sharedApplication].keyWindow.backgroundColor = [UIColor whiteColor];
+    [UIApplication sharedApplication].delegate.window.backgroundColor = [UIColor colorWithRed:99/255.0 green:185/255.0 blue:0 alpha:1];
     
     KeychainItemWrapper* wrapper = [[KeychainItemWrapper alloc] initWithIdentifier: @"Password" accessGroup: @"F489V4H5F6.com.Knoda.KnodaIPhoneApp"];
 	self.passwordItem = wrapper;

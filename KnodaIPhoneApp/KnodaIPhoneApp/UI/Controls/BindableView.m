@@ -36,13 +36,11 @@
 #pragma mark ImageBindable
 
 - (void)didLoadImage:(UIImage *)img error:(NSError *)error {
-    //DLog(@"");
     self.loading = NO;
     self.imageView.image = img;
 }
 
 - (void)didStartImageLoading {
-    //DLog(@"");
     self.loading = YES;
 }
 

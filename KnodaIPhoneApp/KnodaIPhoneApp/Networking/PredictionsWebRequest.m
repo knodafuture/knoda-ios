@@ -75,6 +75,11 @@ static const NSInteger kPageResultsLimit = 7;
     for (NSDictionary* predictionDictionary in resultArray)
     {
         Prediction* prediction = [[Prediction alloc] initWithDictionary:predictionDictionary];
+        
+        if ([predictionDictionary[@"my_challenge"] isKindOfClass:[NSDictionary class]]) {
+            [prediction setupChallenge:predictionDictionary[@"my_challenge"] withPoints:predictionDictionary[@"my_points"]];
+        }
+        
         [predictionArray addObject: prediction];
     }
     

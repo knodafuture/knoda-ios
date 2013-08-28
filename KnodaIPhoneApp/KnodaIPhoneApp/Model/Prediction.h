@@ -36,6 +36,8 @@
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 
+- (void)setupChallenge:(NSDictionary *)challengeDict withPoints:(NSDictionary *)pointsDict;
+
 - (BOOL)isExpired;
 
 @end

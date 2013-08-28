@@ -108,6 +108,7 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
         
         SignOutWebRequest * signOutWebRequest = [[SignOutWebRequest alloc]init];
         [signOutWebRequest executeWithCompletionBlock:^{
+            appDelegate.user = nil;
         }];
     }
     else if ([segue.identifier isEqualToString:kAddPredictionSegue]) {

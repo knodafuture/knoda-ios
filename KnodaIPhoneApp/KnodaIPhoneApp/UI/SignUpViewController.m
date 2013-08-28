@@ -152,6 +152,8 @@ static NSString* const kApplicationSegue   = @"ApplicationNavigationSegue";
                       
                       if (profileRequest.isSucceeded)
                       {
+                          [self.appDelegate sendToken];
+                          
                           [self.appDelegate.user updateWithObject: profileRequest.user];
                           [self.appDelegate savePassword: self.passwordTextField.text];
                           

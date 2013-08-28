@@ -17,10 +17,12 @@
     return self;
 }
 
+
 - (NSString*) methodName
 {
     return @"password.json";
 }
+
 
 - (NSString*) httpMethod
 {

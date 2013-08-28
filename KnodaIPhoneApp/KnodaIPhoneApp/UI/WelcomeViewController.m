@@ -56,6 +56,8 @@
                  {
                      if (profileRequest.isSucceeded)
                      {
+                         [appDelegate sendToken];
+                         
                          [appDelegate.user updateWithObject: profileRequest.user];
                          [self performSegueWithIdentifier: @"ApplicationNavigationSegue" sender: self];
                      }

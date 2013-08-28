@@ -16,26 +16,13 @@
 #import "BadgesWebRequest.h"
 #import "NewBadgeView.h"
 
+#import "SendDeviceTokenWebRequest.h"
+
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-/*    LoginWebRequest* loginRequest = [[LoginWebRequest alloc] initWithUsername: @"" password: @""];
-    [loginRequest executeWithCompletionBlock: ^
-    {
-        self.user = loginRequest.user;
-        
-        AddPredictionRequest* addPredictionRequest = [[AddPredictionRequest alloc] initWithBody: @"" expirationDay: 17 expirationMonth: 11 expirationYear: 2015];
-        [addPredictionRequest executeWithCompletionBlock: ^
-        {
-            PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] init];
-            [predictionsRequest executeWithCompletionBlock: ^{}];
-        }];
-    }];*/
-    
-    //SignUpRequest* signUpRequest = [[SignUpRequest alloc] initWithUsername: @"" email: @"" password: @""];
-    //[signUpRequest executeWithCompletionBlock: ^{}];
-    
     UIImage* navBackgroundImage = [UIImage imageNamed: @"headerBar"];
     [[UINavigationBar appearance] setBackgroundImage: navBackgroundImage forBarMetrics: UIBarMetricsDefault];
     
@@ -52,6 +39,8 @@
 	self.passwordItem = wrapper;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNewBadgeNotification:) name:NewBadgeNotification object:nil];
+    
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
     
     return YES;
 }
@@ -81,6 +70,44 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+
+- (void) sendToken
+{
+    if (self.deviceToken != nil)
+    {
+        SendDeviceTokenWebRequest* request = [[SendDeviceTokenWebRequest alloc] initWithToken: self.deviceToken];
+        [request executeWithCompletionBlock: ^{}];
+    }
+}
+
+
+- (void)application: (UIApplication*) app didRegisterForRemoteNotificationsWithDeviceToken: (NSData*) deviceToken
+{
+    NSLog(@"Registered push notifications token: %@", [deviceToken description]);
+    
+    self.deviceToken = [[[deviceToken description]
+                                stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]]
+                                stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    if (self.user != nil)
+    {
+        [self sendToken];
+    }
+}
+
+
+- (void) application: (UIApplication*) app didFailToRegisterForRemoteNotificationsWithError: (NSError*) err
+{
+    NSLog(@"Error in registration. Error: %@", err);
+    self.deviceToken = nil;
+}
+
+
+- (void) application: (UIApplication*) application didReceiveRemoteNotification: (NSDictionary*) userInfo
+{
+    NSLog(@"Push notification arrived: %@", userInfo);
 }
 
 

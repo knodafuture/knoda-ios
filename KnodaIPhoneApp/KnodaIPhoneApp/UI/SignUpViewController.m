@@ -34,6 +34,7 @@ static NSString* const kApplicationSegue   = @"ApplicationNavigationSegue";
 @property (nonatomic, strong) IBOutlet UILabel* errorLabel;
 
 @property (nonatomic, assign) BOOL errorShown;
+@property (nonatomic, assign) BOOL keyboardShown;
 
 @end
 
@@ -190,6 +191,8 @@ static NSString* const kApplicationSegue   = @"ApplicationNavigationSegue";
         UIViewAnimationCurve animationCurve = [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
         
         [self moveUpOrDown: YES withAnimationDuration:animationDuration animationCurve:animationCurve keyboardFrame:endFrame];
+        
+        self.keyboardShown = YES;
     }
 }
 
@@ -202,6 +205,8 @@ static NSString* const kApplicationSegue   = @"ApplicationNavigationSegue";
         UIViewAnimationCurve animationCurve = [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
         
         [self moveUpOrDown:NO withAnimationDuration:animationDuration animationCurve:animationCurve keyboardFrame:endFrame];
+        
+        self.keyboardShown = NO;
     }
 }
 
@@ -219,12 +224,16 @@ withAnimationDuration: (NSTimeInterval)animationDuration
         
         if (newY < newContainerFrame.origin.y)
         {
+            if (self.errorShown) {
+                newY += self.errorLabel.frame.size.height * 2;
+            }
+            
             newContainerFrame.origin.y = newY;
         }
     }
     else
     {
-        newContainerFrame.origin.y = 0;
+        newContainerFrame.origin.y = self.errorShown ? self.errorLabel.frame.size.height : 0;
     }
     
     [UIView animateWithDuration:animationDuration delay:0.0 options:(animationCurve << 16) animations:^
@@ -322,12 +331,23 @@ withAnimationDuration: (NSTimeInterval)animationDuration
     {
         self.errorShown = YES;
         
+        CGRect newContainerFrame = self.containerView.frame;
+        
+        CGRect newErrorFrame = self.errorView.frame;
+        newErrorFrame.origin.y += newErrorFrame.size.height;
+        
+        if ((newErrorFrame.origin.y == newContainerFrame.origin.y)&&!self.keyboardShown) {
+            newContainerFrame.origin.y += self.errorLabel.frame.size.height;
+        }
+        else {
+            newContainerFrame.origin.y += self.errorLabel.frame.size.height * 2;
+        }
+      
         [UIView animateWithDuration: 0.2 animations: ^
          {
-             CGRect newErrorFrame = self.errorView.frame;
-             newErrorFrame.origin.y += newErrorFrame.size.height;
-             
              self.errorView.frame = newErrorFrame;
+             
+             self.containerView.frame = newContainerFrame;
          }];
     }
 }
@@ -340,12 +360,20 @@ withAnimationDuration: (NSTimeInterval)animationDuration
         self.errorLabel.text = nil;
         self.errorShown = NO;
         
+        CGRect newContainerFrame = self.containerView.frame;
+        
+        if ((newContainerFrame.origin.y - self.errorLabel.frame.size.height * 2) <= 0) {
+            newContainerFrame.origin.y -= self.errorLabel.frame.size.height * 2;
+        }
+        
+        CGRect newErrorFrame = self.errorView.frame;
+        newErrorFrame.origin.y -= newErrorFrame.size.height;
+        
         [UIView animateWithDuration: 0.2 animations: ^
          {
-             CGRect newErrorFrame = self.errorView.frame;
-             newErrorFrame.origin.y -= newErrorFrame.size.height;
-             
              self.errorView.frame = newErrorFrame;
+             
+             self.containerView.frame = newContainerFrame;
          }];
     }
 }

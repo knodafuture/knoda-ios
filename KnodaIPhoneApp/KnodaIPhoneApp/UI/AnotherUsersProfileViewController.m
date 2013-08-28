@@ -48,10 +48,6 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
     [self setUpUsersInfo];
 }
 
-- (void) viewWillDisappear: (BOOL) animated {
-    [super viewWillDisappear: animated];
-}
-
 - (void) updateVisibleCells
 {
     NSArray* visibleCells = [self.predictionsTableView visibleCells];

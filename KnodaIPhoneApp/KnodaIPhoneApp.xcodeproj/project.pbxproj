@@ -51,6 +51,7 @@
 		36997C1E17CCB48900424F4F /* LogInSignUpSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 36997C1D17CCB48900424F4F /* LogInSignUpSegue.m */; };
 		369C427917C78010008C8203 /* noContent.png in Resources */ = {isa = PBXBuildFile; fileRef = 369C427717C78010008C8203 /* noContent.png */; };
 		369C427A17C78010008C8203 /* noContent@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 369C427817C78010008C8203 /* noContent@2x.png */; };
+		369D861717CDE78E0005F0B3 /* UsernameEmailChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 369D861617CDE78E0005F0B3 /* UsernameEmailChangeViewController.m */; };
 		36A4054817C24DDD00406A12 /* BadgesCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A4054717C24DDD00406A12 /* BadgesCollectionViewController.m */; };
 		36A4054B17C24E5500406A12 /* BadgeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A4054A17C24E5500406A12 /* BadgeCollectionViewCell.m */; };
 		36A4055B17C2549500406A12 /* 10_correct_predictions.png in Resources */ = {isa = PBXBuildFile; fileRef = 36A4054D17C2549500406A12 /* 10_correct_predictions.png */; };
@@ -377,6 +378,8 @@
 		36997C1D17CCB48900424F4F /* LogInSignUpSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInSignUpSegue.m; sourceTree = "<group>"; };
 		369C427717C78010008C8203 /* noContent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noContent.png; sourceTree = "<group>"; };
 		369C427817C78010008C8203 /* noContent@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "noContent@2x.png"; sourceTree = "<group>"; };
+		369D861517CDE78E0005F0B3 /* UsernameEmailChangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UsernameEmailChangeViewController.h; path = ../Networking/UsernameEmailChangeViewController.h; sourceTree = "<group>"; };
+		369D861617CDE78E0005F0B3 /* UsernameEmailChangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UsernameEmailChangeViewController.m; path = ../Networking/UsernameEmailChangeViewController.m; sourceTree = "<group>"; };
 		36A4054617C24DDD00406A12 /* BadgesCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadgesCollectionViewController.h; sourceTree = "<group>"; };
 		36A4054717C24DDD00406A12 /* BadgesCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BadgesCollectionViewController.m; sourceTree = "<group>"; };
 		36A4054917C24E5500406A12 /* BadgeCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadgeCollectionViewCell.h; sourceTree = "<group>"; };
@@ -1316,6 +1319,8 @@
 				3638773B17C4D6EA00703475 /* AnotherUsersProfileViewController.m */,
 				57066AA817C64E970080797B /* CategoryPredictionsViewController.h */,
 				57066AA917C64E980080797B /* CategoryPredictionsViewController.m */,
+				369D861517CDE78E0005F0B3 /* UsernameEmailChangeViewController.h */,
+				369D861617CDE78E0005F0B3 /* UsernameEmailChangeViewController.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1725,6 +1730,7 @@
 				365B7E2217C6548300ED04D2 /* AnotherUserPredictionsWebRequest.m in Sources */,
 				571B1D1C17C7BE620013AA41 /* NewBadgeView.m in Sources */,
 				36997C1E17CCB48900424F4F /* LogInSignUpSegue.m in Sources */,
+				369D861717CDE78E0005F0B3 /* UsernameEmailChangeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

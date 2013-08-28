@@ -15,5 +15,7 @@
 @property (nonatomic, readonly) User *user;
 
 - (id)initWithAvatar:(UIImage *)avatarImage;
+- (id)initWithNewUsername:(NSString *)username;
+- (id)initWithNewEmail:(NSString *)email;
 
 @end

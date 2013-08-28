@@ -26,6 +26,22 @@
     return self;
 }
 
+- (id)initWithNewEmail:(NSString *)email {
+    NSDictionary *params = @{@"user[email]" : email};
+    if(self = [super initWithParameters:params]) {
+        _isPatch = YES;
+    }
+    return self;
+}
+
+- (id)initWithNewUsername:(NSString *)username {
+    NSDictionary *params = @{@"user[username]" : username};
+    if(self = [super initWithParameters:params]) {
+        _isPatch = YES;
+    }
+    return self;
+}
+
 - (NSString *)httpMethod {
     return _isPatch ? @"PATCH" : @"GET";
 }

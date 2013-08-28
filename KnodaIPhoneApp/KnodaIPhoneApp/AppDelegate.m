@@ -15,6 +15,8 @@
 #import "AddPredictionRequest.h"
 #import "BadgesWebRequest.h"
 #import "NewBadgeView.h"
+#import "SignOutWebRequest.h"
+#import "ImageCache.h"
 
 #import "SendDeviceTokenWebRequest.h"
 
@@ -147,6 +149,21 @@
     }
     
     return result;
+}
+
+- (void)logout {
+    DLog(@"performing logout");
+    
+    SignOutWebRequest *signOutWebRequest = [SignOutWebRequest new];
+    [signOutWebRequest executeWithCompletionBlock:nil];
+    
+    self.user = nil;
+    [self removePassword];
+    [[ImageCache instance] clear];
+    
+    UINavigationController *nc = (UINavigationController *)self.window.rootViewController;
+    [nc dismissViewControllerAnimated:NO completion:nil];
+    [nc popToRootViewControllerAnimated:YES];
 }
 
 - (void)handleNewBadgeNotification:(NSNotification *)notification {

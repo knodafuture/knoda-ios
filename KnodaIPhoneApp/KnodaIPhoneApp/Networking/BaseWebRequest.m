@@ -331,6 +331,13 @@ static const char *MULTIPART_CHARS = "1234567890_-qwertyuiopasdfghjklzxcvbnmQWER
         
         NSLog(@"Status code: %d", response.statusCode);
         
+        if(response.statusCode == 403 && [self requiresAuthToken]) { //perform logout if authorization is failed
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.appDelegate logout];
+            });
+            return;
+        }
+        
         if (self.state == kRequestStateCancelled)
         {
             return;

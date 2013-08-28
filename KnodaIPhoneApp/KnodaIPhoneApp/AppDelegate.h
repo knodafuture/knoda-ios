@@ -27,4 +27,6 @@
 
 - (void) sendToken;
 
+- (void)logout;
+
 @end

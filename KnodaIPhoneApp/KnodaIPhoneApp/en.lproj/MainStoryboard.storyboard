@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ZKQ-aW-8t7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12A269" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ZKQ-aW-8t7">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -9,7 +9,7 @@
             <objects>
                 <viewController id="2" customClass="WelcomeViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="drb-l3-jKr">
@@ -3897,7 +3897,6 @@ outcome of your prediction</string>
                         <outlet property="pointsLabel" destination="ZZh-i2-KNf" id="21s-Xw-NZ4"/>
                         <outlet property="profileAvatarView" destination="mcr-h0-wFk" id="q0V-TA-fsV"/>
                         <segue destination="iWN-09-37c" kind="push" identifier="ChangePasswordSegue" id="TpK-sS-xAu"/>
-                        <segue destination="2" kind="custom" identifier="SignOutSegue" customClass="SignOutSegue" id="tga-wH-5aw"/>
                         <segue destination="8Kn-Df-1EH" kind="push" identifier="UsernameEmailSegue" id="aHx-6O-PgW"/>
                     </connections>
                 </viewController>
@@ -4811,14 +4810,13 @@ outcome of your prediction</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="pyY-qR-NzL"/>
         <segue reference="r3e-od-7h8"/>
-        <segue reference="tga-wH-5aw"/>
-        <segue reference="H0s-oM-ZNm"/>
         <segue reference="wUp-Tb-D78"/>
-        <segue reference="IMX-a1-Bbr"/>
+        <segue reference="H0s-oM-ZNm"/>
         <segue reference="CM5-5K-qH1"/>
+        <segue reference="pyY-qR-NzL"/>
         <segue reference="vCM-j3-I2J"/>
+        <segue reference="EE6-qF-5xk"/>
         <segue reference="ebR-4n-eVY"/>
     </inferredMetricsTieBreakers>
 </document>

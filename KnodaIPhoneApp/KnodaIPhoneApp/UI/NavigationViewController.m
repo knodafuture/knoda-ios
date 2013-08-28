@@ -53,10 +53,8 @@ static NSString* const MENU_SEGUES[MenuItemsSize] = {
 
 - (void) viewDidLoad {
     [super viewDidLoad];
-
-    self.userUpdateTimer = [NSTimer scheduledTimerWithTimeInterval: 1800.0 target: self selector: @selector(reloadUserInfo) userInfo: nil repeats: YES];
     
-    if([[(AppDelegate *)[[UIApplication sharedApplication] delegate] user] hasAvatar]) {
+    if(self.appDelegate.user.hasAvatar) {
         [self performSegueWithIdentifier: kHomeSegue sender: self];
     }
     else {
@@ -74,10 +72,17 @@ static NSString* const MENU_SEGUES[MenuItemsSize] = {
     [super viewDidUnload];
 }
 
-
 - (void) viewDidAppear: (BOOL) animated
 {
+    [super viewDidAppear:animated];
     self.appeared = YES;
+    self.userUpdateTimer = [NSTimer scheduledTimerWithTimeInterval: 1800.0 target: self selector: @selector(reloadUserInfo) userInfo: nil repeats: YES];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [self.userUpdateTimer invalidate];
+    self.userUpdateTimer = nil;
 }
 
 

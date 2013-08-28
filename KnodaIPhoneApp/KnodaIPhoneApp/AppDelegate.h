@@ -18,9 +18,15 @@
 
 @property (strong, nonatomic) KeychainItemWrapper *passwordItem;
 
+@property (copy, nonatomic) NSString* deviceToken;
+
 - (void) savePassword: (NSString*) password;
 - (void) removePassword;
 
 - (NSDictionary*) credentials;
+
+- (void) sendToken;
+
+- (void)logout;
 
 @end

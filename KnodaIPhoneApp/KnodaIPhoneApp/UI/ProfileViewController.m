@@ -14,7 +14,6 @@
 #import "SignOutWebRequest.h"
 #import "AppDelegate.h"
 #import "ProfileWebRequest.h"
-#import "ImageCache.h"
 #import "UsernameEmailChangeViewController.h"
 #import "AddPredictionViewController.h"
 
@@ -23,7 +22,6 @@ static NSString * const accountDetailsTableViewCellIdentifier = @"accountDetails
 static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 static NSString* const kChangeEmailUsernameSegue = @"UsernameEmailSegue";
 static NSString* const kChangePasswordSegue = @"ChangePasswordSegue";
-static NSString* const kSignOutSegue = @"SignOutSegue";
 
 @interface ProfileViewController () <AddPredictionViewControllerDelegate>
 
@@ -35,7 +33,6 @@ static NSString* const kSignOutSegue = @"SignOutSegue";
 @end
 
 @implementation ProfileViewController
-
 
 - (void)viewDidLoad
 {
@@ -106,17 +103,7 @@ static NSString* const kSignOutSegue = @"SignOutSegue";
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([[segue identifier] isEqualToString:kSignOutSegue])
-    {
-        AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
-        [appDelegate removePassword];
-        
-        SignOutWebRequest * signOutWebRequest = [[SignOutWebRequest alloc]init];
-        [signOutWebRequest executeWithCompletionBlock:^{
-            [[ImageCache instance] clear];
-        }];
-    }
-    else if ([segue.identifier isEqualToString:kAddPredictionSegue]) {
+    if ([segue.identifier isEqualToString:kAddPredictionSegue]) {
         AddPredictionViewController *vc =(AddPredictionViewController*)segue.destinationViewController;
         vc.delegate = self;
     }
@@ -130,7 +117,7 @@ static NSString* const kSignOutSegue = @"SignOutSegue";
 
 - (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 0) {
-        [self performSegueWithIdentifier:kSignOutSegue sender:self];
+        [self.appDelegate logout];
     }
     else {
         [actionSheet dismissWithClickedButtonIndex:1 animated:YES];

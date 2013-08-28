@@ -46,7 +46,6 @@
 		365B7E2B17C657BC00ED04D2 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 365B7E2617C657BC00ED04D2 /* Icon.png */; };
 		365B7E2C17C657BC00ED04D2 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 365B7E2717C657BC00ED04D2 /* Icon@2x.png */; };
 		367EE77F17C3C5E400764C85 /* ProfileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 367EE77E17C3C5E300764C85 /* ProfileCell.m */; };
-		367EE78217C3D17F00764C85 /* SignOutSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 367EE78117C3D17E00764C85 /* SignOutSegue.m */; };
 		367EE78517C3D41900764C85 /* SignOutWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 367EE78417C3D41800764C85 /* SignOutWebRequest.m */; };
 		36997C1E17CCB48900424F4F /* LogInSignUpSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 36997C1D17CCB48900424F4F /* LogInSignUpSegue.m */; };
 		369C427917C78010008C8203 /* noContent.png in Resources */ = {isa = PBXBuildFile; fileRef = 369C427717C78010008C8203 /* noContent.png */; };
@@ -179,8 +178,9 @@
 		9E06639717959A2100B3E974 /* knoda_logo_lg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E06639317959A2100B3E974 /* knoda_logo_lg@2x.png */; };
 		9E06639A17959A4C00B3E974 /* HelveticaNeue.dfont in Resources */ = {isa = PBXBuildFile; fileRef = 9E06639817959A4C00B3E974 /* HelveticaNeue.dfont */; };
 		9E06639B17959A4C00B3E974 /* KronaOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9E06639917959A4C00B3E974 /* KronaOne-Regular.ttf */; };
+		9E212EB717CCEAFF00BE8166 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E212EB617CCEAFF00BE8166 /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9E212EBA17CCEE3500BE8166 /* SendDeviceTokenWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E212EB917CCEE3500BE8166 /* SendDeviceTokenWebRequest.m */; };
 		9E28686A17C63E380033FB3C /* SelectPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 575B100D17C4FBDB00782E6B /* SelectPictureViewController.m */; };
-		9E28686D17C656AE0033FB3C /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E28686C17C656AE0033FB3C /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9E28686F17C659940033FB3C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E28686E17C659930033FB3C /* Security.framework */; };
 		9E30D16617C26E6E002D9ACE /* AlertCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E30D16517C26E6E002D9ACE /* AlertCell.m */; };
 		9E30D16D17C270F8002D9ACE /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E30D16717C270F7002D9ACE /* check.png */; };
@@ -373,8 +373,6 @@
 		365B7E2717C657BC00ED04D2 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "Resources/Images/Icon@2x.png"; sourceTree = "<group>"; };
 		367EE77D17C3C5E300764C85 /* ProfileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileCell.h; sourceTree = "<group>"; };
 		367EE77E17C3C5E300764C85 /* ProfileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileCell.m; sourceTree = "<group>"; };
-		367EE78017C3D17D00764C85 /* SignOutSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignOutSegue.h; sourceTree = "<group>"; };
-		367EE78117C3D17E00764C85 /* SignOutSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignOutSegue.m; sourceTree = "<group>"; };
 		367EE78317C3D41700764C85 /* SignOutWebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignOutWebRequest.h; sourceTree = "<group>"; };
 		367EE78417C3D41800764C85 /* SignOutWebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignOutWebRequest.m; sourceTree = "<group>"; };
 		36997C1C17CCB48900424F4F /* LogInSignUpSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInSignUpSegue.h; sourceTree = "<group>"; };
@@ -554,8 +552,10 @@
 		9E06639317959A2100B3E974 /* knoda_logo_lg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "knoda_logo_lg@2x.png"; sourceTree = "<group>"; };
 		9E06639817959A4C00B3E974 /* HelveticaNeue.dfont */ = {isa = PBXFileReference; lastKnownFileType = file; name = HelveticaNeue.dfont; path = Fonts/HelveticaNeue.dfont; sourceTree = "<group>"; };
 		9E06639917959A4C00B3E974 /* KronaOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "KronaOne-Regular.ttf"; path = "Fonts/KronaOne-Regular.ttf"; sourceTree = "<group>"; };
-		9E28686B17C656AE0033FB3C /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeychainItemWrapper.h; path = KeychainWrapper/KeychainItemWrapper.h; sourceTree = "<group>"; };
-		9E28686C17C656AE0033FB3C /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeychainItemWrapper.m; path = KeychainWrapper/KeychainItemWrapper.m; sourceTree = "<group>"; };
+		9E212EB517CCEAFF00BE8166 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
+		9E212EB617CCEAFF00BE8166 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
+		9E212EB817CCEE3500BE8166 /* SendDeviceTokenWebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendDeviceTokenWebRequest.h; sourceTree = "<group>"; };
+		9E212EB917CCEE3500BE8166 /* SendDeviceTokenWebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendDeviceTokenWebRequest.m; sourceTree = "<group>"; };
 		9E28686E17C659930033FB3C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		9E30D16417C26E6E002D9ACE /* AlertCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertCell.h; sourceTree = "<group>"; };
 		9E30D16517C26E6E002D9ACE /* AlertCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertCell.m; sourceTree = "<group>"; };
@@ -972,8 +972,7 @@
 		9E06635F178C3C7F00B3E974 /* Thirdparty */ = {
 			isa = PBXGroup;
 			children = (
-				9E28686B17C656AE0033FB3C /* KeychainItemWrapper.h */,
-				9E28686C17C656AE0033FB3C /* KeychainItemWrapper.m */,
+				9E212EB417CCEAFF00BE8166 /* KeychainWrapper */,
 				9E066360178C3C7F00B3E974 /* SBJSON */,
 			);
 			path = Thirdparty;
@@ -1155,6 +1154,15 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
+		9E212EB417CCEAFF00BE8166 /* KeychainWrapper */ = {
+			isa = PBXGroup;
+			children = (
+				9E212EB517CCEAFF00BE8166 /* KeychainItemWrapper.h */,
+				9E212EB617CCEAFF00BE8166 /* KeychainItemWrapper.m */,
+			);
+			path = KeychainWrapper;
+			sourceTree = "<group>";
+		};
 		9E57924F1796C39200979928 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
@@ -1283,6 +1291,8 @@
 				365B7E1E17C64E6B00ED04D2 /* AnotherUserProfileWebRequest.m */,
 				365B7E2017C6548200ED04D2 /* AnotherUserPredictionsWebRequest.h */,
 				365B7E2117C6548200ED04D2 /* AnotherUserPredictionsWebRequest.m */,
+				9E212EB817CCEE3500BE8166 /* SendDeviceTokenWebRequest.h */,
+				9E212EB917CCEE3500BE8166 /* SendDeviceTokenWebRequest.m */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -1371,8 +1381,6 @@
 				9E93021A179FF11F00FFB166 /* NavigationSegue.m */,
 				9E8421EF17A26ECB00D14D0A /* PushWithoutAnimationSegue.h */,
 				9E8421F017A26ECB00D14D0A /* PushWithoutAnimationSegue.m */,
-				367EE78017C3D17D00764C85 /* SignOutSegue.h */,
-				367EE78117C3D17E00764C85 /* SignOutSegue.m */,
 				36997C1C17CCB48900424F4F /* LogInSignUpSegue.h */,
 				36997C1D17CCB48900424F4F /* LogInSignUpSegue.m */,
 			);
@@ -1732,7 +1740,6 @@
 				57D525AB17C388F80031C1EE /* BadgesWebRequest.m in Sources */,
 				57D525AC17C388F80031C1EE /* ProfileWebRequest.m in Sources */,
 				367EE77F17C3C5E400764C85 /* ProfileCell.m in Sources */,
-				367EE78217C3D17F00764C85 /* SignOutSegue.m in Sources */,
 				367EE78517C3D41900764C85 /* SignOutWebRequest.m in Sources */,
 				57D525C217C4C2BD0031C1EE /* BindableView.m in Sources */,
 				57D525C917C4C2C70031C1EE /* ImageCache.m in Sources */,
@@ -1744,12 +1751,13 @@
 				3638774617C4F6A100703475 /* ChangePasswordRequest.m in Sources */,
 				3638773F17C4D6EA00703475 /* AnotherUsersProfileViewController.m in Sources */,
 				9E28686A17C63E380033FB3C /* SelectPictureViewController.m in Sources */,
-				9E28686D17C656AE0033FB3C /* KeychainItemWrapper.m in Sources */,
 				57066AAA17C64E990080797B /* CategoryPredictionsViewController.m in Sources */,
 				365B7E1F17C64E6C00ED04D2 /* AnotherUserProfileWebRequest.m in Sources */,
 				365B7E2217C6548300ED04D2 /* AnotherUserPredictionsWebRequest.m in Sources */,
 				571B1D1C17C7BE620013AA41 /* NewBadgeView.m in Sources */,
 				36997C1E17CCB48900424F4F /* LogInSignUpSegue.m in Sources */,
+				9E212EB717CCEAFF00BE8166 /* KeychainItemWrapper.m in Sources */,
+				9E212EBA17CCEE3500BE8166 /* SendDeviceTokenWebRequest.m in Sources */,
 				369D861717CDE78E0005F0B3 /* UsernameEmailChangeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

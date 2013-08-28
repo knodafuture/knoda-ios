@@ -51,6 +51,10 @@
 		36997C1E17CCB48900424F4F /* LogInSignUpSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 36997C1D17CCB48900424F4F /* LogInSignUpSegue.m */; };
 		369C427917C78010008C8203 /* noContent.png in Resources */ = {isa = PBXBuildFile; fileRef = 369C427717C78010008C8203 /* noContent.png */; };
 		369C427A17C78010008C8203 /* noContent@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 369C427817C78010008C8203 /* noContent@2x.png */; };
+		369D861717CDE78E0005F0B3 /* UsernameEmailChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 369D861617CDE78E0005F0B3 /* UsernameEmailChangeViewController.m */; };
+		369D861C17CE02720005F0B3 /* firstStartOverlay-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 369D861917CE02720005F0B3 /* firstStartOverlay-568h@2x.png */; };
+		369D861D17CE02720005F0B3 /* firstStartOverlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 369D861A17CE02720005F0B3 /* firstStartOverlay.png */; };
+		369D861E17CE02720005F0B3 /* firstStartOverlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 369D861B17CE02720005F0B3 /* firstStartOverlay@2x.png */; };
 		36A4054817C24DDD00406A12 /* BadgesCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A4054717C24DDD00406A12 /* BadgesCollectionViewController.m */; };
 		36A4054B17C24E5500406A12 /* BadgeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A4054A17C24E5500406A12 /* BadgeCollectionViewCell.m */; };
 		36A4055B17C2549500406A12 /* 10_correct_predictions.png in Resources */ = {isa = PBXBuildFile; fileRef = 36A4054D17C2549500406A12 /* 10_correct_predictions.png */; };
@@ -378,6 +382,11 @@
 		36997C1D17CCB48900424F4F /* LogInSignUpSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInSignUpSegue.m; sourceTree = "<group>"; };
 		369C427717C78010008C8203 /* noContent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noContent.png; sourceTree = "<group>"; };
 		369C427817C78010008C8203 /* noContent@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "noContent@2x.png"; sourceTree = "<group>"; };
+		369D861517CDE78E0005F0B3 /* UsernameEmailChangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UsernameEmailChangeViewController.h; path = ../Networking/UsernameEmailChangeViewController.h; sourceTree = "<group>"; };
+		369D861617CDE78E0005F0B3 /* UsernameEmailChangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UsernameEmailChangeViewController.m; path = ../Networking/UsernameEmailChangeViewController.m; sourceTree = "<group>"; };
+		369D861917CE02720005F0B3 /* firstStartOverlay-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "firstStartOverlay-568h@2x.png"; sourceTree = "<group>"; };
+		369D861A17CE02720005F0B3 /* firstStartOverlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = firstStartOverlay.png; sourceTree = "<group>"; };
+		369D861B17CE02720005F0B3 /* firstStartOverlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "firstStartOverlay@2x.png"; sourceTree = "<group>"; };
 		36A4054617C24DDD00406A12 /* BadgesCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadgesCollectionViewController.h; sourceTree = "<group>"; };
 		36A4054717C24DDD00406A12 /* BadgesCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BadgesCollectionViewController.m; sourceTree = "<group>"; };
 		36A4054917C24E5500406A12 /* BadgeCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadgeCollectionViewCell.h; sourceTree = "<group>"; };
@@ -782,6 +791,16 @@
 			path = "App Icons";
 			sourceTree = "<group>";
 		};
+		369D861817CE025E0005F0B3 /* firstStart */ = {
+			isa = PBXGroup;
+			children = (
+				369D861917CE02720005F0B3 /* firstStartOverlay-568h@2x.png */,
+				369D861A17CE02720005F0B3 /* firstStartOverlay.png */,
+				369D861B17CE02720005F0B3 /* firstStartOverlay@2x.png */,
+			);
+			name = firstStart;
+			sourceTree = "<group>";
+		};
 		36A4054C17C2549500406A12 /* badgesImages */ = {
 			isa = PBXGroup;
 			children = (
@@ -1012,6 +1031,7 @@
 		9E06638B179598FD00B3E974 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				369D861817CE025E0005F0B3 /* firstStart */,
 				571B1D0717C7BE4C0013AA41 /* newBadgePopup */,
 				369C427717C78010008C8203 /* noContent.png */,
 				369C427817C78010008C8203 /* noContent@2x.png */,
@@ -1329,6 +1349,8 @@
 				3638773B17C4D6EA00703475 /* AnotherUsersProfileViewController.m */,
 				57066AA817C64E970080797B /* CategoryPredictionsViewController.h */,
 				57066AA917C64E980080797B /* CategoryPredictionsViewController.m */,
+				369D861517CDE78E0005F0B3 /* UsernameEmailChangeViewController.h */,
+				369D861617CDE78E0005F0B3 /* UsernameEmailChangeViewController.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1639,6 +1661,9 @@
 				571B1D1617C7BE4C0013AA41 /* ViewBadges_press.png in Resources */,
 				571B1D1717C7BE4C0013AA41 /* ViewBadges_press@2x.png in Resources */,
 				571B1D1D17C7BE620013AA41 /* NewBadgeView.xib in Resources */,
+				369D861C17CE02720005F0B3 /* firstStartOverlay-568h@2x.png in Resources */,
+				369D861D17CE02720005F0B3 /* firstStartOverlay.png in Resources */,
+				369D861E17CE02720005F0B3 /* firstStartOverlay@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1739,6 +1764,7 @@
 				36997C1E17CCB48900424F4F /* LogInSignUpSegue.m in Sources */,
 				9E212EB717CCEAFF00BE8166 /* KeychainItemWrapper.m in Sources */,
 				9E212EBA17CCEE3500BE8166 /* SendDeviceTokenWebRequest.m in Sources */,
+				369D861717CDE78E0005F0B3 /* UsernameEmailChangeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

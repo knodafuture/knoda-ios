@@ -37,12 +37,10 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
     self.cellUpdateTimer = [NSTimer scheduledTimerWithTimeInterval: 60.0 target: self selector: @selector(updateVisibleCells) userInfo: nil repeats: YES];
 }
 
-
-- (void) viewWillDisappear: (BOOL) animated
-{
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [self.cellUpdateTimer invalidate];
     self.cellUpdateTimer = nil;
-    
-    [super viewWillDisappear: animated];
 }
 
 
@@ -59,19 +57,26 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
 }
 
 - (void)refresh {
+    
+    __weak MyPicksViewController *weakSelf = self;
+    
     HistoryMyPicksWebRequest* request = [[HistoryMyPicksWebRequest alloc] init];
     [request executeWithCompletionBlock: ^
      {
+         MyPicksViewController *strongSelf = weakSelf;
+         if(!strongSelf) {
+             return;
+         }
          if (request.errorCode == 0)
          {
-             self.predictions = [NSMutableArray arrayWithArray: request.predictions];
-             [self.tableView reloadData];
+             strongSelf.predictions = [NSMutableArray arrayWithArray: request.predictions];
+             [strongSelf.tableView reloadData];
 
-             if ([self.predictions count] > 0) {
-                 [self.noContentView removeFromSuperview];
+             if ([strongSelf.predictions count] > 0) {
+                 [strongSelf.noContentView removeFromSuperview];
              }
              else {
-                 [self.view addSubview:self.noContentView];
+                 [strongSelf.view addSubview:strongSelf.noContentView];
              }
          }
      }];
@@ -139,17 +144,23 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
 {
     if ((self.predictions.count >= [HistoryMyPicksWebRequest limitByPage]) && indexPath.row == self.predictions.count)
     {
+        __weak MyPicksViewController *weakSelf = self;
+        
         HistoryMyPicksWebRequest* predictionsRequest = [[HistoryMyPicksWebRequest alloc] initWithLastCreatedDate: ((Prediction*)[self.predictions lastObject]).creationDate];
         [predictionsRequest executeWithCompletionBlock: ^
          {
+             MyPicksViewController *strongSelf = weakSelf;
+             if(!strongSelf) {
+                 return;
+             }
              if (predictionsRequest.errorCode == 0 && predictionsRequest.predictions.count != 0)
              {
-                 [self.predictions addObjectsFromArray: [NSMutableArray arrayWithArray: predictionsRequest.predictions] ];
-                 [self.tableView reloadData];
+                 [strongSelf.predictions addObjectsFromArray: [NSMutableArray arrayWithArray: predictionsRequest.predictions] ];
+                 [strongSelf.tableView reloadData];
              }
              else
              {
-                 [self.tableView scrollToRowAtIndexPath: [NSIndexPath indexPathForRow: indexPath.row - 1 inSection: 0] atScrollPosition: UITableViewScrollPositionBottom animated: YES];
+                 [strongSelf.tableView scrollToRowAtIndexPath: [NSIndexPath indexPathForRow: indexPath.row - 1 inSection: 0] atScrollPosition: UITableViewScrollPositionBottom animated: YES];
              }
          }];
     }

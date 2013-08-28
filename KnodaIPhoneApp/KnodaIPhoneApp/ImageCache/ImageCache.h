@@ -17,4 +17,6 @@
 - (void)bindImage:(NSString *)imgURL toView:(UIView<ImageBindable> *)bindableView;
 - (void)bindImage:(NSString *)imgURL toView:(UIView<ImageBindable> *)bindableView withCornerRadius:(CGFloat)radius;
 
+- (void)clear;
+
 @end

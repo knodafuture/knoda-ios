@@ -51,7 +51,7 @@ NSString* const kSelfObserverKey = @"selfObserver";
         NSEnumerator *enumerator = [dict keyEnumerator];
         NSString *key;
         while ((key = [enumerator nextObject])) {
-            if([key isEqualToString:@"doNotObserve"]) {
+            if([key isEqualToString:@"doNotObserve"]||[key isEqualToString:@"justSignedUp"]) {
                 continue;
             }
             id value = dict[key];

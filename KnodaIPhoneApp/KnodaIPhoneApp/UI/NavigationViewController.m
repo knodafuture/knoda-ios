@@ -13,8 +13,18 @@
 #import "ProfileWebRequest.h"
 #import "SelectPictureViewController.h"
 
+#import "BadgesWebRequest.h"
+
 static NSString* const kHomeSegue = @"HomeSegue";
 static NSString* const kSelectPictureSegue = @"SelectPictureSegue";
+
+static NSString* const MENU_SEGUES[MenuItemsSize] = {
+    @"HomeSegue",
+    @"HistorySegue",
+    @"AlertsSegue",
+    @"BadgesSegue",
+    @"ProfileSegue"
+};
 
 @interface NavigationViewController () <SelectPictureDelegate>
 
@@ -26,7 +36,8 @@ static NSString* const kSelectPictureSegue = @"SelectPictureSegue";
 @property (nonatomic, strong) IBOutlet UIView* masterView;
 @property (nonatomic, strong) IBOutlet UIView* detailsView;
 @property (nonatomic, strong) IBOutlet UIView* movingView;
-@property (weak, nonatomic) IBOutlet UITableView *menuItemsTableView;
+@property (weak, nonatomic)   IBOutlet UITableView *menuItemsTableView;
+
 @property (nonatomic, assign) BOOL appeared;
 
 @property (nonatomic, strong) NSTimer* userUpdateTimer;
@@ -83,7 +94,14 @@ static NSString* const kSelectPictureSegue = @"SelectPictureSegue";
     }
 }
 
-
+- (void)openMenuItem:(MenuItem)menuItem {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:menuItem inSection:0];
+    [self.menuItemsTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+    if(!self.masterShown) {
+        [self moveToMaster];
+    }
+    [self performSegueWithIdentifier:MENU_SEGUES[menuItem] sender:nil];
+}
 
 - (void) moveToDetailsAnimated: (BOOL) animated
 {
@@ -189,26 +207,26 @@ static NSString* const kSelectPictureSegue = @"SelectPictureSegue";
     NSString* identefier = @"";
     
     switch (indexPath.row) {
-        case 0:
+        case MenuHome:
             identefier = @"HomeCell";
             break;
-        case 1:
+        case MenuHistory:
             identefier = @"HistoryCell";
             break;
-        case 2:
+        case MenuAlerts:
             identefier = @"AlertsCell";
             break;
-        case 3:
+        case MenuBadges:
             identefier = @"BadgesCell";
             break;
-        case 4:
+        case MenuProfile:
             identefier = @"ProfileCell";
             break;
             
         default:
             break;
     }
-    if (indexPath.row != 4) {
+    if (indexPath.row != MenuProfile) {
         UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier: identefier];
         return cell;
     }
@@ -224,6 +242,10 @@ static NSString* const kSelectPictureSegue = @"SelectPictureSegue";
 - (void)hideViewController:(SelectPictureViewController *)vc {
     [vc.navigationController popViewControllerAnimated:NO];
     [self performSegueWithIdentifier: kHomeSegue sender: self];
+    
+    if(self.appDelegate.user.justSignedUp) {
+        [BadgesWebRequest checkNewBadges];
+    }
 }
 
 @end

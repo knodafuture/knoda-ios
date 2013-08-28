@@ -53,15 +53,20 @@ static const int kPredictionCharsLimit = 300;
 	
     self.categories = [[NSUserDefaults standardUserDefaults] objectForKey: categoriesKey];
     
+    __weak AddPredictionViewController *weakSelf = self;
+    
     CategoriesWebRequest* categoriesRequest = [[CategoriesWebRequest alloc] init];
     [categoriesRequest executeWithCompletionBlock: ^
     {
         if (categoriesRequest.errorCode == 0)
         {
-            self.categories = categoriesRequest.categories;
+            [[NSUserDefaults standardUserDefaults] setObject: categoriesRequest.categories forKey: categoriesKey];
             
-            [[NSUserDefaults standardUserDefaults] setObject: self.categories forKey: categoriesKey];
-            [self.categoryPicker reloadAllComponents];
+            AddPredictionViewController *strongSelf = weakSelf;
+            if(strongSelf) {
+                strongSelf.categories = categoriesRequest.categories;
+                [strongSelf.categoryPicker reloadAllComponents];
+            }
         }
     }];
     

@@ -14,11 +14,16 @@
 #import "SignOutWebRequest.h"
 #import "AppDelegate.h"
 #import "ProfileWebRequest.h"
+#import "ImageCache.h"
+#import "UsernameEmailChangeViewController.h"
 #import "AddPredictionViewController.h"
 
 static NSString * const accountDetailsTableViewCellIdentifier = @"accountDetailsTableViewCellIdentifier";
 
 static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
+static NSString* const kChangeEmailUsernameSegue = @"UsernameEmailSegue";
+static NSString* const kChangePasswordSegue = @"ChangePasswordSegue";
+static NSString* const kSignOutSegue = @"SignOutSegue";
 
 @interface ProfileViewController () <AddPredictionViewControllerDelegate>
 
@@ -38,7 +43,6 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"darkBgPattern"]];
     self.accountDetailsTableView.backgroundView = nil;
     [self makeProfileImageRoundedCorners];
-    [self fillInUsersInformation];
     self.navigationController.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, self.navigationController.navigationBar.frame.size.height);
     
     if (self.leftButtonItemReturnsBack) {
@@ -48,6 +52,7 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self fillInUsersInformation];
     [[self navigationController] setNavigationBarHidden:NO animated:NO];
 }
 
@@ -72,14 +77,14 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
         User * user = self.appDelegate.user;
         [self.profileAvatarView bindToURL:user.bigImage];
         self.loginLabel.text = user.name;
-        self.pointsLabel.text = [NSString stringWithFormat:@"%d points",user.points];
-        self.accountDetailsArray = [NSArray arrayWithObjects:self.appDelegate.user.name,user.email,@"Change Password", nil];
+        self.pointsLabel.text = [NSString stringWithFormat:@"%d %@",user.points,NSLocalizedString(@"points", @"")];
+        self.accountDetailsArray = [NSArray arrayWithObjects:self.appDelegate.user.name,user.email,NSLocalizedString(@"Change Password", @""), nil];
         [self.accountDetailsTableView reloadData];
     }];
 }
 
 - (IBAction)signOut:(id)sender {
-    UIActionSheet * actionSheet = [[UIActionSheet alloc]initWithTitle:@"Are you sure you want to log out?" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"Log Out" otherButtonTitles:@"Cancel", nil];
+    UIActionSheet * actionSheet = [[UIActionSheet alloc]initWithTitle:NSLocalizedString(@"Are you sure you want to log out?", @"") delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"Log Out" otherButtonTitles:@"Cancel", nil];
     [actionSheet showInView:self.view];
 }
 
@@ -101,7 +106,7 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([[segue identifier] isEqualToString:@"SignOutSegue"])
+    if ([[segue identifier] isEqualToString:kSignOutSegue])
     {
         AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
         [appDelegate removePassword];
@@ -109,11 +114,16 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
         SignOutWebRequest * signOutWebRequest = [[SignOutWebRequest alloc]init];
         [signOutWebRequest executeWithCompletionBlock:^{
             appDelegate.user = nil;
+            [[ImageCache instance] clear];
         }];
     }
     else if ([segue.identifier isEqualToString:kAddPredictionSegue]) {
         AddPredictionViewController *vc =(AddPredictionViewController*)segue.destinationViewController;
         vc.delegate = self;
+    }
+    else if ([segue.identifier isEqualToString:kChangeEmailUsernameSegue]) {        
+        UsernameEmailChangeViewController *vc =(UsernameEmailChangeViewController*)segue.destinationViewController;
+        vc.userProperyChangeType = [sender integerValue];
     }
 }
 
@@ -121,7 +131,7 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 
 - (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 0) {
-        [self performSegueWithIdentifier:@"SignOutSegue" sender:self];
+        [self performSegueWithIdentifier:kSignOutSegue sender:self];
     }
     else {
         [actionSheet dismissWithClickedButtonIndex:1 animated:YES];
@@ -131,8 +141,18 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 #pragma mark - TableView datasource
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 2) {
-        [self performSegueWithIdentifier:@"ChangePasswordSegue" sender:self];
+    switch (indexPath.row) {
+        case 0:
+            [self performSegueWithIdentifier:kChangeEmailUsernameSegue sender:@(UserPropertyTypeUsername)];
+            break;
+        case 1:
+            [self performSegueWithIdentifier:kChangeEmailUsernameSegue sender:@(UserPropertyTypeEmail)];
+            break;
+        case 2:
+            [self performSegueWithIdentifier:kChangePasswordSegue sender:self];
+            break;
+        default:
+            break;
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -148,7 +168,6 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 {
     return [self.accountDetailsArray count];
 }
-
 
 - (UITableViewCell*) tableView: (UITableView*) tableView cellForRowAtIndexPath: (NSIndexPath*) indexPath
 {

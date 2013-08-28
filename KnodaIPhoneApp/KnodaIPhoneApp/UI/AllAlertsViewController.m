@@ -36,19 +36,26 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 }
 
 - (void)refresh {
+    
+    __weak AllAlertsViewController *weakSelf = self;
+    
     AllAlertsWebRequest* request = [[AllAlertsWebRequest alloc] init];
     [request executeWithCompletionBlock: ^
      {
+         AllAlertsViewController *strongSelf = weakSelf;
+         if(!strongSelf) {
+             return;
+         }
          if (request.errorCode == 0)
          {
              NSLog(@"All alerts: %@", request.predictions);
              
-             self.alerts = request.predictions;
-             [self.tableView reloadData];
+             strongSelf.alerts = request.predictions;
+             [strongSelf.tableView reloadData];
              
-             if (self.alerts.count != 0)
+             if (strongSelf.alerts.count != 0)
              {
-                 NSArray* visibleCells = [self.tableView visibleCells];
+                 NSArray* visibleCells = [strongSelf.tableView visibleCells];
                  NSMutableArray* chellangeIDs = [NSMutableArray arrayWithCapacity: 0];
                  
                  for (PreditionCell* cell in visibleCells)

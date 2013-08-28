@@ -62,53 +62,8 @@ static const NSInteger kPageResultsLimit = 7;
     
     for (NSDictionary* challengeDictionary in challengeArray)
     {
-        Chellange* chellange = [[Chellange alloc] initWithDictionary:challengeDictionary];
-        
-        NSDictionary* pointsDictionary = [challengeDictionary objectForKey: @"points_details"];
-        
-        [chellange fillPoints:pointsDictionary];
-        
-        NSDictionary* predictionDictionary = [challengeDictionary objectForKey: @"prediction"];
-        Prediction* prediction = [[Prediction alloc] init];
-        
-        prediction.ID = [[predictionDictionary objectForKey: @"id"] integerValue];
-        prediction.body = [predictionDictionary objectForKey: @"body"];
-        prediction.category = [[[predictionDictionary objectForKey: @"tags"] objectAtIndex: 0] objectForKey: @"name"];
-        prediction.agreeCount = [[predictionDictionary objectForKey: @"agreed_count"] integerValue];
-        prediction.disagreeCount = [[predictionDictionary objectForKey: @"disagreed_count"] integerValue];
-        prediction.voitedUsersCount = [[predictionDictionary objectForKey: @"market_size"] integerValue];
-        prediction.agreedPercent = [[predictionDictionary objectForKey: @"prediction_market"] integerValue];
-        prediction.expired = [[predictionDictionary objectForKey: @"expired"] boolValue];
-        prediction.settled = [[predictionDictionary objectForKey: @"settled"] boolValue];
-        prediction.userId = [[predictionDictionary objectForKey: @"user_id"] integerValue];
-        prediction.userName = [predictionDictionary objectForKey: @"username"];
-        
-        if ([predictionDictionary objectForKey: @"user_avatar"] != nil && ![[predictionDictionary objectForKey: @"user_avatar"] isKindOfClass: [NSNull class]])
-        {
-            prediction.userAvatars = [predictionDictionary objectForKey: @"user_avatar"];
-        }
-        
-        if (![[predictionDictionary objectForKey: @"outcome"] isKindOfClass: [NSNull class]])
-        {
-            prediction.outcome = [[predictionDictionary objectForKey: @"outcome"] boolValue];
-        }
-        
-        if ([predictionDictionary objectForKey: @"created_at"] != nil && ![[predictionDictionary objectForKey: @"created_at"] isKindOfClass: [NSNull class]])
-        {
-            NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
-            [dateFormatter setDateFormat: @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'zzz"];
-            prediction.creationDate = [dateFormatter dateFromString: [[predictionDictionary objectForKey: @"created_at"] stringByAppendingString: @"GMT"]];
-        }
-        
-        if ([predictionDictionary objectForKey: @"expires_at"] != nil && ![[predictionDictionary objectForKey: @"expires_at"] isKindOfClass: [NSNull class]])
-        {
-            NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
-            [dateFormatter setDateFormat: @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'zzz"];
-            prediction.expirationDate = [dateFormatter dateFromString: [[predictionDictionary objectForKey: @"expires_at"] stringByAppendingString: @"GMT"]];
-        }
-        
-        prediction.chellange = chellange;
-        
+        Prediction* prediction = [[Prediction alloc] initWithDictionary:challengeDictionary[@"prediction"]];
+        [prediction setupChallenge:challengeDictionary withPoints:challengeDictionary[@"points_details"]];
         [predictionsMutable addObject: prediction];
     }
     

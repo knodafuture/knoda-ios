@@ -16,47 +16,51 @@ static NSString* const kResponseDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'zzz";
 
 - (id)initWithDictionary:(NSDictionary *)dictionary {
     if(self = [super init]) {
-        self.ID = [[dictionary objectForKey: @"id"] integerValue];
-        self.body = [dictionary objectForKey: @"body"];
-        self.category = [[[dictionary objectForKey: @"tags"] objectAtIndex: 0] objectForKey: @"name"];
-        self.agreeCount = [[dictionary objectForKey: @"agreed_count"] integerValue];
-        self.disagreeCount = [[dictionary objectForKey: @"disagreed_count"] integerValue];
+        self.ID               = [[dictionary objectForKey: @"id"] integerValue];
+        self.body             = [dictionary objectForKey: @"body"];
+        self.agreeCount       = [[dictionary objectForKey: @"agreed_count"] integerValue];
+        self.disagreeCount    = [[dictionary objectForKey: @"disagreed_count"] integerValue];
         self.voitedUsersCount = [[dictionary objectForKey: @"market_size"] integerValue];
-        self.agreedPercent = [[dictionary objectForKey: @"prediction_market"] integerValue];
-        self.expired = [[dictionary objectForKey: @"expired"] boolValue];
-        self.settled = [[dictionary objectForKey: @"settled"] boolValue];
-        self.userId = [[dictionary objectForKey: @"user_id"] integerValue];
-        self.userName = [dictionary objectForKey: @"username"];
+        self.agreedPercent    = [[dictionary objectForKey: @"prediction_market"] integerValue];
+        self.expired          = [[dictionary objectForKey: @"expired"] boolValue];
+        self.settled          = [[dictionary objectForKey: @"settled"] boolValue];
+        self.userId           = [[dictionary objectForKey: @"user_id"] integerValue];
+        self.userName         = [dictionary objectForKey: @"username"];
         
-        if ([dictionary objectForKey: @"user_avatar"] != nil && ![[dictionary objectForKey: @"user_avatar"] isKindOfClass: [NSNull class]])
-        {
-            self.userAvatars = [dictionary objectForKey: @"user_avatar"];
+        id obj = [dictionary objectForKey: @"tags"];
+        if([obj isKindOfClass:[NSArray class]] && [obj count]) {
+            self.category = [[obj objectAtIndex: 0] objectForKey: @"name"];
         }
         
-        if (![[dictionary objectForKey: @"outcome"] isKindOfClass: [NSNull class]])
-        {
-            self.outcome = [[dictionary objectForKey: @"outcome"] boolValue];
+        obj = [dictionary objectForKey: @"user_avatar"];
+        if ([obj isKindOfClass:[NSDictionary class]]) {
+            self.userAvatars = obj;
         }
         
-        if ([dictionary objectForKey: @"created_at"] != nil && ![[dictionary objectForKey: @"created_at"] isKindOfClass: [NSNull class]])
+        obj = [dictionary objectForKey: @"outcome"];
+        if (obj && ![obj isKindOfClass: [NSNull class]])
         {
-            self.creationDate = [NSDate dateFromString:[[dictionary objectForKey: @"created_at"] stringByAppendingString: @"GMT"] withFormat:kResponseDateFormat];
+            self.outcome = [obj boolValue];
         }
         
-        if ([dictionary objectForKey: @"expires_at"] != nil && ![[dictionary objectForKey: @"expires_at"] isKindOfClass: [NSNull class]])
+        obj = [dictionary objectForKey: @"created_at"];
+        if (obj && ![obj isKindOfClass: [NSNull class]])
         {
-            self.expirationDate = [NSDate dateFromString:[[dictionary objectForKey: @"expires_at"] stringByAppendingString: @"GMT"] withFormat:kResponseDateFormat];
+            self.creationDate = [NSDate dateFromString:[obj stringByAppendingString: @"GMT"] withFormat:kResponseDateFormat];
         }
         
-        if ([dictionary objectForKey: @"my_challenge"] != nil && ![[dictionary objectForKey: @"my_challenge"] isKindOfClass: [NSNull class]])
+        obj = [dictionary objectForKey: @"expires_at"];
+        if (obj && ![obj isKindOfClass: [NSNull class]])
         {
-            NSDictionary* chellangeDictionary = [dictionary objectForKey: @"my_challenge"];
-            self.chellange = [[Chellange alloc] initWithDictionary:chellangeDictionary];
-            [self.chellange fillPoints:[dictionary objectForKey:@"my_points"]];
+            self.expirationDate = [NSDate dateFromString:[obj stringByAppendingString: @"GMT"] withFormat:kResponseDateFormat];
         }
-
     }
     return self;
+}
+
+- (void)setupChallenge:(NSDictionary *)challengeDict withPoints:(NSDictionary *)pointsDict {
+    self.chellange = [[Chellange alloc] initWithDictionary:challengeDict];
+    [self.chellange fillPoints:pointsDict];
 }
 
 - (NSString *)thumbAvatar {

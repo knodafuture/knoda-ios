@@ -67,6 +67,9 @@
     DLog(@"%@", parsedResult);
     
     _prediction = [[Prediction alloc] initWithDictionary:parsedResult];
+    if ([parsedResult[@"my_challenge"] isKindOfClass:[NSDictionary class]]) {
+        [_prediction setupChallenge:parsedResult[@"my_challenge"] withPoints:parsedResult[@"my_points"]];
+    }
 }
 
 @end

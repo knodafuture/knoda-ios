@@ -41,7 +41,7 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
 {
     [super viewDidLoad];
     
-    if (self.appDelegate.user.justSignedUp) {
+    if (self.appDelegate.user.justSignedUp||!self.appDelegate.user) {
         [self showFirstStartOverlay];
     }
     

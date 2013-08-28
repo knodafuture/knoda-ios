@@ -245,7 +245,6 @@ static NSString* const MENU_SEGUES[MenuItemsSize] = {
     
     if(self.appDelegate.user.justSignedUp) {
         [BadgesWebRequest checkNewBadges];
-        self.appDelegate.user.justSignedUp = NO;
     }
 }
 

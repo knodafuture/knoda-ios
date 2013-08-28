@@ -31,6 +31,7 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
 @property (nonatomic, strong) AppDelegate * appDelegate;
 
 @property (weak, nonatomic) IBOutlet UIView *noContentView;
+@property (strong, nonatomic) IBOutlet UIView *firstStartView;
 
 @end
 
@@ -40,6 +41,10 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
 {
     [super viewDidLoad];
     
+    if (self.appDelegate.user.justSignedUp) {
+        [self showFirstStartOverlay];
+    }
+    
 	self.navigationController.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, self.navigationController.navigationBar.frame.size.height);
     
     [self refresh:nil];
@@ -48,6 +53,18 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
     [refreshControl addTarget: self action: @selector(refresh:) forControlEvents: UIControlEventValueChanged];
     
     self.refreshControl = refreshControl;
+}
+
+- (void) viewDidAppear: (BOOL) animated
+{
+    [super viewDidAppear: animated];    
+    self.cellUpdateTimer = [NSTimer scheduledTimerWithTimeInterval: 60.0 target: self selector: @selector(updateVisibleCells) userInfo: nil repeats: YES];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [self.cellUpdateTimer invalidate];
+    self.cellUpdateTimer = nil;
 }
 
 - (void) setUpNoContentViewHidden: (BOOL) hidden {
@@ -64,17 +81,21 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
     }
 }
 
-- (void) viewDidAppear: (BOOL) animated
-{
-    [super viewDidAppear: animated];
+- (void) showFirstStartOverlay {
+    self.view.userInteractionEnabled = NO;
     
-    self.cellUpdateTimer = [NSTimer scheduledTimerWithTimeInterval: 60.0 target: self selector: @selector(updateVisibleCells) userInfo: nil repeats: YES];
+    CGRect frame = [[[UIApplication sharedApplication] delegate] window].frame;
+    frame.origin.y += 10;
+    frame.size.height -= 10;
+   
+    self.firstStartView.frame = frame;
+    [[[[UIApplication sharedApplication] delegate] window] addSubview:self.firstStartView];
 }
 
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    [self.cellUpdateTimer invalidate];
-    self.cellUpdateTimer = nil;
+- (IBAction)closeFirstStartView:(id)sender {
+    [self.firstStartView removeFromSuperview];
+    self.view.userInteractionEnabled = YES;
+    self.appDelegate.user.justSignedUp = NO;
 }
 
 - (void) updateVisibleCells

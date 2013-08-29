@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "BindableView.h"
 
-@interface ProfileViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate>
+@interface ProfileViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet BindableView *profileAvatarView;
 @property (weak, nonatomic) IBOutlet UITableView *accountDetailsTableView;

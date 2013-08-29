@@ -16,6 +16,7 @@
 #import "ProfileWebRequest.h"
 #import "UsernameEmailChangeViewController.h"
 #import "AddPredictionViewController.h"
+#import "UIImage+Utils.h"
 
 static NSString * const accountDetailsTableViewCellIdentifier = @"accountDetailsTableViewCellIdentifier";
 
@@ -23,12 +24,16 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 static NSString* const kChangeEmailUsernameSegue = @"UsernameEmailSegue";
 static NSString* const kChangePasswordSegue = @"ChangePasswordSegue";
 
+static const int kDefaultAvatarsCount = 5;
+
 @interface ProfileViewController () <AddPredictionViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *activityView;
 @property (nonatomic, strong) AppDelegate * appDelegate;
 @property (nonatomic, strong) NSArray * accountDetailsArray;
 @property (weak, nonatomic) IBOutlet UIButton *leftNavigationBarItem;
+@property (nonatomic, strong) UIActionSheet *avatarChangeAcitonSheet;
+@property (nonatomic) UIImage *avatarImage;
 
 @end
 
@@ -99,6 +104,84 @@ static NSString* const kChangePasswordSegue = @"ChangePasswordSegue";
     return [UIApplication sharedApplication].delegate;
 }
 
+#pragma mark - Change Avatar
+
+- (IBAction)avatarImageVIewTapped:(id)sender {
+    if (!self.avatarChangeAcitonSheet) {
+        self.avatarChangeAcitonSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                                   delegate:self
+                                                          cancelButtonTitle:NSLocalizedString(@"Cancel", @"")
+                                                     destructiveButtonTitle:nil
+                                                          otherButtonTitles:NSLocalizedString(@"Take Photo", @""), NSLocalizedString(@"Choose Existing Photo", @""), NSLocalizedString(@"Set Default", @""), nil];
+    }
+    [self.avatarChangeAcitonSheet showInView:self.view];
+}
+
+- (void)showImagePickerWithSource:(UIImagePickerControllerSourceType)sourceType {
+    
+    if(![UIImagePickerController isSourceTypeAvailable:sourceType]) {
+        DLog(@"UIImagePickerController sourceType (%d) unavailable", sourceType);
+        return;
+    }
+    
+    UIImagePickerController *pickerVC = [UIImagePickerController new];
+    
+    pickerVC.sourceType    = sourceType;
+    pickerVC.allowsEditing = NO;
+    pickerVC.delegate      = self;
+    
+    [self presentViewController:pickerVC animated:YES completion:nil];
+}
+
+- (void)setDefaultAvatar {
+    NSString *imgName = [NSString stringWithFormat:@"avatar_%d.png", (arc4random() % kDefaultAvatarsCount + 1)];
+    self.avatarImage = [UIImage imageNamed:imgName];
+}
+
+- (void)sendAvatar {
+    ProfileWebRequest *profileRequest = [[ProfileWebRequest alloc] initWithAvatar:self.avatarImage];
+
+    self.activityView.hidden = NO;
+    
+    [profileRequest executeWithCompletionBlock:^{
+        if(profileRequest.isSucceeded) {
+            ProfileWebRequest *updateRequest = [ProfileWebRequest new];
+            [updateRequest executeWithCompletionBlock:^{
+                if(updateRequest.isSucceeded) {
+                    [[(AppDelegate *)[[UIApplication sharedApplication] delegate] user] updateWithObject:updateRequest.user];
+                    self.profileAvatarView.imageView.image = self.avatarImage;
+                    self.activityView.hidden = YES;
+                }
+            }];
+        }
+        else {
+            self.activityView.hidden = YES;
+            [[[UIAlertView alloc] initWithTitle:nil
+                                        message:profileRequest.userFriendlyErrorDescription
+                                       delegate:nil
+                              cancelButtonTitle:NSLocalizedString(@"OK", @"")
+                              otherButtonTitles:nil] show];
+        }
+    }];
+}
+
+#pragma mark UIImagePickerControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    [self dismissViewControllerAnimated:YES completion:^{
+        UIImage *img = info[UIImagePickerControllerOriginalImage];
+        if(img) {
+            self.avatarImage = [img scaledToSize:self.profileAvatarView.imageView.frame.size];
+            [self sendAvatar];
+        }
+    }];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
 #pragma mark - Segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -116,11 +199,26 @@ static NSString* const kChangePasswordSegue = @"ChangePasswordSegue";
 #pragma mark - UIActionSheet delegate
 
 - (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 0) {
-        [self.appDelegate logout];
+    if (actionSheet != self.avatarChangeAcitonSheet) {
+        if (buttonIndex == 0) {
+            [self.appDelegate logout];
+        }
+        else {
+            [actionSheet dismissWithClickedButtonIndex:1 animated:YES];
+        }
     }
     else {
-        [actionSheet dismissWithClickedButtonIndex:1 animated:YES];
+        switch (buttonIndex) {
+            case 0: //take photo
+            case 1: //choose existing photo
+                [self showImagePickerWithSource:(buttonIndex ? UIImagePickerControllerSourceTypePhotoLibrary : UIImagePickerControllerSourceTypeCamera)];
+                break;
+            case 2: //skip
+                [self setDefaultAvatar];
+                [self sendAvatar];
+            default: //continue
+                break;
+        }
     }
 }
 

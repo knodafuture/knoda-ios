@@ -3817,9 +3817,13 @@
                                 <rect key="frame" x="20" y="13" width="157" height="157"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" id="B3w-ew-Q0F">
+                                    <imageView contentMode="scaleAspectFill" id="B3w-ew-Q0F">
                                         <rect key="frame" x="0.0" y="0.0" width="157" height="157"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="q16-pP-gr1" appends="YES" id="a22-rc-l82"/>
+                                        </connections>
                                     </imageView>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="gray" id="qS7-fX-ebg">
                                         <rect key="frame" x="68" y="68" width="20" height="20"/>
@@ -3919,6 +3923,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lgo-yb-njz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="q16-pP-gr1">
+                    <connections>
+                        <action selector="avatarImageVIewTapped:" destination="WNw-sS-s8V" id="wCm-gm-tTS"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1269" y="4660"/>
         </scene>
@@ -4763,6 +4772,8 @@
         <class className="ProfileViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfileViewController.h"/>
             <relationships>
+                <relationship kind="action" name="menuButtonPress:"/>
+                <relationship kind="action" name="signOut:"/>
                 <relationship kind="outlet" name="accountDetailsTableView" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="leftNavigationBarItem" candidateClass="UIButton"/>

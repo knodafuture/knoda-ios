@@ -11,7 +11,6 @@
 
 @interface BindableView()
 
-@property (nonatomic, weak) IBOutlet UIImageView *imageView;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @property (nonatomic, strong) UITapGestureRecognizer * gestureRecognizer;

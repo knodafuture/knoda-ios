@@ -38,7 +38,6 @@ static NSString* const MENU_SEGUES[MenuItemsSize] = {
 @property (nonatomic, strong) IBOutlet UIView* movingView;
 @property (weak, nonatomic)   IBOutlet UITableView *menuItemsTableView;
 
-@property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
 @property (weak, nonatomic) IBOutlet UIView *gestureView;
 
 @property (nonatomic, assign) BOOL appeared;
@@ -57,8 +56,8 @@ static NSString* const MENU_SEGUES[MenuItemsSize] = {
 - (void) viewDidLoad {
     [super viewDidLoad];
     
-    self.tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(toggleNavigationPanel)];
-    [self.gestureView addGestureRecognizer:self.tapGestureRecognizer];
+    UITapGestureRecognizer * recognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(toggleNavigationPanel)];
+    [self.gestureView addGestureRecognizer:recognizer];
     
     if(self.appDelegate.user.hasAvatar) {
         [self openMenuItem:MenuHome];
@@ -74,7 +73,6 @@ static NSString* const MENU_SEGUES[MenuItemsSize] = {
     self.detailsView = nil;
     self.movingView = nil;
     self.userUpdateTimer = nil;
-    self.tapGestureRecognizer = nil;
     self.gestureView = nil;
     
     [super viewDidUnload];
@@ -135,6 +133,7 @@ static NSString* const MENU_SEGUES[MenuItemsSize] = {
 - (void) moveToDetails
 {
     self.masterShown = NO;
+    self.gestureView.hidden = YES;
     
     CGRect newFrame = self.movingView.frame;
     newFrame.origin.x -= self.masterView.frame.size.width;
@@ -145,6 +144,7 @@ static NSString* const MENU_SEGUES[MenuItemsSize] = {
 - (void) moveToMaster
 {
     self.masterShown = YES;
+    self.gestureView.hidden = NO;
     
     [self updateUserInfo];
     
@@ -161,7 +161,6 @@ static NSString* const MENU_SEGUES[MenuItemsSize] = {
 {
     if (self.masterShown)
     {   
-        self.gestureView.hidden = YES;
         [self moveToDetailsAnimated: YES];
     }
     else

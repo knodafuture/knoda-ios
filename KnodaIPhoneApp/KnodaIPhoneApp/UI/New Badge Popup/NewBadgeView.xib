@@ -80,17 +80,18 @@
 						<array class="NSMutableArray" key="NSSubviews">
 							<object class="IBUIImageView" id="58973348">
 								<reference key="NSNextResponder" ref="211476930"/>
-								<int key="NSvFlags">274</int>
-								<string key="NSFrame">{{7, 26}, {180, 124}}</string>
+								<int key="NSvFlags">301</int>
+								<string key="NSFrame">{{10, 20}, {174, 174}}</string>
 								<reference key="NSSuperview" ref="211476930"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="535784122"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<int key="IBUIContentMode">1</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
 						</array>
-						<string key="NSFrame">{{63, 113}, {194, 194}}</string>
+						<string key="NSFrame">{{63, 113}, {194, 214}}</string>
 						<reference key="NSSuperview" ref="373689283"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="58973348"/>
@@ -216,6 +217,14 @@
 					<int key="connectionID">11</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">badgeBackgroundView</string>
+						<reference key="source" ref="373689283"/>
+						<reference key="destination" ref="211476930"/>
+					</object>
+					<int key="connectionID">14</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">viewBadges:</string>
 						<reference key="source" ref="535784122"/>
@@ -326,7 +335,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">13</int>
+			<int key="maxID">14</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -347,17 +356,20 @@
 							<string key="candidateClassName">UIButton</string>
 						</object>
 					</dictionary>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">badgeImageView</string>
-						<string key="NS.object.0">UIImageView</string>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">badgeImageView</string>
-						<object class="IBToOneOutletInfo" key="NS.object.0">
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="badgeBackgroundView">UIView</string>
+						<string key="badgeImageView">UIImageView</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="badgeBackgroundView">
+							<string key="name">badgeBackgroundView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="badgeImageView">
 							<string key="name">badgeImageView</string>
 							<string key="candidateClassName">UIImageView</string>
 						</object>
-					</object>
+					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/NewBadgeView.h</string>

@@ -153,7 +153,7 @@ static NSString* const kApplicationSegue = @"ApplicationNavigationSegue";
                      }
                      else
                      {
-                         [self showError:profileRequest.userFriendlyErrorDescription];
+                         [self showError:profileRequest.localizedErrorDescription];
                      }
                  }];
              }
@@ -165,7 +165,7 @@ static NSString* const kApplicationSegue = @"ApplicationNavigationSegue";
                  }
                  else
                  {
-                     [self showError: NSLocalizedString(@"Unknown error. Please try later.", @"")];
+                     [self showError: loginRequest.localizedErrorDescription];
                  }
              }
          }];

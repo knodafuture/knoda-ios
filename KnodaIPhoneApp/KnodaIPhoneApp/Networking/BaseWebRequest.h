@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "JSON.h"
+#import "ServerError.h"
 
 extern NSString* const kBaseURL;
 
@@ -26,7 +27,7 @@ typedef enum _InternalErrorCodes
 
 typedef enum _ServerErrorCodes
 {
-    kSomeServerError
+    kServerError = -100
 } ServerErrorCodes;
 
 
@@ -54,7 +55,9 @@ typedef void (^RequestCompletionBlock)(void);
 @property (atomic, readonly) BOOL isCancelled;
 @property (atomic, readonly) BOOL isMultipartData;
 
-@property (nonatomic, readonly) NSString *userFriendlyErrorDescription;
+@property (nonatomic, readonly) ServerError *serverError;
+
+@property (nonatomic, readonly) NSString *localizedErrorDescription;
 
 - (id) initWithParameters: (NSDictionary*) parameters;
 

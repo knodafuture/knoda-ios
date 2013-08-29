@@ -11,6 +11,7 @@
 #import "NavigationSegue.h"
 #import "AddPredictionViewController.h"
 #import "AppDelegate.h"
+#import "AllAlertsWebRequest.h"
 
 static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 
@@ -18,6 +19,7 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 
 @property (nonatomic, strong) IBOutlet UIView* detailsView;
 @property (nonatomic, strong) IBOutlet UIImageView* segmentedControlImage;
+@property (weak, nonatomic) IBOutlet UIView *loadingView;
 @property (nonatomic, strong) AppDelegate * appDelegate;
 @property (nonatomic, weak) UIViewController *detailsViewController;
 @property (weak, nonatomic) IBOutlet UIView *noContentView;
@@ -32,7 +34,26 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 {
     [super viewDidLoad];
     self.navigationController.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, self.navigationController.navigationBar.frame.size.height);
-    self.appDelegate.user.alerts > 0 ? [self performSegueWithIdentifier: @"AllAlertsSegue" sender: self] : [self setUpNoContentViewHidden:NO];
+    self.loadingView.hidden = NO;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    self.loadingView.hidden = NO;
+    AllAlertsWebRequest* request = [[AllAlertsWebRequest alloc] init];
+    __weak AlertsViewController *weakSelf = self;
+    
+    [request executeWithCompletionBlock: ^
+     {
+         if (request.errorCode == 0)
+         {
+             AlertsViewController *strongSelf = weakSelf;
+             if(strongSelf) {
+                 self.loadingView.hidden = YES;
+                 request.predictions.count > 0 ? [strongSelf performSegueWithIdentifier: @"AllAlertsSegue" sender: strongSelf] : [strongSelf setUpNoContentViewHidden:NO];
+             }
+         }
+     }];
+
 }
 
 - (void) setUpNoContentViewHidden: (BOOL) hidden {
@@ -63,7 +84,9 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 
 - (IBAction) menuButtonPressed: (id) sender
 {
-    [(UIViewController<RefreshableViewController>*)[self.childViewControllers objectAtIndex: 0] refresh];
+    if (self.childViewControllers.count > 0) {
+        [(UIViewController<RefreshableViewController>*)[self.childViewControllers objectAtIndex: 0] refresh];
+    }
     [((NavigationViewController*)self.navigationController.parentViewController) toggleNavigationPanel];
 }
 

@@ -18,6 +18,7 @@
 #import "AppDelegate.h"
 #import "PredictionDetailsViewController.h"
 #import "User.h"
+#import "BadgesWebRequest.h"
 
 static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
@@ -96,6 +97,8 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
     [self.firstStartView removeFromSuperview];
     self.view.userInteractionEnabled = YES;
     self.appDelegate.user.justSignedUp = NO;
+    
+    [BadgesWebRequest checkNewBadges];
 }
 
 - (void) updateVisibleCells
@@ -290,7 +293,7 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
         }
         else
         {
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle: @"" message: request.userFriendlyErrorDescription delegate: nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles: nil];
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle: @"" message: request.localizedErrorDescription delegate: nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles: nil];
             [alert show];
             
             [cell resetAgreedDisagreed];
@@ -321,7 +324,7 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
          }
          else
          {
-             UIAlertView* alert = [[UIAlertView alloc] initWithTitle: @"" message: request.userFriendlyErrorDescription delegate: nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles: nil];
+             UIAlertView* alert = [[UIAlertView alloc] initWithTitle: @"" message: request.localizedErrorDescription delegate: nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles: nil];
              [alert show];
              
              [cell resetAgreedDisagreed];

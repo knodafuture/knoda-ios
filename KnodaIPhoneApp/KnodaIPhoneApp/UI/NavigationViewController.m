@@ -12,9 +12,6 @@
 #import "NavigationSegue.h"
 #import "ProfileWebRequest.h"
 #import "SelectPictureViewController.h"
-
-#import "BadgesWebRequest.h"
-
 #import "AlertNavigationCell.h"
 #import "AllAlertsWebRequest.h"
 
@@ -321,10 +318,6 @@ static NSString* const MENU_SEGUES[MenuItemsSize] = {
 - (void)hideViewController:(SelectPictureViewController *)vc {
     [vc.navigationController popViewControllerAnimated:NO];
     [self performSegueWithIdentifier: kHomeSegue sender: self];
-    
-    if(self.appDelegate.user.justSignedUp) {
-        [BadgesWebRequest checkNewBadges];
-    }
 }
 
 @end

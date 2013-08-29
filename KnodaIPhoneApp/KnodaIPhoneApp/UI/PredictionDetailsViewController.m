@@ -284,7 +284,7 @@ static const int kBSAlertTag = 1001;
 
 - (void)showErrorFromRequest:(BaseWebRequest *)request {
     [[[UIAlertView alloc] initWithTitle:@""
-                                message:request.userFriendlyErrorDescription
+                                message:request.localizedErrorDescription
                                delegate:nil
                       cancelButtonTitle:NSLocalizedString(@"OK", @"")
                       otherButtonTitles:nil] show];

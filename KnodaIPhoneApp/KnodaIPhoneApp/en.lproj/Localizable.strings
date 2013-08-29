@@ -1,0 +1,23 @@
+/* 
+  Localizable.strings
+  KnodaIPhoneApp
+
+  Created by Viktor Levschanov on 29.08.13.
+  Copyright (c) 2013 Knoda. All rights reserved.
+*/
+
+"email has already been taken" = "The email has already been taken.";
+"email is invalid" = "The email is invalid.";
+"email is blank" = "The email is blank.";
+
+"password is too short (minimum is 6 characters)" = "The password is too short (minimum is 6 characters).";
+"password is too long (maximum is 20 characters)" = "The password is too long (maximum is 20 characters).";
+"password is blank" = "The password is blank";
+
+"username has already been taken" = "The username has already been taken.";
+"username is invalid" = "The username is invalid.";
+
+"token is blank" = "";
+
+"body is blank" = "";
+"body has already been taken" = "Such prediction already exists";

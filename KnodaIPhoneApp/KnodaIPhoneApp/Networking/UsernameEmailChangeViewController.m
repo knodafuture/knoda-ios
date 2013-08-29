@@ -67,7 +67,7 @@
         else {
             self.loadingView.hidden = YES;
             [[[UIAlertView alloc] initWithTitle:nil
-                                        message:webRequest.userFriendlyErrorDescription
+                                        message:webRequest.localizedErrorDescription
                                        delegate:nil
                               cancelButtonTitle:NSLocalizedString(@"OK", @"")
                               otherButtonTitles:nil] show];

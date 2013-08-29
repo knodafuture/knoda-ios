@@ -9,6 +9,8 @@
 #import "ChangePasswordViewController.h"
 #import "ChangePasswordRequest.h"
 #import "PasswordCell.h"
+#import "LoginWebRequest.h"
+#import "AppDelegate.h"
 
 static NSString * const kOldPasswordCellIdentifier = @"OldPasswordCell";
 static NSString * const kNewPasswordCellIdentifier = @"NewPasswordCell";
@@ -25,6 +27,8 @@ static NSInteger const kKeyboardHeight = 216;
 @property (nonatomic, strong) NSString *currentPassword;
 @property (nonatomic, strong) NSString *retypeNewPassword;
 
+@property (nonatomic, readonly) AppDelegate* appDelegate;
+
 @end
 
 @implementation ChangePasswordViewController
@@ -36,6 +40,11 @@ static NSInteger const kKeyboardHeight = 216;
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.scrollView.frame.size.height + 130);
     self.scrollView.scrollEnabled = NO;
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"darkBgPattern"]];
+}
+
+- (AppDelegate*) appDelegate
+{
+    return [UIApplication sharedApplication].delegate;
 }
 
 - (IBAction)backButtonPress:(id)sender {
@@ -62,12 +71,24 @@ static NSInteger const kKeyboardHeight = 216;
         if (changePasswordRequest.errorCode == 0) {
             alertView.title = NSLocalizedString(@"Succes", @"");
             alertView.message = NSLocalizedString(@"Password has been changed succesfully", @"");
+            
+            LoginWebRequest *loginRequest = [[LoginWebRequest alloc] initWithUsername:self.appDelegate.user.name password:self.usersNewPassword];
+            [loginRequest executeWithCompletionBlock:^{
+                if(loginRequest.isSucceeded) {
+                    [self.appDelegate.user updateWithObject:loginRequest.user];
+                }
+                else {
+                    alertView.title = NSLocalizedString(@"Error", @"");
+                    alertView.message = loginRequest.userFriendlyErrorDescription;
+                }
+                [alertView show];
+            }];
         }
         else {
             alertView.title = NSLocalizedString(@"Error", @"");
             alertView.message = NSLocalizedString(@"Old password is incorrect", @"");
+            [alertView show];
         }
-        [alertView show];
     }];
 }
 

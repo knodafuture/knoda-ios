@@ -102,7 +102,7 @@ static NSString* const MENU_SEGUES[MenuItemsSize] = {
 - (void)openMenuItem:(MenuItem)menuItem {
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:menuItem inSection:0];
     [self.menuItemsTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-    if(!self.masterShown) {
+    if(!self.masterShown && self.appeared) {
         [self moveToMaster];
     }
     [self performSegueWithIdentifier:MENU_SEGUES[menuItem] sender:self];

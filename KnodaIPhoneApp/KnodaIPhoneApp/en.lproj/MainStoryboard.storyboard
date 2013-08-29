@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ZKQ-aW-8t7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12A269" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ZKQ-aW-8t7">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -9,15 +9,15 @@
             <objects>
                 <viewController id="2" customClass="WelcomeViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3">
-                        <rect key="frame" x="0.0" y="20" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="drb-l3-jKr">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="528"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="5et-OW-apG">
-                                        <rect key="frame" x="0.0" y="0.0" width="1920" height="548"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="1920" height="528"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" id="rjs-IK-RXs">
@@ -54,7 +54,7 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                             </view>
                                             <view contentMode="scaleToFill" id="jT5-hZ-ELD">
-                                                <rect key="frame" x="320" y="0.0" width="320" height="548"/>
+                                                <rect key="frame" x="320" y="0.0" width="320" height="528"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="center" image="welcomeMakePredictions.png" id="Inx-j1-LNu">
@@ -62,7 +62,7 @@
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     </imageView>
                                                     <view contentMode="scaleToFill" id="Itt-ld-nbE">
-                                                        <rect key="frame" x="0.0" y="391" width="320" height="89"/>
+                                                        <rect key="frame" x="0.0" y="371" width="320" height="89"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <color key="backgroundColor" red="0.066146918224447585" green="0.36171025815217395" blue="0.044152824500716246" alpha="1" colorSpace="calibratedRGB"/>
                                                     </view>
@@ -70,7 +70,7 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                             </view>
                                             <view contentMode="scaleToFill" id="gcb-6j-hxm">
-                                                <rect key="frame" x="640" y="0.0" width="320" height="548"/>
+                                                <rect key="frame" x="640" y="0.0" width="320" height="528"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="center" image="welcomeOtherPredictions.png" id="wr4-If-VG5">
@@ -78,7 +78,7 @@
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     </imageView>
                                                     <view contentMode="scaleToFill" id="jE3-MS-hfU">
-                                                        <rect key="frame" x="0.0" y="391" width="320" height="89"/>
+                                                        <rect key="frame" x="0.0" y="371" width="320" height="89"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <color key="backgroundColor" red="0.066146918220000003" green="0.36171025820000002" blue="0.0441528245" alpha="1" colorSpace="calibratedRGB"/>
                                                     </view>
@@ -86,7 +86,7 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                             </view>
                                             <view contentMode="scaleToFill" id="MGl-Yn-lhK">
-                                                <rect key="frame" x="960" y="0.0" width="320" height="548"/>
+                                                <rect key="frame" x="960" y="0.0" width="320" height="528"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="center" image="welcomeTrackPredictions.png" id="0BM-3E-Ymd">
@@ -94,7 +94,7 @@
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     </imageView>
                                                     <view contentMode="scaleToFill" id="bsh-t7-xpc">
-                                                        <rect key="frame" x="0.0" y="391" width="320" height="89"/>
+                                                        <rect key="frame" x="0.0" y="371" width="320" height="89"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <color key="backgroundColor" red="0.066146918220000003" green="0.36171025820000002" blue="0.0441528245" alpha="1" colorSpace="calibratedRGB"/>
                                                     </view>
@@ -102,7 +102,7 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                             </view>
                                             <view contentMode="scaleToFill" id="UkS-Xj-FaS">
-                                                <rect key="frame" x="1280" y="0.0" width="320" height="548"/>
+                                                <rect key="frame" x="1280" y="0.0" width="320" height="528"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="center" image="welcomeAgreeDisagree.png" id="OpF-X0-xxy">
@@ -110,7 +110,7 @@
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     </imageView>
                                                     <view contentMode="scaleToFill" id="f9Q-Xg-l1J">
-                                                        <rect key="frame" x="0.0" y="391" width="320" height="89"/>
+                                                        <rect key="frame" x="0.0" y="371" width="320" height="89"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <color key="backgroundColor" red="0.066146918220000003" green="0.36171025820000002" blue="0.0441528245" alpha="1" colorSpace="calibratedRGB"/>
                                                     </view>
@@ -118,7 +118,7 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                             </view>
                                             <view contentMode="scaleToFill" id="HnR-1u-IGC">
-                                                <rect key="frame" x="1600" y="0.0" width="320" height="548"/>
+                                                <rect key="frame" x="1600" y="0.0" width="320" height="528"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="center" image="welcomePointsBadges.png" id="Qrn-qu-t8I">
@@ -126,7 +126,7 @@
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     </imageView>
                                                     <view contentMode="scaleToFill" id="suZ-HG-2np">
-                                                        <rect key="frame" x="0.0" y="391" width="320" height="89"/>
+                                                        <rect key="frame" x="0.0" y="371" width="320" height="89"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <color key="backgroundColor" red="0.066146918220000003" green="0.36171025820000002" blue="0.0441528245" alpha="1" colorSpace="calibratedRGB"/>
                                                     </view>
@@ -139,7 +139,7 @@
                                 </subviews>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0OR-8K-PCf">
-                                <rect key="frame" x="23" y="417" width="126" height="43"/>
+                                <rect key="frame" x="23" y="397" width="126" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" backgroundImage="btn_login_light.png">
@@ -154,7 +154,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ass-K9-4Vd">
-                                <rect key="frame" x="171" y="416" width="126" height="43"/>
+                                <rect key="frame" x="171" y="396" width="126" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" backgroundImage="btn_signup_gray.png">
@@ -169,16 +169,16 @@
                                 </connections>
                             </button>
                             <view hidden="YES" contentMode="scaleToFill" id="6UH-u1-tCM">
-                                <rect key="frame" x="0.0" y="316" width="320" height="164"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="0.0" y="316" width="320" height="144"/>
+                                <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="white" id="2yc-EA-b1e">
-                                        <rect key="frame" x="150" y="3" width="20" height="20"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <rect key="frame" x="150" y="2" width="20" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     </activityIndicatorView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Loading..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Loa-68-Mmq">
-                                        <rect key="frame" x="126" y="31" width="77" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <rect key="frame" x="126" y="26" width="77" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -208,11 +208,11 @@
             <objects>
                 <viewController id="7Xf-DC-nY7" customClass="LoginViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Sq0-i4-tqT">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="440"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="greenBg.png" id="gBZ-db-8tx">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="440"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" id="1EP-Ws-6LR">
@@ -321,7 +321,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                             <view hidden="YES" alpha="0.40000000000000013" contentMode="scaleToFill" id="9Rv-DF-3Sh">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="440"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="whiteLarge" id="Leg-4R-7nB">
@@ -354,11 +354,11 @@
             <objects>
                 <viewController id="S60-cA-HyP" customClass="ForgotPasswordViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qFb-go-mnY">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="440"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="greenBg.png" id="OFN-x8-GJ3">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="440"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" id="GhA-Ph-utM">
@@ -460,7 +460,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                             <view hidden="YES" alpha="0.40000000596046448" contentMode="scaleToFill" id="iaJ-b1-GsU">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="440"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="whiteLarge" id="ceC-PB-ctT">
@@ -924,11 +924,11 @@
             <objects>
                 <viewController id="HpP-X1-pbb" customClass="SignUpViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XfX-jY-xSk">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="440"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="greenBg.png" id="Hws-5f-OYz">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="440"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" id="xiF-KX-37Q">
@@ -1070,7 +1070,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                             <view hidden="YES" alpha="0.40000000596046448" contentMode="scaleToFill" id="PRk-kD-QgQ">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="440"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="whiteLarge" id="zeo-LT-4cH">
@@ -1104,16 +1104,16 @@
             <objects>
                 <viewController title="KNODA" id="sd8-UN-EgX" customClass="TermsOfServiceViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zB2-xd-zLn">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="440"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" id="ioX-jH-d29">
-                                <rect key="frame" x="0.0" y="44" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="396"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </webView>
                             <view hidden="YES" alpha="0.40000000596046448" contentMode="scaleToFill" id="EgD-vS-Ruq">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="440"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="whiteLarge" id="F7n-dK-5di">
@@ -4810,12 +4810,12 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="CM5-5K-qH1"/>
-        <segue reference="Ef7-FX-Fpl"/>
+        <segue reference="wUp-Tb-D78"/>
         <segue reference="H0s-oM-ZNm"/>
-        <segue reference="jDp-TX-Mpj"/>
+        <segue reference="r3e-od-7h8"/>
         <segue reference="bH8-Zv-3wa"/>
         <segue reference="vCM-j3-I2J"/>
+        <segue reference="CM5-5K-qH1"/>
         <segue reference="pyY-qR-NzL"/>
         <segue reference="EE6-qF-5xk"/>
     </inferredMetricsTieBreakers>

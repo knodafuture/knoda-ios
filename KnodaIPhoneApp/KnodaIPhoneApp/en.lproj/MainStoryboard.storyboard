@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12A269" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ZKQ-aW-8t7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ZKQ-aW-8t7">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -932,7 +932,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" id="xiF-KX-37Q">
-                                <rect key="frame" x="14" y="6" width="292" height="388"/>
+                                <rect key="frame" x="14" y="0.0" width="292" height="388"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="knoda_logo_sm.png" id="2gj-pP-H1k">
@@ -979,7 +979,7 @@
                                         </connections>
                                     </textField>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="By signing up, I agree the" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4QC-MG-4gl">
-                                        <rect key="frame" x="14" y="274" width="162" height="21"/>
+                                        <rect key="frame" x="10" y="274.5" width="162" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -994,7 +994,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="H8d-8e-D9P">
-                                        <rect key="frame" x="22" y="346" width="250" height="38"/>
+                                        <rect key="frame" x="22" y="347" width="250" height="38"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal">
@@ -1018,7 +1018,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ILc-01-A9v">
-                                        <rect key="frame" x="175" y="266" width="116" height="38"/>
+                                        <rect key="frame" x="171" y="266" width="116" height="38"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                         <state key="normal" title="Terms of Service">
@@ -1968,14 +1968,14 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" red="0.0" green="0.32941176470588235" blue="0.16470588235294117" alpha="1" colorSpace="calibratedRGB"/>
                                         <string key="text">When do you want to be reminded to determine the
-outcome of your prediction</string>
+                                            outcome of your prediction</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                         <color key="shadowColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <size key="shadowOffset" width="1" height="1"/>
                                         <string key="userLabel">Label - When do you want to be reminded to determine the
- outcome of your prediction</string>
+                                            outcome of your prediction</string>
                                     </label>
                                     <pickerView contentMode="scaleToFill" id="UUh-NH-Uzt">
                                         <rect key="frame" x="0.0" y="118" width="320" height="216"/>
@@ -4810,20 +4810,13 @@ outcome of your prediction</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="r3e-od-7h8"/>
-        <segue reference="wUp-Tb-D78"/>
-        <segue reference="H0s-oM-ZNm"/>
         <segue reference="CM5-5K-qH1"/>
-        <segue reference="pyY-qR-NzL"/>
-        <segue reference="vCM-j3-I2J"/>
-        <segue reference="pyY-qR-NzL"/>
         <segue reference="Ef7-FX-Fpl"/>
         <segue reference="H0s-oM-ZNm"/>
-        <segue reference="tga-wH-5aw"/>
         <segue reference="jDp-TX-Mpj"/>
         <segue reference="bH8-Zv-3wa"/>
-        <segue reference="IMX-a1-Bbr"/>
+        <segue reference="vCM-j3-I2J"/>
+        <segue reference="pyY-qR-NzL"/>
         <segue reference="EE6-qF-5xk"/>
-        <segue reference="ebR-4n-eVY"/>
     </inferredMetricsTieBreakers>
 </document>

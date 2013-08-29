@@ -102,7 +102,7 @@ static const int kDefaultAvatarsCount = 5;
         else {
             self.loadingView.hidden = YES;
             [[[UIAlertView alloc] initWithTitle:nil
-                                        message:profileRequest.userFriendlyErrorDescription
+                                        message:profileRequest.localizedErrorDescription
                                        delegate:nil
                               cancelButtonTitle:NSLocalizedString(@"OK", @"")
                               otherButtonTitles:nil] show];

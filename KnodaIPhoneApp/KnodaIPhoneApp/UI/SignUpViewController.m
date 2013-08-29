@@ -40,6 +40,10 @@ static NSString* const kApplicationSegue   = @"ApplicationNavigationSegue";
 
 @implementation SignUpViewController
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+}
+
 - (void) viewDidUnload
 {
     self.usernameTextField = nil;
@@ -164,7 +168,7 @@ static NSString* const kApplicationSegue   = @"ApplicationNavigationSegue";
                       }
                       else
                       {
-                          [self showError:profileRequest.userFriendlyErrorDescription];
+                          [self showError:profileRequest.localizedErrorDescription];
                       }
                   }];
              }
@@ -174,7 +178,7 @@ static NSString* const kApplicationSegue   = @"ApplicationNavigationSegue";
              }
              else
              {
-                 [self showError: NSLocalizedString(@"Unknown error. Please try later.", @"")];
+                 [self showError: signUpRequest.localizedErrorDescription];
              }
          }];
     }

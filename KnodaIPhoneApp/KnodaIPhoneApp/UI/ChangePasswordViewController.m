@@ -79,7 +79,7 @@ static NSInteger const kKeyboardHeight = 216;
                 }
                 else {
                     alertView.title = NSLocalizedString(@"Error", @"");
-                    alertView.message = loginRequest.userFriendlyErrorDescription;
+                    alertView.message = loginRequest.localizedErrorDescription;
                 }
                 [alertView show];
             }];

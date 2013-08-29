@@ -23,6 +23,9 @@
 
 NSString* const kAlertNotification = @"AlertNotification";
 
+@interface AppDelegate() <UIAlertViewDelegate>
+
+@end
 
 @implementation AppDelegate
 

@@ -22,6 +22,8 @@
 
 @property (nonatomic, readonly) AppDelegate* appDelegate;
 
+@property (nonatomic) ServerError *serverError;
+
 @end
 
 
@@ -141,6 +143,9 @@ static const char *MULTIPART_CHARS = "1234567890_-qwertyuiopasdfghjklzxcvbnmQWER
     return NSLocalizedString(@"Unknown error. Please try again later.", @"");
 }
 
+- (NSString *)localizedErrorDescription {
+    return self.serverError.shouldNotifyUser ? self.serverError.localizedDescription : [self userFriendlyErrorDescription];
+}
 
 - (NSURL*) url
 {
@@ -266,22 +271,6 @@ static const char *MULTIPART_CHARS = "1234567890_-qwertyuiopasdfghjklzxcvbnmQWER
     return body;
 }
 
-
-+ (NSString*) serverErrorDescriptionByCode: (NSInteger) code
-{
-    NSString* description = @"";
-    
-    switch (code)
-    {
-        default:
-            description = [NSString stringWithFormat: NSLocalizedString(@"Uncnown error code came from the server: %i", @""), code];
-            break;
-    }
-    
-    return description;
-}
-
-
 #pragma mark Public methods
 
 
@@ -328,8 +317,10 @@ static const char *MULTIPART_CHARS = "1234567890_-qwertyuiopasdfghjklzxcvbnmQWER
         }
         
         NSData* result = [NSURLConnection sendSynchronousRequest: request returningResponse: &response error: &error];
+        NSString* resultString = [[NSString alloc] initWithData: result encoding: NSUTF8StringEncoding];
         
         NSLog(@"Status code: %d", response.statusCode);
+        NSLog(@"%@ %@\nRequest result:\n%@",  NSStringFromClass([self class]), request.URL, resultString);
         
         if(response.statusCode == 403 && [self requiresAuthToken]) { //perform logout if authorization is failed
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -361,60 +352,46 @@ static const char *MULTIPART_CHARS = "1234567890_-qwertyuiopasdfghjklzxcvbnmQWER
             self.errorCode = kInternalErrorCodeUnknownServerError;
             self.errorDescription = NSLocalizedString(@"Unknown server error", @"");
         }
-        else
+        
+        if (resultString.length != 0)
         {
-            NSString* resultString = [[NSString alloc] initWithData: result encoding: NSUTF8StringEncoding];
+            id parsedResult = [resultString JSONValue];
             
-            NSLog(@"%@ %@\nRequest result:\n%@",  NSStringFromClass([self class]), request.URL, resultString);
-            
-            if (resultString.length != 0)
+            // Handle parser error
+            if (parsedResult == nil)
             {
-                id parsedResult = [resultString JSONValue];
-                
-                // Handle parser error
-                if (parsedResult == nil)
+                self.errorCode = kInetrnalErrorCodeJSONParsingError;
+                self.errorDescription = NSLocalizedString(@"Error JSON parsing", @"");
+            }
+            else
+            {
+                if ([parsedResult isKindOfClass: [NSDictionary class]])
                 {
-                    self.errorCode = kInetrnalErrorCodeJSONParsingError;
-                    self.errorDescription = NSLocalizedString(@"Error JSON parsing", @"");
-                }
-                else
-                {
-                    if ([parsedResult isKindOfClass: [NSDictionary class]])
-                    {
-                        NSString* serverError = [parsedResult objectForKey: @"error"];
-                        
-                        // Handle our server errors
-                        if (serverError != nil)
-                        {
-                            NSNumberFormatter* formatter = [[NSNumberFormatter alloc] init];
-                            
-                            [formatter setNumberStyle: NSNumberFormatterDecimalStyle];
-                            [formatter setPositivePrefix: @"#"];
-                            
-                            NSInteger serverErrorCode = [[formatter numberFromString: serverError] integerValue];
-                            
-                            self.errorCode = serverErrorCode;
-                            self.errorDescription = [[self class] serverErrorDescriptionByCode: serverErrorCode];
+                    id errors = [parsedResult objectForKey: @"errors"];
+                    if([errors isKindOfClass:[NSDictionary class]] && [errors count]) {
+                        if(self.errorCode == 0) {
+                            self.errorCode = kServerError;
                         }
-                        // SUCESS - no error here!
-                        else
-                        {
-                            [self fillResultObject: parsedResult];
-                            [self checkStateAfterFinished];
-                        }
+                        self.serverError = [[ServerError alloc] initWithCode:self.errorCode andInfo:errors];
                     }
                     // SUCESS - no error here!
-                    else if ([parsedResult isKindOfClass: [NSArray class]])
+                    else
                     {
                         [self fillResultObject: parsedResult];
                         [self checkStateAfterFinished];
                     }
-                    // Handle unexpected result from JSON parser - not NSArray of NSDictionary. Should never happen.
-                    else
-                    {
-                        self.errorCode = kInternalErrorCodeUnexpectedJSONParsingResult;
-                        self.errorDescription = NSLocalizedString(@"Unexpected result type returned by JSON parser", @"");
-                    }
+                }
+                // SUCESS - no error here!
+                else if ([parsedResult isKindOfClass: [NSArray class]])
+                {
+                    [self fillResultObject: parsedResult];
+                    [self checkStateAfterFinished];
+                }
+                // Handle unexpected result from JSON parser - not NSArray of NSDictionary. Should never happen.
+                else
+                {
+                    self.errorCode = kInternalErrorCodeUnexpectedJSONParsingResult;
+                    self.errorDescription = NSLocalizedString(@"Unexpected result type returned by JSON parser", @"");
                 }
             }
         }

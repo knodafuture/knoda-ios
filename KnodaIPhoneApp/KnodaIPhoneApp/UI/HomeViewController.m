@@ -290,7 +290,7 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
         }
         else
         {
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle: @"" message: request.userFriendlyErrorDescription delegate: nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles: nil];
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle: @"" message: request.localizedErrorDescription delegate: nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles: nil];
             [alert show];
             
             [cell resetAgreedDisagreed];
@@ -321,7 +321,7 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
          }
          else
          {
-             UIAlertView* alert = [[UIAlertView alloc] initWithTitle: @"" message: request.userFriendlyErrorDescription delegate: nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles: nil];
+             UIAlertView* alert = [[UIAlertView alloc] initWithTitle: @"" message: request.localizedErrorDescription delegate: nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles: nil];
              [alert show];
              
              [cell resetAgreedDisagreed];

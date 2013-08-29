@@ -100,6 +100,8 @@
 		572D465817BD0B37008164A5 /* BS_unsigned@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 572D465617BD0B37008164A5 /* BS_unsigned@2x.png */; };
 		572D465B17BD14AA008164A5 /* LoadableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 572D465A17BD14AA008164A5 /* LoadableCell.m */; };
 		572D465E17BD1B62008164A5 /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 572D465D17BD1B62008164A5 /* NSDate+Utils.m */; };
+		574314E017CF9EE800C8BC75 /* ServerError.m in Sources */ = {isa = PBXBuildFile; fileRef = 574314DF17CF9EE800C8BC75 /* ServerError.m */; };
+		574314E317CFA88200C8BC75 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 574314E117CFA88100C8BC75 /* Localizable.strings */; };
 		5746F29A17BA8CAE00C835FA /* LoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5746F29917BA8CAE00C835FA /* LoadingCell.m */; };
 		5746F29D17BA8CB700C835FA /* PredictionDetailsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5746F29C17BA8CB700C835FA /* PredictionDetailsCell.m */; };
 		5746F2A017BB7C7500C835FA /* PredictionUsersWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5746F29F17BB7C7500C835FA /* PredictionUsersWebRequest.m */; };
@@ -440,6 +442,9 @@
 		572D465A17BD14AA008164A5 /* LoadableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadableCell.m; sourceTree = "<group>"; };
 		572D465C17BD1B62008164A5 /* NSDate+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utils.h"; sourceTree = "<group>"; };
 		572D465D17BD1B62008164A5 /* NSDate+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utils.m"; sourceTree = "<group>"; };
+		574314DE17CF9EE800C8BC75 /* ServerError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerError.h; sourceTree = "<group>"; };
+		574314DF17CF9EE800C8BC75 /* ServerError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerError.m; sourceTree = "<group>"; };
+		574314E217CFA88200C8BC75 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5746F29817BA8CAE00C835FA /* LoadingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingCell.h; sourceTree = "<group>"; };
 		5746F29917BA8CAE00C835FA /* LoadingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingCell.m; sourceTree = "<group>"; };
 		5746F29B17BA8CB700C835FA /* PredictionDetailsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PredictionDetailsCell.h; sourceTree = "<group>"; };
@@ -1234,6 +1239,7 @@
 		9E70882A178AF68E00F036A8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				574314E117CFA88100C8BC75 /* Localizable.strings */,
 				365B7E2317C657BC00ED04D2 /* Default-568h@2x.png */,
 				365B7E2417C657BC00ED04D2 /* Default.png */,
 				365B7E2517C657BC00ED04D2 /* Default@2x.png */,
@@ -1250,6 +1256,8 @@
 		9E708846178AFF2F00F036A8 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				574314DE17CF9EE800C8BC75 /* ServerError.h */,
+				574314DF17CF9EE800C8BC75 /* ServerError.m */,
 				9E708847178AFF2F00F036A8 /* BaseWebRequest.h */,
 				9E708848178AFF2F00F036A8 /* BaseWebRequest.m */,
 				9E06637E178EAE2000B3E974 /* PredictionsWebRequest.h */,
@@ -1672,6 +1680,7 @@
 				369D861E17CE02720005F0B3 /* firstStartOverlay@2x.png in Resources */,
 				9E212EC017CF82F200BE8166 /* alert_indicator.png in Resources */,
 				9E212EC117CF82F200BE8166 /* alert_indicator@2x.png in Resources */,
+				574314E317CFA88200C8BC75 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1773,12 +1782,21 @@
 				9E212EBA17CCEE3500BE8166 /* SendDeviceTokenWebRequest.m in Sources */,
 				369D861717CDE78E0005F0B3 /* UsernameEmailChangeViewController.m in Sources */,
 				9E212EBD17CF808F00BE8166 /* AlertNavigationCell.m in Sources */,
+				574314E017CF9EE800C8BC75 /* ServerError.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		574314E117CFA88100C8BC75 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				574314E217CFA88200C8BC75 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		9E70882C178AF68E00F036A8 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

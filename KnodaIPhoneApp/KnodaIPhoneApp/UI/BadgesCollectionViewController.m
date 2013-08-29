@@ -40,6 +40,10 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
     
     self.activityView.hidden = NO;
     self.navigationController.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, self.navigationController.navigationBar.frame.size.height);
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self setUpUsersBadges];
 }
 

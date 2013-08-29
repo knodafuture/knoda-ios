@@ -38,6 +38,9 @@ static NSString* const MENU_SEGUES[MenuItemsSize] = {
 @property (nonatomic, strong) IBOutlet UIView* movingView;
 @property (weak, nonatomic)   IBOutlet UITableView *menuItemsTableView;
 
+@property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
+@property (weak, nonatomic) IBOutlet UIView *gestureView;
+
 @property (nonatomic, assign) BOOL appeared;
 
 @property (nonatomic, strong) NSTimer* userUpdateTimer;
@@ -54,6 +57,9 @@ static NSString* const MENU_SEGUES[MenuItemsSize] = {
 - (void) viewDidLoad {
     [super viewDidLoad];
     
+    self.tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(toggleNavigationPanel)];
+    [self.gestureView addGestureRecognizer:self.tapGestureRecognizer];
+    
     if(self.appDelegate.user.hasAvatar) {
         [self openMenuItem:MenuHome];
     }
@@ -68,6 +74,8 @@ static NSString* const MENU_SEGUES[MenuItemsSize] = {
     self.detailsView = nil;
     self.movingView = nil;
     self.userUpdateTimer = nil;
+    self.tapGestureRecognizer = nil;
+    self.gestureView = nil;
     
     [super viewDidUnload];
 }
@@ -102,9 +110,10 @@ static NSString* const MENU_SEGUES[MenuItemsSize] = {
 - (void)openMenuItem:(MenuItem)menuItem {
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:menuItem inSection:0];
     [self.menuItemsTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-    if(!self.masterShown) {
-        [self moveToMaster];
-    }
+//  causes bug with menu twice right movement
+//    if(!self.masterShown) {
+//        [self moveToMaster];
+//    }
     [self performSegueWithIdentifier:MENU_SEGUES[menuItem] sender:self];
 }
 
@@ -152,13 +161,19 @@ static NSString* const MENU_SEGUES[MenuItemsSize] = {
 - (void) toggleNavigationPanel
 {
     if (self.masterShown)
-    {
+    {   
+        self.gestureView.hidden = YES;
         [self moveToDetailsAnimated: YES];
     }
     else
     {
+        self.gestureView.hidden = NO;
         [self moveToMaster];
     }
+}
+
+- (void) animatedMoveToDetailsWithGestureRecognizer : (UITapGestureRecognizer *) recognizer {
+    [self moveToDetailsAnimated:YES];
 }
 
 

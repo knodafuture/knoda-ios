@@ -55,7 +55,7 @@ static NSString* const MENU_SEGUES[MenuItemsSize] = {
     [super viewDidLoad];
     
     if(self.appDelegate.user.hasAvatar) {
-        [self performSegueWithIdentifier: kHomeSegue sender: self];
+        [self openMenuItem:MenuHome];
     }
     else {
         [self performSegueWithIdentifier: kSelectPictureSegue sender: self];
@@ -105,7 +105,7 @@ static NSString* const MENU_SEGUES[MenuItemsSize] = {
     if(!self.masterShown) {
         [self moveToMaster];
     }
-    [self performSegueWithIdentifier:MENU_SEGUES[menuItem] sender:nil];
+    [self performSegueWithIdentifier:MENU_SEGUES[menuItem] sender:self];
 }
 
 - (void) moveToDetailsAnimated: (BOOL) animated
@@ -187,9 +187,15 @@ static NSString* const MENU_SEGUES[MenuItemsSize] = {
     self.wonPercantageLabel.text = ![user.winningPercentage isEqual: @0] ? [NSString stringWithFormat:@"%@%@",user.winningPercentage,@"%"] : @"0%";
     self.steakLabel.text = [user.streak length] > 0 ? user.streak : @"-";
     
-    [self.menuItemsTableView beginUpdates];    
-    [self.menuItemsTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:4 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    NSIndexPath *selectedIndexPath = [self.menuItemsTableView indexPathForSelectedRow];
+    
+    [self.menuItemsTableView beginUpdates];
+    [self.menuItemsTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:MenuProfile inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
     [self.menuItemsTableView endUpdates];
+    
+    if(![self.menuItemsTableView indexPathForSelectedRow] && selectedIndexPath) {
+        [self.menuItemsTableView selectRowAtIndexPath:selectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+    }
 }
 
 #pragma mark - UITableViewDataSource

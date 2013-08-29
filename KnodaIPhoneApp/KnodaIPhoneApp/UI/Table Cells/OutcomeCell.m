@@ -9,12 +9,14 @@
 #import "OutcomeCell.h"
 
 #import "Prediction.h"
+#import "Chellange.h"
 
 static const float kBigCellHeight   = 151.0;
 static const float kSmallCellHeight = 99.0;
 
 @interface OutcomeCell()
 
+@property (nonatomic, strong) IBOutlet UILabel* promptLabel;
 @property (nonatomic, weak) IBOutlet UIButton *unfinishedButton;
 
 @end
@@ -22,7 +24,8 @@ static const float kSmallCellHeight = 99.0;
 @implementation OutcomeCell
 
 - (void)setupCellWithPrediction:(Prediction *)prediction {
-    self.unfinishedButton.hidden = ![prediction isExpired];
+    self.promptLabel.text = (prediction.chellange.isOwn) ? (NSLocalizedString(@"Was your prediction correct?", @"")) : NSLocalizedString(@"Was this prediction correct?", @"");
+    self.unfinishedButton.hidden = ![prediction isExpired] || !prediction.chellange.isOwn;
 }
 
 + (CGFloat)cellHeightForPrediction:(Prediction *)prediction {

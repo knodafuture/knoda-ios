@@ -254,7 +254,7 @@ static const int kBSAlertTag = 1001;
             if(self.prediction.hasOutcome) {
                 return RowStatus;
             }
-            else if(self.prediction.chellange.isOwn && [self.prediction isExpired]) {
+            else if((self.prediction.chellange.isOwn && [self.prediction isExpired]) || [self.prediction passed72HoursSinceExpiration]) {
                 return RowOutcome;
             }
             else if(!self.prediction.chellange) {

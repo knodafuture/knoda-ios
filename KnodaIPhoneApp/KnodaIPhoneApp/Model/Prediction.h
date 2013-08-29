@@ -40,4 +40,6 @@
 
 - (BOOL)isExpired;
 
+- (BOOL) passed72HoursSinceExpiration;
+
 @end

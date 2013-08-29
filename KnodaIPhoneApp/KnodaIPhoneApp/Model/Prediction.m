@@ -94,4 +94,18 @@ static NSString* const kResponseDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'zzz";
 }
 
 
+- (BOOL) passed72HoursSinceExpiration
+{
+    NSTimeInterval timeInterval = [[NSDate date] timeIntervalSinceDate: self.expirationDate];
+    NSTimeInterval secondsIn72Hours = 60 * 60 * 72;
+    
+    if (timeInterval > secondsIn72Hours)
+    {
+        return YES;
+    }
+    
+    return NO;
+}
+
+
 @end

@@ -180,6 +180,9 @@
 		9E06639B17959A4C00B3E974 /* KronaOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9E06639917959A4C00B3E974 /* KronaOne-Regular.ttf */; };
 		9E212EB717CCEAFF00BE8166 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E212EB617CCEAFF00BE8166 /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9E212EBA17CCEE3500BE8166 /* SendDeviceTokenWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E212EB917CCEE3500BE8166 /* SendDeviceTokenWebRequest.m */; };
+		9E212EBD17CF808F00BE8166 /* AlertNavigationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E212EBC17CF808F00BE8166 /* AlertNavigationCell.m */; };
+		9E212EC017CF82F200BE8166 /* alert_indicator.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E212EBE17CF82F200BE8166 /* alert_indicator.png */; };
+		9E212EC117CF82F200BE8166 /* alert_indicator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E212EBF17CF82F200BE8166 /* alert_indicator@2x.png */; };
 		9E28686A17C63E380033FB3C /* SelectPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 575B100D17C4FBDB00782E6B /* SelectPictureViewController.m */; };
 		9E28686F17C659940033FB3C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E28686E17C659930033FB3C /* Security.framework */; };
 		9E30D16617C26E6E002D9ACE /* AlertCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E30D16517C26E6E002D9ACE /* AlertCell.m */; };
@@ -556,6 +559,10 @@
 		9E212EB617CCEAFF00BE8166 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
 		9E212EB817CCEE3500BE8166 /* SendDeviceTokenWebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendDeviceTokenWebRequest.h; sourceTree = "<group>"; };
 		9E212EB917CCEE3500BE8166 /* SendDeviceTokenWebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendDeviceTokenWebRequest.m; sourceTree = "<group>"; };
+		9E212EBB17CF808F00BE8166 /* AlertNavigationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertNavigationCell.h; sourceTree = "<group>"; };
+		9E212EBC17CF808F00BE8166 /* AlertNavigationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertNavigationCell.m; sourceTree = "<group>"; };
+		9E212EBE17CF82F200BE8166 /* alert_indicator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alert_indicator.png; sourceTree = "<group>"; };
+		9E212EBF17CF82F200BE8166 /* alert_indicator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert_indicator@2x.png"; sourceTree = "<group>"; };
 		9E28686E17C659930033FB3C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		9E30D16417C26E6E002D9ACE /* AlertCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertCell.h; sourceTree = "<group>"; };
 		9E30D16517C26E6E002D9ACE /* AlertCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertCell.m; sourceTree = "<group>"; };
@@ -1028,6 +1035,8 @@
 		9E06638B179598FD00B3E974 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				9E212EBE17CF82F200BE8166 /* alert_indicator.png */,
+				9E212EBF17CF82F200BE8166 /* alert_indicator@2x.png */,
 				369D861817CE025E0005F0B3 /* firstStart */,
 				571B1D0717C7BE4C0013AA41 /* newBadgePopup */,
 				369C427717C78010008C8203 /* noContent.png */,
@@ -1370,6 +1379,8 @@
 				367EE77E17C3C5E300764C85 /* ProfileCell.m */,
 				3638774117C4F37000703475 /* PasswordCell.h */,
 				3638774217C4F37000703475 /* PasswordCell.m */,
+				9E212EBB17CF808F00BE8166 /* AlertNavigationCell.h */,
+				9E212EBC17CF808F00BE8166 /* AlertNavigationCell.m */,
 			);
 			path = "Table Cells";
 			sourceTree = "<group>";
@@ -1659,6 +1670,8 @@
 				369D861C17CE02720005F0B3 /* firstStartOverlay-568h@2x.png in Resources */,
 				369D861D17CE02720005F0B3 /* firstStartOverlay.png in Resources */,
 				369D861E17CE02720005F0B3 /* firstStartOverlay@2x.png in Resources */,
+				9E212EC017CF82F200BE8166 /* alert_indicator.png in Resources */,
+				9E212EC117CF82F200BE8166 /* alert_indicator@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1759,6 +1772,7 @@
 				9E212EB717CCEAFF00BE8166 /* KeychainItemWrapper.m in Sources */,
 				9E212EBA17CCEE3500BE8166 /* SendDeviceTokenWebRequest.m in Sources */,
 				369D861717CDE78E0005F0B3 /* UsernameEmailChangeViewController.m in Sources */,
+				9E212EBD17CF808F00BE8166 /* AlertNavigationCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

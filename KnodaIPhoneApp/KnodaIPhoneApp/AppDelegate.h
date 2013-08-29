@@ -11,7 +11,9 @@
 #import "User.h"
 #import "KeychainItemWrapper.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+extern NSString* const kAlertNotification;
+
+@interface AppDelegate : UIResponder <UIApplicationDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) User* user;
@@ -19,6 +21,8 @@
 @property (strong, nonatomic) KeychainItemWrapper *passwordItem;
 
 @property (copy, nonatomic) NSString* deviceToken;
+
+@property (assign, nonatomic) BOOL notificationReceived;
 
 - (void) savePassword: (NSString*) password;
 - (void) removePassword;

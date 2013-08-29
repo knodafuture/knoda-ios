@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol RefreshableViewController <NSObject>
+
+- (void) refresh;
+
+@end
+
 @interface AlertsViewController : UIViewController
 
 @end

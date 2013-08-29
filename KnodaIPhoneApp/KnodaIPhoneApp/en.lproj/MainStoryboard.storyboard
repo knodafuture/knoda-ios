@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ZKQ-aW-8t7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11G63b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ZKQ-aW-8t7">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -329,7 +329,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </activityIndicatorView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.38823529411764707" green="0.72549019607843135" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -607,7 +607,7 @@
                                                             <segue destination="8Rv-W9-dvZ" kind="custom" identifier="HistorySegue" customClass="NavigationSegue" id="Ngh-Vu-Qdc"/>
                                                         </connections>
                                                     </tableViewCell>
-                                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="AlertsCell" id="Fja-qi-JRn">
+                                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="AlertsCell" id="Fja-qi-JRn" customClass="AlertNavigationCell">
                                                         <rect key="frame" x="0.0" y="110" width="265" height="44"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -618,6 +618,17 @@
                                                                     <rect key="frame" x="0.0" y="42" width="265" height="3"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 </imageView>
+                                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="alert_indicator.png" id="hKA-th-dbx">
+                                                                    <rect key="frame" x="214" y="10" width="39" height="28"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                </imageView>
+                                                                <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" id="OK3-MZ-36Y">
+                                                                    <rect key="frame" x="220" y="11" width="27" height="21"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
                                                                 <view alpha="0.5" contentMode="scaleToFill" id="lY9-hB-CYF">
                                                                     <rect key="frame" x="0.0" y="0.0" width="280" height="43"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -638,6 +649,8 @@
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         </view>
                                                         <connections>
+                                                            <outlet property="badgeImage" destination="hKA-th-dbx" id="7O8-K1-AdD"/>
+                                                            <outlet property="badgeLabel" destination="OK3-MZ-36Y" id="ke4-MN-Kdd"/>
                                                             <outlet property="selectedBackgroundView" destination="lY9-hB-CYF" id="Hrx-Ca-l0N"/>
                                                             <segue destination="OOJ-qX-5dW" kind="custom" identifier="AlertsSegue" customClass="NavigationSegue" id="xPp-pD-Yp1"/>
                                                         </connections>
@@ -3260,7 +3273,7 @@
             <objects>
                 <collectionViewController storyboardIdentifier="BadgesCollectionViewController" autoresizesArchivedViewToFullSize="NO" id="1yK-AL-nqr" customClass="BadgesCollectionViewController" sceneMemberID="viewController">
                     <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="WUG-U6-g9g">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="4WD-kC-WbB">
@@ -3270,7 +3283,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <view key="backgroundView" hidden="YES" alpha="0.40000000596046448" contentMode="scaleToFill" id="UmJ-Ms-oBU">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="whiteLarge" id="Wt9-fF-YQK">
@@ -3278,7 +3291,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </activityIndicatorView>
                                 <view hidden="YES" contentMode="scaleToFill" id="ZTj-Kc-rga">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="noContent.png" id="a0s-yT-MsF">
@@ -4429,6 +4442,7 @@
         <image name="YesBtn.png" width="127" height="44"/>
         <image name="YesBtn_pressed.png" width="127" height="44"/>
         <image name="agree.png" width="11" height="65"/>
+        <image name="alert_indicator.png" width="39" height="28"/>
         <image name="alertsIcon.png" width="17" height="17"/>
         <image name="backArrow.png" width="23" height="19"/>
         <image name="badgesIcon.png" width="22" height="22"/>
@@ -4505,6 +4519,13 @@
                 <relationship kind="outlet" name="alertMarkImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="alertTitle" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="avatarView" candidateClass="BindableView"/>
+            </relationships>
+        </class>
+        <class className="AlertNavigationCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AlertNavigationCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="badgeImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="badgeLabel" candidateClass="UILabel"/>
             </relationships>
         </class>
         <class className="AlertsViewController" superclassName="UIViewController">
@@ -4816,13 +4837,13 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="pyY-qR-NzL"/>
-        <segue reference="Ef7-FX-Fpl"/>
-        <segue reference="H0s-oM-ZNm"/>
+        <segue reference="ufA-86-Qke"/>
         <segue reference="jDp-TX-Mpj"/>
+        <segue reference="mnN-YR-PTq"/>
         <segue reference="CM5-5K-qH1"/>
         <segue reference="vCM-j3-I2J"/>
-        <segue reference="ebR-4n-eVY"/>
+        <segue reference="pyY-qR-NzL"/>
         <segue reference="EE6-qF-5xk"/>
+        <segue reference="ebR-4n-eVY"/>
     </inferredMetricsTieBreakers>
 </document>

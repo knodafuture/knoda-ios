@@ -15,8 +15,13 @@
 
 #import "BadgesWebRequest.h"
 
+#import "AlertNavigationCell.h"
+#import "AllAlertsWebRequest.h"
+
 static NSString* const kHomeSegue = @"HomeSegue";
 static NSString* const kSelectPictureSegue = @"SelectPictureSegue";
+
+static const NSInteger kAlertCellIndex = 2;
 
 static NSString* const MENU_SEGUES[MenuItemsSize] = {
     @"HomeSegue",
@@ -59,12 +64,26 @@ static NSString* const MENU_SEGUES[MenuItemsSize] = {
     UITapGestureRecognizer * recognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(toggleNavigationPanel)];
     [self.gestureView addGestureRecognizer:recognizer];
     
-    if(self.appDelegate.user.hasAvatar) {
-        [self openMenuItem:MenuHome];
+    [self updateAlertBadge];
+    
+    if(self.appDelegate.user.hasAvatar)
+    {
+        if (self.appDelegate.notificationReceived)
+        {
+            [self openMenuItem: MenuAlerts];
+            self.appDelegate.notificationReceived = NO;
+        }
+        else
+        {
+            [self openMenuItem: MenuHome];
+        }
     }
-    else {
+    else
+    {
         [self performSegueWithIdentifier: kSelectPictureSegue sender: self];
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(showAlerts) name: kAlertNotification object: nil];
 }
 
 - (void) viewDidUnload
@@ -75,6 +94,8 @@ static NSString* const MENU_SEGUES[MenuItemsSize] = {
     self.userUpdateTimer = nil;
     self.gestureView = nil;
     
+    [[NSNotificationCenter defaultCenter] removeObserver: self];
+    
     [super viewDidUnload];
 }
 
@@ -83,6 +104,12 @@ static NSString* const MENU_SEGUES[MenuItemsSize] = {
     [super viewDidAppear:animated];
     self.appeared = YES;
     self.userUpdateTimer = [NSTimer scheduledTimerWithTimeInterval: 1800.0 target: self selector: @selector(reloadUserInfo) userInfo: nil repeats: YES];
+    
+    if (self.appDelegate.notificationReceived)
+    {
+        [self openMenuItem: MenuAlerts];
+        self.appDelegate.notificationReceived = NO;
+    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -104,6 +131,14 @@ static NSString* const MENU_SEGUES[MenuItemsSize] = {
         vc.delegate = self;
     }
 }
+
+
+- (void) showAlerts
+{
+    [self.navigationController dismissViewControllerAnimated: YES completion: nil];
+    [self openMenuItem: MenuAlerts];
+}
+
 
 - (void)openMenuItem:(MenuItem)menuItem {
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:menuItem inSection:0];
@@ -146,6 +181,7 @@ static NSString* const MENU_SEGUES[MenuItemsSize] = {
     self.masterShown = YES;
     self.gestureView.hidden = NO;
     
+    [self updateAlertBadge];
     [self updateUserInfo];
     
     [UIView animateWithDuration: 0.3 animations: ^
@@ -210,6 +246,25 @@ static NSString* const MENU_SEGUES[MenuItemsSize] = {
         [self.menuItemsTableView selectRowAtIndexPath:selectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
     }
 }
+
+
+#pragma mark - Badge update
+
+
+- (void) updateAlertBadge
+{
+    AllAlertsWebRequest* request = [[AllAlertsWebRequest alloc] init];
+    [request executeWithCompletionBlock: ^
+    {
+        if (request.errorCode == 0)
+        {
+            AlertNavigationCell* cell = (AlertNavigationCell*)[self.menuItemsTableView cellForRowAtIndexPath: [NSIndexPath indexPathForRow: kAlertCellIndex inSection: 0]];
+            [cell updateBadge: request.predictions.count];
+            [[UIApplication sharedApplication] setApplicationIconBadgeNumber: request.predictions.count];
+        }
+    }];
+}
+
 
 #pragma mark - UITableViewDataSource
 

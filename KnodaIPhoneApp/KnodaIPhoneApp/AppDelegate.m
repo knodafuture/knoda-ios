@@ -21,6 +21,9 @@
 #import "SendDeviceTokenWebRequest.h"
 
 
+NSString* const kAlertNotification = @"AlertNotification";
+
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -42,7 +45,12 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNewBadgeNotification:) name:NewBadgeNotification object:nil];
     
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
+    
+    if ([launchOptions objectForKey: UIApplicationLaunchOptionsRemoteNotificationKey] != nil)
+    {
+        self.notificationReceived = YES;
+    }
     
     return YES;
 }
@@ -110,6 +118,22 @@
 - (void) application: (UIApplication*) application didReceiveRemoteNotification: (NSDictionary*) userInfo
 {
     NSLog(@"Push notification arrived: %@", userInfo);
+    NSString* alertString = [[userInfo objectForKey: @"aps"] objectForKey: @"alert"];
+    
+    if (alertString.length != 0)
+    {
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle: @"" message: alertString delegate: self cancelButtonTitle: NSLocalizedString(@"Cancel", @"") otherButtonTitles: NSLocalizedString(@"Show", @""), nil];
+        [alertView show];
+    }
+}
+
+
+- (void) alertView:(UIAlertView*) alertView clickedButtonAtIndex: (NSInteger) buttonIndex
+{
+    if (buttonIndex == 1)
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName: kAlertNotification object: nil];
+    }
 }
 
 

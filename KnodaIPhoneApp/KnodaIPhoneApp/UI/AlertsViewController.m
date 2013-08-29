@@ -63,6 +63,7 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 
 - (IBAction) menuButtonPressed: (id) sender
 {
+    [(UIViewController<RefreshableViewController>*)[self.childViewControllers objectAtIndex: 0] refresh];
     [((NavigationViewController*)self.navigationController.parentViewController) toggleNavigationPanel];
 }
 

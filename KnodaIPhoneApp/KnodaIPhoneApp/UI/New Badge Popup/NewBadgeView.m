@@ -14,6 +14,7 @@
 
 @interface NewBadgeView()
 
+@property (weak, nonatomic) IBOutlet UIView *badgeBackgroundView;
 @property (weak, nonatomic) IBOutlet UIImageView *badgeImageView;
 
 @end

@@ -209,6 +209,9 @@ static const float kAvatarSize = 172.0;
 }
 
 - (void)imageCropper:(ImageCropperViewController *)vc didCroppedImage:(UIImage *)image {
+    if(!CGSizeEqualToSize(image.size, AVATAR_SIZE)) {
+        image = [image scaledToSize:AVATAR_SIZE];
+    }
     [self sendAvatar:image];
     [vc dismissViewControllerAnimated:YES completion:nil];
 }

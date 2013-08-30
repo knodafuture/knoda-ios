@@ -45,7 +45,8 @@ NSString* const kNewBadgeImages      = @"NewBadgeNotificationImages";
     if ([parsedResult respondsToSelector:@selector(valueForKey:)]) {
         self.badgesImagesArray = [[NSMutableArray alloc]init];
         [[parsedResult valueForKey:@"badges"]enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            [self.badgesImagesArray addObject:[UIImage imageNamed:[obj valueForKey:@"name"]]];
+            NSString *badgeName = _forNew ? [NSString stringWithFormat:@"%@_big",[obj valueForKey:@"name"]] : [obj valueForKey:@"name"];
+            [self.badgesImagesArray addObject:[UIImage imageNamed:badgeName]];
         }];
     }
 }

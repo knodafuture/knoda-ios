@@ -9,13 +9,13 @@
 #import "UsernameEmailChangeViewController.h"
 #import "AppDelegate.h"
 #import "ProfileWebRequest.h"
-#import "PasswordCell.h"
+#import "CustomizedTextField.h"
 
 @interface UsernameEmailChangeViewController ()
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *loadingView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *rightButtonItem;
+@property (weak, nonatomic) IBOutlet CustomizedTextField *userPropertyTextField;
 
 @end
 
@@ -25,10 +25,23 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"darkBgPattern"]];
-    self.tableView.backgroundView = nil;
     self.navigationController.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, self.navigationController.navigationBar.frame.size.height);
     UIColor * darkGreen = [UIColor colorWithRed:36/255.0 green:112/255.0 blue:66/255.0 alpha:1];
     [self.rightButtonItem setTitleTextAttributes:@{UITextAttributeTextColor : darkGreen} forState:UIControlStateNormal];
+    [self setUpTextFieldPlaceHolder];
+}
+
+- (void) setUpTextFieldPlaceHolder {
+    switch (self.userProperyChangeType) {
+        case UserPropertyTypeEmail:
+            self.userPropertyTextField.placeholder = NSLocalizedString(@"Email Address", @"");
+            break;
+        case UserPropertyTypeUsername:
+            self.userPropertyTextField.placeholder = NSLocalizedString(@"User name", @"");
+            break;
+        default:
+            break;
+    }
 }
 
 - (IBAction)backButtonPressed:(id)sender {
@@ -40,16 +53,14 @@
 }
 
 - (void) saveNewProperyValue {
-    PasswordCell *cell = (PasswordCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    [cell.passWordTextField resignFirstResponder];
-    NSString * newPropertyValue = cell.passWordTextField.text;
+    [self.userPropertyTextField resignFirstResponder];
     
     ProfileWebRequest * webRequest = nil;
     if (self.userProperyChangeType == UserPropertyTypeEmail) {
-        webRequest = [[ProfileWebRequest alloc]initWithNewEmail:newPropertyValue];
+        webRequest = [[ProfileWebRequest alloc]initWithNewEmail:self.userPropertyTextField.text];
     }
     else if (self.userProperyChangeType == UserPropertyTypeUsername) {
-        webRequest = [[ProfileWebRequest alloc]initWithNewUsername:newPropertyValue];
+        webRequest = [[ProfileWebRequest alloc]initWithNewUsername:self.userPropertyTextField.text];
     }
     
     self.loadingView.hidden = NO;
@@ -81,36 +92,6 @@
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {
     [self saveNewProperyValue];
     return YES;
-}
-
-#pragma mark - TableView datasource
-
-- (NSInteger) numberOfSectionsInTableView: (UITableView*) tableView
-{
-    return 1;
-}
-
-- (NSInteger) tableView: (UITableView*) tableView numberOfRowsInSection: (NSInteger) section
-{
-    return 1;
-}
-
-- (UITableViewCell*) tableView: (UITableView*) tableView cellForRowAtIndexPath: (NSIndexPath*) indexPath
-{
-    NSString *cellIdentifier = nil;
-    switch (self.userProperyChangeType) {
-        case UserPropertyTypeEmail:
-            cellIdentifier = @"EmailCell";
-            break;
-        case UserPropertyTypeUsername:
-            cellIdentifier = @"UserNameCell";
-            break;
-        default:
-            break;
-    }
-    
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    return cell;
 }
 
 @end

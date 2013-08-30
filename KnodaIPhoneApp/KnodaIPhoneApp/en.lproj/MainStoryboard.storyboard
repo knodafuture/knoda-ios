@@ -3290,7 +3290,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="4WD-kC-WbB">
-                            <size key="itemSize" width="151" height="125"/>
+                            <size key="itemSize" width="151" height="124"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -3326,14 +3326,14 @@
                         </view>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="BadgeCollectionViewCellIdentifier" id="ff3-EA-PO1" customClass="BadgeCollectionViewCell">
-                                <rect key="frame" x="0.0" y="0.0" width="151" height="125"/>
+                                <rect key="frame" x="0.0" y="0.0" width="151" height="124"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="151" height="125"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="151" height="124"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="jZa-eT-bk4">
-                                            <rect key="frame" x="8" y="16" width="135" height="94"/>
+                                            <rect key="frame" x="22" y="9" width="106" height="106"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </imageView>
                                     </subviews>
@@ -3952,6 +3952,17 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="436"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <view hidden="YES" alpha="0.40000000596046448" contentMode="scaleToFill" id="bma-s7-Zqx">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="436"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="whiteLarge" id="PpR-YO-apk">
+                                        <rect key="frame" x="142" y="203" width="37" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="zsL-n0-Fe7">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="436"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3971,86 +3982,6 @@
                                             <action selector="cancelButtonPress:" destination="iWN-09-37c" eventType="touchUpInside" id="o0G-Qj-2FT"/>
                                         </connections>
                                     </button>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="LVu-yP-aW4">
-                                        <rect key="frame" x="9" y="0.0" width="302" height="192"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                        <prototypes>
-                                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="OldPasswordCell" id="aKQ-fu-MAt" customClass="PasswordCell">
-                                                <rect key="frame" x="0.0" y="46" width="302" height="45"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                    <rect key="frame" x="10" y="1" width="282" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <subviews>
-                                                        <textField opaque="NO" clipsSubviews="YES" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Current Password" minimumFontSize="17" id="8Gk-UN-CSB" customClass="CustomizedTextField">
-                                                            <rect key="frame" x="20" y="7" width="242" height="30"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
-                                                            <connections>
-                                                                <outlet property="delegate" destination="iWN-09-37c" id="m12-ed-3mh"/>
-                                                            </connections>
-                                                        </textField>
-                                                    </subviews>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                </view>
-                                                <connections>
-                                                    <outlet property="passWordTextField" destination="8Gk-UN-CSB" id="VY1-sd-A7B"/>
-                                                </connections>
-                                            </tableViewCell>
-                                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="NewPasswordCell" id="4Vf-VO-dVP" customClass="PasswordCell">
-                                                <rect key="frame" x="0.0" y="91" width="302" height="44"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                    <rect key="frame" x="10" y="0.0" width="282" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <subviews>
-                                                        <textField opaque="NO" clipsSubviews="YES" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="New Password" minimumFontSize="17" id="hys-g4-nFQ" customClass="CustomizedTextField">
-                                                            <rect key="frame" x="20" y="7" width="242" height="30"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
-                                                            <connections>
-                                                                <outlet property="delegate" destination="iWN-09-37c" id="rRt-aE-1TA"/>
-                                                            </connections>
-                                                        </textField>
-                                                    </subviews>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                </view>
-                                                <connections>
-                                                    <outlet property="passWordTextField" destination="hys-g4-nFQ" id="2ea-Vi-Ok0"/>
-                                                </connections>
-                                            </tableViewCell>
-                                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="NewPasswordRetypeCell" id="YgJ-0u-YBL" customClass="PasswordCell">
-                                                <rect key="frame" x="0.0" y="135" width="302" height="45"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                    <rect key="frame" x="10" y="0.0" width="282" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <subviews>
-                                                        <textField opaque="NO" clipsSubviews="YES" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Re-type new Password" minimumFontSize="17" id="wd2-ah-mvd" customClass="CustomizedTextField">
-                                                            <rect key="frame" x="20" y="7" width="242" height="30"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="go" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
-                                                            <connections>
-                                                                <outlet property="delegate" destination="iWN-09-37c" id="s9q-mj-H36"/>
-                                                            </connections>
-                                                        </textField>
-                                                    </subviews>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                </view>
-                                                <connections>
-                                                    <outlet property="passWordTextField" destination="wd2-ah-mvd" id="aqh-Ev-kze"/>
-                                                </connections>
-                                            </tableViewCell>
-                                        </prototypes>
-                                        <connections>
-                                            <outlet property="dataSource" destination="iWN-09-37c" id="3zr-AD-q5U"/>
-                                            <outlet property="delegate" destination="iWN-09-37c" id="U4f-hx-sVk"/>
-                                        </connections>
-                                    </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="zOX-P2-9L8">
                                         <rect key="frame" x="9" y="300" width="302" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -4066,19 +3997,55 @@
                                             <action selector="changeButtonPressed:" destination="iWN-09-37c" eventType="touchUpInside" id="OCs-1I-V0I"/>
                                         </connections>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="field_top.png" id="fBK-Nq-Fm6">
+                                        <rect key="frame" x="22" y="72" width="277" height="43"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="New Password" minimumFontSize="17" id="Zba-Rp-RoT" customClass="CustomizedTextField">
+                                        <rect key="frame" x="42" y="78" width="256" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="iWN-09-37c" id="OSb-U2-nlQ"/>
+                                        </connections>
+                                    </textField>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="field_btm.png" id="DSr-VR-mVN">
+                                        <rect key="frame" x="22" y="113.5" width="277" height="43"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Re-type new Password" minimumFontSize="17" id="ru8-oV-xdE" customClass="CustomizedTextField">
+                                        <rect key="frame" x="42" y="120" width="256" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="go" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="iWN-09-37c" id="SST-kg-N8D"/>
+                                        </connections>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Xbd-7t-mGz">
+                                        <rect key="frame" x="20" y="14" width="278" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Current Password" minimumFontSize="17" id="Can-ie-YOg" customClass="CustomizedTextField">
+                                        <rect key="frame" x="42" y="21" width="256" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="iWN-09-37c" id="uq5-hM-SQf"/>
+                                        </connections>
+                                    </textField>
                                 </subviews>
                             </scrollView>
-                            <view hidden="YES" alpha="0.40000000596046448" contentMode="scaleToFill" id="bma-s7-Zqx">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="436"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="whiteLarge" id="PpR-YO-apk">
-                                        <rect key="frame" x="142" y="203" width="37" height="37"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </activityIndicatorView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -4105,9 +4072,11 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="currentPasswordTextField" destination="Can-ie-YOg" id="Ovv-On-LBz"/>
                         <outlet property="loadingView" destination="bma-s7-Zqx" id="PQl-SM-sfR"/>
-                        <outlet property="passwordsTableView" destination="LVu-yP-aW4" id="lwB-na-Sdj"/>
+                        <outlet property="retypeNewPasswordTextField" destination="ru8-oV-xdE" id="Fxo-wk-M7w"/>
                         <outlet property="scrollView" destination="zsL-n0-Fe7" id="XLe-C7-Fon"/>
+                        <outlet property="usersNewPasswordTextField" destination="Zba-Rp-RoT" id="3i8-Tw-0u9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GCC-AM-1Xr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4122,62 +4091,6 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="436"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="nsB-lj-d1j">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="127"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EmailCell" id="Pa5-xq-rmR" customClass="PasswordCell">
-                                        <rect key="frame" x="0.0" y="46" width="320" height="45"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="1" width="300" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email Address" minimumFontSize="17" id="E5Z-UZ-fmm" customClass="CustomizedTextField">
-                                                    <rect key="frame" x="20" y="7" width="242" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
-                                                    <connections>
-                                                        <outlet property="delegate" destination="8Kn-Df-1EH" id="CKH-mH-anh"/>
-                                                    </connections>
-                                                </textField>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                        <connections>
-                                            <outlet property="passWordTextField" destination="E5Z-UZ-fmm" id="VD2-A5-5r9"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="UserNameCell" id="A9Q-iC-ugz" customClass="PasswordCell">
-                                        <rect key="frame" x="0.0" y="91" width="320" height="45"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="User name" minimumFontSize="17" id="qtL-Td-vEH" customClass="CustomizedTextField">
-                                                    <rect key="frame" x="20" y="7" width="242" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
-                                                    <connections>
-                                                        <outlet property="delegate" destination="8Kn-Df-1EH" id="Mk1-JM-h67"/>
-                                                    </connections>
-                                                </textField>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                        <connections>
-                                            <outlet property="passWordTextField" destination="qtL-Td-vEH" id="wYx-1N-fkJ"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="8Kn-Df-1EH" id="xah-4m-KmE"/>
-                                </connections>
-                            </tableView>
                             <view hidden="YES" alpha="0.40000000596046448" contentMode="scaleToFill" id="mjf-qb-7HR">
                                 <rect key="frame" x="0.0" y="-22" width="320" height="480"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4189,6 +4102,24 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="aL4-Zz-4jR">
+                                <rect key="frame" x="20" y="11" width="280" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="Nuq-xd-eCo" customClass="CustomizedTextField">
+                                <rect key="frame" x="44" y="18" width="256" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -4224,7 +4155,7 @@
                     <connections>
                         <outlet property="loadingView" destination="mjf-qb-7HR" id="YjU-XR-iXh"/>
                         <outlet property="rightButtonItem" destination="C3Z-M6-yRs" id="KLW-uZ-FOv"/>
-                        <outlet property="tableView" destination="nsB-lj-d1j" id="L1d-XJ-hqc"/>
+                        <outlet property="userPropertyTextField" destination="Nuq-xd-eCo" id="xgw-4p-1ZX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tcJ-KH-hVw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4529,6 +4460,341 @@
         <image name="welcomeTrackPredictions.png" width="320" height="568"/>
         <image name="xIcon.png" width="13" height="13"/>
     </resources>
+    <classes>
+        <class className="AddPredictionViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddPredictionViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="cancel:"/>
+                <relationship kind="action" name="predict:"/>
+                <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="categoryButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="categoryPicker" candidateClass="UIPickerView"/>
+                <relationship kind="outlet" name="charsLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="expirationLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="expirationPicker" candidateClass="UIPickerView"/>
+                <relationship kind="outlet" name="navigationBar" candidateClass="UINavigationBar"/>
+                <relationship kind="outlet" name="predictBarButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="textView" candidateClass="UITextView"/>
+            </relationships>
+        </class>
+        <class className="AlertCell" superclassName="PreditionCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AlertCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="alertMarkImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="alertTitle" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="avatarView" candidateClass="BindableView"/>
+            </relationships>
+        </class>
+        <class className="AlertNavigationCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AlertNavigationCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="badgeImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="badgeLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="AlertsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AlertsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="detailsView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="loadingView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="noContentView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="segmentedControlImage" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="AllAlertsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AllAlertsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="AnotherUsersProfileViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AnotherUsersProfileViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="predictionsTableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="userAvatarView" candidateClass="BindableView"/>
+                <relationship kind="outlet" name="userNameLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="userPointsLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="userProfileImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="userTotalPredictionsLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="BadgeCollectionViewCell" superclassName="UICollectionViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/BadgeCollectionViewCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="badgeImageView" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="BadgesCollectionViewController" superclassName="UICollectionViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/BadgesCollectionViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="noContentView" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="BaseTableViewCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/BaseTableViewCell.h"/>
+        </class>
+        <class className="BindableView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/BindableView.h"/>
+            <relationships>
+                <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="CategoryPredictionsViewController" superclassName="HomeViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CategoryPredictionsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="backButtonPressed:" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="ChangePasswordViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ChangePasswordViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="currentPasswordTextField" candidateClass="CustomizedTextField"/>
+                <relationship kind="outlet" name="loadingView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="retypeNewPasswordTextField" candidateClass="CustomizedTextField"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="usersNewPasswordTextField" candidateClass="CustomizedTextField"/>
+            </relationships>
+        </class>
+        <class className="CustomizedTextField" superclassName="UITextField">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomizedTextField.h"/>
+        </class>
+        <class className="ExpiredAlertsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ExpiredAlertsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="ForgotPasswordViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ForgotPasswordViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="errorLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="errorView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="textField" candidateClass="CustomizedTextField"/>
+            </relationships>
+        </class>
+        <class className="HistoryViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/HistoryViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="detailsView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="noContentView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="segmentedControlImage" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="HomeViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/HomeViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="firstStartView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="noContentView" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="LoadableCell" superclassName="BaseTableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoadableCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="loadingView" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="LoadingCell" superclassName="BaseTableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoadingCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
+            </relationships>
+        </class>
+        <class className="LoginViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="errorLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="errorView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="usernameTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="MakePredictionCell" superclassName="LoadableCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MakePredictionCell.h"/>
+        </class>
+        <class className="MyPicksViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MyPicksViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="noContentView" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="MyPredictionsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MyPredictionsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="noContentView" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="NavigationViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NavigationViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="detailsView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="gestureView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="masterView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="menuItemsTableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="movingView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="pointsLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="steakLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="wonLostLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="wonPercantageLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="OutcomeCell" superclassName="LoadableCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/OutcomeCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="promptLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="unfinishedButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="PredictionCategoryCell" superclassName="BaseTableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PredictionCategoryCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="button" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="PredictionDetailsCell" superclassName="PreditionCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PredictionDetailsCell.h"/>
+        </class>
+        <class className="PredictionDetailsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PredictionDetailsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="agreeButtonTapped:" candidateClass="UIButton"/>
+                <relationship kind="action" name="backButtonPressed:" candidateClass="UIButton"/>
+                <relationship kind="action" name="bsButtonTapped:" candidateClass="UIButton"/>
+                <relationship kind="action" name="categoryButtonTapped:" candidateClass="UIButton"/>
+                <relationship kind="action" name="disagreeButtonTapped:" candidateClass="UIButton"/>
+                <relationship kind="action" name="hidePicker:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="action" name="noButtonTapped:" candidateClass="UIButton"/>
+                <relationship kind="action" name="unfinishButtonTapped:" candidateClass="UIButton"/>
+                <relationship kind="action" name="unfinishPrediction:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="action" name="yesButtonTapped:" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="pickerViewHolder" candidateClass="UIView"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="PredictionStatusCell" superclassName="LoadableCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PredictionStatusCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="bsButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="bsView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="pointsLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="PredictorCell" superclassName="BaseTableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PredictorCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="agreedUserName" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="disagreedUserName" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="PredictorsCountCell" superclassName="BaseTableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PredictorsCountCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="agreedLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="disagreedLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="PreditionCell" superclassName="BaseTableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PreditionCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="agreeImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="agreeQuestionView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="avatarView" candidateClass="BindableView"/>
+                <relationship kind="outlet" name="bodyLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="disagreeImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="disagreeQuestionView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="expirationDateLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="guessMarkImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="metadataLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="usernameLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="ProfileCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfileCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="avatarView" candidateClass="BindableView"/>
+                <relationship kind="outlet" name="userNameLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="ProfileViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfileViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="accountDetailsTableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="leftNavigationBarItem" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="loginLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="pointsLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="profileAvatarView" candidateClass="BindableView"/>
+            </relationships>
+        </class>
+        <class className="SelectPictureViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SelectPictureViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="backButtonPressed:" candidateClass="UIButton"/>
+                <relationship kind="action" name="doneButtontapped:"/>
+                <relationship kind="action" name="pictureButtonTapped:"/>
+                <relationship kind="outlet" name="doneButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="loadingView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="pictureButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="SignUpViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SignUpViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="emailTextFiled" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="errorLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="errorView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="usernameTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="TermsOfServiceViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TermsOfServiceViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+        <class className="UICollectionReusableView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionReusableView.h"/>
+        </class>
+        <class className="UICollectionViewCell" superclassName="UICollectionReusableView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewCell.h"/>
+        </class>
+        <class className="UICollectionViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewController.h"/>
+        </class>
+        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
+        </class>
+        <class className="UsernameEmailChangeViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UsernameEmailChangeViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="loadingView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="rightButtonItem" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="userPropertyTextField" candidateClass="CustomizedTextField"/>
+            </relationships>
+        </class>
+        <class className="WelcomeViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/WelcomeViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="contentView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="loadingView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="pagingScroll" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="promotionLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
@@ -4539,9 +4805,9 @@
         <segue reference="jDp-TX-Mpj"/>
         <segue reference="ufA-86-Qke"/>
         <segue reference="CM5-5K-qH1"/>
-        <segue reference="m1B-jn-2wq"/>
         <segue reference="qdw-34-WFW"/>
-        <segue reference="ONf-EH-HA5"/>
+        <segue reference="m1B-jn-2wq"/>
         <segue reference="ebR-4n-eVY"/>
+        <segue reference="vOL-Z6-T0L"/>
     </inferredMetricsTieBreakers>
 </document>

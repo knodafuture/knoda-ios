@@ -8,32 +8,21 @@
 
 #import "ChangePasswordViewController.h"
 #import "ChangePasswordRequest.h"
-#import "PasswordCell.h"
 #import "LoginWebRequest.h"
 #import "AppDelegate.h"
-
-static NSString * const kOldPasswordCellIdentifier = @"OldPasswordCell";
-static NSString * const kNewPasswordCellIdentifier = @"NewPasswordCell";
-static NSString * const kRetypeNewPasswordCellIdentifier = @"NewPasswordRetypeCell";
-
-static NSInteger const kCurrentPasswordTextFieldTag = 101;
-static NSInteger const kNewPasswordTextFieldTag = 102;
-static NSInteger const kRetypeNewPasswordTextFieldTag = 103;
-
-static NSInteger const kKeyboardHeight = 216;
+#import "CustomizedTextField.h"
 
 @interface ChangePasswordViewController ()
 
-@property (weak, nonatomic) IBOutlet UITableView *passwordsTableView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-
-@property (nonatomic, strong) NSString *usersNewPassword;
-@property (nonatomic, strong) NSString *currentPassword;
-@property (nonatomic, strong) NSString *retypeNewPassword;
 
 @property (nonatomic, readonly) AppDelegate* appDelegate;
 
 @property (weak, nonatomic) IBOutlet UIView *loadingView;
+
+@property (weak, nonatomic) IBOutlet CustomizedTextField *retypeNewPasswordTextField;
+@property (weak, nonatomic) IBOutlet CustomizedTextField *currentPasswordTextField;
+@property (weak, nonatomic) IBOutlet CustomizedTextField *usersNewPasswordTextField;
 
 @end
 
@@ -42,7 +31,6 @@ static NSInteger const kKeyboardHeight = 216;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.passwordsTableView.backgroundView = nil;
     NSInteger scrollContentHeight = self.scrollView.frame.size.height;
     scrollContentHeight = scrollContentHeight > 480 ? scrollContentHeight * 1.05 : scrollContentHeight * 1.23;
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, scrollContentHeight);
@@ -68,16 +56,16 @@ static NSInteger const kKeyboardHeight = 216;
 }
 
 - (void) changePassword {
-    
-    [self setUpPasswordsValues];
-    
+
     if (![self passwordsFilledInCorrect]) {
         return;
     }
     
+    [self eraseTextFieldsText];
+    
     self.loadingView.hidden = NO;
     
-    ChangePasswordRequest * changePasswordRequest = [[ChangePasswordRequest alloc]initWithCurrentPassword:self.currentPassword newPassword:self.usersNewPassword];
+    ChangePasswordRequest * changePasswordRequest = [[ChangePasswordRequest alloc]initWithCurrentPassword:self.currentPasswordTextField.text newPassword:self.usersNewPasswordTextField.text];
     [changePasswordRequest executeWithCompletionBlock:^{
         
         UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:nil message:nil delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
@@ -86,11 +74,10 @@ static NSInteger const kKeyboardHeight = 216;
             alertView.title = NSLocalizedString(@"Succes", @"");
             alertView.message = NSLocalizedString(@"Password has been changed succesfully", @"");
             
-            LoginWebRequest *loginRequest = [[LoginWebRequest alloc] initWithUsername:self.appDelegate.user.name password:self.usersNewPassword];
+            LoginWebRequest *loginRequest = [[LoginWebRequest alloc] initWithUsername:self.appDelegate.user.name password:self.usersNewPasswordTextField.text];
             [loginRequest executeWithCompletionBlock:^{
                 self.loadingView.hidden = YES;
                 if(loginRequest.isSucceeded) {
-                    [self eraseTextFieldsText];
                     [self.appDelegate.user updateWithObject:loginRequest.user];
                     [self.navigationController popViewControllerAnimated:YES];
                 }
@@ -114,8 +101,8 @@ static NSInteger const kKeyboardHeight = 216;
 
 - (BOOL) passwordsFilledInCorrect {
     UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") message:nil delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-    if (([self.currentPassword length] > 5)&&([self.usersNewPassword length] > 5)&&([self.retypeNewPassword length] > 5)) {
-        if ([self.usersNewPassword isEqualToString:self.retypeNewPassword]) {
+    if (([self.currentPasswordTextField.text length] > 5)&&([self.usersNewPasswordTextField.text length] > 5)&&([self.retypeNewPasswordTextField.text length] > 5)) {
+        if ([self.usersNewPasswordTextField.text isEqualToString:self.retypeNewPasswordTextField.text]) {
             return YES;
         }
         else {
@@ -134,9 +121,9 @@ static NSInteger const kKeyboardHeight = 216;
 #pragma mark - TextField delegate
 
 - (void) eraseTextFieldsText {
-    [(UITextField *)[self.view viewWithTag:kCurrentPasswordTextFieldTag]setText:@""];
-    [(UITextField *)[self.view viewWithTag:kNewPasswordTextFieldTag]setText:@""];
-    [(UITextField *)[self.view viewWithTag:kRetypeNewPasswordTextFieldTag]setText:@""];
+    self.currentPasswordTextField.text = @"";
+    self.usersNewPasswordTextField.text = @"";
+    self.retypeNewPasswordTextField.text = @"";
     
     [self.scrollView scrollsToTop];
     self.scrollView.scrollEnabled = NO;
@@ -149,19 +136,17 @@ static NSInteger const kKeyboardHeight = 216;
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
-    switch (textField.tag) {
-        case 101: 
-            [(UITextField *)[self.view viewWithTag:102]becomeFirstResponder];
-            break;
-        case 102: 
-            [(UITextField *)[self.view viewWithTag:103]becomeFirstResponder];
-            break;
-        case 103: 
-            [self changePassword];
-            break;
-        default:
-            break;
+    
+    if (textField == self.currentPasswordTextField) {
+        [self.usersNewPasswordTextField becomeFirstResponder];
     }
+    else if (textField == self.usersNewPasswordTextField) {
+        [self.retypeNewPasswordTextField becomeFirstResponder];
+    }
+    else if (textField == self.retypeNewPasswordTextField) {
+        [self changePassword];
+    }
+    
     return YES;
 }
 
@@ -171,44 +156,6 @@ static NSInteger const kKeyboardHeight = 216;
         return NO;
     }
     return YES;
-}
-
-- (void) setUpPasswordsValues {
-    self.currentPassword = ((UITextField *)[self.view viewWithTag:kCurrentPasswordTextFieldTag]).text;
-    self.usersNewPassword = ((UITextField *)[self.view viewWithTag:kNewPasswordTextFieldTag]).text;
-    self.retypeNewPassword = ((UITextField *)[self.view viewWithTag:kRetypeNewPasswordTextFieldTag]).text;
-}
-
-#pragma mark - TableView datasource
-
-- (NSInteger) numberOfSectionsInTableView: (UITableView*) tableView
-{
-    return 2;
-}
-
-- (NSInteger) tableView: (UITableView*) tableView numberOfRowsInSection: (NSInteger) section
-{
-    if (section == 0) {
-        return 1;
-    }
-    else {
-        return 2;
-    }
-}
-
-- (UITableViewCell*) tableView: (UITableView*) tableView cellForRowAtIndexPath: (NSIndexPath*) indexPath
-{
-    NSString* identefier = @"";
-   
-    if (indexPath.section == 0) {
-        identefier = kOldPasswordCellIdentifier;
-    }
-    else {
-        identefier = (indexPath.row == 0) ? kNewPasswordCellIdentifier : kRetypeNewPasswordCellIdentifier;
-    }
-
-    PasswordCell * cell = [tableView dequeueReusableCellWithIdentifier: identefier];
-    return cell;
 }
 
 @end

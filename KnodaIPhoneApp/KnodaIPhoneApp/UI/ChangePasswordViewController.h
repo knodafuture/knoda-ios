@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ChangePasswordViewController : UIViewController <UITextFieldDelegate>
+@interface ChangePasswordViewController : UIViewController <UITextFieldDelegate,UIScrollViewDelegate>
 
 @end

@@ -17,23 +17,29 @@
 #import "UsernameEmailChangeViewController.h"
 #import "AddPredictionViewController.h"
 #import "UIImage+Utils.h"
+#import "ImageCropperViewController.h"
 
 static NSString * const accountDetailsTableViewCellIdentifier = @"accountDetailsTableViewCellIdentifier";
 
 static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 static NSString* const kChangeEmailUsernameSegue = @"UsernameEmailSegue";
 static NSString* const kChangePasswordSegue = @"ChangePasswordSegue";
+static NSString* const kImageCropperSegue = @"ImageCropperSegue";
 
 static const int kDefaultAvatarsCount = 5;
 
-@interface ProfileViewController () <AddPredictionViewControllerDelegate>
+static const float kAvatarSize = 172.0;
+#define AVATAR_SIZE CGSizeMake(kAvatarSize, kAvatarSize)
+
+@interface ProfileViewController () <AddPredictionViewControllerDelegate, ImageCropperDelegate> {
+    int _loadingsCount;
+}
 
 @property (weak, nonatomic) IBOutlet UIView *activityView;
 @property (nonatomic, strong) AppDelegate * appDelegate;
 @property (nonatomic, strong) NSArray * accountDetailsArray;
 @property (weak, nonatomic) IBOutlet UIButton *leftNavigationBarItem;
 @property (nonatomic, strong) UIActionSheet *avatarChangeAcitonSheet;
-@property (nonatomic) UIImage *avatarImage;
 
 @end
 
@@ -67,10 +73,10 @@ static const int kDefaultAvatarsCount = 5;
 }
 
 - (void) fillInUsersInformation {
-    self.activityView.hidden = NO;
+    [self showLoadingView];
     ProfileWebRequest *profileWebRequest = [[ProfileWebRequest alloc]init];
     [profileWebRequest executeWithCompletionBlock:^{
-        self.activityView.hidden = YES;
+        [self hideLoadingView];
         
         if (profileWebRequest.isSucceeded)
         {
@@ -84,6 +90,18 @@ static const int kDefaultAvatarsCount = 5;
         self.accountDetailsArray = [NSArray arrayWithObjects:self.appDelegate.user.name,user.email,NSLocalizedString(@"Change Password", @""), nil];
         [self.accountDetailsTableView reloadData];
     }];
+}
+
+- (void)showLoadingView {
+    self.activityView.hidden = NO;
+    _loadingsCount++;
+}
+
+- (void)hideLoadingView {
+    if(--_loadingsCount <= 0) {
+        self.activityView.hidden = YES;
+        _loadingsCount = 0;
+    }
 }
 
 - (IBAction)signOut:(id)sender {
@@ -134,15 +152,10 @@ static const int kDefaultAvatarsCount = 5;
     [self presentViewController:pickerVC animated:YES completion:nil];
 }
 
-- (void)setDefaultAvatar {
-    NSString *imgName = [NSString stringWithFormat:@"avatar_%d.png", (arc4random() % kDefaultAvatarsCount + 1)];
-    self.avatarImage = [UIImage imageNamed:imgName];
-}
+- (void)sendAvatar:(UIImage *)image {
+    ProfileWebRequest *profileRequest = [[ProfileWebRequest alloc] initWithAvatar:image];
 
-- (void)sendAvatar {
-    ProfileWebRequest *profileRequest = [[ProfileWebRequest alloc] initWithAvatar:self.avatarImage];
-
-    self.activityView.hidden = NO;
+    [self showLoadingView];
     
     [profileRequest executeWithCompletionBlock:^{
         if(profileRequest.isSucceeded) {
@@ -150,13 +163,13 @@ static const int kDefaultAvatarsCount = 5;
             [updateRequest executeWithCompletionBlock:^{
                 if(updateRequest.isSucceeded) {
                     [[(AppDelegate *)[[UIApplication sharedApplication] delegate] user] updateWithObject:updateRequest.user];
-                    self.profileAvatarView.imageView.image = self.avatarImage;
-                    self.activityView.hidden = YES;
+                    self.profileAvatarView.imageView.image = image;
+                    [self hideLoadingView];
                 }
             }];
         }
         else {
-            self.activityView.hidden = YES;
+            [self hideLoadingView];
             [[[UIAlertView alloc] initWithTitle:nil
                                         message:profileRequest.localizedErrorDescription
                                        delegate:nil
@@ -172,8 +185,15 @@ static const int kDefaultAvatarsCount = 5;
     [self dismissViewControllerAnimated:YES completion:^{
         UIImage *img = info[UIImagePickerControllerOriginalImage];
         if(img) {
-            self.avatarImage = [img scaledToSize:self.profileAvatarView.imageView.frame.size];
-            [self sendAvatar];
+            if(img.size.width < kAvatarSize || img.size.height < kAvatarSize) {
+                img = [img scaledToSize:AVATAR_SIZE];
+            }
+            if(CGSizeEqualToSize(img.size, AVATAR_SIZE)) {
+                [self sendAvatar:img];
+            }
+            else {
+                [self performSegueWithIdentifier:kImageCropperSegue sender:img];
+            }
         }
     }];
 }
@@ -182,6 +202,16 @@ static const int kDefaultAvatarsCount = 5;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark ImageCropperDelegate
+
+- (void)imageCropperDidCancel:(ImageCropperViewController *)vc {
+    [vc dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imageCropper:(ImageCropperViewController *)vc didCroppedImage:(UIImage *)image {
+    [self sendAvatar:image];
+    [vc dismissViewControllerAnimated:YES completion:nil];
+}
 
 #pragma mark - Segues
 
@@ -194,6 +224,12 @@ static const int kDefaultAvatarsCount = 5;
     else if ([segue.identifier isEqualToString:kChangeEmailUsernameSegue]) {        
         UsernameEmailChangeViewController *vc =(UsernameEmailChangeViewController*)segue.destinationViewController;
         vc.userProperyChangeType = [sender integerValue];
+    }
+    else if([segue.identifier isEqualToString:kImageCropperSegue]) {
+        ImageCropperViewController *vc = (ImageCropperViewController *)segue.destinationViewController;
+        vc.image    = sender;
+        vc.delegate = self;
+        vc.cropSize = AVATAR_SIZE;
     }
 }
 
@@ -215,8 +251,10 @@ static const int kDefaultAvatarsCount = 5;
                 [self showImagePickerWithSource:(buttonIndex ? UIImagePickerControllerSourceTypePhotoLibrary : UIImagePickerControllerSourceTypeCamera)];
                 break;
             case 2: //skip
-                [self setDefaultAvatar];
-                [self sendAvatar];
+            {
+                NSString *imgName = [NSString stringWithFormat:@"avatar_%d.png", (arc4random() % kDefaultAvatarsCount + 1)];
+                [self sendAvatar:[UIImage imageNamed:imgName]];
+            }
             default: //continue
                 break;
         }

@@ -12,9 +12,16 @@
 
 - (UIImage *)scaledToSize:(CGSize)size; {
     
-    UIGraphicsBeginImageContextWithOptions(size, NO, [[UIScreen mainScreen] scale]);
+    float w = self.size.width;
+    float h = self.size.height;
     
-    [self drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    float ratio = w < h ? size.width / w : size.height / h;
+    
+    CGRect rect = CGRectMake(0, 0, w * ratio, h * ratio);
+    
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, [[UIScreen mainScreen] scale]);
+    
+    [self drawInRect:rect];
     
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     

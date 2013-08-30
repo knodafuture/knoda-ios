@@ -62,13 +62,12 @@ static const int kBSAlertTag = 1001;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *pickerViewHolder;
+@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 
 @property (nonatomic) NSArray *agreedUsers;
 @property (nonatomic) NSArray *disagreedUsers;
 
 @property (nonatomic) NSMutableArray *requests;
-
-@property (nonatomic) NSString *expString;
 
 @end
 
@@ -83,8 +82,6 @@ static const int kBSAlertTag = 1001;
     
     _loadingUsers = YES;
     [self updateUsers];
-    
-    self.expString = [[AddPredictionViewController expirationStrings] objectAtIndex:0];
     
     CGRect frame = self.pickerViewHolder.frame;
     frame.origin.y = self.view.frame.size.height;
@@ -129,6 +126,9 @@ static const int kBSAlertTag = 1001;
 }
 
 - (IBAction)unfinishButtonTapped:(UIButton *)sender {
+    self.datePicker.minimumDate = [NSDate dateWithTimeInterval:(10 * 60) sinceDate:[NSDate date]];
+    self.datePicker.maximumDate = [NSDate dateWithTimeInterval:(7 * 24 * 60 * 60) sinceDate:[NSDate date]];
+    self.datePicker.date = self.datePicker.minimumDate;
     [self showView:self.pickerViewHolder];
 }
 
@@ -139,7 +139,7 @@ static const int kBSAlertTag = 1001;
 - (IBAction)unfinishPrediction:(UIBarButtonItem *)sender {
     _updatingStatus = YES;
     
-    NSDate *expDate = [AddPredictionViewController dateForExpirationString:self.expString];
+    NSDate *expDate = self.datePicker.date;
     
     __weak PredictionDetailsViewController *weakSelf = self;
     
@@ -166,7 +166,8 @@ static const int kBSAlertTag = 1001;
                         [strongSelf showErrorFromRequest:request];
                     }
                     
-                    [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowOutcome]] withRowAnimation:UITableViewRowAnimationAutomatic];
+                    [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowOutcome], [strongSelf indexPathForCellType:RowPrediction]]
+                                                withRowAnimation:UITableViewRowAnimationAutomatic];
                 }];
             }
             else {
@@ -544,29 +545,9 @@ static const int kBSAlertTag = 1001;
     }
 }
 
-#pragma mark - UIPickerViewDataSource
-
-- (NSInteger) numberOfComponentsInPickerView: (UIPickerView*) pickerView {
-    return 1;
-}
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return [AddPredictionViewController expirationStrings].count;
-}
-
-#pragma mark UIPickerViewDelegate
-
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    return [[AddPredictionViewController expirationStrings] objectAtIndex:row];
-}
-
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    self.expString = [self pickerView:pickerView titleForRow:row forComponent:component];
-}
-
 #pragma mark - Date Picker
 
-- (void)showView:(UIView *)view {    
+- (void)showView:(UIView *)view {
     UIViewAnimationCurve animationCurve = UIViewAnimationCurveEaseInOut;
     NSTimeInterval duration = 0.3;
     

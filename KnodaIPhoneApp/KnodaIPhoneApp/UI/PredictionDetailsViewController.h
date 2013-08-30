@@ -14,7 +14,7 @@
 
 @protocol AddPredictionViewControllerDelegate;
 
-@interface PredictionDetailsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
+@interface PredictionDetailsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) Prediction *prediction;
 

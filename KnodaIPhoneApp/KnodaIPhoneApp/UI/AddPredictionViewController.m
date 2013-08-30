@@ -27,6 +27,7 @@ static const int kPredictionCharsLimit = 300;
 @property (nonatomic, strong) IBOutlet UIView* activityView;
 @property (nonatomic, strong) IBOutlet UILabel* charsLabel;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *predictBarButton;
+@property (nonatomic, strong) IBOutlet UIView* touchView;
 
 @property (nonatomic, strong) NSArray* categories;
 @property (nonatomic, strong) NSArray* expirationStrings;
@@ -94,8 +95,17 @@ static const int kPredictionCharsLimit = 300;
 }
 
 
+- (IBAction) touchViewTapped: (id) sender
+{
+    [self hidePicker: self.categoryPicker];
+    [self hidePicker: self.expirationPicker];
+}
+
+
 - (void) showPicker: (UIPickerView*) picker
 {
+    self.touchView.hidden = NO;
+    
     if ([self.textView isFirstResponder])
     {
         [self.textView resignFirstResponder];
@@ -118,6 +128,8 @@ static const int kPredictionCharsLimit = 300;
 
 - (void) hidePicker: (UIPickerView*) picker
 {
+    self.touchView.hidden = YES;
+    
     UIViewAnimationCurve animationCurve = UIViewAnimationCurveEaseInOut;
     NSTimeInterval duration = 0.3;
     

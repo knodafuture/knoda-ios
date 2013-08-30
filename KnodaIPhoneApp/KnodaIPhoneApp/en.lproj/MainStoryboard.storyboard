@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11G63b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ZKQ-aW-8t7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ZKQ-aW-8t7">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -943,7 +943,7 @@
             <objects>
                 <viewController id="JIu-QZ-Vpd" customClass="ImageCropperViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="f2o-64-ZKA">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" id="cZB-W0-VyE">
@@ -1157,7 +1157,7 @@
             <objects>
                 <viewController title="KNODA" id="sd8-UN-EgX" customClass="TermsOfServiceViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zB2-xd-zLn">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="588"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="588"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" id="ioX-jH-d29">
@@ -3178,12 +3178,31 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <outlet property="delegate" destination="kaP-3O-9VE" id="1WK-Mo-4fb"/>
                                 </connections>
                             </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" id="SWv-3I-bst">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="498"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="noContent.png" id="jhG-tC-jlD">
+                                        <rect key="frame" x="89" y="64" width="143" height="143"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Waiting for you to win or lose a prediction. Or for one of your own predictions to expire. " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0RB-Wj-nwt">
+                                        <rect key="frame" x="44" y="233" width="233" height="68"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                        <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="noContentView" destination="SWv-3I-bst" id="DGz-xw-Kfi"/>
                         <outlet property="tableView" destination="qay-9m-qT1" id="mCb-ZU-5hv"/>
                         <segue destination="wNN-TM-pOg" kind="push" identifier="PredictionDetailsSegue" id="7J3-4U-wrw"/>
                     </connections>
@@ -3337,12 +3356,31 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <outlet property="delegate" destination="vbf-gQ-kwZ" id="uNv-8O-hNg"/>
                                 </connections>
                             </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" id="1b7-uA-odU">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="498"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="noContent.png" id="anj-9Q-w4L">
+                                        <rect key="frame" x="89" y="64" width="143" height="143"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Waiting for one of your predictions to expire." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2Hy-Tg-g4T">
+                                        <rect key="frame" x="44" y="233" width="233" height="68"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                        <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="noContentView" destination="1b7-uA-odU" id="4iT-Gf-lwV"/>
                         <outlet property="tableView" destination="tYC-6h-Nmh" id="RxN-Mv-CyQ"/>
                         <segue destination="wNN-TM-pOg" kind="push" identifier="PredictionDetailsSegue" id="2Xa-rF-3p5"/>
                     </connections>
@@ -4021,7 +4059,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <viewController id="iWN-09-37c" customClass="ChangePasswordViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Iol-eh-d6m">
-                        <rect key="frame" x="0.0" y="44" width="320" height="544"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="544"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view hidden="YES" alpha="0.40000000596046448" contentMode="scaleToFill" id="bma-s7-Zqx">
@@ -4163,7 +4201,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <viewController id="8Kn-Df-1EH" customClass="UsernameEmailChangeViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="knP-tV-O4A">
-                        <rect key="frame" x="0.0" y="44" width="320" height="544"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="544"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view hidden="YES" alpha="0.40000000596046448" contentMode="scaleToFill" id="mjf-qb-7HR">
@@ -4242,7 +4280,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <tableViewController id="7fT-Te-TB1" customClass="CategoryPredictionsViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="88" sectionHeaderHeight="22" sectionFooterHeight="22" id="2jP-nc-KCP">
-                        <rect key="frame" x="0.0" y="64" width="320" height="524"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="524"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -4535,365 +4573,20 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="welcomeTrackPredictions.png" width="320" height="568"/>
         <image name="xIcon.png" width="13" height="13"/>
     </resources>
-    <classes>
-        <class className="AddPredictionViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddPredictionViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="cancel:"/>
-                <relationship kind="action" name="predict:"/>
-                <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="categoryButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="categoryPicker" candidateClass="UIPickerView"/>
-                <relationship kind="outlet" name="charsLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="expirationLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="expirationPicker" candidateClass="UIPickerView"/>
-                <relationship kind="outlet" name="navigationBar" candidateClass="UINavigationBar"/>
-                <relationship kind="outlet" name="predictBarButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="textView" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="touchView" candidateClass="UIView"/>
-            </relationships>
-        </class>
-        <class className="AlertCell" superclassName="PreditionCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AlertCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="alertMarkImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="alertTitle" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="avatarView" candidateClass="BindableView"/>
-            </relationships>
-        </class>
-        <class className="AlertNavigationCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AlertNavigationCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="badgeImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="badgeLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="AlertsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AlertsViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="detailsView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="loadingView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="noContentView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="segmentedControlImage" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="AllAlertsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AllAlertsViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="AnotherUsersProfileViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AnotherUsersProfileViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="predictionsTableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="userAvatarView" candidateClass="BindableView"/>
-                <relationship kind="outlet" name="userNameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="userPointsLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="userProfileImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="userTotalPredictionsLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="BadgeCollectionViewCell" superclassName="UICollectionViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/BadgeCollectionViewCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="badgeImageView" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="BadgesCollectionViewController" superclassName="UICollectionViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/BadgesCollectionViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="noContentView" candidateClass="UIView"/>
-            </relationships>
-        </class>
-        <class className="BaseTableViewCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/BaseTableViewCell.h"/>
-        </class>
-        <class className="BindableView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/BindableView.h"/>
-            <relationships>
-                <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
-                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="CategoryPredictionsViewController" superclassName="HomeViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CategoryPredictionsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="backButtonPressed:" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="ChangePasswordViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ChangePasswordViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="currentPasswordTextField" candidateClass="CustomizedTextField"/>
-                <relationship kind="outlet" name="loadingView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="retypeNewPasswordTextField" candidateClass="CustomizedTextField"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="usersNewPasswordTextField" candidateClass="CustomizedTextField"/>
-            </relationships>
-        </class>
-        <class className="CustomizedTextField" superclassName="UITextField">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomizedTextField.h"/>
-        </class>
-        <class className="ExpiredAlertsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ExpiredAlertsViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="ForgotPasswordViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ForgotPasswordViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="errorLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="errorView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="textField" candidateClass="CustomizedTextField"/>
-            </relationships>
-        </class>
-        <class className="HistoryViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/HistoryViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="detailsView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="noContentView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="segmentedControlImage" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="HomeViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/HomeViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="firstStartImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="firstStartView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="noContentView" candidateClass="UIView"/>
-            </relationships>
-        </class>
-        <class className="ImageCropperViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ImageCropperViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="cancelButtonTapped:" candidateClass="UIBarButtonItem"/>
-                <relationship kind="action" name="doneButtonTapped:" candidateClass="UIBarButtonItem"/>
-            </relationships>
-        </class>
-        <class className="LoadableCell" superclassName="BaseTableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoadableCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
-                <relationship kind="outlet" name="loadingView" candidateClass="UIView"/>
-            </relationships>
-        </class>
-        <class className="LoadingCell" superclassName="BaseTableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoadingCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
-            </relationships>
-        </class>
-        <class className="LoginViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="errorLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="errorView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="usernameTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="MakePredictionCell" superclassName="LoadableCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MakePredictionCell.h"/>
-        </class>
-        <class className="MyPicksViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MyPicksViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="noContentView" candidateClass="UIView"/>
-            </relationships>
-        </class>
-        <class className="MyPredictionsViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MyPredictionsViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="noContentView" candidateClass="UIView"/>
-            </relationships>
-        </class>
-        <class className="NavigationViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NavigationViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="detailsView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="gestureView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="masterView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="menuItemsTableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="movingView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="pointsLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="steakLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="wonLostLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="wonPercantageLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="OutcomeCell" superclassName="LoadableCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/OutcomeCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="promptLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="unfinishedButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="PredictionCategoryCell" superclassName="BaseTableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PredictionCategoryCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="button" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="PredictionDetailsCell" superclassName="PreditionCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PredictionDetailsCell.h"/>
-        </class>
-        <class className="PredictionDetailsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PredictionDetailsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="agreeButtonTapped:" candidateClass="UIButton"/>
-                <relationship kind="action" name="backButtonPressed:" candidateClass="UIButton"/>
-                <relationship kind="action" name="bsButtonTapped:" candidateClass="UIButton"/>
-                <relationship kind="action" name="categoryButtonTapped:" candidateClass="UIButton"/>
-                <relationship kind="action" name="disagreeButtonTapped:" candidateClass="UIButton"/>
-                <relationship kind="action" name="hidePicker:" candidateClass="UIBarButtonItem"/>
-                <relationship kind="action" name="noButtonTapped:" candidateClass="UIButton"/>
-                <relationship kind="action" name="unfinishButtonTapped:" candidateClass="UIButton"/>
-                <relationship kind="action" name="unfinishPrediction:" candidateClass="UIBarButtonItem"/>
-                <relationship kind="action" name="yesButtonTapped:" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
-                <relationship kind="outlet" name="pickerViewHolder" candidateClass="UIView"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="PredictionStatusCell" superclassName="LoadableCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PredictionStatusCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="bsButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="bsView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="pointsLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="PredictorCell" superclassName="BaseTableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PredictorCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="agreedUserName" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="disagreedUserName" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="PredictorsCountCell" superclassName="BaseTableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PredictorsCountCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="agreedLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="disagreedLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="PreditionCell" superclassName="BaseTableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PreditionCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="agreeImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="agreeQuestionView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="avatarView" candidateClass="BindableView"/>
-                <relationship kind="outlet" name="bodyLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="disagreeImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="disagreeQuestionView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="expirationDateLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="guessMarkImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="metadataLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="usernameLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="ProfileCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfileCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="avatarView" candidateClass="BindableView"/>
-                <relationship kind="outlet" name="userNameLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="ProfileViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfileViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="accountDetailsTableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="leftNavigationBarItem" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="loginLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="pointsLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="profileAvatarView" candidateClass="BindableView"/>
-            </relationships>
-        </class>
-        <class className="SelectPictureViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SelectPictureViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="backButtonPressed:" candidateClass="UIButton"/>
-                <relationship kind="action" name="doneButtontapped:"/>
-                <relationship kind="action" name="pictureButtonTapped:"/>
-                <relationship kind="outlet" name="doneButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="loadingView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="pictureButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="SignUpViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SignUpViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="emailTextFiled" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="errorLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="errorView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="usernameTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="TermsOfServiceViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TermsOfServiceViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-        <class className="UICollectionReusableView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionReusableView.h"/>
-        </class>
-        <class className="UICollectionViewCell" superclassName="UICollectionReusableView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewCell.h"/>
-        </class>
-        <class className="UICollectionViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewController.h"/>
-        </class>
-        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
-        </class>
-        <class className="UsernameEmailChangeViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UsernameEmailChangeViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="loadingView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="rightButtonItem" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="userPropertyTextField" candidateClass="CustomizedTextField"/>
-            </relationships>
-        </class>
-        <class className="WelcomeViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/WelcomeViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="contentView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="loadingView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="pagingScroll" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="promotionLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="mnN-YR-PTq"/>
         <segue reference="jDp-TX-Mpj"/>
         <segue reference="ufA-86-Qke"/>
-        <segue reference="mnN-YR-PTq"/>
-        <segue reference="IMX-a1-Bbr"/>
+        <segue reference="W7Q-BW-b5o"/>
         <segue reference="CM5-5K-qH1"/>
         <segue reference="vCM-j3-I2J"/>
         <segue reference="pyY-qR-NzL"/>
-        <segue reference="vNo-cL-etu"/>
         <segue reference="ebR-4n-eVY"/>
+        <segue reference="vNo-cL-etu"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -24,6 +24,7 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 
 @property (nonatomic, strong) NSArray* alerts;
 @property (nonatomic, strong) IBOutlet UITableView* tableView;
+@property (weak, nonatomic) IBOutlet UIView *noContentView;
 
 @end
 
@@ -80,6 +81,9 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
                           }
                       }];
                  }
+             }
+             else {
+                 self.noContentView.hidden = NO;
              }
          }
      }];

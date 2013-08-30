@@ -64,4 +64,6 @@ typedef void (^RequestCompletionBlock)(void);
 - (void) executeWithCompletionBlock: (RequestCompletionBlock) completion;
 - (void) cancel;
 
+- (NSString *) baseUrlString;
+
 @end

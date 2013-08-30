@@ -273,6 +273,10 @@ static const char *MULTIPART_CHARS = "1234567890_-qwertyuiopasdfghjklzxcvbnmQWER
 
 #pragma mark Public methods
 
+- (NSString *) baseUrlString {
+    return kBaseURL;
+}
+
 
 - (void) executeWithCompletionBlock: (RequestCompletionBlock) completion
 {

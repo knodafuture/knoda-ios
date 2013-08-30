@@ -35,26 +35,7 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
     [super viewDidLoad];
     self.navigationController.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, self.navigationController.navigationBar.frame.size.height);
     [self.navigationController.navigationBar setTitleVerticalPositionAdjustment:5 forBarMetrics:UIBarMetricsDefault];
-    self.loadingView.hidden = NO;
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    self.loadingView.hidden = NO;
-    AllAlertsWebRequest* request = [[AllAlertsWebRequest alloc] init];
-    __weak AlertsViewController *weakSelf = self;
-    
-    [request executeWithCompletionBlock: ^
-     {
-         if (request.errorCode == 0)
-         {
-             AlertsViewController *strongSelf = weakSelf;
-             if(strongSelf) {
-                 self.loadingView.hidden = YES;
-                 request.predictions.count > 0 ? [strongSelf performSegueWithIdentifier: @"AllAlertsSegue" sender: strongSelf] : [strongSelf setUpNoContentViewHidden:NO];
-             }
-         }
-     }];
-
+    [self performSegueWithIdentifier: @"AllAlertsSegue" sender: self];
 }
 
 - (void) setUpNoContentViewHidden: (BOOL) hidden {

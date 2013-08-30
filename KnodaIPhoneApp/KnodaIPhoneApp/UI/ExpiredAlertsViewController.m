@@ -18,6 +18,7 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 
 @property (nonatomic, strong) NSArray* alerts;
 @property (nonatomic, strong) IBOutlet UITableView* tableView;
+@property (weak, nonatomic) IBOutlet UIView *noContentView;
 
 @end
 
@@ -41,10 +42,15 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
          }
          if (request.errorCode == 0)
          {
-             NSLog(@"Expired alerts: %@", request.predictions);
-             
-             strongSelf.alerts = request.predictions;
-             [strongSelf.tableView reloadData];
+             if (request.predictions.count > 0) {
+                 NSLog(@"Expired alerts: %@", request.predictions);
+                 
+                 strongSelf.alerts = request.predictions;
+                 [strongSelf.tableView reloadData];
+             }
+             else {
+                 self.noContentView.hidden = NO;
+             }
          }
      }];
 }

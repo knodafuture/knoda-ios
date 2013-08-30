@@ -181,6 +181,9 @@ static NSString* const kImageCropperSegue = @"ImageCropperSegue";
 }
 
 - (void)imageCropper:(ImageCropperViewController *)vc didCroppedImage:(UIImage *)image {
+    if(!CGSizeEqualToSize(image.size, AVATAR_SIZE)) {
+        image = [image scaledToSize:AVATAR_SIZE];
+    }
     self.avatarImage = image;
     [vc dismissViewControllerAnimated:YES completion:nil];
 }

@@ -60,15 +60,13 @@
     if (![self passwordsFilledInCorrect]) {
         return;
     }
-    
-    [self eraseTextFieldsText];
-    
+    [self hideKeyboard];
     self.loadingView.hidden = NO;
     
     ChangePasswordRequest * changePasswordRequest = [[ChangePasswordRequest alloc] initWithCurrentPassword:self.currentPasswordTextField.text newPassword:self.usersNewPasswordTextField.text];
     [changePasswordRequest executeWithCompletionBlock:^{
         
-        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:nil message:nil delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:nil message:nil delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok", @"") otherButtonTitles:nil];
         if (changePasswordRequest.errorCode == 0) {
 
             alertView.title = NSLocalizedString(@"Succes", @"");
@@ -100,7 +98,7 @@
 #pragma mark - passwords chechs 
 
 - (BOOL) passwordsFilledInCorrect {
-    UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") message:nil delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") message:nil delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok", @"") otherButtonTitles:nil];
     if (([self.currentPasswordTextField.text length] > 5)&&([self.usersNewPasswordTextField.text length] > 5)&&([self.retypeNewPasswordTextField.text length] > 5)) {
         if ([self.usersNewPasswordTextField.text isEqualToString:self.retypeNewPasswordTextField.text]) {
             return YES;
@@ -120,12 +118,12 @@
 
 #pragma mark - TextField delegate
 
-- (void) eraseTextFieldsText {
-    self.currentPasswordTextField.text = @"";
-    self.usersNewPasswordTextField.text = @"";
-    self.retypeNewPasswordTextField.text = @"";
-    
-    [self.scrollView scrollsToTop];
+- (void) hideKeyboard {
+    [self.currentPasswordTextField resignFirstResponder];
+    [self.self.usersNewPasswordTextField resignFirstResponder];
+    [self.retypeNewPasswordTextField resignFirstResponder];
+
+    [self.scrollView scrollRectToVisible:self.scrollView.frame animated:YES];
     self.scrollView.scrollEnabled = NO;
 }
 
@@ -135,6 +133,7 @@
 }
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {
+    
     [textField resignFirstResponder];
     
     if (textField == self.currentPasswordTextField) {

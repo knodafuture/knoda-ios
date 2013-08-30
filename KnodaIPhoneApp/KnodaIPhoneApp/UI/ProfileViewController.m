@@ -46,7 +46,8 @@ static const int kDefaultAvatarsCount = 5;
     self.accountDetailsTableView.backgroundView = nil;
     [self makeProfileImageRoundedCorners];
     self.navigationController.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, self.navigationController.navigationBar.frame.size.height);
-    
+    [self.navigationController.navigationBar setTitleVerticalPositionAdjustment:5 forBarMetrics:UIBarMetricsDefault];
+
     if (self.leftButtonItemReturnsBack) {
         [self.leftNavigationBarItem setImage:[UIImage imageNamed:@"backArrow.png"] forState:UIControlStateNormal];
     }

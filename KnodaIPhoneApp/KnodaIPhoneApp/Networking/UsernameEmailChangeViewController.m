@@ -26,6 +26,8 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"darkBgPattern"]];
     self.navigationController.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, self.navigationController.navigationBar.frame.size.height);
+    [self.navigationController.navigationBar setTitleVerticalPositionAdjustment:5 forBarMetrics:UIBarMetricsDefault];
+
     UIColor * darkGreen = [UIColor colorWithRed:36/255.0 green:112/255.0 blue:66/255.0 alpha:1];
     [self.rightButtonItem setTitleTextAttributes:@{UITextAttributeTextColor : darkGreen} forState:UIControlStateNormal];
     [self setUpTextFieldPlaceHolder];

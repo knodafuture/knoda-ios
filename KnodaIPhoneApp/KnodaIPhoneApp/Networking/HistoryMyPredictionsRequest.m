@@ -10,7 +10,7 @@
 #import "Chellange.h"
 #import "Prediction.h"
 
-static const NSInteger kPageResultsLimit = 7;
+static const NSInteger kPageResultsLimit = 25;
 
 @implementation HistoryMyPredictionsRequest
 

@@ -11,7 +11,7 @@
 #import "Chellange.h"
 
 
-static const NSInteger kPageResultsLimit = 7;
+static const NSInteger kPageResultsLimit = 25;
 
 
 @interface PredictionsWebRequest ()

@@ -44,6 +44,7 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"darkBgPattern"]];
     self.navigationController.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, self.navigationController.navigationBar.frame.size.height);
+    [self.navigationController.navigationBar setTitleVerticalPositionAdjustment:5 forBarMetrics:UIBarMetricsDefault];
     self.activityView.hidden = NO;
     [self setUpUsersInfo];
 }

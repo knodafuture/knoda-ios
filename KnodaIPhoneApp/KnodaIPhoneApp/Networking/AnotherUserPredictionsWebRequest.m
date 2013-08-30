@@ -9,7 +9,7 @@
 #import "AnotherUserPredictionsWebRequest.h"
 #import "Prediction.h"
 
-static const NSInteger kPageResultsLimit = 7;
+static const NSInteger kPageResultsLimit = 25;
 
 @interface AnotherUserPredictionsWebRequest() {
     NSInteger _userId;

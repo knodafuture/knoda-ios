@@ -913,7 +913,7 @@
                             </button>
                             <view hidden="YES" contentMode="scaleToFill" id="idE-k5-9Mb">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="528"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="whiteLarge" id="4GQ-PY-4VS">
                                         <rect key="frame" x="141" y="246" width="37" height="37"/>
@@ -1430,6 +1430,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="firstStartImageView" destination="nS8-RQ-grw" id="3Mw-o8-6tY"/>
                         <outlet property="firstStartView" destination="Noa-A4-aDS" id="tEY-fh-Xyb"/>
                         <outlet property="noContentView" destination="ED0-MX-HnC" id="fqv-Dn-pJc"/>
                         <segue destination="wNN-TM-pOg" kind="push" identifier="PredictionDetailsSegue" id="CM5-5K-qH1"/>
@@ -4664,6 +4665,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="HomeViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/HomeViewController.h"/>
             <relationships>
+                <relationship kind="outlet" name="firstStartImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="firstStartView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="noContentView" candidateClass="UIView"/>
             </relationships>
@@ -4884,14 +4886,14 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="mnN-YR-PTq"/>
         <segue reference="jDp-TX-Mpj"/>
         <segue reference="ufA-86-Qke"/>
-        <segue reference="qdw-34-WFW"/>
-        <segue reference="tps-cU-HZ0"/>
-        <segue reference="m1B-jn-2wq"/>
-        <segue reference="ebR-4n-eVY"/>
-        <segue reference="EE6-qF-5xk"/>
+        <segue reference="mnN-YR-PTq"/>
+        <segue reference="IMX-a1-Bbr"/>
+        <segue reference="CM5-5K-qH1"/>
+        <segue reference="vCM-j3-I2J"/>
+        <segue reference="pyY-qR-NzL"/>
         <segue reference="vNo-cL-etu"/>
+        <segue reference="ebR-4n-eVY"/>
     </inferredMetricsTieBreakers>
 </document>

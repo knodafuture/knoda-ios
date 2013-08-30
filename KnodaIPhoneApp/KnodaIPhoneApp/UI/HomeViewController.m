@@ -20,6 +20,8 @@
 #import "User.h"
 #import "BadgesWebRequest.h"
 
+#define IS_PHONEPOD5() ([UIScreen mainScreen].bounds.size.height == 568.0f && [UIScreen mainScreen].scale == 2.f && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+
 static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
 static NSString* const kUserProfileSegue       = @"UserProfileSegue";
@@ -33,6 +35,7 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
 
 @property (weak, nonatomic) IBOutlet UIView *noContentView;
 @property (strong, nonatomic) IBOutlet UIView *firstStartView;
+@property (weak, nonatomic) IBOutlet UIImageView *firstStartImageView;
 
 @end
 
@@ -89,6 +92,10 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
     CGRect frame = [[[UIApplication sharedApplication] delegate] window].frame;
     frame.origin.y += 10;
     frame.size.height -= 10;
+    
+    if(IS_PHONEPOD5()) {
+        self.firstStartImageView.image = [UIImage imageNamed:@"firstStartOverlay-568h@2x"];
+    } 
    
     self.firstStartView.frame = frame;
     [[[[UIApplication sharedApplication] delegate] window] addSubview:self.firstStartView];

@@ -16,6 +16,10 @@ static NSString * const kOldPasswordCellIdentifier = @"OldPasswordCell";
 static NSString * const kNewPasswordCellIdentifier = @"NewPasswordCell";
 static NSString * const kRetypeNewPasswordCellIdentifier = @"NewPasswordRetypeCell";
 
+static NSInteger const kCurrentPasswordTextFieldTag = 101;
+static NSInteger const kNewPasswordTextFieldTag = 102;
+static NSInteger const kRetypeNewPasswordTextFieldTag = 103;
+
 static NSInteger const kKeyboardHeight = 216;
 
 @interface ChangePasswordViewController ()
@@ -29,6 +33,8 @@ static NSInteger const kKeyboardHeight = 216;
 
 @property (nonatomic, readonly) AppDelegate* appDelegate;
 
+@property (weak, nonatomic) IBOutlet UIView *loadingView;
+
 @end
 
 @implementation ChangePasswordViewController
@@ -37,7 +43,9 @@ static NSInteger const kKeyboardHeight = 216;
 {
     [super viewDidLoad];
     self.passwordsTableView.backgroundView = nil;
-    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.scrollView.frame.size.height + 130);
+    NSInteger scrollContentHeight = self.scrollView.frame.size.height;
+    scrollContentHeight = scrollContentHeight > 480 ? scrollContentHeight * 1.05 : scrollContentHeight * 1.23;
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, scrollContentHeight);
     self.scrollView.scrollEnabled = NO;
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"darkBgPattern"]];
 }
@@ -60,22 +68,31 @@ static NSInteger const kKeyboardHeight = 216;
 }
 
 - (void) changePassword {
+    
+    [self setUpPasswordsValues];
+    
     if (![self passwordsFilledInCorrect]) {
         return;
     }
+    
+    self.loadingView.hidden = NO;
+    
     ChangePasswordRequest * changePasswordRequest = [[ChangePasswordRequest alloc]initWithCurrentPassword:self.currentPassword newPassword:self.usersNewPassword];
     [changePasswordRequest executeWithCompletionBlock:^{
         
-        [self eraseTextFieldsText];
         UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:nil message:nil delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         if (changePasswordRequest.errorCode == 0) {
+
             alertView.title = NSLocalizedString(@"Succes", @"");
             alertView.message = NSLocalizedString(@"Password has been changed succesfully", @"");
             
             LoginWebRequest *loginRequest = [[LoginWebRequest alloc] initWithUsername:self.appDelegate.user.name password:self.usersNewPassword];
             [loginRequest executeWithCompletionBlock:^{
+                self.loadingView.hidden = YES;
                 if(loginRequest.isSucceeded) {
+                    [self eraseTextFieldsText];
                     [self.appDelegate.user updateWithObject:loginRequest.user];
+                    [self.navigationController popViewControllerAnimated:YES];
                 }
                 else {
                     alertView.title = NSLocalizedString(@"Error", @"");
@@ -85,6 +102,7 @@ static NSInteger const kKeyboardHeight = 216;
             }];
         }
         else {
+            self.loadingView.hidden = YES;
             alertView.title = NSLocalizedString(@"Error", @"");
             alertView.message = NSLocalizedString(@"Old password is incorrect", @"");
             [alertView show];
@@ -116,9 +134,9 @@ static NSInteger const kKeyboardHeight = 216;
 #pragma mark - TextField delegate
 
 - (void) eraseTextFieldsText {
-    [(UITextField *)[self.view viewWithTag:101]setText:@""];
-    [(UITextField *)[self.view viewWithTag:102]setText:@""];
-    [(UITextField *)[self.view viewWithTag:103]setText:@""];
+    [(UITextField *)[self.view viewWithTag:kCurrentPasswordTextFieldTag]setText:@""];
+    [(UITextField *)[self.view viewWithTag:kNewPasswordTextFieldTag]setText:@""];
+    [(UITextField *)[self.view viewWithTag:kRetypeNewPasswordTextFieldTag]setText:@""];
     
     [self.scrollView scrollsToTop];
     self.scrollView.scrollEnabled = NO;
@@ -132,13 +150,13 @@ static NSInteger const kKeyboardHeight = 216;
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     switch (textField.tag) {
-        case 101:
+        case 101: 
             [(UITextField *)[self.view viewWithTag:102]becomeFirstResponder];
             break;
-        case 102:
+        case 102: 
             [(UITextField *)[self.view viewWithTag:103]becomeFirstResponder];
             break;
-        case 103:
+        case 103: 
             [self changePassword];
             break;
         default:
@@ -147,28 +165,18 @@ static NSInteger const kKeyboardHeight = 216;
     return YES;
 }
 
-- (void) textFieldDidEndEditing:(UITextField *)textField {
-    switch (textField.tag) {
-        case 101:
-            self.currentPassword = textField.text;
-            break;
-        case 102:
-            self.usersNewPassword = textField.text;
-            break;
-        case 103:
-            self.retypeNewPassword = textField.text;
-            break;
-        default:
-            break;
-    }
-}
-
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     if ([textField.text length] > 20) {
         textField.text = [textField.text substringToIndex:19];
         return NO;
     }
     return YES;
+}
+
+- (void) setUpPasswordsValues {
+    self.currentPassword = ((UITextField *)[self.view viewWithTag:kCurrentPasswordTextFieldTag]).text;
+    self.usersNewPassword = ((UITextField *)[self.view viewWithTag:kNewPasswordTextFieldTag]).text;
+    self.retypeNewPassword = ((UITextField *)[self.view viewWithTag:kRetypeNewPasswordTextFieldTag]).text;
 }
 
 #pragma mark - TableView datasource

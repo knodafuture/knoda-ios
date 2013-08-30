@@ -65,10 +65,10 @@
     
     self.loadingView.hidden = NO;
     
-    ChangePasswordRequest * changePasswordRequest = [[ChangePasswordRequest alloc]initWithCurrentPassword:self.currentPasswordTextField.text newPassword:self.usersNewPasswordTextField.text];
+    ChangePasswordRequest * changePasswordRequest = [[ChangePasswordRequest alloc] initWithCurrentPassword:self.currentPasswordTextField.text newPassword:self.usersNewPasswordTextField.text];
     [changePasswordRequest executeWithCompletionBlock:^{
         
-        UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:nil message:nil delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:nil message:nil delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         if (changePasswordRequest.errorCode == 0) {
 
             alertView.title = NSLocalizedString(@"Succes", @"");

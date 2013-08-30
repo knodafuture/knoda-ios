@@ -10,10 +10,18 @@
 #import "ProfileWebRequest.h"
 #import "UIImage+Utils.h"
 #import "AppDelegate.h"
+#import "ImageCropperViewController.h"
+
+#import <QuartzCore/QuartzCore.h>
 
 static const int kDefaultAvatarsCount = 5;
 
-@interface SelectPictureViewController () <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+static const float kAvatarSize = 172.0;
+#define AVATAR_SIZE CGSizeMake(kAvatarSize, kAvatarSize)
+
+static NSString* const kImageCropperSegue = @"ImageCropperSegue";
+
+@interface SelectPictureViewController () <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImageCropperDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *pictureButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
@@ -30,6 +38,9 @@ static const int kDefaultAvatarsCount = 5;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.pictureButton.imageView.layer.cornerRadius = 10.0;
+    self.pictureButton.imageView.layer.masksToBounds = YES;
+    
     [self pictureButtonTapped:nil];
 }
 
@@ -40,6 +51,7 @@ static const int kDefaultAvatarsCount = 5;
 - (void)setAvatarImage:(UIImage *)avatarImage {
     _avatarImage = avatarImage;
     self.doneButton.enabled = _avatarImage != nil;
+    [self.pictureButton setImage:_avatarImage forState:UIControlStateNormal];
 }
 
 #pragma mark Actions
@@ -58,6 +70,15 @@ static const int kDefaultAvatarsCount = 5;
 
 - (IBAction)doneButtontapped:(id)sender {
     [self sendAvatar];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([segue.identifier isEqualToString:kImageCropperSegue]) {
+        ImageCropperViewController *vc = (ImageCropperViewController *)segue.destinationViewController;
+        vc.image    = sender;
+        vc.delegate = self;
+        vc.cropSize = AVATAR_SIZE;
+    }
 }
 
 #pragma mark Private
@@ -81,7 +102,6 @@ static const int kDefaultAvatarsCount = 5;
 - (void)setDefaultAvatar {
     NSString *imgName = [NSString stringWithFormat:@"avatar_%d.png", (arc4random() % kDefaultAvatarsCount + 1)];    
     self.avatarImage = [UIImage imageNamed:imgName];
-    [self.pictureButton setImage:self.avatarImage forState:UIControlStateNormal];
 }
 
 - (void)sendAvatar {
@@ -136,8 +156,15 @@ static const int kDefaultAvatarsCount = 5;
     [self dismissViewControllerAnimated:YES completion:^{
         UIImage *img = info[UIImagePickerControllerOriginalImage];
         if(img) {
-            self.avatarImage = [img scaledToSize:self.pictureButton.frame.size];
-            [self.pictureButton setImage:self.avatarImage forState:UIControlStateNormal];
+            if(img.size.width < kAvatarSize || img.size.height < kAvatarSize) {
+                img = [img scaledToSize:AVATAR_SIZE];
+            }
+            if(CGSizeEqualToSize(img.size, AVATAR_SIZE)) {
+                self.avatarImage = img;
+            }
+            else {
+                [self performSegueWithIdentifier:kImageCropperSegue sender:img];
+            }
         }
     }];
 }
@@ -145,6 +172,17 @@ static const int kDefaultAvatarsCount = 5;
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     DLog(@"");
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark ImageCropperDelegate
+
+- (void)imageCropperDidCancel:(ImageCropperViewController *)vc {
+    [vc dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imageCropper:(ImageCropperViewController *)vc didCroppedImage:(UIImage *)image {
+    self.avatarImage = image;
+    [vc dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

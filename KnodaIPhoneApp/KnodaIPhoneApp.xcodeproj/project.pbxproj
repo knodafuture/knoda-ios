@@ -339,6 +339,8 @@
 		9EC05AF017A172B600D67DA2 /* MyPicksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EC05AEF17A172B600D67DA2 /* MyPicksViewController.m */; };
 		9ECECC3B17B10F4E00B48465 /* PredictionDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ECECC3A17B10F4E00B48465 /* PredictionDetailsViewController.m */; };
 		9ECECC3E17B11B6800B48465 /* PredictionCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ECECC3D17B11B6800B48465 /* PredictionCategoryCell.m */; };
+		C3C33EFF17D0A56F003CA79C /* BJImageCropper.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C33EFE17D0A56F003CA79C /* BJImageCropper.m */; };
+		C3C33F0217D0A823003CA79C /* ImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C33F0117D0A823003CA79C /* ImageCropperViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -769,6 +771,10 @@
 		9ECECC3A17B10F4E00B48465 /* PredictionDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PredictionDetailsViewController.m; sourceTree = "<group>"; };
 		9ECECC3C17B11B6800B48465 /* PredictionCategoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PredictionCategoryCell.h; sourceTree = "<group>"; };
 		9ECECC3D17B11B6800B48465 /* PredictionCategoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PredictionCategoryCell.m; sourceTree = "<group>"; };
+		C3C33EFD17D0A56F003CA79C /* BJImageCropper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BJImageCropper.h; sourceTree = "<group>"; };
+		C3C33EFE17D0A56F003CA79C /* BJImageCropper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BJImageCropper.m; sourceTree = "<group>"; };
+		C3C33F0017D0A823003CA79C /* ImageCropperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCropperViewController.h; sourceTree = "<group>"; };
+		C3C33F0117D0A823003CA79C /* ImageCropperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCropperViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1019,6 +1025,7 @@
 		9E06635F178C3C7F00B3E974 /* Thirdparty */ = {
 			isa = PBXGroup;
 			children = (
+				C3C33EFC17D0A56E003CA79C /* ImageCropper */,
 				9E212EB417CCEAFF00BE8166 /* KeychainWrapper */,
 				9E066360178C3C7F00B3E974 /* SBJSON */,
 			);
@@ -1398,6 +1405,8 @@
 				57066AA917C64E980080797B /* CategoryPredictionsViewController.m */,
 				369D861517CDE78E0005F0B3 /* UsernameEmailChangeViewController.h */,
 				369D861617CDE78E0005F0B3 /* UsernameEmailChangeViewController.m */,
+				C3C33F0017D0A823003CA79C /* ImageCropperViewController.h */,
+				C3C33F0117D0A823003CA79C /* ImageCropperViewController.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1435,6 +1444,15 @@
 				36997C1D17CCB48900424F4F /* LogInSignUpSegue.m */,
 			);
 			path = Segues;
+			sourceTree = "<group>";
+		};
+		C3C33EFC17D0A56E003CA79C /* ImageCropper */ = {
+			isa = PBXGroup;
+			children = (
+				C3C33EFD17D0A56F003CA79C /* BJImageCropper.h */,
+				C3C33EFE17D0A56F003CA79C /* BJImageCropper.m */,
+			);
+			path = ImageCropper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1825,6 +1843,8 @@
 				369D861717CDE78E0005F0B3 /* UsernameEmailChangeViewController.m in Sources */,
 				9E212EBD17CF808F00BE8166 /* AlertNavigationCell.m in Sources */,
 				574314E017CF9EE800C8BC75 /* ServerError.m in Sources */,
+				C3C33EFF17D0A56F003CA79C /* BJImageCropper.m in Sources */,
+				C3C33F0217D0A823003CA79C /* ImageCropperViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

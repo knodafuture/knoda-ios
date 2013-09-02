@@ -127,7 +127,6 @@ static const int kBSAlertTag = 1001;
 
 - (IBAction)unfinishButtonTapped:(UIButton *)sender {
     self.datePicker.minimumDate = [NSDate dateWithTimeInterval:(10 * 60) sinceDate:[NSDate date]];
-    self.datePicker.maximumDate = [NSDate dateWithTimeInterval:(7 * 24 * 60 * 60) sinceDate:[NSDate date]];
     self.datePicker.date = self.datePicker.minimumDate;
     [self showView:self.pickerViewHolder];
 }

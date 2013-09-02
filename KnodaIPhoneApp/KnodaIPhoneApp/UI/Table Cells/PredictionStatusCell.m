@@ -75,11 +75,13 @@ static const float kBSHeight           = 44.0;
 
 + (NSString *)marketSizeNameForPoints:(NSInteger)points {
     switch (points) {
-        case 1:
-        case 2:  return NSLocalizedString(@"Favorite", @"");
-        case 3:
-        case 4:  return NSLocalizedString(@"Underdog", @"");
-        default: return NSLocalizedString(@"Longshot", @"");
+        case 0:  return NSLocalizedString(@"Too Easy", @"");
+        case 10:
+        case 20: return NSLocalizedString(@"Favorite", @"");
+        case 30:
+        case 40: return NSLocalizedString(@"Underdog", @"");
+        case 50: return NSLocalizedString(@"Longshot", @"");
+        default: return @"";
     }
 }
 

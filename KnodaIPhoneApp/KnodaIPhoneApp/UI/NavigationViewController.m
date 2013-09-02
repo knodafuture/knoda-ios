@@ -44,8 +44,6 @@ static NSString* const MENU_SEGUES[MenuItemsSize] = {
 
 @property (nonatomic, assign) BOOL appeared;
 
-@property (nonatomic, strong) NSTimer* userUpdateTimer;
-
 @property (nonatomic, assign) BOOL masterShown;
 
 @property (nonatomic, strong) AppDelegate * appDelegate;
@@ -57,6 +55,8 @@ static NSString* const MENU_SEGUES[MenuItemsSize] = {
 
 - (void) viewDidLoad {
     [super viewDidLoad];
+    
+    [self reloadUserInfo];
     
     UITapGestureRecognizer * recognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(toggleNavigationPanel)];
     [self.gestureView addGestureRecognizer:recognizer];
@@ -88,7 +88,6 @@ static NSString* const MENU_SEGUES[MenuItemsSize] = {
     self.masterView = nil;
     self.detailsView = nil;
     self.movingView = nil;
-    self.userUpdateTimer = nil;
     self.gestureView = nil;
     
     [[NSNotificationCenter defaultCenter] removeObserver: self];
@@ -99,8 +98,8 @@ static NSString* const MENU_SEGUES[MenuItemsSize] = {
 - (void) viewDidAppear: (BOOL) animated
 {
     [super viewDidAppear:animated];
+    
     self.appeared = YES;
-    self.userUpdateTimer = [NSTimer scheduledTimerWithTimeInterval: 1800.0 target: self selector: @selector(reloadUserInfo) userInfo: nil repeats: YES];
     
     if (self.appDelegate.notificationReceived)
     {
@@ -111,8 +110,6 @@ static NSString* const MENU_SEGUES[MenuItemsSize] = {
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    [self.userUpdateTimer invalidate];
-    self.userUpdateTimer = nil;
 }
 
 
@@ -175,6 +172,8 @@ static NSString* const MENU_SEGUES[MenuItemsSize] = {
 
 - (void) moveToMaster
 {
+    [self updateUserInfo];
+    
     self.masterShown = YES;
     self.gestureView.hidden = NO;
     

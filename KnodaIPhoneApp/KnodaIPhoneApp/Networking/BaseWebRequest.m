@@ -120,7 +120,8 @@ static const char *MULTIPART_CHARS = "1234567890_-qwertyuiopasdfghjklzxcvbnmQWER
 }
 
 
-- (BOOL)isMultipartData {
+- (BOOL) isMultipartData
+{
     return NO;
 }
 

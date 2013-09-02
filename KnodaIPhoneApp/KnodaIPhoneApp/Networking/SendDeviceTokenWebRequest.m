@@ -13,7 +13,13 @@
 
 - (id) initWithToken: (NSString*) token
 {
-    NSDictionary* params = @{@"apple_device_token[token]": token};
+    BOOL sandbox = NO;
+    
+#ifdef DEBUG
+    sandbox = YES;
+#endif
+    
+    NSDictionary* params = @{@"apple_device_token[token]": token, @"apple_device_token[sandbox]": (sandbox) ? @"true" : @"false"};
     
     self = [super initWithParameters: params];
     return self;
@@ -35,6 +41,13 @@
 - (BOOL) requiresAuthToken
 {
     return YES;
+}
+
+
+- (void) fillResultObject: (id) parsedResult
+{
+    NSLog(@"SendDeviceToken result: %@", parsedResult);
+    self.tokenID = [parsedResult  objectForKey: @"id"];
 }
 
 

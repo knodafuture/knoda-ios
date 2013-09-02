@@ -19,6 +19,7 @@
 #import "ImageCache.h"
 
 #import "SendDeviceTokenWebRequest.h"
+#import "RemoveTokenWebRequest.h"
 
 
 NSString* const kAlertNotification = @"AlertNotification";
@@ -91,7 +92,13 @@ NSString* const kAlertNotification = @"AlertNotification";
     if (self.deviceToken != nil)
     {
         SendDeviceTokenWebRequest* request = [[SendDeviceTokenWebRequest alloc] initWithToken: self.deviceToken];
-        [request executeWithCompletionBlock: ^{}];
+        [request executeWithCompletionBlock: ^
+        {
+            if (request.errorCode == 0)
+            {
+                self.deviceTokenID = request.tokenID;
+            }
+        }];
     }
 }
 
@@ -181,8 +188,15 @@ NSString* const kAlertNotification = @"AlertNotification";
 - (void)logout {
     DLog(@"performing logout");
     
+    if (self.deviceTokenID != nil)
+    {
+        RemoveTokenWebRequest* request = [[RemoveTokenWebRequest alloc] initWithTokenID: self.deviceTokenID];
+        [request executeWithCompletionBlock: nil];
+    }
+    
     SignOutWebRequest *signOutWebRequest = [SignOutWebRequest new];
     [signOutWebRequest executeWithCompletionBlock:nil];
+    
     
     self.user = nil;
     [self removePassword];

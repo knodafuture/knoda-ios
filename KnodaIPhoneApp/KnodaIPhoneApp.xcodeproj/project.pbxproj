@@ -247,6 +247,7 @@
 		9E5792991799881F00979928 /* makePrediction@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5792951799881D00979928 /* makePrediction@2x.png */; };
 		9E57929A1799881F00979928 /* nav.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5792961799881D00979928 /* nav.png */; };
 		9E57929B1799881F00979928 /* nav@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5792971799881E00979928 /* nav@2x.png */; };
+		9E677AC417D4C73C00A9AFFC /* RemoveTokenWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E677AC317D4C73C00A9AFFC /* RemoveTokenWebRequest.m */; };
 		9E708824178AF68E00F036A8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E708823178AF68E00F036A8 /* UIKit.framework */; };
 		9E708826178AF68E00F036A8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E708825178AF68E00F036A8 /* Foundation.framework */; };
 		9E708828178AF68E00F036A8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E708827178AF68E00F036A8 /* CoreGraphics.framework */; };
@@ -648,6 +649,8 @@
 		9E5792951799881D00979928 /* makePrediction@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "makePrediction@2x.png"; sourceTree = "<group>"; };
 		9E5792961799881D00979928 /* nav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav.png; sourceTree = "<group>"; };
 		9E5792971799881E00979928 /* nav@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav@2x.png"; sourceTree = "<group>"; };
+		9E677AC217D4C73C00A9AFFC /* RemoveTokenWebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoveTokenWebRequest.h; sourceTree = "<group>"; };
+		9E677AC317D4C73C00A9AFFC /* RemoveTokenWebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoveTokenWebRequest.m; sourceTree = "<group>"; };
 		9E708820178AF68E00F036A8 /* KnodaIPhoneApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KnodaIPhoneApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E708823178AF68E00F036A8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9E708825178AF68E00F036A8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1350,6 +1353,8 @@
 				365B7E2117C6548200ED04D2 /* AnotherUserPredictionsWebRequest.m */,
 				9E212EB817CCEE3500BE8166 /* SendDeviceTokenWebRequest.h */,
 				9E212EB917CCEE3500BE8166 /* SendDeviceTokenWebRequest.m */,
+				9E677AC217D4C73C00A9AFFC /* RemoveTokenWebRequest.h */,
+				9E677AC317D4C73C00A9AFFC /* RemoveTokenWebRequest.m */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -1845,6 +1850,7 @@
 				574314E017CF9EE800C8BC75 /* ServerError.m in Sources */,
 				C3C33EFF17D0A56F003CA79C /* BJImageCropper.m in Sources */,
 				C3C33F0217D0A823003CA79C /* ImageCropperViewController.m in Sources */,
+				9E677AC417D4C73C00A9AFFC /* RemoveTokenWebRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

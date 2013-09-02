@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ZKQ-aW-8t7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11G63b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ZKQ-aW-8t7">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -2295,6 +2295,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <pickerView contentMode="scaleToFill" id="H7w-Fr-LXB">
                                 <rect key="frame" x="0.0" y="548" width="320" height="216"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <gestureRecognizers/>
                                 <connections>
                                     <outlet property="dataSource" destination="ZCK-dQ-2af" id="Co8-vH-Dg5"/>
                                     <outlet property="delegate" destination="ZCK-dQ-2af" id="8he-lE-HWr"/>
@@ -2303,6 +2304,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <pickerView contentMode="scaleToFill" id="ye8-Of-uMl">
                                 <rect key="frame" x="0.0" y="548" width="320" height="216"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <gestureRecognizers/>
                                 <connections>
                                     <outlet property="dataSource" destination="ZCK-dQ-2af" id="l84-Px-xXT"/>
                                     <outlet property="delegate" destination="ZCK-dQ-2af" id="NoN-lX-erN"/>
@@ -4553,7 +4555,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="knoda_horizontal.png" width="116" height="43"/>
         <image name="knoda_logo_lg.png" width="312" height="326"/>
         <image name="knoda_logo_sm.png" width="252" height="268"/>
-        <image name="makePrediction.png" width="17" height="19"/>
+        <image name="makePrediction.png" width="23" height="23"/>
         <image name="nav.png" width="24" height="19"/>
         <image name="navRule.png" width="269" height="7"/>
         <image name="nav_separator.png" width="270" height="3"/>

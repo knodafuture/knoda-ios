@@ -11,7 +11,6 @@
 #import "NavigationViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "AppDelegate.h"
-#import "SignOutWebRequest.h"
 #import "AppDelegate.h"
 #import "ProfileWebRequest.h"
 #import "UsernameEmailChangeViewController.h"

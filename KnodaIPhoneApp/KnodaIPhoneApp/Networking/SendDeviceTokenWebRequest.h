@@ -10,6 +10,8 @@
 
 @interface SendDeviceTokenWebRequest : BaseWebRequest
 
+@property (nonatomic, strong) NSNumber* tokenID;
+
 - (id) initWithToken: (NSString*) token;
 
 @end

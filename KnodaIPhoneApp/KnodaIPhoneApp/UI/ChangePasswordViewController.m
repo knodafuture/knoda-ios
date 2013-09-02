@@ -11,6 +11,7 @@
 #import "LoginWebRequest.h"
 #import "AppDelegate.h"
 #import "CustomizedTextField.h"
+#import "ProfileWebRequest.h"
 
 @interface ChangePasswordViewController ()
 
@@ -75,13 +76,34 @@
             LoginWebRequest *loginRequest = [[LoginWebRequest alloc] initWithUsername:self.appDelegate.user.name password:self.usersNewPasswordTextField.text];
             [loginRequest executeWithCompletionBlock:^{
                 self.loadingView.hidden = YES;
-                if(loginRequest.isSucceeded) {
-                    [self.appDelegate.user updateWithObject:loginRequest.user];
-                    [self.navigationController popViewControllerAnimated:YES];
+                if(loginRequest.isSucceeded)
+                {
+                    self.appDelegate.user = loginRequest.user;
+                    
+                    [self.appDelegate sendToken];
+                    
+                    ProfileWebRequest *profileRequest = [ProfileWebRequest new];
+                    [profileRequest executeWithCompletionBlock: ^
+                     {
+                         if (profileRequest.isSucceeded)
+                         {
+                             [self.appDelegate.user updateWithObject:profileRequest.user];
+                             [self.appDelegate savePassword: self.usersNewPasswordTextField.text];
+                             
+                             [self.navigationController popViewControllerAnimated:YES];
+                         }
+                         else
+                         {
+                             alertView.title = NSLocalizedString(@"Error", @"");
+                             alertView.message = profileRequest.localizedErrorDescription;
+                         }
+                     }];
                 }
                 else {
                     alertView.title = NSLocalizedString(@"Error", @"");
                     alertView.message = loginRequest.localizedErrorDescription;
+                    
+                    [self.appDelegate logout];
                 }
                 [alertView show];
             }];

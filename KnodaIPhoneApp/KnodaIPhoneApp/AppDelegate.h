@@ -21,6 +21,7 @@ extern NSString* const kAlertNotification;
 @property (strong, nonatomic) KeychainItemWrapper *passwordItem;
 
 @property (copy, nonatomic) NSString* deviceToken;
+@property (strong, nonatomic) NSNumber* deviceTokenID;
 
 @property (assign, nonatomic) BOOL notificationReceived;
 

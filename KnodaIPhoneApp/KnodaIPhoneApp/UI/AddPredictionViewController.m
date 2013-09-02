@@ -419,10 +419,13 @@ withAnimationDuration: (NSTimeInterval)animationDuration
         self.categoryButton.frame = newButtonFrame;
         
         self.categoryButton.hidden = NO;
+        
+        [self hidePicker: self.categoryPicker];
     }
     else if (pickerView == self.expirationPicker)
     {
         self.expirationLabel.text = [self.expirationStrings objectAtIndex: row];
+        [self hidePicker: self.expirationPicker];
     }
 }
 

@@ -401,8 +401,9 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
     }
     else if (interval < (secondsInMinute * minutesInHour * hoursInDay))
     {
-        NSInteger minutes = ((NSInteger)interval / secondsInMinute) % minutesInHour;
+        NSInteger minutes = 0;
         NSInteger hours = (NSInteger)interval / (secondsInMinute * minutesInHour);
+        minutes = hours > 0 ? 0 : ((NSInteger)interval / secondsInMinute) % minutesInHour;
         
         NSString* hoursString = (hours != 0) ? [NSString stringWithFormat: NSLocalizedString(@"%dh", @""), hours] : @"";
         NSString* minutesString = (minutes != 0) ? [NSString stringWithFormat: NSLocalizedString(@"%dm", @""), minutes] : @"";
@@ -460,13 +461,14 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
     }
     else if (interval < (secondsInMinute * minutesInHour * hoursInDay))
     {
-        NSInteger minutes = ((NSInteger)interval / secondsInMinute) % minutesInHour;
+        NSInteger minutes = 0;
         NSInteger hours = (NSInteger)interval / (secondsInMinute * minutesInHour);
+        minutes = hours > 0 ? 0 : ((NSInteger)interval / secondsInMinute) % minutesInHour; 
         
         NSString* hoursString = (hours != 0) ? [NSString stringWithFormat: NSLocalizedString(@"%dh", @""), hours] : @"";
         NSString* minutesString = (minutes != 0) ? [NSString stringWithFormat: NSLocalizedString(@"%dm", @""), minutes] : @"";
         NSString* space = (hours != 0 && minutes != 0) ? @" " : @"";
-        
+
         result = [NSString stringWithFormat: NSLocalizedString(@"exp %@%@%@%@", @""), hoursString, space, minutesString, (expired) ? @" ago" : @""];
     }
     else if (interval < (secondsInMinute * minutesInHour * hoursInDay * daysInMonth))

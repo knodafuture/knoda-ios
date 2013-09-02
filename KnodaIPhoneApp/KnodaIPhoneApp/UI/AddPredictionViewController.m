@@ -45,7 +45,7 @@ static const int kPredictionCharsLimit = 300;
 {
     [super viewDidLoad];
     
-    self.placeholderText = NSLocalizedString(@"Type your prediction, enter between 1-5 topics associated with your prediction and enter the deadline date when other users can no longer agree or disagree with your prediction.", @"");
+    self.placeholderText = NSLocalizedString(@"Type your prediction, enter the expiration deadline when other users will no longer be able to agree or disagree with your prediction and select the category that best matches your prediction.", @"");
     self.showPlaceholder = YES;
     
     self.expirationStrings = [[self class] expirationStrings];

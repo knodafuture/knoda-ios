@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Knoda. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "ParentViewController.h"
 
-@interface HistoryViewController : UIViewController
+@interface HistoryViewController : ParentViewController
 
 @end

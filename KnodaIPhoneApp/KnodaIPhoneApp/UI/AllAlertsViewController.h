@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Knoda. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "ChildViewController.h"
 
-@interface AllAlertsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface AllAlertsViewController : ChildViewController
 
 @end

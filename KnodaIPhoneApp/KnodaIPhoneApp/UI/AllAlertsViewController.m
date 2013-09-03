@@ -22,14 +22,9 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 
 @interface AllAlertsViewController ()
 
-@property (nonatomic, strong) NSArray* alerts;
-@property (nonatomic, strong) IBOutlet UITableView* tableView;
-@property (weak, nonatomic) IBOutlet UIView *noContentView;
-
 @end
 
 @implementation AllAlertsViewController
-
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -51,10 +46,10 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
          {
              NSLog(@"All alerts: %@", request.predictions);
              
-             strongSelf.alerts = request.predictions;
+             strongSelf.predictions = [NSMutableArray arrayWithArray:request.predictions];
              [strongSelf.tableView reloadData];
              
-             if (strongSelf.alerts.count != 0)
+             if (strongSelf.predictions.count != 0)
              {
                  NSArray* visibleCells = [strongSelf.tableView visibleCells];
                  NSMutableArray* chellangeIDs = [NSMutableArray arrayWithCapacity: 0];
@@ -105,7 +100,7 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 
 - (NSInteger) tableView: (UITableView*) tableView numberOfRowsInSection: (NSInteger) section
 {
-    return (self.alerts.count == 0) ? 1 : self.alerts.count;
+    return (self.predictions.count == 0) ? 1 : self.predictions.count;
 }
 
 
@@ -113,10 +108,10 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 {
     UITableViewCell* cell = nil;
     
-    if (self.alerts.count != 0)
+    if (self.predictions.count != 0)
     {
         cell = [self.tableView dequeueReusableCellWithIdentifier: [AlertCell reuseIdentifier]];
-        [((AlertCell*)cell) fillWithPrediction: [self.alerts objectAtIndex: indexPath.row]];
+        [((AlertCell*)cell) fillWithPrediction: [self.predictions objectAtIndex: indexPath.row]];
     }
     else
     {
@@ -129,7 +124,7 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 
 - (void) scrollViewDidEndScrollingAnimation: (UIScrollView*) scrollView
 {
-    if (self.alerts.count != 0)
+    if (self.predictions.count != 0)
     {
         NSArray* visibleCells = [self.tableView visibleCells];
         NSMutableArray* chellangeIDs = [NSMutableArray arrayWithCapacity: 0];
@@ -162,9 +157,9 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath: indexPath animated: YES];
     
-    if (self.alerts.count != 0)
+    if (self.predictions.count != 0)
     {
-        Prediction* prediction = [self.alerts objectAtIndex: indexPath.row];
+        Prediction* prediction = [self.predictions objectAtIndex: indexPath.row];
         [self performSegueWithIdentifier:kPredictionDetailsSegue sender:prediction];
     }
 }

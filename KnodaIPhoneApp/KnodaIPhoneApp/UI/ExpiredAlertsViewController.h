@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Knoda. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "ChildViewController.h"
 
-@interface ExpiredAlertsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface ExpiredAlertsViewController : ChildViewController
 
 @end

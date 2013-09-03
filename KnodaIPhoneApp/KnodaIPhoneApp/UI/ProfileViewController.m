@@ -225,7 +225,8 @@ static const float kAvatarSize = 344.0;
     }
     else if ([segue.identifier isEqualToString:kChangeEmailUsernameSegue]) {        
         UsernameEmailChangeViewController *vc =(UsernameEmailChangeViewController*)segue.destinationViewController;
-        vc.userProperyChangeType = [sender integerValue];
+        vc.userProperyChangeType = [sender[0]integerValue];
+        vc.currentPropertyValue = sender[1];
     }
     else if([segue.identifier isEqualToString:kImageCropperSegue]) {
         ImageCropperViewController *vc = (ImageCropperViewController *)segue.destinationViewController;
@@ -268,10 +269,10 @@ static const float kAvatarSize = 344.0;
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
         case 0:
-            [self performSegueWithIdentifier:kChangeEmailUsernameSegue sender:@(UserPropertyTypeUsername)];
+            [self performSegueWithIdentifier:kChangeEmailUsernameSegue sender:@[@(UserPropertyTypeUsername),[tableView cellForRowAtIndexPath:indexPath].textLabel.text]];
             break;
         case 1:
-            [self performSegueWithIdentifier:kChangeEmailUsernameSegue sender:@(UserPropertyTypeEmail)];
+            [self performSegueWithIdentifier:kChangeEmailUsernameSegue sender:@[@(UserPropertyTypeEmail),[tableView cellForRowAtIndexPath:indexPath].textLabel.text]];
             break;
         case 2:
             [self performSegueWithIdentifier:kChangePasswordSegue sender:self];

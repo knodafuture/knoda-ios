@@ -12,21 +12,21 @@
 
 - (void) perform
 {
-    for (UIViewController* childController in ((UIViewController*)self.sourceViewController).childViewControllers)
-    {
-        [childController removeFromParentViewController];
-    }
+    [[(UIViewController *)self.sourceViewController childViewControllers] makeObjectsPerformSelector:@selector(willMoveToParentViewController:) withObject:nil];
     
-    for (UIView* subview in self.detailsView.subviews)
-    {
-        [subview removeFromSuperview];
-    }
+    [self.detailsView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
-    [self.detailsView addSubview: ((UIViewController*)self.destinationViewController).view];
+    [[(UIViewController *)self.sourceViewController childViewControllers] makeObjectsPerformSelector:@selector(removeFromParentViewController)];
+    
+    
+    [((UIViewController*)self.sourceViewController) addChildViewController: self.destinationViewController];
+    
     ((UIViewController*)self.destinationViewController).view.frame = self.detailsView.bounds;
+    [self.detailsView addSubview: ((UIViewController*)self.destinationViewController).view];
     
-    [((UIViewController*)self.sourceViewController) addChildViewController: ((UIViewController*)self.destinationViewController)];
+    [((UIViewController*)self.destinationViewController) didMoveToParentViewController: self.sourceViewController];
     
+
     if (self.completion != nil)
     {
         self.completion();

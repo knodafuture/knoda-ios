@@ -7,18 +7,10 @@
 //
 
 #import "HistoryViewController.h"
-#import "NavigationSegue.h"
 #import "NavigationViewController.h"
 #import "AddPredictionViewController.h"
 
-static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
-
-@interface HistoryViewController () <AddPredictionViewControllerDelegate>
-
-@property (nonatomic, strong) IBOutlet UIView* detailsView;
-@property (nonatomic, strong) IBOutlet UIImageView* segmentedControlImage;
-@property (weak, nonatomic) IBOutlet UIView *noContentView;
-@property (nonatomic, weak) UIViewController *detailsViewController;
+@interface HistoryViewController ()
 
 @end
 
@@ -29,50 +21,13 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
     [super viewDidLoad];
     self.navigationController.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, self.navigationController.navigationBar.frame.size.height);
     [self.navigationController.navigationBar setTitleVerticalPositionAdjustment:5 forBarMetrics:UIBarMetricsDefault];
-
+    
     [self performSegueWithIdentifier: @"MyPredictionSegue" sender: self];
-}
-
-
-- (void) prepareForSegue: (UIStoryboardSegue*) segue sender: (id) sender
-{
-    if([segue isKindOfClass:[NavigationSegue class]]) {
-        ((NavigationSegue*)segue).detailsView = self.detailsView;
-        self.detailsViewController = segue.destinationViewController;
-    }
-    else if ([segue.identifier isEqualToString:kAddPredictionSegue]) {
-        AddPredictionViewController *vc = (AddPredictionViewController *)segue.destinationViewController;
-        vc.delegate = self;
-    }
 }
 
 - (IBAction) menuButtonPressed: (id) sender
 {
     [((NavigationViewController*)self.navigationController.parentViewController) toggleNavigationPanel];
 }
-
-
-- (IBAction) lerfButtonPressed: (id) sender
-{
-    self.segmentedControlImage.image = [UIImage imageNamed: @"sort_left-green"];
-}
-
-
-- (IBAction) rightButtonPressed: (id) sender
-{
-    self.segmentedControlImage.image = [UIImage imageNamed: @"sort_right-green"];
-}
-
-#pragma mark - AddPredictionViewControllerDelegate
-
-- (void) predictionWasMadeInController:(AddPredictionViewController *)vc
-{
-    [vc dismissViewControllerAnimated:YES completion:^{
-        if([self.detailsViewController conformsToProtocol:@protocol(AddPredictionViewControllerDelegate)]) {
-            [(id<AddPredictionViewControllerDelegate>)self.detailsViewController predictionWasMadeInController:nil];
-        }
-    }];
-}
-
 
 @end

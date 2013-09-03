@@ -12,22 +12,23 @@
 #import "Prediction.h"
 #import "PredictionDetailsViewController.h"
 #import "AnotherUsersProfileViewController.h"
+#import "ChildControllerDataSource.h"
 
 
 static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 static NSString* const kUserProfileSegue       = @"UserProfileSegue";
 
-@interface MyPicksViewController () <PredictionCellDelegate>
+@interface MyPicksViewController () <PredictionCellDelegate> {
+    BOOL _isRefreshing;
+    BOOL _needLoadNextPage;
+}
 
-@property (strong, nonatomic) IBOutlet UIView *noContentView;
-@property (nonatomic, strong) NSMutableArray* predictions;
 @property (nonatomic, strong) NSTimer* cellUpdateTimer;
 
 @end
 
 
 @implementation MyPicksViewController
-
 
 - (void) viewDidAppear: (BOOL) animated
 {
@@ -60,6 +61,8 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
     
     __weak MyPicksViewController *weakSelf = self;
     
+    _isRefreshing = YES;
+    
     HistoryMyPicksWebRequest* request = [[HistoryMyPicksWebRequest alloc] init];
     [request executeWithCompletionBlock: ^
      {
@@ -79,6 +82,33 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
                  [strongSelf.view addSubview:strongSelf.noContentView];
              }
          }
+         _isRefreshing = NO;
+         if(_needLoadNextPage && strongSelf.predictions.count >= [HistoryMyPicksWebRequest limitByPage]) {
+             [strongSelf loadNextPage];
+         }
+         _needLoadNextPage = NO;
+     }];
+}
+
+- (void)loadNextPage {
+    __weak MyPicksViewController *weakSelf = self;
+    
+    HistoryMyPicksWebRequest* predictionsRequest = [[HistoryMyPicksWebRequest alloc] initWithLastCreatedDate: ((Prediction*)[self.predictions lastObject]).creationDate];
+    [predictionsRequest executeWithCompletionBlock: ^
+     {
+         MyPicksViewController *strongSelf = weakSelf;
+         if(!strongSelf) {
+             return;
+         }
+         if (predictionsRequest.errorCode == 0 && predictionsRequest.predictions.count != 0)
+         {
+             [strongSelf.predictions addObjectsFromArray: [NSMutableArray arrayWithArray: predictionsRequest.predictions] ];
+             [strongSelf.tableView reloadData];
+         }
+         else
+         {
+             [strongSelf.tableView scrollToRowAtIndexPath: [NSIndexPath indexPathForRow: strongSelf.predictions.count - 1 inSection: 0] atScrollPosition: UITableViewScrollPositionBottom animated: YES];
+         }
      }];
 }
 
@@ -93,6 +123,9 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
     }
 }
 
+- (NSInteger)limitByPage {
+    return [HistoryMyPicksWebRequest limitByPage];
+}
 
 #pragma mark - UITableViewDataSource
 
@@ -144,25 +177,12 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
 {
     if ((self.predictions.count >= [HistoryMyPicksWebRequest limitByPage]) && indexPath.row == self.predictions.count)
     {
-        __weak MyPicksViewController *weakSelf = self;
-        
-        HistoryMyPicksWebRequest* predictionsRequest = [[HistoryMyPicksWebRequest alloc] initWithLastCreatedDate: ((Prediction*)[self.predictions lastObject]).creationDate];
-        [predictionsRequest executeWithCompletionBlock: ^
-         {
-             MyPicksViewController *strongSelf = weakSelf;
-             if(!strongSelf) {
-                 return;
-             }
-             if (predictionsRequest.errorCode == 0 && predictionsRequest.predictions.count != 0)
-             {
-                 [strongSelf.predictions addObjectsFromArray: [NSMutableArray arrayWithArray: predictionsRequest.predictions] ];
-                 [strongSelf.tableView reloadData];
-             }
-             else
-             {
-                 [strongSelf.tableView scrollToRowAtIndexPath: [NSIndexPath indexPathForRow: indexPath.row - 1 inSection: 0] atScrollPosition: UITableViewScrollPositionBottom animated: YES];
-             }
-         }];
+        if(!_isRefreshing) {
+            [self loadNextPage];
+        }
+        else {
+            _needLoadNextPage = YES;
+        }
     }
 }
 

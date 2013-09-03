@@ -98,7 +98,7 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
 - (void) setUpUserProfileInformationWithUser : (User *) user {
     [self.userAvatarView bindToURL:user.smallImage];
     self.userNameLabel.text = user.name;
-    self.userPointsLabel.text = [NSString stringWithFormat:@"%d @%@",user.points, NSLocalizedString(@"points", @"")];
+    self.userPointsLabel.text = [NSString stringWithFormat:@"%d %@",user.points, NSLocalizedString(@"points", @"")];
     self.userTotalPredictionsLabel.text = [NSString stringWithFormat:@"%d %@",user.totalPredictions, NSLocalizedString(@"total predictions", @"")];
 }
 

@@ -29,21 +29,8 @@
     [self.navigationController.navigationBar setTitleVerticalPositionAdjustment:5 forBarMetrics:UIBarMetricsDefault];
 
     UIColor * darkGreen = [UIColor colorWithRed:36/255.0 green:112/255.0 blue:66/255.0 alpha:1];
-    [self.rightButtonItem setTitleTextAttributes:@{UITextAttributeTextColor : darkGreen} forState:UIControlStateNormal];
-    [self setUpTextFieldPlaceHolder];
-}
-
-- (void) setUpTextFieldPlaceHolder {
-    switch (self.userProperyChangeType) {
-        case UserPropertyTypeEmail:
-            self.userPropertyTextField.placeholder = NSLocalizedString(@"Email Address", @"");
-            break;
-        case UserPropertyTypeUsername:
-            self.userPropertyTextField.placeholder = NSLocalizedString(@"User name", @"");
-            break;
-        default:
-            break;
-    }
+    [self.rightButtonItem setTitleTextAttributes:@{UITextAttributeTextColor : darkGreen, UITextAttributeFont : [UIFont fontWithName:@"HelveticaNeue-Medium" size:13]} forState:UIControlStateNormal];
+    self.userPropertyTextField.text = self.currentPropertyValue;
 }
 
 - (IBAction)backButtonPressed:(id)sender {

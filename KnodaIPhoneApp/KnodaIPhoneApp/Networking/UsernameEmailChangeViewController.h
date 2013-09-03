@@ -16,5 +16,6 @@ typedef NS_ENUM( NSUInteger, UserPropertyType ) {
 @interface UsernameEmailChangeViewController : UIViewController <UITextFieldDelegate>
 
 @property (nonatomic, assign) UserPropertyType userProperyChangeType;
+@property (nonatomic, strong) NSString *currentPropertyValue;
 
 @end

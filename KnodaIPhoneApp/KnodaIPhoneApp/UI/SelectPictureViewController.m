@@ -157,7 +157,7 @@ static NSString* const kImageCropperSegue = @"ImageCropperSegue";
         UIImage *img = info[UIImagePickerControllerOriginalImage];
         if(img) {
             if(img.size.width < kAvatarSize || img.size.height < kAvatarSize) {
-                img = [img scaledToSize:AVATAR_SIZE];
+                img = [img scaledToSize:AVATAR_SIZE autoScale:NO];
             }
             if(CGSizeEqualToSize(img.size, AVATAR_SIZE)) {
                 self.avatarImage = img;
@@ -182,7 +182,7 @@ static NSString* const kImageCropperSegue = @"ImageCropperSegue";
 
 - (void)imageCropper:(ImageCropperViewController *)vc didCroppedImage:(UIImage *)image {
     if(!CGSizeEqualToSize(image.size, AVATAR_SIZE)) {
-        image = [image scaledToSize:AVATAR_SIZE];
+        image = [image scaledToSize:AVATAR_SIZE autoScale:NO];
     }
     self.avatarImage = image;
     [vc dismissViewControllerAnimated:YES completion:nil];

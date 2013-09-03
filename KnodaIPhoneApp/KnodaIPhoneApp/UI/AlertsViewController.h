@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Knoda. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "ParentViewController.h"
 
 @protocol RefreshableViewController <NSObject>
 
@@ -14,6 +14,6 @@
 
 @end
 
-@interface AlertsViewController : UIViewController
+@interface AlertsViewController : ParentViewController
 
 @end

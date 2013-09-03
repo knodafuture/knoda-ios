@@ -96,6 +96,8 @@
 		57066AA517C5258F0080797B /* AP_predict_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 57066A9717C5258F0080797B /* AP_predict_pressed.png */; };
 		57066AA617C5258F0080797B /* AP_predict_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57066A9817C5258F0080797B /* AP_predict_pressed@2x.png */; };
 		57066AAA17C64E990080797B /* CategoryPredictionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57066AA917C64E980080797B /* CategoryPredictionsViewController.m */; };
+		5707792317D4E9220095FF19 /* ChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5707792017D4E9220095FF19 /* ChildViewController.m */; };
+		5707792417D4E9220095FF19 /* ParentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5707792217D4E9220095FF19 /* ParentViewController.m */; };
 		571B1D1017C7BE4C0013AA41 /* CloseBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 571B1D0817C7BE4C0013AA41 /* CloseBtn.png */; };
 		571B1D1117C7BE4C0013AA41 /* CloseBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 571B1D0917C7BE4C0013AA41 /* CloseBtn@2x.png */; };
 		571B1D1217C7BE4C0013AA41 /* CloseBtn_press.png in Resources */ = {isa = PBXBuildFile; fileRef = 571B1D0A17C7BE4C0013AA41 /* CloseBtn_press.png */; };
@@ -447,6 +449,11 @@
 		57066A9817C5258F0080797B /* AP_predict_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AP_predict_pressed@2x.png"; sourceTree = "<group>"; };
 		57066AA817C64E970080797B /* CategoryPredictionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryPredictionsViewController.h; sourceTree = "<group>"; };
 		57066AA917C64E980080797B /* CategoryPredictionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryPredictionsViewController.m; sourceTree = "<group>"; };
+		5707791E17D4E9220095FF19 /* ChildControllerDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildControllerDataSource.h; sourceTree = "<group>"; };
+		5707791F17D4E9220095FF19 /* ChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildViewController.h; sourceTree = "<group>"; };
+		5707792017D4E9220095FF19 /* ChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildViewController.m; sourceTree = "<group>"; };
+		5707792117D4E9220095FF19 /* ParentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParentViewController.h; sourceTree = "<group>"; };
+		5707792217D4E9220095FF19 /* ParentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParentViewController.m; sourceTree = "<group>"; };
 		571B1D0817C7BE4C0013AA41 /* CloseBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseBtn.png; sourceTree = "<group>"; };
 		571B1D0917C7BE4C0013AA41 /* CloseBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CloseBtn@2x.png"; sourceTree = "<group>"; };
 		571B1D0A17C7BE4C0013AA41 /* CloseBtn_press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseBtn_press.png; sourceTree = "<group>"; };
@@ -894,6 +901,83 @@
 				57066A9817C5258F0080797B /* AP_predict_pressed@2x.png */,
 			);
 			path = addPrediction;
+			sourceTree = "<group>";
+		};
+		5707791A17D4E88E0095FF19 /* Login & SingUp */ = {
+			isa = PBXGroup;
+			children = (
+				9E70884A178AFF2F00F036A8 /* WelcomeViewController.h */,
+				9E70884B178AFF2F00F036A8 /* WelcomeViewController.m */,
+				9E57924C1795A8D300979928 /* LoginViewController.h */,
+				9E57924D1795A8D300979928 /* LoginViewController.m */,
+				9E5792831798466100979928 /* SignUpViewController.h */,
+				9E5792841798466100979928 /* SignUpViewController.m */,
+				9E57928A179977EF00979928 /* TermsOfServiceViewController.h */,
+				9E57928B179977EF00979928 /* TermsOfServiceViewController.m */,
+				9E579291179982C000979928 /* ForgotPasswordViewController.h */,
+				9E579292179982C000979928 /* ForgotPasswordViewController.m */,
+				3638773E17C4D6EA00703475 /* SelectPictureViewController.h */,
+				575B100D17C4FBDB00782E6B /* SelectPictureViewController.m */,
+				C3C33F0017D0A823003CA79C /* ImageCropperViewController.h */,
+				C3C33F0117D0A823003CA79C /* ImageCropperViewController.m */,
+			);
+			name = "Login & SingUp";
+			sourceTree = "<group>";
+		};
+		5707791B17D4E8B10095FF19 /* Menu Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				9E930215179FDE5000FFB166 /* NavigationViewController.h */,
+				9E930216179FDE5000FFB166 /* NavigationViewController.m */,
+				9E93021E179FF45000FFB166 /* HomeViewController.h */,
+				9E93021F179FF45000FFB166 /* HomeViewController.m */,
+				5707792617D5E9520095FF19 /* History & Alerts */,
+				9E8421D017A1858600D14D0A /* ProfileViewController.h */,
+				9E8421D117A1858600D14D0A /* ProfileViewController.m */,
+				36A4054617C24DDD00406A12 /* BadgesCollectionViewController.h */,
+				36A4054717C24DDD00406A12 /* BadgesCollectionViewController.m */,
+			);
+			name = "Menu Controllers";
+			sourceTree = "<group>";
+		};
+		5707791C17D4E8E90095FF19 /* Alerts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Alerts;
+			sourceTree = "<group>";
+		};
+		5707791D17D4E8FC0095FF19 /* History */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = History;
+			sourceTree = "<group>";
+		};
+		5707792617D5E9520095FF19 /* History & Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				5707791E17D4E9220095FF19 /* ChildControllerDataSource.h */,
+				5707791F17D4E9220095FF19 /* ChildViewController.h */,
+				5707792017D4E9220095FF19 /* ChildViewController.m */,
+				5707792117D4E9220095FF19 /* ParentViewController.h */,
+				5707792217D4E9220095FF19 /* ParentViewController.m */,
+				5707791D17D4E8FC0095FF19 /* History */,
+				9EC05AE817A164EA00D67DA2 /* HistoryViewController.h */,
+				9EC05AE917A164EA00D67DA2 /* HistoryViewController.m */,
+				9EC05AEB17A1723100D67DA2 /* MyPredictionsViewController.h */,
+				9EC05AEC17A1723100D67DA2 /* MyPredictionsViewController.m */,
+				9EC05AEE17A172B600D67DA2 /* MyPicksViewController.h */,
+				9EC05AEF17A172B600D67DA2 /* MyPicksViewController.m */,
+				5707791C17D4E8E90095FF19 /* Alerts */,
+				9E8421BC17A179C500D14D0A /* AlertsViewController.h */,
+				9E8421BD17A179C500D14D0A /* AlertsViewController.m */,
+				9E8421BF17A17AE900D14D0A /* AllAlertsViewController.h */,
+				9E8421C017A17AE900D14D0A /* AllAlertsViewController.m */,
+				9E8421C217A17B1A00D14D0A /* ExpiredAlertsViewController.h */,
+				9E8421C317A17B1A00D14D0A /* ExpiredAlertsViewController.m */,
+			);
+			name = "History & Alerts";
 			sourceTree = "<group>";
 		};
 		571B1D0717C7BE4C0013AA41 /* newBadgePopup */ = {
@@ -1366,52 +1450,20 @@
 				9E930218179FF0E800FFB166 /* Segues */,
 				9E57924F1796C39200979928 /* Controls */,
 				571B1D1817C7BE620013AA41 /* New Badge Popup */,
-				9E70884A178AFF2F00F036A8 /* WelcomeViewController.h */,
-				9E70884B178AFF2F00F036A8 /* WelcomeViewController.m */,
-				9E57924C1795A8D300979928 /* LoginViewController.h */,
-				9E57924D1795A8D300979928 /* LoginViewController.m */,
-				9E5792831798466100979928 /* SignUpViewController.h */,
-				9E5792841798466100979928 /* SignUpViewController.m */,
-				9E57928A179977EF00979928 /* TermsOfServiceViewController.h */,
-				9E57928B179977EF00979928 /* TermsOfServiceViewController.m */,
-				9E579291179982C000979928 /* ForgotPasswordViewController.h */,
-				9E579292179982C000979928 /* ForgotPasswordViewController.m */,
-				9E930215179FDE5000FFB166 /* NavigationViewController.h */,
-				9E930216179FDE5000FFB166 /* NavigationViewController.m */,
-				9E93021E179FF45000FFB166 /* HomeViewController.h */,
-				9E93021F179FF45000FFB166 /* HomeViewController.m */,
-				9EC05AE817A164EA00D67DA2 /* HistoryViewController.h */,
-				9EC05AE917A164EA00D67DA2 /* HistoryViewController.m */,
-				9EC05AEB17A1723100D67DA2 /* MyPredictionsViewController.h */,
-				9EC05AEC17A1723100D67DA2 /* MyPredictionsViewController.m */,
-				9EC05AEE17A172B600D67DA2 /* MyPicksViewController.h */,
-				9EC05AEF17A172B600D67DA2 /* MyPicksViewController.m */,
-				9E8421BC17A179C500D14D0A /* AlertsViewController.h */,
-				9E8421BD17A179C500D14D0A /* AlertsViewController.m */,
-				9E8421BF17A17AE900D14D0A /* AllAlertsViewController.h */,
-				9E8421C017A17AE900D14D0A /* AllAlertsViewController.m */,
-				9E8421C217A17B1A00D14D0A /* ExpiredAlertsViewController.h */,
-				9E8421C317A17B1A00D14D0A /* ExpiredAlertsViewController.m */,
-				9E8421D017A1858600D14D0A /* ProfileViewController.h */,
-				9E8421D117A1858600D14D0A /* ProfileViewController.m */,
+				5707791A17D4E88E0095FF19 /* Login & SingUp */,
+				5707791B17D4E8B10095FF19 /* Menu Controllers */,
 				9E8421F817AFC91700D14D0A /* AddPredictionViewController.h */,
 				9E8421F917AFC91700D14D0A /* AddPredictionViewController.m */,
 				9ECECC3917B10F4E00B48465 /* PredictionDetailsViewController.h */,
 				9ECECC3A17B10F4E00B48465 /* PredictionDetailsViewController.m */,
-				36A4054617C24DDD00406A12 /* BadgesCollectionViewController.h */,
-				36A4054717C24DDD00406A12 /* BadgesCollectionViewController.m */,
 				3638773C17C4D6EA00703475 /* ChangePasswordViewController.h */,
 				3638773D17C4D6EA00703475 /* ChangePasswordViewController.m */,
-				3638773E17C4D6EA00703475 /* SelectPictureViewController.h */,
-				575B100D17C4FBDB00782E6B /* SelectPictureViewController.m */,
 				3638773A17C4D6EA00703475 /* AnotherUsersProfileViewController.h */,
 				3638773B17C4D6EA00703475 /* AnotherUsersProfileViewController.m */,
 				57066AA817C64E970080797B /* CategoryPredictionsViewController.h */,
 				57066AA917C64E980080797B /* CategoryPredictionsViewController.m */,
 				369D861517CDE78E0005F0B3 /* UsernameEmailChangeViewController.h */,
 				369D861617CDE78E0005F0B3 /* UsernameEmailChangeViewController.m */,
-				C3C33F0017D0A823003CA79C /* ImageCropperViewController.h */,
-				C3C33F0117D0A823003CA79C /* ImageCropperViewController.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1851,6 +1903,8 @@
 				C3C33EFF17D0A56F003CA79C /* BJImageCropper.m in Sources */,
 				C3C33F0217D0A823003CA79C /* ImageCropperViewController.m in Sources */,
 				9E677AC417D4C73C00A9AFFC /* RemoveTokenWebRequest.m in Sources */,
+				5707792317D4E9220095FF19 /* ChildViewController.m in Sources */,
+				5707792417D4E9220095FF19 /* ParentViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

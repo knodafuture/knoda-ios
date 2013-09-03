@@ -14,15 +14,17 @@
 #import "AddPredictionViewController.h"
 #import "AnotherUsersProfileViewController.h"
 #import "ProfileViewController.h"
+#import "ChildControllerDataSource.h"
 
 static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 static NSString* const kMyProfileSegue = @"MyProfileSegue";
 
-@interface MyPredictionsViewController () <AddPredictionViewControllerDelegate, PredictionCellDelegate>
+@interface MyPredictionsViewController () <AddPredictionViewControllerDelegate, PredictionCellDelegate> {
+    BOOL _isRefreshing;
+    BOOL _needLoadNextPage;
+}
 
-@property (nonatomic, strong) NSMutableArray* predictions;
 @property (nonatomic, strong) NSTimer* cellUpdateTimer;
-@property (strong, nonatomic) IBOutlet UIView *noContentView;
 
 @end
 
@@ -66,6 +68,8 @@ static NSString* const kMyProfileSegue = @"MyProfileSegue";
     
     __weak MyPredictionsViewController *weakSelf = self;
     
+    _isRefreshing = YES;
+    
     HistoryMyPredictionsRequest* request = [[HistoryMyPredictionsRequest alloc] init];
     [request executeWithCompletionBlock: ^
      {
@@ -85,6 +89,33 @@ static NSString* const kMyProfileSegue = @"MyProfileSegue";
                  [strongSelf.view addSubview:strongSelf.noContentView];
              }
          }
+         _isRefreshing = NO;
+         if(_needLoadNextPage && strongSelf.predictions.count >= [HistoryMyPredictionsRequest limitByPage]) {
+             [strongSelf loadNextPage];
+         }
+         _needLoadNextPage = NO;
+     }];
+}
+
+- (void)loadNextPage {
+    __weak MyPredictionsViewController *weakSelf = self;
+    
+    HistoryMyPredictionsRequest* predictionsRequest = [[HistoryMyPredictionsRequest alloc] initWithLastCreatedDate: ((Prediction*)[self.predictions lastObject]).creationDate];
+    [predictionsRequest executeWithCompletionBlock: ^
+     {
+         MyPredictionsViewController *strongSelf = weakSelf;
+         if(!strongSelf) {
+             return;
+         }
+         if (predictionsRequest.errorCode == 0 && predictionsRequest.predictions.count != 0)
+         {
+             [strongSelf.predictions addObjectsFromArray: [NSMutableArray arrayWithArray: predictionsRequest.predictions] ];
+             [strongSelf.tableView reloadData];
+         }
+         else
+         {
+             [strongSelf.tableView scrollToRowAtIndexPath: [NSIndexPath indexPathForRow: strongSelf.predictions.count - 1 inSection: 0] atScrollPosition: UITableViewScrollPositionBottom animated: YES];
+         }
      }];
 }
 
@@ -98,6 +129,10 @@ static NSString* const kMyProfileSegue = @"MyProfileSegue";
         ProfileViewController *vc = (ProfileViewController *)segue.destinationViewController;
         vc.leftButtonItemReturnsBack = YES;
     }
+}
+
+- (NSInteger)limitByPage {
+    return [HistoryMyPredictionsRequest limitByPage];
 }
 
 #pragma mark - UITableViewDataSource
@@ -130,7 +165,7 @@ static NSString* const kMyProfileSegue = @"MyProfileSegue";
         [cell setUpUserProfileTapGestures:tapGesture];
         
         [cell fillWithPrediction: prediction];
-                
+        
         tableCell = cell;
     }
     else
@@ -148,27 +183,14 @@ static NSString* const kMyProfileSegue = @"MyProfileSegue";
 
 - (void) tableView: (UITableView*) tableView willDisplayCell: (UITableViewCell*) cell forRowAtIndexPath: (NSIndexPath*) indexPath
 {
-    __weak MyPredictionsViewController *weakSelf = self;
-    
     if ((self.predictions.count >= [HistoryMyPredictionsRequest limitByPage]) && indexPath.row == self.predictions.count)
     {
-        HistoryMyPredictionsRequest* predictionsRequest = [[HistoryMyPredictionsRequest alloc] initWithLastCreatedDate: ((Prediction*)[self.predictions lastObject]).creationDate];
-        [predictionsRequest executeWithCompletionBlock: ^
-         {
-             MyPredictionsViewController *strongSelf = weakSelf;
-             if(!strongSelf) {
-                 return;
-             }
-             if (predictionsRequest.errorCode == 0 && predictionsRequest.predictions.count != 0)
-             {
-                 [strongSelf.predictions addObjectsFromArray: [NSMutableArray arrayWithArray: predictionsRequest.predictions] ];
-                 [strongSelf.tableView reloadData];
-             }
-             else
-             {
-                 [strongSelf.tableView scrollToRowAtIndexPath: [NSIndexPath indexPathForRow: indexPath.row - 1 inSection: 0] atScrollPosition: UITableViewScrollPositionBottom animated: YES];
-             }
-         }];
+        if(!_isRefreshing) {
+            [self loadNextPage];
+        }
+        else {
+            _needLoadNextPage = YES;
+        }
     }
 }
 

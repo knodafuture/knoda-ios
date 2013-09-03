@@ -4265,7 +4265,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Save" style="done" id="C3Z-M6-yRs">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="tintColor" white="0.95000000000000007" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="saveButonTouched:" destination="8Kn-Df-1EH" id="Qn1-Jx-pLN"/>
                             </connections>

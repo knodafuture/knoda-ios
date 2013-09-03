@@ -23,6 +23,12 @@
 }
 
 
+- (BOOL) requiresAuthToken
+{
+    return YES;
+}
+
+
 - (void) fillResultObject: (id) parsedResult
 {
     NSLog(@"Get Categories Result: %@", parsedResult);

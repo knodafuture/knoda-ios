@@ -294,6 +294,7 @@ static const char *MULTIPART_CHARS = "1234567890_-qwertyuiopasdfghjklzxcvbnmQWER
     
     [request setHTTPMethod: [self httpMethod]];
     [request setTimeoutInterval: 20];
+    [request setHTTPShouldHandleCookies: NO];
     
     NSLog(@"%@ Start request %@", NSStringFromClass([self class]), request.URL);
     
@@ -327,13 +328,6 @@ static const char *MULTIPART_CHARS = "1234567890_-qwertyuiopasdfghjklzxcvbnmQWER
         NSLog(@"Status code: %d", response.statusCode);
         NSLog(@"%@ %@\nRequest result:\n%@",  NSStringFromClass([self class]), request.URL, resultString);
         
-        if(response.statusCode == 403 && [self requiresAuthToken]) { //perform logout if authorization is failed
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.appDelegate logout];
-            });
-            return;
-        }
-        
         if (self.state == kRequestStateCancelled)
         {
             return;
@@ -356,6 +350,13 @@ static const char *MULTIPART_CHARS = "1234567890_-qwertyuiopasdfghjklzxcvbnmQWER
         {
             self.errorCode = kInternalErrorCodeUnknownServerError;
             self.errorDescription = NSLocalizedString(@"Unknown server error", @"");
+        }
+        
+        if(self.errorCode == -1012 && [self requiresAuthToken]) { //perform logout if authorization is failed
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.appDelegate logout];
+            });
+            return;
         }
         
         if (resultString.length != 0)

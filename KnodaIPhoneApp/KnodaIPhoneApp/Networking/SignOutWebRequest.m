@@ -21,4 +21,11 @@
     return @"DELETE";
 }
 
+
+- (BOOL) requiresAuthToken
+{
+    return YES;
+}
+
+
 @end

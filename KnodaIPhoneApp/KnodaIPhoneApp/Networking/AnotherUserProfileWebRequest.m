@@ -29,6 +29,13 @@
     return [NSString stringWithFormat:format, _userId];
 }
 
+
+- (BOOL) requiresAuthToken
+{
+    return YES;
+}
+
+
 - (void) fillResultObject: (id) parsedResult
 {
     NSLog(@"Parsed user's info: %@", parsedResult);

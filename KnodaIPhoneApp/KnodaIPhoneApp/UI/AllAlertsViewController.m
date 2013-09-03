@@ -36,52 +36,52 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
     __weak AllAlertsViewController *weakSelf = self;
     
     AllAlertsWebRequest* request = [[AllAlertsWebRequest alloc] init];
-    [request executeWithCompletionBlock: ^
-     {
-         AllAlertsViewController *strongSelf = weakSelf;
-         if(!strongSelf) {
-             return;
-         }
-         if (request.errorCode == 0)
-         {
-             NSLog(@"All alerts: %@", request.predictions);
-             
-             strongSelf.predictions = [NSMutableArray arrayWithArray:request.predictions];
-             [strongSelf.tableView reloadData];
-             
-             if (strongSelf.predictions.count != 0)
-             {
-                 NSArray* visibleCells = [strongSelf.tableView visibleCells];
-                 NSMutableArray* chellangeIDs = [NSMutableArray arrayWithCapacity: 0];
-                 
-                 for (PreditionCell* cell in visibleCells)
-                 {
-                     if (cell.prediction.settled)
+    
+    [self executeRequest:request withBlock:^{
+        AllAlertsViewController *strongSelf = weakSelf;
+        if(!strongSelf) {
+            return;
+        }
+        if (request.errorCode == 0)
+        {
+            NSLog(@"All alerts: %@", request.predictions);
+            
+            strongSelf.predictions = [NSMutableArray arrayWithArray:request.predictions];
+            [strongSelf.tableView reloadData];
+            
+            if (strongSelf.predictions.count != 0)
+            {
+                NSArray* visibleCells = [strongSelf.tableView visibleCells];
+                NSMutableArray* chellangeIDs = [NSMutableArray arrayWithCapacity: 0];
+                
+                for (PreditionCell* cell in visibleCells)
+                {
+                    if (cell.prediction.settled)
+                    {
+                        [chellangeIDs addObject: [NSNumber numberWithInteger: cell.prediction.chellange.ID]];
+                    }
+                }
+                
+                if (chellangeIDs.count != 0)
+                {
+                    SetSeenAlertsWebRequest* request = [[SetSeenAlertsWebRequest alloc] initWithIDs: chellangeIDs];
+                    [request executeWithCompletionBlock: ^
                      {
-                         [chellangeIDs addObject: [NSNumber numberWithInteger: cell.prediction.chellange.ID]];
-                     }
-                 }
-                 
-                 if (chellangeIDs.count != 0)
-                 {
-                     SetSeenAlertsWebRequest* request = [[SetSeenAlertsWebRequest alloc] initWithIDs: chellangeIDs];
-                     [request executeWithCompletionBlock: ^
-                      {
-                          if (request.errorCode != 0)
-                          {
-                              for (PreditionCell* cell in visibleCells)
-                              {
-                                  cell.prediction.chellange.seen = YES;
-                              }
-                          }
-                      }];
-                 }
-             }
-             else {
-                 self.noContentView.hidden = NO;
-             }
-         }
-     }];
+                         if (request.errorCode != 0)
+                         {
+                             for (PreditionCell* cell in visibleCells)
+                             {
+                                 cell.prediction.chellange.seen = YES;
+                             }
+                         }
+                     }];
+                }
+            }
+            else {
+                strongSelf.noContentView.hidden = NO;
+            }
+        }
+    }];
 }
 
 - (void) prepareForSegue: (UIStoryboardSegue*) segue sender: (id) sender

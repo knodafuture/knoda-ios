@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Knoda. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseRequestingViewController.h"
 
 #import "Prediction.h"
 
@@ -14,7 +14,7 @@
 
 @protocol AddPredictionViewControllerDelegate;
 
-@interface PredictionDetailsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface PredictionDetailsViewController : BaseRequestingViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) Prediction *prediction;
 

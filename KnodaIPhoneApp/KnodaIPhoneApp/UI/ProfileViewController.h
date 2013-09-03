@@ -6,10 +6,11 @@
 //  Copyright (c) 2013 Knoda. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "BindableView.h"
+#import "BaseRequestingViewController.h"
 
-@interface ProfileViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@class BindableView;
+
+@interface ProfileViewController : BaseRequestingViewController <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet BindableView *profileAvatarView;
 @property (weak, nonatomic) IBOutlet UITableView *accountDetailsTableView;

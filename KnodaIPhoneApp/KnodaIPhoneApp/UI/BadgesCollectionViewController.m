@@ -11,6 +11,7 @@
 #import "NavigationViewController.h"
 #import "BadgesWebRequest.h"
 #import "AddPredictionViewController.h"
+#import "UIViewController+WebRequests.h"
 
 static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 
@@ -20,13 +21,21 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 @property (weak, nonatomic) IBOutlet UIView *activityView;
 @property (weak, nonatomic) IBOutlet UIView *noContentView;
 
+@property (nonatomic) NSMutableArray *webRequests;
+
 @end
 
 @implementation BadgesCollectionViewController
 
+- (void)dealloc {
+    [self cancelAllRequests];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.webRequests = [NSMutableArray array];
     
     if(self.navigationController.viewControllers.count > 1) { //if it's not from menu - change the navigation items
         UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 33)];
@@ -48,18 +57,26 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
     [self setUpUsersBadges];
 }
 
+- (NSMutableArray *)getWebRequests {
+    return self.webRequests;
+}
+
 - (void) setUpUsersBadges {
+    __weak BadgesCollectionViewController *weakSelf = self;
     BadgesWebRequest * badgesWebRequest = [[BadgesWebRequest alloc]init];
-    [badgesWebRequest executeWithCompletionBlock:^{
-        self.activityView.hidden = YES;
+    [self executeRequest:badgesWebRequest withBlock:^{
+        BadgesCollectionViewController *strongSelf = weakSelf;
+        if(!strongSelf) return;
+        
+        strongSelf.activityView.hidden = YES;
         if (badgesWebRequest.errorCode == 0) {
-            self.badgesImagesArray = badgesWebRequest.badgesImagesArray;
-            [self.collectionView reloadData];
+            strongSelf.badgesImagesArray = badgesWebRequest.badgesImagesArray;
+            [strongSelf.collectionView reloadData];
         }
         
-        if ([self.badgesImagesArray count] == 0) {
-            self.noContentView.hidden = NO;
-            self.view = self.noContentView;
+        if ([strongSelf.badgesImagesArray count] == 0) {
+            strongSelf.noContentView.hidden = NO;
+            strongSelf.view = strongSelf.noContentView;
         }
     }];
 }

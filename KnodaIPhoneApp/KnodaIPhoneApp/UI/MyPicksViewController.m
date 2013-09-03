@@ -64,52 +64,52 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
     _isRefreshing = YES;
     
     HistoryMyPicksWebRequest* request = [[HistoryMyPicksWebRequest alloc] init];
-    [request executeWithCompletionBlock: ^
-     {
-         MyPicksViewController *strongSelf = weakSelf;
-         if(!strongSelf) {
-             return;
-         }
-         if (request.errorCode == 0)
-         {
-             strongSelf.predictions = [NSMutableArray arrayWithArray: request.predictions];
-             [strongSelf.tableView reloadData];
-
-             if ([strongSelf.predictions count] > 0) {
-                 [strongSelf.noContentView removeFromSuperview];
-             }
-             else {
-                 [strongSelf.view addSubview:strongSelf.noContentView];
-             }
-         }
-         _isRefreshing = NO;
-         if(_needLoadNextPage && strongSelf.predictions.count >= [HistoryMyPicksWebRequest limitByPage]) {
-             [strongSelf loadNextPage];
-         }
-         _needLoadNextPage = NO;
-     }];
+    
+    [self executeRequest:request withBlock:^{
+        MyPicksViewController *strongSelf = weakSelf;
+        if(!strongSelf) {
+            return;
+        }
+        if (request.errorCode == 0)
+        {
+            strongSelf.predictions = [NSMutableArray arrayWithArray: request.predictions];
+            [strongSelf.tableView reloadData];
+            
+            if ([strongSelf.predictions count] > 0) {
+                [strongSelf.noContentView removeFromSuperview];
+            }
+            else {
+                [strongSelf.view addSubview:strongSelf.noContentView];
+            }
+        }
+        strongSelf->_isRefreshing = NO;
+        if(strongSelf->_needLoadNextPage && strongSelf.predictions.count >= [HistoryMyPicksWebRequest limitByPage]) {
+            [strongSelf loadNextPage];
+        }
+        strongSelf->_needLoadNextPage = NO;
+    }];
 }
 
 - (void)loadNextPage {
     __weak MyPicksViewController *weakSelf = self;
     
     HistoryMyPicksWebRequest* predictionsRequest = [[HistoryMyPicksWebRequest alloc] initWithLastCreatedDate: ((Prediction*)[self.predictions lastObject]).creationDate];
-    [predictionsRequest executeWithCompletionBlock: ^
-     {
-         MyPicksViewController *strongSelf = weakSelf;
-         if(!strongSelf) {
-             return;
-         }
-         if (predictionsRequest.errorCode == 0 && predictionsRequest.predictions.count != 0)
-         {
-             [strongSelf.predictions addObjectsFromArray: [NSMutableArray arrayWithArray: predictionsRequest.predictions] ];
-             [strongSelf.tableView reloadData];
-         }
-         else
-         {
-             [strongSelf.tableView scrollToRowAtIndexPath: [NSIndexPath indexPathForRow: strongSelf.predictions.count - 1 inSection: 0] atScrollPosition: UITableViewScrollPositionBottom animated: YES];
-         }
-     }];
+    
+    [self executeRequest:predictionsRequest withBlock:^{
+        MyPicksViewController *strongSelf = weakSelf;
+        if(!strongSelf) {
+            return;
+        }
+        if (predictionsRequest.isSucceeded && predictionsRequest.predictions.count != 0)
+        {
+            [strongSelf.predictions addObjectsFromArray: [NSMutableArray arrayWithArray: predictionsRequest.predictions] ];
+            [strongSelf.tableView reloadData];
+        }
+        else
+        {
+            [strongSelf.tableView scrollToRowAtIndexPath: [NSIndexPath indexPathForRow: strongSelf.predictions.count - 1 inSection: 0] atScrollPosition: UITableViewScrollPositionBottom animated: YES];
+        }
+    }];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

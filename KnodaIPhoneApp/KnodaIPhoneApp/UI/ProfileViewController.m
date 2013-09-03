@@ -17,6 +17,7 @@
 #import "AddPredictionViewController.h"
 #import "UIImage+Utils.h"
 #import "ImageCropperViewController.h"
+#import "BindableView.h"
 
 static NSString * const accountDetailsTableViewCellIdentifier = @"accountDetailsTableViewCellIdentifier";
 
@@ -43,6 +44,10 @@ static const float kAvatarSize = 344.0;
 @end
 
 @implementation ProfileViewController
+
+- (void)dealloc {
+    [self cancelAllRequests];
+}
 
 - (void)viewDidLoad
 {
@@ -73,21 +78,28 @@ static const float kAvatarSize = 344.0;
 
 - (void) fillInUsersInformation {
     [self showLoadingView];
+    
+    __weak ProfileViewController *weakSelf = self;
+    
     ProfileWebRequest *profileWebRequest = [[ProfileWebRequest alloc]init];
-    [profileWebRequest executeWithCompletionBlock:^{
-        [self hideLoadingView];
+    
+    [self executeRequest:profileWebRequest withBlock:^{
+        ProfileViewController *strongSelf = weakSelf;
+        if(!strongSelf) return;
+        
+        [strongSelf hideLoadingView];
         
         if (profileWebRequest.isSucceeded)
         {
-            [self.appDelegate.user updateWithObject:profileWebRequest.user];
+            [strongSelf.appDelegate.user updateWithObject:profileWebRequest.user];
         }
         
-        User * user = self.appDelegate.user;
-        [self.profileAvatarView bindToURL:user.bigImage];
-        self.loginLabel.text = user.name;
-        self.pointsLabel.text = [NSString stringWithFormat:@"%d %@",user.points,NSLocalizedString(@"points", @"")];
-        self.accountDetailsArray = [NSArray arrayWithObjects:self.appDelegate.user.name,user.email,NSLocalizedString(@"Change Password", @""), nil];
-        [self.accountDetailsTableView reloadData];
+        User * user = strongSelf.appDelegate.user;
+        [strongSelf.profileAvatarView bindToURL:user.bigImage];
+        strongSelf.loginLabel.text = user.name;
+        strongSelf.pointsLabel.text = [NSString stringWithFormat:@"%d %@",user.points,NSLocalizedString(@"points", @"")];
+        strongSelf.accountDetailsArray = [NSArray arrayWithObjects:strongSelf.appDelegate.user.name,user.email,NSLocalizedString(@"Change Password", @""), nil];
+        [strongSelf.accountDetailsTableView reloadData];
     }];
 }
 
@@ -156,19 +168,24 @@ static const float kAvatarSize = 344.0;
 
     [self showLoadingView];
     
-    [profileRequest executeWithCompletionBlock:^{
+    __weak ProfileViewController *weakSelf = self;
+    
+    [self executeRequest:profileRequest withBlock:^{
+        ProfileViewController *strongSelf = weakSelf;
+        if(!strongSelf) return;
+        
         if(profileRequest.isSucceeded) {
             ProfileWebRequest *updateRequest = [ProfileWebRequest new];
             [updateRequest executeWithCompletionBlock:^{
                 if(updateRequest.isSucceeded) {
                     [[(AppDelegate *)[[UIApplication sharedApplication] delegate] user] updateWithObject:updateRequest.user];
-                    self.profileAvatarView.imageView.image = image;
-                    [self hideLoadingView];
+                    strongSelf.profileAvatarView.imageView.image = image;
+                    [strongSelf hideLoadingView];
                 }
             }];
         }
         else {
-            [self hideLoadingView];
+            [strongSelf hideLoadingView];
             [[[UIAlertView alloc] initWithTitle:nil
                                         message:profileRequest.localizedErrorDescription
                                        delegate:nil

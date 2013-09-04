@@ -15,11 +15,12 @@
 #import "AnotherUsersProfileViewController.h"
 #import "ProfileViewController.h"
 #import "ChildControllerDataSource.h"
+#import "PredictionUpdateWebRequest.h"
 
 static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 static NSString* const kMyProfileSegue = @"MyProfileSegue";
 
-@interface MyPredictionsViewController () <AddPredictionViewControllerDelegate, PredictionCellDelegate> {
+@interface MyPredictionsViewController () <AddPredictionViewControllerDelegate, PredictionCellDelegate, PredictionDetailsDelegate> {
     BOOL _isRefreshing;
     BOOL _needLoadNextPage;
 }
@@ -122,6 +123,7 @@ static NSString* const kMyProfileSegue = @"MyProfileSegue";
         PredictionDetailsViewController *vc = (PredictionDetailsViewController *)segue.destinationViewController;
         vc.prediction = sender;
         vc.addPredictionDelegate = self;
+        vc.delegate = self;
     }
     else if([segue.identifier isEqualToString:kMyProfileSegue]) {
         ProfileViewController *vc = (ProfileViewController *)segue.destinationViewController;
@@ -213,6 +215,25 @@ static NSString* const kMyProfileSegue = @"MyProfileSegue";
 
 - (void) profileSelectedWithUserId:(NSInteger)userId inCell:(PreditionCell *)cell {
     [self performSegueWithIdentifier:kMyProfileSegue sender:self];
+}
+
+#pragma mark PredictionDetailsDelegate
+
+- (void)updatePrediction:(Prediction *)prediction {
+    __weak MyPredictionsViewController *weakSelf = self;
+    PredictionUpdateWebRequest *updateRequest = [[PredictionUpdateWebRequest alloc] initWithPredictionId:prediction.ID];
+    [self executeRequest:updateRequest withBlock:^{
+        MyPredictionsViewController *strongSelf = weakSelf;
+        if(!strongSelf) return;
+        
+        if(updateRequest.isSucceeded) {
+            [prediction updateWithObject:updateRequest.prediction];
+            NSUInteger idx = [strongSelf.predictions indexOfObject:prediction];
+            if(idx != NSNotFound) {
+                [strongSelf.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:idx inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
+        }
+    }];
 }
 
 @end

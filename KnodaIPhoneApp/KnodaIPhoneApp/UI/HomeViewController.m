@@ -20,6 +20,7 @@
 #import "User.h"
 #import "BadgesWebRequest.h"
 #import "UIViewController+WebRequests.h"
+#import "PredictionUpdateWebRequest.h"
 
 #define IS_PHONEPOD5() ([UIScreen mainScreen].bounds.size.height == 568.0f && [UIScreen mainScreen].scale == 2.f && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 
@@ -28,7 +29,7 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
 static NSString* const kUserProfileSegue       = @"UserProfileSegue";
 static NSString* const kMyProfileSegue         = @"MyProfileSegue";
 
-@interface HomeViewController ()
+@interface HomeViewController () <PredictionDetailsDelegate>
 
 @property (nonatomic, strong) NSMutableArray* predictions;
 @property (nonatomic, strong) NSTimer* cellUpdateTimer;
@@ -144,6 +145,7 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
         PredictionDetailsViewController *vc = (PredictionDetailsViewController *)segue.destinationViewController;
         vc.prediction = sender;
         vc.addPredictionDelegate = self;
+        vc.delegate = self;
     }
     else if([segue.identifier isEqualToString:kUserProfileSegue]) {
         AnotherUsersProfileViewController *vc = (AnotherUsersProfileViewController *)segue.destinationViewController;
@@ -367,6 +369,25 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
 - (AppDelegate*) appDelegate
 {
     return [UIApplication sharedApplication].delegate;
+}
+
+#pragma mark PredictionDetailsDelegate
+
+- (void)updatePrediction:(Prediction *)prediction {
+    __weak HomeViewController *weakSelf = self;
+    PredictionUpdateWebRequest *updateRequest = [[PredictionUpdateWebRequest alloc] initWithPredictionId:prediction.ID];
+    [self executeRequest:updateRequest withBlock:^{
+        HomeViewController *strongSelf = weakSelf;
+        if(!strongSelf) return;
+        
+        if(updateRequest.isSucceeded) {
+            [prediction updateWithObject:updateRequest.prediction];
+            NSUInteger idx = [strongSelf.predictions indexOfObject:prediction];
+            if(idx != NSNotFound) {
+                [strongSelf.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:idx inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
+        }
+    }];
 }
 
 @end

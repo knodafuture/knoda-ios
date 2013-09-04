@@ -91,6 +91,9 @@ static const int kBSAlertTag = 1001;
 #pragma mark Actions
 
 - (IBAction)backButtonPressed:(UIButton *)sender {
+    if(self.delegate && [self getWebRequests].count) { //update prediction in case if some changes weren't handled
+        [self.delegate updatePrediction:self.prediction];
+    }
     [self cancelAllRequests];
     [self.navigationController popViewControllerAnimated:YES];
 }

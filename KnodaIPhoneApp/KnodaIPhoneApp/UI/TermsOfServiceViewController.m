@@ -11,7 +11,6 @@
 
 @interface TermsOfServiceViewController ()
 
-@property (nonatomic, strong) IBOutlet UIView* activityView;
 @property (nonatomic, strong) IBOutlet UIWebView* webView;
 
 @end
@@ -30,7 +29,6 @@
 
 - (void) viewWillAppear: (BOOL) animated
 {
-    //self.activityView.hidden = NO;
     NSURL *termsURL = [NSURL URLWithString:[NSString stringWithFormat: @"http://%@/ios/pages/terms.html", kBaseURL]];
     NSURLRequest *requestObj = [NSURLRequest requestWithURL:termsURL];
     [self.webView loadRequest:requestObj];
@@ -45,5 +43,18 @@
     [self.navigationController popViewControllerAnimated: YES];
 }
 
+#pragma mark UIWebViewDelegate
+
+- (void)webViewDidStartLoad:(UIWebView *)webView {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+}
 
 @end

@@ -8,13 +8,9 @@
 
 #import "AlertsViewController.h"
 #import "NavigationViewController.h"
-#import "AppDelegate.h"
 #import "AllAlertsWebRequest.h"
 
 @interface AlertsViewController ()
-
-@property (weak, nonatomic) IBOutlet UIView *loadingView;
-@property (nonatomic, strong) AppDelegate * appDelegate;
 
 @end
 
@@ -49,11 +45,6 @@
         [(UIViewController<RefreshableViewController>*)[self.childViewControllers objectAtIndex: 0] refresh];
     }
     [((NavigationViewController*)self.navigationController.parentViewController) toggleNavigationPanel];
-}
-
-- (AppDelegate*) appDelegate
-{
-    return [UIApplication sharedApplication].delegate;
 }
 
 @end

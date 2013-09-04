@@ -11,6 +11,7 @@
 #import "UIImage+Utils.h"
 #import "AppDelegate.h"
 #import "ImageCropperViewController.h"
+#import "LoadingView.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -25,7 +26,6 @@ static NSString* const kImageCropperSegue = @"ImageCropperSegue";
 
 @property (weak, nonatomic) IBOutlet UIButton *pictureButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
-@property (weak, nonatomic) IBOutlet UIView *loadingView;
 
 @property (nonatomic) UIImage *avatarImage;
 
@@ -107,12 +107,13 @@ static NSString* const kImageCropperSegue = @"ImageCropperSegue";
 - (void)sendAvatar {
     ProfileWebRequest *profileRequest = [[ProfileWebRequest alloc] initWithAvatar:self.avatarImage];
     
-    self.loadingView.hidden = NO;
+    [[LoadingView sharedInstance] show];
     
     [profileRequest executeWithCompletionBlock:^{
         if(profileRequest.isSucceeded) {
             ProfileWebRequest *updateRequest = [ProfileWebRequest new];
             [updateRequest executeWithCompletionBlock:^{
+                [[LoadingView sharedInstance] hide];
                 if(updateRequest.isSucceeded) {
                     [[(AppDelegate *)[[UIApplication sharedApplication] delegate] user] updateWithObject:updateRequest.user];
                 }
@@ -120,7 +121,7 @@ static NSString* const kImageCropperSegue = @"ImageCropperSegue";
             }];
         }
         else {
-            self.loadingView.hidden = YES;
+            [[LoadingView sharedInstance] hide];
             [[[UIAlertView alloc] initWithTitle:nil
                                         message:profileRequest.localizedErrorDescription
                                        delegate:nil

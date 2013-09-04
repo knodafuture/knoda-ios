@@ -12,13 +12,13 @@
 #import "BadgesWebRequest.h"
 #import "AddPredictionViewController.h"
 #import "UIViewController+WebRequests.h"
+#import "LoadingView.h"
 
 static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 
 @interface BadgesCollectionViewController () <AddPredictionViewControllerDelegate>
 
 @property (nonatomic, strong) NSMutableArray * badgesImagesArray;
-@property (weak, nonatomic) IBOutlet UIView *activityView;
 @property (weak, nonatomic) IBOutlet UIView *noContentView;
 
 @property (nonatomic) NSMutableArray *webRequests;
@@ -47,7 +47,7 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
         self.navigationItem.rightBarButtonItem = nil;
     }
     
-    self.activityView.hidden = NO;
+    [[LoadingView sharedInstance] show];
     self.navigationController.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, self.navigationController.navigationBar.frame.size.height);
     [self.navigationController.navigationBar setTitleVerticalPositionAdjustment:5 forBarMetrics:UIBarMetricsDefault];
 }
@@ -65,10 +65,11 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
     __weak BadgesCollectionViewController *weakSelf = self;
     BadgesWebRequest * badgesWebRequest = [[BadgesWebRequest alloc]init];
     [self executeRequest:badgesWebRequest withBlock:^{
+        [[LoadingView sharedInstance] hide];
+        
         BadgesCollectionViewController *strongSelf = weakSelf;
         if(!strongSelf) return;
         
-        strongSelf.activityView.hidden = YES;
         if (badgesWebRequest.errorCode == 0) {
             strongSelf.badgesImagesArray = badgesWebRequest.badgesImagesArray;
             [strongSelf.collectionView reloadData];

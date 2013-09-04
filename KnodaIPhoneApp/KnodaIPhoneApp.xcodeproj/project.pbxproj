@@ -123,6 +123,8 @@
 		573BC37617D740E400E668C7 /* ProfileSaveButton_press@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 573BC37217D740E200E668C7 /* ProfileSaveButton_press@2x.png */; };
 		573BC37717D740E400E668C7 /* ProfileSaveButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 573BC37317D740E200E668C7 /* ProfileSaveButton.png */; };
 		573BC37817D740E400E668C7 /* ProfileSaveButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 573BC37417D740E200E668C7 /* ProfileSaveButton@2x.png */; };
+		573BC37C17D7576E00E668C7 /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 573BC37B17D7576E00E668C7 /* LoadingView.m */; };
+		573BC37E17D7577D00E668C7 /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 573BC37D17D7577D00E668C7 /* LoadingView.xib */; };
 		574314E017CF9EE800C8BC75 /* ServerError.m in Sources */ = {isa = PBXBuildFile; fileRef = 574314DF17CF9EE800C8BC75 /* ServerError.m */; };
 		574314E317CFA88200C8BC75 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 574314E117CFA88100C8BC75 /* Localizable.strings */; };
 		5746F29A17BA8CAE00C835FA /* LoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5746F29917BA8CAE00C835FA /* LoadingCell.m */; };
@@ -495,6 +497,9 @@
 		573BC37217D740E200E668C7 /* ProfileSaveButton_press@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ProfileSaveButton_press@2x.png"; sourceTree = "<group>"; };
 		573BC37317D740E200E668C7 /* ProfileSaveButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ProfileSaveButton.png; sourceTree = "<group>"; };
 		573BC37417D740E200E668C7 /* ProfileSaveButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ProfileSaveButton@2x.png"; sourceTree = "<group>"; };
+		573BC37A17D7576E00E668C7 /* LoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingView.h; sourceTree = "<group>"; };
+		573BC37B17D7576E00E668C7 /* LoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingView.m; sourceTree = "<group>"; };
+		573BC37D17D7577D00E668C7 /* LoadingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
 		574314DE17CF9EE800C8BC75 /* ServerError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerError.h; sourceTree = "<group>"; };
 		574314DF17CF9EE800C8BC75 /* ServerError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerError.m; sourceTree = "<group>"; };
 		574314E217CFA88200C8BC75 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -1065,6 +1070,16 @@
 			name = "Base History & Alerts Controllers";
 			sourceTree = "<group>";
 		};
+		573BC37917D7573800E668C7 /* LoadingView */ = {
+			isa = PBXGroup;
+			children = (
+				573BC37A17D7576E00E668C7 /* LoadingView.h */,
+				573BC37B17D7576E00E668C7 /* LoadingView.m */,
+				573BC37D17D7577D00E668C7 /* LoadingView.xib */,
+			);
+			name = LoadingView;
+			sourceTree = "<group>";
+		};
 		578E9B1A17BA218500A7B304 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -1518,6 +1533,7 @@
 				9E930218179FF0E800FFB166 /* Segues */,
 				9E57924F1796C39200979928 /* Controls */,
 				571B1D1817C7BE620013AA41 /* New Badge Popup */,
+				573BC37917D7573800E668C7 /* LoadingView */,
 				573BC35F17D6178C00E668C7 /* Base Controllers */,
 				5707791A17D4E88E0095FF19 /* Login & SingUp Controllers */,
 				5707791B17D4E8B10095FF19 /* Menu Controllers */,
@@ -1865,6 +1881,7 @@
 				573BC37617D740E400E668C7 /* ProfileSaveButton_press@2x.png in Resources */,
 				573BC37717D740E400E668C7 /* ProfileSaveButton.png in Resources */,
 				573BC37817D740E400E668C7 /* ProfileSaveButton@2x.png in Resources */,
+				573BC37E17D7577D00E668C7 /* LoadingView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1973,6 +1990,7 @@
 				5707792417D4E9220095FF19 /* ParentViewController.m in Sources */,
 				573BC36317D6180A00E668C7 /* BaseRequestingViewController.m in Sources */,
 				573BC36617D61DAF00E668C7 /* UIViewController+WebRequests.m in Sources */,
+				573BC37C17D7576E00E668C7 /* LoadingView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

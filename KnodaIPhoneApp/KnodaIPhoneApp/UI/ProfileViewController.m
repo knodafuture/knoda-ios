@@ -18,6 +18,7 @@
 #import "UIImage+Utils.h"
 #import "ImageCropperViewController.h"
 #import "BindableView.h"
+#import "LoadingView.h"
 
 static NSString * const accountDetailsTableViewCellIdentifier = @"accountDetailsTableViewCellIdentifier";
 
@@ -31,11 +32,8 @@ static const int kDefaultAvatarsCount = 5;
 static const float kAvatarSize = 344.0;
 #define AVATAR_SIZE CGSizeMake(kAvatarSize, kAvatarSize)
 
-@interface ProfileViewController () <AddPredictionViewControllerDelegate, ImageCropperDelegate> {
-    int _loadingsCount;
-}
+@interface ProfileViewController () <AddPredictionViewControllerDelegate, ImageCropperDelegate>
 
-@property (weak, nonatomic) IBOutlet UIView *activityView;
 @property (nonatomic, strong) AppDelegate * appDelegate;
 @property (nonatomic, strong) NSArray * accountDetailsArray;
 @property (weak, nonatomic) IBOutlet UIButton *leftNavigationBarItem;
@@ -77,17 +75,17 @@ static const float kAvatarSize = 344.0;
 }
 
 - (void) fillInUsersInformation {
-    [self showLoadingView];
+    [[LoadingView sharedInstance] show];
     
     __weak ProfileViewController *weakSelf = self;
     
     ProfileWebRequest *profileWebRequest = [[ProfileWebRequest alloc]init];
     
     [self executeRequest:profileWebRequest withBlock:^{
+        [[LoadingView sharedInstance] hide];
+        
         ProfileViewController *strongSelf = weakSelf;
         if(!strongSelf) return;
-        
-        [strongSelf hideLoadingView];
         
         if (profileWebRequest.isSucceeded)
         {
@@ -101,18 +99,6 @@ static const float kAvatarSize = 344.0;
         strongSelf.accountDetailsArray = [NSArray arrayWithObjects:strongSelf.appDelegate.user.name,user.email,NSLocalizedString(@"Change Password", @""), nil];
         [strongSelf.accountDetailsTableView reloadData];
     }];
-}
-
-- (void)showLoadingView {
-    self.activityView.hidden = NO;
-    _loadingsCount++;
-}
-
-- (void)hideLoadingView {
-    if(--_loadingsCount <= 0) {
-        self.activityView.hidden = YES;
-        _loadingsCount = 0;
-    }
 }
 
 - (IBAction)signOut:(id)sender {
@@ -166,13 +152,16 @@ static const float kAvatarSize = 344.0;
 - (void)sendAvatar:(UIImage *)image {
     ProfileWebRequest *profileRequest = [[ProfileWebRequest alloc] initWithAvatar:image];
 
-    [self showLoadingView];
+    [[LoadingView sharedInstance] show];
     
     __weak ProfileViewController *weakSelf = self;
     
     [self executeRequest:profileRequest withBlock:^{
         ProfileViewController *strongSelf = weakSelf;
-        if(!strongSelf) return;
+        if(!strongSelf) {
+            [[LoadingView sharedInstance] hide];
+            return;
+        }
         
         if(profileRequest.isSucceeded) {
             ProfileWebRequest *updateRequest = [ProfileWebRequest new];
@@ -180,12 +169,12 @@ static const float kAvatarSize = 344.0;
                 if(updateRequest.isSucceeded) {
                     [[(AppDelegate *)[[UIApplication sharedApplication] delegate] user] updateWithObject:updateRequest.user];
                     strongSelf.profileAvatarView.imageView.image = image;
-                    [strongSelf hideLoadingView];
+                    [[LoadingView sharedInstance] hide];
                 }
             }];
         }
         else {
-            [strongSelf hideLoadingView];
+            [[LoadingView sharedInstance] hide];
             [[[UIAlertView alloc] initWithTitle:nil
                                         message:profileRequest.localizedErrorDescription
                                        delegate:nil

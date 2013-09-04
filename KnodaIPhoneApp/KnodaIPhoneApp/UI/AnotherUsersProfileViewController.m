@@ -17,6 +17,7 @@
 #import "PredictionAgreeWebRequest.h"
 #import "PredictionDisagreeWebRequest.h"
 #import "ChellangeByPredictionWebRequest.h"
+#import "LoadingView.h"
 
 static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
@@ -28,7 +29,6 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
 @property (weak, nonatomic) IBOutlet UILabel *userTotalPredictionsLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *userProfileImageView;
 @property (weak, nonatomic) IBOutlet UITableView *predictionsTableView;
-@property (weak, nonatomic) IBOutlet UIView *activityView;
 @property (weak, nonatomic) IBOutlet BindableView *userAvatarView;
 
 @property (nonatomic, strong) NSMutableArray * predictions;
@@ -45,7 +45,7 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"darkBgPattern"]];
     self.navigationController.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, self.navigationController.navigationBar.frame.size.height);
     [self.navigationController.navigationBar setTitleVerticalPositionAdjustment:5 forBarMetrics:UIBarMetricsDefault];
-    self.activityView.hidden = NO;
+    [[LoadingView sharedInstance] show];
     [self setUpUsersInfo];
 }
 
@@ -72,11 +72,12 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
         
         AnotherUsersProfileViewController *strongSelf = weakSelf;
         if(!strongSelf) {
+            [[LoadingView sharedInstance] hide];
             return;
         }
         
         if (!profileWebRequest.isSucceeded) {
-            strongSelf.activityView.hidden = YES;
+            [[LoadingView sharedInstance] hide];
             return;
         }
         
@@ -87,13 +88,13 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
         [strongSelf executeRequest:predictionWebRequest withBlock:^{
             
             if (!predictionWebRequest.isSucceeded) {
-                strongSelf.activityView.hidden = YES;
+                [[LoadingView sharedInstance] hide];
                 return;
             }
             
             strongSelf.predictions = [NSMutableArray arrayWithArray: predictionWebRequest.predictions];
             [strongSelf.predictionsTableView reloadData];
-            strongSelf.activityView.hidden = YES;
+            [[LoadingView sharedInstance] hide];
         }];
     }];
 }

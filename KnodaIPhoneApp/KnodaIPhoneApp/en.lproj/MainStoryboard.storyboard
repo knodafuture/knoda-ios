@@ -320,23 +320,11 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
-                            <view hidden="YES" alpha="0.40000000000000013" contentMode="scaleToFill" id="9Rv-DF-3Sh">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="440"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="whiteLarge" id="Leg-4R-7nB">
-                                        <rect key="frame" x="142" y="203" width="37" height="37"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </activityIndicatorView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="97t-be-8mF"/>
                     <connections>
-                        <outlet property="activityView" destination="9Rv-DF-3Sh" id="f5P-wF-rUe"/>
                         <outlet property="containerView" destination="1EP-Ws-6LR" id="zzT-Mr-RLE"/>
                         <outlet property="errorLabel" destination="dlc-Ud-hhw" id="XJA-pv-cRB"/>
                         <outlet property="errorView" destination="dWs-4J-IEO" id="MZU-p8-wwL"/>
@@ -459,23 +447,11 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
-                            <view hidden="YES" alpha="0.40000000596046448" contentMode="scaleToFill" id="iaJ-b1-GsU">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="440"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="whiteLarge" id="ceC-PB-ctT">
-                                        <rect key="frame" x="142" y="203" width="37" height="37"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </activityIndicatorView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="TT9-oa-LI2"/>
                     <connections>
-                        <outlet property="activityView" destination="iaJ-b1-GsU" id="Fnf-eX-Hu0"/>
                         <outlet property="containerView" destination="GhA-Ph-utM" id="m65-de-j7K"/>
                         <outlet property="errorLabel" destination="3fq-JE-IPy" id="KJe-VI-YpL"/>
                         <outlet property="errorView" destination="gEO-pX-WzW" id="VYz-FO-bm6"/>
@@ -911,24 +887,12 @@
                                     <action selector="pictureButtonTapped:" destination="3dr-J6-vO2" eventType="touchUpInside" id="mj8-LD-glM"/>
                                 </connections>
                             </button>
-                            <view hidden="YES" contentMode="scaleToFill" id="idE-k5-9Mb">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="528"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="whiteLarge" id="4GQ-PY-4VS">
-                                        <rect key="frame" x="141" y="246" width="37" height="37"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </activityIndicatorView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.59999999999999998" colorSpace="calibratedWhite"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.38823529410000002" green="0.68627450980000004" blue="0.08235294118" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="t3L-Ts-yMU"/>
                     <connections>
                         <outlet property="doneButton" destination="KVQ-0n-eoX" id="SXR-Aa-DyJ"/>
-                        <outlet property="loadingView" destination="idE-k5-9Mb" id="ZpT-Nd-Egy"/>
                         <outlet property="pictureButton" destination="jFm-Vj-9nU" id="Osa-L7-uNg"/>
                         <outlet property="view" destination="W8U-Lz-ChA" id="oYK-zv-TGp"/>
                         <segue destination="JIu-QZ-Vpd" kind="modal" identifier="ImageCropperSegue" id="gsg-jr-EMh"/>
@@ -1123,23 +1087,11 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
-                            <view hidden="YES" alpha="0.40000000596046448" contentMode="scaleToFill" id="PRk-kD-QgQ">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="whiteLarge" id="zeo-LT-4cH">
-                                        <rect key="frame" x="142" y="203" width="37" height="37"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </activityIndicatorView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="TM9-FM-fzE"/>
                     <connections>
-                        <outlet property="activityView" destination="PRk-kD-QgQ" id="OUP-nL-UGz"/>
                         <outlet property="containerView" destination="xiF-KX-37Q" id="wwh-IY-atk"/>
                         <outlet property="emailTextFiled" destination="VE1-fu-Imh" id="rVZ-t5-Ztd"/>
                         <outlet property="errorLabel" destination="Knt-tY-jYS" id="djW-rf-e2g"/>
@@ -1165,18 +1117,10 @@
                                 <rect key="frame" x="0.0" y="44" width="320" height="436"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="sd8-UN-EgX" id="iTb-XI-fvi"/>
+                                </connections>
                             </webView>
-                            <view hidden="YES" alpha="0.40000000596046448" contentMode="scaleToFill" id="EgD-vS-Ruq">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="whiteLarge" id="F7n-dK-5di">
-                                        <rect key="frame" x="142" y="233" width="37" height="37"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </activityIndicatorView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                             <navigationBar contentMode="scaleToFill" id="e7B-Ev-2sx">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -1208,7 +1152,6 @@
                     <navigationItem key="navigationItem" title="KNODA" id="GmG-gH-3jh"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="activityView" destination="EgD-vS-Ruq" id="epC-dj-LZe"/>
                         <outlet property="webView" destination="ioX-jH-d29" id="YHm-oz-Y8F"/>
                     </connections>
                 </viewController>
@@ -2283,17 +2226,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <view hidden="YES" alpha="0.40000000596046448" contentMode="scaleToFill" id="ZJ3-PL-7di">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="whiteLarge" id="F1D-j0-120">
-                                        <rect key="frame" x="142" y="203" width="37" height="37"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </activityIndicatorView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                             <pickerView contentMode="scaleToFill" id="H7w-Fr-LXB">
                                 <rect key="frame" x="0.0" y="548" width="320" height="216"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -2319,7 +2251,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <nil key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
-                        <outlet property="activityView" destination="ZJ3-PL-7di" id="VM7-a8-Rsq"/>
                         <outlet property="categoryButton" destination="YE3-Kr-XLe" id="J9O-X2-ZDq"/>
                         <outlet property="categoryPicker" destination="ye8-Of-uMl" id="RPj-rN-Yz2"/>
                         <outlet property="charsLabel" destination="z8s-ts-wEt" id="znd-kU-TU2"/>
@@ -2946,17 +2877,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <segue destination="kaP-3O-9VE" kind="custom" identifier="AllAlertsSegue" customClass="NavigationSegue" id="bwC-0P-nrG"/>
                                 </connections>
                             </button>
-                            <view hidden="YES" alpha="0.40000000596046448" contentMode="scaleToFill" id="AVS-53-KzW">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="whiteLarge" id="liJ-cJ-B4n">
-                                        <rect key="frame" x="142" y="203" width="37" height="37"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </activityIndicatorView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jSZ-vQ-FR3">
                                 <rect key="frame" x="161" y="5" width="145" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -3034,7 +2954,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="detailsView" destination="EOO-9x-cK4" id="9P1-yN-aeb"/>
-                        <outlet property="loadingView" destination="AVS-53-KzW" id="90n-I6-Rl1"/>
                         <outlet property="noContentView" destination="TEl-Uk-3k9" id="vlv-ah-Ya7"/>
                         <outlet property="segmentedControlImage" destination="iOh-au-mBx" id="wvc-ZN-vsp"/>
                     </connections>
@@ -3423,34 +3342,23 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
-                        <view key="backgroundView" hidden="YES" alpha="0.40000000596046448" contentMode="scaleToFill" id="UmJ-Ms-oBU">
+                        <view key="backgroundView" hidden="YES" contentMode="scaleToFill" id="ZTj-Kc-rga">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="whiteLarge" id="Wt9-fF-YQK">
-                                    <rect key="frame" x="142" y="203" width="37" height="37"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="noContent.png" id="a0s-yT-MsF">
+                                    <rect key="frame" x="89" y="64" width="143" height="143"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                </activityIndicatorView>
-                                <view hidden="YES" contentMode="scaleToFill" id="ZTj-Kc-rga">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="noContent.png" id="a0s-yT-MsF">
-                                            <rect key="frame" x="89" y="64" width="143" height="143"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="You don't have any badges yet. Maybe make a prediction  (hint,hint) " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MFp-0T-oNz">
-                                            <rect key="frame" x="44" y="233" width="233" height="68"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
-                                            <color key="textColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="deviceRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                </view>
+                                </imageView>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="You don't have any badges yet. Maybe make a prediction  (hint,hint) " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MFp-0T-oNz">
+                                    <rect key="frame" x="44" y="233" width="233" height="68"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                    <color key="textColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="deviceRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         </view>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="BadgeCollectionViewCellIdentifier" id="ff3-EA-PO1" customClass="BadgeCollectionViewCell">
@@ -3518,7 +3426,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="activityView" destination="UmJ-Ms-oBU" id="JO7-Di-EmH"/>
                         <outlet property="noContentView" destination="ZTj-Kc-rga" id="H0e-AB-og5"/>
                     </connections>
                 </collectionViewController>
@@ -3803,17 +3710,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <outlet property="delegate" destination="bkd-uK-mBb" id="kKP-vy-UhV"/>
                                 </connections>
                             </tableView>
-                            <view hidden="YES" alpha="0.40000000596046448" contentMode="scaleToFill" id="aVM-QY-KvM">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="436"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="whiteLarge" id="7wq-aR-jxm">
-                                        <rect key="frame" x="142" y="235" width="37" height="37"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </activityIndicatorView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -3859,7 +3755,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <nil key="simulatedStatusBarMetrics"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="activityView" destination="aVM-QY-KvM" id="2fU-zT-U3c"/>
                         <outlet property="predictionsTableView" destination="DKL-NF-JLd" id="yyX-pJ-pCd"/>
                         <outlet property="userAvatarView" destination="Wwv-Ps-wNC" id="fh4-L4-3cb"/>
                         <outlet property="userNameLabel" destination="zi2-DT-IRL" id="xIe-Ak-255"/>
@@ -3999,17 +3894,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view hidden="YES" alpha="0.40000000596046448" contentMode="scaleToFill" id="pcW-2G-GEJ">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="436"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="whiteLarge" id="2ap-Bh-oJd">
-                                        <rect key="frame" x="142" y="203" width="37" height="37"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </activityIndicatorView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                         </subviews>
                     </view>
                     <navigationItem key="navigationItem" title="ME" id="H5a-8g-bK2">
@@ -4038,7 +3922,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="accountDetailsTableView" destination="kQT-OI-osY" id="c30-GG-eyH"/>
-                        <outlet property="activityView" destination="pcW-2G-GEJ" id="Rz8-Iv-qwc"/>
                         <outlet property="leftNavigationBarItem" destination="EZM-wz-ONY" id="8nu-8C-XWH"/>
                         <outlet property="loginLabel" destination="BOq-cn-2MG" id="Ahp-4c-FNQ"/>
                         <outlet property="pointsLabel" destination="ZZh-i2-KNf" id="21s-Xw-NZ4"/>
@@ -4065,17 +3948,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <rect key="frame" x="0.0" y="44" width="320" height="436"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view hidden="YES" alpha="0.40000000596046448" contentMode="scaleToFill" id="bma-s7-Zqx">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="436"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="whiteLarge" id="PpR-YO-apk">
-                                        <rect key="frame" x="142" y="203" width="37" height="37"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </activityIndicatorView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="zsL-n0-Fe7">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="436"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4189,7 +4061,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </navigationItem>
                     <connections>
                         <outlet property="currentPasswordTextField" destination="Can-ie-YOg" id="Ovv-On-LBz"/>
-                        <outlet property="loadingView" destination="bma-s7-Zqx" id="PQl-SM-sfR"/>
                         <outlet property="retypeNewPasswordTextField" destination="ru8-oV-xdE" id="Fxo-wk-M7w"/>
                         <outlet property="scrollView" destination="zsL-n0-Fe7" id="XLe-C7-Fon"/>
                         <outlet property="usersNewPasswordTextField" destination="Zba-Rp-RoT" id="3i8-Tw-0u9"/>
@@ -4207,17 +4078,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <rect key="frame" x="0.0" y="44" width="320" height="436"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view hidden="YES" alpha="0.40000000596046448" contentMode="scaleToFill" id="mjf-qb-7HR">
-                                <rect key="frame" x="0.0" y="-22" width="320" height="480"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="whiteLarge" id="52o-KF-rHi">
-                                        <rect key="frame" x="142" y="203" width="37" height="37"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </activityIndicatorView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="aL4-Zz-4jR">
                                 <rect key="frame" x="20" y="11" width="280" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -4283,7 +4143,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="loadingView" destination="mjf-qb-7HR" id="YjU-XR-iXh"/>
                         <outlet property="userPropertyTextField" destination="Nuq-xd-eCo" id="xgw-4p-1ZX"/>
                     </connections>
                 </viewController>
@@ -4598,7 +4457,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <relationships>
                 <relationship kind="action" name="cancel:"/>
                 <relationship kind="action" name="predict:"/>
-                <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="categoryButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="categoryPicker" candidateClass="UIPickerView"/>
                 <relationship kind="outlet" name="charsLabel" candidateClass="UILabel"/>
@@ -4628,9 +4486,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         </class>
         <class className="AlertsViewController" superclassName="ParentViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AlertsViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="loadingView" candidateClass="UIView"/>
-            </relationships>
         </class>
         <class className="AllAlertsViewController" superclassName="ChildViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AllAlertsViewController.h"/>
@@ -4638,7 +4493,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="AnotherUsersProfileViewController" superclassName="BaseRequestingViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AnotherUsersProfileViewController.h"/>
             <relationships>
-                <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="predictionsTableView" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="userAvatarView" candidateClass="BindableView"/>
                 <relationship kind="outlet" name="userNameLabel" candidateClass="UILabel"/>
@@ -4656,7 +4510,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="BadgesCollectionViewController" superclassName="UICollectionViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/BadgesCollectionViewController.h"/>
             <relationships>
-                <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="noContentView" candidateClass="UIView"/>
             </relationships>
         </class>
@@ -4683,7 +4536,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ChangePasswordViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="currentPasswordTextField" candidateClass="CustomizedTextField"/>
-                <relationship kind="outlet" name="loadingView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="retypeNewPasswordTextField" candidateClass="CustomizedTextField"/>
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="usersNewPasswordTextField" candidateClass="CustomizedTextField"/>
@@ -4705,7 +4557,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="ForgotPasswordViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ForgotPasswordViewController.h"/>
             <relationships>
-                <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="errorLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="errorView" candidateClass="UIView"/>
@@ -4746,7 +4597,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="LoginViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginViewController.h"/>
             <relationships>
-                <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="errorLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="errorView" candidateClass="UIView"/>
@@ -4870,7 +4720,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfileViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="accountDetailsTableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="leftNavigationBarItem" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="loginLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="pointsLabel" candidateClass="UILabel"/>
@@ -4884,14 +4733,12 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="action" name="doneButtontapped:"/>
                 <relationship kind="action" name="pictureButtonTapped:"/>
                 <relationship kind="outlet" name="doneButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="loadingView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="pictureButton" candidateClass="UIButton"/>
             </relationships>
         </class>
         <class className="SignUpViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SignUpViewController.h"/>
             <relationships>
-                <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="emailTextFiled" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="errorLabel" candidateClass="UILabel"/>
@@ -4903,7 +4750,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="TermsOfServiceViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TermsOfServiceViewController.h"/>
             <relationships>
-                <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
             </relationships>
         </class>
@@ -4924,8 +4770,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <relationships>
                 <relationship kind="action" name="backButtonPressed:"/>
                 <relationship kind="action" name="saveButonTouched:"/>
-                <relationship kind="outlet" name="loadingView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="rightButtonItem" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="userPropertyTextField" candidateClass="CustomizedTextField"/>
             </relationships>
         </class>
@@ -4945,14 +4789,14 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="mnN-YR-PTq"/>
-        <segue reference="jDp-TX-Mpj"/>
+        <segue reference="Ef7-FX-Fpl"/>
         <segue reference="ufA-86-Qke"/>
+        <segue reference="jDp-TX-Mpj"/>
+        <segue reference="bH8-Zv-3wa"/>
+        <segue reference="gsg-jr-EMh"/>
         <segue reference="qdw-34-WFW"/>
         <segue reference="Xdg-c4-S6o"/>
         <segue reference="m1B-jn-2wq"/>
-        <segue reference="ONf-EH-HA5"/>
-        <segue reference="ebR-4n-eVY"/>
-        <segue reference="vNo-cL-etu"/>
+        <segue reference="esW-Qq-HJ8"/>
     </inferredMetricsTieBreakers>
 </document>

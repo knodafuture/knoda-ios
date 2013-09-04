@@ -7,18 +7,11 @@
 //
 
 #import "LoginViewController.h"
-
 #import "AppDelegate.h"
-
 #import "LoginWebRequest.h"
-
-//! TODO: remove these headers
-#import "PredictionsWebRequest.h"
-#import "AddPredictionRequest.h"
-
 #import "ForgotPasswordViewController.h"
-
 #import "ProfileWebRequest.h"
+#import "LoadingView.h"
 
 static NSString* const kApplicationSegue = @"ApplicationNavigationSegue";
 
@@ -29,7 +22,6 @@ static NSString* const kApplicationSegue = @"ApplicationNavigationSegue";
 @property (nonatomic, strong) IBOutlet UITextField* usernameTextField;
 @property (nonatomic, strong) IBOutlet UITextField* passwordTextField;
 @property (nonatomic, strong) IBOutlet UIView* containerView;
-@property (nonatomic, strong) IBOutlet UIView* activityView;
 @property (nonatomic, strong) IBOutlet UIView* errorView;
 @property (nonatomic, strong) IBOutlet UILabel* errorLabel;
 
@@ -38,20 +30,6 @@ static NSString* const kApplicationSegue = @"ApplicationNavigationSegue";
 @end
 
 @implementation LoginViewController
-
-
-- (void) viewDidUnload
-{
-    self.usernameTextField = nil;
-    self.passwordTextField = nil;
-    self.containerView = nil;
-    self.activityView = nil;
-    self.errorView = nil;
-    self.errorLabel = nil;
-    
-    [super viewDidUnload];
-}
-
 
 - (void) viewWillAppear: (BOOL) animated
 {
@@ -116,7 +94,7 @@ static NSString* const kApplicationSegue = @"ApplicationNavigationSegue";
 {
     if ([self checkTextFields])
     {
-        self.activityView.hidden = NO;
+        [[LoadingView sharedInstance] show];
         
         if ([self.usernameTextField isFirstResponder])
         {
@@ -140,7 +118,7 @@ static NSString* const kApplicationSegue = @"ApplicationNavigationSegue";
                  ProfileWebRequest *profileRequest = [ProfileWebRequest new];
                  [profileRequest executeWithCompletionBlock: ^
                  {
-                     self.activityView.hidden = YES;
+                     [[LoadingView sharedInstance] hide];
                      
                      if (profileRequest.isSucceeded)
                      {
@@ -158,7 +136,7 @@ static NSString* const kApplicationSegue = @"ApplicationNavigationSegue";
                  }];
              }
              else {
-                 self.activityView.hidden = YES;
+                 [[LoadingView sharedInstance] hide];
                  if (loginRequest.errorCode == 403)
                  {
                      [self showError: NSLocalizedString(@"Invalid username or password", @"")];

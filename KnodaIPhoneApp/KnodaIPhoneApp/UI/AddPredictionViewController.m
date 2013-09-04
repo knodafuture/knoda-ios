@@ -9,6 +9,7 @@
 #import "AddPredictionViewController.h"
 #import "CategoriesWebRequest.h"
 #import "AddPredictionRequest.h"
+#import "LoadingView.h"
 
 #define TEXT_FONT        [UIFont fontWithName:@"HelveticaNeue" size:15]
 #define PLACEHOLDER_FONT [UIFont fontWithName:@"HelveticaNeue-Italic" size:15]
@@ -24,7 +25,6 @@ static const int kPredictionCharsLimit = 300;
 @property (nonatomic, strong) IBOutlet UIPickerView* expirationPicker;
 @property (nonatomic, strong) IBOutlet UIButton* categoryButton;
 @property (nonatomic, strong) IBOutlet UILabel* expirationLabel;
-@property (nonatomic, strong) IBOutlet UIView* activityView;
 @property (nonatomic, strong) IBOutlet UILabel* charsLabel;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *predictBarButton;
 @property (nonatomic, strong) IBOutlet UIView* touchView;
@@ -244,14 +244,14 @@ static const int kPredictionCharsLimit = 300;
         [self hidePicker: self.categoryPicker];
         [self hidePicker: self.expirationPicker];
         
-        self.activityView.hidden = NO;
+        [[LoadingView sharedInstance] show];
         
         AddPredictionRequest* request = [[AddPredictionRequest alloc] initWithBody:self.textView.text
                                                                     expirationDate:[self expirationDate]
                                                                           category:self.categoryText];
         [request executeWithCompletionBlock: ^
         {
-            self.activityView.hidden = YES;
+            [[LoadingView sharedInstance] hide];
             
             if (request.errorCode == 0)
             {

@@ -250,6 +250,14 @@
 		9E57929A1799881F00979928 /* nav.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5792961799881D00979928 /* nav.png */; };
 		9E57929B1799881F00979928 /* nav@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E5792971799881E00979928 /* nav@2x.png */; };
 		9E677AC417D4C73C00A9AFFC /* RemoveTokenWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E677AC317D4C73C00A9AFFC /* RemoveTokenWebRequest.m */; };
+		9E677ACD17D758AD00A9AFFC /* Cancel_press.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E677AC517D758AD00A9AFFC /* Cancel_press.png */; };
+		9E677ACE17D758AD00A9AFFC /* Cancel_press@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E677AC617D758AD00A9AFFC /* Cancel_press@2x.png */; };
+		9E677ACF17D758AD00A9AFFC /* Cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E677AC717D758AD00A9AFFC /* Cancel.png */; };
+		9E677AD017D758AD00A9AFFC /* Cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E677AC817D758AD00A9AFFC /* Cancel@2x.png */; };
+		9E677AD117D758AD00A9AFFC /* done-button_press.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E677AC917D758AD00A9AFFC /* done-button_press.png */; };
+		9E677AD217D758AD00A9AFFC /* done-button_press@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E677ACA17D758AD00A9AFFC /* done-button_press@2x.png */; };
+		9E677AD317D758AD00A9AFFC /* done-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E677ACB17D758AD00A9AFFC /* done-button.png */; };
+		9E677AD417D758AD00A9AFFC /* done-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E677ACC17D758AD00A9AFFC /* done-button@2x.png */; };
 		9E708824178AF68E00F036A8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E708823178AF68E00F036A8 /* UIKit.framework */; };
 		9E708826178AF68E00F036A8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E708825178AF68E00F036A8 /* Foundation.framework */; };
 		9E708828178AF68E00F036A8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E708827178AF68E00F036A8 /* CoreGraphics.framework */; };
@@ -658,6 +666,14 @@
 		9E5792971799881E00979928 /* nav@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav@2x.png"; sourceTree = "<group>"; };
 		9E677AC217D4C73C00A9AFFC /* RemoveTokenWebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoveTokenWebRequest.h; sourceTree = "<group>"; };
 		9E677AC317D4C73C00A9AFFC /* RemoveTokenWebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoveTokenWebRequest.m; sourceTree = "<group>"; };
+		9E677AC517D758AD00A9AFFC /* Cancel_press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cancel_press.png; sourceTree = "<group>"; };
+		9E677AC617D758AD00A9AFFC /* Cancel_press@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cancel_press@2x.png"; sourceTree = "<group>"; };
+		9E677AC717D758AD00A9AFFC /* Cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cancel.png; sourceTree = "<group>"; };
+		9E677AC817D758AD00A9AFFC /* Cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cancel@2x.png"; sourceTree = "<group>"; };
+		9E677AC917D758AD00A9AFFC /* done-button_press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "done-button_press.png"; sourceTree = "<group>"; };
+		9E677ACA17D758AD00A9AFFC /* done-button_press@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "done-button_press@2x.png"; sourceTree = "<group>"; };
+		9E677ACB17D758AD00A9AFFC /* done-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "done-button.png"; sourceTree = "<group>"; };
+		9E677ACC17D758AD00A9AFFC /* done-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "done-button@2x.png"; sourceTree = "<group>"; };
 		9E708820178AF68E00F036A8 /* KnodaIPhoneApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KnodaIPhoneApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E708823178AF68E00F036A8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9E708825178AF68E00F036A8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1169,6 +1185,14 @@
 		9E06638B179598FD00B3E974 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				9E677AC517D758AD00A9AFFC /* Cancel_press.png */,
+				9E677AC617D758AD00A9AFFC /* Cancel_press@2x.png */,
+				9E677AC717D758AD00A9AFFC /* Cancel.png */,
+				9E677AC817D758AD00A9AFFC /* Cancel@2x.png */,
+				9E677AC917D758AD00A9AFFC /* done-button_press.png */,
+				9E677ACA17D758AD00A9AFFC /* done-button_press@2x.png */,
+				9E677ACB17D758AD00A9AFFC /* done-button.png */,
+				9E677ACC17D758AD00A9AFFC /* done-button@2x.png */,
 				364D180017D0A3E3005303D0 /* badges */,
 				9E212EBE17CF82F200BE8166 /* alert_indicator.png */,
 				9E212EBF17CF82F200BE8166 /* alert_indicator@2x.png */,
@@ -1799,6 +1823,14 @@
 				364D183617D0A3E3005303D0 /* silver_founding@2x.png in Resources */,
 				364D183717D0A3E3005303D0 /* silver_founding_big.png in Resources */,
 				364D183817D0A3E3005303D0 /* silver_founding_big@2x.png in Resources */,
+				9E677ACD17D758AD00A9AFFC /* Cancel_press.png in Resources */,
+				9E677ACE17D758AD00A9AFFC /* Cancel_press@2x.png in Resources */,
+				9E677ACF17D758AD00A9AFFC /* Cancel.png in Resources */,
+				9E677AD017D758AD00A9AFFC /* Cancel@2x.png in Resources */,
+				9E677AD117D758AD00A9AFFC /* done-button_press.png in Resources */,
+				9E677AD217D758AD00A9AFFC /* done-button_press@2x.png in Resources */,
+				9E677AD317D758AD00A9AFFC /* done-button.png in Resources */,
+				9E677AD417D758AD00A9AFFC /* done-button@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

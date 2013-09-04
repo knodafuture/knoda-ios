@@ -22,7 +22,7 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = self.category;
+    self.title = [self.category uppercaseString];
 }
 
 - (void) prepareForSegue: (UIStoryboardSegue*) segue sender: (id) sender

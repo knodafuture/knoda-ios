@@ -177,7 +177,7 @@ static const int kPredictionCharsLimit = 300;
             
             [self.categoryButton setTitle:self.categoryText forState:UIControlStateNormal];
             
-            [self.self.categoryButton.titleLabel sizeToFit];
+            [self.categoryButton.titleLabel sizeToFit];
             
             CGRect newButtonFrame = self.categoryButton.frame;
             newButtonFrame.size.width = self.categoryButton.titleLabel.frame.size.width + 40;

@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Knoda. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseRequestingViewController.h"
 
-@interface AnotherUsersProfileViewController : UIViewController
+@interface AnotherUsersProfileViewController : BaseRequestingViewController
 
 @property (nonatomic, assign) NSInteger userId;
 

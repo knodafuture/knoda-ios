@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Knoda. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseRequestingViewController.h"
 
 typedef enum {
     MenuHome = 0,
@@ -17,7 +17,7 @@ typedef enum {
     MenuItemsSize
 } MenuItem;
 
-@interface NavigationViewController : UIViewController <UITableViewDataSource>
+@interface NavigationViewController : BaseRequestingViewController <UITableViewDataSource>
 
 @property (nonatomic, weak) UINavigationController *detailsController;
 

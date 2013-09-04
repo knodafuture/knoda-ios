@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TermsOfServiceViewController : UIViewController
+@interface TermsOfServiceViewController : UIViewController <UIWebViewDelegate>
 
 @end

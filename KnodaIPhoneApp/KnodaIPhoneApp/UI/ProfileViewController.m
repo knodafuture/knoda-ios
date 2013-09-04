@@ -17,6 +17,8 @@
 #import "AddPredictionViewController.h"
 #import "UIImage+Utils.h"
 #import "ImageCropperViewController.h"
+#import "BindableView.h"
+#import "LoadingView.h"
 
 static NSString * const accountDetailsTableViewCellIdentifier = @"accountDetailsTableViewCellIdentifier";
 
@@ -30,11 +32,8 @@ static const int kDefaultAvatarsCount = 5;
 static const float kAvatarSize = 344.0;
 #define AVATAR_SIZE CGSizeMake(kAvatarSize, kAvatarSize)
 
-@interface ProfileViewController () <AddPredictionViewControllerDelegate, ImageCropperDelegate> {
-    int _loadingsCount;
-}
+@interface ProfileViewController () <AddPredictionViewControllerDelegate, ImageCropperDelegate>
 
-@property (weak, nonatomic) IBOutlet UIView *activityView;
 @property (nonatomic, strong) AppDelegate * appDelegate;
 @property (nonatomic, strong) NSArray * accountDetailsArray;
 @property (weak, nonatomic) IBOutlet UIButton *leftNavigationBarItem;
@@ -44,10 +43,14 @@ static const float kAvatarSize = 344.0;
 
 @implementation ProfileViewController
 
+- (void)dealloc {
+    [self cancelAllRequests];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"darkBgPattern"]];
+	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"profileBgPattern"]];
     self.accountDetailsTableView.backgroundView = nil;
     [self makeProfileImageRoundedCorners];
     self.navigationController.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, self.navigationController.navigationBar.frame.size.height);
@@ -72,35 +75,30 @@ static const float kAvatarSize = 344.0;
 }
 
 - (void) fillInUsersInformation {
-    [self showLoadingView];
+    [[LoadingView sharedInstance] show];
+    
+    __weak ProfileViewController *weakSelf = self;
+    
     ProfileWebRequest *profileWebRequest = [[ProfileWebRequest alloc]init];
-    [profileWebRequest executeWithCompletionBlock:^{
-        [self hideLoadingView];
+    
+    [self executeRequest:profileWebRequest withBlock:^{
+        [[LoadingView sharedInstance] hide];
+        
+        ProfileViewController *strongSelf = weakSelf;
+        if(!strongSelf) return;
         
         if (profileWebRequest.isSucceeded)
         {
-            [self.appDelegate.user updateWithObject:profileWebRequest.user];
+            [strongSelf.appDelegate.user updateWithObject:profileWebRequest.user];
         }
         
-        User * user = self.appDelegate.user;
-        [self.profileAvatarView bindToURL:user.bigImage];
-        self.loginLabel.text = user.name;
-        self.pointsLabel.text = [NSString stringWithFormat:@"%d %@",user.points,NSLocalizedString(@"points", @"")];
-        self.accountDetailsArray = [NSArray arrayWithObjects:self.appDelegate.user.name,user.email,NSLocalizedString(@"Change Password", @""), nil];
-        [self.accountDetailsTableView reloadData];
+        User * user = strongSelf.appDelegate.user;
+        [strongSelf.profileAvatarView bindToURL:user.bigImage];
+        strongSelf.loginLabel.text = user.name;
+        strongSelf.pointsLabel.text = [NSString stringWithFormat:@"%d %@",user.points,NSLocalizedString(@"points", @"")];
+        strongSelf.accountDetailsArray = [NSArray arrayWithObjects:strongSelf.appDelegate.user.name,user.email,NSLocalizedString(@"Change Password", @""), nil];
+        [strongSelf.accountDetailsTableView reloadData];
     }];
-}
-
-- (void)showLoadingView {
-    self.activityView.hidden = NO;
-    _loadingsCount++;
-}
-
-- (void)hideLoadingView {
-    if(--_loadingsCount <= 0) {
-        self.activityView.hidden = YES;
-        _loadingsCount = 0;
-    }
 }
 
 - (IBAction)signOut:(id)sender {
@@ -154,21 +152,29 @@ static const float kAvatarSize = 344.0;
 - (void)sendAvatar:(UIImage *)image {
     ProfileWebRequest *profileRequest = [[ProfileWebRequest alloc] initWithAvatar:image];
 
-    [self showLoadingView];
+    [[LoadingView sharedInstance] show];
     
-    [profileRequest executeWithCompletionBlock:^{
+    __weak ProfileViewController *weakSelf = self;
+    
+    [self executeRequest:profileRequest withBlock:^{
+        ProfileViewController *strongSelf = weakSelf;
+        if(!strongSelf) {
+            [[LoadingView sharedInstance] hide];
+            return;
+        }
+        
         if(profileRequest.isSucceeded) {
             ProfileWebRequest *updateRequest = [ProfileWebRequest new];
             [updateRequest executeWithCompletionBlock:^{
                 if(updateRequest.isSucceeded) {
                     [[(AppDelegate *)[[UIApplication sharedApplication] delegate] user] updateWithObject:updateRequest.user];
-                    self.profileAvatarView.imageView.image = image;
-                    [self hideLoadingView];
+                    strongSelf.profileAvatarView.imageView.image = image;
+                    [[LoadingView sharedInstance] hide];
                 }
             }];
         }
         else {
-            [self hideLoadingView];
+            [[LoadingView sharedInstance] hide];
             [[[UIAlertView alloc] initWithTitle:nil
                                         message:profileRequest.localizedErrorDescription
                                        delegate:nil
@@ -185,7 +191,7 @@ static const float kAvatarSize = 344.0;
         UIImage *img = info[UIImagePickerControllerOriginalImage];
         if(img) {
             if(img.size.width < kAvatarSize || img.size.height < kAvatarSize) {
-                img = [img scaledToSize:AVATAR_SIZE];
+                img = [img scaledToSize:AVATAR_SIZE autoScale:NO];
             }
             if(CGSizeEqualToSize(img.size, AVATAR_SIZE)) {
                 [self sendAvatar:img];
@@ -209,7 +215,7 @@ static const float kAvatarSize = 344.0;
 
 - (void)imageCropper:(ImageCropperViewController *)vc didCroppedImage:(UIImage *)image {
     if(!CGSizeEqualToSize(image.size, AVATAR_SIZE)) {
-        image = [image scaledToSize:AVATAR_SIZE];
+        image = [image scaledToSize:AVATAR_SIZE autoScale:NO];
     }
     [self sendAvatar:image];
     [vc dismissViewControllerAnimated:YES completion:nil];

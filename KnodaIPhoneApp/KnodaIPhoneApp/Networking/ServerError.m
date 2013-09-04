@@ -72,7 +72,7 @@ static NSArray *_errorValues;
 }
 
 - (NSString *)localizedDescription {
-    return [_descriptions componentsJoinedByString:@" "];
+    return _descriptions.count ? [_descriptions objectAtIndex:0] : @"";
 }
 
 @end

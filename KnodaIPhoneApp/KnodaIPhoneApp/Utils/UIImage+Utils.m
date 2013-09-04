@@ -10,7 +10,7 @@
 
 @implementation UIImage (Utils)
 
-- (UIImage *)scaledToSize:(CGSize)size; {
+- (UIImage *)scaledToSize:(CGSize)size autoScale:(BOOL)scale; {
     
     float w = self.size.width;
     float h = self.size.height;
@@ -19,7 +19,7 @@
     
     CGRect rect = CGRectMake(0, 0, w * ratio, h * ratio);
     
-    UIGraphicsBeginImageContextWithOptions(rect.size, NO, [[UIScreen mainScreen] scale]);
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, scale ? [[UIScreen mainScreen] scale] : 1.0);
     
     [self drawInRect:rect];
     

@@ -15,6 +15,10 @@
 
 @implementation ChildViewController
 
+- (void)dealloc {
+    [self cancelAllRequests];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 

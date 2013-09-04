@@ -19,6 +19,8 @@
 #import "PredictionDetailsViewController.h"
 #import "User.h"
 #import "BadgesWebRequest.h"
+#import "UIViewController+WebRequests.h"
+#import "PredictionUpdateWebRequest.h"
 
 #define IS_PHONEPOD5() ([UIScreen mainScreen].bounds.size.height == 568.0f && [UIScreen mainScreen].scale == 2.f && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 
@@ -27,7 +29,7 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
 static NSString* const kUserProfileSegue       = @"UserProfileSegue";
 static NSString* const kMyProfileSegue         = @"MyProfileSegue";
 
-@interface HomeViewController ()
+@interface HomeViewController () <PredictionDetailsDelegate>
 
 @property (nonatomic, strong) NSMutableArray* predictions;
 @property (nonatomic, strong) NSTimer* cellUpdateTimer;
@@ -37,13 +39,21 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
 @property (strong, nonatomic) IBOutlet UIView *firstStartView;
 @property (weak, nonatomic) IBOutlet UIImageView *firstStartImageView;
 
+@property (nonatomic) NSMutableArray *webRequests;
+
 @end
 
 @implementation HomeViewController
 
+- (void)dealloc {
+    [self cancelAllRequests];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.webRequests = [NSMutableArray array];
     
     if (self.appDelegate.user.justSignedUp||!self.appDelegate.user) {
         [self showFirstStartOverlay];
@@ -70,6 +80,10 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
     [super viewDidDisappear:animated];
     [self.cellUpdateTimer invalidate];
     self.cellUpdateTimer = nil;
+}
+
+- (NSMutableArray *)getWebRequests {
+    return self.webRequests;
 }
 
 - (void) setUpNoContentViewHidden: (BOOL) hidden {
@@ -131,6 +145,7 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
         PredictionDetailsViewController *vc = (PredictionDetailsViewController *)segue.destinationViewController;
         vc.prediction = sender;
         vc.addPredictionDelegate = self;
+        vc.delegate = self;
     }
     else if([segue.identifier isEqualToString:kUserProfileSegue]) {
         AnotherUsersProfileViewController *vc = (AnotherUsersProfileViewController *)segue.destinationViewController;
@@ -162,23 +177,23 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
     __weak HomeViewController *weakSelf = self;
     
     PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] initWithOffset: 0 andTag:[self predictionsCategory]];
-    [predictionsRequest executeWithCompletionBlock: ^
-     {
-         HomeViewController *strongSelf = weakSelf;
-         if(!strongSelf) {
-             return;
-         }
-         
-         [refresh endRefreshing];
-         
-         if (predictionsRequest.errorCode == 0)
-         {
-             strongSelf.predictions = [NSMutableArray arrayWithArray: predictionsRequest.predictions];
-             [strongSelf.tableView reloadData];
-         }
-         BOOL hideContentView = strongSelf.predictions.count > 0;
-         [strongSelf setUpNoContentViewHidden:hideContentView];
-     }];
+    
+    [self executeRequest:predictionsRequest withBlock:^{
+        HomeViewController *strongSelf = weakSelf;
+        if(!strongSelf) {
+            return;
+        }
+        
+        [refresh endRefreshing];
+        
+        if (predictionsRequest.errorCode == 0)
+        {
+            strongSelf.predictions = [NSMutableArray arrayWithArray: predictionsRequest.predictions];
+            [strongSelf.tableView reloadData];
+        }
+        BOOL hideContentView = strongSelf.predictions.count > 0;
+        [strongSelf setUpNoContentViewHidden:hideContentView];
+    }];
 }
 
 
@@ -235,23 +250,23 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
         __weak HomeViewController *weakSelf = self;
         
         PredictionsWebRequest* predictionsRequest = [[PredictionsWebRequest alloc] initWithLastID: ((Prediction*)[self.predictions lastObject]).ID andTag:[self predictionsCategory]];
-        [predictionsRequest executeWithCompletionBlock: ^
-         {
-             HomeViewController *strongSelf = weakSelf;
-             if(!strongSelf) {
-                 return;
-             }
-             
-             if (predictionsRequest.errorCode == 0 && predictionsRequest.predictions.count != 0)
-             {
-                 [strongSelf.predictions addObjectsFromArray: [NSMutableArray arrayWithArray: predictionsRequest.predictions] ];
-                 [strongSelf.tableView reloadData];
-             }
-             else
-             {
-                 [strongSelf.tableView scrollToRowAtIndexPath: [NSIndexPath indexPathForRow: indexPath.row - 1 inSection: 0] atScrollPosition: UITableViewScrollPositionBottom animated: YES];
-             }
-         }];
+        
+        [self executeRequest:predictionsRequest withBlock:^{
+            HomeViewController *strongSelf = weakSelf;
+            if(!strongSelf) {
+                return;
+            }
+            
+            if (predictionsRequest.errorCode == 0 && predictionsRequest.predictions.count != 0)
+            {
+                [strongSelf.predictions addObjectsFromArray: [NSMutableArray arrayWithArray: predictionsRequest.predictions] ];
+                [strongSelf.tableView reloadData];
+            }
+            else
+            {
+                [strongSelf.tableView scrollToRowAtIndexPath: [NSIndexPath indexPathForRow: indexPath.row - 1 inSection: 0] atScrollPosition: UITableViewScrollPositionBottom animated: YES];
+            }
+        }];
     }
 }
 
@@ -354,6 +369,25 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
 - (AppDelegate*) appDelegate
 {
     return [UIApplication sharedApplication].delegate;
+}
+
+#pragma mark PredictionDetailsDelegate
+
+- (void)updatePrediction:(Prediction *)prediction {
+    __weak HomeViewController *weakSelf = self;
+    PredictionUpdateWebRequest *updateRequest = [[PredictionUpdateWebRequest alloc] initWithPredictionId:prediction.ID];
+    [self executeRequest:updateRequest withBlock:^{
+        HomeViewController *strongSelf = weakSelf;
+        if(!strongSelf) return;
+        
+        if(updateRequest.isSucceeded) {
+            [prediction updateWithObject:updateRequest.prediction];
+            NSUInteger idx = [strongSelf.predictions indexOfObject:prediction];
+            if(idx != NSNotFound) {
+                [strongSelf.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:idx inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
+        }
+    }];
 }
 
 @end

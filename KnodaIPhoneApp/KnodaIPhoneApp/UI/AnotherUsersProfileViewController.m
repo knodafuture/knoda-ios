@@ -17,6 +17,7 @@
 #import "PredictionAgreeWebRequest.h"
 #import "PredictionDisagreeWebRequest.h"
 #import "ChellangeByPredictionWebRequest.h"
+#import "LoadingView.h"
 
 static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
@@ -28,7 +29,6 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
 @property (weak, nonatomic) IBOutlet UILabel *userTotalPredictionsLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *userProfileImageView;
 @property (weak, nonatomic) IBOutlet UITableView *predictionsTableView;
-@property (weak, nonatomic) IBOutlet UIView *activityView;
 @property (weak, nonatomic) IBOutlet BindableView *userAvatarView;
 
 @property (nonatomic, strong) NSMutableArray * predictions;
@@ -45,7 +45,7 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"darkBgPattern"]];
     self.navigationController.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, self.navigationController.navigationBar.frame.size.height);
     [self.navigationController.navigationBar setTitleVerticalPositionAdjustment:5 forBarMetrics:UIBarMetricsDefault];
-    self.activityView.hidden = NO;
+    [[LoadingView sharedInstance] show];
     [self setUpUsersInfo];
 }
 
@@ -67,30 +67,34 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
     __weak AnotherUsersProfileViewController *weakSelf = self;
     
     AnotherUserProfileWebRequest *profileWebRequest = [[AnotherUserProfileWebRequest alloc]initWithUserId:self.userId];
-    [profileWebRequest executeWithCompletionBlock:^{
+    
+    [self executeRequest:profileWebRequest withBlock:^{
         
         AnotherUsersProfileViewController *strongSelf = weakSelf;
         if(!strongSelf) {
+            [[LoadingView sharedInstance] hide];
             return;
         }
         
-        if (profileWebRequest.errorCode != 0) {
-            strongSelf.activityView.hidden = YES;
+        if (!profileWebRequest.isSucceeded) {
+            [[LoadingView sharedInstance] hide];
             return;
         }
         
         [strongSelf setUpUserProfileInformationWithUser:profileWebRequest.user];
+        
         AnotherUserPredictionsWebRequest *predictionWebRequest = [[AnotherUserPredictionsWebRequest alloc]initWithUserId:strongSelf.userId];
-        [predictionWebRequest executeWithCompletionBlock:^{
+        
+        [strongSelf executeRequest:predictionWebRequest withBlock:^{
             
-            if (predictionWebRequest.errorCode != 0) {
-                strongSelf.activityView.hidden = YES;
+            if (!predictionWebRequest.isSucceeded) {
+                [[LoadingView sharedInstance] hide];
                 return;
             }
             
             strongSelf.predictions = [NSMutableArray arrayWithArray: predictionWebRequest.predictions];
             [strongSelf.predictionsTableView reloadData];
-            strongSelf.activityView.hidden = YES;
+            [[LoadingView sharedInstance] hide];
         }];
     }];
 }
@@ -104,6 +108,7 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
 
 
 - (IBAction)backButtonPress:(id)sender {
+    [self cancelAllRequests];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -173,20 +178,25 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
 {
     if ((self.predictions.count >= [AnotherUserPredictionsWebRequest limitByPage]) && indexPath.row == self.predictions.count)
     {
+        __weak AnotherUsersProfileViewController *weakSelf = self;
+        
         AnotherUserPredictionsWebRequest* predictionsRequest = [[AnotherUserPredictionsWebRequest alloc] initWithLastId:((Prediction*)[self.predictions lastObject]).ID andUserID:self.userId];
 
-        [predictionsRequest executeWithCompletionBlock: ^
-         {
-             if (predictionsRequest.errorCode == 0 && predictionsRequest.predictions.count != 0)
-             {
-                 [self.predictions addObjectsFromArray: [NSMutableArray arrayWithArray: predictionsRequest.predictions] ];
-                 [self.predictionsTableView reloadData];
-             }
-             else
-             {
-                 [self.predictionsTableView scrollToRowAtIndexPath: [NSIndexPath indexPathForRow: indexPath.row - 1 inSection: 0] atScrollPosition: UITableViewScrollPositionBottom animated: YES];
-             }
-         }];
+        [self executeRequest:predictionsRequest withBlock:^{
+            
+            AnotherUsersProfileViewController *strongSelf = weakSelf;
+            if(!strongSelf) return;
+            
+            if (predictionsRequest.isSucceeded && predictionsRequest.predictions.count != 0)
+            {
+                [strongSelf.predictions addObjectsFromArray: [NSMutableArray arrayWithArray: predictionsRequest.predictions] ];
+                [strongSelf.predictionsTableView reloadData];
+            }
+            else
+            {
+                [strongSelf.predictionsTableView scrollToRowAtIndexPath: [NSIndexPath indexPathForRow: indexPath.row - 1 inSection: 0] atScrollPosition: UITableViewScrollPositionBottom animated: YES];
+            }
+        }];
     }
 }
 

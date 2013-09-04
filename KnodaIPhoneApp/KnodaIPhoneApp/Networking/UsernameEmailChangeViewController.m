@@ -10,11 +10,10 @@
 #import "AppDelegate.h"
 #import "ProfileWebRequest.h"
 #import "CustomizedTextField.h"
+#import "LoadingView.h"
 
 @interface UsernameEmailChangeViewController ()
 
-@property (weak, nonatomic) IBOutlet UIView *loadingView;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *rightButtonItem;
 @property (weak, nonatomic) IBOutlet CustomizedTextField *userPropertyTextField;
 
 @end
@@ -28,8 +27,6 @@
     self.navigationController.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, self.navigationController.navigationBar.frame.size.height);
     [self.navigationController.navigationBar setTitleVerticalPositionAdjustment:5 forBarMetrics:UIBarMetricsDefault];
 
-    UIColor * darkGreen = [UIColor colorWithRed:23/255.0 green:71/255.0 blue:43/255.0 alpha:1];
-    [self.rightButtonItem setTitleTextAttributes:@{UITextAttributeTextColor : darkGreen, UITextAttributeFont : [UIFont fontWithName:@"HelveticaNeue-Medium" size:13]} forState:UIControlStateNormal];
     self.userPropertyTextField.text = self.currentPropertyValue;
 }
 
@@ -52,12 +49,13 @@
         webRequest = [[ProfileWebRequest alloc]initWithNewUsername:self.userPropertyTextField.text];
     }
     
-    self.loadingView.hidden = NO;
+    [[LoadingView sharedInstance] show];
     
     [webRequest executeWithCompletionBlock:^{
         if(webRequest.isSucceeded) {
             ProfileWebRequest *updateRequest = [ProfileWebRequest new];
             [updateRequest executeWithCompletionBlock:^{
+                [[LoadingView sharedInstance] hide];
                 if(updateRequest.isSucceeded) {
                     [[(AppDelegate *)[[UIApplication sharedApplication] delegate] user] updateWithObject:updateRequest.user];
                 }
@@ -65,7 +63,7 @@
             }];
         }
         else {
-            self.loadingView.hidden = YES;
+            [[LoadingView sharedInstance] hide];
             [[[UIAlertView alloc] initWithTitle:nil
                                         message:webRequest.localizedErrorDescription
                                        delegate:nil

@@ -10,13 +10,12 @@
 
 #import "CustomizedTextField.h"
 #import "ForgotPasswordWebRequest.h"
-
+#import "LoadingView.h"
 
 @interface ForgotPasswordViewController ()
 
 @property (nonatomic, strong) IBOutlet CustomizedTextField* textField;
 @property (nonatomic, strong) IBOutlet UIView* containerView;
-@property (nonatomic, strong) IBOutlet UIView* activityView;
 @property (nonatomic, strong) IBOutlet UIView* errorView;
 @property (nonatomic, strong) IBOutlet UILabel* errorLabel;
 
@@ -105,12 +104,12 @@
     }
     else
     {
-        self.activityView.hidden = NO;
+        [[LoadingView sharedInstance] show];
         
         ForgotPasswordWebRequest* forgotPasswordRequest = [[ForgotPasswordWebRequest alloc] initWithEmail: self.textField.text];
         [forgotPasswordRequest executeWithCompletionBlock: ^
          {
-             self.activityView.hidden = YES;
+             [[LoadingView sharedInstance] hide];
              
              if (forgotPasswordRequest.errorCode == 0)
              {

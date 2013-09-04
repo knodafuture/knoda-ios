@@ -9,6 +9,7 @@
 #import "AddPredictionViewController.h"
 #import "CategoriesWebRequest.h"
 #import "AddPredictionRequest.h"
+#import "LoadingView.h"
 
 #define TEXT_FONT        [UIFont fontWithName:@"HelveticaNeue" size:15]
 #define PLACEHOLDER_FONT [UIFont fontWithName:@"HelveticaNeue-Italic" size:15]
@@ -25,7 +26,6 @@ static const CGFloat kCategorySectionHeight = 40;
 @property (nonatomic, strong) IBOutlet UIPickerView* expirationPicker;
 @property (nonatomic, strong) IBOutlet UIButton* categoryButton;
 @property (nonatomic, strong) IBOutlet UILabel* expirationLabel;
-@property (nonatomic, strong) IBOutlet UIView* activityView;
 @property (nonatomic, strong) IBOutlet UILabel* charsLabel;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *predictBarButton;
 
@@ -205,7 +205,7 @@ static const CGFloat kCategorySectionHeight = 40;
             
             [self.categoryButton setTitle:self.categoryText forState:UIControlStateNormal];
             
-            [self.self.categoryButton.titleLabel sizeToFit];
+            [self.categoryButton.titleLabel sizeToFit];
             
             CGRect newButtonFrame = self.categoryButton.frame;
             newButtonFrame.size.width = self.categoryButton.titleLabel.frame.size.width + 40;
@@ -310,14 +310,14 @@ static const CGFloat kCategorySectionHeight = 40;
         [self hideCategoryPicker];
         [self hideExpirationDatePicker];
         
-        self.activityView.hidden = NO;
+        [[LoadingView sharedInstance] show];
         
         AddPredictionRequest* request = [[AddPredictionRequest alloc] initWithBody:self.textView.text
                                                                     expirationDate:[self expirationDate]
                                                                           category:self.categoryText];
         [request executeWithCompletionBlock: ^
         {
-            self.activityView.hidden = YES;
+            [[LoadingView sharedInstance] hide];
             
             if (request.errorCode == 0)
             {

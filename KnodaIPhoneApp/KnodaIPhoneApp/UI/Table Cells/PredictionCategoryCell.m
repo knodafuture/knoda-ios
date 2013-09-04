@@ -34,6 +34,14 @@
 - (void)setCategory:(NSString *)category {
     [self.button setTitle:category forState:UIControlStateNormal];
     [self.button setTitle:category forState:UIControlStateHighlighted];
+    
+    [self.button.titleLabel sizeToFit];
+    
+    CGRect newButtonFrame = self.button.frame;
+    newButtonFrame.size.width = self.button.titleLabel.frame.size.width + 40;
+    self.button.frame = newButtonFrame;
+    
+    [self.button setImageEdgeInsets:UIEdgeInsetsMake(2, newButtonFrame.size.width - self.button.imageView.image.size.width - 17, 0, 0)];
 }
 
 - (void)setButtonEnabled:(BOOL)buttonEnabled {

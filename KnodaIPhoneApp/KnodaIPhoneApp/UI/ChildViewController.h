@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 Knoda. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseRequestingViewController.h"
 
 @protocol ChildControllerDataSource;
 
-@interface ChildViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface ChildViewController : BaseRequestingViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) IBOutlet UITableView* tableView;
 @property (weak, nonatomic)   IBOutlet UIView *noContentView;

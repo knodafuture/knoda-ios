@@ -67,8 +67,6 @@ static const int kBSAlertTag = 1001;
 @property (nonatomic) NSArray *agreedUsers;
 @property (nonatomic) NSArray *disagreedUsers;
 
-@property (nonatomic) NSMutableArray *requests;
-
 @end
 
 @implementation PredictionDetailsViewController
@@ -77,8 +75,6 @@ static const int kBSAlertTag = 1001;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.requests = [NSMutableArray array];
     
     _loadingUsers = YES;
     [self updateUsers];
@@ -95,7 +91,10 @@ static const int kBSAlertTag = 1001;
 #pragma mark Actions
 
 - (IBAction)backButtonPressed:(UIButton *)sender {
-    [self.requests makeObjectsPerformSelector:@selector(cancel)];
+    if(self.delegate && [self getWebRequests].count) { //update prediction in case if some changes weren't handled
+        [self.delegate updatePrediction:self.prediction];
+    }
+    [self cancelAllRequests];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -143,40 +142,33 @@ static const int kBSAlertTag = 1001;
     __weak PredictionDetailsViewController *weakSelf = self;
     
     PredictionUpdateWebRequest *request = [[PredictionUpdateWebRequest alloc] initWithPredictionId:self.prediction.ID extendTill:expDate];
-    [request executeWithCompletionBlock:^{
+    [self executeRequest:request withBlock:^{
         PredictionDetailsViewController *strongSelf = weakSelf;
-        if(strongSelf) {
-            [strongSelf.requests removeObject:request];
-            
-            if(request.isSucceeded) {
+        if(!strongSelf) return;
+        
+        if(request.isSucceeded) {            
+            PredictionUpdateWebRequest *updateRequest = [[PredictionUpdateWebRequest alloc] initWithPredictionId:strongSelf.prediction.ID];
+            [strongSelf executeRequest:updateRequest withBlock:^{
                 
-                PredictionUpdateWebRequest *updateRequest = [[PredictionUpdateWebRequest alloc] initWithPredictionId:strongSelf.prediction.ID];
-                [strongSelf.requests addObject:updateRequest];
-                
-                [updateRequest executeWithCompletionBlock:^{
-                    [strongSelf.requests removeObject:updateRequest];
-                    
-                    strongSelf->_updatingStatus = NO;
-                    
-                    if(updateRequest.isSucceeded) {
-                        [strongSelf.prediction updateWithObject:updateRequest.prediction];
-                    }
-                    else {
-                        [strongSelf showErrorFromRequest:request];
-                    }
-                    
-                    [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowOutcome], [strongSelf indexPathForCellType:RowPrediction]]
-                                                withRowAnimation:UITableViewRowAnimationAutomatic];
-                }];
-            }
-            else {
                 strongSelf->_updatingStatus = NO;
-                [strongSelf showErrorFromRequest:request];
-                [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowOutcome]] withRowAnimation:UITableViewRowAnimationNone];
-            }
+                
+                if(updateRequest.isSucceeded) {
+                    [strongSelf.prediction updateWithObject:updateRequest.prediction];
+                }
+                else {
+                    [strongSelf showErrorFromRequest:request];
+                }
+                
+                [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowOutcome], [strongSelf indexPathForCellType:RowPrediction]]
+                                            withRowAnimation:UITableViewRowAnimationAutomatic];
+            }];
+        }
+        else {
+            strongSelf->_updatingStatus = NO;
+            [strongSelf showErrorFromRequest:request];
+            [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowOutcome]] withRowAnimation:UITableViewRowAnimationNone];
         }
     }];
-    [self.requests addObject:request];
     
     [self.tableView reloadRowsAtIndexPaths:@[[self indexPathForCellType:RowOutcome]] withRowAnimation:UITableViewRowAnimationNone];
     [self hideView:self.pickerViewHolder];
@@ -296,24 +288,20 @@ static const int kBSAlertTag = 1001;
         __weak PredictionDetailsViewController *weakSelf = self;
         
         PredictionUsersWebRequest *requestAgreed = [[PredictionUsersWebRequest alloc] initWithPredictionId:self.prediction.ID forAgreedUsers:YES];
-        [requestAgreed executeWithCompletionBlock:^{
+        [self executeRequest:requestAgreed withBlock:^{
+            
             PredictionDetailsViewController *strongSelf = weakSelf;
-            if(strongSelf) {
-                [strongSelf updatePredictionUsers:requestAgreed.users agreed:YES];
-                [strongSelf.requests removeObject:requestAgreed];
-            }
+            if(!strongSelf) return;
+            [strongSelf updatePredictionUsers:requestAgreed.users agreed:YES];
         }];
-        [self.requests addObject:requestAgreed];
         
         PredictionUsersWebRequest *requestDisagreed = [[PredictionUsersWebRequest alloc] initWithPredictionId:self.prediction.ID forAgreedUsers:NO];
-        [requestDisagreed executeWithCompletionBlock:^{
+        [self executeRequest:requestDisagreed withBlock:^{
+            
             PredictionDetailsViewController *strongSelf = weakSelf;
-            if(strongSelf) {
-                [strongSelf updatePredictionUsers:requestDisagreed.users agreed:NO];
-                [strongSelf.requests removeObject:requestDisagreed];
-            }
+            if(!strongSelf) return;
+            [strongSelf updatePredictionUsers:requestDisagreed.users agreed:NO];
         }];
-        [self.requests addObject:requestDisagreed];
     }
 }
 
@@ -330,45 +318,38 @@ static const int kBSAlertTag = 1001;
         request = [[PredictionDisagreeWebRequest alloc] initWithPredictionID:self.prediction.ID];
     }
     
-    [self.requests addObject:request];
-    
     __weak PredictionDetailsViewController *weakSelf = self;
     
-    [request executeWithCompletionBlock:^{
+    [self executeRequest:request withBlock:^{
         PredictionDetailsViewController *strongSelf = weakSelf;
-        if(strongSelf) {
-            [strongSelf.requests removeObject:request];
-            
-            if(request.isSucceeded) {
-                ChellangeByPredictionWebRequest *challengeRequest = [[ChellangeByPredictionWebRequest alloc] initWithPredictionID:strongSelf.prediction.ID];
-                [strongSelf.requests addObject:challengeRequest];
+        if(!strongSelf) return;
+        
+        if(request.isSucceeded) {
+            ChellangeByPredictionWebRequest *challengeRequest = [[ChellangeByPredictionWebRequest alloc] initWithPredictionID:strongSelf.prediction.ID];
+            [strongSelf executeRequest:challengeRequest withBlock:^{
                 
-                [challengeRequest executeWithCompletionBlock:^{
-                    [strongSelf.requests removeObject:challengeRequest];
-                    
-                    strongSelf->_updatingStatus = NO;
-                    
-                    strongSelf.prediction.chellange = challengeRequest.chellange;
-                    
-                    if(challengeRequest.isSucceeded) {
-                        [strongSelf updateUsers];
-                    }
-                    else {
-                        [strongSelf showErrorFromRequest:request];
-                    }
-                    
-                    //update related cells
-                    [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowMakePrediction], [strongSelf indexPathForCellType:RowPrediction]]
-                                                withRowAnimation:UITableViewRowAnimationAutomatic];
-                }];
-            }
-            else {
-                [strongSelf showErrorFromRequest:request];
                 strongSelf->_updatingStatus = NO;
-            }
-            [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowMakePrediction]] withRowAnimation:UITableViewRowAnimationNone];
+                strongSelf.prediction.chellange = challengeRequest.chellange;
+                
+                if(challengeRequest.isSucceeded) {
+                    [strongSelf updateUsers];
+                }
+                else {
+                    [strongSelf showErrorFromRequest:request];
+                }
+                
+                //update related cells
+                [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowMakePrediction], [strongSelf indexPathForCellType:RowPrediction]]
+                                            withRowAnimation:UITableViewRowAnimationAutomatic];
+            }];
         }
+        else {
+            [strongSelf showErrorFromRequest:request];
+            strongSelf->_updatingStatus = NO;
+        }
+        [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowMakePrediction]] withRowAnimation:UITableViewRowAnimationNone];
     }];
+    
     [self.tableView reloadRowsAtIndexPaths:@[[self indexPathForCellType:RowMakePrediction]] withRowAnimation:UITableViewRowAnimationNone];
 }
 
@@ -377,45 +358,37 @@ static const int kBSAlertTag = 1001;
     _updatingStatus = YES;
     
     OutcomeWebRequest *outcomeRequest = [[OutcomeWebRequest alloc] initWithPredictionId:self.prediction.ID realise:realise];
-    [self.requests addObject:outcomeRequest];
     
     __weak PredictionDetailsViewController *weakSelf = self;
     
-    [outcomeRequest executeWithCompletionBlock:^{
+    [self executeRequest:outcomeRequest withBlock:^{        
+        PredictionDetailsViewController *strongSelf = weakSelf;
+        if(!strongSelf) return;
         
-        PredictionDetailsViewController *strongSelf = weakSelf;        
-        if(strongSelf) {
-            
-            [strongSelf.requests removeObject:outcomeRequest];
-            
-            if(outcomeRequest.isSucceeded) {
+        if(outcomeRequest.isSucceeded) {            
+            PredictionUpdateWebRequest *updateRequest = [[PredictionUpdateWebRequest alloc] initWithPredictionId:strongSelf.prediction.ID];
+            [strongSelf executeRequest:updateRequest withBlock:^{
                 
-                PredictionUpdateWebRequest *updateRequest = [[PredictionUpdateWebRequest alloc] initWithPredictionId:strongSelf.prediction.ID];
-                [strongSelf.requests addObject:updateRequest];
-                
-                [updateRequest executeWithCompletionBlock:^{
-                    [strongSelf.requests removeObject:updateRequest];
-                    
-                    strongSelf->_updatingStatus = NO;
-                    
-                    if(updateRequest.isSucceeded) {
-                        [strongSelf.prediction updateWithObject:updateRequest.prediction];
-                    }
-                    else {
-                        [strongSelf showErrorFromRequest:outcomeRequest];
-                    }
-                    [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowOutcome], [strongSelf indexPathForCellType:RowPrediction]] withRowAnimation:UITableViewRowAnimationAutomatic];
-                }];
-            }
-            else {
                 strongSelf->_updatingStatus = NO;
                 
-                [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowOutcome]] withRowAnimation:UITableViewRowAnimationNone];
-                
-                [strongSelf showErrorFromRequest:outcomeRequest];
-            }
+                if(updateRequest.isSucceeded) {
+                    [strongSelf.prediction updateWithObject:updateRequest.prediction];
+                }
+                else {
+                    [strongSelf showErrorFromRequest:outcomeRequest];
+                }
+                [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowOutcome], [strongSelf indexPathForCellType:RowPrediction]] withRowAnimation:UITableViewRowAnimationAutomatic];
+            }];
+        }
+        else {
+            strongSelf->_updatingStatus = NO;
+            
+            [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowOutcome]] withRowAnimation:UITableViewRowAnimationNone];
+            
+            [strongSelf showErrorFromRequest:outcomeRequest];
         }
     }];
+
     [self.tableView reloadRowsAtIndexPaths:@[[self indexPathForCellType:RowOutcome]] withRowAnimation:UITableViewRowAnimationNone];
 }
 
@@ -426,36 +399,32 @@ static const int kBSAlertTag = 1001;
     __weak PredictionDetailsViewController *weakSelf = self;
 
     BSWebRequest *bsRequest = [[BSWebRequest alloc] initWithPredictionId:self.prediction.ID];
-    [bsRequest executeWithCompletionBlock:^{
+    [self executeRequest:bsRequest withBlock:^{
         PredictionDetailsViewController *strongSelf = weakSelf;
-        if(strongSelf) {
-            [strongSelf.requests removeObject:bsRequest];
-            if(bsRequest.isSucceeded) {
-                PredictionUpdateWebRequest *updateRequest = [[PredictionUpdateWebRequest alloc] initWithPredictionId:strongSelf.prediction.ID];
-                [strongSelf.requests addObject:updateRequest];
+        if(!strongSelf) return;
+        
+        if(bsRequest.isSucceeded) {
+            PredictionUpdateWebRequest *updateRequest = [[PredictionUpdateWebRequest alloc] initWithPredictionId:strongSelf.prediction.ID];
+            [strongSelf executeRequest:updateRequest withBlock:^{
                 
-                [updateRequest executeWithCompletionBlock:^{
-                    [strongSelf.requests removeObject:updateRequest];
-                    
-                    strongSelf->_updatingStatus = NO;
-                    
-                    if(updateRequest.isSucceeded) {
-                        [strongSelf.prediction updateWithObject:updateRequest.prediction];
-                    }
-                    else {
-                        [strongSelf showErrorFromRequest:updateRequest];
-                    }
-                    [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowStatus]] withRowAnimation:UITableViewRowAnimationAutomatic];
-                }];
-            }
-            else {
                 strongSelf->_updatingStatus = NO;
-                [strongSelf showErrorFromRequest:bsRequest];
+                
+                if(updateRequest.isSucceeded) {
+                    [strongSelf.prediction updateWithObject:updateRequest.prediction];
+                }
+                else {
+                    [strongSelf showErrorFromRequest:updateRequest];
+                }
                 [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowStatus]] withRowAnimation:UITableViewRowAnimationAutomatic];
-            }
+            }];
+        }
+        else {
+            strongSelf->_updatingStatus = NO;
+            [strongSelf showErrorFromRequest:bsRequest];
+            [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowStatus]] withRowAnimation:UITableViewRowAnimationAutomatic];
         }
     }];
-    [self.requests addObject:bsRequest];
+
     [self.tableView reloadRowsAtIndexPaths:@[[self indexPathForCellType:RowStatus]] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 

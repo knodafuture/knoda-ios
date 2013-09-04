@@ -30,25 +30,25 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
     __weak ExpiredAlertsViewController *weakSelf = self;
     
     ExpiredAlertsWebRequest* request = [[ExpiredAlertsWebRequest alloc] init];
-    [request executeWithCompletionBlock: ^
-     {
-         ExpiredAlertsViewController *strongSelf = weakSelf;
-         if(!strongSelf) {
-             return;
-         }
-         if (request.errorCode == 0)
-         {
-             if (request.predictions.count > 0) {
-                 NSLog(@"Expired alerts: %@", request.predictions);
-                 
-                 strongSelf.predictions = [NSMutableArray arrayWithArray:request.predictions];
-                 [strongSelf.tableView reloadData];
-             }
-             else {
-                 self.noContentView.hidden = NO;
-             }
-         }
-     }];
+    
+    [self executeRequest:request withBlock:^{
+        ExpiredAlertsViewController *strongSelf = weakSelf;
+        if(!strongSelf) {
+            return;
+        }
+        if (request.isSucceeded)
+        {
+            if (request.predictions.count > 0) {
+                NSLog(@"Expired alerts: %@", request.predictions);
+                
+                strongSelf.predictions = [NSMutableArray arrayWithArray:request.predictions];
+                [strongSelf.tableView reloadData];
+            }
+            else {
+                strongSelf.noContentView.hidden = NO;
+            }
+        }
+    }];
 }
 
 - (void) prepareForSegue: (UIStoryboardSegue*) segue sender: (id) sender

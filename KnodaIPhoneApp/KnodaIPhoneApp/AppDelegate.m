@@ -17,6 +17,7 @@
 #import "NewBadgeView.h"
 #import "SignOutWebRequest.h"
 #import "ImageCache.h"
+#import "LoadingView.h"
 
 #import "SendDeviceTokenWebRequest.h"
 #import "RemoveTokenWebRequest.h"
@@ -205,6 +206,8 @@ NSString* const kAlertNotification = @"AlertNotification";
     UINavigationController *nc = (UINavigationController *)self.window.rootViewController;
     [nc dismissViewControllerAnimated:NO completion:nil];
     [nc popToRootViewControllerAnimated:YES];
+    
+    [[LoadingView sharedInstance] reset];
 }
 
 - (void)handleNewBadgeNotification:(NSNotification *)notification {

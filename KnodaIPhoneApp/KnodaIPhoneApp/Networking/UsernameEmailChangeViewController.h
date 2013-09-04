@@ -18,4 +18,7 @@ typedef NS_ENUM( NSUInteger, UserPropertyType ) {
 @property (nonatomic, assign) UserPropertyType userProperyChangeType;
 @property (nonatomic, strong) NSString *currentPropertyValue;
 
+- (IBAction)backButtonPressed:(id)sender;
+- (IBAction)saveButonTouched:(id)sender;
+
 @end

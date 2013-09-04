@@ -113,6 +113,18 @@
 		572D465817BD0B37008164A5 /* BS_unsigned@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 572D465617BD0B37008164A5 /* BS_unsigned@2x.png */; };
 		572D465B17BD14AA008164A5 /* LoadableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 572D465A17BD14AA008164A5 /* LoadableCell.m */; };
 		572D465E17BD1B62008164A5 /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 572D465D17BD1B62008164A5 /* NSDate+Utils.m */; };
+		573BC36317D6180A00E668C7 /* BaseRequestingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 573BC36217D6180A00E668C7 /* BaseRequestingViewController.m */; };
+		573BC36617D61DAF00E668C7 /* UIViewController+WebRequests.m in Sources */ = {isa = PBXBuildFile; fileRef = 573BC36517D61DAF00E668C7 /* UIViewController+WebRequests.m */; };
+		573BC36B17D734E700E668C7 /* category_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 573BC36917D734E600E668C7 /* category_arrow.png */; };
+		573BC36C17D734E700E668C7 /* category_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 573BC36A17D734E600E668C7 /* category_arrow@2x.png */; };
+		573BC36F17D73EA200E668C7 /* profileBgPattern.png in Resources */ = {isa = PBXBuildFile; fileRef = 573BC36D17D73EA100E668C7 /* profileBgPattern.png */; };
+		573BC37017D73EA200E668C7 /* profileBgPattern@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 573BC36E17D73EA100E668C7 /* profileBgPattern@2x.png */; };
+		573BC37517D740E400E668C7 /* ProfileSaveButton_press.png in Resources */ = {isa = PBXBuildFile; fileRef = 573BC37117D740E100E668C7 /* ProfileSaveButton_press.png */; };
+		573BC37617D740E400E668C7 /* ProfileSaveButton_press@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 573BC37217D740E200E668C7 /* ProfileSaveButton_press@2x.png */; };
+		573BC37717D740E400E668C7 /* ProfileSaveButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 573BC37317D740E200E668C7 /* ProfileSaveButton.png */; };
+		573BC37817D740E400E668C7 /* ProfileSaveButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 573BC37417D740E200E668C7 /* ProfileSaveButton@2x.png */; };
+		573BC37C17D7576E00E668C7 /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 573BC37B17D7576E00E668C7 /* LoadingView.m */; };
+		573BC37E17D7577D00E668C7 /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 573BC37D17D7577D00E668C7 /* LoadingView.xib */; };
 		574314E017CF9EE800C8BC75 /* ServerError.m in Sources */ = {isa = PBXBuildFile; fileRef = 574314DF17CF9EE800C8BC75 /* ServerError.m */; };
 		574314E317CFA88200C8BC75 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 574314E117CFA88100C8BC75 /* Localizable.strings */; };
 		5746F29A17BA8CAE00C835FA /* LoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5746F29917BA8CAE00C835FA /* LoadingCell.m */; };
@@ -481,6 +493,21 @@
 		572D465A17BD14AA008164A5 /* LoadableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadableCell.m; sourceTree = "<group>"; };
 		572D465C17BD1B62008164A5 /* NSDate+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utils.h"; sourceTree = "<group>"; };
 		572D465D17BD1B62008164A5 /* NSDate+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utils.m"; sourceTree = "<group>"; };
+		573BC36117D6180A00E668C7 /* BaseRequestingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseRequestingViewController.h; sourceTree = "<group>"; };
+		573BC36217D6180A00E668C7 /* BaseRequestingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseRequestingViewController.m; sourceTree = "<group>"; };
+		573BC36417D61DAF00E668C7 /* UIViewController+WebRequests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+WebRequests.h"; sourceTree = "<group>"; };
+		573BC36517D61DAF00E668C7 /* UIViewController+WebRequests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+WebRequests.m"; sourceTree = "<group>"; };
+		573BC36917D734E600E668C7 /* category_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = category_arrow.png; sourceTree = "<group>"; };
+		573BC36A17D734E600E668C7 /* category_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "category_arrow@2x.png"; sourceTree = "<group>"; };
+		573BC36D17D73EA100E668C7 /* profileBgPattern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profileBgPattern.png; sourceTree = "<group>"; };
+		573BC36E17D73EA100E668C7 /* profileBgPattern@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profileBgPattern@2x.png"; sourceTree = "<group>"; };
+		573BC37117D740E100E668C7 /* ProfileSaveButton_press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ProfileSaveButton_press.png; sourceTree = "<group>"; };
+		573BC37217D740E200E668C7 /* ProfileSaveButton_press@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ProfileSaveButton_press@2x.png"; sourceTree = "<group>"; };
+		573BC37317D740E200E668C7 /* ProfileSaveButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ProfileSaveButton.png; sourceTree = "<group>"; };
+		573BC37417D740E200E668C7 /* ProfileSaveButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ProfileSaveButton@2x.png"; sourceTree = "<group>"; };
+		573BC37A17D7576E00E668C7 /* LoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingView.h; sourceTree = "<group>"; };
+		573BC37B17D7576E00E668C7 /* LoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingView.m; sourceTree = "<group>"; };
+		573BC37D17D7577D00E668C7 /* LoadingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
 		574314DE17CF9EE800C8BC75 /* ServerError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerError.h; sourceTree = "<group>"; };
 		574314DF17CF9EE800C8BC75 /* ServerError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerError.m; sourceTree = "<group>"; };
 		574314E217CFA88200C8BC75 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -919,7 +946,7 @@
 			path = addPrediction;
 			sourceTree = "<group>";
 		};
-		5707791A17D4E88E0095FF19 /* Login & SingUp */ = {
+		5707791A17D4E88E0095FF19 /* Login & SingUp Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				9E70884A178AFF2F00F036A8 /* WelcomeViewController.h */,
@@ -937,7 +964,7 @@
 				C3C33F0017D0A823003CA79C /* ImageCropperViewController.h */,
 				C3C33F0117D0A823003CA79C /* ImageCropperViewController.m */,
 			);
-			name = "Login & SingUp";
+			name = "Login & SingUp Controllers";
 			sourceTree = "<group>";
 		};
 		5707791B17D4E8B10095FF19 /* Menu Controllers */ = {
@@ -947,7 +974,8 @@
 				9E930216179FDE5000FFB166 /* NavigationViewController.m */,
 				9E93021E179FF45000FFB166 /* HomeViewController.h */,
 				9E93021F179FF45000FFB166 /* HomeViewController.m */,
-				5707792617D5E9520095FF19 /* History & Alerts */,
+				5707791D17D4E8FC0095FF19 /* History Controllers */,
+				5707791C17D4E8E90095FF19 /* Alerts Controllers */,
 				9E8421D017A1858600D14D0A /* ProfileViewController.h */,
 				9E8421D117A1858600D14D0A /* ProfileViewController.m */,
 				36A4054617C24DDD00406A12 /* BadgesCollectionViewController.h */,
@@ -956,36 +984,9 @@
 			name = "Menu Controllers";
 			sourceTree = "<group>";
 		};
-		5707791C17D4E8E90095FF19 /* Alerts */ = {
+		5707791C17D4E8E90095FF19 /* Alerts Controllers */ = {
 			isa = PBXGroup;
 			children = (
-			);
-			name = Alerts;
-			sourceTree = "<group>";
-		};
-		5707791D17D4E8FC0095FF19 /* History */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = History;
-			sourceTree = "<group>";
-		};
-		5707792617D5E9520095FF19 /* History & Alerts */ = {
-			isa = PBXGroup;
-			children = (
-				5707791E17D4E9220095FF19 /* ChildControllerDataSource.h */,
-				5707791F17D4E9220095FF19 /* ChildViewController.h */,
-				5707792017D4E9220095FF19 /* ChildViewController.m */,
-				5707792117D4E9220095FF19 /* ParentViewController.h */,
-				5707792217D4E9220095FF19 /* ParentViewController.m */,
-				5707791D17D4E8FC0095FF19 /* History */,
-				9EC05AE817A164EA00D67DA2 /* HistoryViewController.h */,
-				9EC05AE917A164EA00D67DA2 /* HistoryViewController.m */,
-				9EC05AEB17A1723100D67DA2 /* MyPredictionsViewController.h */,
-				9EC05AEC17A1723100D67DA2 /* MyPredictionsViewController.m */,
-				9EC05AEE17A172B600D67DA2 /* MyPicksViewController.h */,
-				9EC05AEF17A172B600D67DA2 /* MyPicksViewController.m */,
-				5707791C17D4E8E90095FF19 /* Alerts */,
 				9E8421BC17A179C500D14D0A /* AlertsViewController.h */,
 				9E8421BD17A179C500D14D0A /* AlertsViewController.m */,
 				9E8421BF17A17AE900D14D0A /* AllAlertsViewController.h */,
@@ -993,7 +994,20 @@
 				9E8421C217A17B1A00D14D0A /* ExpiredAlertsViewController.h */,
 				9E8421C317A17B1A00D14D0A /* ExpiredAlertsViewController.m */,
 			);
-			name = "History & Alerts";
+			name = "Alerts Controllers";
+			sourceTree = "<group>";
+		};
+		5707791D17D4E8FC0095FF19 /* History Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				9EC05AE817A164EA00D67DA2 /* HistoryViewController.h */,
+				9EC05AE917A164EA00D67DA2 /* HistoryViewController.m */,
+				9EC05AEB17A1723100D67DA2 /* MyPredictionsViewController.h */,
+				9EC05AEC17A1723100D67DA2 /* MyPredictionsViewController.m */,
+				9EC05AEE17A172B600D67DA2 /* MyPicksViewController.h */,
+				9EC05AEF17A172B600D67DA2 /* MyPicksViewController.m */,
+			);
+			name = "History Controllers";
 			sourceTree = "<group>";
 		};
 		571B1D0717C7BE4C0013AA41 /* newBadgePopup */ = {
@@ -1021,6 +1035,67 @@
 			path = "New Badge Popup";
 			sourceTree = "<group>";
 		};
+		573BC35F17D6178C00E668C7 /* Base Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				573BC36717D629C600E668C7 /* Base Requesting Controller */,
+				573BC36817D629DD00E668C7 /* Base History & Alerts Controllers */,
+			);
+			name = "Base Controllers";
+			sourceTree = "<group>";
+		};
+		573BC36017D617C200E668C7 /* Additional Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				9E8421F817AFC91700D14D0A /* AddPredictionViewController.h */,
+				9E8421F917AFC91700D14D0A /* AddPredictionViewController.m */,
+				9ECECC3917B10F4E00B48465 /* PredictionDetailsViewController.h */,
+				9ECECC3A17B10F4E00B48465 /* PredictionDetailsViewController.m */,
+				3638773C17C4D6EA00703475 /* ChangePasswordViewController.h */,
+				3638773D17C4D6EA00703475 /* ChangePasswordViewController.m */,
+				3638773A17C4D6EA00703475 /* AnotherUsersProfileViewController.h */,
+				3638773B17C4D6EA00703475 /* AnotherUsersProfileViewController.m */,
+				57066AA817C64E970080797B /* CategoryPredictionsViewController.h */,
+				57066AA917C64E980080797B /* CategoryPredictionsViewController.m */,
+				369D861517CDE78E0005F0B3 /* UsernameEmailChangeViewController.h */,
+				369D861617CDE78E0005F0B3 /* UsernameEmailChangeViewController.m */,
+			);
+			name = "Additional Controllers";
+			sourceTree = "<group>";
+		};
+		573BC36717D629C600E668C7 /* Base Requesting Controller */ = {
+			isa = PBXGroup;
+			children = (
+				573BC36417D61DAF00E668C7 /* UIViewController+WebRequests.h */,
+				573BC36517D61DAF00E668C7 /* UIViewController+WebRequests.m */,
+				573BC36117D6180A00E668C7 /* BaseRequestingViewController.h */,
+				573BC36217D6180A00E668C7 /* BaseRequestingViewController.m */,
+			);
+			name = "Base Requesting Controller";
+			sourceTree = "<group>";
+		};
+		573BC36817D629DD00E668C7 /* Base History & Alerts Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5707791E17D4E9220095FF19 /* ChildControllerDataSource.h */,
+				5707791F17D4E9220095FF19 /* ChildViewController.h */,
+				5707792017D4E9220095FF19 /* ChildViewController.m */,
+				5707792117D4E9220095FF19 /* ParentViewController.h */,
+				5707792217D4E9220095FF19 /* ParentViewController.m */,
+			);
+			name = "Base History & Alerts Controllers";
+			sourceTree = "<group>";
+		};
+		573BC37917D7573800E668C7 /* LoadingView */ = {
+			isa = PBXGroup;
+			children = (
+				573BC37A17D7576E00E668C7 /* LoadingView.h */,
+				573BC37B17D7576E00E668C7 /* LoadingView.m */,
+				573BC37D17D7577D00E668C7 /* LoadingView.xib */,
+			);
+			name = LoadingView;
+			sourceTree = "<group>";
+		};
 		578E9B1A17BA218500A7B304 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -1041,6 +1116,8 @@
 		578E9B1E17BA218F00A7B304 /* PredictionDetails */ = {
 			isa = PBXGroup;
 			children = (
+				573BC36917D734E600E668C7 /* category_arrow.png */,
+				573BC36A17D734E600E668C7 /* category_arrow@2x.png */,
 				572D465517BD0B37008164A5 /* BS_unsigned.png */,
 				572D465617BD0B37008164A5 /* BS_unsigned@2x.png */,
 				578E9B1F17BA219B00A7B304 /* AgreeBtn_pressed.png */,
@@ -1193,6 +1270,12 @@
 				9E677ACA17D758AD00A9AFFC /* done-button_press@2x.png */,
 				9E677ACB17D758AD00A9AFFC /* done-button.png */,
 				9E677ACC17D758AD00A9AFFC /* done-button@2x.png */,
+				573BC37117D740E100E668C7 /* ProfileSaveButton_press.png */,
+				573BC37217D740E200E668C7 /* ProfileSaveButton_press@2x.png */,
+				573BC37317D740E200E668C7 /* ProfileSaveButton.png */,
+				573BC37417D740E200E668C7 /* ProfileSaveButton@2x.png */,
+				573BC36D17D73EA100E668C7 /* profileBgPattern.png */,
+				573BC36E17D73EA100E668C7 /* profileBgPattern@2x.png */,
 				364D180017D0A3E3005303D0 /* badges */,
 				9E212EBE17CF82F200BE8166 /* alert_indicator.png */,
 				9E212EBF17CF82F200BE8166 /* alert_indicator@2x.png */,
@@ -1474,20 +1557,11 @@
 				9E930218179FF0E800FFB166 /* Segues */,
 				9E57924F1796C39200979928 /* Controls */,
 				571B1D1817C7BE620013AA41 /* New Badge Popup */,
-				5707791A17D4E88E0095FF19 /* Login & SingUp */,
+				573BC37917D7573800E668C7 /* LoadingView */,
+				573BC35F17D6178C00E668C7 /* Base Controllers */,
+				5707791A17D4E88E0095FF19 /* Login & SingUp Controllers */,
 				5707791B17D4E8B10095FF19 /* Menu Controllers */,
-				9E8421F817AFC91700D14D0A /* AddPredictionViewController.h */,
-				9E8421F917AFC91700D14D0A /* AddPredictionViewController.m */,
-				9ECECC3917B10F4E00B48465 /* PredictionDetailsViewController.h */,
-				9ECECC3A17B10F4E00B48465 /* PredictionDetailsViewController.m */,
-				3638773C17C4D6EA00703475 /* ChangePasswordViewController.h */,
-				3638773D17C4D6EA00703475 /* ChangePasswordViewController.m */,
-				3638773A17C4D6EA00703475 /* AnotherUsersProfileViewController.h */,
-				3638773B17C4D6EA00703475 /* AnotherUsersProfileViewController.m */,
-				57066AA817C64E970080797B /* CategoryPredictionsViewController.h */,
-				57066AA917C64E980080797B /* CategoryPredictionsViewController.m */,
-				369D861517CDE78E0005F0B3 /* UsernameEmailChangeViewController.h */,
-				369D861617CDE78E0005F0B3 /* UsernameEmailChangeViewController.m */,
+				573BC36017D617C200E668C7 /* Additional Controllers */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1831,6 +1905,15 @@
 				9E677AD217D758AD00A9AFFC /* done-button_press@2x.png in Resources */,
 				9E677AD317D758AD00A9AFFC /* done-button.png in Resources */,
 				9E677AD417D758AD00A9AFFC /* done-button@2x.png in Resources */,
+				573BC36B17D734E700E668C7 /* category_arrow.png in Resources */,
+				573BC36C17D734E700E668C7 /* category_arrow@2x.png in Resources */,
+				573BC36F17D73EA200E668C7 /* profileBgPattern.png in Resources */,
+				573BC37017D73EA200E668C7 /* profileBgPattern@2x.png in Resources */,
+				573BC37517D740E400E668C7 /* ProfileSaveButton_press.png in Resources */,
+				573BC37617D740E400E668C7 /* ProfileSaveButton_press@2x.png in Resources */,
+				573BC37717D740E400E668C7 /* ProfileSaveButton.png in Resources */,
+				573BC37817D740E400E668C7 /* ProfileSaveButton@2x.png in Resources */,
+				573BC37E17D7577D00E668C7 /* LoadingView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1937,6 +2020,9 @@
 				9E677AC417D4C73C00A9AFFC /* RemoveTokenWebRequest.m in Sources */,
 				5707792317D4E9220095FF19 /* ChildViewController.m in Sources */,
 				5707792417D4E9220095FF19 /* ParentViewController.m in Sources */,
+				573BC36317D6180A00E668C7 /* BaseRequestingViewController.m in Sources */,
+				573BC36617D61DAF00E668C7 /* UIViewController+WebRequests.m in Sources */,
+				573BC37C17D7576E00E668C7 /* LoadingView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2030,6 +2116,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: James Flexman (PW494ZCC4M)";
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KnodaIPhoneApp/KnodaIPhoneApp-Prefix.pch";
 				INFOPLIST_FILE = "KnodaIPhoneApp/KnodaIPhoneApp-Info.plist";

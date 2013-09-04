@@ -110,6 +110,7 @@ static NSString* const MENU_SEGUES[MenuItemsSize] = {
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
+    [self cancelAllRequests];
 }
 
 
@@ -215,13 +216,21 @@ static NSString* const MENU_SEGUES[MenuItemsSize] = {
 #pragma mark - User's info update 
 
 - (void) reloadUserInfo {
+    
+    __weak NavigationViewController *weakSelf = self;
+    
     ProfileWebRequest *profileWebRequest = [[ProfileWebRequest alloc]init];
-    [profileWebRequest executeWithCompletionBlock:^{
+    
+    [self executeRequest:profileWebRequest withBlock:^{
+        
+        NavigationViewController *strongSelf = weakSelf;
+        if(!strongSelf) return;
+        
         if (profileWebRequest.isSucceeded)
         {
-            [self.appDelegate.user updateWithObject:profileWebRequest.user];
+            [strongSelf.appDelegate.user updateWithObject:profileWebRequest.user];
         }
-        [self updateUserInfo];
+        [strongSelf updateUserInfo];
     }];
 }
 
@@ -250,11 +259,10 @@ static NSString* const MENU_SEGUES[MenuItemsSize] = {
 - (void) updateAlertBadge
 {
     AllAlertsWebRequest* request = [[AllAlertsWebRequest alloc] init];
-    [request executeWithCompletionBlock: ^
-    {
-        if (request.errorCode == 0)
+    AlertNavigationCell* cell = (AlertNavigationCell*)[self.menuItemsTableView cellForRowAtIndexPath: [NSIndexPath indexPathForRow: kAlertCellIndex inSection: 0]];
+    [self executeRequest:request withBlock:^{
+        if (request.isSucceeded)
         {
-            AlertNavigationCell* cell = (AlertNavigationCell*)[self.menuItemsTableView cellForRowAtIndexPath: [NSIndexPath indexPathForRow: kAlertCellIndex inSection: 0]];
             [cell updateBadge: request.predictions.count];
             [[UIApplication sharedApplication] setApplicationIconBadgeNumber: request.predictions.count];
         }

@@ -13,6 +13,7 @@
 #import "SignUpRequest.h"
 #import "PredictionsWebRequest.h"
 #import "ProfileWebRequest.h"
+#import "LoadingView.h"
 
 
 static const NSInteger kMaxUsernameLength = 15;
@@ -29,7 +30,6 @@ static NSString* const kApplicationSegue   = @"ApplicationNavigationSegue";
 @property (nonatomic, strong) IBOutlet UITextField* passwordTextField;
 @property (nonatomic, strong) IBOutlet UITextField* emailTextFiled;
 @property (nonatomic, strong) IBOutlet UIView* containerView;
-@property (nonatomic, strong) IBOutlet UIView* activityView;
 @property (nonatomic, strong) IBOutlet UIView* errorView;
 @property (nonatomic, strong) IBOutlet UILabel* errorLabel;
 
@@ -43,20 +43,6 @@ static NSString* const kApplicationSegue   = @"ApplicationNavigationSegue";
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
-
-- (void) viewDidUnload
-{
-    self.usernameTextField = nil;
-    self.passwordTextField = nil;
-    self.emailTextFiled = nil;
-    self.containerView = nil;
-    self.activityView = nil;
-    self.errorView = nil;
-    self.errorLabel = nil;
-    
-    [super viewDidUnload];
-}
-
 
 - (void) viewWillAppear: (BOOL) animated
 {
@@ -122,7 +108,7 @@ static NSString* const kApplicationSegue   = @"ApplicationNavigationSegue";
 {
     if ([self checkTextFields])
     {
-        self.activityView.hidden = NO;
+        [[LoadingView sharedInstance] show];
         
         if ([self.emailTextFiled isFirstResponder])
         {
@@ -144,16 +130,14 @@ static NSString* const kApplicationSegue   = @"ApplicationNavigationSegue";
         SignUpRequest* signUpRequest = [[SignUpRequest alloc] initWithUsername: self.usernameTextField.text email: self.emailTextFiled.text password: self.passwordTextField.text];
         [signUpRequest executeWithCompletionBlock: ^
          {
-             self.activityView.hidden = YES;
-             
-             if (signUpRequest.errorCode == 0)
+             if (signUpRequest.isSucceeded)
              {
                  self.appDelegate.user = signUpRequest.user;
                  
                  ProfileWebRequest *profileRequest = [ProfileWebRequest new];
                  [profileRequest executeWithCompletionBlock: ^
                   {
-                      self.activityView.hidden = YES;
+                      [[LoadingView sharedInstance] hide];
                       
                       if (profileRequest.isSucceeded)
                       {
@@ -172,13 +156,17 @@ static NSString* const kApplicationSegue   = @"ApplicationNavigationSegue";
                       }
                   }];
              }
-             else if (signUpRequest.errorCode == 403)
-             {
-                 [self showError: NSLocalizedString(@"Invalid username or password", @"")];
-             }
              else
              {
-                 [self showError: signUpRequest.localizedErrorDescription];
+                 [[LoadingView sharedInstance] hide];
+                 if (signUpRequest.errorCode == 403)
+                 {
+                     [self showError: NSLocalizedString(@"Invalid username or password", @"")];
+                 }
+                 else
+                 {
+                     [self showError: signUpRequest.localizedErrorDescription];
+                 }
              }
          }];
     }

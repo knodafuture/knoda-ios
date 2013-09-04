@@ -123,6 +123,7 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
         PredictionDetailsViewController *vc = (PredictionDetailsViewController *)segue.destinationViewController;
         vc.prediction = sender;
         vc.addPredictionDelegate = self;
+        vc.shouldNotOpenProfile = YES;
     }
 }
 

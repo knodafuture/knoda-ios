@@ -569,6 +569,9 @@ withAnimationDuration: (NSTimeInterval)animationDuration
 #pragma mark - Prediction Cell delegate
 
 - (void) profileSelectedWithUserId:(NSInteger)userId inCell:(PreditionCell *)cell {
+    if(self.shouldNotOpenProfile) {
+        return;
+    }
     if (self.appDelegate.user.userId == userId) {
         [self performSegueWithIdentifier:kMyProfileSegue sender:self];
     }

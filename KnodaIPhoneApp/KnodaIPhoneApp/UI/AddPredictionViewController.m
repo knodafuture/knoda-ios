@@ -195,7 +195,7 @@ static const CGFloat kCategorySectionHeight = 40;
 {
     [self hideExpirationDatePicker];
     
-    self.previousCategory = self.categoryButton.titleLabel.text;
+    self.previousCategory = self.categoryText;
     
     if (self.categoryText.length == 0)
     {
@@ -272,7 +272,9 @@ static const CGFloat kCategorySectionHeight = 40;
     newButtonFrame.size.width = self.categoryButton.titleLabel.frame.size.width + 40;
     self.categoryButton.frame = newButtonFrame;
     
-    self.categoryButton.hidden = self.categoryText.length != 0;
+    self.categoryButton.hidden = self.categoryText.length == 0;
+    
+    NSLog(@"self.categoryButton.hidden = %@", (self.categoryButton.hidden) ? @"YES" : @"NO");
     
     [self hideCategoryPicker];
 }
@@ -332,6 +334,7 @@ static const CGFloat kCategorySectionHeight = 40;
             {
                 UIAlertView* alert = [[UIAlertView alloc] initWithTitle: @"" message: request.localizedErrorDescription delegate: nil cancelButtonTitle: NSLocalizedString(@"OK", @"") otherButtonTitles: nil];
                 [alert show];
+                
             }
         }];
     }
@@ -342,6 +345,7 @@ static const CGFloat kCategorySectionHeight = 40;
 {
     [self dismissViewControllerAnimated: YES completion: nil];
 }
+
 
 #pragma mark UITextViewDelegate
 
@@ -370,6 +374,7 @@ static const CGFloat kCategorySectionHeight = 40;
         self.showPlaceholder = YES;
     }
 }
+
 
 #pragma mark - Keyboard show/hide handlers
 

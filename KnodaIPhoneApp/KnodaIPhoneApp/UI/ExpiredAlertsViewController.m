@@ -20,10 +20,21 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 
 @implementation ExpiredAlertsViewController
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void) viewDidAppear: (BOOL) animated
+{
+    [super viewDidAppear: animated];
+    
     [self refresh];
+    [Flurry logEvent: @"Expired_Alerts_Screen" withParameters: nil timed: YES];
 }
+
+
+- (void) viewDidDisappear: (BOOL) animated
+{
+    [super viewDidDisappear: animated];
+    [Flurry endTimedEvent: @"Expired_Alerts_Screen" withParameters: nil];
+}
+
 
 - (void)refresh {
     

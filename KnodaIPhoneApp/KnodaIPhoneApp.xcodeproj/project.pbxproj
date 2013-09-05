@@ -270,6 +270,7 @@
 		9E677AD217D758AD00A9AFFC /* done-button_press@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E677ACA17D758AD00A9AFFC /* done-button_press@2x.png */; };
 		9E677AD317D758AD00A9AFFC /* done-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E677ACB17D758AD00A9AFFC /* done-button.png */; };
 		9E677AD417D758AD00A9AFFC /* done-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E677ACC17D758AD00A9AFFC /* done-button@2x.png */; };
+		9E6F4C5817D8B3A500EAB4A0 /* libFlurry_4.2.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6F4C5717D8B3A500EAB4A0 /* libFlurry_4.2.3.a */; };
 		9E708824178AF68E00F036A8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E708823178AF68E00F036A8 /* UIKit.framework */; };
 		9E708826178AF68E00F036A8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E708825178AF68E00F036A8 /* Foundation.framework */; };
 		9E708828178AF68E00F036A8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E708827178AF68E00F036A8 /* CoreGraphics.framework */; };
@@ -701,6 +702,8 @@
 		9E677ACA17D758AD00A9AFFC /* done-button_press@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "done-button_press@2x.png"; sourceTree = "<group>"; };
 		9E677ACB17D758AD00A9AFFC /* done-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "done-button.png"; sourceTree = "<group>"; };
 		9E677ACC17D758AD00A9AFFC /* done-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "done-button@2x.png"; sourceTree = "<group>"; };
+		9E6F4C5617D8B3A500EAB4A0 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
+		9E6F4C5717D8B3A500EAB4A0 /* libFlurry_4.2.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_4.2.3.a; sourceTree = "<group>"; };
 		9E708820178AF68E00F036A8 /* KnodaIPhoneApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KnodaIPhoneApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E708823178AF68E00F036A8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9E708825178AF68E00F036A8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -840,6 +843,7 @@
 				9E708824178AF68E00F036A8 /* UIKit.framework in Frameworks */,
 				9E708826178AF68E00F036A8 /* Foundation.framework in Frameworks */,
 				9E708828178AF68E00F036A8 /* CoreGraphics.framework in Frameworks */,
+				9E6F4C5817D8B3A500EAB4A0 /* libFlurry_4.2.3.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1205,6 +1209,7 @@
 		9E06635F178C3C7F00B3E974 /* Thirdparty */ = {
 			isa = PBXGroup;
 			children = (
+				9E6F4C5517D8B3A500EAB4A0 /* Flurry */,
 				C3C33EFC17D0A56E003CA79C /* ImageCropper */,
 				9E212EB417CCEAFF00BE8166 /* KeychainWrapper */,
 				9E066360178C3C7F00B3E974 /* SBJSON */,
@@ -1422,6 +1427,15 @@
 				9E5792511796C3B900979928 /* CustomizedTextField.m */,
 			);
 			path = Controls;
+			sourceTree = "<group>";
+		};
+		9E6F4C5517D8B3A500EAB4A0 /* Flurry */ = {
+			isa = PBXGroup;
+			children = (
+				9E6F4C5617D8B3A500EAB4A0 /* Flurry.h */,
+				9E6F4C5717D8B3A500EAB4A0 /* libFlurry_4.2.3.a */,
+			);
+			path = Flurry;
 			sourceTree = "<group>";
 		};
 		9E708817178AF68E00F036A8 = {
@@ -2121,6 +2135,10 @@
 				GCC_PREFIX_HEADER = "KnodaIPhoneApp/KnodaIPhoneApp-Prefix.pch";
 				INFOPLIST_FILE = "KnodaIPhoneApp/KnodaIPhoneApp-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/KnodaIPhoneApp/Thirdparty/Flurry\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -2136,6 +2154,10 @@
 				GCC_PREFIX_HEADER = "KnodaIPhoneApp/KnodaIPhoneApp-Prefix.pch";
 				INFOPLIST_FILE = "KnodaIPhoneApp/KnodaIPhoneApp-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/KnodaIPhoneApp/Thirdparty/Flurry\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";

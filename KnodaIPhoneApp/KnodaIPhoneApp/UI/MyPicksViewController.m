@@ -36,12 +36,17 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
     [self refresh];
     
     self.cellUpdateTimer = [NSTimer scheduledTimerWithTimeInterval: 60.0 target: self selector: @selector(updateVisibleCells) userInfo: nil repeats: YES];
+    [Flurry logEvent: @"My_Piks_Screen" withParameters: nil timed: YES];
 }
 
-- (void)viewDidDisappear:(BOOL)animated {
+- (void) viewDidDisappear: (BOOL) animated
+{
     [super viewDidDisappear:animated];
+    
     [self.cellUpdateTimer invalidate];
     self.cellUpdateTimer = nil;
+    
+    [Flurry endTimedEvent: @"My_Piks_Screen" withParameters: nil];
 }
 
 

@@ -26,10 +26,21 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 
 @implementation AllAlertsViewController
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void) viewDidAppear: (BOOL) animated
+{
+    [super viewDidAppear: animated];
+    
     [self refresh];
+    [Flurry logEvent: @"All_Alerts_Screen" withParameters: nil timed: YES];
 }
+
+
+- (void) viewDidDisappear: (BOOL) animated
+{
+    [super viewDidDisappear: animated];
+    [Flurry endTimedEvent: @"All_Alerts_Screen" withParameters: nil];
+}
+
 
 - (void)refresh {
     

@@ -23,6 +23,10 @@
 #import "RemoveTokenWebRequest.h"
 
 
+static NSString* const kDevFlurryKey = @"QTDYWKWSJXK9YNDHKN5Z";
+static NSString* const kProductionFlurryKey = @"VQF4B8866XG6256GPQJ5";
+
+
 NSString* const kAlertNotification = @"AlertNotification";
 
 @interface AppDelegate() <UIAlertViewDelegate>
@@ -33,6 +37,9 @@ NSString* const kAlertNotification = @"AlertNotification";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [Flurry startSession: kDevFlurryKey];
+    [Flurry setCrashReportingEnabled: YES];
+    
     UIImage* navBackgroundImage = [UIImage imageNamed: @"headerBar"];
     [[UINavigationBar appearance] setBackgroundImage: navBackgroundImage forBarMetrics: UIBarMetricsDefault];
     

@@ -17,6 +17,7 @@
 @property (nonatomic, copy) NSString* body;
 @property (nonatomic, strong) NSDate* creationDate;
 @property (nonatomic, strong) NSDate* expirationDate;
+@property (nonatomic ,strong) NSDate* unfinishedDate;
 @property (nonatomic, assign) NSInteger agreeCount;
 @property (nonatomic, assign) NSInteger disagreeCount;
 @property (nonatomic, assign) NSInteger voitedUsersCount;
@@ -40,6 +41,10 @@
 
 - (BOOL)isExpired;
 
+- (BOOL)isFinished;
+
 - (BOOL) passed72HoursSinceExpiration;
+
+- (BOOL)canSetOutcome;
 
 @end

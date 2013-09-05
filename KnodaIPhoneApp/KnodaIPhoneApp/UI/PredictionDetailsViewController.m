@@ -244,13 +244,13 @@ static const int kBSAlertTag = 1001;
         case 0: return RowPrediction;
         case 1: return RowCategory;
         case 2:
-            if(self.prediction.hasOutcome) {
+            if(self.prediction.hasOutcome && self.prediction.chellange) {
                 return RowStatus;
             }
-            else if((self.prediction.chellange.isOwn && [self.prediction isExpired]) || [self.prediction passed72HoursSinceExpiration]) {
+            else if([self.prediction canSetOutcome]) {
                 return RowOutcome;
             }
-            else if(!self.prediction.chellange) {
+            else if(!self.prediction.chellange && ![self.prediction isExpired]) {
                 return RowMakePrediction;
             }
             return RowEmpty;

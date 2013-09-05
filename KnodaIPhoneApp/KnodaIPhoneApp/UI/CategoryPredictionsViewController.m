@@ -9,7 +9,6 @@
 #import "CategoryPredictionsViewController.h"
 #import "PreditionCell.h"
 #import "LoadingCell.h"
-#import "PredictionDetailsViewController.h"
 
 static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 
@@ -32,6 +31,8 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
         vc.prediction = sender;
         vc.addPredictionDelegate = self;
         vc.shouldNotOpenCategory = YES;
+        vc.shouldNotOpenProfile = self.shouldNotOpenProfile;
+        vc.delegate = self;
     }
     else {
         [super prepareForSegue:segue sender:sender];
@@ -44,6 +45,14 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 
 - (NSString *)predictionsCategory {
     return self.category;
+}
+
+#pragma mark - PredictionCellDelegate
+
+- (void) profileSelectedWithUserId:(NSInteger)userId inCell:(PreditionCell *)cell {
+    if(!self.shouldNotOpenProfile) {
+        [super profileSelectedWithUserId:userId inCell:cell];
+    }
 }
 
 @end

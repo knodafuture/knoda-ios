@@ -10,7 +10,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import "AddPredictionViewController.h"
 #import "PreditionCell.h"
+#import "PredictionDetailsViewController.h"
 
-@interface HomeViewController : UITableViewController <AddPredictionViewControllerDelegate, PredictionCellDelegate>
+@interface HomeViewController : UITableViewController <AddPredictionViewControllerDelegate, PredictionCellDelegate, PredictionDetailsDelegate>
 
 @end

@@ -187,6 +187,7 @@ static const int kBSAlertTag = 1001;
     else if([segue.identifier isEqualToString:kCategorySegue]) {
         CategoryPredictionsViewController *vc = (CategoryPredictionsViewController *)segue.destinationViewController;
         vc.category = self.prediction.category;
+        vc.shouldNotOpenProfile = self.shouldNotOpenProfile;
     }
     else if ([segue.identifier isEqualToString:kUserProfileSegue]) {
         ((AnotherUsersProfileViewController*)segue.destinationViewController).userId = self.prediction.userId;

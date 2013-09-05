@@ -16,7 +16,6 @@
 #import "PredictionDisagreeWebRequest.h"
 #import "ChellangeByPredictionWebRequest.h"
 #import "AppDelegate.h"
-#import "PredictionDetailsViewController.h"
 #import "User.h"
 #import "BadgesWebRequest.h"
 #import "UIViewController+WebRequests.h"
@@ -29,7 +28,7 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
 static NSString* const kUserProfileSegue       = @"UserProfileSegue";
 static NSString* const kMyProfileSegue         = @"MyProfileSegue";
 
-@interface HomeViewController () <PredictionDetailsDelegate>
+@interface HomeViewController ()
 
 @property (nonatomic, strong) NSMutableArray* predictions;
 @property (nonatomic, strong) NSTimer* cellUpdateTimer;

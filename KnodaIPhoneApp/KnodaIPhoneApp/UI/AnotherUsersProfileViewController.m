@@ -18,11 +18,12 @@
 #import "PredictionDisagreeWebRequest.h"
 #import "ChellangeByPredictionWebRequest.h"
 #import "LoadingView.h"
+#import "PredictionUpdateWebRequest.h"
 
 static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
 
-@interface AnotherUsersProfileViewController () <AddPredictionViewControllerDelegate, PredictionCellDelegate>
+@interface AnotherUsersProfileViewController () <AddPredictionViewControllerDelegate, PredictionCellDelegate, PredictionDetailsDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *userPointsLabel;
@@ -124,6 +125,7 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
         vc.prediction = sender;
         vc.addPredictionDelegate = self;
         vc.shouldNotOpenProfile = YES;
+        vc.delegate = self;
     }
 }
 
@@ -276,6 +278,25 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
              [cell resetAgreedDisagreed];
          }
      }];
+}
+
+#pragma mark PredictionDetailsDelegate
+
+- (void)updatePrediction:(Prediction *)prediction {
+    __weak AnotherUsersProfileViewController *weakSelf = self;
+    PredictionUpdateWebRequest *updateRequest = [[PredictionUpdateWebRequest alloc] initWithPredictionId:prediction.ID];
+    [self executeRequest:updateRequest withBlock:^{
+        AnotherUsersProfileViewController *strongSelf = weakSelf;
+        if(!strongSelf) return;
+        
+        if(updateRequest.isSucceeded) {
+            [prediction updateWithObject:updateRequest.prediction];
+            NSUInteger idx = [strongSelf.predictions indexOfObject:prediction];
+            if(idx != NSNotFound) {
+                [strongSelf.predictionsTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:idx inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
+        }
+    }];
 }
 
 @end

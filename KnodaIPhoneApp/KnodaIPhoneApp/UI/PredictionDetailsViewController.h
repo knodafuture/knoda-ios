@@ -23,6 +23,7 @@
 @property (nonatomic, weak) id<PredictionDetailsDelegate> delegate;
 
 @property (nonatomic, assign) BOOL shouldNotOpenCategory;
+@property (nonatomic, assign) BOOL shouldNotOpenProfile;
 
 - (IBAction)backButtonPressed:(UIButton *)sender;
 - (IBAction)bsButtonTapped:(UIButton *)sender;

@@ -173,7 +173,7 @@ static NSString* const MENU_SEGUES[MenuItemsSize] = {
 
 - (void) moveToMaster
 {
-    [self updateUserInfo];
+    [self reloadUserInfo];
     
     self.masterShown = YES;
     self.gestureView.hidden = NO;

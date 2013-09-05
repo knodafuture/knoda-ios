@@ -187,6 +187,7 @@ static const int kBSAlertTag = 1001;
     else if([segue.identifier isEqualToString:kCategorySegue]) {
         CategoryPredictionsViewController *vc = (CategoryPredictionsViewController *)segue.destinationViewController;
         vc.category = self.prediction.category;
+        vc.shouldNotOpenProfile = self.shouldNotOpenProfile;
     }
     else if ([segue.identifier isEqualToString:kUserProfileSegue]) {
         ((AnotherUsersProfileViewController*)segue.destinationViewController).userId = self.prediction.userId;
@@ -569,6 +570,9 @@ withAnimationDuration: (NSTimeInterval)animationDuration
 #pragma mark - Prediction Cell delegate
 
 - (void) profileSelectedWithUserId:(NSInteger)userId inCell:(PreditionCell *)cell {
+    if(self.shouldNotOpenProfile) {
+        return;
+    }
     if (self.appDelegate.user.userId == userId) {
         [self performSegueWithIdentifier:kMyProfileSegue sender:self];
     }

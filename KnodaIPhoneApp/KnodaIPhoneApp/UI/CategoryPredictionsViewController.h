@@ -12,6 +12,8 @@
 
 @property (nonatomic) NSString *category;
 
+@property (nonatomic, assign) BOOL shouldNotOpenProfile;
+
 - (IBAction)backButtonPressed:(UIButton *)sender;
 
 @end

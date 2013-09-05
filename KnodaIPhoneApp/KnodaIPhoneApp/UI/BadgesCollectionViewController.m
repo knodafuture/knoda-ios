@@ -52,9 +52,18 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
     [self.navigationController.navigationBar setTitleVerticalPositionAdjustment:5 forBarMetrics:UIBarMetricsDefault];
 }
 
-- (void) viewWillAppear:(BOOL)animated {
+- (void) viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
+    
     [self setUpUsersBadges];
+    [Flurry logEvent: @"Badges_Screen" withParameters: nil timed: YES];
+}
+
+- (void) viewDidDisappear: (BOOL) animated
+{
+    [super viewDidDisappear: animated];
+    [Flurry endTimedEvent: @"Badges_Screen" withParameters: nil];
 }
 
 - (NSMutableArray *)getWebRequests {

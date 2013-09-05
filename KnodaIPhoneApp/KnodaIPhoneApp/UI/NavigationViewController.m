@@ -162,6 +162,8 @@ static NSString* const MENU_SEGUES[MenuItemsSize] = {
 
 - (void) moveToDetails
 {
+    [Flurry endTimedEvent: @"Navigation_Screen" withParameters: nil];
+    
     self.masterShown = NO;
     self.gestureView.hidden = YES;
     
@@ -173,6 +175,8 @@ static NSString* const MENU_SEGUES[MenuItemsSize] = {
 
 - (void) moveToMaster
 {
+    [Flurry logEvent: @"Navigation_Screen" withParameters: nil timed: YES];
+    
     [self reloadUserInfo];
     
     self.masterShown = YES;

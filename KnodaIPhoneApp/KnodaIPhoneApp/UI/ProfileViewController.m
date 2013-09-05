@@ -63,9 +63,20 @@ static const float kAvatarSize = 344.0;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
     [self fillInUsersInformation];
     [[self navigationController] setNavigationBarHidden:NO animated:NO];
+    
+    [Flurry logEvent: @"Profile_Screen" withParameters: nil timed: YES];
 }
+
+
+- (void) viewDidDisappear: (BOOL) animated
+{
+    [super viewDidDisappear: animated];
+    [Flurry endTimedEvent: @"Profile_Screen" withParameters: nil];
+}
+
 
 - (void) makeProfileImageRoundedCorners {
     self.profileAvatarView.layer.cornerRadius = 10.0;

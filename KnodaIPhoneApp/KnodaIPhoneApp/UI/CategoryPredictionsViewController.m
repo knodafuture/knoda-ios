@@ -28,11 +28,11 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 {
     if([segue.identifier isEqualToString:kPredictionDetailsSegue]) {
         PredictionDetailsViewController *vc = (PredictionDetailsViewController *)segue.destinationViewController;
-        vc.prediction = sender;
+        vc.prediction            = sender;
         vc.addPredictionDelegate = self;
         vc.shouldNotOpenCategory = YES;
-        vc.shouldNotOpenProfile = self.shouldNotOpenProfile;
-        vc.delegate = self;
+        vc.shouldNotOpenProfile  = self.shouldNotOpenProfile;
+        vc.delegate              = self;
     }
     else {
         [super prepareForSegue:segue sender:sender];

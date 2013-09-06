@@ -175,7 +175,12 @@ static const int kBSAlertTag = 1001;
 }
 
 - (IBAction)categoryButtonTapped:(UIButton *)sender {
-    [self performSegueWithIdentifier:kCategorySegue sender:nil];
+    if(self.shouldNotOpenCategory) {
+        [self backButtonPressed:nil];
+    }
+    else {
+        [self performSegueWithIdentifier:kCategorySegue sender:nil];
+    }
 }
 
 #pragma mark Segue
@@ -186,14 +191,14 @@ static const int kBSAlertTag = 1001;
     }
     else if([segue.identifier isEqualToString:kCategorySegue]) {
         CategoryPredictionsViewController *vc = (CategoryPredictionsViewController *)segue.destinationViewController;
-        vc.category = self.prediction.category;
+        vc.category             = self.prediction.category;
         vc.shouldNotOpenProfile = self.shouldNotOpenProfile;
     }
     else if ([segue.identifier isEqualToString:kUserProfileSegue]) {
         ((AnotherUsersProfileViewController*)segue.destinationViewController).userId = self.prediction.userId;
     }
     else if([segue.identifier isEqualToString:kMyProfileSegue]) {
-        ProfileViewController *vc = (ProfileViewController *)segue.destinationViewController;
+        ProfileViewController *vc    = (ProfileViewController *)segue.destinationViewController;
         vc.leftButtonItemReturnsBack = YES;
     }
 }
@@ -456,7 +461,6 @@ static const int kBSAlertTag = 1001;
     else if([baseCell isKindOfClass:[PredictionCategoryCell class]]) {
         PredictionCategoryCell *cell = (PredictionCategoryCell *)baseCell;
         [cell setCategory:self.prediction.category];
-        cell.buttonEnabled = !self.shouldNotOpenCategory;
     }
     else if([baseCell isKindOfClass:[PredictionStatusCell class]]) {
         PredictionStatusCell *cell = (PredictionStatusCell *)baseCell;

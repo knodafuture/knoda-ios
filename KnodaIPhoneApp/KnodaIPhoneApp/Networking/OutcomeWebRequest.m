@@ -7,6 +7,7 @@
 //
 
 #import "OutcomeWebRequest.h"
+#import "BadgesWebRequest.h"
 
 @interface OutcomeWebRequest() {
     NSInteger _predictionId;
@@ -40,6 +41,18 @@
 
 - (NSString *)userFriendlyErrorDescription {
     return NSLocalizedString(@"Unable to set the outcome for this prediction at this time. Please try again later.", @"");
+}
+
+- (void)executeWithCompletionBlock:(RequestCompletionBlock)completion {
+    RequestCompletionBlock block = completion ? [completion copy] : nil;
+    [super executeWithCompletionBlock:^{
+        if(block) {
+            block();
+        }
+        if(self.isSucceeded) {
+            [BadgesWebRequest checkNewBadges];
+        }
+    }];
 }
 
 @end

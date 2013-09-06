@@ -72,6 +72,11 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
     self.avatarView.layer.rasterizationScale = [[UIScreen mainScreen] scale];
 }
 
+- (void)prepareForReuse {
+    [super prepareForReuse];
+    [self.avatarView didStartImageLoading];
+}
+
 #pragma mark KVO
 
 - (void)addKVO {
@@ -216,6 +221,10 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
 
 - (void) handlePanFrom: (UIPanGestureRecognizer*) recognizer
 {
+    if([self.prediction isExpired]) {
+        return;
+    }
+    
     CGFloat location = [recognizer locationInView: self.contentView].x;
     
     if (recognizer.state == UIGestureRecognizerStateChanged)

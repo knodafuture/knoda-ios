@@ -25,11 +25,11 @@ static const float kSmallCellHeight = 99.0;
 
 - (void)setupCellWithPrediction:(Prediction *)prediction {
     self.promptLabel.text = (prediction.chellange.isOwn) ? (NSLocalizedString(@"Was your prediction correct?", @"")) : NSLocalizedString(@"Was this prediction correct?", @"");
-    self.unfinishedButton.hidden = ![prediction isExpired] || !prediction.chellange.isOwn;
+    self.unfinishedButton.hidden = ![prediction isFinished];
 }
 
 + (CGFloat)cellHeightForPrediction:(Prediction *)prediction {
-    return [prediction isExpired] ? kBigCellHeight : kSmallCellHeight;
+    return [prediction isFinished] ? kBigCellHeight : kSmallCellHeight;
 }
 
 @end

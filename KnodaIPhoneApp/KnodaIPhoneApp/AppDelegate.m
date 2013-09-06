@@ -205,7 +205,6 @@ NSString* const kAlertNotification = @"AlertNotification";
     SignOutWebRequest *signOutWebRequest = [SignOutWebRequest new];
     [signOutWebRequest executeWithCompletionBlock:nil];
     
-    
     self.user = nil;
     [self removePassword];
     [[ImageCache instance] clear];

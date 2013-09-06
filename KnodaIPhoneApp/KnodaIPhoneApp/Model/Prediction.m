@@ -43,19 +43,19 @@ static NSString* const kResponseDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'zzz";
             self.outcome = [obj boolValue];
         }
         
-        obj = [dictionary objectForKey: @"created_at"];
-        if (obj && ![obj isKindOfClass: [NSNull class]])
-        {
-            self.creationDate = [NSDate dateFromString:[obj stringByAppendingString: @"GMT"] withFormat:kResponseDateFormat];
-        }
-        
-        obj = [dictionary objectForKey: @"expires_at"];
-        if (obj && ![obj isKindOfClass: [NSNull class]])
-        {
-            self.expirationDate = [NSDate dateFromString:[obj stringByAppendingString: @"GMT"] withFormat:kResponseDateFormat];
-        }
+        self.creationDate   = [self dateFromObject:dictionary[@"created_at"]];
+        self.expirationDate = [self dateFromObject:dictionary[@"expires_at"]];
+        self.unfinishedDate = [self dateFromObject:dictionary[@"unfinished"]];
+
     }
     return self;
+}
+
+- (NSDate *)dateFromObject:(id)obj {
+    if (obj && ![obj isKindOfClass: [NSNull class]] && [obj isKindOfClass:[NSString class]]) {
+        return [NSDate dateFromString:[obj stringByAppendingString: @"GMT"] withFormat:kResponseDateFormat];
+    }
+    return nil;
 }
 
 - (void)setupChallenge:(NSDictionary *)challengeDict withPoints:(NSDictionary *)pointsDict {
@@ -84,11 +84,14 @@ static NSString* const kResponseDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'zzz";
     return [self.expirationDate timeIntervalSinceNow] < 0;
 }
 
+- (BOOL)isFinished {
+    return self.chellange.isOwn && (self.unfinishedDate ? [self.unfinishedDate timeIntervalSinceNow] < 0 : [self.expirationDate timeIntervalSinceNow] < 0);
+}
 
 - (NSString*) description
 {
     
-    NSString* result = [NSString stringWithFormat: @"\r\r***PREDICTION***\rid: %d\rcategory: %@\rbody: %@\rcreationDate: %@\rexpirationDate: %@\ragreeCount: %d\rdisagreeCount: %d\rvoitedUsersCount: %d\ragreePersent: %d\rexpired: %@\rhasOutcome: %@\routcome: %@\rsettled: %@\ruserId: %d\ruserName: %@\ruserAvatars: %@\rchellange: %@\r***", self.ID, self.category, self.body, self.creationDate, self.expirationDate, self.agreeCount, self.disagreeCount, self.voitedUsersCount, self.agreedPercent, (self.expired) ? @"YES" : @"NO", (self.hasOutcome) ? @"YES" : @"NO", (self.outcome) ? @"YES" : @"NO", (self.settled) ? @"YES" : @"NO", self.userId, self.userName, self.userAvatars, self.chellange];
+    NSString* result = [NSString stringWithFormat: @"\r\r***PREDICTION***\rid: %d\rcategory: %@\rbody: %@\rcreationDate: %@\rexpirationDate: %@\runfinishedDate: %@\ragreeCount: %d\rdisagreeCount: %d\rvoitedUsersCount: %d\ragreePersent: %d\rexpired: %@\rhasOutcome: %@\routcome: %@\rsettled: %@\ruserId: %d\ruserName: %@\ruserAvatars: %@\rchellange: %@\r***", self.ID, self.category, self.body, self.creationDate, self.expirationDate, self.unfinishedDate, self.agreeCount, self.disagreeCount, self.voitedUsersCount, self.agreedPercent, (self.expired) ? @"YES" : @"NO", (self.hasOutcome) ? @"YES" : @"NO", (self.outcome) ? @"YES" : @"NO", (self.settled) ? @"YES" : @"NO", self.userId, self.userName, self.userAvatars, self.chellange];
     
     return result;
 }
@@ -96,7 +99,7 @@ static NSString* const kResponseDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'zzz";
 
 - (BOOL) passed72HoursSinceExpiration
 {
-    NSTimeInterval timeInterval = [[NSDate date] timeIntervalSinceDate: self.expirationDate];
+    NSTimeInterval timeInterval = [[NSDate date] timeIntervalSinceDate: (self.unfinishedDate ? : self.expirationDate)];
     NSTimeInterval secondsIn72Hours = 60 * 60 * 72;
     
     if (timeInterval > secondsIn72Hours)
@@ -105,6 +108,10 @@ static NSString* const kResponseDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'zzz";
     }
     
     return NO;
+}
+
+- (BOOL)canSetOutcome {
+    return [self isFinished] || [self passed72HoursSinceExpiration];
 }
 
 

@@ -39,11 +39,11 @@
 
 - (id)initWithPredictionId:(NSInteger)predictionId extendTill:(NSDate *)expDate {
     NSDateComponents *dc = [expDate gmtDateComponents];
-    NSDictionary *params = @{@"prediction[expires_at(1i)]" : @(dc.year),
-                             @"prediction[expires_at(2i)]" : @(dc.month),
-                             @"prediction[expires_at(3i)]" : @(dc.day),
-                             @"prediction[expires_at(4i)]" : @(dc.hour),
-                             @"prediction[expires_at(5i)]" : @(dc.minute)};
+    NSDictionary *params = @{@"prediction[unfinished(1i)]" : @(dc.year),
+                             @"prediction[unfinished(2i)]" : @(dc.month),
+                             @"prediction[unfinished(3i)]" : @(dc.day),
+                             @"prediction[unfinished(4i)]" : @(dc.hour),
+                             @"prediction[unfinished(5i)]" : @(dc.minute)};
     return ((self = [self initWithPredictionId:predictionId patch:params]));
 }
 

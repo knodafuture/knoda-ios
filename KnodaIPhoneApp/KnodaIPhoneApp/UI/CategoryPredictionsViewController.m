@@ -24,6 +24,21 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
     self.title = [self.category uppercaseString];
 }
 
+
+- (void) viewDidAppear: (BOOL) animated
+{
+    [super viewDidAppear: animated];
+    [Flurry logEvent: @"Predictions_By_Category_Screen" withParameters: @{@"Category": self.category} timed: YES];
+}
+
+
+- (void) viewDidDisappear: (BOOL) animated
+{
+    [super viewDidDisappear: animated];
+    [Flurry endTimedEvent: @"Predictions_By_Category_Screen" withParameters: @{@"Category": self.category}];
+}
+
+
 - (void) prepareForSegue: (UIStoryboardSegue*) segue sender: (id) sender
 {
     if([segue.identifier isEqualToString:kPredictionDetailsSegue]) {

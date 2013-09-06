@@ -88,6 +88,21 @@ static const int kBSAlertTag = 1001;
     }
 }
 
+
+- (void) viewDidAppear: (BOOL) animated
+{
+    [super viewDidAppear: animated];
+    [Flurry logEvent: @"Prediction_Details_Screen" timed: YES];
+}
+
+
+- (void) viewDidDisappear: (BOOL) animated
+{
+    [super viewDidDisappear: animated];
+    [Flurry endTimedEvent: @"Prediction_Details_Screen" withParameters: nil];
+}
+
+
 #pragma mark Actions
 
 - (IBAction)backButtonPressed:(UIButton *)sender {
@@ -109,10 +124,12 @@ static const int kBSAlertTag = 1001;
 }
 
 - (IBAction)agreeButtonTapped:(UIButton *)sender {
+    [Flurry logEvent: @"Agree_Button_Tapped"];
     [self sendAgree:YES];
 }
 
 - (IBAction)disagreeButtonTapped:(UIButton *)sender {
+    [Flurry logEvent: @"Disagree_Button_Tapped"];
     [self sendAgree:NO];
 }
 
@@ -124,7 +141,10 @@ static const int kBSAlertTag = 1001;
     [self sendOutcome:NO];
 }
 
-- (IBAction)unfinishButtonTapped:(UIButton *)sender {
+- (IBAction)unfinishButtonTapped: (UIButton*) sender
+{
+    [Flurry logEvent: @"Unfinished_Button_Tapped"];
+    
     self.datePicker.minimumDate = [NSDate dateWithTimeInterval:(10 * 60) sinceDate:[NSDate date]];
     self.datePicker.date = self.datePicker.minimumDate;
     [self showView:self.pickerViewHolder];
@@ -509,7 +529,9 @@ static const int kBSAlertTag = 1001;
 #pragma mark UIAlertViewDelegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if(alertView.tag == kBSAlertTag && alertView.cancelButtonIndex != buttonIndex) {
+    if(alertView.tag == kBSAlertTag && alertView.cancelButtonIndex != buttonIndex)
+    {
+        [Flurry logEvent: @"BS_Button_Tapped"];
         [self sendBS];
     }
 }

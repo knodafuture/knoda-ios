@@ -105,7 +105,10 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
     }
 }
 
-- (void) showFirstStartOverlay {
+- (void) showFirstStartOverlay
+{
+    [Flurry logEvent: @"First_Screen_Overlay" timed: YES];
+    
     self.view.userInteractionEnabled = NO;
     
     CGRect frame = [[[UIApplication sharedApplication] delegate] window].frame;
@@ -120,7 +123,10 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
     [[[[UIApplication sharedApplication] delegate] window] addSubview:self.firstStartView];
 }
 
-- (IBAction)closeFirstStartView:(id)sender {
+- (IBAction)closeFirstStartView:(id)sender
+{
+    [Flurry endTimedEvent: @"First_Screen_Overlay" withParameters: nil];
+    
     [self.firstStartView removeFromSuperview];
     self.view.userInteractionEnabled = YES;
     self.appDelegate.user.justSignedUp = NO;

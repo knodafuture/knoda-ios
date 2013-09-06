@@ -50,6 +50,21 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
     [self setUpUsersInfo];
 }
 
+
+- (void) viewDidAppear: (BOOL) animated
+{
+    [super viewDidAppear: animated];
+    [Flurry logEvent: @"Another_User_Profile_Screen" withParameters: nil timed: YES];
+}
+
+
+- (void) viewDidDisappear: (BOOL) animated
+{
+    [super viewDidDisappear: animated];
+    [Flurry endTimedEvent: @"Another_User_Profile_Screen" withParameters: nil];
+}
+
+
 - (void) updateVisibleCells
 {
     NSArray* visibleCells = [self.predictionsTableView visibleCells];

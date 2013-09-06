@@ -91,6 +91,8 @@ static const CGFloat kCategorySectionHeight = 40;
 {
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(willShowKeyboardNotificationDidRecieve:) name: UIKeyboardWillShowNotification object: nil];
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(willHideKeyboardNotificationDidRecieve:) name: UIKeyboardWillHideNotification object: nil];
+
+    [Flurry logEvent: @"Add_Prediction_Screen" withParameters: nil timed: YES];
     
     [super viewWillAppear: animated];
 }
@@ -99,6 +101,8 @@ static const CGFloat kCategorySectionHeight = 40;
 - (void) viewWillDisappear: (BOOL) animated
 {
     [[NSNotificationCenter defaultCenter] removeObserver: self];
+    
+    [Flurry endTimedEvent: @"Add_Prediction_Screen" withParameters: nil];
     
     [super viewWillDisappear: animated];
 }
@@ -304,6 +308,8 @@ static const CGFloat kCategorySectionHeight = 40;
     }
     else
     {
+        [Flurry logEvent: @"Add_Prediction" withParameters: @{@"Category": self.categoryText, @"ExpirationDate": self.expirationLabel.text}];
+        
         if ([self.textView isFirstResponder])
         {
             [self.textView resignFirstResponder];

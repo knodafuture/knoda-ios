@@ -261,6 +261,7 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
             
             if (self.agreed && [self.delegate respondsToSelector: @selector(predictionAgreed:inCell:)])
             {
+                [Flurry logEvent: @"Swiped_Agree"];
                 [self.delegate predictionAgreed: self.prediction inCell: self];
             }
             
@@ -280,6 +281,7 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
             
             if (self.disagreed && [self.delegate respondsToSelector: @selector(predictionDisagreed:inCell:)])
             {
+                [Flurry logEvent: @"Swiped_Disagree"];
                 [self.delegate predictionDisagreed: self.prediction inCell: self];
             }
             

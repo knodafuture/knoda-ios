@@ -72,6 +72,11 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
     self.avatarView.layer.rasterizationScale = [[UIScreen mainScreen] scale];
 }
 
+- (void)prepareForReuse {
+    [super prepareForReuse];
+    [self.avatarView didStartImageLoading];
+}
+
 #pragma mark KVO
 
 - (void)addKVO {

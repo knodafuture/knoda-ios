@@ -20,7 +20,7 @@ static NSString* const kSelectPictureSegue = @"SelectPictureSegue";
 
 static const NSInteger kAlertCellIndex = 2;
 
-static NSString* const MENU_SEGUES[MenuItemsSize] = {
+static NSString* const MENU_SEGUES[MenuItemsCount] = {
     @"HomeSegue",
     @"HistorySegue",
     @"AlertsSegue",
@@ -277,15 +277,9 @@ static NSString* const MENU_SEGUES[MenuItemsSize] = {
 #pragma mark - UITableViewDataSource
 
 
-- (NSInteger) numberOfSectionsInTableView: (UITableView*) tableView
-{
-    return 1;
-}
-
-
 - (NSInteger) tableView: (UITableView*) tableView numberOfRowsInSection: (NSInteger) section
 {
-    return 5;
+    return MenuItemsCount;
 }
 
 

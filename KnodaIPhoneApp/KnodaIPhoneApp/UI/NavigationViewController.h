@@ -14,7 +14,7 @@ typedef enum {
     MenuAlerts,
     MenuBadges,
     MenuProfile,
-    MenuItemsSize
+    MenuItemsCount
 } MenuItem;
 
 @interface NavigationViewController : BaseRequestingViewController <UITableViewDataSource>

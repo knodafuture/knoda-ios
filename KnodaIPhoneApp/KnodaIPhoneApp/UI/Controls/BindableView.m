@@ -40,6 +40,7 @@
 }
 
 - (void)didStartImageLoading {
+    self.imageView.image = nil;
     self.loading = YES;
 }
 

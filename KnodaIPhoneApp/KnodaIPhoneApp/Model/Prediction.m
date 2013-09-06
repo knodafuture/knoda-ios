@@ -111,7 +111,7 @@ static NSString* const kResponseDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'zzz";
 }
 
 - (BOOL)canSetOutcome {
-    return [self isFinished] || [self passed72HoursSinceExpiration];
+    return self.chellange && ([self isFinished] || [self passed72HoursSinceExpiration]);
 }
 
 

@@ -73,6 +73,10 @@ static const int kBSAlertTag = 1001;
 
 #pragma mark View lifecycle
 
+- (void)dealloc {
+    [[(AppDelegate *)[[UIApplication sharedApplication] delegate] user] removeObserver:self forKeyPath:@"smallImage"];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -86,6 +90,8 @@ static const int kBSAlertTag = 1001;
     if(!self.addPredictionDelegate) {
         self.addPredictionDelegate = self;
     }
+    
+    [[(AppDelegate *)[[UIApplication sharedApplication] delegate] user] addObserver:self forKeyPath:@"smallImage" options:NSKeyValueObservingOptionNew context:nil];
 }
 
 
@@ -102,6 +108,15 @@ static const int kBSAlertTag = 1001;
     [Flurry endTimedEvent: @"Prediction_Details_Screen" withParameters: nil];
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if([object isKindOfClass:[User class]] && [keyPath isEqualToString:@"smallImage"]) {
+        self.prediction.smallAvatar = [(User *)object smallImage];
+        [self.tableView reloadRowsAtIndexPaths:@[[self indexPathForCellType:RowPrediction]] withRowAnimation:UITableViewRowAnimationNone];
+    }
+    else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
+}
 
 #pragma mark Actions
 

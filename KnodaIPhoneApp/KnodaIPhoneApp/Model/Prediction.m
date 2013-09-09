@@ -34,7 +34,9 @@ static NSString* const kResponseDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'zzz";
         
         obj = [dictionary objectForKey: @"user_avatar"];
         if ([obj isKindOfClass:[NSDictionary class]]) {
-            self.userAvatars = obj;
+            self.thumbAvatar = obj[@"thumb"];
+            self.smallAvatar = obj[@"small"];
+            self.bigAvatar   = obj[@"big"];
         }
         
         obj = [dictionary objectForKey: @"outcome"];
@@ -63,18 +65,6 @@ static NSString* const kResponseDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'zzz";
     [self.chellange fillPoints:pointsDict];
 }
 
-- (NSString *)thumbAvatar {
-    return self.userAvatars[@"thumb"];
-}
-
-- (NSString *)smallAvatar {
-    return self.userAvatars[@"small"];
-}
-
-- (NSString *)bigAvatar {
-    return self.userAvatars[@"big"];
-}
-
 - (void)setOutcome:(BOOL)outcome {
     _outcome = outcome;
     self.hasOutcome = YES;
@@ -91,7 +81,7 @@ static NSString* const kResponseDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'zzz";
 - (NSString*) description
 {
     
-    NSString* result = [NSString stringWithFormat: @"\r\r***PREDICTION***\rid: %d\rcategory: %@\rbody: %@\rcreationDate: %@\rexpirationDate: %@\runfinishedDate: %@\ragreeCount: %d\rdisagreeCount: %d\rvoitedUsersCount: %d\ragreePersent: %d\rexpired: %@\rhasOutcome: %@\routcome: %@\rsettled: %@\ruserId: %d\ruserName: %@\ruserAvatars: %@\rchellange: %@\r***", self.ID, self.category, self.body, self.creationDate, self.expirationDate, self.unfinishedDate, self.agreeCount, self.disagreeCount, self.voitedUsersCount, self.agreedPercent, (self.expired) ? @"YES" : @"NO", (self.hasOutcome) ? @"YES" : @"NO", (self.outcome) ? @"YES" : @"NO", (self.settled) ? @"YES" : @"NO", self.userId, self.userName, self.userAvatars, self.chellange];
+    NSString* result = [NSString stringWithFormat: @"\r\r***PREDICTION***\rid: %d\rcategory: %@\rbody: %@\rcreationDate: %@\rexpirationDate: %@\runfinishedDate: %@\ragreeCount: %d\rdisagreeCount: %d\rvoitedUsersCount: %d\ragreePersent: %d\rexpired: %@\rhasOutcome: %@\routcome: %@\rsettled: %@\ruserId: %d\ruserName: %@\ruserAvatars: %@\rchellange: %@\r***", self.ID, self.category, self.body, self.creationDate, self.expirationDate, self.unfinishedDate, self.agreeCount, self.disagreeCount, self.voitedUsersCount, self.agreedPercent, (self.expired) ? @"YES" : @"NO", (self.hasOutcome) ? @"YES" : @"NO", (self.outcome) ? @"YES" : @"NO", (self.settled) ? @"YES" : @"NO", self.userId, self.userName, [NSString stringWithFormat:@"\n%@\n%@\n%@", self.thumbAvatar, self.smallAvatar, self.bigAvatar], self.chellange];
     
     return result;
 }

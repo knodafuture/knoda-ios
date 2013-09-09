@@ -20,7 +20,7 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
     @"expired",
     @"outcome",
     @"settled",
-    @"smallImage",
+    @"smallAvatar",
     @"chellange",
     @"chellange.seen",
     @"chellange.agree",

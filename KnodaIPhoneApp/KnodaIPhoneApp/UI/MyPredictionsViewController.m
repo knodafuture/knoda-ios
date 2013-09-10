@@ -200,7 +200,10 @@ static NSString* const kMyProfileSegue = @"MyProfileSegue";
 }
 
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath: indexPath animated: YES];
+    
     if (self.predictions.count != 0)
     {
         Prediction* prediction = [self.predictions objectAtIndex: indexPath.row];

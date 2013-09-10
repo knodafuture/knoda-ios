@@ -29,6 +29,8 @@
 @property (nonatomic, strong) IBOutlet UILabel* bodyLabel;
 @property (nonatomic, strong) IBOutlet UILabel* metadataLabel;
 
+@property (nonatomic, strong) IBOutlet UIImageView* guessMarkImage;
+
 @property (nonatomic, assign) BOOL agreed;
 @property (nonatomic, assign) BOOL disagreed;
 
@@ -44,5 +46,6 @@
 - (void) updateDates;
 
 - (void) update;
+- (void) updateGuessMark;
 
 @end

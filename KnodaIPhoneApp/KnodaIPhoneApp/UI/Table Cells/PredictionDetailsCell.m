@@ -10,6 +10,7 @@
 #import "UILabel+Utils.h"
 
 #import "Prediction.h"
+#import "Chellange.h"
 
 #define BODY_FONT [UIFont fontWithName:@"HelveticaNeue" size:15.0]
 
@@ -28,6 +29,18 @@ static const float kBodyWidth          = 218.0;
 - (void)fillWithPrediction:(Prediction *)prediction {
     [super fillWithPrediction:prediction];
     [self adjustLayouts];
+}
+
+- (void)updateGuessMark {    
+    if(self.prediction.chellange.isOwn) {
+        [super updateGuessMark];
+    }
+    else if (self.prediction.hasOutcome && !self.prediction.chellange) {
+        self.guessMarkImage.image = [UIImage imageNamed:(self.prediction.outcome ? @"check" : @"x_lost")];
+    }
+    else {
+        self.guessMarkImage.image = nil;
+    }
 }
 
 + (CGFloat)cellHeightForPrediction:(Prediction *)prediction {

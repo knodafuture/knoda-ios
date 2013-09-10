@@ -16,6 +16,7 @@
 #import "ProfileViewController.h"
 #import "ChildControllerDataSource.h"
 #import "PredictionUpdateWebRequest.h"
+#import "AppDelegate.h"
 
 static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 static NSString* const kMyProfileSegue = @"MyProfileSegue";
@@ -23,6 +24,8 @@ static NSString* const kMyProfileSegue = @"MyProfileSegue";
 @interface MyPredictionsViewController () <AddPredictionViewControllerDelegate, PredictionCellDelegate, PredictionDetailsDelegate> {
     BOOL _isRefreshing;
     BOOL _needLoadNextPage;
+    BOOL _needRefresh;
+    BOOL _viewAppeared;
 }
 
 @property (nonatomic, strong) NSTimer* cellUpdateTimer;
@@ -32,17 +35,28 @@ static NSString* const kMyProfileSegue = @"MyProfileSegue";
 
 @implementation MyPredictionsViewController
 
+- (void)dealloc {
+    [[(AppDelegate *)[[UIApplication sharedApplication] delegate] user] removeObserver:self forKeyPath:@"smallImage"];
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self refresh];
+    
+    [[(AppDelegate *)[[UIApplication sharedApplication] delegate] user] addObserver:self forKeyPath:@"smallImage" options:NSKeyValueObservingOptionNew context:nil];
 }
 
 
 - (void) viewDidAppear: (BOOL) animated
 {
     [super viewDidAppear: animated];
+    
+    _viewAppeared = YES;
+    
+    if(_needRefresh) {
+        [self refresh];
+    }
     
     self.cellUpdateTimer = [NSTimer scheduledTimerWithTimeInterval: 60.0 target: self selector: @selector(updateVisibleCells) userInfo: nil repeats: YES];
     [Flurry logEvent: @"My_Predictions_Screen" withParameters: nil timed: YES];
@@ -52,10 +66,26 @@ static NSString* const kMyProfileSegue = @"MyProfileSegue";
 {
     [super viewDidDisappear:animated];
     
+    _viewAppeared = NO;
+    
     [self.cellUpdateTimer invalidate];
     self.cellUpdateTimer = nil;
     
     [Flurry endTimedEvent: @"My_Predictions_Screen" withParameters: nil];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if([object isKindOfClass:[BaseModelObject class]]) {
+        if(_viewAppeared) {
+            [self refresh];
+        }
+        else {
+            _needRefresh = YES;
+        }
+    }
+    else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
 }
 
 - (void) updateVisibleCells

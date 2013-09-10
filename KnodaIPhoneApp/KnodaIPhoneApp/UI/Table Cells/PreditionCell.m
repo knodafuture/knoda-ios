@@ -20,7 +20,7 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
     @"expired",
     @"outcome",
     @"settled",
-    @"smallImage",
+    @"smallAvatar",
     @"chellange",
     @"chellange.seen",
     @"chellange.agree",
@@ -40,8 +40,6 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
 
 @property (nonatomic, strong) IBOutlet UIImageView* agreeImage;
 @property (nonatomic, strong) IBOutlet UIImageView* disagreeImage;
-
-@property (nonatomic, strong) IBOutlet UIImageView* guessMarkImage;
 
 @property (nonatomic, strong) IBOutlet UILabel* usernameLabel;
 @property (nonatomic, strong) IBOutlet UILabel* expirationDateLabel;
@@ -124,6 +122,17 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
 
 #pragma mark Fill data
 
+- (void)updateGuessMark {
+    if ([self.prediction.expirationDate compare: [NSDate date]] == NSOrderedAscending && self.prediction.chellange.isOwn)
+    {
+        self.guessMarkImage.image = [UIImage imageNamed: ((!self.prediction.settled) ? @"exclamation" : ((self.prediction.outcome) ? @"check" : @"x_lost"))];
+    }
+    else
+    {
+        self.guessMarkImage.image = nil;
+    }
+}
+
 - (void)update {
     [self resetAgreedDisagreed];
     
@@ -149,14 +158,7 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
     rect.size.height = expectedLabelSize.height;
     self.bodyLabel.frame = rect;
     
-    if ([self.prediction.expirationDate compare: [NSDate date]] == NSOrderedAscending && self.prediction.chellange.isOwn)
-    {
-        self.guessMarkImage.image = [UIImage imageNamed: ((!self.prediction.settled) ? @"exclamation" : ((self.prediction.outcome) ? @"check" : @"x_lost"))];
-    }
-    else
-    {
-        self.guessMarkImage.image = nil;
-    }
+    [self updateGuessMark];
     
     self.agreed = (self.prediction.chellange != nil) && (self.prediction.chellange.agree) && (!self.prediction.chellange.isOwn);
     self.disagreed = (self.prediction.chellange != nil) && !(self.prediction.chellange.agree) && (!self.prediction.chellange.isOwn);

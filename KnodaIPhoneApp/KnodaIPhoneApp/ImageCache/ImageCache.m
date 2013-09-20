@@ -93,7 +93,8 @@ static const int kMaxSimultaneousLoading = 10;
             [self.imageEntries addObject:entry];
         }
         
-        if(!entry.isLoading && self.loadingsCount++ < kMaxSimultaneousLoading) {
+        if(!entry.isLoading && self.loadingsCount < kMaxSimultaneousLoading) {
+            self.loadingsCount++;
             [entry loadImageWithCornerRadius:radius completion:^{
                 if(entry.error) {
                     DLog(@"%@", entry.error);

@@ -41,11 +41,15 @@ static NSString* const kImageCropperSegue = @"ImageCropperSegue";
     self.pictureButton.imageView.layer.cornerRadius = 10.0;
     self.pictureButton.imageView.layer.masksToBounds = YES;
     
-    [self pictureButtonTapped:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self pictureButtonTapped:nil];
 }
 
 - (void)setAvatarImage:(UIImage *)avatarImage {

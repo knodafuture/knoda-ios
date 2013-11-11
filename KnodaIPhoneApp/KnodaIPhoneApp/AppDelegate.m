@@ -45,8 +45,11 @@ NSString* const kAlertNotification = @"AlertNotification";
     if (SYSTEM_VERSION_GREATER_THAN(@"7.0")) {
         [[UINavigationBar appearance] setBarTintColor:navBackgroundColor];
     }
-    else
+    else {
         [[UINavigationBar appearance] setTintColor:navBackgroundColor];
+        [[UINavigationBar appearance] setTitleVerticalPositionAdjustment:4.0 forBarMetrics:UIBarMetricsDefault];
+
+    }
     [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
                                                            [UIColor colorFromHex:@"235C37"], UITextAttributeTextColor,
                                                            [UIFont fontWithName: @"Krona One" size: 15], UITextAttributeFont, nil]];

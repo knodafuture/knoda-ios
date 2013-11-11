@@ -48,8 +48,12 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
     }
     
     [[LoadingView sharedInstance] show];
-    self.navigationController.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, self.navigationController.navigationBar.frame.size.height);
-    [self.navigationController.navigationBar setTitleVerticalPositionAdjustment:5 forBarMetrics:UIBarMetricsDefault];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem sideNavBarBUttonItemwithTarget:self action:@selector(menuButtonPressed:)];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem rightBarButtonItemWithImage:[UIImage imageNamed:@"PredictIcon"] target:self action:@selector(createPredictionPressed:)];
+    self.navigationController.navigationBar.translucent = NO;
+}
+- (void)createPredictionPressed:(id)sender {
+    [self performSegueWithIdentifier:kAddPredictionSegue sender:sender];
 }
 
 - (void) viewWillAppear:(BOOL)animated

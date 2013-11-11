@@ -74,7 +74,8 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
 {
     [super viewDidAppear: animated];    
     self.cellUpdateTimer = [NSTimer scheduledTimerWithTimeInterval: 60.0 target: self selector: @selector(updateVisibleCells) userInfo: nil repeats: YES];
-    self.tableView.frame = self.view.frame;
+    //self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height - 20.0);
+    //self.tableView.frame = self.navigationController.view.frame;
     [Flurry logEvent: @"Home_Screen" withParameters: nil timed: YES];
 }
 

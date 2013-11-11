@@ -10,6 +10,9 @@
 #import "NavigationViewController.h"
 #import "AllAlertsWebRequest.h"
 
+static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
+
+
 @interface AlertsViewController ()
 
 @end
@@ -20,9 +23,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationController.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, self.navigationController.navigationBar.frame.size.height);
-    [self.navigationController.navigationBar setTitleVerticalPositionAdjustment:5 forBarMetrics:UIBarMetricsDefault];
     [self performSegueWithIdentifier: @"AllAlertsSegue" sender: self];
+    
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem sideNavBarBUttonItemwithTarget:self action:@selector(menuButtonPressed:)];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem rightBarButtonItemWithImage:[UIImage imageNamed:@"PredictIcon"] target:self action:@selector(createPredictionPressed:)];
+    self.navigationController.navigationBar.translucent = NO;
+}
+
+- (void)createPredictionPressed:(id)sender {
+    [self performSegueWithIdentifier:kAddPredictionSegue sender:sender];
 }
 
 - (void) setUpNoContentViewHidden: (BOOL) hidden {
@@ -46,5 +55,7 @@
     }
     [((NavigationViewController*)self.navigationController.parentViewController) toggleNavigationPanel];
 }
+
+
 
 @end

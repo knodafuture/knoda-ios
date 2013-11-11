@@ -11,6 +11,7 @@
 		015FA0B418303DA800253DB2 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 015FA0B318303DA800253DB2 /* Media.xcassets */; };
 		015FA0B718304A8600253DB2 /* UIBarButtonItem+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 015FA0B618304A8600253DB2 /* UIBarButtonItem+Utils.m */; };
 		015FA0BA18304D7800253DB2 /* UINavigationItem+iOS7Spacing.m in Sources */ = {isa = PBXBuildFile; fileRef = 015FA0B918304D7800253DB2 /* UINavigationItem+iOS7Spacing.m */; };
+		015FA0BD1830860200253DB2 /* PickerAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 015FA0BC1830860200253DB2 /* PickerAccessoryView.xib */; };
 		3638773F17C4D6EA00703475 /* AnotherUsersProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3638773B17C4D6EA00703475 /* AnotherUsersProfileViewController.m */; };
 		3638774017C4D6EA00703475 /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3638773D17C4D6EA00703475 /* ChangePasswordViewController.m */; };
 		3638774617C4F6A100703475 /* ChangePasswordRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3638774517C4F6A100703475 /* ChangePasswordRequest.m */; };
@@ -380,6 +381,7 @@
 		015FA0B618304A8600253DB2 /* UIBarButtonItem+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Utils.m"; sourceTree = "<group>"; };
 		015FA0B818304D7800253DB2 /* UINavigationItem+iOS7Spacing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationItem+iOS7Spacing.h"; sourceTree = "<group>"; };
 		015FA0B918304D7800253DB2 /* UINavigationItem+iOS7Spacing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationItem+iOS7Spacing.m"; sourceTree = "<group>"; };
+		015FA0BC1830860200253DB2 /* PickerAccessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PickerAccessoryView.xib; path = "Things I needed/PickerAccessoryView.xib"; sourceTree = "<group>"; };
 		3638773A17C4D6EA00703475 /* AnotherUsersProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnotherUsersProfileViewController.h; sourceTree = "<group>"; };
 		3638773B17C4D6EA00703475 /* AnotherUsersProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnotherUsersProfileViewController.m; sourceTree = "<group>"; };
 		3638773C17C4D6EA00703475 /* ChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordViewController.h; sourceTree = "<group>"; };
@@ -864,6 +866,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		015FA0BB183085D400253DB2 /* Things I needed */ = {
+			isa = PBXGroup;
+			children = (
+				015FA0BC1830860200253DB2 /* PickerAccessoryView.xib */,
+			);
+			name = "Things I needed";
+			sourceTree = "<group>";
+		};
 		364D180017D0A3E3005303D0 /* badges */ = {
 			isa = PBXGroup;
 			children = (
@@ -1589,6 +1599,7 @@
 		9E708849178AFF2F00F036A8 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				015FA0BB183085D400253DB2 /* Things I needed */,
 				9E76A56017A138BA004F8FC1 /* Table Cells */,
 				9E930218179FF0E800FFB166 /* Segues */,
 				9E57924F1796C39200979928 /* Controls */,
@@ -1674,6 +1685,11 @@
 			attributes = {
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = Knoda;
+				TargetAttributes = {
+					9E70881F178AF68E00F036A8 = {
+						DevelopmentTeam = F489V4H5F6;
+					};
+				};
 			};
 			buildConfigurationList = 9E70881B178AF68E00F036A8 /* Build configuration list for PBXProject "KnodaIPhoneApp" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1701,6 +1717,7 @@
 				9E70883D178AF68E00F036A8 /* MainStoryboard.storyboard in Resources */,
 				9E06639417959A2100B3E974 /* greenBg.png in Resources */,
 				9E06639517959A2100B3E974 /* greenBg@2x.png in Resources */,
+				015FA0BD1830860200253DB2 /* PickerAccessoryView.xib in Resources */,
 				9E06639617959A2100B3E974 /* knoda_logo_lg.png in Resources */,
 				9E06639717959A2100B3E974 /* knoda_logo_lg@2x.png in Resources */,
 				9E06639A17959A4C00B3E974 /* HelveticaNeue.dfont in Resources */,
@@ -2156,6 +2173,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: James Flexman (PW494ZCC4M)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KnodaIPhoneApp/KnodaIPhoneApp-Prefix.pch";
@@ -2166,7 +2184,7 @@
 					"\"$(SRCROOT)/KnodaIPhoneApp/Thirdparty/Flurry\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "E9BA2B1F-B6F7-4DC2-9676-63F7714619FB";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2174,8 +2192,8 @@
 		9E708845178AF68E00F036A8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Knoda, LLC (F489V4H5F6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Knoda, LLC (F489V4H5F6)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KnodaIPhoneApp/KnodaIPhoneApp-Prefix.pch";
 				INFOPLIST_FILE = "KnodaIPhoneApp/KnodaIPhoneApp-Info.plist";
@@ -2185,8 +2203,8 @@
 					"\"$(SRCROOT)/KnodaIPhoneApp/Thirdparty/Flurry\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "6D565F7C-94E5-422F-A39A-046258C94904";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6D565F7C-94E5-422F-A39A-046258C94904";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -19,6 +19,11 @@
 
 @implementation BindableView
 
+
+- (void)awakeFromNib {
+    self.layer.shadowOffset = CGSizeZero;
+    self.layer.shadowRadius = 0.0;
+}
 - (void)setLoading:(BOOL)loading {
     _loading = loading;
     self.activityIndicator.hidden = !_loading;

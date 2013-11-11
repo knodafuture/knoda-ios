@@ -39,6 +39,8 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
 @property (nonatomic, strong) IBOutlet UIView* disagreeQuestionView;
 
 @property (nonatomic, weak) IBOutlet UIImageView *voteImage;
+@property (nonatomic, weak) IBOutlet UIImageView *agreeImage;
+@property (nonatomic, weak) IBOutlet UIImageView *disagreeImage;
 
 @property (nonatomic, strong) IBOutlet UILabel* usernameLabel;
 @property (nonatomic, strong) IBOutlet UILabel* expirationDateLabel;
@@ -231,6 +233,10 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
                 
                 self.agreeQuestionView.frame = newAgreeFrame;
                 
+                if (location > self.contentView.frame.size.width / 2)
+                    self.voteImage.image = [UIImage imageNamed:@"AgreeMarker"];
+                else
+                    self.voteImage.image = nil;
                 //self.agreeImage.hidden = location < self.contentView.frame.size.width / 2;
             }
         }
@@ -243,6 +249,10 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
                 
                 self.disagreeQuestionView.frame = newDisagreeFrame;
                 
+                if (location < self.contentView.frame.size.width / 2)
+                    self.voteImage.image = [UIImage imageNamed:@"DisagreeMarker"];
+                else
+                    self.voteImage.image = nil;
                 //self.disagreeImage.hidden = location > self.contentView.frame.size.width / 2;
             }
         }
@@ -377,8 +387,8 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
 
 - (BOOL) gestureRecognizerShouldBegin: (UIGestureRecognizer*) gestureRecognizer
 {
-    self.recognizingLeftGesture = ([gestureRecognizer locationInView: self.contentView].x <= 50 && !self.agreed && !self.disagreed && !self.prediction.chellange.isOwn);
-    self.recognizingRightGesture = ([gestureRecognizer locationInView: self.contentView].x >= CGRectGetWidth(self.contentView.frame) - 50 && !self.agreed && ! self.disagreed && !self.prediction.chellange.isOwn);
+    self.recognizingLeftGesture = ([gestureRecognizer locationInView: self.contentView].x <= 150 && !self.agreed && !self.disagreed && !self.prediction.chellange.isOwn);
+    self.recognizingRightGesture = ([gestureRecognizer locationInView: self.contentView].x >= CGRectGetWidth(self.contentView.frame) - 150 && !self.agreed && ! self.disagreed && !self.prediction.chellange.isOwn);
     
     return (self.recognizingLeftGesture || self.recognizingRightGesture);
 }

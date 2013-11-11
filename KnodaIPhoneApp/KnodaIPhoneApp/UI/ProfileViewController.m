@@ -53,12 +53,12 @@ static const float kAvatarSize = 344.0;
 	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"profileBgPattern"]];
     self.accountDetailsTableView.backgroundView = nil;
     [self makeProfileImageRoundedCorners];
-    self.navigationController.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, self.navigationController.navigationBar.frame.size.height);
-    [self.navigationController.navigationBar setTitleVerticalPositionAdjustment:5 forBarMetrics:UIBarMetricsDefault];
 
-    if (self.leftButtonItemReturnsBack) {
-        [self.leftNavigationBarItem setImage:[UIImage imageNamed:@"backArrow.png"] forState:UIControlStateNormal];
-    }
+    if (self.leftButtonItemReturnsBack)
+        self.navigationItem.leftBarButtonItem = [UIBarButtonItem backButtonWithTarget:self action:@selector(menuButtonPress:)];
+    else
+        self.navigationItem.leftBarButtonItem = [UIBarButtonItem sideNavBarBUttonItemwithTarget:self action:@selector(menuButtonPress:)];
+    self.navigationController.navigationBar.translucent = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated {

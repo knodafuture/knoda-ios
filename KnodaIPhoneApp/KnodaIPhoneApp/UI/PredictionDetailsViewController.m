@@ -92,6 +92,10 @@ static const int kBSAlertTag = 1001;
     }
     
     [[(AppDelegate *)[[UIApplication sharedApplication] delegate] user] addObserver:self forKeyPath:@"smallImage" options:NSKeyValueObservingOptionNew context:nil];
+    self.title = @"DETAILS";
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem backButtonWithTarget:self action:@selector(backButtonPressed:)];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem rightBarButtonItemWithImage:[UIImage imageNamed:@"PredictIcon"] target:self action:@selector(createPredictionPressed:)];
+
 }
 
 
@@ -126,6 +130,10 @@ static const int kBSAlertTag = 1001;
     }
     [self cancelAllRequests];
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)createPredictionPressed:(id)sender {
+    [self performSegueWithIdentifier:kAddPredictionSegue sender:sender];
 }
 
 - (IBAction)bsButtonTapped:(UIButton *)sender {

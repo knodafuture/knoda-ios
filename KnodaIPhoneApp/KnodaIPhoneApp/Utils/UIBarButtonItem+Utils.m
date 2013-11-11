@@ -17,7 +17,7 @@ static UIFont *font = nil;
 + (UIBarButtonItem *)backButtonWithTarget:(id)target action:(SEL)action {
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 20)];
     [backButton addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
-    [backButton setImage:[UIImage imageNamed:@"Back"] forState:UIControlStateNormal];
+    [backButton setImage:[UIImage imageNamed:@"BackIcon"] forState:UIControlStateNormal];
     return [[UIBarButtonItem alloc] initWithCustomView:backButton];
 }
 
@@ -32,7 +32,6 @@ static UIFont *font = nil;
 + (UIBarButtonItem *)styledBarButtonItemWithTitle:(NSString *)title target:(id)target action:(SEL)action color:(UIColor *)color {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [self setButtonFrame:button forTitle:title];
-    [button setBackgroundImage:[[UIImage imageNamed:@"NavBar-BtnBg"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 6, 0, 6)] forState:UIControlStateNormal];
     [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     [button setTitle:title forState:UIControlStateNormal];
     [button setTitleColor:color forState:UIControlStateNormal];
@@ -54,7 +53,7 @@ static UIFont *font = nil;
 
 + (UIFont *)getFont {
     if (!font)
-        font = [UIFont fontWithName:@"DIN-Bold" size:14.0];
+        font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18.0];
     return font;
 }
 

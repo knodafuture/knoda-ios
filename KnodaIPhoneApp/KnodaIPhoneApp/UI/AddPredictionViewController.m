@@ -10,6 +10,9 @@
 #import "CategoriesWebRequest.h"
 #import "AddPredictionRequest.h"
 #import "LoadingView.h"
+#import "BindableView.h"
+#import "AppDelegate.h"
+#import "User.h"
 
 #define TEXT_FONT        [UIFont fontWithName:@"HelveticaNeue" size:15]
 #define PLACEHOLDER_FONT [UIFont fontWithName:@"HelveticaNeue-Italic" size:15]
@@ -24,16 +27,18 @@ static const CGFloat kCategorySectionHeight = 40;
 @property (nonatomic, strong) IBOutlet UINavigationBar* navigationBar;
 @property (nonatomic, strong) IBOutlet UIPickerView* categoryPicker;
 @property (nonatomic, strong) IBOutlet UIPickerView* expirationPicker;
-@property (nonatomic, strong) IBOutlet UIButton* categoryButton;
+@property (nonatomic, strong) IBOutlet UILabel *categoryLabel;
 @property (nonatomic, strong) IBOutlet UILabel* expirationLabel;
 @property (nonatomic, strong) IBOutlet UILabel* charsLabel;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *predictBarButton;
 
 @property (nonatomic, strong) IBOutlet UIView* expirationPickerContainerView;
 @property (nonatomic, strong) IBOutlet UIView* categoryPickerContainerView;
-
+@property (nonatomic, weak) IBOutlet UIView *expirationBar;
+@property (nonatomic, weak) IBOutlet UIView *categoryBar;
 @property (nonatomic, strong) IBOutlet UIView* containerView;
 @property (nonatomic, strong) IBOutlet UIView* internalContainerView;
+@property (nonatomic, strong) IBOutlet BindableView *avatarView;
 
 @property (nonatomic, strong) NSString* previousCategory;
 @property (nonatomic, strong) NSString* previousExpirationDate;
@@ -42,6 +47,7 @@ static const CGFloat kCategorySectionHeight = 40;
 @property (nonatomic, strong) NSArray* expirationStrings;
 
 @property (nonatomic, strong) NSString* categoryText;
+@property (nonatomic, strong) NSString *expirationString;
 @property (nonatomic, strong) NSString* placeholderText;
 
 @property (nonatomic, assign) BOOL showPlaceholder;
@@ -54,7 +60,7 @@ static const CGFloat kCategorySectionHeight = 40;
 {
     [super viewDidLoad];
     
-    self.placeholderText = NSLocalizedString(@"Type your prediction, enter the expiration deadline when other users will no longer be able to agree or disagree with your prediction and select the category that best matches your prediction.", @"");
+    self.placeholderText = NSLocalizedString(@"Make a prediction...", @"");
     self.showPlaceholder = YES;
     
     self.expirationStrings = [[self class] expirationStrings];
@@ -80,17 +86,26 @@ static const CGFloat kCategorySectionHeight = 40;
         }
     }];
     
-    UIImage *categoryBgImg = [[UIImage imageNamed:@"AP_category_bg.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 12, 0, 12)];
-    [self.categoryButton setBackgroundImage:categoryBgImg forState:UIControlStateNormal];
-    
     self.predictBarButton.enabled = NO;
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTitle:@"Cancel" target:self action:@selector(cancel:) color:[UIColor whiteColor]];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTitle:@"Submit" target:self action:@selector(predict:) color:[UIColor whiteColor]];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap)];
+    [self.view addGestureRecognizer:tap];
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [self.avatarView bindToURL:appDelegate.user.thumbImage];
 }
 
+- (void)didTap {
+    [self.view endEditing:YES];
+}
 
 - (void) viewWillAppear: (BOOL) animated
 {
-    [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(willShowKeyboardNotificationDidRecieve:) name: UIKeyboardWillShowNotification object: nil];
-    [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(willHideKeyboardNotificationDidRecieve:) name: UIKeyboardWillHideNotification object: nil];
+    //[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(willShowKeyboardNotificationDidRecieve:) name: UIKeyboardWillShowNotification object: nil];
+    //[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(willHideKeyboardNotificationDidRecieve:) name: UIKeyboardWillHideNotification object: nil];
 
     [Flurry logEvent: @"Add_Prediction_Screen" withParameters: nil timed: YES];
     
@@ -111,75 +126,69 @@ static const CGFloat kCategorySectionHeight = 40;
 - (void) hideExpirationDatePicker
 {
     self.previousExpirationDate = nil;
-    [self hidePicker: self.expirationPickerContainerView viewToMoveDown: self.internalContainerView holdCategorySection: YES];
+    [self hidePickerViewAndRestore:self.expirationPickerContainerView];
 }
 
 
 - (void) showExpirationDatePicker
 {
-    [self showPicker: self.expirationPickerContainerView viewToMoveUp: self.internalContainerView holdCategorySection: YES];
+    [self showPickerView:self.expirationPickerContainerView under:self.expirationBar];
 }
 
 
 - (void) hideCategoryPicker
 {
     self.previousCategory = nil;
-    [self hidePicker: self.categoryPickerContainerView viewToMoveDown: self.containerView holdCategorySection: NO];
+    [self hidePickerViewAndRestore:self.categoryPickerContainerView];
 }
 
 
 - (void) showCategoryPicker
 {
-    [self showPicker: self.categoryPickerContainerView viewToMoveUp: self.containerView holdCategorySection: NO];
+    [self showPickerView:self.categoryPickerContainerView under:self.categoryBar];
 }
-
-
-- (void) showPicker: (UIView*) pickerContainer viewToMoveUp: (UIView*) viewToMove holdCategorySection: (BOOL) holdCategory
-{
+- (void)showPickerView:(UIView *)pickerView under:(UIView *)importantView {
     if ([self.textView isFirstResponder])
-    {
         [self.textView resignFirstResponder];
-    }
     
-    UIViewAnimationCurve animationCurve = UIViewAnimationCurveEaseInOut;
-    NSTimeInterval duration = 0.3;
+    CGRect newFrame = pickerView.frame;
+    CGRect containerFrame = self.containerView.frame;
+    newFrame.origin.y = self.view.frame.size.height - newFrame.size.height;
     
-    CGRect newFrame = pickerContainer.frame;
-    newFrame.origin.y = pickerContainer.superview.frame.size.height - newFrame.size.height - ((holdCategory) ? kCategorySectionHeight : 0);
+    CGFloat difference = newFrame.origin.y - (importantView.frame.size.height + importantView.frame.origin.y);
     
-    [UIView animateWithDuration: duration delay: 0.0 options: (animationCurve << 16) animations:^
-     {
-         pickerContainer.frame = newFrame;
-     } completion: NULL];
+    if (difference < 0)
+        containerFrame.origin.y += difference;
     
-    [self moveUpOrDown: YES withAnimationDuration: duration animationCurve: animationCurve keyboardFrame: newFrame viewToMove: viewToMove holdCategorySection: holdCategory];
+    [UIView animateWithDuration:0.3 delay:0.0 options:0 animations:^{
+        pickerView.frame = newFrame;
+        self.containerView.frame = containerFrame;
+    } completion:^(BOOL finished){}];
+        
 }
 
-
-- (void) hidePicker: (UIView*) pickerContainer viewToMoveDown: (UIView*) viewToMove holdCategorySection: (BOOL) holdCategory
-{
-    UIViewAnimationCurve animationCurve = UIViewAnimationCurveEaseInOut;
-    NSTimeInterval duration = 0.3;
+- (void)hidePickerViewAndRestore:(UIView *)pickerView {
     
-    CGRect newFrame = pickerContainer.frame;
+    CGRect newFrame = pickerView.frame;
     newFrame.origin.y = self.view.frame.size.height;
     
-    [UIView animateWithDuration: duration delay: 0.0 options: (animationCurve << 16) animations:^
-     {
-         pickerContainer.frame = newFrame;
-     } completion: NULL];
+    CGRect containerFrame = self.containerView.frame;
+    containerFrame.origin.y = 0;
     
-    [self moveUpOrDown: NO withAnimationDuration: duration animationCurve: animationCurve keyboardFrame: newFrame viewToMove: viewToMove holdCategorySection: holdCategory];
+    [UIView animateWithDuration:0.3 delay:0.0 options:0 animations:^{
+        pickerView.frame = newFrame;
+        self.containerView.frame = containerFrame;
+    } completion:^(BOOL finished){}];
+    
 }
-
 
 - (NSDate*) expirationDate
 {
     NSDate* result = nil;
     
-    if (![self.expirationLabel.text isEqualToString: NSLocalizedString(@"Set Time", @"")])
+    if (self.expirationString)
     {
-        result = [[self class] dateForExpirationString:self.expirationLabel.text];
+        result = [[self class] dateForExpirationString:self.expirationString];
     }
     
     return result;
@@ -207,15 +216,7 @@ static const CGFloat kCategorySectionHeight = 40;
         {
             self.categoryText = [self.categories objectAtIndex: 0];
             
-            [self.categoryButton setTitle:self.categoryText forState:UIControlStateNormal];
-            
-            [self.categoryButton.titleLabel sizeToFit];
-            
-            CGRect newButtonFrame = self.categoryButton.frame;
-            newButtonFrame.size.width = self.categoryButton.titleLabel.frame.size.width + 40;
-            self.categoryButton.frame = newButtonFrame;
-            
-            self.categoryButton.hidden = NO;
+            self.categoryLabel.text = self.categoryText;
         }
     }
     else
@@ -231,20 +232,24 @@ static const CGFloat kCategorySectionHeight = 40;
 {
     [self hideCategoryPicker];
     
-    self.previousExpirationDate = self.expirationLabel.text;
+    self.previousExpirationDate = self.expirationString;
     
-    if ([self.expirationLabel.text isEqualToString: NSLocalizedString(@"Set Time", @"")])
+    if (!self.expirationString)
     {
-        self.expirationLabel.text = [self.expirationStrings objectAtIndex: 0];
+        self.expirationString = [self.expirationStrings objectAtIndex: 0];
     }
     else
     {
-        [self.expirationPicker selectRow: [self.expirationStrings indexOfObject: self.expirationLabel.text] inComponent: 0 animated: NO];
+        [self.expirationPicker selectRow: [self.expirationStrings indexOfObject: self.expirationString] inComponent: 0 animated: NO];
     }
     
     [self showExpirationDatePicker];
 }
 
+- (void)setExpirationString:(NSString *)expirationString {
+    _expirationString = expirationString;
+    self.expirationLabel.text = [NSString stringWithFormat:@"Expires in %@", expirationString];
+}
 
 - (IBAction) doneExpirationPicker: (id) sender
 {
@@ -254,7 +259,8 @@ static const CGFloat kCategorySectionHeight = 40;
 
 - (IBAction) cancelExpirationPicker: (id) sender
 {
-    self.expirationLabel.text = self.previousExpirationDate;
+    self.expirationString = nil;
+    self.expirationLabel.text = @"Expires in...";
     [self hideExpirationDatePicker];
 }
 
@@ -268,18 +274,11 @@ static const CGFloat kCategorySectionHeight = 40;
 - (IBAction) cancelCategoryPicker: (id) sender
 {
     self.categoryText = self.previousCategory;
-    [self.categoryButton setTitle:self.categoryText forState:UIControlStateNormal];
-    
-    [self.categoryButton.titleLabel sizeToFit];
-    
-    CGRect newButtonFrame = self.categoryButton.frame;
-    newButtonFrame.size.width = self.categoryButton.titleLabel.frame.size.width + 40;
-    self.categoryButton.frame = newButtonFrame;
-    
-    self.categoryButton.hidden = self.categoryText.length == 0;
-    
-    NSLog(@"self.categoryButton.hidden = %@", (self.categoryButton.hidden) ? @"YES" : @"NO");
-    
+    if (self.previousCategory)
+        self.categoryLabel.text = self.categoryText;
+    else
+        self.categoryLabel.text = @"Select a Category";
+
     [self hideCategoryPicker];
 }
 
@@ -308,7 +307,7 @@ static const CGFloat kCategorySectionHeight = 40;
     }
     else
     {
-        [Flurry logEvent: @"Add_Prediction" withParameters: @{@"Category": self.categoryText, @"ExpirationDate": self.expirationLabel.text}];
+        [Flurry logEvent: @"Add_Prediction" withParameters: @{@"Category": self.categoryText, @"ExpirationDate": self.expirationString}];
         
         if ([self.textView isFirstResponder])
         {
@@ -329,7 +328,8 @@ static const CGFloat kCategorySectionHeight = 40;
             
             if (request.errorCode == 0)
             {
-                [self.delegate predictionWasMadeInController:self];
+                //[self.delegate predictionWasMadeInController:self];
+                [self.navigationController popViewControllerAnimated:YES];
             }
             else if (request.errorCode == kRequestTimeoutError)
             {
@@ -349,7 +349,7 @@ static const CGFloat kCategorySectionHeight = 40;
 
 - (IBAction) cancel: (id) sender
 {
-    [self dismissViewControllerAnimated: YES completion: nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 
@@ -359,6 +359,11 @@ static const CGFloat kCategorySectionHeight = 40;
     
     int len = textView.text.length - range.length + text.length;
     
+    if ([text isEqualToString:@"\n"]) {
+        [self.view endEditing:YES];
+        return NO;
+    }
+    
     if(len <= kPredictionCharsLimit) {
         self.charsLabel.text = [NSString stringWithFormat:@"%d", (self.showPlaceholder ? kPredictionCharsLimit : (kPredictionCharsLimit - len))];
         self.predictBarButton.enabled = !self.showPlaceholder && len > 0;
@@ -366,10 +371,14 @@ static const CGFloat kCategorySectionHeight = 40;
         return YES;
     }
     
+
+    
     return NO;
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
+    [self hideCategoryPicker];
+    [self hideExpirationDatePicker];
     if(self.showPlaceholder) {
         self.showPlaceholder = NO;
     }
@@ -383,63 +392,6 @@ static const CGFloat kCategorySectionHeight = 40;
 
 
 #pragma mark - Keyboard show/hide handlers
-
-
-- (void) willShowKeyboardNotificationDidRecieve: (NSNotification*) notification
-{
-    if ([self.textView isFirstResponder])
-    {
-        [self hideCategoryPicker];
-        [self hideExpirationDatePicker];
-        
-        NSTimeInterval animationDuration = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-        CGRect endFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-        UIViewAnimationCurve animationCurve = [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
-        
-        [self moveUpOrDown: YES withAnimationDuration: animationDuration animationCurve: animationCurve keyboardFrame: endFrame viewToMove: self.containerView holdCategorySection: NO];
-    }
-}
-
-- (void) willHideKeyboardNotificationDidRecieve: (NSNotification*) notification
-{
-    if ([self.textView isFirstResponder])
-    {
-        NSTimeInterval animationDuration = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-        CGRect endFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-        UIViewAnimationCurve animationCurve = [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
-        
-        [self moveUpOrDown:NO withAnimationDuration: animationDuration animationCurve: animationCurve keyboardFrame: endFrame viewToMove: self.containerView holdCategorySection: NO];
-    }
-}
-
-
-- (void) moveUpOrDown: (BOOL) up
-withAnimationDuration: (NSTimeInterval) animationDuration
-       animationCurve: (UIViewAnimationCurve) animationCurve
-        keyboardFrame: (CGRect) keyboardFrame
-           viewToMove: (UIView*) viewToMove
-  holdCategorySection: (BOOL) holdCategorySection
-{
-    CGRect newContainerFrame = viewToMove.frame;
-    
-    if (up)
-    {
-        newContainerFrame.size.height = viewToMove.superview.frame.size.height -
-            [viewToMove.superview convertRect: keyboardFrame fromView: self.view.window].size.height -
-        ((holdCategorySection) ? kCategorySectionHeight : 0) -
-        ((viewToMove.superview == self.view) ? self.navigationBar.frame.size.height : 0);
-    }
-    else
-    {
-        newContainerFrame.size.height = viewToMove.superview.frame.size.height - ((viewToMove.superview == self.view) ? self.navigationBar.frame.size.height : 0) - ((holdCategorySection) ? kCategorySectionHeight : 0);
-    }
-    
-    [UIView animateWithDuration: animationDuration delay: 0.0 options: (animationCurve << 16) animations:^
-     {
-         viewToMove.frame = newContainerFrame;
-     } completion: NULL];
-}
-
 
 #pragma mark - UIPickerViewDataSource
 
@@ -492,19 +444,18 @@ withAnimationDuration: (NSTimeInterval) animationDuration
     if (pickerView == self.categoryPicker)
     {
         self.categoryText = [self.categories objectAtIndex: row];
-        [self.categoryButton setTitle:self.categoryText forState:UIControlStateNormal];
+
+        self.categoryLabel.text = self.categoryText;
         
-        [self.categoryButton.titleLabel sizeToFit];
-        
-        CGRect newButtonFrame = self.categoryButton.frame;
-        newButtonFrame.size.width = self.categoryButton.titleLabel.frame.size.width + 40;
-        self.categoryButton.frame = newButtonFrame;
-        
-        self.categoryButton.hidden = NO;
+//        CGRect newButtonFrame = self.categoryButton.frame;
+//        newButtonFrame.size.width = self.categoryButton.titleLabel.frame.size.width + 40;
+//        self.categoryButton.frame = newButtonFrame;
+//        
+//        self.categoryButton.hidden = NO;
     }
     else if (pickerView == self.expirationPicker)
     {
-        self.expirationLabel.text = [self.expirationStrings objectAtIndex: row];
+        self.expirationString = [self.expirationStrings objectAtIndex: row];
     }
 }
 

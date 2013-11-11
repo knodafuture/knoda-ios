@@ -127,7 +127,15 @@ static const int kMaxFileNameLength = 254;
 }
 
 - (NSURL *)getImageURL {
-    return [NSURL URLWithString:[NSString stringWithFormat:@"http://%@%@", kBaseURL, self.imgUrl]];
+    if ([self.imgUrl rangeOfString:@"http"].location == NSNotFound)
+    {
+        return [NSURL URLWithString:[NSString stringWithFormat:@"http://%@%@", kBaseURL, self.imgUrl]];
+    }
+    else
+    {
+        return [NSURL URLWithString:self.imgUrl];
+    }
+
 }
 
 + (NSString *)cachePath {

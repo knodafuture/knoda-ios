@@ -40,17 +40,19 @@ NSString* const kAlertNotification = @"AlertNotification";
     [Flurry startSession: kDevFlurryKey];
     [Flurry setCrashReportingEnabled: YES];
     
-    UIImage* navBackgroundImage = [UIImage imageNamed: @"headerBar"];
-    [[UINavigationBar appearance] setBackgroundImage: navBackgroundImage forBarMetrics: UIBarMetricsDefault];
+    UIColor *navBackgroundColor = [UIColor colorFromHex:@"77BC1F"];
     
+    if (SYSTEM_VERSION_GREATER_THAN(@"7.0")) {
+        [[UINavigationBar appearance] setBarTintColor:navBackgroundColor];
+    }
+    else
+        [[UINavigationBar appearance] setTintColor:navBackgroundColor];
     [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
-                                                           [UIColor whiteColor], UITextAttributeTextColor,
-                                                           [UIColor blackColor], UITextAttributeTextShadowColor,
-                                                           [NSValue valueWithUIOffset: UIOffsetMake(0, -1)], UITextAttributeTextShadowOffset,
+                                                           [UIColor colorFromHex:@"235C37"], UITextAttributeTextColor,
                                                            [UIFont fontWithName: @"Krona One" size: 15], UITextAttributeFont, nil]];
     
-    [UIApplication sharedApplication].keyWindow.backgroundColor = [UIColor whiteColor];
-    [UIApplication sharedApplication].delegate.window.backgroundColor = [UIColor colorWithRed:99/255.0 green:185/255.0 blue:0 alpha:1];
+    [UIApplication sharedApplication].keyWindow.backgroundColor = navBackgroundColor;
+    [UIApplication sharedApplication].delegate.window.backgroundColor = navBackgroundColor;
     
     KeychainItemWrapper* wrapper = [[KeychainItemWrapper alloc] initWithIdentifier: @"Password" accessGroup: @"F489V4H5F6.com.Knoda.KnodaIPhoneApp"];
 	self.passwordItem = wrapper;

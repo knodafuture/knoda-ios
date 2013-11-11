@@ -58,22 +58,23 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
         [self showFirstStartOverlay];
     }
     
-	self.navigationController.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, self.navigationController.navigationBar.frame.size.height);
-    [self.navigationController.navigationBar setTitleVerticalPositionAdjustment:5 forBarMetrics:UIBarMetricsDefault];
-    
     [self refresh:nil];
-    
+        
     UIRefreshControl* refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget: self action: @selector(refresh:) forControlEvents: UIControlEventValueChanged];
     
     self.refreshControl = refreshControl;
+
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem sideNavBarBUttonItemwithTarget:self action:@selector(menuButtonPressed:)];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem rightBarButtonItemWithImage:[UIImage imageNamed:@"PredictIcon"] target:self action:@selector(createPredictionPressed:)];
 }
 
 - (void) viewDidAppear: (BOOL) animated
 {
     [super viewDidAppear: animated];    
     self.cellUpdateTimer = [NSTimer scheduledTimerWithTimeInterval: 60.0 target: self selector: @selector(updateVisibleCells) userInfo: nil repeats: YES];
-    
+    self.tableView.frame = self.view.frame;
     [Flurry logEvent: @"Home_Screen" withParameters: nil timed: YES];
 }
 
@@ -182,6 +183,9 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
     [((NavigationViewController*)self.navigationController.parentViewController) toggleNavigationPanel];
 }
 
+- (void)createPredictionPressed:(id)sender {
+    [self performSegueWithIdentifier:kAddPredictionSegue sender:sender];
+}
 
 - (void) refresh: (UIRefreshControl*) refresh
 {

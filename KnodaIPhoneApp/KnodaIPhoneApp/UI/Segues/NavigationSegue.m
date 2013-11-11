@@ -21,11 +21,11 @@
     
     [((UIViewController*)self.sourceViewController) addChildViewController: self.destinationViewController];
     
-    ((UIViewController*)self.destinationViewController).view.frame = self.detailsView.bounds;
     [self.detailsView addSubview: ((UIViewController*)self.destinationViewController).view];
-    
+
     [((UIViewController*)self.destinationViewController) didMoveToParentViewController: self.sourceViewController];
-    
+    ((UIViewController*)self.destinationViewController).view.frame = self.detailsView.bounds;
+
 
     if (self.completion != nil)
     {

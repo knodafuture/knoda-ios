@@ -97,12 +97,10 @@ static const int kMaxFileNameLength = 254;
     //DLog(@"downloading img from %@", [self getImageURL]);
     NSError *error = nil;
     NSData *imgData = [NSData dataWithContentsOfURL:[self getImageURL] options:0 error:&error];
+    NSLog(@"IMAGE URL: %@", [self getImageURL]);
     _error = error;
     if(!error && imgData) {
         _image = [UIImage imageWithData:imgData];        
-        if(_cornerRadius) {
-            _image = [_image roundedImageWithRadius:_cornerRadius];
-        }
         
         [self writeImage];
     }

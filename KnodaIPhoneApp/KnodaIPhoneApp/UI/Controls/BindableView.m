@@ -25,7 +25,7 @@
 }
 
 - (void)bindToURL:(NSString *)imgUrl withCornerRadius:(CGFloat)radius {
-    [[ImageCache instance] bindImage:imgUrl toView:self withCornerRadius:radius];
+    [[ImageCache instance] bindImage:imgUrl toView:self withCornerRadius:0.0];
 }
 
 - (void)bindToURL:(NSString *)imgUrl {

@@ -38,8 +38,7 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
 @property (nonatomic, strong) IBOutlet UIView* agreeQuestionView;
 @property (nonatomic, strong) IBOutlet UIView* disagreeQuestionView;
 
-@property (nonatomic, strong) IBOutlet UIImageView* agreeImage;
-@property (nonatomic, strong) IBOutlet UIImageView* disagreeImage;
+@property (nonatomic, weak) IBOutlet UIImageView *voteImage;
 
 @property (nonatomic, strong) IBOutlet UILabel* usernameLabel;
 @property (nonatomic, strong) IBOutlet UILabel* expirationDateLabel;
@@ -56,20 +55,17 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
 
 
 + (CGFloat)cellHeight {
-    return 88.0;
+    return 102.0;
 }
 
 - (void)dealloc {
     [self removeKVO];
 }
-
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
-    self.avatarView.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:self.avatarView.bounds cornerRadius:self.avatarView.layer.cornerRadius].CGPath;
-    self.avatarView.layer.rasterizationScale = [[UIScreen mainScreen] scale];
+    self.avatarView.layer.shadowRadius = 0.0;
+    self.avatarView.layer.shadowOffset = CGSizeZero;
 }
-
 - (void)prepareForReuse {
     [super prepareForReuse];
     [self.avatarView didStartImageLoading];
@@ -148,8 +144,8 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
                                creationString,
                                self.prediction.agreedPercent];
     
-    self.expirationDateLabel.text = expirationString;
-    self.expirationDateLabel.textColor = (expiresInLowerThen10Minutes) ? ([UIColor redColor]) : (self.metadataLabel.textColor);
+    //self.expirationDateLabel.text = expirationString;
+    //self.expirationDateLabel.textColor = (expiresInLowerThen10Minutes) ? ([UIColor redColor]) : (self.metadataLabel.textColor);
     
     CGRect rect = self.bodyLabel.frame;
     CGSize maximumLabelSize = CGSizeMake(218, 37);
@@ -164,15 +160,13 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
     self.disagreed = (self.prediction.chellange != nil) && !(self.prediction.chellange.agree) && (!self.prediction.chellange.isOwn);
     
     if (self.agreed)
-    {
-        self.agreeImage.image = [UIImage imageNamed: (!self.prediction.settled) ? @"agree" : ((self.prediction.outcome == YES) ? @"agree_win" : @"agree_lose")];
-    }
+        self.voteImage.image = [UIImage imageNamed: (!self.prediction.settled) ? @"AgreeMarker" : ((self.prediction.outcome == YES) ? @"AgreeMarkerActive" : @"agree_lose")];
     else if (self.disagreed)
-    {
-        self.disagreeImage.image = [UIImage imageNamed: (!self.prediction.settled) ? @"disagree" : ((self.prediction.outcome == NO) ? @"disagree_win" : @"disagree_lose")];
-    }
+        self.voteImage.image = [UIImage imageNamed: (!self.prediction.settled) ? @"DisagreeMarker" : ((self.prediction.outcome == NO) ? @"disagree_win" : @"DisagreeMarkerActive")];
+    else
+        self.voteImage.image = nil;
     
-    [self.avatarView bindToURL:self.prediction.smallAvatar withCornerRadius:self.avatarView.layer.cornerRadius];
+    [self.avatarView bindToURL:self.prediction.smallAvatar withCornerRadius:0.0];
     
 }
 
@@ -196,7 +190,6 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
                                self.prediction.agreedPercent];
     
     self.expirationDateLabel.text = expirationString;
-    self.expirationDateLabel.textColor = (expiresInLowerThen10Minutes) ? ([UIColor redColor]) : (self.metadataLabel.textColor);
     
     if ([self.prediction.expirationDate compare: [NSDate date]] == NSOrderedAscending && self.prediction.chellange.isOwn)
     {
@@ -208,13 +201,11 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
     }
     
     if (self.agreed)
-    {
-        self.agreeImage.image = [UIImage imageNamed: (!self.prediction.settled) ? @"agree" : ((self.prediction.outcome == YES) ? @"agree_win" : @"agree_lose")];
-    }
+        self.voteImage.image = [UIImage imageNamed: (!self.prediction.settled) ? @"AgreeMarker" : ((self.prediction.outcome == YES) ? @"AgreeMarkerActive" : @"agree_lose")];
     else if (self.disagreed)
-    {
-        self.disagreeImage.image = [UIImage imageNamed: (!self.prediction.settled) ? @"disagree" : ((self.prediction.outcome == NO) ? @"disagree_win" : @"disagree_lose")];
-    }
+        self.voteImage.image = [UIImage imageNamed: (!self.prediction.settled) ? @"DisagreeMarker" : ((self.prediction.outcome == NO) ? @"disagree_win" : @"DisagreeMarkerActive")];
+    else
+        self.voteImage.image = nil;
 }
 
 
@@ -240,7 +231,7 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
                 
                 self.agreeQuestionView.frame = newAgreeFrame;
                 
-                self.agreeImage.hidden = location < self.contentView.frame.size.width / 2;
+                //self.agreeImage.hidden = location < self.contentView.frame.size.width / 2;
             }
         }
         else if (self.recognizingRightGesture)
@@ -252,7 +243,7 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
                 
                 self.disagreeQuestionView.frame = newDisagreeFrame;
                 
-                self.disagreeImage.hidden = location > self.contentView.frame.size.width / 2;
+                //self.disagreeImage.hidden = location > self.contentView.frame.size.width / 2;
             }
         }
     }
@@ -342,8 +333,7 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
     agreed = NO;
     disagreed = NO;
     
-    self.agreeImage.hidden = YES;
-    self.disagreeImage.hidden = YES;
+    self.voteImage.image = nil;
 }
 
 
@@ -358,7 +348,8 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
     if (!self.agreed && !self.disagreed)
     {
         agreed = newAgreed;
-        self.agreeImage.hidden = !agreed;
+        if (agreed)
+            self.voteImage.image = [UIImage imageNamed:@"AgreeMarker"];
     }
 }
 
@@ -374,7 +365,9 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
     if (!self.agreed && !self.disagreed)
     {
         disagreed = newDisagreed;
-        self.disagreeImage.hidden = !disagreed;
+        if (disagreed)
+            self.voteImage.image = [UIImage imageNamed:@"DisagreeMarker"];
+            
     }
 }
 

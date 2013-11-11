@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		015FA0B218303CC200253DB2 /* UIColor+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 015FA0B118303CC200253DB2 /* UIColor+Utils.m */; };
+		015FA0B418303DA800253DB2 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 015FA0B318303DA800253DB2 /* Media.xcassets */; };
+		015FA0B718304A8600253DB2 /* UIBarButtonItem+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 015FA0B618304A8600253DB2 /* UIBarButtonItem+Utils.m */; };
+		015FA0BA18304D7800253DB2 /* UINavigationItem+iOS7Spacing.m in Sources */ = {isa = PBXBuildFile; fileRef = 015FA0B918304D7800253DB2 /* UINavigationItem+iOS7Spacing.m */; };
 		3638773F17C4D6EA00703475 /* AnotherUsersProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3638773B17C4D6EA00703475 /* AnotherUsersProfileViewController.m */; };
 		3638774017C4D6EA00703475 /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3638773D17C4D6EA00703475 /* ChangePasswordViewController.m */; };
 		3638774617C4F6A100703475 /* ChangePasswordRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3638774517C4F6A100703475 /* ChangePasswordRequest.m */; };
@@ -369,6 +373,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		015FA0B018303CC200253DB2 /* UIColor+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Utils.h"; sourceTree = "<group>"; };
+		015FA0B118303CC200253DB2 /* UIColor+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Utils.m"; sourceTree = "<group>"; };
+		015FA0B318303DA800253DB2 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		015FA0B518304A8600253DB2 /* UIBarButtonItem+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Utils.h"; sourceTree = "<group>"; };
+		015FA0B618304A8600253DB2 /* UIBarButtonItem+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Utils.m"; sourceTree = "<group>"; };
+		015FA0B818304D7800253DB2 /* UINavigationItem+iOS7Spacing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationItem+iOS7Spacing.h"; sourceTree = "<group>"; };
+		015FA0B918304D7800253DB2 /* UINavigationItem+iOS7Spacing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationItem+iOS7Spacing.m"; sourceTree = "<group>"; };
 		3638773A17C4D6EA00703475 /* AnotherUsersProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnotherUsersProfileViewController.h; sourceTree = "<group>"; };
 		3638773B17C4D6EA00703475 /* AnotherUsersProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnotherUsersProfileViewController.m; sourceTree = "<group>"; };
 		3638773C17C4D6EA00703475 /* ChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordViewController.h; sourceTree = "<group>"; };
@@ -1106,6 +1117,10 @@
 		578E9B1A17BA218500A7B304 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				015FA0B818304D7800253DB2 /* UINavigationItem+iOS7Spacing.h */,
+				015FA0B918304D7800253DB2 /* UINavigationItem+iOS7Spacing.m */,
+				015FA0B018303CC200253DB2 /* UIColor+Utils.h */,
+				015FA0B118303CC200253DB2 /* UIColor+Utils.m */,
 				57D525CB17C4C2DB0031C1EE /* NSString+Utils.h */,
 				57D525CC17C4C2DB0031C1EE /* NSString+Utils.m */,
 				578E9B1B17BA218500A7B304 /* UILabel+Utils.h */,
@@ -1116,6 +1131,8 @@
 				572D465D17BD1B62008164A5 /* NSDate+Utils.m */,
 				57D525CE17C4D6CB0031C1EE /* UIImage+Utils.h */,
 				57D525CF17C4D6CB0031C1EE /* UIImage+Utils.m */,
+				015FA0B518304A8600253DB2 /* UIBarButtonItem+Utils.h */,
+				015FA0B618304A8600253DB2 /* UIBarButtonItem+Utils.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1475,6 +1492,7 @@
 		9E708829178AF68E00F036A8 /* KnodaIPhoneApp */ = {
 			isa = PBXGroup;
 			children = (
+				015FA0B318303DA800253DB2 /* Media.xcassets */,
 				578E9B1A17BA218500A7B304 /* Utils */,
 				9E06638A179598FC00B3E974 /* Resources */,
 				9E066374178C3EE200B3E974 /* Model */,
@@ -1729,6 +1747,7 @@
 				9E930206179FCB0B00FFB166 /* badgesIcon@2x.png in Resources */,
 				9E930207179FCB0B00FFB166 /* darkBg.png in Resources */,
 				9E930208179FCB0B00FFB166 /* darkBg@2x.png in Resources */,
+				015FA0B418303DA800253DB2 /* Media.xcassets in Resources */,
 				9E930209179FCB0B00FFB166 /* historyIcon.png in Resources */,
 				9E93020A179FCB0B00FFB166 /* historyIcon@2x.png in Resources */,
 				9E93020B179FCB0B00FFB166 /* homeIcon.png in Resources */,
@@ -1968,6 +1987,7 @@
 				9E93021B179FF11F00FFB166 /* NavigationSegue.m in Sources */,
 				9E930220179FF45000FFB166 /* HomeViewController.m in Sources */,
 				9E76A56317A138E3004F8FC1 /* PreditionCell.m in Sources */,
+				015FA0BA18304D7800253DB2 /* UINavigationItem+iOS7Spacing.m in Sources */,
 				9EC05AEA17A164EA00D67DA2 /* HistoryViewController.m in Sources */,
 				9EC05AED17A1723100D67DA2 /* MyPredictionsViewController.m in Sources */,
 				9EC05AF017A172B600D67DA2 /* MyPicksViewController.m in Sources */,
@@ -1977,6 +1997,7 @@
 				9E8421D217A1858600D14D0A /* ProfileViewController.m in Sources */,
 				9E8421F117A26ECB00D14D0A /* PushWithoutAnimationSegue.m in Sources */,
 				9E8421F417A2817000D14D0A /* ForgotPasswordWebRequest.m in Sources */,
+				015FA0B218303CC200253DB2 /* UIColor+Utils.m in Sources */,
 				9E8421F717A7E10D00D14D0A /* Chellange.m in Sources */,
 				9E8421FA17AFC91700D14D0A /* AddPredictionViewController.m in Sources */,
 				9E8421FD17AFEB4900D14D0A /* CategoriesWebRequest.m in Sources */,
@@ -2014,6 +2035,7 @@
 				57D525AC17C388F80031C1EE /* ProfileWebRequest.m in Sources */,
 				367EE77F17C3C5E400764C85 /* ProfileCell.m in Sources */,
 				367EE78517C3D41900764C85 /* SignOutWebRequest.m in Sources */,
+				015FA0B718304A8600253DB2 /* UIBarButtonItem+Utils.m in Sources */,
 				57D525C217C4C2BD0031C1EE /* BindableView.m in Sources */,
 				57D525C917C4C2C70031C1EE /* ImageCache.m in Sources */,
 				57D525CA17C4C2C70031C1EE /* ImageEntry.m in Sources */,

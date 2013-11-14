@@ -11,7 +11,6 @@
 		015FA0B418303DA800253DB2 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 015FA0B318303DA800253DB2 /* Media.xcassets */; };
 		015FA0B718304A8600253DB2 /* UIBarButtonItem+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 015FA0B618304A8600253DB2 /* UIBarButtonItem+Utils.m */; };
 		015FA0BA18304D7800253DB2 /* UINavigationItem+iOS7Spacing.m in Sources */ = {isa = PBXBuildFile; fileRef = 015FA0B918304D7800253DB2 /* UINavigationItem+iOS7Spacing.m */; };
-		015FA0BD1830860200253DB2 /* PickerAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 015FA0BC1830860200253DB2 /* PickerAccessoryView.xib */; };
 		3638773F17C4D6EA00703475 /* AnotherUsersProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3638773B17C4D6EA00703475 /* AnotherUsersProfileViewController.m */; };
 		3638774017C4D6EA00703475 /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3638773D17C4D6EA00703475 /* ChangePasswordViewController.m */; };
 		3638774617C4F6A100703475 /* ChangePasswordRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3638774517C4F6A100703475 /* ChangePasswordRequest.m */; };
@@ -381,7 +380,6 @@
 		015FA0B618304A8600253DB2 /* UIBarButtonItem+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Utils.m"; sourceTree = "<group>"; };
 		015FA0B818304D7800253DB2 /* UINavigationItem+iOS7Spacing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationItem+iOS7Spacing.h"; sourceTree = "<group>"; };
 		015FA0B918304D7800253DB2 /* UINavigationItem+iOS7Spacing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationItem+iOS7Spacing.m"; sourceTree = "<group>"; };
-		015FA0BC1830860200253DB2 /* PickerAccessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PickerAccessoryView.xib; path = "Things I needed/PickerAccessoryView.xib"; sourceTree = "<group>"; };
 		3638773A17C4D6EA00703475 /* AnotherUsersProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnotherUsersProfileViewController.h; sourceTree = "<group>"; };
 		3638773B17C4D6EA00703475 /* AnotherUsersProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnotherUsersProfileViewController.m; sourceTree = "<group>"; };
 		3638773C17C4D6EA00703475 /* ChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordViewController.h; sourceTree = "<group>"; };
@@ -869,7 +867,6 @@
 		015FA0BB183085D400253DB2 /* Things I needed */ = {
 			isa = PBXGroup;
 			children = (
-				015FA0BC1830860200253DB2 /* PickerAccessoryView.xib */,
 			);
 			name = "Things I needed";
 			sourceTree = "<group>";
@@ -1717,7 +1714,6 @@
 				9E70883D178AF68E00F036A8 /* MainStoryboard.storyboard in Resources */,
 				9E06639417959A2100B3E974 /* greenBg.png in Resources */,
 				9E06639517959A2100B3E974 /* greenBg@2x.png in Resources */,
-				015FA0BD1830860200253DB2 /* PickerAccessoryView.xib in Resources */,
 				9E06639617959A2100B3E974 /* knoda_logo_lg.png in Resources */,
 				9E06639717959A2100B3E974 /* knoda_logo_lg@2x.png in Resources */,
 				9E06639A17959A4C00B3E974 /* HelveticaNeue.dfont in Resources */,

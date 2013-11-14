@@ -20,9 +20,7 @@
 #import "User.h"
 #import "PredictorsCountCell.h"
 #import "PredictorCell.h"
-
 #import "AddPredictionViewController.h"
-
 #import "PredictionUsersWebRequest.h"
 #import "BSWebRequest.h"
 #import "OutcomeWebRequest.h"
@@ -33,18 +31,7 @@
 #import "CategoryPredictionsViewController.h"
 #import "AppDelegate.h"
 
-typedef enum {
-    RowEmpty = -1,
-    RowPrediction,
-    RowCategory,
-    RowStatus,
-    RowPredictorsCount,
-    RowMakePrediction,
-    RowOutcome,
-    RowPredictor,
-    RowLoading,
-    TableRowsBaseCount = RowPredictorsCount + 1,
-} CellType;
+
 
 static NSString* const kCategorySegue      = @"CategoryPredictionsSegue";
 static NSString* const kUserProfileSegue   = @"UserProfileSegue";
@@ -60,12 +47,26 @@ static const int kBSAlertTag = 1001;
 
 @property (nonatomic, strong) AppDelegate * appDelegate;
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *pickerViewHolder;
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 
 @property (nonatomic) NSArray *agreedUsers;
 @property (nonatomic) NSArray *disagreedUsers;
+
+
+@property (weak, nonatomic) IBOutlet BindableView *avatarView;
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *voteImage;
+@property (weak, nonatomic) IBOutlet UILabel *bodyLabel;
+@property (weak, nonatomic) IBOutlet UILabel *metaDataLabel;
+@property (weak, nonatomic) IBOutlet UIView *agreeDisagreeView;
+@property (weak, nonatomic) IBOutlet UIView *settlePredictionView;
+
+@property (weak, nonatomic) IBOutlet UIView *predictionStatusView;
+@property (weak, nonatomic) IBOutlet UILabel *outcomeLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *outcomeImageView;
+@property (weak, nonatomic) IBOutlet UILabel *totalPointsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *pointsBreakdownLabel;
 
 @end
 
@@ -96,6 +97,7 @@ static const int kBSAlertTag = 1001;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem backButtonWithTarget:self action:@selector(backButtonPressed:)];
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem rightBarButtonItemWithImage:[UIImage imageNamed:@"PredictIcon"] target:self action:@selector(createPredictionPressed:)];
 
+    [self updateView];
 }
 
 
@@ -115,13 +117,103 @@ static const int kBSAlertTag = 1001;
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if([object isKindOfClass:[User class]] && [keyPath isEqualToString:@"smallImage"]) {
         self.prediction.smallAvatar = [(User *)object smallImage];
-        [self.tableView reloadRowsAtIndexPaths:@[[self indexPathForCellType:RowPrediction]] withRowAnimation:UITableViewRowAnimationNone];
+        [self updateView];
     }
     else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
 }
 
+- (void)updateView {
+    [self configureHeader];
+    [self configureVariableSpot];
+}
+
+- (void)configureHeader {
+    [self.avatarView bindToURL:self.prediction.smallAvatar];
+    
+    self.usernameLabel.text = self.prediction.userName;
+    self.metaDataLabel.text = [self.prediction metaDataString];
+    self.voteImage.image = [self.prediction statusImage];
+    self.bodyLabel.text = self.prediction.body;
+}
+
+- (void)configureVariableSpot {
+//    switch (indexPath.row) {
+//        case 0: return RowPrediction;
+//        case 1: return RowCategory;
+//        case 2:
+//            if(self.prediction.hasOutcome && self.prediction.chellange) {
+//                return RowStatus;
+//            }
+//            else if([self.prediction canSetOutcome]) {
+//                return RowOutcome;
+//            }
+//            else if(!self.prediction.chellange && ![self.prediction isExpired]) {
+//                return RowMakePrediction;
+//            }
+//            return RowEmpty;
+//        case 3:  return RowPredictorsCount;
+//        default: return _loadingUsers ? RowLoading : RowPredictor;
+//    }
+    
+    if (self.prediction.hasOutcome && self.prediction.chellange)
+        [self updateAndShowPredictionStatusView];
+    else if (self.prediction.canSetOutcome)
+        [self updateAndShowSettlePredictionView];
+    else if (!self.prediction.chellange && ![self.prediction isExpired])
+        [self updateAndShowAgreeDisagreeView];
+}
+        
+- (void)updateAndShowAgreeDisagreeView {
+    self.settlePredictionView.hidden = YES;
+    self.predictionStatusView.hidden = YES;
+    self.agreeDisagreeView.hidden = NO;
+}
+- (void)updateAndShowPredictionStatusView {
+    self.settlePredictionView.hidden = YES;
+    self.predictionStatusView.hidden = NO;
+    self.agreeDisagreeView.hidden = YES;
+    
+    self.pointsBreakdownLabel.text = [self buildPointsString:self.prediction.chellange];
+}
+- (void)updateAndShowSettlePredictionView {
+    self.settlePredictionView.hidden = NO;
+    self.predictionStatusView.hidden = YES;
+    self.agreeDisagreeView.hidden = YES;
+}
+- (IBAction)share:(id)sender {
+    UIActivityViewController *vc = [[UIActivityViewController alloc] initWithActivityItems:@[self.prediction.body] applicationActivities:nil];
+    [self presentViewController:vc animated:YES completion:nil];
+}
+- (NSString *)buildPointsString:(Chellange *)challenge {
+    __block NSMutableString *string = [NSMutableString string];
+    
+    void (^addPoint)(int, NSString*) = ^(int point, NSString *name) {
+        if(point > 0) {
+            [string appendFormat:@"+%d %@\n", point, name];
+        }
+    };
+    
+    addPoint(challenge.basePoints, NSLocalizedString(@"Base", @""));
+    addPoint(challenge.outcomePoints, NSLocalizedString(@"Outcome", @""));
+    addPoint(challenge.marketSizePoints, NSLocalizedString(@"Market size", @""));
+    addPoint(challenge.predictionMarketPoints, [self marketSizeNameForPoints:challenge.predictionMarketPoints]);
+    
+    NSLog(@"!!!!!!!!!!!!!!!!!!! %@ !!!!!!!!!!!!!!!!", string);
+    return string;
+}
+- (NSString *)marketSizeNameForPoints:(NSInteger)points {
+    switch (points) {
+        case 0:  return NSLocalizedString(@"Too Easy", @"");
+        case 10:
+        case 20: return NSLocalizedString(@"Favorite", @"");
+        case 30:
+        case 40: return NSLocalizedString(@"Underdog", @"");
+        case 50: return NSLocalizedString(@"Longshot", @"");
+        default: return @"";
+    }
+}
 #pragma mark Actions
 
 - (IBAction)backButtonPressed:(UIButton *)sender {
@@ -202,18 +294,17 @@ static const int kBSAlertTag = 1001;
                     [strongSelf showErrorFromRequest:request];
                 }
                 
-                [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowOutcome], [strongSelf indexPathForCellType:RowPrediction]]
-                                            withRowAnimation:UITableViewRowAnimationAutomatic];
+                [self updateView];
             }];
         }
         else {
             strongSelf->_updatingStatus = NO;
             [strongSelf showErrorFromRequest:request];
-            [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowOutcome]] withRowAnimation:UITableViewRowAnimationNone];
+            [self updateView];
         }
     }];
     
-    [self.tableView reloadRowsAtIndexPaths:@[[self indexPathForCellType:RowOutcome]] withRowAnimation:UITableViewRowAnimationNone];
+    [self updateView];
     [self hideView:self.pickerViewHolder];
 }
 
@@ -263,61 +354,7 @@ static const int kBSAlertTag = 1001;
         self.prediction.agreeCount    = self.agreedUsers.count;
         self.prediction.disagreeCount = self.disagreedUsers.count;
         
-        [self.tableView reloadData];
-    }
-}
-
-- (BaseTableViewCell *)cellForCellType:(CellType)cellType {
-    return (BaseTableViewCell *)[self.tableView cellForRowAtIndexPath:[self indexPathForCellType:cellType]];
-}
-
-- (NSIndexPath *)indexPathForCellType:(CellType)cellType {
-    switch (cellType) {
-        case RowOutcome:
-        case RowMakePrediction:
-            return [NSIndexPath indexPathForRow:RowStatus inSection:0];
-            
-        case RowEmpty:
-        case RowLoading:
-        case RowPredictor:
-            return nil;
-            
-        default:
-            return [NSIndexPath indexPathForRow:cellType inSection:0];
-    }
-}
-
-- (CellType)cellTypeForIndexpath:(NSIndexPath *)indexPath {
-    switch (indexPath.row) {
-        case 0: return RowPrediction;
-        case 1: return RowCategory;
-        case 2:
-            if(self.prediction.hasOutcome && self.prediction.chellange) {
-                return RowStatus;
-            }
-            else if([self.prediction canSetOutcome]) {
-                return RowOutcome;
-            }
-            else if(!self.prediction.chellange && ![self.prediction isExpired]) {
-                return RowMakePrediction;
-            }
-            return RowEmpty;
-        case 3:  return RowPredictorsCount;
-        default: return _loadingUsers ? RowLoading : RowPredictor;
-    }
-}
-
-- (Class)cellClassForIndexpath:(NSIndexPath *)indexPath {
-    switch ([self cellTypeForIndexpath:indexPath]) {
-        case RowPrediction:         return [PredictionDetailsCell class];
-        case RowCategory:           return [PredictionCategoryCell class];
-        case RowStatus:             return [PredictionStatusCell class];
-        case RowMakePrediction:     return [MakePredictionCell class];
-        case RowOutcome:            return [OutcomeCell class];
-        case RowPredictorsCount:    return [PredictorsCountCell class];
-        case RowPredictor:          return [PredictorCell class];
-        case RowEmpty:              return [BaseTableViewCell class];
-        case RowLoading:            return [LoadingCell class];
+        [self updateView];
     }
 }
 
@@ -387,19 +424,17 @@ static const int kBSAlertTag = 1001;
                     [strongSelf showErrorFromRequest:request];
                 }
                 
-                //update related cells
-                [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowMakePrediction], [strongSelf indexPathForCellType:RowPrediction]]
-                                            withRowAnimation:UITableViewRowAnimationAutomatic];
+                [self updateView];
             }];
         }
         else {
             [strongSelf showErrorFromRequest:request];
             strongSelf->_updatingStatus = NO;
         }
-        [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowMakePrediction]] withRowAnimation:UITableViewRowAnimationNone];
+        [self updateView];
     }];
     
-    [self.tableView reloadRowsAtIndexPaths:@[[self indexPathForCellType:RowMakePrediction]] withRowAnimation:UITableViewRowAnimationNone];
+    [self updateView];
 }
 
 - (void)sendOutcome:(BOOL)realise {
@@ -426,19 +461,18 @@ static const int kBSAlertTag = 1001;
                 else {
                     [strongSelf showErrorFromRequest:outcomeRequest];
                 }
-                [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowOutcome], [strongSelf indexPathForCellType:RowPrediction]] withRowAnimation:UITableViewRowAnimationAutomatic];
+                [self updateView];
             }];
         }
         else {
             strongSelf->_updatingStatus = NO;
             
-            [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowOutcome]] withRowAnimation:UITableViewRowAnimationNone];
-            
+            [self updateView];
             [strongSelf showErrorFromRequest:outcomeRequest];
         }
     }];
 
-    [self.tableView reloadRowsAtIndexPaths:@[[self indexPathForCellType:RowOutcome]] withRowAnimation:UITableViewRowAnimationNone];
+    [self updateView];
 }
 
 - (void)sendBS {    
@@ -464,93 +498,23 @@ static const int kBSAlertTag = 1001;
                 else {
                     [strongSelf showErrorFromRequest:updateRequest];
                 }
-                [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowStatus]] withRowAnimation:UITableViewRowAnimationAutomatic];
+                [self updateView];
             }];
         }
         else {
             strongSelf->_updatingStatus = NO;
             [strongSelf showErrorFromRequest:bsRequest];
-            [strongSelf.tableView reloadRowsAtIndexPaths:@[[strongSelf indexPathForCellType:RowStatus]] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self updateView];
         }
     }];
 
-    [self.tableView reloadRowsAtIndexPaths:@[[self indexPathForCellType:RowStatus]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self updateView];
 }
 
 #pragma mark AddPredictionViewControllerDelegate
 
 - (void) predictionWasMadeInController:(AddPredictionViewController *)vc {
     [vc dismissViewControllerAnimated:YES completion:nil];
-}
-
-#pragma mark UITableViewDataSource
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return TableRowsBaseCount + (_loadingUsers ? 1 : MAX(self.agreedUsers.count, self.disagreedUsers.count));
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    Class cellClass = [self cellClassForIndexpath:indexPath];    
-    BaseTableViewCell *baseCell = (BaseTableViewCell *)[tableView dequeueReusableCellWithIdentifier:[cellClass reuseIdentifier]];
-    
-    if([baseCell isKindOfClass:[PredictionDetailsCell class]]) {
-        PredictionDetailsCell *cell = (PredictionDetailsCell *)baseCell;
-        [cell fillWithPrediction:self.prediction];
-        cell.delegate = self;
-        UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]init];
-        [cell setUpUserProfileTapGestures:tapGesture];
-    }
-    else if([baseCell isKindOfClass:[PredictionCategoryCell class]]) {
-        PredictionCategoryCell *cell = (PredictionCategoryCell *)baseCell;
-        [cell setCategory:self.prediction.category];
-    }
-    else if([baseCell isKindOfClass:[PredictionStatusCell class]]) {
-        PredictionStatusCell *cell = (PredictionStatusCell *)baseCell;
-        [cell setupCellWithPrediction:self.prediction];
-        cell.loading = _updatingStatus;
-    }
-    else if([baseCell isKindOfClass:[MakePredictionCell class]]) {
-        MakePredictionCell *cell = (MakePredictionCell *)baseCell;
-        cell.loading = _updatingStatus;
-    }
-    else if([baseCell isKindOfClass:[PredictorsCountCell class]]) {
-        PredictorsCountCell *cell = (PredictorsCountCell *)baseCell;
-        cell.agreedCount    = self.prediction.agreeCount;
-        cell.disagreedCount = self.prediction.disagreeCount;
-    }
-    else if([baseCell isKindOfClass:[PredictorCell class]]) {
-        PredictorCell *cell = (PredictorCell *)baseCell;
-        int idx = indexPath.row - TableRowsBaseCount;
-        cell.agreedUserName.text    = self.agreedUsers.count > idx ? self.agreedUsers[idx] : @"";
-        cell.disagreedUserName.text = self.disagreedUsers.count > idx ? self.disagreedUsers[idx] : @"";
-    }
-    else if([baseCell isKindOfClass:[OutcomeCell class]]) {
-        OutcomeCell *cell = (OutcomeCell *)baseCell;
-        [cell setupCellWithPrediction:self.prediction];
-        cell.loading = _updatingStatus;
-    }
-    
-    return baseCell;
-}
-
-#pragma mark UITableViewDelegate
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch ([self cellTypeForIndexpath:indexPath]) {
-        case RowStatus:
-            return [PredictionStatusCell cellHeightForPrediction:self.prediction];
-        case RowPrediction:
-            return [PredictionDetailsCell cellHeightForPrediction:self.prediction];
-        case RowOutcome:
-            return [OutcomeCell cellHeightForPrediction:self.prediction];
-        case RowEmpty:
-            return 0.0;
-        case RowLoading:
-            return 44.0;
-        default:
-            return [[self cellClassForIndexpath:indexPath] cellHeight];
-    }
 }
 
 #pragma mark UIAlertViewDelegate
@@ -600,19 +564,19 @@ withAnimationDuration: (NSTimeInterval)animationDuration
        animationCurve: (UIViewAnimationCurve)animationCurve
         keyboardFrame: (CGRect)keyboardFrame
 {
-    CGRect newContainerFrame = self.tableView.frame;
+    CGRect newContainerFrame = self.view.frame;
     
     if(up) {
-        newContainerFrame.size.height = self.view.frame.size.height - [self.tableView.superview convertRect: keyboardFrame fromView: self.view.window].size.height;
+        newContainerFrame.size.height = self.view.frame.size.height - [self.view.superview convertRect: keyboardFrame fromView: self.view.window].size.height;
     }
     else {
         newContainerFrame.size.height = self.view.frame.size.height;
     }
     
     [UIView animateWithDuration: animationDuration delay: 0.0 options: (animationCurve << 16) animations:^{
-        self.tableView.frame = newContainerFrame;
+        self.view.frame = newContainerFrame;
     } completion:^(BOOL finished) {
-        [self.tableView scrollToRowAtIndexPath:[self indexPathForCellType:RowOutcome] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+       // [self.tableView scrollToRowAtIndexPath:[self indexPathForCellType:RowOutcome] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
     }];
 }
 

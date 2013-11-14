@@ -15,7 +15,7 @@
 @protocol AddPredictionViewControllerDelegate;
 @protocol PredictionDetailsDelegate;
 
-@interface PredictionDetailsViewController : BaseRequestingViewController <UITableViewDataSource, UITableViewDelegate>
+@interface PredictionDetailsViewController : BaseRequestingViewController
 
 @property (nonatomic, strong) Prediction *prediction;
 
@@ -36,6 +36,7 @@
 - (IBAction)unfinishPrediction:(UIBarButtonItem *)sender;
 - (IBAction)categoryButtonTapped:(UIButton *)sender;
 
+- (IBAction)share:(id)sender;
 @end
 
 @protocol PredictionDetailsDelegate <NSObject>

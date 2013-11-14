@@ -136,15 +136,9 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
     
     self.usernameLabel.text = self.prediction.userName;
     self.bodyLabel.text = self.prediction.body;
+        
     
-    BOOL expiresInLowerThen10Minutes = NO;
-    NSString* expirationString = [self predictionExpiresIntervalString: self.prediction lowerThen10Minutes: &expiresInLowerThen10Minutes];
-    NSString* creationString = [self predictionCreatedIntervalString: self.prediction];
-    
-    self.metadataLabel.text = [NSString stringWithFormat: NSLocalizedString(@"%@ | %@ | %d%% agree", @""),
-                               expirationString,
-                               creationString,
-                               self.prediction.agreedPercent];
+    self.metadataLabel.text = [self.prediction metaDataString];
     
     //self.expirationDateLabel.text = expirationString;
     //self.expirationDateLabel.textColor = (expiresInLowerThen10Minutes) ? ([UIColor redColor]) : (self.metadataLabel.textColor);
@@ -158,15 +152,10 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
     
     [self updateGuessMark];
     
-    self.agreed = (self.prediction.chellange != nil) && (self.prediction.chellange.agree) && (!self.prediction.chellange.isOwn);
-    self.disagreed = (self.prediction.chellange != nil) && !(self.prediction.chellange.agree) && (!self.prediction.chellange.isOwn);
-    
-    if (self.agreed)
-        self.voteImage.image = [UIImage imageNamed: (!self.prediction.settled) ? @"AgreeMarker" : ((self.prediction.outcome == YES) ? @"AgreeMarkerActive" : @"agree_lose")];
-    else if (self.disagreed)
-        self.voteImage.image = [UIImage imageNamed: (!self.prediction.settled) ? @"DisagreeMarker" : ((self.prediction.outcome == NO) ? @"disagree_win" : @"DisagreeMarkerActive")];
-    else
-        self.voteImage.image = nil;
+    self.agreed = [self.prediction iAgree];
+    self.disagreed = [self.prediction iDisagree];
+    self.voteImage.image = [self.prediction statusImage];
+
     
     [self.avatarView bindToURL:self.prediction.smallAvatar withCornerRadius:0.0];
     
@@ -182,16 +171,9 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
 
 - (void) updateDates
 {
-    BOOL expiresInLowerThen10Minutes = NO;
-    NSString* expirationString = [self predictionExpiresIntervalString: self.prediction lowerThen10Minutes: &expiresInLowerThen10Minutes];
-    NSString* creationString = [self predictionCreatedIntervalString: self.prediction];
+    self.metadataLabel.text = [self.prediction metaDataString];
     
-    self.metadataLabel.text = [NSString stringWithFormat: NSLocalizedString(@"%@ | %@ | %d%% agree", @""),
-                               expirationString,
-                               creationString,
-                               self.prediction.agreedPercent];
-    
-    self.expirationDateLabel.text = expirationString;
+    //self.expirationDateLabel.text = expirationString;
     
     if ([self.prediction.expirationDate compare: [NSDate date]] == NSOrderedAscending && self.prediction.chellange.isOwn)
     {
@@ -202,12 +184,7 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
         self.guessMarkImage.image = nil;
     }
     
-    if (self.agreed)
-        self.voteImage.image = [UIImage imageNamed: (!self.prediction.settled) ? @"AgreeMarker" : ((self.prediction.outcome == YES) ? @"AgreeMarkerActive" : @"agree_lose")];
-    else if (self.disagreed)
-        self.voteImage.image = [UIImage imageNamed: (!self.prediction.settled) ? @"DisagreeMarker" : ((self.prediction.outcome == NO) ? @"disagree_win" : @"DisagreeMarkerActive")];
-    else
-        self.voteImage.image = nil;
+    self.voteImage.image = [self.prediction statusImage];
 }
 
 
@@ -394,121 +371,6 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
 }
 
 
-#pragma mark Calculate dates
 
-
-- (NSString*) predictionCreatedIntervalString: (Prediction*) prediciton
-{
-    NSString* result;
-    
-    NSDate* now = [NSDate date];
-    
-    NSTimeInterval interval = [now timeIntervalSinceDate: prediciton.creationDate];
-    
-    NSInteger secondsInMinute = 60;
-    NSInteger minutesInHour = 60;
-    NSInteger hoursInDay = 24;
-    NSInteger daysInMonth = 30;
-    NSInteger monthInYear = 12;
-    
-    if (interval < secondsInMinute)
-    {
-        result = [NSString stringWithFormat: NSLocalizedString(@"made %ds ago", @""), (NSInteger)interval];
-    }
-    else if (interval < (secondsInMinute * minutesInHour * hoursInDay))
-    {
-        NSInteger minutes = 0;
-        NSInteger hours = (NSInteger)interval / (secondsInMinute * minutesInHour);
-        minutes = hours > 0 ? 0 : ((NSInteger)interval / secondsInMinute) % minutesInHour;
-        
-        NSString* hoursString = (hours != 0) ? [NSString stringWithFormat: NSLocalizedString(@"%dh", @""), hours] : @"";
-        NSString* minutesString = (minutes != 0) ? [NSString stringWithFormat: NSLocalizedString(@"%dm", @""), minutes] : @"";
-        NSString* space = (hours != 0 && minutes != 0) ? @" " : @"";
-        
-        result = [NSString stringWithFormat: NSLocalizedString(@"made %@%@%@ ago", @""), hoursString, space, minutesString];
-    }
-    else if (interval < (secondsInMinute * minutesInHour * hoursInDay * daysInMonth))
-    {
-        NSInteger days = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay));
-        result = [NSString stringWithFormat: NSLocalizedString(@"made %dd ago", @""), days];
-    }
-    else if (interval < (secondsInMinute * minutesInHour * hoursInDay * daysInMonth * monthInYear))
-    {
-        NSInteger month = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay * daysInMonth));
-        result = [NSString stringWithFormat: NSLocalizedString(@"made %dmth ago", @""), month];
-    }
-    else
-    {
-        NSInteger year = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay * daysInMonth * monthInYear));
-        result = [NSString stringWithFormat: NSLocalizedString(@"made %dyr%@ ago", @""), year, (year != 1) ? @"s" : @""];
-    }
-    
-    return result;
-}
-
-
-- (NSString*) predictionExpiresIntervalString: (Prediction*) prediciton lowerThen10Minutes: (BOOL*) lowerThen10Minutes
-{
-    NSString* result;
-    
-    NSTimeInterval interval = 0;
-    NSDate* now = [NSDate date];
-    BOOL expired = NO;
-    
-    if ([now compare: prediciton.expirationDate] == NSOrderedAscending)
-    {
-        interval = [prediciton.expirationDate timeIntervalSinceDate: now];
-    }
-    else
-    {
-        interval = [now timeIntervalSinceDate: prediciton.expirationDate];
-        expired = YES;
-    }
-    
-    NSInteger secondsInMinute = 60;
-    NSInteger minutesInHour = 60;
-    NSInteger hoursInDay = 24;
-    NSInteger daysInMonth = 30;
-    NSInteger monthInYear = 12;
-    
-    if (interval < secondsInMinute)
-    {
-        result = [NSString stringWithFormat: NSLocalizedString(@"exp %ds%@", @""), (NSInteger)interval, (expired) ? @" ago" : @""];
-    }
-    else if (interval < (secondsInMinute * minutesInHour * hoursInDay))
-    {
-        NSInteger minutes = 0;
-        NSInteger hours = (NSInteger)interval / (secondsInMinute * minutesInHour);
-        minutes = hours > 0 ? 0 : ((NSInteger)interval / secondsInMinute) % minutesInHour; 
-        
-        NSString* hoursString = (hours != 0) ? [NSString stringWithFormat: NSLocalizedString(@"%dh", @""), hours] : @"";
-        NSString* minutesString = (minutes != 0) ? [NSString stringWithFormat: NSLocalizedString(@"%dm", @""), minutes] : @"";
-        NSString* space = (hours != 0 && minutes != 0) ? @" " : @"";
-
-        result = [NSString stringWithFormat: NSLocalizedString(@"exp %@%@%@%@", @""), hoursString, space, minutesString, (expired) ? @" ago" : @""];
-    }
-    else if (interval < (secondsInMinute * minutesInHour * hoursInDay * daysInMonth))
-    {
-        NSInteger days = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay)) + 1;
-        result = [NSString stringWithFormat: NSLocalizedString(@"exp %dd%@", @""), days, (expired) ? @" ago" : @""];
-    }
-    else if (interval < (secondsInMinute * minutesInHour * hoursInDay * daysInMonth * monthInYear))
-    {
-        NSInteger month = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay * daysInMonth)) + 1;
-        result = [NSString stringWithFormat: NSLocalizedString(@"exp %dmth%@", @""), month, (expired) ? @" ago" : @""];
-    }
-    else
-    {
-        NSInteger year = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay * daysInMonth * monthInYear)) + 1;
-        result = [NSString stringWithFormat: NSLocalizedString(@"exp %dyr%@", @""), year, (year != 1) ? @"s" : @"", (expired) ? @" ago" : @""];
-    }
-    
-    if (interval < (secondsInMinute * 10) && !expired)
-    {
-        *lowerThen10Minutes = YES;
-    }
-    
-    return result;
-}
 
 @end

@@ -46,4 +46,9 @@
 
 - (BOOL)canSetOutcome;
 
+- (NSString *)metaDataString;
+
+- (BOOL)iAgree;
+- (BOOL)iDisagree;
+- (UIImage *)statusImage;
 @end

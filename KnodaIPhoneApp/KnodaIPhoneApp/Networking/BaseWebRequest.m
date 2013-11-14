@@ -37,9 +37,9 @@ static NSString* const kBaseURL = @"example.com";
 #else
 
 //static NSString* const kBaseURL = @"89.22.50.128/api/";
-NSString* const kBaseURL = @"54.213.86.248";
+//NSString* const kBaseURL = @"54.213.86.248";
 //NSString* const kBaseURL = @"127.0.0.1:3000";
-//NSString* const kBaseURL = @"knoda-dev.herokuapp.com";
+NSString* const kBaseURL = @"knoda-dev.herokuapp.com";
 
 #endif
 

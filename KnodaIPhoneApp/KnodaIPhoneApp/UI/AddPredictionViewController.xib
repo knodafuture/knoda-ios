@@ -47,6 +47,9 @@
                                     <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="-1" id="DuX-nH-zGd"/>
+                                    </connections>
                                 </textView>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="300" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8hw-0x-PsZ">
                                     <rect key="frame" x="280" y="79" width="34" height="21"/>
@@ -167,6 +170,10 @@
                             <rect key="frame" x="0.0" y="44" width="320" height="162"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <gestureRecognizers/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="XbX-9K-p0D"/>
+                                <outlet property="delegate" destination="-1" id="2wF-BK-Vuo"/>
+                            </connections>
                         </pickerView>
                         <view contentMode="scaleToFill" id="PDF-6x-Qzh" userLabel="Exp Picker Accessory">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -209,6 +216,10 @@
                             <rect key="frame" x="0.0" y="44" width="320" height="162"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <gestureRecognizers/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="jqe-o0-6Xk"/>
+                                <outlet property="delegate" destination="-1" id="jxT-k6-8Q5"/>
+                            </connections>
                         </pickerView>
                         <view contentMode="scaleToFill" id="M94-0D-5cQ" userLabel="Category Picker Accessory">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

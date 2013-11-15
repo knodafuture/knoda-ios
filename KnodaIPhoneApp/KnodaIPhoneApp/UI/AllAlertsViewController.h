@@ -7,8 +7,9 @@
 //
 
 #import "BaseRequestingViewController.h"
+#import "PredictionCell.h"
 
-@interface AllAlertsViewController : BaseRequestingViewController <UITableViewDataSource, UITableViewDelegate>
+@interface AllAlertsViewController : BaseRequestingViewController <UITableViewDataSource, UITableViewDelegate, PredictionCellDelegate>
 @property (nonatomic, strong) IBOutlet UITableView* tableView;
 @property (weak, nonatomic)   IBOutlet UIView *noContentView;
 @end

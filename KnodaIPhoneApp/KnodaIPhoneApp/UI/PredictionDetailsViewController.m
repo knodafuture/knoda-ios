@@ -24,7 +24,8 @@
 #import "CategoryPredictionsViewController.h"
 #import "AppDelegate.h"
 
-
+#import "BigDaddyPredictionCell.h"
+#import "PredictionDetailsSectionHeader.h"
 
 static NSString* const kCategorySegue      = @"CategoryPredictionsSegue";
 static NSString* const kUserProfileSegue   = @"UserProfileSegue";
@@ -32,7 +33,9 @@ static NSString* const kMyProfileSegue     = @"MyProfileSegue";
 
 static const int kBSAlertTag = 1001;
 
-@interface PredictionDetailsViewController () <UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate> {
+static const float parallaxRatio = 0.5;
+
+@interface PredictionDetailsViewController () <UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate, PredictionCellDelegate> {
     BOOL _loadingUsers;
     BOOL _updatingStatus;
 }
@@ -41,27 +44,10 @@ static const int kBSAlertTag = 1001;
 
 @property (nonatomic) NSArray *agreedUsers;
 @property (nonatomic) NSArray *disagreedUsers;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
-@property (weak, nonatomic) IBOutlet UIView *predictionHeaderView;
-@property (weak, nonatomic) IBOutlet BindableView *avatarView;
-@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *voteImage;
-@property (weak, nonatomic) IBOutlet UILabel *bodyLabel;
-@property (weak, nonatomic) IBOutlet UILabel *metaDataLabel;
-@property (weak, nonatomic) IBOutlet UILabel *smallOutcomeLabel;
-
-@property (weak, nonatomic) IBOutlet UIView *agreeDisagreeView;
-@property (weak, nonatomic) IBOutlet UIView *settlePredictionView;
-
-@property (weak, nonatomic) IBOutlet UIView *predictionStatusView;
-@property (weak, nonatomic) IBOutlet UILabel *outcomeLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *outcomeImageView;
-@property (weak, nonatomic) IBOutlet UILabel *totalPointsLabel;
-@property (weak, nonatomic) IBOutlet UILabel *pointsBreakdownLabel;
-
-@property (weak, nonatomic) IBOutlet UILabel *agreedNumberLabel;
-@property (weak, nonatomic) IBOutlet UILabel *disagreedNumberLabel;
-@property (weak, nonatomic) IBOutlet UITableView *predictorsTable;
+@property (strong, nonatomic) BigDaddyPredictionCell *predictionCell;
+@property (strong, nonatomic) PredictionDetailsSectionHeader *sectionHeader;
 
 @end
 
@@ -81,16 +67,18 @@ static const int kBSAlertTag = 1001;
     
     [[(AppDelegate *)[[UIApplication sharedApplication] delegate] user] addObserver:self forKeyPath:@"smallImage" options:NSKeyValueObservingOptionNew context:nil];
     self.title = @"DETAILS";
-
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(profileImageTapped:)];
-    [self.avatarView addGestureRecognizer:tap];
     
     self.navigationController.navigationBar.translucent = NO;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem backButtonWithTarget:self action:@selector(backPressed:)];
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem addPredictionBarButtonItem];
     
+    [self.tableView registerClass:UITableViewCell.class forCellReuseIdentifier:@"basicCell"];
     
-    [self updateView];
+    self.predictionCell = [BigDaddyPredictionCell predictionCellWithOwner:self];
+    self.sectionHeader = [PredictionDetailsSectionHeader sectionHeaderWithOwner:self];
+    
+    [self.predictionCell configureWithPrediction:self.prediction];
+    [self.tableView reloadData];
 }
 
 
@@ -99,7 +87,6 @@ static const int kBSAlertTag = 1001;
     [super viewDidAppear: animated];
     [Flurry logEvent: @"Prediction_Details_Screen" timed: YES];
 }
-
 
 - (void) viewDidDisappear: (BOOL) animated
 {
@@ -110,86 +97,26 @@ static const int kBSAlertTag = 1001;
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if([object isKindOfClass:[User class]] && [keyPath isEqualToString:@"smallImage"]) {
         self.prediction.smallAvatar = [(User *)object smallImage];
-        [self updateView];
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
     else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
 }
-
-- (void)updateView {
-    [self configureHeader];
-    [self configureVariableSpot];
-    [self reloadPredictorsTable];
-}
-
-- (void)configureHeader {
-    [self.avatarView bindToURL:self.prediction.smallAvatar];
-    
-    self.usernameLabel.text = self.prediction.userName;
-    self.metaDataLabel.text = [self.prediction metaDataString];
-    self.bodyLabel.text = self.prediction.body;
-
-    self.voteImage.image = [self.prediction statusImage];
-    self.smallOutcomeLabel.text = self.prediction.settled ? [self.prediction outcomeString] : @"";
-}
-
-- (void)configureVariableSpot {
-    
-    if (self.prediction.hasOutcome && self.prediction.chellange)
-        [self updateAndShowPredictionStatusView];
-    else if (self.prediction.canSetOutcome)
-        [self updateAndShowSettlePredictionView];
-    else if (!self.prediction.chellange && ![self.prediction isExpired])
-        [self updateAndShowAgreeDisagreeView];
-    else {
-        self.settlePredictionView.hidden = YES;
-        self.predictionStatusView.hidden = YES;
-        self.agreeDisagreeView.hidden = YES;
-    }
-}
-        
-- (void)updateAndShowAgreeDisagreeView {
-    self.settlePredictionView.hidden = YES;
-    self.predictionStatusView.hidden = YES;
-    self.agreeDisagreeView.hidden = NO;
-}
-- (void)updateAndShowPredictionStatusView {
-    self.settlePredictionView.hidden = YES;
-    self.predictionStatusView.hidden = NO;
-    self.agreeDisagreeView.hidden = YES;
-    
-    self.pointsBreakdownLabel.text = [self.prediction pointsString];
-    
-    self.totalPointsLabel.text = [NSString stringWithFormat:@"%d", [self.prediction totalPoints]];
-    
-    if ([self.prediction win]) {
-        self.outcomeLabel.text = @"YOU WON!";
-        self.outcomeImageView.image = [UIImage imageNamed:@"ResultsWinIcon"];
-    } else {
-        self.outcomeLabel.text = @"YOU LOST!";
-        self.outcomeImageView.image = [UIImage imageNamed:@"ResultsLoseIcon"];
-    }
-    
-}
-- (void)updateAndShowSettlePredictionView {
-    self.settlePredictionView.hidden = NO;
-    self.predictionStatusView.hidden = YES;
-    self.agreeDisagreeView.hidden = YES;
-}
 - (void)reloadPredictorsTable {
-    [self.predictorsTable reloadData];
+    //[self.predictorsTable reloadData];
     
-    self.agreedNumberLabel.text = [NSString stringWithFormat:@"%d AGREED", self.prediction.agreeCount];
-    self.disagreedNumberLabel.text = [NSString stringWithFormat:@"%d DISAGREED", self.prediction.disagreeCount];
+    //self.agreedNumberLabel.text = [NSString stringWithFormat:@"%d AGREED", self.prediction.agreeCount];
+    //self.disagreedNumberLabel.text = [NSString stringWithFormat:@"%d DISAGREED", self.prediction.disagreeCount];
     
 }
+
+
+#pragma mark Actions
 - (IBAction)share:(id)sender {
     UIActivityViewController *vc = [[UIActivityViewController alloc] initWithActivityItems:@[self.prediction.body] applicationActivities:nil];
     [self presentViewController:vc animated:YES completion:nil];
 }
-
-#pragma mark Actions
 
 - (void)backPressed:(UIButton *)sender {
     if(self.delegate && [self getWebRequests].count) { //update prediction in case if some changes weren't handled
@@ -270,25 +197,76 @@ static const int kBSAlertTag = 1001;
         self.prediction.agreeCount    = self.agreedUsers.count;
         self.prediction.disagreeCount = self.disagreedUsers.count;
         
-        [self updateView];
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0)
+        return self.predictionCell.frame.size.height;
+    else
+        return 30;
+}
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (section == 1)
+        return predictionDetailsSectionHeaderHeight;
+    else
+        return 0;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    if (section == 1)
+        return self.sectionHeader;
+    else
+        return nil;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _loadingUsers ? 1 : MAX(self.agreedUsers.count, self.disagreedUsers.count);
+    if (section == 0)
+        return 1;
+    else {
+        if (_loadingUsers)
+            return 21;
+        else
+            return MAX(self.agreedUsers.count, self.disagreedUsers.count) + 20;
+    }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        //[self.predictionCell update];
+        return self.predictionCell;
+    }
     
-    if (_loadingUsers)
-        return [tableView dequeueReusableCellWithIdentifier:[LoadingCell reuseIdentifier] forIndexPath:indexPath];
+    if (_loadingUsers && indexPath.row == 0)
+        return [tableView dequeueReusableCellWithIdentifier:@"LoadingCell" forIndexPath:indexPath];
     
-    PredictorCell *cell = [tableView dequeueReusableCellWithIdentifier:[PredictorCell reuseIdentifier] forIndexPath:indexPath];
+    if (indexPath.row < MAX(self.agreedUsers.count, self.disagreedUsers.count) - 1) {
+        PredictorCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PredictorCell" forIndexPath:indexPath];
+        
+        int idx = indexPath.row;
+        cell.agreedUserName.text    = self.agreedUsers.count > idx ? self.agreedUsers[idx] : @"";
+        cell.disagreedUserName.text = self.disagreedUsers.count > idx ? self.disagreedUsers[idx] : @"";
     
-    int idx = indexPath.row;
-    cell.agreedUserName.text    = self.agreedUsers.count > idx ? self.agreedUsers[idx] : @"";
-    cell.disagreedUserName.text = self.disagreedUsers.count > idx ? self.disagreedUsers[idx] : @"";
+        return cell;
+    }
     
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"basicCell"];
+    cell.textLabel.text = @"just here to test scrolling";
     return cell;
+    
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    UITableViewCell *stickyCell = self.predictionCell;
+    CGRect frame = stickyCell.frame;
+    frame.origin.y = scrollView.contentOffset.y * parallaxRatio;
+    
+    stickyCell.frame = frame;
+    [self.tableView sendSubviewToBack:stickyCell];
+    
+
 }
 #pragma mark Requests
 
@@ -355,18 +333,17 @@ static const int kBSAlertTag = 1001;
                 else {
                     [strongSelf showErrorFromRequest:request];
                 }
-                
-                [self updateView];
+                [self.tableView reloadData];
             }];
         }
         else {
             [strongSelf showErrorFromRequest:request];
             strongSelf->_updatingStatus = NO;
         }
-        [self updateView];
+        [self.tableView reloadData];
     }];
     
-    [self updateView];
+    [self.tableView reloadData];
 }
 
 - (void)sendOutcome:(BOOL)realise {
@@ -393,21 +370,21 @@ static const int kBSAlertTag = 1001;
                 else {
                     [strongSelf showErrorFromRequest:outcomeRequest];
                 }
-                [self updateView];
+                [self.tableView reloadData];
             }];
         }
         else {
             strongSelf->_updatingStatus = NO;
             
-            [self updateView];
+            [self.tableView reloadData];
             [strongSelf showErrorFromRequest:outcomeRequest];
         }
     }];
 
-    [self updateView];
+    [self.tableView reloadData];
 }
 
-- (void)sendBS {    
+- (void)sendBS {
     
     _updatingStatus = YES;
     
@@ -430,17 +407,17 @@ static const int kBSAlertTag = 1001;
                 else {
                     [strongSelf showErrorFromRequest:updateRequest];
                 }
-                [self updateView];
+                [self.tableView reloadData];
             }];
         }
         else {
             strongSelf->_updatingStatus = NO;
             [strongSelf showErrorFromRequest:bsRequest];
-            [self updateView];
+            [self.tableView reloadData];
         }
     }];
 
-    [self updateView];
+    [self.tableView reloadData];
 }
 
 #pragma mark UIAlertViewDelegate

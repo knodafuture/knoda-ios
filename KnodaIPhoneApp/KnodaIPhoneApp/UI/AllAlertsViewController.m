@@ -16,9 +16,13 @@
 #import "PredictionCell.h"
 #import "LoadingCell.h"
 #import "NavigationViewController.h"
+#import "AppDelegate.h" 
+#import "ProfileViewController.h"
+#import "AnotherUsersProfileViewController.h"
 
 static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
-
+static NSString* const kMyProfileSegue = @"MyProfileSegue";
+static NSString* const kUserProfileSegue       = @"UserProfileSegue";
 @interface AllAlertsViewController ()
 @property (strong, nonatomic) NSMutableArray *predictions;
 @end
@@ -43,9 +47,7 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
     
     [self refresh];
     [Flurry logEvent: @"All_Alerts_Screen" withParameters: nil timed: YES];
-    
-    self.tableView.rowHeight = [PredictionCell cellHeight];
-}
+    }
 
 
 - (void) viewDidDisappear: (BOOL) animated
@@ -114,13 +116,23 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
         PredictionDetailsViewController *vc = (PredictionDetailsViewController *)segue.destinationViewController;
         vc.prediction = sender;
     }
+    else if([segue.identifier isEqualToString:kUserProfileSegue]) {
+        AnotherUsersProfileViewController *vc = (AnotherUsersProfileViewController *)segue.destinationViewController;
+        vc.userId = [sender integerValue];
+    }
+    else if([segue.identifier isEqualToString:kMyProfileSegue]) {
+        ProfileViewController *vc = (ProfileViewController *)segue.destinationViewController;
+        vc.leftButtonItemReturnsBack = YES;
+    }
 }
 
-- (NSInteger) numberOfSectionsInTableView: (UITableView*) tableView
-{
-    return 1;
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.row != self.predictions.count)
+        return [PredictionCell heightForPrediction:[self.predictions objectAtIndex:indexPath.row]];
+    else
+        return defaultCellHeight;
 }
-
 
 - (NSInteger) tableView: (UITableView*) tableView numberOfRowsInSection: (NSInteger) section
 {
@@ -134,6 +146,7 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
     {
         PredictionCell *cell = [PredictionCell predictionCellForTableView:tableView];
         [cell fillWithPrediction:[self.predictions objectAtIndex:indexPath.row]];
+        cell.delegate = self;
         return cell;
     }
     else
@@ -172,7 +185,12 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
         }
     }
 }
-
+- (void) profileSelectedWithUserId:(NSInteger)userId inCell:(PredictionCell *)cell {
+    if ([(AppDelegate *)[[UIApplication sharedApplication] delegate] user].userId == userId)
+        [self performSegueWithIdentifier:kMyProfileSegue sender:self];
+    else
+        [self performSegueWithIdentifier:kUserProfileSegue sender:[NSNumber numberWithInt:userId]];
+}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath: indexPath animated: YES];
     

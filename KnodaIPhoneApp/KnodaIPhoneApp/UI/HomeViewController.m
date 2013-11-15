@@ -76,8 +76,7 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
 {
     [super viewDidAppear: animated];    
     self.cellUpdateTimer = [NSTimer scheduledTimerWithTimeInterval: 60.0 target: self selector: @selector(updateVisibleCells) userInfo: nil repeats: YES];
-    //self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height - 20.0);
-    //self.tableView.frame = self.navigationController.view.frame;
+    [self refresh:nil];
     [Flurry logEvent: @"Home_Screen" withParameters: nil timed: YES];
 }
 
@@ -205,11 +204,13 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
 #pragma mark - UITableViewDataSource
 
 
-- (NSInteger) numberOfSectionsInTableView: (UITableView*) tableView
-{
-    return 1;
-}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
+    if (indexPath.row != self.predictions.count)
+        return [PredictionCell heightForPrediction:[self.predictions objectAtIndex:indexPath.row]];
+    else
+        return defaultCellHeight;
+}
 
 - (NSInteger) tableView: (UITableView*) tableView numberOfRowsInSection: (NSInteger) section
 {
@@ -228,11 +229,7 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
         
         [cell fillWithPrediction: prediction];
         cell.delegate = self;
-        
-        UIPanGestureRecognizer* recognizer = [[UIPanGestureRecognizer alloc] init];
-        [cell addPanGestureRecognizer: recognizer];
-        UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]init];
-        [cell setUpUserProfileTapGestures:tapGesture];
+
         return cell;
     } else
         return [LoadingCell loadingCellForTableView:tableView];

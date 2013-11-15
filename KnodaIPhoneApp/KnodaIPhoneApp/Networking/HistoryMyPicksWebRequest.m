@@ -30,7 +30,7 @@ static const NSInteger kPageResultsLimit = 25;
     return self;
 }
 
-
+ 
 - (id) initWithLastCreatedDate: (NSDate*) lastCreatedDate
 {
     NSDictionary* params = @{@"list": @"picks", @"limit" : [NSNumber numberWithInteger: kPageResultsLimit], @"created_at_lt" : lastCreatedDate};

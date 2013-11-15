@@ -88,6 +88,7 @@ static const CGFloat kCategorySectionHeight = 40;
     self.navigationController.navigationBar.translucent = NO;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTitle:@"Cancel" target:self action:@selector(cancel) color:[UIColor whiteColor]];
     self.predictBarButton = self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTitle:@"Submit" target:self action:@selector(predict) color:[UIColor whiteColor]];
+    self.title = @"PREDICT";
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap)];
     [self.view addGestureRecognizer:tap];
@@ -325,8 +326,7 @@ static const CGFloat kCategorySectionHeight = 40;
             
             if (request.errorCode == 0)
             {
-                //[self.delegate predictionWasMadeInController:self];
-                [self.navigationController popViewControllerAnimated:YES];
+                [self.delegate predictionWasMadeInController:self];
             }
             else if (request.errorCode == kRequestTimeoutError)
             {

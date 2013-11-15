@@ -13,12 +13,14 @@
 #import "PredictionDetailsViewController.h"
 #import "AnotherUsersProfileViewController.h"
 #import "ProfileViewController.h"
-#import "ChildControllerDataSource.h"
 #import "PredictionUpdateWebRequest.h"
 #import "AppDelegate.h"
+#import "LoadingCell.h"
+#import "NavigationViewController.h"
 
 static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 static NSString* const kMyProfileSegue = @"MyProfileSegue";
+static NSString* const kUserProfileSegue       = @"UserProfileSegue";
 
 @interface MyPredictionsViewController () <PredictionCellDelegate, PredictionDetailsDelegate> {
     BOOL _isRefreshing;
@@ -28,7 +30,7 @@ static NSString* const kMyProfileSegue = @"MyProfileSegue";
 }
 
 @property (nonatomic, strong) NSTimer* cellUpdateTimer;
-
+@property (nonatomic, strong) NSMutableArray *predictions;
 @end
 
 
@@ -43,9 +45,18 @@ static NSString* const kMyProfileSegue = @"MyProfileSegue";
     [super viewDidLoad];
     [self refresh];
     
+    
+    self.navigationController.navigationBar.translucent = NO;
+    self.title = @"HISTORY";
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem sideNavBarBUttonItemwithTarget:self action:@selector(menuPressed:)];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem addPredictionBarButtonItem];
+    
+    
     [[(AppDelegate *)[[UIApplication sharedApplication] delegate] user] addObserver:self forKeyPath:@"smallImage" options:NSKeyValueObservingOptionNew context:nil];
 }
-
+- (void)menuPressed:(id)sender {
+    [((NavigationViewController*)self.navigationController.parentViewController) toggleNavigationPanel];
+}
 
 - (void) viewDidAppear: (BOOL) animated
 {
@@ -162,6 +173,10 @@ static NSString* const kMyProfileSegue = @"MyProfileSegue";
         ProfileViewController *vc = (ProfileViewController *)segue.destinationViewController;
         vc.leftButtonItemReturnsBack = YES;
     }
+    else if([segue.identifier isEqualToString:kUserProfileSegue]) {
+        AnotherUsersProfileViewController *vc = (AnotherUsersProfileViewController *)segue.destinationViewController;
+        vc.userId = [sender integerValue];
+    }
 }
 
 - (NSInteger)limitByPage {
@@ -182,32 +197,28 @@ static NSString* const kMyProfileSegue = @"MyProfileSegue";
     return (self.predictions.count != 0) ? ((self.predictions.count >= [HistoryMyPredictionsRequest limitByPage]) ? self.predictions.count + 1 : self.predictions.count) : 1;
 }
 
-
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row != self.predictions.count)
+        return [PredictionCell heightForPrediction:[self.predictions objectAtIndex:indexPath.row]];
+    else
+        return defaultCellHeight;
+}
 - (UITableViewCell*) tableView: (UITableView*) tableView cellForRowAtIndexPath: (NSIndexPath*) indexPath
 {
-    UITableViewCell* tableCell;
     
     if (indexPath.row != self.predictions.count)
     {
         Prediction* prediction = [self.predictions objectAtIndex: indexPath.row];
         
-        PredictionCell* cell = [tableView dequeueReusableCellWithIdentifier:[PredictionCell reuseIdentifier]];
+        PredictionCell* cell = [PredictionCell predictionCellForTableView:tableView];
         cell.delegate = self;
-        
-        UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]init];
-        [cell setUpUserProfileTapGestures:tapGesture];
         
         [cell fillWithPrediction: prediction];
         
-        tableCell = cell;
+        return cell;
     }
     else
-    {
-        UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier: @"LoadingCell"];
-        tableCell = cell;
-    }
-    
-    return tableCell;
+        return [LoadingCell loadingCellForTableView:tableView];
 }
 
 
@@ -242,7 +253,10 @@ static NSString* const kMyProfileSegue = @"MyProfileSegue";
 #pragma mark - PredictionCellDelegate
 
 - (void) profileSelectedWithUserId:(NSInteger)userId inCell:(PredictionCell *)cell {
-    [self performSegueWithIdentifier:kMyProfileSegue sender:self];
+    if ([(AppDelegate *)[[UIApplication sharedApplication] delegate] user].userId == userId)
+        [self performSegueWithIdentifier:kMyProfileSegue sender:self];
+    else
+        [self performSegueWithIdentifier:kUserProfileSegue sender:[NSNumber numberWithInt:userId]];
 }
 
 #pragma mark PredictionDetailsDelegate

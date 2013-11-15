@@ -23,7 +23,7 @@ static const NSInteger kPageResultsLimit = 25;
 
 - (id) init
 {
-    NSDictionary* params = @{@"list": @"own", @"limit" : [NSNumber numberWithInteger: kPageResultsLimit], @"offset" : [NSNumber numberWithInteger: 0]};
+    NSDictionary* params = @{@"list": @"ownedAndPicked", @"limit" : [NSNumber numberWithInteger: kPageResultsLimit], @"offset" : [NSNumber numberWithInteger: 0]};
     
     self = [super initWithParameters: params];
     return self;
@@ -32,7 +32,7 @@ static const NSInteger kPageResultsLimit = 25;
 
 - (id) initWithLastCreatedDate: (NSDate*) lastCreatedDate
 {
-    NSDictionary* params = @{@"list": @"own", @"limit" : [NSNumber numberWithInteger: kPageResultsLimit], @"created_at_lt" : lastCreatedDate};
+    NSDictionary* params = @{@"list": @"ownedAndPicked", @"limit" : [NSNumber numberWithInteger: kPageResultsLimit], @"created_at_lt" : lastCreatedDate};
     
     self = [super initWithParameters: params];
     return self;

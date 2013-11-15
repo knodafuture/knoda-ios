@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BaseTableViewCell.h"
 #import "BindableView.h"
 
 @class Prediction;
 @class PredictionCell;
 
+const extern CGFloat defaultCellHeight;
 
 @protocol PredictionCellDelegate <NSObject>
 
@@ -24,19 +24,12 @@
 @end
 
 
-@interface PredictionCell : BaseTableViewCell <UIGestureRecognizerDelegate, BindableViewProtocol>
-
-@property (nonatomic, strong) IBOutlet UILabel* bodyLabel;
-@property (nonatomic, strong) IBOutlet UILabel* metadataLabel;
-
-@property (nonatomic, assign) BOOL agreed;
-@property (nonatomic, assign) BOOL disagreed;
+@interface PredictionCell : UITableViewCell <BindableViewProtocol>
 
 @property (nonatomic, weak) id<PredictionCellDelegate> delegate;
 
 @property (nonatomic, strong) Prediction* prediction;
 
-- (void) addPanGestureRecognizer: (UIPanGestureRecognizer*) recognizer;
 - (void) setUpUserProfileTapGestures : (UITapGestureRecognizer*) recognizer;
 - (void) fillWithPrediction: (Prediction*) prediction;
 - (void) resetAgreedDisagreed;
@@ -44,5 +37,7 @@
 - (void) update;
 
 + (PredictionCell *)predictionCellForTableView:(UITableView *)tableView;
++ (CGFloat)heightForPrediction:(Prediction *)prediction;
+
 
 @end

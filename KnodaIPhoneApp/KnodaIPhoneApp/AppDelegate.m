@@ -46,7 +46,7 @@ NSString* const kAlertNotification = @"AlertNotification";
         [[UINavigationBar appearance] setBarTintColor:navBackgroundColor];
     }
     else {
-        [[UINavigationBar appearance] setTintColor:navBackgroundColor];
+        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"NavBar6"] forBarMetrics:UIBarMetricsDefault];
         [[UINavigationBar appearance] setTitleVerticalPositionAdjustment:4.0 forBarMetrics:UIBarMetricsDefault];
 
     }

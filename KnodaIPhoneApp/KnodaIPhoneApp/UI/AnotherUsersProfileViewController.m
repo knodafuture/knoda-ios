@@ -43,7 +43,6 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
     [super viewDidLoad];
     [[LoadingView sharedInstance] show];
     [self setUpUsersInfo];
-    self.predictionsTableView.rowHeight = [PredictionCell cellHeight];
 
     self.navigationController.navigationBar.translucent = NO;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem backButtonWithTarget:self action:@selector(backPressed:)];
@@ -142,7 +141,13 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 }
 
 #pragma mark - TableView datasource
-
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.row != self.predictions.count)
+        return [PredictionCell heightForPrediction:[self.predictions objectAtIndex:indexPath.row]];
+    else
+        return defaultCellHeight;
+}
 - (NSInteger) tableView: (UITableView*) tableView numberOfRowsInSection: (NSInteger) section {
     return (self.predictions.count != 0) ? ((self.predictions.count >= [AnotherUserPredictionsWebRequest limitByPage]) ? self.predictions.count + 1 : self.predictions.count) : 1;
 }
@@ -159,9 +164,7 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
         
         [cell fillWithPrediction: prediction];
         cell.delegate = self;
-        
-        UIPanGestureRecognizer* recognizer = [[UIPanGestureRecognizer alloc] init];
-        [cell addPanGestureRecognizer: recognizer];
+
         
         tableCell = cell;
     }

@@ -7,14 +7,13 @@
 //
 
 #import "ProfileViewController.h"
-#import "PreditionCell.h"
+#import "PredictionCell.h"
 #import "NavigationViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "AppDelegate.h"
 #import "AppDelegate.h"
 #import "ProfileWebRequest.h"
 #import "UsernameEmailChangeViewController.h"
-#import "AddPredictionViewController.h"
 #import "UIImage+Utils.h"
 #import "ImageCropperViewController.h"
 #import "BindableView.h"
@@ -22,7 +21,6 @@
 
 static NSString * const accountDetailsTableViewCellIdentifier = @"accountDetailsTableViewCellIdentifier";
 
-static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 static NSString* const kChangeEmailUsernameSegue = @"UsernameEmailSegue";
 static NSString* const kChangePasswordSegue = @"ChangePasswordSegue";
 static NSString* const kImageCropperSegue = @"ImageCropperSegue";
@@ -32,7 +30,7 @@ static const int kDefaultAvatarsCount = 5;
 static const float kAvatarSize = 344.0;
 #define AVATAR_SIZE CGSizeMake(kAvatarSize, kAvatarSize)
 
-@interface ProfileViewController () <AddPredictionViewControllerDelegate, ImageCropperDelegate>
+@interface ProfileViewController () <ImageCropperDelegate>
 
 @property (nonatomic, strong) AppDelegate * appDelegate;
 @property (nonatomic, strong) NSArray * accountDetailsArray;
@@ -59,6 +57,7 @@ static const float kAvatarSize = 344.0;
     else
         self.navigationItem.leftBarButtonItem = [UIBarButtonItem sideNavBarBUttonItemwithTarget:self action:@selector(menuButtonPress:)];
     self.navigationController.navigationBar.translucent = NO;
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem addPredictionBarButtonItem];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -236,11 +235,7 @@ static const float kAvatarSize = 344.0;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:kAddPredictionSegue]) {
-        AddPredictionViewController *vc =(AddPredictionViewController*)segue.destinationViewController;
-        vc.delegate = self;
-    }
-    else if ([segue.identifier isEqualToString:kChangeEmailUsernameSegue]) {        
+    if ([segue.identifier isEqualToString:kChangeEmailUsernameSegue]) {
         UsernameEmailChangeViewController *vc =(UsernameEmailChangeViewController*)segue.destinationViewController;
         vc.userProperyChangeType = [sender[0]integerValue];
         vc.currentPropertyValue = sender[1];
@@ -323,12 +318,4 @@ static const float kAvatarSize = 344.0;
     cell.textLabel.text = self.accountDetailsArray[indexPath.row];
     return cell;
 }
-
-#pragma mark - AddPredictionViewControllerDelegate
-
-- (void) predictionWasMadeInController:(AddPredictionViewController *)vc
-{
-    [vc dismissViewControllerAnimated:YES completion:nil];
-}
-
 @end

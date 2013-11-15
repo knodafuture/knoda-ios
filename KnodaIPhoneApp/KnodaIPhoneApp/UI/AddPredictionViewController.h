@@ -24,7 +24,4 @@
 + (NSArray *)expirationStrings;
 + (NSDate *)dateForExpirationString:(NSString *)expString;
 
-- (IBAction) predict: (id) sender;
-- (IBAction) cancel: (id) sender;
-
 @end

@@ -10,13 +10,11 @@
 #import "BadgeCollectionViewCell.h"
 #import "NavigationViewController.h"
 #import "BadgesWebRequest.h"
-#import "AddPredictionViewController.h"
 #import "UIViewController+WebRequests.h"
 #import "LoadingView.h"
 
-static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 
-@interface BadgesCollectionViewController () <AddPredictionViewControllerDelegate>
+@interface BadgesCollectionViewController ()
 
 @property (nonatomic, strong) NSMutableArray * badgesImagesArray;
 @property (weak, nonatomic) IBOutlet UIView *noContentView;
@@ -49,13 +47,9 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
     
     [[LoadingView sharedInstance] show];
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem sideNavBarBUttonItemwithTarget:self action:@selector(menuButtonPressed:)];
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem rightBarButtonItemWithImage:[UIImage imageNamed:@"PredictIcon"] target:self action:@selector(createPredictionPressed:)];
     self.navigationController.navigationBar.translucent = NO;
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem addPredictionBarButtonItem];
 }
-- (void)createPredictionPressed:(id)sender {
-    [self performSegueWithIdentifier:kAddPredictionSegue sender:sender];
-}
-
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -95,13 +89,6 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
     }];
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:kAddPredictionSegue]) {
-        AddPredictionViewController *vc =(AddPredictionViewController*)segue.destinationViewController;
-        vc.delegate = self;
-    }
-}
-
 #pragma mark - Outlets actions
 
 - (IBAction)menuButtonPressed:(id)sender {
@@ -139,13 +126,6 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
     BadgeCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BadgeCollectionViewCellIdentifier" forIndexPath:indexPath];
     cell.badgeImageView.image = self.badgesImagesArray[(indexPath.section*2 + indexPath.row)];
     return cell;
-}
-
-#pragma mark - AddPredictionViewControllerDelegate
-
-- (void) predictionWasMadeInController:(AddPredictionViewController *)vc
-{
-    [vc dismissViewControllerAnimated:YES completion:nil];
 }
 
 

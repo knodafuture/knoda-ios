@@ -7,9 +7,9 @@
 //
 
 #import "UIBarButtonItem+Utils.h"
+#import "AppDelegate.h"
 
 #define PADDING 10.0
-
 static UIFont *font = nil;
 
 @implementation UIBarButtonItem (Utils)
@@ -81,5 +81,10 @@ static UIFont *font = nil;
 
 + (UIBarButtonItem *)sideNavBarBUttonItemwithTarget:(id)target action:(SEL)action {
     return [UIBarButtonItem leftBarButtonItemWithImage:[UIImage imageNamed:@"NavIcon"] target:target action:action];
+}
++ (UIBarButtonItem *)addPredictionBarButtonItem {
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    return [UIBarButtonItem rightBarButtonItemWithImage:[UIImage imageNamed:@"PredictIcon"] target:delegate action:@selector(presentAddPredictionViewController)];
+
 }
 @end

@@ -6,9 +6,7 @@
 //  Copyright (c) 2013 Knoda. All rights reserved.
 //
 
-#import "BaseTableViewCell.h"
-
-@interface PredictorCell : BaseTableViewCell
+@interface PredictorCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *agreedUserName;
 @property (weak, nonatomic) IBOutlet UILabel *disagreedUserName;

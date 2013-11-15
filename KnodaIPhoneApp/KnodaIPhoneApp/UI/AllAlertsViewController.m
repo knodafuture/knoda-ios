@@ -8,31 +8,46 @@
 
 #import "AllAlertsViewController.h"
 
-#import "AlertCell.h"
 #import "AllAlertsWebRequest.h"
-
 #import "Chellange.h"
 #import "Prediction.h"
-
 #import "SetSeenAlertsWebRequest.h"
-
 #import "PredictionDetailsViewController.h"
+#import "PredictionCell.h"
+#import "LoadingCell.h"
+#import "NavigationViewController.h"
+#import "AppDelegate.h" 
+#import "ProfileViewController.h"
+#import "AnotherUsersProfileViewController.h"
 
 static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
-
+static NSString* const kMyProfileSegue = @"MyProfileSegue";
+static NSString* const kUserProfileSegue       = @"UserProfileSegue";
 @interface AllAlertsViewController ()
-
+@property (strong, nonatomic) NSMutableArray *predictions;
 @end
 
 @implementation AllAlertsViewController
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem sideNavBarBUttonItemwithTarget:self action:@selector(menuPressed:)];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem addPredictionBarButtonItem];
+    
+    self.title = @"ALERTS";
+}
+- (void)menuPressed:(id)sender {
+    [((NavigationViewController*)self.navigationController.parentViewController) toggleNavigationPanel];
+}
 - (void) viewDidAppear: (BOOL) animated
 {
     [super viewDidAppear: animated];
     
     [self refresh];
     [Flurry logEvent: @"All_Alerts_Screen" withParameters: nil timed: YES];
-}
+    }
 
 
 - (void) viewDidDisappear: (BOOL) animated
@@ -65,7 +80,7 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
                 NSArray* visibleCells = [strongSelf.tableView visibleCells];
                 NSMutableArray* chellangeIDs = [NSMutableArray arrayWithCapacity: 0];
                 
-                for (PreditionCell* cell in visibleCells)
+                for (PredictionCell* cell in visibleCells)
                 {
                     if (cell.prediction.settled)
                     {
@@ -80,7 +95,7 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
                      {
                          if (request.errorCode != 0)
                          {
-                             for (PreditionCell* cell in visibleCells)
+                             for (PredictionCell* cell in visibleCells)
                              {
                                  cell.prediction.chellange.seen = YES;
                              }
@@ -101,13 +116,23 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
         PredictionDetailsViewController *vc = (PredictionDetailsViewController *)segue.destinationViewController;
         vc.prediction = sender;
     }
+    else if([segue.identifier isEqualToString:kUserProfileSegue]) {
+        AnotherUsersProfileViewController *vc = (AnotherUsersProfileViewController *)segue.destinationViewController;
+        vc.userId = [sender integerValue];
+    }
+    else if([segue.identifier isEqualToString:kMyProfileSegue]) {
+        ProfileViewController *vc = (ProfileViewController *)segue.destinationViewController;
+        vc.leftButtonItemReturnsBack = YES;
+    }
 }
 
-- (NSInteger) numberOfSectionsInTableView: (UITableView*) tableView
-{
-    return 1;
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.row != self.predictions.count)
+        return [PredictionCell heightForPrediction:[self.predictions objectAtIndex:indexPath.row]];
+    else
+        return defaultCellHeight;
 }
-
 
 - (NSInteger) tableView: (UITableView*) tableView numberOfRowsInSection: (NSInteger) section
 {
@@ -117,19 +142,15 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 
 - (UITableViewCell*) tableView: (UITableView*) tableView cellForRowAtIndexPath: (NSIndexPath*) indexPath
 {
-    UITableViewCell* cell = nil;
-    
     if (self.predictions.count != 0)
     {
-        cell = [self.tableView dequeueReusableCellWithIdentifier: [AlertCell reuseIdentifier]];
-        [((AlertCell*)cell) fillWithPrediction: [self.predictions objectAtIndex: indexPath.row]];
+        PredictionCell *cell = [PredictionCell predictionCellForTableView:tableView];
+        [cell fillWithPrediction:[self.predictions objectAtIndex:indexPath.row]];
+        cell.delegate = self;
+        return cell;
     }
     else
-    {
-        cell = [self.tableView dequeueReusableCellWithIdentifier: @"LoadingCell"];
-    }
-    
-    return cell;
+        return [LoadingCell loadingCellForTableView:tableView];
 }
 
 
@@ -140,7 +161,7 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
         NSArray* visibleCells = [self.tableView visibleCells];
         NSMutableArray* chellangeIDs = [NSMutableArray arrayWithCapacity: 0];
         
-        for (PreditionCell* cell in visibleCells)
+        for (PredictionCell* cell in visibleCells)
         {
             if (cell.prediction.settled)
             {
@@ -155,7 +176,7 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
             {
                 if (request.errorCode != 0)
                 {
-                    for (PreditionCell* cell in visibleCells)
+                    for (PredictionCell* cell in visibleCells)
                     {
                         cell.prediction.chellange.seen = YES;
                     }
@@ -164,7 +185,12 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
         }
     }
 }
-
+- (void) profileSelectedWithUserId:(NSInteger)userId inCell:(PredictionCell *)cell {
+    if ([(AppDelegate *)[[UIApplication sharedApplication] delegate] user].userId == userId)
+        [self performSegueWithIdentifier:kMyProfileSegue sender:self];
+    else
+        [self performSegueWithIdentifier:kUserProfileSegue sender:[NSNumber numberWithInt:userId]];
+}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath: indexPath animated: YES];
     

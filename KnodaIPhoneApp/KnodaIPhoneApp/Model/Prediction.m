@@ -104,5 +104,186 @@ static NSString* const kResponseDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'zzz";
     return self.chellange && ([self isFinished] || [self passed72HoursSinceExpiration]);
 }
 
+- (NSString *)metaDataString {
+    NSString* expirationString = [self predictionExpiresIntervalString: self];
+    NSString* creationString = [self predictionCreatedIntervalString: self];
+    
+    return [NSString stringWithFormat: NSLocalizedString(@"%@ | %@ | %d%% agree", @""),
+            expirationString,
+            creationString,
+            self.agreedPercent];
+}
+#pragma mark Calculate dates
+
+
+- (NSString*) predictionCreatedIntervalString: (Prediction*) prediciton
+{
+    NSString* result;
+    
+    NSDate* now = [NSDate date];
+    
+    NSTimeInterval interval = [now timeIntervalSinceDate: prediciton.creationDate];
+    
+    NSInteger secondsInMinute = 60;
+    NSInteger minutesInHour = 60;
+    NSInteger hoursInDay = 24;
+    NSInteger daysInMonth = 30;
+    NSInteger monthInYear = 12;
+    
+    if (interval < secondsInMinute)
+    {
+        result = [NSString stringWithFormat: NSLocalizedString(@"made %ds ago", @""), (NSInteger)interval];
+    }
+    else if (interval < (secondsInMinute * minutesInHour * hoursInDay))
+    {
+        NSInteger minutes = 0;
+        NSInteger hours = (NSInteger)interval / (secondsInMinute * minutesInHour);
+        minutes = hours > 0 ? 0 : ((NSInteger)interval / secondsInMinute) % minutesInHour;
+        
+        NSString* hoursString = (hours != 0) ? [NSString stringWithFormat: NSLocalizedString(@"%dh", @""), hours] : @"";
+        NSString* minutesString = (minutes != 0) ? [NSString stringWithFormat: NSLocalizedString(@"%dm", @""), minutes] : @"";
+        NSString* space = (hours != 0 && minutes != 0) ? @" " : @"";
+        
+        result = [NSString stringWithFormat: NSLocalizedString(@"made %@%@%@ ago", @""), hoursString, space, minutesString];
+    }
+    else if (interval < (secondsInMinute * minutesInHour * hoursInDay * daysInMonth))
+    {
+        NSInteger days = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay));
+        result = [NSString stringWithFormat: NSLocalizedString(@"made %dd ago", @""), days];
+    }
+    else if (interval < (secondsInMinute * minutesInHour * hoursInDay * daysInMonth * monthInYear))
+    {
+        NSInteger month = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay * daysInMonth));
+        result = [NSString stringWithFormat: NSLocalizedString(@"made %dmth ago", @""), month];
+    }
+    else
+    {
+        NSInteger year = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay * daysInMonth * monthInYear));
+        result = [NSString stringWithFormat: NSLocalizedString(@"made %dyr%@ ago", @""), year, (year != 1) ? @"s" : @""];
+    }
+    
+    return result;
+}
+
+
+- (NSString*) predictionExpiresIntervalString: (Prediction*) prediciton {
+    NSString* result;
+    
+    NSTimeInterval interval = 0;
+    NSDate* now = [NSDate date];
+    BOOL expired = NO;
+    
+    if ([now compare: prediciton.expirationDate] == NSOrderedAscending)
+    {
+        interval = [prediciton.expirationDate timeIntervalSinceDate: now];
+    }
+    else
+    {
+        interval = [now timeIntervalSinceDate: prediciton.expirationDate];
+        expired = YES;
+    }
+    
+    NSInteger secondsInMinute = 60;
+    NSInteger minutesInHour = 60;
+    NSInteger hoursInDay = 24;
+    NSInteger daysInMonth = 30;
+    NSInteger monthInYear = 12;
+    
+    if (interval < secondsInMinute)
+    {
+        result = [NSString stringWithFormat: NSLocalizedString(@"exp %ds%@", @""), (NSInteger)interval, (expired) ? @" ago" : @""];
+    }
+    else if (interval < (secondsInMinute * minutesInHour * hoursInDay))
+    {
+        NSInteger minutes = 0;
+        NSInteger hours = (NSInteger)interval / (secondsInMinute * minutesInHour);
+        minutes = hours > 0 ? 0 : ((NSInteger)interval / secondsInMinute) % minutesInHour;
+        
+        NSString* hoursString = (hours != 0) ? [NSString stringWithFormat: NSLocalizedString(@"%dh", @""), hours] : @"";
+        NSString* minutesString = (minutes != 0) ? [NSString stringWithFormat: NSLocalizedString(@"%dm", @""), minutes] : @"";
+        NSString* space = (hours != 0 && minutes != 0) ? @" " : @"";
+        
+        result = [NSString stringWithFormat: NSLocalizedString(@"exp %@%@%@%@", @""), hoursString, space, minutesString, (expired) ? @" ago" : @""];
+    }
+    else if (interval < (secondsInMinute * minutesInHour * hoursInDay * daysInMonth))
+    {
+        NSInteger days = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay)) + 1;
+        result = [NSString stringWithFormat: NSLocalizedString(@"exp %dd%@", @""), days, (expired) ? @" ago" : @""];
+    }
+    else if (interval < (secondsInMinute * minutesInHour * hoursInDay * daysInMonth * monthInYear))
+    {
+        NSInteger month = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay * daysInMonth)) + 1;
+        result = [NSString stringWithFormat: NSLocalizedString(@"exp %dmth%@", @""), month, (expired) ? @" ago" : @""];
+    }
+    else
+    {
+        NSInteger year = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay * daysInMonth * monthInYear)) + 1;
+        result = [NSString stringWithFormat: NSLocalizedString(@"exp %dyr%@", @""), year, (year != 1) ? @"s" : @"", (expired) ? @" ago" : @""];
+    }
+
+    
+    return result;
+}
+
+- (BOOL)iAgree {
+    return (self.chellange != nil) && (self.chellange.agree);
+}
+
+- (BOOL)iDisagree {
+    return (self.chellange != nil) && !(self.chellange.agree);
+}
+
+- (UIImage *)statusImage {
+    if ([self iAgree])
+        return [UIImage imageNamed:@"AgreeMarkerActive"];
+    else if ([self iDisagree])
+        return [UIImage imageNamed:@"DisagreeMarkerActive"];
+    else
+        return nil;
+}
+
+- (NSString *)outcomeString {
+    if ([self iAgree])
+        return self.outcome ? @"W" : @"L";
+    else
+        return self.outcome ? @"L" : @"W";
+
+}
+- (BOOL)win {
+    if ([self iAgree])
+        return self.outcome ? YES : NO;
+    else
+        return self.outcome ? NO : YES;
+}
+- (NSString *)pointsString {
+    __block NSMutableString *string = [NSMutableString string];
+    
+    void (^addPoint)(int, NSString*) = ^(int point, NSString *name) {
+        if(point > 0) {
+            [string appendFormat:@"+%d %@\n", point, name];
+        }
+    };
+    
+    addPoint(self.chellange.basePoints, NSLocalizedString(@"Base", @""));
+    addPoint(self.chellange.outcomePoints, NSLocalizedString(@"Outcome", @""));
+    addPoint(self.chellange.marketSizePoints, NSLocalizedString(@"Market size", @""));
+    addPoint(self.chellange.predictionMarketPoints, [self marketSizeNameForPoints:self.chellange.predictionMarketPoints]);
+    
+    return string;
+}
+- (NSInteger)totalPoints {
+    return self.chellange.basePoints + self.chellange.outcomePoints + self.chellange.marketSizePoints + self.chellange.predictionMarketPoints;
+}
+- (NSString *)marketSizeNameForPoints:(NSInteger)points {
+    switch (points) {
+        case 0:  return NSLocalizedString(@"Too Easy", @"");
+        case 10:
+        case 20: return NSLocalizedString(@"Favorite", @"");
+        case 30:
+        case 40: return NSLocalizedString(@"Underdog", @"");
+        case 50: return NSLocalizedString(@"Longshot", @"");
+        default: return @"";
+    }
+}
 
 @end

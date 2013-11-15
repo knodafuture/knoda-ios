@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Knoda. All rights reserved.
 //
 
-#import "BaseTableViewCell.h"
+@interface LoadingCell : UITableViewCell
 
-@interface LoadingCell : BaseTableViewCell
++ (LoadingCell *)loadingCellForTableView:(UITableView *)tableView;
 
 @end

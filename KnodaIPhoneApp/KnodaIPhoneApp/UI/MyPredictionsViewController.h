@@ -6,8 +6,10 @@
 //  Copyright (c) 2013 Knoda. All rights reserved.
 //
 
-#import "ChildViewController.h"
+#import "BaseRequestingViewController.h"
 
-@interface MyPredictionsViewController : ChildViewController
+@interface MyPredictionsViewController : BaseRequestingViewController <UITableViewDataSource, UITableViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *noContentView;
 @end

@@ -36,7 +36,6 @@ NSString* const kBaseURL = @"api.knoda.com";
 
 #else
 
-
 //Uncomment the following line for local environment
 //NSString* const kBaseURL = @"127.0.0.1:3000";
 

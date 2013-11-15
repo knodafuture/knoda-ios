@@ -7,21 +7,22 @@
 //
 
 #import "MyPredictionsViewController.h"
-#import "PreditionCell.h"
+#import "PredictionCell.h"
 #import "HistoryMyPredictionsRequest.h"
 #import "Prediction.h"
 #import "PredictionDetailsViewController.h"
-#import "AddPredictionViewController.h"
 #import "AnotherUsersProfileViewController.h"
 #import "ProfileViewController.h"
-#import "ChildControllerDataSource.h"
 #import "PredictionUpdateWebRequest.h"
 #import "AppDelegate.h"
+#import "LoadingCell.h"
+#import "NavigationViewController.h"
 
 static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 static NSString* const kMyProfileSegue = @"MyProfileSegue";
+static NSString* const kUserProfileSegue       = @"UserProfileSegue";
 
-@interface MyPredictionsViewController () <AddPredictionViewControllerDelegate, PredictionCellDelegate, PredictionDetailsDelegate> {
+@interface MyPredictionsViewController () <PredictionCellDelegate, PredictionDetailsDelegate> {
     BOOL _isRefreshing;
     BOOL _needLoadNextPage;
     BOOL _needRefresh;
@@ -29,7 +30,7 @@ static NSString* const kMyProfileSegue = @"MyProfileSegue";
 }
 
 @property (nonatomic, strong) NSTimer* cellUpdateTimer;
-
+@property (nonatomic, strong) NSMutableArray *predictions;
 @end
 
 
@@ -44,9 +45,18 @@ static NSString* const kMyProfileSegue = @"MyProfileSegue";
     [super viewDidLoad];
     [self refresh];
     
+    
+    self.navigationController.navigationBar.translucent = NO;
+    self.title = @"HISTORY";
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem sideNavBarBUttonItemwithTarget:self action:@selector(menuPressed:)];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem addPredictionBarButtonItem];
+    
+    
     [[(AppDelegate *)[[UIApplication sharedApplication] delegate] user] addObserver:self forKeyPath:@"smallImage" options:NSKeyValueObservingOptionNew context:nil];
 }
-
+- (void)menuPressed:(id)sender {
+    [((NavigationViewController*)self.navigationController.parentViewController) toggleNavigationPanel];
+}
 
 - (void) viewDidAppear: (BOOL) animated
 {
@@ -94,8 +104,8 @@ static NSString* const kMyProfileSegue = @"MyProfileSegue";
     
     for (UITableViewCell* cell in visibleCells)
     {
-        if([cell isKindOfClass:[PreditionCell class]]) {
-            [(PreditionCell *)cell updateDates];
+        if([cell isKindOfClass:[PredictionCell class]]) {
+            [(PredictionCell *)cell updateDates];
         }
     }
 }
@@ -157,12 +167,15 @@ static NSString* const kMyProfileSegue = @"MyProfileSegue";
     if([segue.identifier isEqualToString:kPredictionDetailsSegue]) {
         PredictionDetailsViewController *vc = (PredictionDetailsViewController *)segue.destinationViewController;
         vc.prediction = sender;
-        vc.addPredictionDelegate = self;
         vc.delegate = self;
     }
     else if([segue.identifier isEqualToString:kMyProfileSegue]) {
         ProfileViewController *vc = (ProfileViewController *)segue.destinationViewController;
         vc.leftButtonItemReturnsBack = YES;
+    }
+    else if([segue.identifier isEqualToString:kUserProfileSegue]) {
+        AnotherUsersProfileViewController *vc = (AnotherUsersProfileViewController *)segue.destinationViewController;
+        vc.userId = [sender integerValue];
     }
 }
 
@@ -184,32 +197,28 @@ static NSString* const kMyProfileSegue = @"MyProfileSegue";
     return (self.predictions.count != 0) ? ((self.predictions.count >= [HistoryMyPredictionsRequest limitByPage]) ? self.predictions.count + 1 : self.predictions.count) : 1;
 }
 
-
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row != self.predictions.count)
+        return [PredictionCell heightForPrediction:[self.predictions objectAtIndex:indexPath.row]];
+    else
+        return defaultCellHeight;
+}
 - (UITableViewCell*) tableView: (UITableView*) tableView cellForRowAtIndexPath: (NSIndexPath*) indexPath
 {
-    UITableViewCell* tableCell;
     
     if (indexPath.row != self.predictions.count)
     {
         Prediction* prediction = [self.predictions objectAtIndex: indexPath.row];
         
-        PreditionCell* cell = [tableView dequeueReusableCellWithIdentifier:[PreditionCell reuseIdentifier]];
+        PredictionCell* cell = [PredictionCell predictionCellForTableView:tableView];
         cell.delegate = self;
-        
-        UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]init];
-        [cell setUpUserProfileTapGestures:tapGesture];
         
         [cell fillWithPrediction: prediction];
         
-        tableCell = cell;
+        return cell;
     }
     else
-    {
-        UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier: @"LoadingCell"];
-        tableCell = cell;
-    }
-    
-    return tableCell;
+        return [LoadingCell loadingCellForTableView:tableView];
 }
 
 
@@ -241,18 +250,13 @@ static NSString* const kMyProfileSegue = @"MyProfileSegue";
     }
 }
 
-
-#pragma mark - AddPredictionViewControllerDelegate
-
-- (void) predictionWasMadeInController:(AddPredictionViewController *)vc {
-    [vc dismissViewControllerAnimated:YES completion:nil];
-    [self refresh];
-}
-
 #pragma mark - PredictionCellDelegate
 
-- (void) profileSelectedWithUserId:(NSInteger)userId inCell:(PreditionCell *)cell {
-    [self performSegueWithIdentifier:kMyProfileSegue sender:self];
+- (void) profileSelectedWithUserId:(NSInteger)userId inCell:(PredictionCell *)cell {
+    if ([(AppDelegate *)[[UIApplication sharedApplication] delegate] user].userId == userId)
+        [self performSegueWithIdentifier:kMyProfileSegue sender:self];
+    else
+        [self performSegueWithIdentifier:kUserProfileSegue sender:[NSNumber numberWithInt:userId]];
 }
 
 #pragma mark PredictionDetailsDelegate

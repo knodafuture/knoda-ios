@@ -8,6 +8,9 @@
 
 #import "LoadingCell.h"
 
+
+static UINib *nib;
+
 @interface LoadingCell()
 
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityIndicator;
@@ -19,6 +22,19 @@
 - (void)prepareForReuse {
     [super prepareForReuse];
     [self.activityIndicator startAnimating];
+}
+
++ (void)initialize {
+    nib = [UINib nibWithNibName:@"LoadingCell" bundle:[NSBundle mainBundle]];
+}
+
++ (LoadingCell *)loadingCellForTableView:(UITableView *)tableView {
+    LoadingCell *cell = (LoadingCell *)[tableView dequeueReusableCellWithIdentifier:@"LoadingCell"];
+    
+    if (!cell)
+        cell = [[nib instantiateWithOwner:nil options:nil] lastObject];
+    
+    return cell;
 }
 
 @end

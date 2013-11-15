@@ -11,7 +11,7 @@
 #import "AnotherUserProfileWebRequest.h"
 #import "AnotherUserPredictionsWebRequest.h"
 #import "AddPredictionViewController.h"
-#import "PreditionCell.h"
+#import "PredictionCell.h"
 #import "BindableView.h"
 #import "PredictionDetailsViewController.h"
 #import "PredictionAgreeWebRequest.h"
@@ -69,7 +69,7 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
 {
     NSArray* visibleCells = [self.predictionsTableView visibleCells];
     
-    for (PreditionCell* cell in visibleCells)
+    for (PredictionCell* cell in visibleCells)
     {
         [cell updateDates];
     }
@@ -138,7 +138,6 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
     else if([segue.identifier isEqualToString:kPredictionDetailsSegue]) {
         PredictionDetailsViewController *vc = (PredictionDetailsViewController *)segue.destinationViewController;
         vc.prediction = sender;
-        vc.addPredictionDelegate = self;
         vc.shouldNotOpenProfile = YES;
         vc.delegate = self;
     }
@@ -171,7 +170,7 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
     {
         Prediction* prediction = [self.predictions objectAtIndex: indexPath.row];
         
-        PreditionCell* cell = [tableView dequeueReusableCellWithIdentifier:[PreditionCell reuseIdentifier]];
+        PredictionCell* cell = [tableView dequeueReusableCellWithIdentifier:[PredictionCell reuseIdentifier]];
         
         [cell fillWithPrediction: prediction];
         cell.delegate = self;
@@ -231,7 +230,7 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
 #pragma mark - PredictionCellDelegate
 
 
-- (void) predictionAgreed: (Prediction*) prediction inCell: (PreditionCell*) cell
+- (void) predictionAgreed: (Prediction*) prediction inCell: (PredictionCell*) cell
 {
     __weak AnotherUsersProfileViewController *weakSelf = self;
     
@@ -263,7 +262,7 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
      }];
 }
 
-- (void) predictionDisagreed: (Prediction*) prediction inCell: (PreditionCell*) cell
+- (void) predictionDisagreed: (Prediction*) prediction inCell: (PredictionCell*) cell
 {
     __weak AnotherUsersProfileViewController *weakSelf = self;
     

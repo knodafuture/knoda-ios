@@ -7,7 +7,7 @@
 //
 
 #import "ProfileViewController.h"
-#import "PreditionCell.h"
+#import "PredictionCell.h"
 #import "NavigationViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "AppDelegate.h"

@@ -142,8 +142,8 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
     
     for (UITableViewCell* cell in visibleCells)
     {
-        if([cell isKindOfClass:[PreditionCell class]]) {
-            [(PreditionCell *)cell updateDates];
+        if([cell isKindOfClass:[PredictionCell class]]) {
+            [(PredictionCell *)cell updateDates];
         }
     }
 }
@@ -157,7 +157,6 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
     else if([segue.identifier isEqualToString:kPredictionDetailsSegue]) {
         PredictionDetailsViewController *vc = (PredictionDetailsViewController *)segue.destinationViewController;
         vc.prediction = sender;
-        vc.addPredictionDelegate = self;
         vc.delegate = self;
     }
     else if([segue.identifier isEqualToString:kUserProfileSegue]) {
@@ -236,7 +235,7 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
     {
         Prediction* prediction = [self.predictions objectAtIndex: indexPath.row];
         
-        PreditionCell* cell = [tableView dequeueReusableCellWithIdentifier:[PreditionCell reuseIdentifier]];
+        PredictionCell* cell = [tableView dequeueReusableCellWithIdentifier:[PredictionCell reuseIdentifier]];
         
         [cell fillWithPrediction: prediction];
         cell.delegate = self;
@@ -308,7 +307,7 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
 #pragma mark - PredictionCellDelegate
 
 
-- (void) predictionAgreed: (Prediction*) prediction inCell: (PreditionCell*) cell
+- (void) predictionAgreed: (Prediction*) prediction inCell: (PredictionCell *) cell
 {
     __weak HomeViewController *weakSelf = self;
     
@@ -340,7 +339,7 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
     }];
 }
 
-- (void) predictionDisagreed: (Prediction*) prediction inCell: (PreditionCell*) cell
+- (void) predictionDisagreed: (Prediction*) prediction inCell: (PredictionCell *) cell
 {
     __weak HomeViewController *weakSelf = self;
     
@@ -371,7 +370,7 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
      }];
 }
 
-- (void) profileSelectedWithUserId:(NSInteger)userId inCell:(PreditionCell *)cell {
+- (void) profileSelectedWithUserId:(NSInteger)userId inCell:(PredictionCell *)cell {
     if (self.appDelegate.user.userId == userId) {
         [self performSegueWithIdentifier:kMyProfileSegue sender:self];
     }

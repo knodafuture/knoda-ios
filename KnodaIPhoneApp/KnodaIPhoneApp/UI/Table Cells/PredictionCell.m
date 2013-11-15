@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Knoda. All rights reserved.
 //
 
-#import "PreditionCell.h"
+#import "PredictionCell.h"
 #import "Prediction.h"
 #import "Chellange.h"
 
@@ -28,7 +28,7 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
     @"chellange.isFinished"
 };
 
-@interface PreditionCell ()
+@interface PredictionCell ()
 
 @property (nonatomic, strong) UIPanGestureRecognizer* gestureRecognizer;
 @property (nonatomic, strong) UITapGestureRecognizer* profileGestureRecognizer;
@@ -49,7 +49,7 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
 
 @end
 
-@implementation PreditionCell
+@implementation PredictionCell
 {
     BOOL agreed;
     BOOL disagreed;
@@ -76,7 +76,7 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
 #pragma mark KVO
 
 - (void)addKVO {
-    if(![self isMemberOfClass:[PreditionCell class]]) {
+    if(![self isMemberOfClass:[PredictionCell class]]) {
         return;
     }
     for(int i = 0; i < kObserverKeyCount; i++) {
@@ -85,7 +85,7 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
 }
 
 - (void)removeKVO {
-    if(![self isMemberOfClass:[PreditionCell class]]) {
+    if(![self isMemberOfClass:[PredictionCell class]]) {
         return;
     }
     for(int i = 0; i < kObserverKeyCount; i++) {
@@ -136,12 +136,8 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
     
     self.usernameLabel.text = self.prediction.userName;
     self.bodyLabel.text = self.prediction.body;
-        
     
     self.metadataLabel.text = [self.prediction metaDataString];
-    
-    //self.expirationDateLabel.text = expirationString;
-    //self.expirationDateLabel.textColor = (expiresInLowerThen10Minutes) ? ([UIColor redColor]) : (self.metadataLabel.textColor);
     
     CGRect rect = self.bodyLabel.frame;
     CGSize maximumLabelSize = CGSizeMake(218, 37);

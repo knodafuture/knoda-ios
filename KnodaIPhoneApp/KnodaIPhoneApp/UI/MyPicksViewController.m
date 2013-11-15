@@ -7,7 +7,7 @@
 //
 
 #import "MyPicksViewController.h"
-#import "PreditionCell.h"
+#import "PredictionCell.h"
 #import "HistoryMyPicksWebRequest.h"
 #import "Prediction.h"
 #import "PredictionDetailsViewController.h"
@@ -56,8 +56,8 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
     
     for (UITableViewCell* cell in visibleCells)
     {
-        if([cell isKindOfClass:[PreditionCell class]]) {
-            [(PreditionCell *)cell updateDates];
+        if([cell isKindOfClass:[PredictionCell class]]) {
+            [(PredictionCell *)cell updateDates];
         }
     }
 }
@@ -155,7 +155,7 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
     {
         Prediction* prediction = [self.predictions objectAtIndex: indexPath.row];
         
-        PreditionCell* cell = [tableView dequeueReusableCellWithIdentifier:[PreditionCell reuseIdentifier]];
+        PredictionCell* cell = [tableView dequeueReusableCellWithIdentifier:[PredictionCell reuseIdentifier]];
         cell.delegate = self;
         
         [cell fillWithPrediction: prediction];
@@ -204,7 +204,7 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
 }
 
 #pragma mark - PredictionCellDelegate
-- (void) profileSelectedWithUserId:(NSInteger)userId inCell:(PreditionCell *)cell {
+- (void) profileSelectedWithUserId:(NSInteger)userId inCell:(PredictionCell *)cell {
     [self performSegueWithIdentifier:kUserProfileSegue sender:[NSNumber numberWithInteger:userId]];
 }
 

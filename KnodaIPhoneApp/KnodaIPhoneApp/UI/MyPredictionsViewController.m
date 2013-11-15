@@ -7,7 +7,7 @@
 //
 
 #import "MyPredictionsViewController.h"
-#import "PreditionCell.h"
+#import "PredictionCell.h"
 #import "HistoryMyPredictionsRequest.h"
 #import "Prediction.h"
 #import "PredictionDetailsViewController.h"
@@ -94,8 +94,8 @@ static NSString* const kMyProfileSegue = @"MyProfileSegue";
     
     for (UITableViewCell* cell in visibleCells)
     {
-        if([cell isKindOfClass:[PreditionCell class]]) {
-            [(PreditionCell *)cell updateDates];
+        if([cell isKindOfClass:[PredictionCell class]]) {
+            [(PredictionCell *)cell updateDates];
         }
     }
 }
@@ -157,7 +157,6 @@ static NSString* const kMyProfileSegue = @"MyProfileSegue";
     if([segue.identifier isEqualToString:kPredictionDetailsSegue]) {
         PredictionDetailsViewController *vc = (PredictionDetailsViewController *)segue.destinationViewController;
         vc.prediction = sender;
-        vc.addPredictionDelegate = self;
         vc.delegate = self;
     }
     else if([segue.identifier isEqualToString:kMyProfileSegue]) {
@@ -193,7 +192,7 @@ static NSString* const kMyProfileSegue = @"MyProfileSegue";
     {
         Prediction* prediction = [self.predictions objectAtIndex: indexPath.row];
         
-        PreditionCell* cell = [tableView dequeueReusableCellWithIdentifier:[PreditionCell reuseIdentifier]];
+        PredictionCell* cell = [tableView dequeueReusableCellWithIdentifier:[PredictionCell reuseIdentifier]];
         cell.delegate = self;
         
         UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]init];
@@ -251,7 +250,7 @@ static NSString* const kMyProfileSegue = @"MyProfileSegue";
 
 #pragma mark - PredictionCellDelegate
 
-- (void) profileSelectedWithUserId:(NSInteger)userId inCell:(PreditionCell *)cell {
+- (void) profileSelectedWithUserId:(NSInteger)userId inCell:(PredictionCell *)cell {
     [self performSegueWithIdentifier:kMyProfileSegue sender:self];
 }
 

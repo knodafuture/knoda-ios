@@ -19,21 +19,16 @@
 
 @property (nonatomic, strong) Prediction *prediction;
 
-@property (nonatomic, weak) id<AddPredictionViewControllerDelegate> addPredictionDelegate;
 @property (nonatomic, weak) id<PredictionDetailsDelegate> delegate;
 
 @property (nonatomic, assign) BOOL shouldNotOpenCategory;
 @property (nonatomic, assign) BOOL shouldNotOpenProfile;
 
-- (IBAction)backButtonPressed:(UIButton *)sender;
 - (IBAction)bsButtonTapped:(UIButton *)sender;
 - (IBAction)agreeButtonTapped:(UIButton *)sender;
 - (IBAction)disagreeButtonTapped:(UIButton *)sender;
 - (IBAction)yesButtonTapped:(UIButton *)sender;
 - (IBAction)noButtonTapped:(UIButton *)sender;
-- (IBAction)unfinishButtonTapped:(UIButton *)sender;
-- (IBAction)hidePicker:(UIBarButtonItem *)sender;
-- (IBAction)unfinishPrediction:(UIBarButtonItem *)sender;
 - (IBAction)categoryButtonTapped:(UIButton *)sender;
 
 - (IBAction)share:(id)sender;

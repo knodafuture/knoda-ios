@@ -40,25 +40,23 @@ static NSString* const kMyProfileSegue     = @"MyProfileSegue";
 
 static const int kBSAlertTag = 1001;
 
-@interface PredictionDetailsViewController () <UIAlertViewDelegate, AddPredictionViewControllerDelegate, PredictionCellDelegate> {
+@interface PredictionDetailsViewController () <UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate> {
     BOOL _loadingUsers;
     BOOL _updatingStatus;
 }
 
 @property (nonatomic, strong) AppDelegate * appDelegate;
 
-@property (weak, nonatomic) IBOutlet UIView *pickerViewHolder;
-@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
-
 @property (nonatomic) NSArray *agreedUsers;
 @property (nonatomic) NSArray *disagreedUsers;
 
-
+@property (weak, nonatomic) IBOutlet UIView *predictionHeaderView;
 @property (weak, nonatomic) IBOutlet BindableView *avatarView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *voteImage;
 @property (weak, nonatomic) IBOutlet UILabel *bodyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *metaDataLabel;
+
 @property (weak, nonatomic) IBOutlet UIView *agreeDisagreeView;
 @property (weak, nonatomic) IBOutlet UIView *settlePredictionView;
 
@@ -67,6 +65,10 @@ static const int kBSAlertTag = 1001;
 @property (weak, nonatomic) IBOutlet UIImageView *outcomeImageView;
 @property (weak, nonatomic) IBOutlet UILabel *totalPointsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *pointsBreakdownLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *agreedNumberLabel;
+@property (weak, nonatomic) IBOutlet UILabel *disagreedNumberLabel;
+@property (weak, nonatomic) IBOutlet UITableView *predictorsTable;
 
 @end
 
@@ -84,19 +86,14 @@ static const int kBSAlertTag = 1001;
     _loadingUsers = YES;
     [self updateUsers];
     
-    CGRect frame = self.pickerViewHolder.frame;
-    frame.origin.y = self.view.frame.size.height;
-    self.pickerViewHolder.frame = frame;
-    
-    if(!self.addPredictionDelegate) {
-        self.addPredictionDelegate = self;
-    }
-    
     [[(AppDelegate *)[[UIApplication sharedApplication] delegate] user] addObserver:self forKeyPath:@"smallImage" options:NSKeyValueObservingOptionNew context:nil];
     self.title = @"DETAILS";
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem backButtonWithTarget:self action:@selector(backButtonPressed:)];
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem rightBarButtonItemWithImage:[UIImage imageNamed:@"PredictIcon"] target:self action:@selector(createPredictionPressed:)];
 
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(profileImageTapped:)];
+    [self.avatarView addGestureRecognizer:tap];
+    
     [self updateView];
 }
 
@@ -127,6 +124,7 @@ static const int kBSAlertTag = 1001;
 - (void)updateView {
     [self configureHeader];
     [self configureVariableSpot];
+    [self reloadPredictorsTable];
 }
 
 - (void)configureHeader {
@@ -139,29 +137,13 @@ static const int kBSAlertTag = 1001;
 }
 
 - (void)configureVariableSpot {
-//    switch (indexPath.row) {
-//        case 0: return RowPrediction;
-//        case 1: return RowCategory;
-//        case 2:
-//            if(self.prediction.hasOutcome && self.prediction.chellange) {
-//                return RowStatus;
-//            }
-//            else if([self.prediction canSetOutcome]) {
-//                return RowOutcome;
-//            }
-//            else if(!self.prediction.chellange && ![self.prediction isExpired]) {
-//                return RowMakePrediction;
-//            }
-//            return RowEmpty;
-//        case 3:  return RowPredictorsCount;
-//        default: return _loadingUsers ? RowLoading : RowPredictor;
-//    }
     
     if (self.prediction.hasOutcome && self.prediction.chellange)
         [self updateAndShowPredictionStatusView];
     else if (self.prediction.canSetOutcome)
         [self updateAndShowSettlePredictionView];
-    else if (!self.prediction.chellange && ![self.prediction isExpired])
+    //else if (!self.prediction.chellange && ![self.prediction isExpired])
+    else
         [self updateAndShowAgreeDisagreeView];
 }
         
@@ -175,48 +157,28 @@ static const int kBSAlertTag = 1001;
     self.predictionStatusView.hidden = NO;
     self.agreeDisagreeView.hidden = YES;
     
-    self.pointsBreakdownLabel.text = [self buildPointsString:self.prediction.chellange];
+    self.pointsBreakdownLabel.text = [self.prediction pointsString];
 }
 - (void)updateAndShowSettlePredictionView {
     self.settlePredictionView.hidden = NO;
     self.predictionStatusView.hidden = YES;
     self.agreeDisagreeView.hidden = YES;
 }
+- (void)reloadPredictorsTable {
+    [self.predictorsTable reloadData];
+    
+    self.agreedNumberLabel.text = [NSString stringWithFormat:@"%d AGREED", self.prediction.agreeCount];
+    self.disagreedNumberLabel.text = [NSString stringWithFormat:@"%d DISAGREED", self.prediction.disagreeCount];
+    
+}
 - (IBAction)share:(id)sender {
     UIActivityViewController *vc = [[UIActivityViewController alloc] initWithActivityItems:@[self.prediction.body] applicationActivities:nil];
     [self presentViewController:vc animated:YES completion:nil];
 }
-- (NSString *)buildPointsString:(Chellange *)challenge {
-    __block NSMutableString *string = [NSMutableString string];
-    
-    void (^addPoint)(int, NSString*) = ^(int point, NSString *name) {
-        if(point > 0) {
-            [string appendFormat:@"+%d %@\n", point, name];
-        }
-    };
-    
-    addPoint(challenge.basePoints, NSLocalizedString(@"Base", @""));
-    addPoint(challenge.outcomePoints, NSLocalizedString(@"Outcome", @""));
-    addPoint(challenge.marketSizePoints, NSLocalizedString(@"Market size", @""));
-    addPoint(challenge.predictionMarketPoints, [self marketSizeNameForPoints:challenge.predictionMarketPoints]);
-    
-    NSLog(@"!!!!!!!!!!!!!!!!!!! %@ !!!!!!!!!!!!!!!!", string);
-    return string;
-}
-- (NSString *)marketSizeNameForPoints:(NSInteger)points {
-    switch (points) {
-        case 0:  return NSLocalizedString(@"Too Easy", @"");
-        case 10:
-        case 20: return NSLocalizedString(@"Favorite", @"");
-        case 30:
-        case 40: return NSLocalizedString(@"Underdog", @"");
-        case 50: return NSLocalizedString(@"Longshot", @"");
-        default: return @"";
-    }
-}
+
 #pragma mark Actions
 
-- (IBAction)backButtonPressed:(UIButton *)sender {
+- (void)backButtonPressed:(UIButton *)sender {
     if(self.delegate && [self getWebRequests].count) { //update prediction in case if some changes weren't handled
         [self.delegate updatePrediction:self.prediction];
     }
@@ -256,58 +218,6 @@ static const int kBSAlertTag = 1001;
     [self sendOutcome:NO];
 }
 
-- (IBAction)unfinishButtonTapped: (UIButton*) sender
-{
-    [Flurry logEvent: @"Unfinished_Button_Tapped"];
-    
-    self.datePicker.minimumDate = [NSDate dateWithTimeInterval:(10 * 60) sinceDate:[NSDate date]];
-    self.datePicker.date = self.datePicker.minimumDate;
-    [self showView:self.pickerViewHolder];
-}
-
-- (IBAction)hidePicker:(UIBarButtonItem *)sender {
-    [self hideView:self.pickerViewHolder];
-}
-
-- (IBAction)unfinishPrediction:(UIBarButtonItem *)sender {
-    _updatingStatus = YES;
-    
-    NSDate *expDate = self.datePicker.date;
-    
-    __weak PredictionDetailsViewController *weakSelf = self;
-    
-    PredictionUpdateWebRequest *request = [[PredictionUpdateWebRequest alloc] initWithPredictionId:self.prediction.ID extendTill:expDate];
-    [self executeRequest:request withBlock:^{
-        PredictionDetailsViewController *strongSelf = weakSelf;
-        if(!strongSelf) return;
-        
-        if(request.isSucceeded) {            
-            PredictionUpdateWebRequest *updateRequest = [[PredictionUpdateWebRequest alloc] initWithPredictionId:strongSelf.prediction.ID];
-            [strongSelf executeRequest:updateRequest withBlock:^{
-                
-                strongSelf->_updatingStatus = NO;
-                
-                if(updateRequest.isSucceeded) {
-                    [strongSelf.prediction updateWithObject:updateRequest.prediction];
-                }
-                else {
-                    [strongSelf showErrorFromRequest:request];
-                }
-                
-                [self updateView];
-            }];
-        }
-        else {
-            strongSelf->_updatingStatus = NO;
-            [strongSelf showErrorFromRequest:request];
-            [self updateView];
-        }
-    }];
-    
-    [self updateView];
-    [self hideView:self.pickerViewHolder];
-}
-
 - (IBAction)categoryButtonTapped:(UIButton *)sender {
     if(self.shouldNotOpenCategory) {
         [self backButtonPressed:nil];
@@ -320,10 +230,7 @@ static const int kBSAlertTag = 1001;
 #pragma mark Segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:kAddPredictionSegue]) {
-        ((AddPredictionViewController*)segue.destinationViewController).delegate = self.addPredictionDelegate;
-    }
-    else if([segue.identifier isEqualToString:kCategorySegue]) {
+    if([segue.identifier isEqualToString:kCategorySegue]) {
         CategoryPredictionsViewController *vc = (CategoryPredictionsViewController *)segue.destinationViewController;
         vc.category             = self.prediction.category;
         vc.shouldNotOpenProfile = self.shouldNotOpenProfile;
@@ -358,6 +265,22 @@ static const int kBSAlertTag = 1001;
     }
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return _loadingUsers ? 1 : MAX(self.agreedUsers.count, self.disagreedUsers.count);
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (_loadingUsers)
+        return [tableView dequeueReusableCellWithIdentifier:[LoadingCell reuseIdentifier] forIndexPath:indexPath];
+    
+    PredictorCell *cell = [tableView dequeueReusableCellWithIdentifier:[PredictorCell reuseIdentifier] forIndexPath:indexPath];
+    
+    int idx = indexPath.row;
+    cell.agreedUserName.text    = self.agreedUsers.count > idx ? self.agreedUsers[idx] : @"";
+    cell.disagreedUserName.text = self.disagreedUsers.count > idx ? self.disagreedUsers[idx] : @"";
+    
+    return cell;
+}
 #pragma mark Requests
 
 - (void)showErrorFromRequest:(BaseWebRequest *)request {
@@ -511,12 +434,6 @@ static const int kBSAlertTag = 1001;
     [self updateView];
 }
 
-#pragma mark AddPredictionViewControllerDelegate
-
-- (void) predictionWasMadeInController:(AddPredictionViewController *)vc {
-    [vc dismissViewControllerAnimated:YES completion:nil];
-}
-
 #pragma mark UIAlertViewDelegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -526,73 +443,14 @@ static const int kBSAlertTag = 1001;
         [self sendBS];
     }
 }
-
-#pragma mark - Date Picker
-
-- (void)showView:(UIView *)view {
-    UIViewAnimationCurve animationCurve = UIViewAnimationCurveEaseInOut;
-    NSTimeInterval duration = 0.3;
-    
-    CGRect newFrame = view.frame;
-    newFrame.origin.y = self.view.frame.size.height - newFrame.size.height;
-    
-    [UIView animateWithDuration: duration delay: 0.0 options: (animationCurve << 16) animations:^
-     {
-         view.frame = newFrame;
-     } completion: NULL];
-    
-    [self moveUpOrDown: YES withAnimationDuration: duration animationCurve: animationCurve keyboardFrame: newFrame];
-}
-
-
-- (void)hideView:(UIView *)view {
-    UIViewAnimationCurve animationCurve = UIViewAnimationCurveEaseInOut;
-    NSTimeInterval duration = 0.3;
-    
-    CGRect newFrame = view.frame;
-    newFrame.origin.y = self.view.frame.size.height;
-    
-    [UIView animateWithDuration: duration delay: 0.0 options: (animationCurve << 16) animations:^{
-        view.frame = newFrame;
-    } completion: NULL];
-    
-    [self moveUpOrDown: NO withAnimationDuration: duration animationCurve: animationCurve keyboardFrame: newFrame];
-}
-
-- (void) moveUpOrDown: (BOOL) up
-withAnimationDuration: (NSTimeInterval)animationDuration
-       animationCurve: (UIViewAnimationCurve)animationCurve
-        keyboardFrame: (CGRect)keyboardFrame
-{
-    CGRect newContainerFrame = self.view.frame;
-    
-    if(up) {
-        newContainerFrame.size.height = self.view.frame.size.height - [self.view.superview convertRect: keyboardFrame fromView: self.view.window].size.height;
-    }
-    else {
-        newContainerFrame.size.height = self.view.frame.size.height;
-    }
-    
-    [UIView animateWithDuration: animationDuration delay: 0.0 options: (animationCurve << 16) animations:^{
-        self.view.frame = newContainerFrame;
-    } completion:^(BOOL finished) {
-       // [self.tableView scrollToRowAtIndexPath:[self indexPathForCellType:RowOutcome] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
-    }];
-}
-
 #pragma mark - Prediction Cell delegate
 
-- (void) profileSelectedWithUserId:(NSInteger)userId inCell:(PreditionCell *)cell {
-    if(self.shouldNotOpenProfile) {
-        return;
-    }
-    if (self.appDelegate.user.userId == userId) {
+- (void)profileImageTapped:(id)sender {
+    if (self.appDelegate.user.userId == self.prediction.userId)
         [self performSegueWithIdentifier:kMyProfileSegue sender:self];
-    }
-    else {
-        [self performSegueWithIdentifier:kUserProfileSegue sender:[NSNumber numberWithInteger:userId]];
-    }}
-
+    else
+        [self performSegueWithIdentifier:kUserProfileSegue sender:[NSNumber numberWithInt:self.prediction.userId]];
+}
 #pragma mark - AppDelegate
 
 - (AppDelegate*) appDelegate

@@ -65,7 +65,7 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
                 NSArray* visibleCells = [strongSelf.tableView visibleCells];
                 NSMutableArray* chellangeIDs = [NSMutableArray arrayWithCapacity: 0];
                 
-                for (PreditionCell* cell in visibleCells)
+                for (PredictionCell* cell in visibleCells)
                 {
                     if (cell.prediction.settled)
                     {
@@ -80,7 +80,7 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
                      {
                          if (request.errorCode != 0)
                          {
-                             for (PreditionCell* cell in visibleCells)
+                             for (PredictionCell* cell in visibleCells)
                              {
                                  cell.prediction.chellange.seen = YES;
                              }
@@ -140,7 +140,7 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
         NSArray* visibleCells = [self.tableView visibleCells];
         NSMutableArray* chellangeIDs = [NSMutableArray arrayWithCapacity: 0];
         
-        for (PreditionCell* cell in visibleCells)
+        for (PredictionCell* cell in visibleCells)
         {
             if (cell.prediction.settled)
             {
@@ -155,7 +155,7 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
             {
                 if (request.errorCode != 0)
                 {
-                    for (PreditionCell* cell in visibleCells)
+                    for (PredictionCell* cell in visibleCells)
                     {
                         cell.prediction.chellange.seen = YES;
                     }

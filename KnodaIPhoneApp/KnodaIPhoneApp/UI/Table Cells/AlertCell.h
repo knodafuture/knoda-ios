@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Knoda. All rights reserved.
 //
 
-#import "PreditionCell.h"
+#import "PredictionCell.h"
 
-@interface AlertCell : PreditionCell
+@interface AlertCell : PredictionCell
 
 @end

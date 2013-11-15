@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 Knoda. All rights reserved.
 //
 
-#import "PreditionCell.h"
+#import "PredictionCell.h"
 
 @class Prediction;
 
-@interface PredictionDetailsCell : PreditionCell
+@interface PredictionDetailsCell : PredictionCell
 
 + (CGFloat)cellHeightForPrediction:(Prediction *)prediction;
 

@@ -11,20 +11,20 @@
 #import "BindableView.h"
 
 @class Prediction;
-@class PreditionCell;
+@class PredictionCell;
 
 
 @protocol PredictionCellDelegate <NSObject>
 
 @optional
-- (void) predictionAgreed: (Prediction*) prediction inCell: (PreditionCell*) cell;
-- (void) predictionDisagreed: (Prediction*) prediction inCell: (PreditionCell*) cell;
-- (void) profileSelectedWithUserId: (NSInteger) userId inCell: (PreditionCell*) cell;
+- (void) predictionAgreed: (Prediction*) prediction inCell: (PredictionCell*) cell;
+- (void) predictionDisagreed: (Prediction*) prediction inCell: (PredictionCell*) cell;
+- (void) profileSelectedWithUserId: (NSInteger) userId inCell: (PredictionCell*) cell;
 
 @end
 
 
-@interface PreditionCell : BaseTableViewCell <UIGestureRecognizerDelegate, BindableViewProtocol>
+@interface PredictionCell : BaseTableViewCell <UIGestureRecognizerDelegate, BindableViewProtocol>
 
 @property (nonatomic, strong) IBOutlet UILabel* bodyLabel;
 @property (nonatomic, strong) IBOutlet UILabel* metadataLabel;

@@ -242,4 +242,32 @@ static NSString* const kResponseDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'zzz";
         return nil;
 }
 
+- (NSString *)pointsString {
+    __block NSMutableString *string = [NSMutableString string];
+    
+    void (^addPoint)(int, NSString*) = ^(int point, NSString *name) {
+        if(point > 0) {
+            [string appendFormat:@"+%d %@\n", point, name];
+        }
+    };
+    
+    addPoint(self.chellange.basePoints, NSLocalizedString(@"Base", @""));
+    addPoint(self.chellange.outcomePoints, NSLocalizedString(@"Outcome", @""));
+    addPoint(self.chellange.marketSizePoints, NSLocalizedString(@"Market size", @""));
+    addPoint(self.chellange.predictionMarketPoints, [self marketSizeNameForPoints:self.chellange.predictionMarketPoints]);
+    
+    return string;
+}
+- (NSString *)marketSizeNameForPoints:(NSInteger)points {
+    switch (points) {
+        case 0:  return NSLocalizedString(@"Too Easy", @"");
+        case 10:
+        case 20: return NSLocalizedString(@"Favorite", @"");
+        case 30:
+        case 40: return NSLocalizedString(@"Underdog", @"");
+        case 50: return NSLocalizedString(@"Longshot", @"");
+        default: return @"";
+    }
+}
+
 @end

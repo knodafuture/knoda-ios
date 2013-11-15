@@ -290,7 +290,7 @@
 		9E76A55D17A01A94004F8FC1 /* sort_left-green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E76A55917A01A94004F8FC1 /* sort_left-green@2x.png */; };
 		9E76A55E17A01A94004F8FC1 /* sort_right-green.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E76A55A17A01A94004F8FC1 /* sort_right-green.png */; };
 		9E76A55F17A01A94004F8FC1 /* sort_right-green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E76A55B17A01A94004F8FC1 /* sort_right-green@2x.png */; };
-		9E76A56317A138E3004F8FC1 /* PreditionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E76A56217A138E3004F8FC1 /* PreditionCell.m */; };
+		9E76A56317A138E3004F8FC1 /* PredictionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E76A56217A138E3004F8FC1 /* PredictionCell.m */; };
 		9E76A56617A1445B004F8FC1 /* prediction_overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E76A56417A14449004F8FC1 /* prediction_overlay.png */; };
 		9E76A56717A1445B004F8FC1 /* prediction_overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E76A56517A14450004F8FC1 /* prediction_overlay@2x.png */; };
 		9E8421B617A1778D00D14D0A /* checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E8421B417A1778D00D14D0A /* checkmark.png */; };
@@ -737,8 +737,8 @@
 		9E76A55917A01A94004F8FC1 /* sort_left-green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sort_left-green@2x.png"; sourceTree = "<group>"; };
 		9E76A55A17A01A94004F8FC1 /* sort_right-green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sort_right-green.png"; sourceTree = "<group>"; };
 		9E76A55B17A01A94004F8FC1 /* sort_right-green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sort_right-green@2x.png"; sourceTree = "<group>"; };
-		9E76A56117A138E3004F8FC1 /* PreditionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreditionCell.h; sourceTree = "<group>"; };
-		9E76A56217A138E3004F8FC1 /* PreditionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreditionCell.m; sourceTree = "<group>"; };
+		9E76A56117A138E3004F8FC1 /* PredictionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PredictionCell.h; sourceTree = "<group>"; };
+		9E76A56217A138E3004F8FC1 /* PredictionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PredictionCell.m; sourceTree = "<group>"; };
 		9E76A56417A14449004F8FC1 /* prediction_overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = prediction_overlay.png; sourceTree = "<group>"; };
 		9E76A56517A14450004F8FC1 /* prediction_overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "prediction_overlay@2x.png"; sourceTree = "<group>"; };
 		9E8421B417A1778D00D14D0A /* checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkmark.png; sourceTree = "<group>"; };
@@ -1615,8 +1615,8 @@
 			children = (
 				578E9B5417BA21D900A7B304 /* BaseTableViewCell.h */,
 				578E9B5517BA21D900A7B304 /* BaseTableViewCell.m */,
-				9E76A56117A138E3004F8FC1 /* PreditionCell.h */,
-				9E76A56217A138E3004F8FC1 /* PreditionCell.m */,
+				9E76A56117A138E3004F8FC1 /* PredictionCell.h */,
+				9E76A56217A138E3004F8FC1 /* PredictionCell.m */,
 				5746F29817BA8CAE00C835FA /* LoadingCell.h */,
 				5746F29917BA8CAE00C835FA /* LoadingCell.m */,
 				578E9B5317BA21AE00A7B304 /* PredictionDetails */,
@@ -1999,7 +1999,7 @@
 				9E930217179FDE5000FFB166 /* NavigationViewController.m in Sources */,
 				9E93021B179FF11F00FFB166 /* NavigationSegue.m in Sources */,
 				9E930220179FF45000FFB166 /* HomeViewController.m in Sources */,
-				9E76A56317A138E3004F8FC1 /* PreditionCell.m in Sources */,
+				9E76A56317A138E3004F8FC1 /* PredictionCell.m in Sources */,
 				015FA0BA18304D7800253DB2 /* UINavigationItem+iOS7Spacing.m in Sources */,
 				9EC05AEA17A164EA00D67DA2 /* HistoryViewController.m in Sources */,
 				9EC05AED17A1723100D67DA2 /* MyPredictionsViewController.m in Sources */,

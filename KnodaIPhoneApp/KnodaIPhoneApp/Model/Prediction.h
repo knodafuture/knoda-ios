@@ -47,6 +47,7 @@
 - (BOOL)canSetOutcome;
 
 - (NSString *)metaDataString;
+- (NSString *)pointsString;
 
 - (BOOL)iAgree;
 - (BOOL)iDisagree;

@@ -10,9 +10,6 @@
 #import "NavigationViewController.h"
 #import "AllAlertsWebRequest.h"
 
-static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
-
-
 @interface AlertsViewController ()
 
 @end
@@ -26,14 +23,8 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
     [self performSegueWithIdentifier: @"AllAlertsSegue" sender: self];
     
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem sideNavBarBUttonItemwithTarget:self action:@selector(menuButtonPressed:)];
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem rightBarButtonItemWithImage:[UIImage imageNamed:@"PredictIcon"] target:self action:@selector(createPredictionPressed:)];
     self.navigationController.navigationBar.translucent = NO;
 }
-
-- (void)createPredictionPressed:(id)sender {
-    [self performSegueWithIdentifier:kAddPredictionSegue sender:sender];
-}
-
 - (void) setUpNoContentViewHidden: (BOOL) hidden {
     if (self.noContentView.hidden == hidden) {
         return;

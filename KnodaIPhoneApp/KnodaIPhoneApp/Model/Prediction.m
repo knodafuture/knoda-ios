@@ -226,22 +226,35 @@ static NSString* const kResponseDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'zzz";
 }
 
 - (BOOL)iAgree {
-    return (self.chellange != nil) && (self.chellange.agree) && (!self.chellange.isOwn);
+    return (self.chellange != nil) && (self.chellange.agree);
 }
 
 - (BOOL)iDisagree {
-    return (self.chellange != nil) && !(self.chellange.agree) && (!self.chellange.isOwn);
+    return (self.chellange != nil) && !(self.chellange.agree);
 }
 
 - (UIImage *)statusImage {
     if ([self iAgree])
-        return [UIImage imageNamed: (!self.settled) ? @"AgreeMarker" : ((self.outcome == YES) ? @"AgreeMarkerActive" : @"agree_lose")];
+        return [UIImage imageNamed:@"AgreeMarkerActive"];
     else if ([self iDisagree])
-        return [UIImage imageNamed: (!self.settled) ? @"DisagreeMarker" : ((self.outcome == NO) ? @"disagree_win" : @"DisagreeMarkerActive")];
+        return [UIImage imageNamed:@"DisagreeMarkerActive"];
     else
         return nil;
 }
 
+- (NSString *)outcomeString {
+    if ([self iAgree])
+        return self.outcome ? @"W" : @"L";
+    else
+        return self.outcome ? @"L" : @"W";
+
+}
+- (BOOL)win {
+    if ([self iAgree])
+        return self.outcome ? YES : NO;
+    else
+        return self.outcome ? NO : YES;
+}
 - (NSString *)pointsString {
     __block NSMutableString *string = [NSMutableString string];
     
@@ -257,6 +270,9 @@ static NSString* const kResponseDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'zzz";
     addPoint(self.chellange.predictionMarketPoints, [self marketSizeNameForPoints:self.chellange.predictionMarketPoints]);
     
     return string;
+}
+- (NSInteger)totalPoints {
+    return self.chellange.basePoints + self.chellange.outcomePoints + self.chellange.marketSizePoints + self.chellange.predictionMarketPoints;
 }
 - (NSString *)marketSizeNameForPoints:(NSInteger)points {
     switch (points) {

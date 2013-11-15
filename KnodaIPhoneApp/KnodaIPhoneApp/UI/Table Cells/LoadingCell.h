@@ -10,4 +10,6 @@
 
 @interface LoadingCell : BaseTableViewCell
 
++ (LoadingCell *)loadingCellForTableView:(UITableView *)tableView;
+
 @end

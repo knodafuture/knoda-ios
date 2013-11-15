@@ -48,8 +48,11 @@
 
 - (NSString *)metaDataString;
 - (NSString *)pointsString;
+- (NSInteger)totalPoints;
 
 - (BOOL)iAgree;
 - (BOOL)iDisagree;
 - (UIImage *)statusImage;
+- (NSString *)outcomeString;
+- (BOOL)win;
 @end

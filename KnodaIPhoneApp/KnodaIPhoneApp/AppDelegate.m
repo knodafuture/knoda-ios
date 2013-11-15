@@ -18,7 +18,7 @@
 #import "SignOutWebRequest.h"
 #import "ImageCache.h"
 #import "LoadingView.h"
-
+#import "AddPredictionViewController.h"
 #import "SendDeviceTokenWebRequest.h"
 #import "RemoveTokenWebRequest.h"
 
@@ -29,7 +29,7 @@ static NSString* const kProductionFlurryKey = @"VQF4B8866XG6256GPQJ5";
 
 NSString* const kAlertNotification = @"AlertNotification";
 
-@interface AppDelegate() <UIAlertViewDelegate>
+@interface AppDelegate() <UIAlertViewDelegate, AddPredictionViewControllerDelegate>
 
 @end
 
@@ -226,4 +226,15 @@ NSString* const kAlertNotification = @"AlertNotification";
     [NewBadgeView showWithBadge:[images lastObject] animated:YES];
 }
 
+
+- (void)presentAddPredictionViewController {
+    AddPredictionViewController *vc = [[AddPredictionViewController alloc] initWithNibName:@"AddPredictionViewController" bundle:[NSBundle mainBundle]];
+    vc.delegate = self;
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    
+    [self.window.rootViewController presentViewController:nav animated:YES completion:nil];
+}
+- (void)predictionWasMadeInController:(AddPredictionViewController *)vc {
+    [self.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
+}
 @end

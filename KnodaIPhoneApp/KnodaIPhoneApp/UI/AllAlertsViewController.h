@@ -6,8 +6,9 @@
 //  Copyright (c) 2013 Knoda. All rights reserved.
 //
 
-#import "ChildViewController.h"
+#import "BaseRequestingViewController.h"
 
-@interface AllAlertsViewController : ChildViewController
-
+@interface AllAlertsViewController : BaseRequestingViewController <UITableViewDataSource, UITableViewDelegate>
+@property (nonatomic, strong) IBOutlet UITableView* tableView;
+@property (weak, nonatomic)   IBOutlet UIView *noContentView;
 @end

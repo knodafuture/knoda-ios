@@ -8,30 +8,43 @@
 
 #import "AllAlertsViewController.h"
 
-#import "AlertCell.h"
 #import "AllAlertsWebRequest.h"
-
 #import "Chellange.h"
 #import "Prediction.h"
-
 #import "SetSeenAlertsWebRequest.h"
-
 #import "PredictionDetailsViewController.h"
+#import "PredictionCell.h"
+#import "LoadingCell.h"
+#import "NavigationViewController.h"
 
 static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 
 @interface AllAlertsViewController ()
-
+@property (strong, nonatomic) NSMutableArray *predictions;
 @end
 
 @implementation AllAlertsViewController
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem sideNavBarBUttonItemwithTarget:self action:@selector(menuPressed:)];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem addPredictionBarButtonItem];
+    
+    self.title = @"ALERTS";
+}
+- (void)menuPressed:(id)sender {
+    [((NavigationViewController*)self.navigationController.parentViewController) toggleNavigationPanel];
+}
 - (void) viewDidAppear: (BOOL) animated
 {
     [super viewDidAppear: animated];
     
     [self refresh];
     [Flurry logEvent: @"All_Alerts_Screen" withParameters: nil timed: YES];
+    
+    self.tableView.rowHeight = [PredictionCell cellHeight];
 }
 
 
@@ -117,19 +130,14 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 
 - (UITableViewCell*) tableView: (UITableView*) tableView cellForRowAtIndexPath: (NSIndexPath*) indexPath
 {
-    UITableViewCell* cell = nil;
-    
     if (self.predictions.count != 0)
     {
-        cell = [self.tableView dequeueReusableCellWithIdentifier: [AlertCell reuseIdentifier]];
-        [((AlertCell*)cell) fillWithPrediction: [self.predictions objectAtIndex: indexPath.row]];
+        PredictionCell *cell = [PredictionCell predictionCellForTableView:tableView];
+        [cell fillWithPrediction:[self.predictions objectAtIndex:indexPath.row]];
+        return cell;
     }
     else
-    {
-        cell = [self.tableView dequeueReusableCellWithIdentifier: @"LoadingCell"];
-    }
-    
-    return cell;
+        return [LoadingCell loadingCellForTableView:tableView];
 }
 
 

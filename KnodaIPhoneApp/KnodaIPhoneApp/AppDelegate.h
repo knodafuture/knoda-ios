@@ -27,11 +27,10 @@ extern NSString* const kAlertNotification;
 
 - (void) savePassword: (NSString*) password;
 - (void) removePassword;
-
 - (NSDictionary*) credentials;
-
 - (void) sendToken;
-
 - (void)logout;
+
+- (void)presentAddPredictionViewController;
 
 @end

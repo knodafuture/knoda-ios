@@ -11,16 +11,9 @@
 #import "Prediction.h"
 #import "Chellange.h"
 #import "ProfileViewController.h"
-#import "PredictionDetailsCell.h"
-#import "PredictionCategoryCell.h"
-#import "PredictionStatusCell.h"
-#import "MakePredictionCell.h"
-#import "OutcomeCell.h"
 #import "LoadingCell.h"
 #import "User.h"
-#import "PredictorsCountCell.h"
 #import "PredictorCell.h"
-#import "AddPredictionViewController.h"
 #import "PredictionUsersWebRequest.h"
 #import "BSWebRequest.h"
 #import "OutcomeWebRequest.h"
@@ -35,7 +28,6 @@
 
 static NSString* const kCategorySegue      = @"CategoryPredictionsSegue";
 static NSString* const kUserProfileSegue   = @"UserProfileSegue";
-static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
 static NSString* const kMyProfileSegue     = @"MyProfileSegue";
 
 static const int kBSAlertTag = 1001;
@@ -56,6 +48,7 @@ static const int kBSAlertTag = 1001;
 @property (weak, nonatomic) IBOutlet UIImageView *voteImage;
 @property (weak, nonatomic) IBOutlet UILabel *bodyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *metaDataLabel;
+@property (weak, nonatomic) IBOutlet UILabel *smallOutcomeLabel;
 
 @property (weak, nonatomic) IBOutlet UIView *agreeDisagreeView;
 @property (weak, nonatomic) IBOutlet UIView *settlePredictionView;
@@ -88,11 +81,14 @@ static const int kBSAlertTag = 1001;
     
     [[(AppDelegate *)[[UIApplication sharedApplication] delegate] user] addObserver:self forKeyPath:@"smallImage" options:NSKeyValueObservingOptionNew context:nil];
     self.title = @"DETAILS";
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem backButtonWithTarget:self action:@selector(backButtonPressed:)];
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem rightBarButtonItemWithImage:[UIImage imageNamed:@"PredictIcon"] target:self action:@selector(createPredictionPressed:)];
 
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(profileImageTapped:)];
     [self.avatarView addGestureRecognizer:tap];
+    
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem backButtonWithTarget:self action:@selector(backPressed:)];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem addPredictionBarButtonItem];
+    
     
     [self updateView];
 }
@@ -132,8 +128,10 @@ static const int kBSAlertTag = 1001;
     
     self.usernameLabel.text = self.prediction.userName;
     self.metaDataLabel.text = [self.prediction metaDataString];
-    self.voteImage.image = [self.prediction statusImage];
     self.bodyLabel.text = self.prediction.body;
+
+    self.voteImage.image = [self.prediction statusImage];
+    self.smallOutcomeLabel.text = self.prediction.settled ? [self.prediction outcomeString] : @"";
 }
 
 - (void)configureVariableSpot {
@@ -142,9 +140,13 @@ static const int kBSAlertTag = 1001;
         [self updateAndShowPredictionStatusView];
     else if (self.prediction.canSetOutcome)
         [self updateAndShowSettlePredictionView];
-    //else if (!self.prediction.chellange && ![self.prediction isExpired])
-    else
+    else if (!self.prediction.chellange && ![self.prediction isExpired])
         [self updateAndShowAgreeDisagreeView];
+    else {
+        self.settlePredictionView.hidden = YES;
+        self.predictionStatusView.hidden = YES;
+        self.agreeDisagreeView.hidden = YES;
+    }
 }
         
 - (void)updateAndShowAgreeDisagreeView {
@@ -158,6 +160,17 @@ static const int kBSAlertTag = 1001;
     self.agreeDisagreeView.hidden = YES;
     
     self.pointsBreakdownLabel.text = [self.prediction pointsString];
+    
+    self.totalPointsLabel.text = [NSString stringWithFormat:@"%d", [self.prediction totalPoints]];
+    
+    if ([self.prediction win]) {
+        self.outcomeLabel.text = @"YOU WON!";
+        self.outcomeImageView.image = [UIImage imageNamed:@"ResultsWinIcon"];
+    } else {
+        self.outcomeLabel.text = @"YOU LOST!";
+        self.outcomeImageView.image = [UIImage imageNamed:@"ResultsLoseIcon"];
+    }
+    
 }
 - (void)updateAndShowSettlePredictionView {
     self.settlePredictionView.hidden = NO;
@@ -178,16 +191,12 @@ static const int kBSAlertTag = 1001;
 
 #pragma mark Actions
 
-- (void)backButtonPressed:(UIButton *)sender {
+- (void)backPressed:(UIButton *)sender {
     if(self.delegate && [self getWebRequests].count) { //update prediction in case if some changes weren't handled
         [self.delegate updatePrediction:self.prediction];
     }
     [self cancelAllRequests];
     [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (void)createPredictionPressed:(id)sender {
-    [self performSegueWithIdentifier:kAddPredictionSegue sender:sender];
 }
 
 - (IBAction)bsButtonTapped:(UIButton *)sender {
@@ -220,7 +229,7 @@ static const int kBSAlertTag = 1001;
 
 - (IBAction)categoryButtonTapped:(UIButton *)sender {
     if(self.shouldNotOpenCategory) {
-        [self backButtonPressed:nil];
+        [self backPressed:nil];
     }
     else {
         [self performSegueWithIdentifier:kCategorySegue sender:nil];

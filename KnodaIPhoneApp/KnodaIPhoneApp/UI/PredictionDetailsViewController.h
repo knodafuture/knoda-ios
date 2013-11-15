@@ -12,7 +12,6 @@
 
 @class Prediction;
 
-@protocol AddPredictionViewControllerDelegate;
 @protocol PredictionDetailsDelegate;
 
 @interface PredictionDetailsViewController : BaseRequestingViewController

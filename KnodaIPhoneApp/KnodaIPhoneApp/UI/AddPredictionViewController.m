@@ -24,20 +24,18 @@ static const CGFloat kCategorySectionHeight = 40;
 @interface AddPredictionViewController ()
 
 @property (nonatomic, strong) IBOutlet UITextView* textView;
-@property (nonatomic, strong) IBOutlet UINavigationBar* navigationBar;
 @property (nonatomic, strong) IBOutlet UIPickerView* categoryPicker;
 @property (nonatomic, strong) IBOutlet UIPickerView* expirationPicker;
 @property (nonatomic, strong) IBOutlet UILabel *categoryLabel;
 @property (nonatomic, strong) IBOutlet UILabel* expirationLabel;
 @property (nonatomic, strong) IBOutlet UILabel* charsLabel;
-@property (nonatomic, strong) IBOutlet UIBarButtonItem *predictBarButton;
+@property (nonatomic, strong) UIBarButtonItem *predictBarButton;
 
 @property (nonatomic, strong) IBOutlet UIView* expirationPickerContainerView;
 @property (nonatomic, strong) IBOutlet UIView* categoryPickerContainerView;
 @property (nonatomic, weak) IBOutlet UIView *expirationBar;
 @property (nonatomic, weak) IBOutlet UIView *categoryBar;
 @property (nonatomic, strong) IBOutlet UIView* containerView;
-@property (nonatomic, strong) IBOutlet UIView* internalContainerView;
 @property (nonatomic, strong) IBOutlet BindableView *avatarView;
 
 @property (nonatomic, strong) NSString* previousCategory;
@@ -88,8 +86,8 @@ static const CGFloat kCategorySectionHeight = 40;
     
     self.predictBarButton.enabled = NO;
     self.navigationController.navigationBar.translucent = NO;
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTitle:@"Cancel" target:self action:@selector(cancel:) color:[UIColor whiteColor]];
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTitle:@"Submit" target:self action:@selector(predict:) color:[UIColor whiteColor]];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTitle:@"Cancel" target:self action:@selector(cancel) color:[UIColor whiteColor]];
+    self.predictBarButton = self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTitle:@"Submit" target:self action:@selector(predict) color:[UIColor whiteColor]];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap)];
     [self.view addGestureRecognizer:tap];
@@ -283,8 +281,7 @@ static const CGFloat kCategorySectionHeight = 40;
 }
 
 
-- (IBAction) predict: (id) sender
-{
+- (void)predict {
     NSString* errorMessage = nil;
     
     if (self.textView.text.length == 0)
@@ -347,9 +344,8 @@ static const CGFloat kCategorySectionHeight = 40;
 }
 
 
-- (IBAction) cancel: (id) sender
-{
-    [self.navigationController popViewControllerAnimated:YES];
+- (void)cancel {
+    [self.delegate predictionWasMadeInController:self];
 }
 
 

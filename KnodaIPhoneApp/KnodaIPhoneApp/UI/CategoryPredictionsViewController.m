@@ -22,9 +22,10 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
     [super viewDidLoad];
     
     self.title = [self.category uppercaseString];
+    
+    self.navigationController.navigationBar.translucent = NO;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem backButtonWithTarget:self action:@selector(backButtonPressed:)];
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem rightBarButtonItemWithImage:[UIImage imageNamed:@"PredictIcon"] target:self action:@selector(createPredictionPressed:)];
-
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem addPredictionBarButtonItem];
 }
 
 

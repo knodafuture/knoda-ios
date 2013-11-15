@@ -11,7 +11,6 @@
 #import "HistoryMyPredictionsRequest.h"
 #import "Prediction.h"
 #import "PredictionDetailsViewController.h"
-#import "AddPredictionViewController.h"
 #import "AnotherUsersProfileViewController.h"
 #import "ProfileViewController.h"
 #import "ChildControllerDataSource.h"
@@ -21,7 +20,7 @@
 static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 static NSString* const kMyProfileSegue = @"MyProfileSegue";
 
-@interface MyPredictionsViewController () <AddPredictionViewControllerDelegate, PredictionCellDelegate, PredictionDetailsDelegate> {
+@interface MyPredictionsViewController () <PredictionCellDelegate, PredictionDetailsDelegate> {
     BOOL _isRefreshing;
     BOOL _needLoadNextPage;
     BOOL _needRefresh;
@@ -238,14 +237,6 @@ static NSString* const kMyProfileSegue = @"MyProfileSegue";
         Prediction* prediction = [self.predictions objectAtIndex: indexPath.row];
         [self performSegueWithIdentifier:kPredictionDetailsSegue sender:prediction];
     }
-}
-
-
-#pragma mark - AddPredictionViewControllerDelegate
-
-- (void) predictionWasMadeInController:(AddPredictionViewController *)vc {
-    [vc dismissViewControllerAnimated:YES completion:nil];
-    [self refresh];
 }
 
 #pragma mark - PredictionCellDelegate

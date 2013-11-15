@@ -28,6 +28,8 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
     @"chellange.isFinished"
 };
 
+static UINib *nib;
+
 @interface PredictionCell ()
 
 @property (nonatomic, strong) UIPanGestureRecognizer* gestureRecognizer;
@@ -39,11 +41,8 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
 @property (nonatomic, strong) IBOutlet UIView* disagreeQuestionView;
 
 @property (nonatomic, weak) IBOutlet UIImageView *voteImage;
-@property (nonatomic, weak) IBOutlet UIImageView *agreeImage;
-@property (nonatomic, weak) IBOutlet UIImageView *disagreeImage;
-
+@property (nonatomic, weak) IBOutlet UILabel *outcomeLabel;
 @property (nonatomic, strong) IBOutlet UILabel* usernameLabel;
-@property (nonatomic, strong) IBOutlet UILabel* expirationDateLabel;
 
 @property (nonatomic, strong) IBOutlet BindableView *avatarView;
 
@@ -60,14 +59,29 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
     return 102.0;
 }
 
++ (void)initialize {
+    nib = [UINib nibWithNibName:@"PredictionCell" bundle:[NSBundle mainBundle]];
+}
+
++ (PredictionCell *)predictionCellForTableView:(UITableView *)tableView {
+    PredictionCell *cell = (PredictionCell *)[tableView dequeueReusableCellWithIdentifier:@"PredictionCell"];
+    
+    if (!cell)
+        cell = [[nib instantiateWithOwner:nil options:nil] lastObject];
+    
+    return cell;
+}
+
 - (void)dealloc {
     [self removeKVO];
 }
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.avatarView.layer.shadowRadius = 0.0;
     self.avatarView.layer.shadowOffset = CGSizeZero;
 }
+
 - (void)prepareForReuse {
     [super prepareForReuse];
     [self.avatarView didStartImageLoading];
@@ -120,17 +134,6 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
 
 #pragma mark Fill data
 
-- (void)updateGuessMark {
-    if ([self.prediction.expirationDate compare: [NSDate date]] == NSOrderedAscending && self.prediction.chellange.isOwn)
-    {
-        self.guessMarkImage.image = [UIImage imageNamed: ((!self.prediction.settled) ? @"exclamation" : ((self.prediction.outcome) ? @"check" : @"x_lost"))];
-    }
-    else
-    {
-        self.guessMarkImage.image = nil;
-    }
-}
-
 - (void)update {
     [self resetAgreedDisagreed];
     
@@ -146,17 +149,24 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
     rect.size.height = expectedLabelSize.height;
     self.bodyLabel.frame = rect;
     
-    [self updateGuessMark];
-    
     self.agreed = [self.prediction iAgree];
     self.disagreed = [self.prediction iDisagree];
-    self.voteImage.image = [self.prediction statusImage];
-
+    
+    [self updateVoteImage];
     
     [self.avatarView bindToURL:self.prediction.smallAvatar withCornerRadius:0.0];
     
 }
 
+- (void)updateVoteImage {
+    if ([self.prediction.expirationDate compare: [NSDate date]] == NSOrderedAscending && self.prediction.chellange.isOwn && !self.prediction.settled)
+        self.voteImage.image = [UIImage imageNamed:@"exclamation"];
+    else
+        self.voteImage.image = [self.prediction statusImage];
+    
+    self.outcomeLabel.text = self.prediction.settled ? [self.prediction outcomeString] : @"";
+
+}
 - (void) fillWithPrediction: (Prediction*) prediction
 {
     self.prediction = prediction;
@@ -169,18 +179,7 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
 {
     self.metadataLabel.text = [self.prediction metaDataString];
     
-    //self.expirationDateLabel.text = expirationString;
-    
-    if ([self.prediction.expirationDate compare: [NSDate date]] == NSOrderedAscending && self.prediction.chellange.isOwn)
-    {
-        self.guessMarkImage.image = [UIImage imageNamed: ((!self.prediction.settled) ? @"exclamation" : ((self.prediction.outcome) ? @"check" : @"x_lost"))];
-    }
-    else
-    {
-        self.guessMarkImage.image = nil;
-    }
-    
-    self.voteImage.image = [self.prediction statusImage];
+    [self updateVoteImage];
 }
 
 

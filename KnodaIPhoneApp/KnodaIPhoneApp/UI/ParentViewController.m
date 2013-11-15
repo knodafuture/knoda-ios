@@ -8,11 +8,8 @@
 
 #import "ParentViewController.h"
 #import "NavigationSegue.h"
-#import "AddPredictionViewController.h"
 
-static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
-
-@interface ParentViewController () <AddPredictionViewControllerDelegate>
+@interface ParentViewController ()
 
 @property (nonatomic, weak) ChildViewController *childViewController;
 @property (nonatomic) NSMutableDictionary *childrenCache;
@@ -31,10 +28,6 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
         ((NavigationSegue*)segue).detailsView = self.detailsView;
         self.childViewController = segue.destinationViewController;
         self.childViewController.childDataSource = self;
-    }
-    else if ([segue.identifier isEqualToString:kAddPredictionSegue]) {
-        AddPredictionViewController *vc = (AddPredictionViewController *)segue.destinationViewController;
-        vc.delegate = self;
     }
 }
 
@@ -64,17 +57,6 @@ static NSString* const kAddPredictionSegue = @"AddPredictionSegue";
     }
     NSString *key = [NSString stringWithFormat:@"%@_data", NSStringFromClass([vc class])];
     self.childrenCache[key] = data;
-}
-
-#pragma mark - AddPredictionViewControllerDelegate
-
-- (void) predictionWasMadeInController:(AddPredictionViewController *)vc
-{
-    [vc dismissViewControllerAnimated:YES completion:^{
-        if([self.childViewController conformsToProtocol:@protocol(AddPredictionViewControllerDelegate)]) {
-            [(id<AddPredictionViewControllerDelegate>)self.childViewController predictionWasMadeInController:nil];
-        }
-    }];
 }
 
 @end

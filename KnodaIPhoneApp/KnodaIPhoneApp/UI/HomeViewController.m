@@ -20,11 +20,11 @@
 #import "BadgesWebRequest.h"
 #import "UIViewController+WebRequests.h"
 #import "PredictionUpdateWebRequest.h"
+#import "LoadingCell.h"
 
 #define IS_PHONEPOD5() ([UIScreen mainScreen].bounds.size.height == 568.0f && [UIScreen mainScreen].scale == 2.f && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 
 static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
-static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
 static NSString* const kUserProfileSegue       = @"UserProfileSegue";
 static NSString* const kMyProfileSegue         = @"MyProfileSegue";
 
@@ -66,10 +66,12 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
     self.refreshControl = refreshControl;
 
     self.navigationController.navigationBar.translucent = NO;
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem sideNavBarBUttonItemwithTarget:self action:@selector(menuButtonPressed:)];
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem rightBarButtonItemWithImage:[UIImage imageNamed:@"PredictIcon"] target:self action:@selector(createPredictionPressed:)];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem sideNavBarBUttonItemwithTarget:self action:@selector(menuPressed:)];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem addPredictionBarButtonItem];
 }
-
+- (void)menuPressed:(id)sender {
+    [((NavigationViewController*)self.navigationController.parentViewController) toggleNavigationPanel];
+}
 - (void) viewDidAppear: (BOOL) animated
 {
     [super viewDidAppear: animated];    
@@ -151,10 +153,7 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
 
 - (void) prepareForSegue: (UIStoryboardSegue*) segue sender: (id) sender
 {
-    if ([segue.identifier isEqualToString:kAddPredictionSegue]) {
-        ((AddPredictionViewController*)segue.destinationViewController).delegate = self;
-    }
-    else if([segue.identifier isEqualToString:kPredictionDetailsSegue]) {
+    if([segue.identifier isEqualToString:kPredictionDetailsSegue]) {
         PredictionDetailsViewController *vc = (PredictionDetailsViewController *)segue.destinationViewController;
         vc.prediction = sender;
         vc.delegate = self;
@@ -177,15 +176,6 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
 
 #pragma mark - Actions
 
-
-- (IBAction) menuButtonPressed: (id) sender
-{
-    [((NavigationViewController*)self.navigationController.parentViewController) toggleNavigationPanel];
-}
-
-- (void)createPredictionPressed:(id)sender {
-    [self performSegueWithIdentifier:kAddPredictionSegue sender:sender];
-}
 
 - (void) refresh: (UIRefreshControl*) refresh
 {
@@ -229,13 +219,12 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
 
 - (UITableViewCell*) tableView: (UITableView*) tableView cellForRowAtIndexPath: (NSIndexPath*) indexPath
 {
-    UITableViewCell* tableCell;
     
     if (indexPath.row != self.predictions.count)
     {
         Prediction* prediction = [self.predictions objectAtIndex: indexPath.row];
         
-        PredictionCell* cell = [tableView dequeueReusableCellWithIdentifier:[PredictionCell reuseIdentifier]];
+        PredictionCell* cell = [PredictionCell predictionCellForTableView:tableView];
         
         [cell fillWithPrediction: prediction];
         cell.delegate = self;
@@ -244,14 +233,9 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
         [cell addPanGestureRecognizer: recognizer];
         UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]init];
         [cell setUpUserProfileTapGestures:tapGesture];
-        tableCell = cell;
-    }
-    else
-    {
-        UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier: @"LoadingCell"];
-        tableCell = cell;
-    }
-    return tableCell;
+        return cell;
+    } else
+        return [LoadingCell loadingCellForTableView:tableView];
 }
 
 
@@ -292,18 +276,6 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
         [self performSegueWithIdentifier:kPredictionDetailsSegue sender:prediction];
     }
 }
-
-#pragma mark - AddPredictionViewControllerDelegate
-
-
-- (void) predictionWasMadeInController:(AddPredictionViewController *)vc
-{
-    [vc dismissViewControllerAnimated:YES completion:nil];
-    
-    [self refresh:nil];
-}
-
-
 #pragma mark - PredictionCellDelegate
 
 

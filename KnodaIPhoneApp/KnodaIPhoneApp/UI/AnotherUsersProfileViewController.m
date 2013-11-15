@@ -10,7 +10,6 @@
 #import "NavigationViewController.h"
 #import "AnotherUserProfileWebRequest.h"
 #import "AnotherUserPredictionsWebRequest.h"
-#import "AddPredictionViewController.h"
 #import "PredictionCell.h"
 #import "BindableView.h"
 #import "PredictionDetailsViewController.h"
@@ -19,16 +18,15 @@
 #import "ChellangeByPredictionWebRequest.h"
 #import "LoadingView.h"
 #import "PredictionUpdateWebRequest.h"
+#import "LoadingCell.h"
 
 static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
-static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
 
-@interface AnotherUsersProfileViewController () <AddPredictionViewControllerDelegate, PredictionCellDelegate, PredictionDetailsDelegate>
+@interface AnotherUsersProfileViewController () <PredictionCellDelegate, PredictionDetailsDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *userPointsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *userTotalPredictionsLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *userProfileImageView;
 @property (weak, nonatomic) IBOutlet UITableView *predictionsTableView;
 @property (weak, nonatomic) IBOutlet BindableView *userAvatarView;
 
@@ -43,14 +41,17 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"darkBgPattern"]];
-    self.navigationController.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, self.navigationController.navigationBar.frame.size.height);
-    [self.navigationController.navigationBar setTitleVerticalPositionAdjustment:5 forBarMetrics:UIBarMetricsDefault];
     [[LoadingView sharedInstance] show];
     [self setUpUsersInfo];
+    self.predictionsTableView.rowHeight = [PredictionCell cellHeight];
+
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem backButtonWithTarget:self action:@selector(backPressed:)];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem addPredictionBarButtonItem];
 }
-
-
+- (void)backPressed:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 - (void) viewDidAppear: (BOOL) animated
 {
     [super viewDidAppear: animated];
@@ -132,10 +133,7 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
 
 - (void) prepareForSegue: (UIStoryboardSegue*) segue sender: (id) sender
 {
-    if ([segue.identifier isEqualToString:kAddPredictionSegue]) {
-        ((AddPredictionViewController*)segue.destinationViewController).delegate = self;
-    }
-    else if([segue.identifier isEqualToString:kPredictionDetailsSegue]) {
+    if([segue.identifier isEqualToString:kPredictionDetailsSegue]) {
         PredictionDetailsViewController *vc = (PredictionDetailsViewController *)segue.destinationViewController;
         vc.prediction = sender;
         vc.shouldNotOpenProfile = YES;
@@ -143,22 +141,9 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
     }
 }
 
-#pragma mark - AddPredictionViewControllerDelegate
-
-- (void) predictionWasMadeInController:(AddPredictionViewController *)vc
-{
-    [vc dismissViewControllerAnimated:YES completion:nil];
-}
-
 #pragma mark - TableView datasource
 
-- (NSInteger) numberOfSectionsInTableView: (UITableView*) tableView
-{
-    return 1;
-}
-
-- (NSInteger) tableView: (UITableView*) tableView numberOfRowsInSection: (NSInteger) section
-{
+- (NSInteger) tableView: (UITableView*) tableView numberOfRowsInSection: (NSInteger) section {
     return (self.predictions.count != 0) ? ((self.predictions.count >= [AnotherUserPredictionsWebRequest limitByPage]) ? self.predictions.count + 1 : self.predictions.count) : 1;
 }
 
@@ -170,7 +155,7 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
     {
         Prediction* prediction = [self.predictions objectAtIndex: indexPath.row];
         
-        PredictionCell* cell = [tableView dequeueReusableCellWithIdentifier:[PredictionCell reuseIdentifier]];
+        PredictionCell* cell = [PredictionCell predictionCellForTableView:tableView];
         
         [cell fillWithPrediction: prediction];
         cell.delegate = self;
@@ -181,10 +166,7 @@ static NSString* const kAddPredictionSegue     = @"AddPredictionSegue";
         tableCell = cell;
     }
     else
-    {
-        UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier: @"LoadingCell"];
-        tableCell = cell;
-    }
+        return [LoadingCell loadingCellForTableView:tableView];
     
     return tableCell;
 }

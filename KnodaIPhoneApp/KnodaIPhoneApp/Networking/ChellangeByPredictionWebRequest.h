@@ -7,12 +7,12 @@
 //
 
 #import "BaseWebRequest.h"
-#import "Chellange.h"
+#import "Challenge.h"
 
 
 @interface ChellangeByPredictionWebRequest : BaseWebRequest
 
-@property (nonatomic, strong) Chellange* chellange;
+@property (nonatomic, strong) Challenge* chellange;
 
 - (id) initWithPredictionID: (NSInteger) predictionID;
 

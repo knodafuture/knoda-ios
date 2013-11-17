@@ -14,27 +14,28 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="101"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" id="Qv2-fI-zVg">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="102"/>
-                        <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DisagreeMarker" id="9Og-Nv-Vm0">
-                                <rect key="frame" x="274" y="36" width="36" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" red="0.36078431372549019" green="0.048679742078079277" blue="0.095526654322189056" alpha="1" colorSpace="calibratedRGB"/>
-                    </view>
                     <view contentMode="scaleToFill" id="c7S-Zm-cCc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="102"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AgreeMarker" id="1TS-91-Zz9">
-                                <rect key="frame" x="10" y="36" width="36" height="29"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SwipeAgreeArrow" id="1TS-91-Zz9">
+                                <rect key="frame" x="10" y="38" width="47" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.13725490200000001" green="0.36078431370000003" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
+                    <view contentMode="scaleToFill" id="Qv2-fI-zVg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="102"/>
+                        <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SwipeDisagreeArrow" id="9Og-Nv-Vm0">
+                                <rect key="frame" x="264" y="38" width="47" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.36078431372549019" green="0.048679742078079277" blue="0.095526654322189056" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <view contentMode="scaleToFill" id="WVa-0u-pvu" userLabel="Sliding Container">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="102"/>
@@ -128,7 +129,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="AgreeMarker" width="18" height="10"/>
-        <image name="DisagreeMarker" width="18" height="10"/>
+        <image name="SwipeAgreeArrow" width="33" height="17"/>
+        <image name="SwipeDisagreeArrow" width="33" height="17"/>
     </resources>
 </document>

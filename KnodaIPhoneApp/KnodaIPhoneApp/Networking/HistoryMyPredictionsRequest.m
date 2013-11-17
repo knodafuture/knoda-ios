@@ -7,7 +7,7 @@
 //
 
 #import "HistoryMyPredictionsRequest.h"
-#import "Chellange.h"
+#import "Challenge.h"
 #import "Prediction.h"
 
 static const NSInteger kPageResultsLimit = 25;

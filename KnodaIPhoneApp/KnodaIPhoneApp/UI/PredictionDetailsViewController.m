@@ -9,7 +9,7 @@
 #import "PredictionDetailsViewController.h"
 #import "AnotherUsersProfileViewController.h"
 #import "Prediction.h"
-#import "Chellange.h"
+#import "Challenge.h"
 #import "ProfileViewController.h"
 #import "LoadingCell.h"
 #import "User.h"
@@ -23,19 +23,25 @@
 #import "PredictionUpdateWebRequest.h"
 #import "CategoryPredictionsViewController.h"
 #import "AppDelegate.h"
-
+#import "CreateCommentWebRequest.h"
 #import "BigDaddyPredictionCell.h"
 #import "PredictionDetailsSectionHeader.h"
+#import "LoadingView.h"
+#import "Comment.h"
+#import "CommentWebRequest.h"
+#import "CommentCell.h"
 
 static NSString* const kCategorySegue      = @"CategoryPredictionsSegue";
 static NSString* const kUserProfileSegue   = @"UserProfileSegue";
 static NSString* const kMyProfileSegue     = @"MyProfileSegue";
 
-static const int kBSAlertTag = 1001;
+static NSString *const defaultCommentText = @"Add a comment...";
 
+static const int kBSAlertTag = 1001;
+static const int kCommentMaxChars = 300;
 static const float parallaxRatio = 0.5;
 
-@interface PredictionDetailsViewController () <UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate, PredictionCellDelegate> {
+@interface PredictionDetailsViewController () <UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate, PredictionCellDelegate, UITextViewDelegate> {
     BOOL _loadingUsers;
     BOOL _updatingStatus;
 }
@@ -49,6 +55,17 @@ static const float parallaxRatio = 0.5;
 @property (strong, nonatomic) BigDaddyPredictionCell *predictionCell;
 @property (strong, nonatomic) PredictionDetailsSectionHeader *sectionHeader;
 
+@property (assign, nonatomic) CGPoint previousContentOffset;
+
+@property (weak, nonatomic) IBOutlet UIView *addCommentContainer;
+@property (weak, nonatomic) IBOutlet UITextView *commentTextView;
+@property (weak, nonatomic) IBOutlet UILabel *textCounterLabel;
+@property (weak, nonatomic) IBOutlet UIView *textViewContainer;
+
+@property (strong, nonatomic) NSMutableArray *comments;
+@property (assign, nonatomic) BOOL composingComment;
+@property (assign, nonatomic) BOOL loadingComments;
+@property (assign, nonatomic) BOOL showingComments;
 @end
 
 @implementation PredictionDetailsViewController
@@ -62,23 +79,21 @@ static const float parallaxRatio = 0.5;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _loadingUsers = YES;
-    [self updateUsers];
-    
     [[(AppDelegate *)[[UIApplication sharedApplication] delegate] user] addObserver:self forKeyPath:@"smallImage" options:NSKeyValueObservingOptionNew context:nil];
     self.title = @"DETAILS";
     
     self.navigationController.navigationBar.translucent = NO;
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem backButtonWithTarget:self action:@selector(backPressed:)];
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem addPredictionBarButtonItem];
-    
+    [self setDefaultBarButtonItems:YES];
     [self.tableView registerClass:UITableViewCell.class forCellReuseIdentifier:@"basicCell"];
     
     self.predictionCell = [BigDaddyPredictionCell predictionCellWithOwner:self];
     self.sectionHeader = [PredictionDetailsSectionHeader sectionHeaderWithOwner:self];
     
     [self.predictionCell configureWithPrediction:self.prediction];
+    
+    [self showComments];
     [self.tableView reloadData];
+    
 }
 
 
@@ -86,15 +101,34 @@ static const float parallaxRatio = 0.5;
 {
     [super viewDidAppear: animated];
     [Flurry logEvent: @"Prediction_Details_Screen" timed: YES];
+    [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(willShowKeyBoard:) name: UIKeyboardWillShowNotification object: nil];
+    [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(willHideKeyBoard:) name: UIKeyboardWillHideNotification object: nil];
+    
+    if (self.addCommentContainer.frame.origin.y < 500)
+        return;
+    
+    CGSize textSize = [defaultCommentText sizeWithFont:self.commentTextView.font forWidth:self.commentTextView.frame.size.width lineBreakMode:NSLineBreakByTruncatingTail];
+    
+    CGRect frame = self.tableView.frame;
+    frame.size.height -= textSize.height * 2.0;
+    self.tableView.frame = frame;
+    
+    frame = self.addCommentContainer.frame;
+    
+    frame.origin.y = self.tableView.frame.size.height;
+    
+    self.addCommentContainer.frame = frame;
 }
-
 - (void) viewDidDisappear: (BOOL) animated
 {
     [super viewDidDisappear: animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [Flurry endTimedEvent: @"Prediction_Details_Screen" withParameters: nil];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if ([keyPath isKindOfClass:NSNull.class])
+        return;
     if([object isKindOfClass:[User class]] && [keyPath isEqualToString:@"smallImage"]) {
         self.prediction.smallAvatar = [(User *)object smallImage];
         [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -110,7 +144,58 @@ static const float parallaxRatio = 0.5;
     //self.disagreedNumberLabel.text = [NSString stringWithFormat:@"%d DISAGREED", self.prediction.disagreeCount];
     
 }
+- (void)setDefaultBarButtonItems:(BOOL)animated {
+    [self.navigationItem setLeftBarButtonItem:[UIBarButtonItem backButtonWithTarget:self action:@selector(backPressed:)] animated:animated];
+    [self.navigationItem setRightBarButtonItem:[UIBarButtonItem addPredictionBarButtonItem] animated:animated];
+}
+- (void)composeComment {
+    UIBarButtonItem *cancelBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTitle:@"Cancel" target:self action:@selector(cancelComment) color:[UIColor whiteColor]];
+    
+    UIBarButtonItem *submitBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTitle:@"Submit" target:self action:@selector(submitComment) color:[UIColor whiteColor]];
+    
+    [self.navigationItem setLeftBarButtonItem:cancelBarButtonItem animated:YES];
+    [self.navigationItem setRightBarButtonItem:submitBarButtonItem animated:YES];
+}
 
+- (void)showComments {
+    [self updateComments];
+    self.showingComments = YES;
+}
+- (void)submitComment {
+    [[LoadingView sharedInstance] show];
+    
+    Comment *comment = [[Comment alloc] init];
+    comment.body = self.commentTextView.text;
+    comment.createdDate = [NSDate date];
+    comment.predictionId = self.prediction.ID;
+    
+    CreateCommentWebRequest *request = [[CreateCommentWebRequest alloc] initWithComment:comment];
+    
+    __weak PredictionDetailsViewController *weakSelf = self;
+    
+    [self executeRequest:request withBlock:^{
+        
+        [[LoadingView sharedInstance] hide];
+        [self cancelComment];
+        
+        PredictionDetailsViewController *strongSelf = weakSelf;
+        if(!strongSelf) return;
+        
+        if (request.isSucceeded)
+            NSLog(@"Worked");
+        else
+            [self showErrorFromRequest:request];
+        
+        [self updateComments];
+        
+    }];
+    
+}
+- (void)cancelComment {
+    self.commentTextView.text = defaultCommentText;
+    [self setDefaultBarButtonItems:YES];
+    [self.commentTextView resignFirstResponder];
+}
 
 #pragma mark Actions
 - (IBAction)share:(id)sender {
@@ -204,8 +289,14 @@ static const float parallaxRatio = 0.5;
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0)
         return self.predictionCell.frame.size.height;
-    else
-        return 30;
+    else {
+        if (self.showingComments && self.loadingComments)
+            return defaultCellHeight;
+        else if (self.showingComments && indexPath.row != self.comments.count)
+            return [CommentCell heightForComment:[self.comments objectAtIndex:indexPath.row]];
+    }
+    
+    return defaultCellHeight;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 2;
@@ -226,30 +317,46 @@ static const float parallaxRatio = 0.5;
     if (section == 0)
         return 1;
     else {
-        if (_loadingUsers)
-            return 21;
-        else
-            return MAX(self.agreedUsers.count, self.disagreedUsers.count) + 20;
+        if (self.showingComments && self.loadingComments)
+            return 1;
+        else if (self.showingComments && !self.loadingComments)
+            return self.comments.count + 1;
     }
+    
+    return 0;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        //[self.predictionCell update];
+        [self.predictionCell update];
         return self.predictionCell;
     }
     
-    if (_loadingUsers && indexPath.row == 0)
-        return [tableView dequeueReusableCellWithIdentifier:@"LoadingCell" forIndexPath:indexPath];
-    
-    if (indexPath.row < MAX(self.agreedUsers.count, self.disagreedUsers.count) - 1) {
-        PredictorCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PredictorCell" forIndexPath:indexPath];
+    if (self.showingComments) {
         
-        int idx = indexPath.row;
-        cell.agreedUserName.text    = self.agreedUsers.count > idx ? self.agreedUsers[idx] : @"";
-        cell.disagreedUserName.text = self.disagreedUsers.count > idx ? self.disagreedUsers[idx] : @"";
-    
+        if (indexPath.row == self.comments.count)
+            return [LoadingCell loadingCellForTableView:tableView];
+        
+        Comment *comment = [self.comments objectAtIndex:indexPath.row];
+        
+        CommentCell *cell = [CommentCell commentCellForTableView:tableView];
+        
+        [cell fillWithComment:comment];
+        
         return cell;
     }
+    
+//    if (_loadingUsers && indexPath.row == 0)
+//        return [tableView dequeueReusableCellWithIdentifier:@"LoadingCell" forIndexPath:indexPath];
+//    
+//    if (indexPath.row < MAX(self.agreedUsers.count, self.disagreedUsers.count) - 1) {
+//        PredictorCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PredictorCell" forIndexPath:indexPath];
+//        
+//        int idx = indexPath.row;
+//        cell.agreedUserName.text    = self.agreedUsers.count > idx ? self.agreedUsers[idx] : @"";
+//        cell.disagreedUserName.text = self.disagreedUsers.count > idx ? self.disagreedUsers[idx] : @"";
+//    
+//        return cell;
+//    }
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"basicCell"];
     cell.textLabel.text = @"just here to test scrolling";
@@ -257,6 +364,34 @@ static const float parallaxRatio = 0.5;
     
 }
 
+- (void) tableView: (UITableView*) tableView willDisplayCell: (UITableViewCell*) cell forRowAtIndexPath: (NSIndexPath*) indexPath
+{
+    if ((self.comments.count >= [CommentWebRequest limitByPage]) && indexPath.row == self.comments.count)
+    {
+        __weak PredictionDetailsViewController *weakSelf = self;
+        
+        CommentWebRequest* request = [[CommentWebRequest alloc] initWithLastId: ((Comment*)[self.comments lastObject])._id forPredictionId:self.prediction.ID];
+        
+        [self executeRequest:request withBlock:^{
+            PredictionDetailsViewController *strongSelf = weakSelf;
+            if(!strongSelf) {
+                return;
+            }
+            
+            if (request.errorCode == 0 && request.comments.count != 0)
+            {
+                [strongSelf.comments addObjectsFromArray: request.comments];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                    [self.tableView reloadData];
+                });
+            }
+            else
+            {
+                [strongSelf.tableView scrollToRowAtIndexPath: [NSIndexPath indexPathForRow: indexPath.row - 1 inSection: 0] atScrollPosition: UITableViewScrollPositionBottom animated: YES];
+            }
+        }];
+    }
+}
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
     UITableViewCell *stickyCell = self.predictionCell;
@@ -266,6 +401,27 @@ static const float parallaxRatio = 0.5;
     stickyCell.frame = frame;
     [self.tableView sendSubviewToBack:stickyCell];
     
+    
+    CGFloat difference = scrollView.contentOffset.y - self.previousContentOffset.y;
+    
+    BOOL scrollingUp = difference < 0;
+    
+    CGFloat height = [self tableView:self.tableView heightForHeaderInSection:1];
+    
+    UIEdgeInsets tableViewInsets = self.tableView.contentInset;
+    if (self.tableView.contentInset.top > -height && scrollView.contentOffset.y > 0 && !scrollingUp) {
+        tableViewInsets.top  = tableViewInsets.top - difference;
+    } else if (self.tableView.contentInset.top <= -height && !scrollingUp) {
+        tableViewInsets.top = -height;
+    } else if (self.tableView.contentInset.top >= -height && self.tableView.contentInset.top < 0 && scrollingUp) {
+        tableViewInsets.top = tableViewInsets.top - difference;
+    } else if (self.tableView.contentInset.top >= 0 && scrollingUp) {
+        tableViewInsets.top = 0;
+    }
+    
+    self.tableView.contentInset = tableViewInsets;
+    self.previousContentOffset = scrollView.contentOffset;
+
 
 }
 #pragma mark Requests
@@ -276,6 +432,26 @@ static const float parallaxRatio = 0.5;
                                delegate:nil
                       cancelButtonTitle:NSLocalizedString(@"OK", @"")
                       otherButtonTitles:nil] show];
+}
+
+- (void)updateComments {
+    __weak PredictionDetailsViewController *weakSelf = self;
+    
+    self.loadingComments = YES;
+    CommentWebRequest *request = [[CommentWebRequest alloc] initWithOffset:0 forPredictionId:self.prediction.ID];
+    
+    [self executeRequest:request withBlock:^{
+        PredictionDetailsViewController *strongSelf = weakSelf;
+        if (!strongSelf)
+            return;
+        
+        self.comments = request.comments;
+        self.loadingComments = NO;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+        NSLog(@"TABLE SIZE %f", self.tableView.contentSize.height);
+    }];
 }
 
 - (void)updateUsers {
@@ -444,4 +620,73 @@ static const float parallaxRatio = 0.5;
     return [UIApplication sharedApplication].delegate;
 }
 
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    if (!self.composingComment)
+        [self composeComment];
+    
+    textView.text = @"";
+}
+
+- (void)willShowKeyBoard:(NSNotification *)object {
+    
+    NSTimeInterval animationDuration = [self keyboardAnimationDurationForNotification:object];
+    
+    CGRect frame = self.addCommentContainer.frame;
+    frame.origin.y = 0;
+    
+    CGSize keyboardSize = [[[object userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    
+    CGRect internalFrame = self.textViewContainer.frame;
+    
+    internalFrame.origin.y = (frame.size.height - keyboardSize.height) / 2.0 - (internalFrame.size.height / 2.0);
+    
+    [UIView animateWithDuration:animationDuration * 0.8 animations:^{
+        self.addCommentContainer.frame = frame;
+        self.textViewContainer.frame = internalFrame;
+    }];
+}
+
+- (void)willHideKeyBoard:(NSNotification *)object {
+    NSTimeInterval animationDuration = [self keyboardAnimationDurationForNotification:object];
+    
+    CGRect frame = self.addCommentContainer.frame;
+    frame.origin.y = self.tableView.frame.size.height;
+    
+    CGRect internalFrame = self.textViewContainer.frame;
+    
+    internalFrame.origin.y = 0;
+    
+    [UIView animateWithDuration:animationDuration * 0.8 animations:^{
+        self.addCommentContainer.frame = frame;
+        self.textViewContainer.frame = internalFrame;
+    }];
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    
+}
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    
+    int len = textView.text.length - range.length + text.length;
+    
+    if ([text isEqualToString:@"\n"]) {
+        [self submitComment];
+        return NO;
+    }
+    
+    if(len <= kCommentMaxChars) {
+        self.textCounterLabel.text = [NSString stringWithFormat:@"%d", kCommentMaxChars - len];
+        return YES;
+    }
+
+    return NO;
+}
+- (NSTimeInterval)keyboardAnimationDurationForNotification:(NSNotification*)notification
+{
+    NSDictionary* info = [notification userInfo];
+    NSValue* value = [info objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSTimeInterval duration = 0;
+    [value getValue:&duration];
+    return duration;
+}
 @end

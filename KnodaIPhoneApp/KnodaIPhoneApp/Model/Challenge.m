@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 Knoda. All rights reserved.
 //
 
-#import "Chellange.h"
+#import "Challenge.h"
 
 
-@implementation Chellange
+@implementation Challenge
 
 - (id)initWithDictionary:(NSDictionary *)dictionary {
     if(self = [super init]) {

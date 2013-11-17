@@ -11,7 +11,7 @@
 @class Prediction;
 
 
-@interface Chellange : BaseModelObject
+@interface Challenge : BaseModelObject
 
 @property (nonatomic, assign) NSInteger ID;
 @property (nonatomic, assign) BOOL seen;

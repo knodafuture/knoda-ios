@@ -8,7 +8,7 @@
 
 #import "AllAlertsWebRequest.h"
 #import "Prediction.h"
-#import "Chellange.h"
+#import "Challenge.h"
 
 
 @implementation AllAlertsWebRequest

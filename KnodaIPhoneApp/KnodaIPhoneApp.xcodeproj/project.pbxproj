@@ -11,6 +11,11 @@
 		015FA0B418303DA800253DB2 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 015FA0B318303DA800253DB2 /* Media.xcassets */; };
 		015FA0B718304A8600253DB2 /* UIBarButtonItem+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 015FA0B618304A8600253DB2 /* UIBarButtonItem+Utils.m */; };
 		015FA0BA18304D7800253DB2 /* UINavigationItem+iOS7Spacing.m in Sources */ = {isa = PBXBuildFile; fileRef = 015FA0B918304D7800253DB2 /* UINavigationItem+iOS7Spacing.m */; };
+		0192BD211838CE5800A760C8 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0192BD201838CE5800A760C8 /* CommentCell.m */; };
+		0192BD231838CE6300A760C8 /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0192BD221838CE6300A760C8 /* CommentCell.xib */; };
+		0192BD261838CF1F00A760C8 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 0192BD251838CF1F00A760C8 /* Comment.m */; };
+		0192BD291838D12E00A760C8 /* CommentWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0192BD281838D12E00A760C8 /* CommentWebRequest.m */; };
+		0192BD2C1838D29D00A760C8 /* CreateCommentWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0192BD2B1838D29D00A760C8 /* CreateCommentWebRequest.m */; };
 		01C07658183610E500866A78 /* PredictionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01C07657183610E500866A78 /* PredictionCell.xib */; };
 		01C0765C183611FE00866A78 /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01C0765B183611FE00866A78 /* LoadingCell.xib */; };
 		01C0765E183617CE00866A78 /* AddPredictionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01C0765D183617CE00866A78 /* AddPredictionViewController.xib */; };
@@ -316,7 +321,7 @@
 		9E8421EE17A267A700D14D0A /* single_txt_field@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E8421E017A267A700D14D0A /* single_txt_field@2x.png */; };
 		9E8421F117A26ECB00D14D0A /* PushWithoutAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E8421F017A26ECB00D14D0A /* PushWithoutAnimationSegue.m */; };
 		9E8421F417A2817000D14D0A /* ForgotPasswordWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E8421F317A2817000D14D0A /* ForgotPasswordWebRequest.m */; };
-		9E8421F717A7E10D00D14D0A /* Chellange.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E8421F617A7E10C00D14D0A /* Chellange.m */; };
+		9E8421F717A7E10D00D14D0A /* Challenge.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E8421F617A7E10C00D14D0A /* Challenge.m */; };
 		9E8421FA17AFC91700D14D0A /* AddPredictionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E8421F917AFC91700D14D0A /* AddPredictionViewController.m */; };
 		9E8421FD17AFEB4900D14D0A /* CategoriesWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E8421FC17AFEB4900D14D0A /* CategoriesWebRequest.m */; };
 		9E930203179FCB0B00FFB166 /* alertsIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E9301F5179FCB0B00FFB166 /* alertsIcon.png */; };
@@ -372,6 +377,15 @@
 		015FA0B618304A8600253DB2 /* UIBarButtonItem+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Utils.m"; sourceTree = "<group>"; };
 		015FA0B818304D7800253DB2 /* UINavigationItem+iOS7Spacing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationItem+iOS7Spacing.h"; sourceTree = "<group>"; };
 		015FA0B918304D7800253DB2 /* UINavigationItem+iOS7Spacing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationItem+iOS7Spacing.m"; sourceTree = "<group>"; };
+		0192BD1F1838CE5800A760C8 /* CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCell.h; sourceTree = "<group>"; };
+		0192BD201838CE5800A760C8 /* CommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentCell.m; sourceTree = "<group>"; };
+		0192BD221838CE6300A760C8 /* CommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentCell.xib; sourceTree = "<group>"; };
+		0192BD241838CF1F00A760C8 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
+		0192BD251838CF1F00A760C8 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
+		0192BD271838D12E00A760C8 /* CommentWebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentWebRequest.h; sourceTree = "<group>"; };
+		0192BD281838D12E00A760C8 /* CommentWebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentWebRequest.m; sourceTree = "<group>"; };
+		0192BD2A1838D29D00A760C8 /* CreateCommentWebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateCommentWebRequest.h; sourceTree = "<group>"; };
+		0192BD2B1838D29D00A760C8 /* CreateCommentWebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateCommentWebRequest.m; sourceTree = "<group>"; };
 		01C07657183610E500866A78 /* PredictionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PredictionCell.xib; sourceTree = "<group>"; };
 		01C0765B183611FE00866A78 /* LoadingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
 		01C0765D183617CE00866A78 /* AddPredictionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddPredictionViewController.xib; sourceTree = "<group>"; };
@@ -751,8 +765,8 @@
 		9E8421F017A26ECB00D14D0A /* PushWithoutAnimationSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushWithoutAnimationSegue.m; sourceTree = "<group>"; };
 		9E8421F217A2817000D14D0A /* ForgotPasswordWebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotPasswordWebRequest.h; sourceTree = "<group>"; };
 		9E8421F317A2817000D14D0A /* ForgotPasswordWebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordWebRequest.m; sourceTree = "<group>"; };
-		9E8421F517A7E10C00D14D0A /* Chellange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chellange.h; sourceTree = "<group>"; };
-		9E8421F617A7E10C00D14D0A /* Chellange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chellange.m; sourceTree = "<group>"; };
+		9E8421F517A7E10C00D14D0A /* Challenge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Challenge.h; sourceTree = "<group>"; };
+		9E8421F617A7E10C00D14D0A /* Challenge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Challenge.m; sourceTree = "<group>"; };
 		9E8421F817AFC91700D14D0A /* AddPredictionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPredictionViewController.h; sourceTree = "<group>"; };
 		9E8421F917AFC91700D14D0A /* AddPredictionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPredictionViewController.m; sourceTree = "<group>"; };
 		9E8421FB17AFEB4900D14D0A /* CategoriesWebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoriesWebRequest.h; sourceTree = "<group>"; };
@@ -1211,8 +1225,10 @@
 				9E066379178C407300B3E974 /* Prediction.m */,
 				9E06637B178C560000B3E974 /* Topic.h */,
 				9E06637C178C560000B3E974 /* Topic.m */,
-				9E8421F517A7E10C00D14D0A /* Chellange.h */,
-				9E8421F617A7E10C00D14D0A /* Chellange.m */,
+				9E8421F517A7E10C00D14D0A /* Challenge.h */,
+				9E8421F617A7E10C00D14D0A /* Challenge.m */,
+				0192BD241838CF1F00A760C8 /* Comment.h */,
+				0192BD251838CF1F00A760C8 /* Comment.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1525,6 +1541,10 @@
 				9E212EB917CCEE3500BE8166 /* SendDeviceTokenWebRequest.m */,
 				9E677AC217D4C73C00A9AFFC /* RemoveTokenWebRequest.h */,
 				9E677AC317D4C73C00A9AFFC /* RemoveTokenWebRequest.m */,
+				0192BD271838D12E00A760C8 /* CommentWebRequest.h */,
+				0192BD281838D12E00A760C8 /* CommentWebRequest.m */,
+				0192BD2A1838D29D00A760C8 /* CreateCommentWebRequest.h */,
+				0192BD2B1838D29D00A760C8 /* CreateCommentWebRequest.m */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -1568,6 +1588,9 @@
 				01C0766018365AC900866A78 /* BigDaddyPredictionCell.m */,
 				01C0766218365B3700866A78 /* BigDaddyPredictionCell.xib */,
 				01C0766718365FD600866A78 /* PredictionDetailsSectionHeader.xib */,
+				0192BD1F1838CE5800A760C8 /* CommentCell.h */,
+				0192BD201838CE5800A760C8 /* CommentCell.m */,
+				0192BD221838CE6300A760C8 /* CommentCell.xib */,
 			);
 			path = "Table Cells";
 			sourceTree = "<group>";
@@ -1829,6 +1852,7 @@
 				365B7DF517C6370E00ED04D2 /* welcomePointsBadges@2x.png in Resources */,
 				365B7DF617C6370E00ED04D2 /* welcomeTrackPredictions.png in Resources */,
 				365B7DF717C6370E00ED04D2 /* welcomeTrackPredictions@2x.png in Resources */,
+				0192BD231838CE6300A760C8 /* CommentCell.xib in Resources */,
 				365B7DFB17C6384700ED04D2 /* load_320x480.png in Resources */,
 				365B7DFC17C6384700ED04D2 /* load_640x960.png in Resources */,
 				365B7DFD17C6384700ED04D2 /* load_640x1136.png in Resources */,
@@ -1940,6 +1964,7 @@
 				9E5792521796C3B900979928 /* CustomizedTextField.m in Sources */,
 				9E5792851798466100979928 /* SignUpViewController.m in Sources */,
 				9E57928C179977EF00979928 /* TermsOfServiceViewController.m in Sources */,
+				0192BD261838CF1F00A760C8 /* Comment.m in Sources */,
 				9E579293179982C000979928 /* ForgotPasswordViewController.m in Sources */,
 				9E930217179FDE5000FFB166 /* NavigationViewController.m in Sources */,
 				9E93021B179FF11F00FFB166 /* NavigationSegue.m in Sources */,
@@ -1953,7 +1978,7 @@
 				9E8421F117A26ECB00D14D0A /* PushWithoutAnimationSegue.m in Sources */,
 				9E8421F417A2817000D14D0A /* ForgotPasswordWebRequest.m in Sources */,
 				015FA0B218303CC200253DB2 /* UIColor+Utils.m in Sources */,
-				9E8421F717A7E10D00D14D0A /* Chellange.m in Sources */,
+				9E8421F717A7E10D00D14D0A /* Challenge.m in Sources */,
 				9E8421FA17AFC91700D14D0A /* AddPredictionViewController.m in Sources */,
 				9E8421FD17AFEB4900D14D0A /* CategoriesWebRequest.m in Sources */,
 				9ECECC3B17B10F4E00B48465 /* PredictionDetailsViewController.m in Sources */,
@@ -1992,13 +2017,16 @@
 				3638773F17C4D6EA00703475 /* AnotherUsersProfileViewController.m in Sources */,
 				9E28686A17C63E380033FB3C /* SelectPictureViewController.m in Sources */,
 				57066AAA17C64E990080797B /* CategoryPredictionsViewController.m in Sources */,
+				0192BD211838CE5800A760C8 /* CommentCell.m in Sources */,
 				365B7E1F17C64E6C00ED04D2 /* AnotherUserProfileWebRequest.m in Sources */,
+				0192BD291838D12E00A760C8 /* CommentWebRequest.m in Sources */,
 				365B7E2217C6548300ED04D2 /* AnotherUserPredictionsWebRequest.m in Sources */,
 				571B1D1C17C7BE620013AA41 /* NewBadgeView.m in Sources */,
 				36997C1E17CCB48900424F4F /* LogInSignUpSegue.m in Sources */,
 				9E212EB717CCEAFF00BE8166 /* KeychainItemWrapper.m in Sources */,
 				9E212EBA17CCEE3500BE8166 /* SendDeviceTokenWebRequest.m in Sources */,
 				369D861717CDE78E0005F0B3 /* UsernameEmailChangeViewController.m in Sources */,
+				0192BD2C1838D29D00A760C8 /* CreateCommentWebRequest.m in Sources */,
 				9E212EBD17CF808F00BE8166 /* AlertNavigationCell.m in Sources */,
 				01C0766618365FB800866A78 /* PredictionDetailsSectionHeader.m in Sources */,
 				574314E017CF9EE800C8BC75 /* ServerError.m in Sources */,
@@ -2100,7 +2128,7 @@
 		9E708844178AF68E00F036A8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: James Flexman (PW494ZCC4M)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2112,7 +2140,7 @@
 					"\"$(SRCROOT)/KnodaIPhoneApp/Thirdparty/Flurry\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "E9BA2B1F-B6F7-4DC2-9676-63F7714619FB";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2120,8 +2148,8 @@
 		9E708845178AF68E00F036A8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Knoda, LLC (F489V4H5F6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Knoda, LLC (F489V4H5F6)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KnodaIPhoneApp/KnodaIPhoneApp-Prefix.pch";
 				INFOPLIST_FILE = "KnodaIPhoneApp/KnodaIPhoneApp-Info.plist";
@@ -2131,7 +2159,7 @@
 					"\"$(SRCROOT)/KnodaIPhoneApp/Thirdparty/Flurry\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6D565F7C-94E5-422F-A39A-046258C94904";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6D565F7C-94E5-422F-A39A-046258C94904";
 				WRAPPER_EXTENSION = app;
 			};

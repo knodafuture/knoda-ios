@@ -8,7 +8,7 @@
 
 #import "PredictionCell.h"
 #import "Prediction.h"
-#import "Chellange.h"
+#import "Challenge.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -33,12 +33,19 @@ const CGFloat defaultCellHeight = 102.0;
 static UINib *nib;
 static CGRect initialAgreeImageFrame;
 static CGRect initialDisagreeImageFrame;
-static CGFloat thresholdPercentage = 0.33f;
+static CGFloat thresholdPercentage = 0.25f;
 static CGFloat iconTrackingDistance = 20.0;
 static UIFont *defaultBodyLabelFont;
 static CGFloat defaultHeight;
 static UILabel *defaultBodyLabel;
 
+static CGFloat fullRedR = 254.0/256.0;
+static CGFloat fullRedG = 50.0/256.0;
+static CGFloat fullRedB = 50.0/256.0;
+
+static CGFloat fullGreenR = 119.0/256.0;
+static CGFloat fullGreenG = 188.0/256.0;
+static CGFloat fullGreenB = 31.0/256.0;
 
 @interface PredictionCell ()
 @property (nonatomic, strong) IBOutlet UILabel* bodyLabel;
@@ -307,8 +314,8 @@ static UILabel *defaultBodyLabel;
     }
     
     
-    if (self.agreed || self.disagreed || self.prediction.chellange.isOwn || self.prediction.isExpired)
-        return;
+    //if (self.agreed || self.disagreed || self.prediction.chellange.isOwn || self.prediction.isExpired)
+    //    return;
 
     
     CGFloat xDelta = currentLocation.x - self.initialTouchLocation.x;
@@ -317,23 +324,36 @@ static UILabel *defaultBodyLabel;
     
     slidingFrame.origin.x = xDelta;
     
+    if (abs(slidingFrame.origin.x) > slidingFrame.size.width / 2.0)
+        return;
+    
+    
     if (abs(slidingFrame.origin.x) < 4)
         slidingFrame.origin.x = 0;
     
     CGFloat xThreshold = slidingFrame.size.width * thresholdPercentage;
     
-    CGFloat percentage = abs(slidingFrame.origin.x) / xThreshold;
+    CGFloat percentage = MIN(abs(slidingFrame.origin.x) / xThreshold, 1);
+    
+    NSLog(@"%f PERCENTAGE!!!", percentage);
     
     self.slidingContainer.frame = slidingFrame;
-
-    self.agreeView.backgroundColor = [UIColor colorWithRed:0.0 green:percentage blue:0.0 alpha:1.0];
-    self.disagreeView.backgroundColor = [UIColor colorWithRed:percentage green:0 blue:0 alpha:1.0];
+    self.disagreeView.hidden = YES;
     
+    
+    CGFloat red = fullGreenR * percentage;
+    CGFloat green = fullGreenG * percentage;
+    CGFloat blue = fullGreenB * percentage;
+    
+    NSLog(@" colors red: %f, green :%f, blue: %f", red * 256, green * 256, blue * 256);
+    //self.disagreeView.backgroundColor = [UIColor colorWithRed:percentage * fullRedR green:percentage * fullRedG blue:percentage * fullRedB alpha:1.0];
+    self.agreeView.backgroundColor = [UIColor colorWithRed:percentage * fullGreenR green:percentage * fullGreenG blue:percentage * fullGreenB alpha:1.0];
+    //self.agreeView.backgroundColor = [UIColor colorFromHex:@"77BC1F"];
     CGRect agreeImageFrame = self.agreeImageView.frame;
     CGRect disagreeImageFrame = self.disagreeImageView.frame;
     
     if (slidingFrame.origin.x > 0) {
-        self.disagreeView.hidden = YES;
+        //self.disagreeView.hidden = YES;
         self.agreeView.hidden = NO;
         if (slidingFrame.origin.x > initialAgreeImageFrame.origin.x + agreeImageFrame.size.width + iconTrackingDistance) {
             agreeImageFrame.origin.x = slidingFrame.origin.x - iconTrackingDistance - agreeImageFrame.size.width;
@@ -343,7 +363,7 @@ static UILabel *defaultBodyLabel;
     
     if (slidingFrame.origin.x < 0) {
         self.disagreeView.hidden = NO;
-        self.agreeView.hidden = YES;
+        //self.agreeView.hidden = YES;
         
         if (slidingFrame.origin.x + slidingFrame.size.width < initialDisagreeImageFrame.origin.x - iconTrackingDistance) {
             disagreeImageFrame.origin.x = slidingFrame.origin.x + slidingFrame.size.width + iconTrackingDistance;
@@ -355,44 +375,19 @@ static UILabel *defaultBodyLabel;
 - (void)doAgreeAnimation:(NSTimeInterval)swipeDuration {
     self.finishingCellAnimation = YES;
     
-    CGRect slidingFrame = self.slidingContainer.frame;
-    
-    CGFloat delta = slidingFrame.size.width - slidingFrame.origin.x;
-    
-    slidingFrame.origin.x = slidingFrame.size.width;
-    
-    CGRect imageFrame = self.agreeImageView.frame;
-    imageFrame.origin.x += delta;
-    
-    
     CGRect closedSlidingFrame = self.slidingContainer.frame;
     closedSlidingFrame.origin.x = 0;
     
     CGRect closedAgreeImageFrame = initialAgreeImageFrame;
     closedAgreeImageFrame.origin.x = 0 - closedAgreeImageFrame.origin.x - closedAgreeImageFrame.size.width;
     
-    
-    CGFloat rate = self.slidingContainer.frame.origin.x / swipeDuration;
-    
-    CGFloat timeTofinish = (self.slidingContainer.frame.size.width - self.slidingContainer.frame.origin.x) / rate;
-    
-    if (timeTofinish > 0.5)
-        timeTofinish = 0.5;
-    if (timeTofinish < 0.1)
-        timeTofinish = 0.1;
-    
-    [UIView animateWithDuration:timeTofinish animations:^{
-        self.slidingContainer.frame = slidingFrame;
-        self.agreeImageView.frame = imageFrame;
-    } completion:^(BOOL finished) {
-        [self flashBackgroundColorOnView:self.agreeView duration:0.1 completion:^{
-            [UIView animateWithDuration:.5 animations:^{
-                self.slidingContainer.frame = closedSlidingFrame;
-                self.agreeImageView.frame = closedAgreeImageFrame;
-            } completion:^(BOOL finished) {
-                [self resetFrames:0.1 completion:^{
-                    self.finishingCellAnimation = NO;
-                }];
+    [self flashBackgroundColorOnView:self.agreeView duration:0.1 completion:^{
+        [UIView animateWithDuration:.5 animations:^{
+            self.slidingContainer.frame = closedSlidingFrame;
+            self.agreeImageView.frame = closedAgreeImageFrame;
+        } completion:^(BOOL finished) {
+            [self resetFrames:0.1 completion:^{
+                self.finishingCellAnimation = NO;
             }];
         }];
     }];
@@ -410,34 +405,20 @@ static UILabel *defaultBodyLabel;
     
     self.finishingCellAnimation = YES;
     
-    CGRect slidingFrame = self.slidingContainer.frame;
-    
-    CGFloat delta = (0 - slidingFrame.size.width ) - slidingFrame.origin.x;
-    
-    slidingFrame.origin.x = 0 - slidingFrame.size.width;
-    
-    CGRect imageFrame = self.disagreeImageView.frame;
-    imageFrame.origin.x += delta;
-    
-    
+
     CGRect closedSlidingFrame = self.slidingContainer.frame;
     closedSlidingFrame.origin.x = 0;
     
     CGRect closedDisagreeImageFrame = initialDisagreeImageFrame;
-    closedDisagreeImageFrame.origin.x = slidingFrame.size.width + (slidingFrame.size.width - initialDisagreeImageFrame.origin.x);
+    closedDisagreeImageFrame.origin.x = closedSlidingFrame.size.width + (closedSlidingFrame.size.width - initialDisagreeImageFrame.origin.x);
     
-    [UIView animateWithDuration:0.5 animations:^{
-        self.slidingContainer.frame = slidingFrame;
-        self.disagreeImageView.frame = imageFrame;
-    } completion:^(BOOL finished) {
-        [self flashBackgroundColorOnView:self.disagreeView duration:0.1 completion:^{
-            [UIView animateWithDuration:.5 animations:^{
-                self.slidingContainer.frame = closedSlidingFrame;
-                self.disagreeImageView.frame = closedDisagreeImageFrame;
-            } completion:^(BOOL finished) {
-                [self resetFrames:0.1 completion:^{
-                    self.finishingCellAnimation = NO;
-                }];
+    [self flashBackgroundColorOnView:self.disagreeView duration:0.1 completion:^{
+        [UIView animateWithDuration:.5 animations:^{
+            self.slidingContainer.frame = closedSlidingFrame;
+            self.disagreeImageView.frame = closedDisagreeImageFrame;
+        } completion:^(BOOL finished) {
+            [self resetFrames:0.1 completion:^{
+                self.finishingCellAnimation = NO;
             }];
         }];
     }];
@@ -497,8 +478,6 @@ static UILabel *defaultBodyLabel;
             [self doAgreeAnimation:event.timestamp - self.initialTouchTimestamp];
     } else
         [self resetFrames:0.5 completion:nil];
-    
-    
     
     [[self parentTableView] setScrollEnabled:YES];
     self.trackingTouch = NO;

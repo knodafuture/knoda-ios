@@ -7,7 +7,7 @@
 //
 
 #import "ExpiredAlertsWebRequest.h"
-#import "Chellange.h"
+#import "Challenge.h"
 #import "Prediction.h"
 
 @implementation ExpiredAlertsWebRequest

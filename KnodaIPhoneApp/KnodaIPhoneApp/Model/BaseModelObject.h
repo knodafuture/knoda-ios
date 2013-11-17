@@ -16,5 +16,5 @@ extern NSString* const kSelfObserverKey;
 
 - (void)updateWithObject:(BaseModelObject *)object;
 - (void)replaceWithObject:(BaseModelObject *)object;
-
+- (NSDate *)dateFromObject:(id)obj;
 @end

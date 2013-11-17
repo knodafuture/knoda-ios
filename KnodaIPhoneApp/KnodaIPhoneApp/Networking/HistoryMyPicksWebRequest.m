@@ -8,7 +8,7 @@
 
 #import "HistoryMyPicksWebRequest.h"
 #import "Prediction.h"
-#import "Chellange.h"
+#import "Challenge.h"
 
 
 static const NSInteger kPageResultsLimit = 25;

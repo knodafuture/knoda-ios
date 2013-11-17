@@ -8,7 +8,7 @@
 
 #import "BaseWebRequest.h"
 #import "AppDelegate.h"
-
+#import "SignOutWebRequest.h"
 
 @interface BaseWebRequest ()
 
@@ -39,8 +39,8 @@ static NSString* const kBaseURL = @"example.com";
 //static NSString* const kBaseURL = @"89.22.50.128/api/";
 //NSString* const kBaseURL = @"54.213.86.248";
 //NSString* const kBaseURL = @"127.0.0.1:3000";
-NSString* const kBaseURL = @"knoda-dev.herokuapp.com";
-
+//NSString* const kBaseURL = @"knoda-dev.herokuapp.com";
+NSString *const kBaseURL = @"localhost:1234";
 #endif
 
 
@@ -354,7 +354,7 @@ static const char *MULTIPART_CHARS = "1234567890_-qwertyuiopasdfghjklzxcvbnmQWER
             self.errorDescription = NSLocalizedString(@"Unknown server error", @"");
         }
         
-        if(self.errorCode == -1012 && [self requiresAuthToken]) { //perform logout if authorization is failed
+        if(self.errorCode == -1012 && [self requiresAuthToken] && self.class != SignOutWebRequest.class) { //perform logout if authorization is failed
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.appDelegate logout];
             });

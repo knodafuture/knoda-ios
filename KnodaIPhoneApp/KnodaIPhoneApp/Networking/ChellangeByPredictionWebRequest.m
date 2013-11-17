@@ -47,7 +47,7 @@
 {
     NSLog(@"Chellange result: %@", parsedResult);
     
-    self.chellange = [[Chellange alloc] initWithDictionary:parsedResult];
+    self.chellange = [[Challenge alloc] initWithDictionary:parsedResult];
 }
 
 

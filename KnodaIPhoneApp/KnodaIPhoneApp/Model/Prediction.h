@@ -8,7 +8,7 @@
 
 #import "BaseModelObject.h"
 
-@class Chellange;
+@class Challenge;
 
 @interface Prediction : BaseModelObject
 
@@ -28,7 +28,7 @@
 @property (nonatomic, assign) BOOL settled;
 @property (nonatomic, assign) NSInteger userId;
 @property (nonatomic, copy) NSString* userName;
-@property (nonatomic, strong) Chellange* chellange;
+@property (nonatomic, strong) Challenge* chellange;
 
 @property (nonatomic) NSString *thumbAvatar;
 @property (nonatomic) NSString *smallAvatar;

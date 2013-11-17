@@ -7,10 +7,9 @@
 //
 
 #import "Prediction.h"
-#import "Chellange.h"
+#import "Challenge.h"
 #import "NSDate+Utils.h"
 
-static NSString* const kResponseDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'zzz";
 
 @implementation Prediction
 
@@ -53,15 +52,8 @@ static NSString* const kResponseDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'zzz";
     return self;
 }
 
-- (NSDate *)dateFromObject:(id)obj {
-    if (obj && ![obj isKindOfClass: [NSNull class]] && [obj isKindOfClass:[NSString class]]) {
-        return [NSDate dateFromString:[obj stringByAppendingString: @"GMT"] withFormat:kResponseDateFormat];
-    }
-    return nil;
-}
-
 - (void)setupChallenge:(NSDictionary *)challengeDict withPoints:(NSDictionary *)pointsDict {
-    self.chellange = [[Chellange alloc] initWithDictionary:challengeDict];
+    self.chellange = [[Challenge alloc] initWithDictionary:challengeDict];
     [self.chellange fillPoints:pointsDict];
 }
 

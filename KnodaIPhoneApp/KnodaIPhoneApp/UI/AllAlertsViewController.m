@@ -9,7 +9,7 @@
 #import "AllAlertsViewController.h"
 
 #import "AllAlertsWebRequest.h"
-#import "Chellange.h"
+#import "Challenge.h"
 #import "Prediction.h"
 #import "SetSeenAlertsWebRequest.h"
 #import "PredictionDetailsViewController.h"

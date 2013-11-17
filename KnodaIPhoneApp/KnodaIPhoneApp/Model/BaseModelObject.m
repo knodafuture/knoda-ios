@@ -7,10 +7,11 @@
 //
 
 #import "BaseModelObject.h"
-
+#import "NSDate+Utils.h"
 #import <objc/runtime.h>
 
 NSString* const kSelfObserverKey = @"selfObserver";
+static NSString* const kResponseDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'zzz";
 
 @interface BaseModelObject()
 
@@ -74,5 +75,10 @@ NSString* const kSelfObserverKey = @"selfObserver";
     return [[self dictionaryWithValuesForKeys:[[[self class] propertyKeys] allObjects]] description];
     
 }
-
+- (NSDate *)dateFromObject:(id)obj {
+    if (obj && ![obj isKindOfClass: [NSNull class]] && [obj isKindOfClass:[NSString class]]) {
+        return [NSDate dateFromString:[obj stringByAppendingString: @"GMT"] withFormat:kResponseDateFormat];
+    }
+    return nil;
+}
 @end

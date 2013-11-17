@@ -1111,11 +1111,11 @@
             <objects>
                 <viewController title="KNODA" id="sd8-UN-EgX" customClass="TermsOfServiceViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zB2-xd-zLn">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="588"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" id="ioX-jH-d29">
-                                <rect key="frame" x="0.0" y="44" width="320" height="544"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="436"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
@@ -1237,14 +1237,14 @@
             <objects>
                 <viewController id="wNN-TM-pOg" customClass="PredictionDetailsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hDO-dV-CXd">
-                        <rect key="frame" x="0.0" y="44" width="320" height="588"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Qyy-el-i9J">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="588"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <color key="sectionIndexTrackingBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexTrackingBackgroundColor" red="0.59434749320000002" green="1" blue="0.16576040919999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="PredictorCell" rowHeight="30" id="JfU-6d-LuB" customClass="PredictorCell">
                                         <rect key="frame" x="0.0" y="22" width="320" height="30"/>
@@ -1304,6 +1304,43 @@
                                     <outlet property="delegate" destination="wNN-TM-pOg" id="9IJ-kE-vnZ"/>
                                 </connections>
                             </tableView>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" id="JRt-Mg-eOv">
+                                <rect key="frame" x="0.0" y="510" width="320" height="416"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <view alpha="0.5" contentMode="scaleToFill" id="6Tq-W6-9oe">
+                                        <rect key="frame" x="0.0" y="0.0" width="416" height="436"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" id="vOo-2O-1Cm">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Add a comment..." id="SBa-hj-U27">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="wNN-TM-pOg" id="HAQ-rX-KIP"/>
+                                                </connections>
+                                            </textView>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="300" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qId-xS-N7T">
+                                                <rect key="frame" x="277" y="123" width="34" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="11"/>
+                                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -1311,9 +1348,13 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="6AE-bE-aRN"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="addCommentContainer" destination="JRt-Mg-eOv" id="g2N-1d-9FM"/>
+                        <outlet property="commentTextView" destination="SBa-hj-U27" id="Mno-El-azV"/>
                         <outlet property="tableView" destination="Qyy-el-i9J" id="Pbo-35-XxO"/>
+                        <outlet property="textCounterLabel" destination="qId-xS-N7T" id="xpa-Cq-oFc"/>
+                        <outlet property="textViewContainer" destination="vOo-2O-1Cm" id="PJs-db-tdS"/>
                         <segue destination="7fT-Te-TB1" kind="push" identifier="CategoryPredictionsSegue" id="ISY-hT-jPF"/>
                         <segue destination="bkd-uK-mBb" kind="push" identifier="UserProfileSegue" id="m1B-jn-2wq"/>
                         <segue destination="WNw-sS-s8V" kind="push" identifier="MyProfileSegue" id="qdw-34-WFW"/>
@@ -1833,11 +1874,11 @@
             <objects>
                 <viewController title="ME" id="WNw-sS-s8V" customClass="ProfileViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mQ1-U4-KtG">
-                        <rect key="frame" x="0.0" y="44" width="320" height="544"/>
+                        <rect key="frame" x="0.0" y="44" width="320" height="436"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cib-RT-omZ">
-                                <rect key="frame" x="9" y="498" width="302" height="42"/>
+                                <rect key="frame" x="9" y="390" width="302" height="42"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="Sign Out" backgroundImage="btnGreen.png">
@@ -1850,7 +1891,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="38" sectionHeaderHeight="10" sectionFooterHeight="10" id="kQT-OI-osY">
-                                <rect key="frame" x="0.0" y="186" width="320" height="258"/>
+                                <rect key="frame" x="0.0" y="186" width="320" height="150"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <connections>
@@ -1859,7 +1900,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8Xz-yH-dwA">
-                                <rect key="frame" x="9" y="453" width="302" height="42"/>
+                                <rect key="frame" x="9" y="345" width="302" height="42"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <state key="normal" title="View Terms">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1943,11 +1984,11 @@
             <objects>
                 <viewController id="iWN-09-37c" customClass="ChangePasswordViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Iol-eh-d6m">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="588"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="zsL-n0-Fe7">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="588"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="SR2-GA-ai9">
@@ -2062,7 +2103,7 @@
             <objects>
                 <viewController id="8Kn-Df-1EH" customClass="UsernameEmailChangeViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="knP-tV-O4A">
-                        <rect key="frame" x="0.0" y="44" width="320" height="544"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="aL4-Zz-4jR">
@@ -2138,7 +2179,7 @@
             <objects>
                 <tableViewController id="7fT-Te-TB1" customClass="CategoryPredictionsViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="102" sectionHeaderHeight="22" sectionFooterHeight="22" id="2jP-nc-KCP">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="588"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
@@ -2214,13 +2255,13 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Ef7-FX-Fpl"/>
-        <segue reference="ufA-86-Qke"/>
+        <segue reference="mnN-YR-PTq"/>
         <segue reference="jDp-TX-Mpj"/>
-        <segue reference="vWb-Wl-mos"/>
-        <segue reference="ebR-4n-eVY"/>
-        <segue reference="vNo-cL-etu"/>
-        <segue reference="4wB-pU-7yW"/>
+        <segue reference="ufA-86-Qke"/>
         <segue reference="Plp-6v-Exs"/>
+        <segue reference="qdw-34-WFW"/>
+        <segue reference="m1B-jn-2wq"/>
+        <segue reference="vNo-cL-etu"/>
+        <segue reference="ebR-4n-eVY"/>
     </inferredMetricsTieBreakers>
 </document>

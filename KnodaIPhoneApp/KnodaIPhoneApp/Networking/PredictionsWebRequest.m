@@ -66,7 +66,6 @@ static const NSInteger kPageResultsLimit = 25;
 
 - (void) fillResultObject: (id) parsedResult
 {
-    NSLog(@"Predictions Result: %@", parsedResult);
     
     NSMutableArray* predictionArray = [[NSMutableArray alloc] initWithCapacity: 0];
     

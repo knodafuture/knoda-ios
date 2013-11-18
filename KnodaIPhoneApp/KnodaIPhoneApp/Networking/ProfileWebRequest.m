@@ -59,7 +59,7 @@
 }
 
 - (void)fillResultObject:(id)parsedResult {
-    DLog(@"%@", parsedResult);
+    //DLog(@"%@", parsedResult);
     _user = [[User alloc] initWithDictionary:parsedResult];
 }
 

@@ -46,7 +46,6 @@
 
 - (void) fillResultObject: (id) parsedResult
 {
-    NSLog(@"SendDeviceToken result: %@", parsedResult);
     self.tokenID = [parsedResult  objectForKey: @"id"];
 }
 

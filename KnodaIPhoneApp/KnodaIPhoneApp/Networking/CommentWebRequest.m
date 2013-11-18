@@ -46,7 +46,6 @@ static const NSInteger kPageResultsLimit = 25;
 
 - (void) fillResultObject: (id) parsedResult
 {
-    NSLog(@"Comments Result: %@", parsedResult);
     
     NSMutableArray* commentsArray = [[NSMutableArray alloc] initWithCapacity: 0];
     

@@ -119,7 +119,6 @@ NSString* const kAlertNotification = @"AlertNotification";
 
 - (void)application: (UIApplication*) app didRegisterForRemoteNotificationsWithDeviceToken: (NSData*) deviceToken
 {
-    NSLog(@"Registered push notifications token: %@", [deviceToken description]);
     
     self.deviceToken = [[[deviceToken description]
                                 stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]]
@@ -134,14 +133,12 @@ NSString* const kAlertNotification = @"AlertNotification";
 
 - (void) application: (UIApplication*) app didFailToRegisterForRemoteNotificationsWithError: (NSError*) err
 {
-    NSLog(@"Error in registration. Error: %@", err);
     self.deviceToken = nil;
 }
 
 
 - (void) application: (UIApplication*) application didReceiveRemoteNotification: (NSDictionary*) userInfo
 {
-    NSLog(@"Push notification arrived: %@", userInfo);
     NSString* alertString = [[userInfo objectForKey: @"aps"] objectForKey: @"alert"];
     
     if (alertString.length != 0)

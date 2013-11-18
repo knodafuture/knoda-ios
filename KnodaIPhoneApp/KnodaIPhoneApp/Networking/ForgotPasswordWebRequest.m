@@ -33,7 +33,6 @@
 
 - (void) fillResultObject: (id) parsedResult
 {
-    NSLog(@"Forgot Password Result: %@", parsedResult);
 }
 
 

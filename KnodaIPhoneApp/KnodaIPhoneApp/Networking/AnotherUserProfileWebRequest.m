@@ -38,7 +38,6 @@
 
 - (void) fillResultObject: (id) parsedResult
 {
-    NSLog(@"Parsed user's info: %@", parsedResult);
     
     if ([parsedResult respondsToSelector:@selector(valueForKey:)]) {
         self.user = [[User alloc]initWithDictionary:parsedResult];

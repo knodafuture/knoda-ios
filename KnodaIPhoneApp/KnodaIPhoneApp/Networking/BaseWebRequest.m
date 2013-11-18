@@ -194,7 +194,9 @@ static const char *MULTIPART_CHARS = "1234567890_-qwertyuiopasdfghjklzxcvbnmQWER
         
         if ([value isKindOfClass: [NSString class]])
         {
-            [urlParameters appendFormat: @"%@=%@", key, value];
+            NSLog(@"value before = %@", value);
+            NSLog(@"value after = %@", [value stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]);
+            [urlParameters appendFormat: @"%@=%@", key, [value stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
         }
         else if ([value isKindOfClass: [NSDate class]])
         {
@@ -258,9 +260,12 @@ static const char *MULTIPART_CHARS = "1234567890_-qwertyuiopasdfghjklzxcvbnmQWER
         if([key isEqualToString:kImages]) {
             continue;
         }
-        [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", key] dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[[NSString stringWithFormat:@"%@\r\n", self.parameters[key]] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"--%@\r\n", [boundary stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]] dataUsingEncoding:NSUTF8StringEncoding]];
+        NSLog(@"first part of post: %@", [NSString stringWithFormat:@"--%@\r\n", [boundary stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]]);
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", [key stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]] dataUsingEncoding:NSUTF8StringEncoding]];
+        NSLog(@"second part of post: %@", [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", [key stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]]);
+        [body appendData:[[NSString stringWithFormat:@"%@\r\n", [self.parameters[key] stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]] dataUsingEncoding:NSUTF8StringEncoding]];
+        NSLog(@"third part of post: %@", [NSString stringWithFormat:@"%@\r\n", [self.parameters[key] stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]]);
     }
     
     DLog(@"%@", [[NSString alloc] initWithData:body encoding:NSUTF8StringEncoding]);
@@ -305,8 +310,6 @@ static const char *MULTIPART_CHARS = "1234567890_-qwertyuiopasdfghjklzxcvbnmQWER
     [request setTimeoutInterval: 20];
     [request setHTTPShouldHandleCookies: NO];
     
-    NSLog(@"%@ Start request %@", NSStringFromClass([self class]), request.URL);
-    
     if ([request.HTTPMethod isEqualToString: @"POST"] || [request.HTTPMethod isEqualToString:@"PATCH"] || [request.HTTPMethod isEqualToString:@"PUT"])
     {
         if([self isMultipartData]) {
@@ -334,8 +337,8 @@ static const char *MULTIPART_CHARS = "1234567890_-qwertyuiopasdfghjklzxcvbnmQWER
         NSData* result = [NSURLConnection sendSynchronousRequest: request returningResponse: &response error: &error];
         NSString* resultString = [[NSString alloc] initWithData: result encoding: NSUTF8StringEncoding];
         
-        NSLog(@"Status code: %d", response.statusCode);
-        NSLog(@"%@ %@\nRequest result:\n%@",  NSStringFromClass([self class]), request.URL, resultString);
+        //NSLog(@"Status code: %d", response.statusCode);
+        //NSLog(@"%@ %@\nRequest result:\n%@",  NSStringFromClass([self class]), request.URL, resultString);
         
         if (self.state == kRequestStateCancelled)
         {

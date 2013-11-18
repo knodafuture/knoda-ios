@@ -70,7 +70,6 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
         }
         if (request.errorCode == 0)
         {
-            NSLog(@"All alerts: %@", request.predictions);
             
             strongSelf.predictions = [NSMutableArray arrayWithArray:request.predictions];
             [strongSelf.tableView reloadData];

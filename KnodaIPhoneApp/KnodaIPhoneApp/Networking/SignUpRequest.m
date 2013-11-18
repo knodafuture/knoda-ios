@@ -49,7 +49,6 @@
 
 - (void) fillResultObject: (id) parsedResult
 {
-    NSLog(@"Sign Up Result: %@", parsedResult);
     
     self.user = [[User alloc] initWithDictionary:parsedResult];
     self.user.token = [parsedResult objectForKey: @"auth_token"];

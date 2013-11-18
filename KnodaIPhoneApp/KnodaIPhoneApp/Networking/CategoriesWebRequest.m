@@ -31,7 +31,6 @@
 
 - (void) fillResultObject: (id) parsedResult
 {
-    NSLog(@"Get Categories Result: %@", parsedResult);
     
     NSMutableArray* array = [NSMutableArray arrayWithCapacity: 0];
     NSArray* topics = [parsedResult objectForKey: @"topics"];

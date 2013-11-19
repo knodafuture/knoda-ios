@@ -18,10 +18,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="102"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SwipeAgreeArrow" id="1TS-91-Zz9">
-                                <rect key="frame" x="10" y="38" width="47" height="25"/>
+                            <view contentMode="scaleToFill" id="p3H-TN-71J">
+                                <rect key="frame" x="10" y="0.0" width="67" height="102"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="AGREE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="O0x-7D-MDy">
+                                        <rect key="frame" x="-5" y="54" width="61" height="19"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
+                                        <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SwipeAgreeArrow" id="1TS-91-Zz9">
+                                        <rect key="frame" x="2" y="29" width="47" height="25"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.13725490200000001" green="0.36078431370000003" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -30,14 +44,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="102"/>
                         <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SwipeDisagreeArrow" id="9Og-Nv-Vm0">
-                                <rect key="frame" x="264" y="38" width="47" height="25"/>
+                            <view contentMode="scaleToFill" id="l8G-JN-vDK">
+                                <rect key="frame" x="243" y="0.0" width="67" height="102"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="DISAGREE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DIT-mM-OJ7">
+                                        <rect key="frame" x="4" y="54" width="74" height="19"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
+                                        <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SwipeDisagreeArrow" id="HF0-q3-mD3">
+                                        <rect key="frame" x="18" y="29" width="47" height="25"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.36078431372549019" green="0.048679742078079277" blue="0.095526654322189056" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <view contentMode="scaleToFill" id="WVa-0u-pvu" userLabel="Sliding Container">
+                    <view userInteractionEnabled="NO" contentMode="scaleToFill" id="WVa-0u-pvu" userLabel="Sliding Container">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="102"/>
                         <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                         <subviews>
@@ -97,12 +125,30 @@
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0m ago | 0%  agree" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="b1Y-l1-01z">
-                                <rect key="frame" x="11" y="77" width="300" height="21"/>
+                                <rect key="frame" x="11" y="77" width="236" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                 <color key="textColor" red="0.46666666670000001" green="0.73725490199999999" blue="0.1215686275" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
+                            <view contentMode="scaleToFill" id="Yt6-9W-Q2S">
+                                <rect key="frame" x="255" y="77" width="56" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="10001" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4y3-Hh-8Li">
+                                        <rect key="frame" x="14" y="0.0" width="40" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                        <color key="textColor" red="0.46666666670000001" green="0.73725490199999999" blue="0.1215686275" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CommentIcon.png" id="1HX-1c-3vi">
+                                        <rect key="frame" x="0.0" y="8" width="8" height="7"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="95F-Cz-FsB">
                                 <rect key="frame" x="293" y="13" width="18" height="10"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -114,11 +160,13 @@
             </tableViewCellContentView>
             <gestureRecognizers/>
             <connections>
-                <outlet property="agreeImageView" destination="1TS-91-Zz9" id="Q5i-WN-bwi"/>
+                <outlet property="agreeImageView" destination="p3H-TN-71J" id="be0-ij-1Np"/>
                 <outlet property="agreeView" destination="c7S-Zm-cCc" id="eQW-HS-XML"/>
                 <outlet property="avatarView" destination="h9l-Ja-5nV" id="VbO-er-rUg"/>
                 <outlet property="bodyLabel" destination="ZEj-w5-Zjh" id="bIt-Jk-b53"/>
-                <outlet property="disagreeImageView" destination="9Og-Nv-Vm0" id="yfs-9h-J6J"/>
+                <outlet property="commentCountLabel" destination="4y3-Hh-8Li" id="dbG-1g-Sn9"/>
+                <outlet property="commentLabelContainer" destination="Yt6-9W-Q2S" id="VX3-qL-2MY"/>
+                <outlet property="disagreeImageView" destination="l8G-JN-vDK" id="7gj-mz-2j2"/>
                 <outlet property="disagreeView" destination="Qv2-fI-zVg" id="t8W-1r-bAd"/>
                 <outlet property="metadataLabel" destination="b1Y-l1-01z" id="9Hu-pO-7oM"/>
                 <outlet property="outcomeLabel" destination="Fzh-XO-Pbc" id="w2k-iC-M88"/>
@@ -129,6 +177,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="CommentIcon.png" width="8" height="7"/>
         <image name="SwipeAgreeArrow" width="33" height="17"/>
         <image name="SwipeDisagreeArrow" width="33" height="17"/>
     </resources>

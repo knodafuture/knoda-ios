@@ -130,7 +130,7 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
     if (indexPath.row != self.predictions.count)
         return [PredictionCell heightForPrediction:[self.predictions objectAtIndex:indexPath.row]];
     else
-        return defaultCellHeight;
+        return loadingCellHeight;
 }
 
 - (NSInteger) tableView: (UITableView*) tableView numberOfRowsInSection: (NSInteger) section

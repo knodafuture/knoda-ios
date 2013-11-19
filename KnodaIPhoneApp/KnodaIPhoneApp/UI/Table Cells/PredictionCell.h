@@ -12,8 +12,6 @@
 @class Prediction;
 @class PredictionCell;
 
-const extern CGFloat defaultCellHeight;
-
 @protocol PredictionCellDelegate <NSObject>
 
 @optional

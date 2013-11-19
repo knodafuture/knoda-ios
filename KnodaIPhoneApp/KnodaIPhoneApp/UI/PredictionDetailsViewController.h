@@ -30,6 +30,9 @@
 - (IBAction)noButtonTapped:(UIButton *)sender;
 - (IBAction)categoryButtonTapped:(UIButton *)sender;
 
+- (IBAction)showComments:(id)sender;
+- (IBAction)showOtherUsers:(id)sender;
+
 - (IBAction)share:(id)sender;
 @end
 

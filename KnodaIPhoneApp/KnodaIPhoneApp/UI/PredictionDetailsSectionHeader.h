@@ -12,7 +12,5 @@ const extern CGFloat predictionDetailsSectionHeaderHeight;
 
 @interface PredictionDetailsSectionHeader : UIView
 
-
-
 + (PredictionDetailsSectionHeader *)sectionHeaderWithOwner:(id)owner;
 @end

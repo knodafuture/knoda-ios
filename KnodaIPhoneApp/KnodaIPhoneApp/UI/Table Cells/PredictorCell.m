@@ -10,8 +10,4 @@
 
 @implementation PredictorCell
 
-+ (CGFloat)cellHeight {
-    return 30.0;
-}
-
 @end

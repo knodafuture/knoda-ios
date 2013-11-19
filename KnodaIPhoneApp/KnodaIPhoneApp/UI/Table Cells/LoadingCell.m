@@ -8,6 +8,7 @@
 
 #import "LoadingCell.h"
 
+const CGFloat loadingCellHeight = 38.0;
 
 static UINib *nib;
 

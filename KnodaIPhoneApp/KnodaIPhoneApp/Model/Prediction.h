@@ -29,6 +29,7 @@
 @property (nonatomic, assign) NSInteger userId;
 @property (nonatomic, copy) NSString* userName;
 @property (nonatomic, strong) Challenge* chellange;
+@property (nonatomic, assign) NSInteger commentCount;
 
 @property (nonatomic) NSString *thumbAvatar;
 @property (nonatomic) NSString *smallAvatar;

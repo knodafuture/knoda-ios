@@ -146,7 +146,7 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
     if (indexPath.row != self.predictions.count)
         return [PredictionCell heightForPrediction:[self.predictions objectAtIndex:indexPath.row]];
     else
-        return defaultCellHeight;
+        return loadingCellHeight;
 }
 - (NSInteger) tableView: (UITableView*) tableView numberOfRowsInSection: (NSInteger) section {
     return (self.predictions.count != 0) ? ((self.predictions.count >= [AnotherUserPredictionsWebRequest limitByPage]) ? self.predictions.count + 1 : self.predictions.count) : 1;

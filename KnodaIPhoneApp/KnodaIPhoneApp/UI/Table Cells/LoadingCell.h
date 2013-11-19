@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Knoda. All rights reserved.
 //
 
+const extern CGFloat loadingCellHeight;
+
 @interface LoadingCell : UITableViewCell
 
 + (LoadingCell *)loadingCellForTableView:(UITableView *)tableView;

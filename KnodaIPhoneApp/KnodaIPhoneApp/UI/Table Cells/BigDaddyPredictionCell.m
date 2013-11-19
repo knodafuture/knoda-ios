@@ -9,7 +9,7 @@
 #import "BigDaddyPredictionCell.h"
 #import "PredictionCell.h"  
 #import "Prediction.h"  
-
+#import "Challenge.h"
 
 static const int kObserverKeyCount = 12;
 static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
@@ -62,14 +62,19 @@ static UINib *nib;
     self.prediction = prediction;
     
     [self.predictionCell fillWithPrediction:prediction];
+    
+    
+    
     CGRect frame = self.frame;
-    
-    frame.size.height = self.predictionCell.frame.size.height + self.agreeDisagreeView.frame.size.height;
-    
+    if ([self showsActionArea])
+        frame.size.height = self.predictionCell.frame.size.height + self.agreeDisagreeView.frame.size.height;
+    else
+        frame.size.height = self.predictionCell.frame.size.height;
     self.frame = frame;
     
     frame = self.agreeDisagreeView.frame;
     frame.origin.y = self.predictionCell.frame.size.height;
+    
     self.agreeDisagreeView.frame = frame;
     self.settlePredictionView.frame = frame;
     self.predictionStatusView.frame = frame;
@@ -83,13 +88,26 @@ static UINib *nib;
     [self configureVariableSpot];
     
 }
+
+- (BOOL)showsActionArea {
+    if (self.prediction.hasOutcome && self.prediction.chellange)
+        return YES;
+    else if (self.prediction.canSetOutcome)
+        return YES;
+    else if (![self.prediction isExpired] && !self.prediction.chellange.isOwn)
+        return YES;
+    else {
+        return NO;
+    }
+}
+
 - (void)configureVariableSpot {
     
     if (self.prediction.hasOutcome && self.prediction.chellange)
         [self updateAndShowPredictionStatusView];
     else if (self.prediction.canSetOutcome)
         [self updateAndShowSettlePredictionView];
-    else if (!self.prediction.chellange && ![self.prediction isExpired])
+    else if (![self.prediction isExpired] && !self.prediction.chellange.isOwn)
         [self updateAndShowAgreeDisagreeView];
     else {
         self.settlePredictionView.hidden = YES;

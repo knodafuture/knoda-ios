@@ -5,7 +5,12 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PredictionDetailsViewController"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PredictionDetailsViewController">
+            <connections>
+                <outlet property="commentsImageView" destination="dVj-ub-p29" id="hih-ei-loR"/>
+                <outlet property="otherUsersImageView" destination="ydl-A7-z5B" id="LX6-KH-M9q"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="WXd-0d-tHo" userLabel="Action Bar" customClass="PredictionDetailsSectionHeader">
             <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
@@ -62,6 +67,9 @@
                     <state key="normal">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="showComments:" destination="-1" eventType="touchUpInside" id="wO5-8u-PhC"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B7w-aF-qas">
                     <rect key="frame" x="93" y="0.0" width="46" height="55"/>
@@ -70,6 +78,9 @@
                     <state key="normal">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="showOtherUsers:" destination="-1" eventType="touchUpInside" id="UtG-Dp-CV7"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AdD-qm-ABC">
                     <rect key="frame" x="174" y="0.0" width="46" height="55"/>

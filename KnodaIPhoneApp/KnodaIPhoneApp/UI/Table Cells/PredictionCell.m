@@ -28,13 +28,11 @@ static NSString* const PREDICTION_OBSERVER_KEYS[kObserverKeyCount] = {
     @"chellange.isFinished"
 };
 
-const CGFloat defaultCellHeight = 102.0;
-
 static UINib *nib;
 static CGRect initialAgreeImageFrame;
 static CGRect initialDisagreeImageFrame;
 static CGFloat thresholdPercentage = 0.25f;
-static CGFloat iconTrackingDistance = 20.0;
+static CGFloat iconTrackingDistance = 0.0;
 static UIFont *defaultBodyLabelFont;
 static CGFloat defaultHeight;
 static UILabel *defaultBodyLabel;
@@ -50,6 +48,8 @@ static CGFloat fullGreenB = 31.0/256.0;
 @interface PredictionCell ()
 @property (nonatomic, strong) IBOutlet UILabel* bodyLabel;
 @property (nonatomic, strong) IBOutlet UILabel* metadataLabel;
+@property (nonatomic, strong) IBOutlet UILabel *commentCountLabel;
+@property (nonatomic, strong) IBOutlet UIView *commentLabelContainer;
 @property (nonatomic, strong) UITapGestureRecognizer* profileGestureRecognizer;
 @property (nonatomic, weak) IBOutlet UIImageView *voteImage;
 @property (nonatomic, weak) IBOutlet UILabel *outcomeLabel;
@@ -58,9 +58,9 @@ static CGFloat fullGreenB = 31.0/256.0;
 
 @property (weak, nonatomic) IBOutlet UIView *slidingContainer;
 @property (weak, nonatomic) IBOutlet UIView *agreeView;
-@property (weak, nonatomic) IBOutlet UIImageView *agreeImageView;
+@property (weak, nonatomic) IBOutlet UIView *agreeImageView;
 @property (weak, nonatomic) IBOutlet UIView *disagreeView;
-@property (weak, nonatomic) IBOutlet UIImageView *disagreeImageView;
+@property (weak, nonatomic) IBOutlet UIView *disagreeImageView;
 
 @property (assign, nonatomic) CGPoint initialTouchLocation;
 @property (assign, nonatomic) NSTimeInterval initialTouchTimestamp;
@@ -183,6 +183,18 @@ static CGFloat fullGreenB = 31.0/256.0;
     
     self.agreed = [self.prediction iAgree];
     self.disagreed = [self.prediction iDisagree];
+    
+    
+    CGSize metaDataSize = [self.metadataLabel sizeThatFits:self.metadataLabel.frame.size];
+    
+    CGRect commentsFrame = self.commentLabelContainer.frame;
+    
+    commentsFrame.origin.x = self.metadataLabel.frame.origin.x + metaDataSize.width + 5.0;
+    
+    self.commentLabelContainer.frame = commentsFrame;
+    
+    self.commentCountLabel.text = [NSString stringWithFormat:@"%d", self.prediction.commentCount];
+    
     
     [self updateVoteImage];
     
@@ -314,8 +326,8 @@ static CGFloat fullGreenB = 31.0/256.0;
     }
     
     
-    //if (self.agreed || self.disagreed || self.prediction.chellange.isOwn || self.prediction.isExpired)
-    //    return;
+    if (self.prediction.chellange.isOwn || self.prediction.isExpired)
+        return;
 
     
     CGFloat xDelta = currentLocation.x - self.initialTouchLocation.x;
@@ -335,26 +347,17 @@ static CGFloat fullGreenB = 31.0/256.0;
     
     CGFloat percentage = MIN(abs(slidingFrame.origin.x) / xThreshold, 1);
     
-    NSLog(@"%f PERCENTAGE!!!", percentage);
     
     self.slidingContainer.frame = slidingFrame;
-    self.disagreeView.hidden = YES;
     
+    self.disagreeView.backgroundColor = [UIColor colorWithRed:percentage * fullRedR green:percentage * fullRedG blue:percentage * fullRedB alpha:1.0];
     
-    CGFloat red = fullGreenR * percentage;
-    CGFloat green = fullGreenG * percentage;
-    CGFloat blue = fullGreenB * percentage;
-    
-    NSLog(@" colors red: %f, green :%f, blue: %f", red * 256, green * 256, blue * 256);
-    //self.disagreeView.backgroundColor = [UIColor colorWithRed:percentage * fullRedR green:percentage * fullRedG blue:percentage * fullRedB alpha:1.0];
     self.agreeView.backgroundColor = [UIColor colorWithRed:percentage * fullGreenR green:percentage * fullGreenG blue:percentage * fullGreenB alpha:1.0];
-    //self.agreeView.backgroundColor = [UIColor colorFromHex:@"77BC1F"];
     CGRect agreeImageFrame = self.agreeImageView.frame;
     CGRect disagreeImageFrame = self.disagreeImageView.frame;
     
     if (slidingFrame.origin.x > 0) {
-        //self.disagreeView.hidden = YES;
-        self.agreeView.hidden = NO;
+        self.disagreeView.backgroundColor = [UIColor clearColor];
         if (slidingFrame.origin.x > initialAgreeImageFrame.origin.x + agreeImageFrame.size.width + iconTrackingDistance) {
             agreeImageFrame.origin.x = slidingFrame.origin.x - iconTrackingDistance - agreeImageFrame.size.width;
             self.agreeImageView.frame = agreeImageFrame;
@@ -362,9 +365,7 @@ static CGFloat fullGreenB = 31.0/256.0;
     }
     
     if (slidingFrame.origin.x < 0) {
-        self.disagreeView.hidden = NO;
-        //self.agreeView.hidden = YES;
-        
+        self.agreeView.backgroundColor = [UIColor clearColor];
         if (slidingFrame.origin.x + slidingFrame.size.width < initialDisagreeImageFrame.origin.x - iconTrackingDistance) {
             disagreeImageFrame.origin.x = slidingFrame.origin.x + slidingFrame.size.width + iconTrackingDistance;
             self.disagreeImageView.frame = disagreeImageFrame;
@@ -381,14 +382,12 @@ static CGFloat fullGreenB = 31.0/256.0;
     CGRect closedAgreeImageFrame = initialAgreeImageFrame;
     closedAgreeImageFrame.origin.x = 0 - closedAgreeImageFrame.origin.x - closedAgreeImageFrame.size.width;
     
-    [self flashBackgroundColorOnView:self.agreeView duration:0.1 completion:^{
-        [UIView animateWithDuration:.5 animations:^{
-            self.slidingContainer.frame = closedSlidingFrame;
-            self.agreeImageView.frame = closedAgreeImageFrame;
-        } completion:^(BOOL finished) {
-            [self resetFrames:0.1 completion:^{
-                self.finishingCellAnimation = NO;
-            }];
+    [UIView animateWithDuration:.5 animations:^{
+        self.slidingContainer.frame = closedSlidingFrame;
+        self.agreeImageView.frame = closedAgreeImageFrame;
+    } completion:^(BOOL finished) {
+        [self resetFrames:0.1 completion:^{
+            self.finishingCellAnimation = NO;
         }];
     }];
     
@@ -412,14 +411,12 @@ static CGFloat fullGreenB = 31.0/256.0;
     CGRect closedDisagreeImageFrame = initialDisagreeImageFrame;
     closedDisagreeImageFrame.origin.x = closedSlidingFrame.size.width + (closedSlidingFrame.size.width - initialDisagreeImageFrame.origin.x);
     
-    [self flashBackgroundColorOnView:self.disagreeView duration:0.1 completion:^{
-        [UIView animateWithDuration:.5 animations:^{
-            self.slidingContainer.frame = closedSlidingFrame;
-            self.disagreeImageView.frame = closedDisagreeImageFrame;
-        } completion:^(BOOL finished) {
-            [self resetFrames:0.1 completion:^{
-                self.finishingCellAnimation = NO;
-            }];
+    [UIView animateWithDuration:.5 animations:^{
+        self.slidingContainer.frame = closedSlidingFrame;
+        self.disagreeImageView.frame = closedDisagreeImageFrame;
+    } completion:^(BOOL finished) {
+        [self resetFrames:0.1 completion:^{
+            self.finishingCellAnimation = NO;
         }];
     }];
     
@@ -430,25 +427,6 @@ static CGFloat fullGreenB = 31.0/256.0;
         [self.delegate predictionDisagreed: self.prediction inCell: self];
     }
 }
-
-- (void)flashBackgroundColorOnView:(UIView *)view duration:(NSTimeInterval)duration completion:(void(^)(void))completion {
-    
-    UIColor *colorToRestore = view.backgroundColor;
-    
-    [UIView animateWithDuration:duration/2.0 animations:^{
-        view.backgroundColor = [UIColor whiteColor];
-    } completion:^(BOOL finished) {
-        [UIView animateWithDuration:duration/2.0 animations:^{
-            view.backgroundColor = colorToRestore;
-        } completion:^(BOOL finished) {
-            completion();
-        }];
-    }];
-    
-    
-}
-
-
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
 
     [super touchesCancelled:touches withEvent:event];

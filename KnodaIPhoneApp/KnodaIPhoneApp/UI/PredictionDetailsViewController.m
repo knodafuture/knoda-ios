@@ -41,6 +41,8 @@ static const int kBSAlertTag = 1001;
 static const int kCommentMaxChars = 300;
 static const float parallaxRatio = 0.5;
 
+static const float otherUsersCellHeight = 44.0;
+
 @interface PredictionDetailsViewController () <UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate, PredictionCellDelegate, UITextViewDelegate> {
     BOOL _loadingUsers;
     BOOL _updatingStatus;
@@ -62,6 +64,10 @@ static const float parallaxRatio = 0.5;
 @property (weak, nonatomic) IBOutlet UILabel *textCounterLabel;
 @property (weak, nonatomic) IBOutlet UIView *textViewContainer;
 
+@property (weak, nonatomic) IBOutlet UIImageView *commentsImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *otherUsersImageView;
+
+
 @property (strong, nonatomic) NSMutableArray *comments;
 @property (assign, nonatomic) BOOL composingComment;
 @property (assign, nonatomic) BOOL loadingComments;
@@ -82,6 +88,8 @@ static const float parallaxRatio = 0.5;
     [[(AppDelegate *)[[UIApplication sharedApplication] delegate] user] addObserver:self forKeyPath:@"smallImage" options:NSKeyValueObservingOptionNew context:nil];
     self.title = @"DETAILS";
     
+    self.tableView.showsVerticalScrollIndicator = NO;
+    
     self.navigationController.navigationBar.translucent = NO;
     [self setDefaultBarButtonItems:YES];
     [self.tableView registerClass:UITableViewCell.class forCellReuseIdentifier:@"basicCell"];
@@ -91,7 +99,7 @@ static const float parallaxRatio = 0.5;
     
     [self.predictionCell configureWithPrediction:self.prediction];
     
-    [self showComments];
+    [self showComments:nil];
     [self.tableView reloadData];
     
 }
@@ -137,13 +145,7 @@ static const float parallaxRatio = 0.5;
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
 }
-- (void)reloadPredictorsTable {
-    //[self.predictorsTable reloadData];
-    
-    //self.agreedNumberLabel.text = [NSString stringWithFormat:@"%d AGREED", self.prediction.agreeCount];
-    //self.disagreedNumberLabel.text = [NSString stringWithFormat:@"%d DISAGREED", self.prediction.disagreeCount];
-    
-}
+
 - (void)setDefaultBarButtonItems:(BOOL)animated {
     [self.navigationItem setLeftBarButtonItem:[UIBarButtonItem backButtonWithTarget:self action:@selector(backPressed:)] animated:animated];
     [self.navigationItem setRightBarButtonItem:[UIBarButtonItem addPredictionBarButtonItem] animated:animated];
@@ -157,9 +159,27 @@ static const float parallaxRatio = 0.5;
     [self.navigationItem setRightBarButtonItem:submitBarButtonItem animated:YES];
 }
 
-- (void)showComments {
-    [self updateComments];
+- (IBAction)showComments:(id)sender {
     self.showingComments = YES;
+    
+    self.commentsImageView.image = [UIImage imageNamed:@"ActionCommentIconActive"];
+    self.otherUsersImageView.image = [UIImage imageNamed:@"ActionOtherUsersIcon"];
+    
+    [self.tableView reloadData];
+    
+    [self updateComments];
+}
+
+- (IBAction)showOtherUsers:(id)sender {
+    
+    self.showingComments = NO;
+    self.commentsImageView.image = [UIImage imageNamed:@"ActionCommentIcon"];
+    self.otherUsersImageView.image = [UIImage imageNamed:@"ActionOtherUsersIconActive"];
+    
+    [self.tableView reloadData];
+    
+    [self updateUsers];
+    
 }
 - (void)submitComment {
     [[LoadingView sharedInstance] show];
@@ -182,7 +202,8 @@ static const float parallaxRatio = 0.5;
         if(!strongSelf) return;
         
         if (request.isSucceeded)
-            NSLog(@"Worked");
+            self.prediction.commentCount++;
+        
         else
             [self showErrorFromRequest:request];
         
@@ -291,12 +312,15 @@ static const float parallaxRatio = 0.5;
         return self.predictionCell.frame.size.height;
     else {
         if (self.showingComments && self.loadingComments)
-            return defaultCellHeight;
+            return loadingCellHeight;
         else if (self.showingComments && indexPath.row != self.comments.count)
             return [CommentCell heightForComment:[self.comments objectAtIndex:indexPath.row]];
+        else if (!self.showingComments && !_loadingUsers)
+            return otherUsersCellHeight;
+        
     }
     
-    return defaultCellHeight;
+    return loadingCellHeight;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 2;
@@ -319,8 +343,13 @@ static const float parallaxRatio = 0.5;
     else {
         if (self.showingComments && self.loadingComments)
             return 1;
-        else if (self.showingComments && !self.loadingComments)
+        else if (self.showingComments && !self.loadingComments) {
             return self.comments.count + 1;
+        }
+        else if(!self.showingComments && _loadingUsers)
+            return 1;
+        else if (!self.showingComments && !_loadingUsers)
+            return MAX(self.agreedUsers.count, self.disagreedUsers.count) + 1;
     }
     
     return 0;
@@ -343,54 +372,57 @@ static const float parallaxRatio = 0.5;
         [cell fillWithComment:comment];
         
         return cell;
+    } else {
+        
+        if (_loadingUsers)
+            return [LoadingCell loadingCellForTableView:self.tableView];
+        
+        if (indexPath.row == 0)
+            return [tableView dequeueReusableCellWithIdentifier:@"PredictorHeaderCell"];
+        
+        
+        PredictorCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PredictorCell" forIndexPath:indexPath];
+
+        int idx = indexPath.row - 1;
+        cell.agreedUserName.text    = self.agreedUsers.count > idx ? self.agreedUsers[idx] : @"";
+        cell.disagreedUserName.text = self.disagreedUsers.count > idx ? self.disagreedUsers[idx] : @"";
+
+        return cell;
     }
-    
-//    if (_loadingUsers && indexPath.row == 0)
-//        return [tableView dequeueReusableCellWithIdentifier:@"LoadingCell" forIndexPath:indexPath];
-//    
-//    if (indexPath.row < MAX(self.agreedUsers.count, self.disagreedUsers.count) - 1) {
-//        PredictorCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PredictorCell" forIndexPath:indexPath];
-//        
-//        int idx = indexPath.row;
-//        cell.agreedUserName.text    = self.agreedUsers.count > idx ? self.agreedUsers[idx] : @"";
-//        cell.disagreedUserName.text = self.disagreedUsers.count > idx ? self.disagreedUsers[idx] : @"";
-//    
-//        return cell;
-//    }
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"basicCell"];
-    cell.textLabel.text = @"just here to test scrolling";
-    return cell;
-    
 }
 
 - (void) tableView: (UITableView*) tableView willDisplayCell: (UITableViewCell*) cell forRowAtIndexPath: (NSIndexPath*) indexPath
 {
-    if ((self.comments.count >= [CommentWebRequest limitByPage]) && indexPath.row == self.comments.count)
-    {
-        __weak PredictionDetailsViewController *weakSelf = self;
-        
-        CommentWebRequest* request = [[CommentWebRequest alloc] initWithLastId: ((Comment*)[self.comments lastObject])._id forPredictionId:self.prediction.ID];
-        
-        [self executeRequest:request withBlock:^{
-            PredictionDetailsViewController *strongSelf = weakSelf;
-            if(!strongSelf) {
-                return;
-            }
-            
-            if (request.errorCode == 0 && request.comments.count != 0)
+    if (indexPath.row == self.comments.count) {
+        if ((self.comments.count >= [CommentWebRequest limitByPage]))
             {
-                [strongSelf.comments addObjectsFromArray: request.comments];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-                    [self.tableView reloadData];
-                });
+                __weak PredictionDetailsViewController *weakSelf = self;
+                
+                CommentWebRequest* request = [[CommentWebRequest alloc] initWithLastId: ((Comment*)[self.comments lastObject])._id forPredictionId:self.prediction.ID];
+                
+                [self executeRequest:request withBlock:^{
+                    PredictionDetailsViewController *strongSelf = weakSelf;
+                    if(!strongSelf) {
+                        return;
+                    }
+                    
+                    if (request.errorCode == 0 && request.comments.count != 0)
+                    {
+                        [strongSelf.comments addObjectsFromArray: request.comments];
+                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                            [self.tableView reloadData];
+                        });
+                    }
+                    else
+                    {
+                        [strongSelf.tableView scrollToRowAtIndexPath: [NSIndexPath indexPathForRow: indexPath.row - 1 inSection: 1] atScrollPosition: UITableViewScrollPositionBottom animated: YES];
+                    }
+                }];
+            } else {
+                [self.tableView scrollToRowAtIndexPath: [NSIndexPath indexPathForRow: indexPath.row - 1 inSection: 1] atScrollPosition: UITableViewScrollPositionBottom animated: YES];
             }
-            else
-            {
-                [strongSelf.tableView scrollToRowAtIndexPath: [NSIndexPath indexPathForRow: indexPath.row - 1 inSection: 0] atScrollPosition: UITableViewScrollPositionBottom animated: YES];
-            }
-        }];
     }
+
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     

@@ -25,7 +25,7 @@
         self.settled          = [[dictionary objectForKey: @"settled"] boolValue];
         self.userId           = [[dictionary objectForKey: @"user_id"] integerValue];
         self.userName         = [dictionary objectForKey: @"username"];
-        
+        self.commentCount     = [[dictionary objectForKey:@"comment_count"] integerValue];
         id obj = [dictionary objectForKey: @"tags"];
         if([obj isKindOfClass:[NSArray class]] && [obj count]) {
             self.category = [[obj objectAtIndex: 0] objectForKey: @"name"];
@@ -100,7 +100,7 @@
     NSString* expirationString = [self predictionExpiresIntervalString: self];
     NSString* creationString = [self predictionCreatedIntervalString: self];
     
-    return [NSString stringWithFormat: NSLocalizedString(@"%@ | %@ | %d%% agree", @""),
+    return [NSString stringWithFormat: NSLocalizedString(@"%@ | %@ | %d%% agree |", @""),
             expirationString,
             creationString,
             self.agreedPercent];

@@ -203,8 +203,8 @@ static CGFloat fullGreenB = 31.0/256.0;
 }
 
 - (void)updateVoteImage {
-    if ([self.prediction.expirationDate compare: [NSDate date]] == NSOrderedAscending && self.prediction.chellange.isOwn && !self.prediction.settled)
-        self.voteImage.image = [UIImage imageNamed:@"exclamation"];
+    if (self.prediction.isReadyForResolution && self.prediction.chellange.isOwn && !self.prediction.settled)
+        self.voteImage.image = [UIImage imageNamed:@"PredictionAlertIcon"];
     else
         self.voteImage.image = [self.prediction statusImage];
     
@@ -225,6 +225,16 @@ static CGFloat fullGreenB = 31.0/256.0;
 - (void) updateDates
 {
     self.metadataLabel.text = [self.prediction metaDataString];
+    
+    CGSize metaDataSize = [self.metadataLabel sizeThatFits:self.metadataLabel.frame.size];
+    
+    CGRect commentsFrame = self.commentLabelContainer.frame;
+    
+    commentsFrame.origin.x = self.metadataLabel.frame.origin.x + metaDataSize.width + 5.0;
+    
+    self.commentLabelContainer.frame = commentsFrame;
+    
+    self.commentCountLabel.text = [NSString stringWithFormat:@"%d", self.prediction.commentCount];
     
     [self updateVoteImage];
 }

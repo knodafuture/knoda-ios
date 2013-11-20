@@ -12,6 +12,8 @@
 @implementation Challenge
 
 - (id)initWithDictionary:(NSDictionary *)dictionary {
+    if (!dictionary || [dictionary isKindOfClass:NSNull.class])
+        return nil;
     if(self = [super init]) {
         self.ID         = [[dictionary objectForKey: @"id"] integerValue];
         self.seen       = [[dictionary objectForKey: @"seen"] boolValue];

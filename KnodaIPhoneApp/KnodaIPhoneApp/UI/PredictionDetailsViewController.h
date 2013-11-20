@@ -29,11 +29,20 @@
 - (IBAction)yesButtonTapped:(UIButton *)sender;
 - (IBAction)noButtonTapped:(UIButton *)sender;
 - (IBAction)categoryButtonTapped:(UIButton *)sender;
-
+- (IBAction)remindMeTapped:(id)sender;
 - (IBAction)showComments:(id)sender;
 - (IBAction)showOtherUsers:(id)sender;
 
 - (IBAction)share:(id)sender;
+
+
+@property (weak, nonatomic) IBOutlet UIView *pickerContainerView;
+@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
+
+- (IBAction)cancelPickerView:(id)sender;
+- (IBAction)donePickerView:(id)sender;
+
+
 @end
 
 @protocol PredictionDetailsDelegate <NSObject>

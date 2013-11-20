@@ -102,6 +102,9 @@ static const float otherUsersCellHeight = 44.0;
     [self showComments:nil];
     [self.tableView reloadData];
     
+    self.datePicker.minimumDate = [NSDate date];
+    self.datePicker.date = [NSDate date];
+    
 }
 
 
@@ -181,6 +184,9 @@ static const float otherUsersCellHeight = 44.0;
     [self updateUsers];
     
 }
+- (IBAction)remindMeTapped:(id)sender {
+    [self showDatePicker];
+}
 - (void)submitComment {
     [[LoadingView sharedInstance] show];
     
@@ -220,7 +226,7 @@ static const float otherUsersCellHeight = 44.0;
 
 #pragma mark Actions
 - (IBAction)share:(id)sender {
-    UIActivityViewController *vc = [[UIActivityViewController alloc] initWithActivityItems:@[self.prediction.body] applicationActivities:nil];
+    UIActivityViewController *vc = [[UIActivityViewController alloc] initWithActivityItems:@[[NSString stringWithFormat:@"Check out my prediction on Knoda! %@", self.prediction.shortUrl]] applicationActivities:nil];
     [self presentViewController:vc animated:YES completion:nil];
 }
 
@@ -511,6 +517,8 @@ static const float otherUsersCellHeight = 44.0;
 
 - (void)sendAgree:(BOOL)agree {
     
+    
+    [[LoadingView sharedInstance] show];
     _updatingStatus = YES;
     
     BaseWebRequest *request;
@@ -526,6 +534,7 @@ static const float otherUsersCellHeight = 44.0;
     
     [self executeRequest:request withBlock:^{
         PredictionDetailsViewController *strongSelf = weakSelf;
+        [[LoadingView sharedInstance] hide];
         if(!strongSelf) return;
         
         if(request.isSucceeded) {
@@ -557,12 +566,13 @@ static const float otherUsersCellHeight = 44.0;
 - (void)sendOutcome:(BOOL)realise {
     
     _updatingStatus = YES;
-    
+    [[LoadingView sharedInstance] show];
     OutcomeWebRequest *outcomeRequest = [[OutcomeWebRequest alloc] initWithPredictionId:self.prediction.ID realise:realise];
     
     __weak PredictionDetailsViewController *weakSelf = self;
     
-    [self executeRequest:outcomeRequest withBlock:^{        
+    [self executeRequest:outcomeRequest withBlock:^{
+        [[LoadingView sharedInstance] hide];
         PredictionDetailsViewController *strongSelf = weakSelf;
         if(!strongSelf) return;
         
@@ -592,14 +602,19 @@ static const float otherUsersCellHeight = 44.0;
     [self.tableView reloadData];
 }
 
+
+
 - (void)sendBS {
     
+    
+    [[LoadingView sharedInstance] show];
     _updatingStatus = YES;
     
     __weak PredictionDetailsViewController *weakSelf = self;
 
     BSWebRequest *bsRequest = [[BSWebRequest alloc] initWithPredictionId:self.prediction.ID];
     [self executeRequest:bsRequest withBlock:^{
+        [[LoadingView sharedInstance] hide];
         PredictionDetailsViewController *strongSelf = weakSelf;
         if(!strongSelf) return;
         
@@ -628,6 +643,42 @@ static const float otherUsersCellHeight = 44.0;
     [self.tableView reloadData];
 }
 
+- (void)sendNewResolutionDate:(NSDate *)date {
+    [[LoadingView sharedInstance] show];
+    _updatingStatus = YES;
+    
+    __weak PredictionDetailsViewController *weakSelf = self;
+    
+    PredictionUpdateWebRequest *request = [[PredictionUpdateWebRequest alloc] initWithPredictionId:self.prediction.ID extendTill:date];
+    [self executeRequest:request withBlock:^{
+        [[LoadingView sharedInstance] hide];
+        PredictionDetailsViewController *strongSelf = weakSelf;
+        if(!strongSelf) return;
+        
+        if(request.isSucceeded) {
+            PredictionUpdateWebRequest *updateRequest = [[PredictionUpdateWebRequest alloc] initWithPredictionId:strongSelf.prediction.ID];
+            [strongSelf executeRequest:updateRequest withBlock:^{
+                
+                strongSelf->_updatingStatus = NO;
+                
+                if(updateRequest.isSucceeded) {
+                    [strongSelf.prediction updateWithObject:updateRequest.prediction];
+                }
+                else {
+                    [strongSelf showErrorFromRequest:updateRequest];
+                }
+                [self.tableView reloadData];
+            }];
+        }
+        else {
+            strongSelf->_updatingStatus = NO;
+            [strongSelf showErrorFromRequest:request];
+            [self.tableView reloadData];
+        }
+    }];
+    
+    [self.tableView reloadData];
+}
 #pragma mark UIAlertViewDelegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -720,5 +771,38 @@ static const float otherUsersCellHeight = 44.0;
     NSTimeInterval duration = 0;
     [value getValue:&duration];
     return duration;
+}
+
+- (IBAction)cancelPickerView:(id)sender {
+    [self hideDatePicker];
+}
+
+- (IBAction)donePickerView:(id)sender {
+    [self hideDatePicker];
+    
+    
+    [self sendNewResolutionDate:self.datePicker.date];
+    
+}
+
+- (void)showDatePicker {
+    CGRect frame = self.pickerContainerView.frame;
+    
+    frame.origin.y = self.view.frame.size.height - frame.size.height;
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        self.pickerContainerView.frame = frame;
+    }];
+}
+
+- (void)hideDatePicker {
+    
+    CGRect frame = self.pickerContainerView.frame;
+    
+    frame.origin.y = self.view.frame.size.height;
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        self.pickerContainerView.frame = frame;
+    }];
 }
 @end

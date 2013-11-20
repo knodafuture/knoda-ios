@@ -23,6 +23,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *totalPointsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *pointsBreakdownLabel;
 
+@property (weak, nonatomic) IBOutlet UIButton *agreeButton;
+@property (weak, nonatomic) IBOutlet UIButton *disagreeButton;
+
+@property (weak, nonatomic) IBOutlet UIView *settleOtherUsersPrediction;
+
 
 + (BigDaddyPredictionCell *)predictionCellWithOwner:(id<PredictionCellDelegate>)owner;
 

@@ -10,6 +10,6 @@
 
 @interface AddPredictionRequest : BaseWebRequest
 
-- (id)initWithBody:(NSString *)body expirationDate:(NSDate *)date category:(NSString *)category;
+- (id)initWithBody:(NSString *)body expirationDate:(NSDate *)date resolutionDate:(NSDate *)resolutionDate category:(NSString *)category;
 
 @end

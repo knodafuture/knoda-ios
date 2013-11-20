@@ -40,13 +40,13 @@ NSString* const kBaseURL = @"api.knoda.com";
 //NSString* const kBaseURL = @"127.0.0.1:3000";
 
 //Uncomment the following line for the development environment
-NSString* const kBaseURL = @"api-dev.knoda.com";
+//NSString* const kBaseURL = @"api-dev.knoda.com";
 
 //Uncomment the following line for the test environment
 //NSString* const kBaseURL = @"api-test.knoda.com";  // Old server=54.213.86.248
 
 
-//NSString* const kBaseURL = @"knoda-dev.herokuapp.com";
+NSString* const kBaseURL = @"knoda-dev.herokuapp.com";
 //NSString *const kBaseURL = @"localhost:1234";
 #endif
 
@@ -260,12 +260,9 @@ static const char *MULTIPART_CHARS = "1234567890_-qwertyuiopasdfghjklzxcvbnmQWER
         if([key isEqualToString:kImages]) {
             continue;
         }
-        [body appendData:[[NSString stringWithFormat:@"--%@\r\n", [self encodeString:boundary]] dataUsingEncoding:NSUTF8StringEncoding]];
-        NSLog(@"first part of post: %@", [NSString stringWithFormat:@"--%@\r\n", [self encodeString:boundary]]);
-        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", [self encodeString:key]] dataUsingEncoding:NSUTF8StringEncoding]];
-        NSLog(@"second part of post: %@", [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", [self encodeString:key]]);
+        [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", key] dataUsingEncoding:NSUTF8StringEncoding]];
         [body appendData:[[NSString stringWithFormat:@"%@\r\n", [self encodeString:self.parameters[key]]] dataUsingEncoding:NSUTF8StringEncoding]];
-        NSLog(@"third part of post: %@", [NSString stringWithFormat:@"%@\r\n", [self encodeString:self.parameters[key]]]);
     }
     
     DLog(@"%@", [[NSString alloc] initWithData:body encoding:NSUTF8StringEncoding]);
@@ -442,6 +439,8 @@ static const char *MULTIPART_CHARS = "1234567890_-qwertyuiopasdfghjklzxcvbnmQWER
 }
 
 - (NSString *)encodeString:(NSString *)string {
+    if (![string isKindOfClass:NSString.class])
+        return string;
     return (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)string, NULL, (CFStringRef)@"&=+", kCFStringEncodingUTF8));
 }
 

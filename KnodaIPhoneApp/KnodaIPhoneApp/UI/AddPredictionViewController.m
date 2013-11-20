@@ -25,31 +25,34 @@ static const CGFloat kCategorySectionHeight = 40;
 
 @property (nonatomic, strong) IBOutlet UITextView* textView;
 @property (nonatomic, strong) IBOutlet UIPickerView* categoryPicker;
-@property (nonatomic, strong) IBOutlet UIPickerView* expirationPicker;
+@property (nonatomic, strong) IBOutlet UIDatePicker* expirationPicker;
+@property (nonatomic, strong) IBOutlet UIDatePicker* resolutionPicker;
 @property (nonatomic, strong) IBOutlet UILabel *categoryLabel;
 @property (nonatomic, strong) IBOutlet UILabel* expirationLabel;
+@property (nonatomic, strong) IBOutlet UILabel* resolutionLabel;
 @property (nonatomic, strong) IBOutlet UILabel* charsLabel;
 @property (nonatomic, strong) UIBarButtonItem *predictBarButton;
 
 @property (nonatomic, strong) IBOutlet UIView* expirationPickerContainerView;
 @property (nonatomic, strong) IBOutlet UIView* categoryPickerContainerView;
+@property (weak, nonatomic) IBOutlet UIView *resolutionPickerContainerView;
 @property (nonatomic, weak) IBOutlet UIView *expirationBar;
 @property (nonatomic, weak) IBOutlet UIView *categoryBar;
+@property (nonatomic, weak) IBOutlet UIView *resolutionBar;
 @property (nonatomic, strong) IBOutlet UIView* containerView;
 @property (nonatomic, strong) IBOutlet BindableView *avatarView;
 
 @property (nonatomic, strong) NSString* previousCategory;
-@property (nonatomic, strong) NSString* previousExpirationDate;
 
 @property (nonatomic, strong) NSArray* categories;
-@property (nonatomic, strong) NSArray* expirationStrings;
 
 @property (nonatomic, strong) NSString* categoryText;
-@property (nonatomic, strong) NSString *expirationString;
 @property (nonatomic, strong) NSString* placeholderText;
 
 @property (nonatomic, assign) BOOL showPlaceholder;
 
+@property (strong, nonatomic) NSDateFormatter *expirationDateFormatter;
+@property (strong, nonatomic) NSDateFormatter *expirationTimeFormatter;
 @end
 
 @implementation AddPredictionViewController
@@ -60,8 +63,6 @@ static const CGFloat kCategorySectionHeight = 40;
     
     self.placeholderText = NSLocalizedString(@"Make a prediction...", @"");
     self.showPlaceholder = YES;
-    
-    self.expirationStrings = [[self class] expirationStrings];
     
     NSString* categoriesKey = @"Categories";
 	
@@ -95,6 +96,20 @@ static const CGFloat kCategorySectionHeight = 40;
     
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [self.avatarView bindToURL:appDelegate.user.thumbImage];
+    
+    self.expirationPicker.minimumDate = [NSDate date];
+    self.expirationPicker.date = [NSDate date];
+    
+    self.expirationDateFormatter = [[NSDateFormatter alloc] init];
+    
+    
+    [self.expirationDateFormatter setDateStyle:NSDateFormatterShortStyle];
+    [self.expirationDateFormatter setTimeStyle:NSDateFormatterNoStyle];
+    
+    self.expirationTimeFormatter = [[NSDateFormatter alloc] init];
+    
+    [self.expirationTimeFormatter setDateStyle:NSDateFormatterNoStyle];
+    [self.expirationTimeFormatter setTimeStyle:NSDateFormatterShortStyle];
 }
 
 - (void)didTap {
@@ -121,10 +136,14 @@ static const CGFloat kCategorySectionHeight = 40;
     [super viewWillDisappear: animated];
 }
 
-
+- (void)showResolutionPicker {
+    [self showPickerView:self.resolutionPickerContainerView under:self.resolutionBar];
+}
+- (void)hideResolutionPicker {
+    [self hidePickerViewAndRestore:self.resolutionPickerContainerView];
+}
 - (void) hideExpirationDatePicker
 {
-    self.previousExpirationDate = nil;
     [self hidePickerViewAndRestore:self.expirationPickerContainerView];
 }
 
@@ -183,14 +202,11 @@ static const CGFloat kCategorySectionHeight = 40;
 
 - (NSDate*) expirationDate
 {
-    NSDate* result = nil;
-    
-    if (self.expirationString)
-    {
-        result = [[self class] dateForExpirationString:self.expirationString];
-    }
-    
-    return result;
+    return self.expirationPicker.date;
+}
+
+- (NSDate *)resolutionDate {
+    return self.resolutionPicker.date;
 }
 
 
@@ -206,6 +222,7 @@ static const CGFloat kCategorySectionHeight = 40;
 - (IBAction) selectCategoryPressed: (id) sender
 {
     [self hideExpirationDatePicker];
+    [self hideResolutionPicker];
     
     self.previousCategory = self.categoryText;
     
@@ -226,30 +243,19 @@ static const CGFloat kCategorySectionHeight = 40;
     [self showCategoryPicker];
 }
 
-
+- (IBAction)selectResolutionPressed:(id)sender {
+    [self hideCategoryPicker];
+    [self hideExpirationDatePicker];
+    
+    [self showResolutionPicker];
+}
 - (IBAction) selectExpirationPressed: (id) sender
 {
     [self hideCategoryPicker];
-    
-    self.previousExpirationDate = self.expirationString;
-    
-    if (!self.expirationString)
-    {
-        self.expirationString = [self.expirationStrings objectAtIndex: 0];
-    }
-    else
-    {
-        [self.expirationPicker selectRow: [self.expirationStrings indexOfObject: self.expirationString] inComponent: 0 animated: NO];
-    }
+    [self hideResolutionPicker];
     
     [self showExpirationDatePicker];
 }
-
-- (void)setExpirationString:(NSString *)expirationString {
-    _expirationString = expirationString;
-    self.expirationLabel.text = [NSString stringWithFormat:@"Expires in %@", expirationString];
-}
-
 - (IBAction) doneExpirationPicker: (id) sender
 {
     [self hideExpirationDatePicker];
@@ -258,8 +264,7 @@ static const CGFloat kCategorySectionHeight = 40;
 
 - (IBAction) cancelExpirationPicker: (id) sender
 {
-    self.expirationString = nil;
-    self.expirationLabel.text = @"Expires in...";
+    self.expirationLabel.text = @"Expires on ...";
     [self hideExpirationDatePicker];
 }
 
@@ -281,7 +286,15 @@ static const CGFloat kCategorySectionHeight = 40;
     [self hideCategoryPicker];
 }
 
+- (IBAction)cancelResolutionPicker:(id)sender {
+    self.resolutionLabel.text = @"Resolves on ...";
+    [self hideResolutionPicker];
 
+}
+- (IBAction)doneResolutionPicker:(id)sender {
+    [self hideResolutionPicker];
+
+}
 - (void)predict {
     NSString* errorMessage = nil;
     
@@ -305,7 +318,6 @@ static const CGFloat kCategorySectionHeight = 40;
     }
     else
     {
-        [Flurry logEvent: @"Add_Prediction" withParameters: @{@"Category": self.categoryText, @"ExpirationDate": self.expirationString}];
         
         if ([self.textView isFirstResponder])
         {
@@ -319,6 +331,7 @@ static const CGFloat kCategorySectionHeight = 40;
         
         AddPredictionRequest* request = [[AddPredictionRequest alloc] initWithBody:self.textView.text
                                                                     expirationDate:[self expirationDate]
+                                                                    resolutionDate:[self resolutionDate]
                                                                           category:self.categoryText];
         [request executeWithCompletionBlock: ^
         {
@@ -400,18 +413,8 @@ static const CGFloat kCategorySectionHeight = 40;
 
 - (NSInteger) pickerView: (UIPickerView*) pickerView numberOfRowsInComponent: (NSInteger) component
 {
-    NSInteger result = 0;
     
-    if (pickerView == self.categoryPicker)
-    {
-        result = (self.categories.count == 0) ? 1 : self.categories.count;
-    }
-    else if (pickerView == self.expirationPicker)
-    {
-        result = self.expirationStrings.count;
-    }
-    
-    return result;
+    return (self.categories.count == 0) ? 1 : self.categories.count;
 }
 
 
@@ -426,10 +429,6 @@ static const CGFloat kCategorySectionHeight = 40;
     {
         result = (self.categories.count == 0) ? NSLocalizedString(@"Loading Categories...", @"") : [self.categories objectAtIndex: row];
     }
-    else if (pickerView == self.expirationPicker)
-    {
-        result = [self.expirationStrings objectAtIndex: row];
-    }
     
     return result;
 }
@@ -442,75 +441,21 @@ static const CGFloat kCategorySectionHeight = 40;
         self.categoryText = [self.categories objectAtIndex: row];
 
         self.categoryLabel.text = self.categoryText;
-        
-//        CGRect newButtonFrame = self.categoryButton.frame;
-//        newButtonFrame.size.width = self.categoryButton.titleLabel.frame.size.width + 40;
-//        self.categoryButton.frame = newButtonFrame;
-//        
-//        self.categoryButton.hidden = NO;
-    }
-    else if (pickerView == self.expirationPicker)
-    {
-        self.expirationString = [self.expirationStrings objectAtIndex: row];
     }
 }
 
-#pragma mark Expiration strings
-
-+ (NSArray *)expirationStrings {
-    static NSArray *expStrings = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        expStrings = @[NSLocalizedString(@"10 minutes", @""),
-                       NSLocalizedString(@"1 hour", @""),
-                       NSLocalizedString(@"3 hours", @""),
-                       NSLocalizedString(@"6 hours", @""),
-                       NSLocalizedString(@"1 day", @""),
-                       NSLocalizedString(@"3 days", @""),
-                       NSLocalizedString(@"1 week", @"")];
-    });
-    return expStrings;
-}
-
-+ (NSDate *)dateForExpirationString:(NSString *)expString {
-    NSInteger index = [[self expirationStrings] indexOfObject:expString];
-    NSTimeInterval timeInterval = 0;
+- (IBAction)expirationPickerValueChanged:(id)sender {
     
-    switch (index) {
-        case 0:
-            // 10 minutes
-            timeInterval = 10*60;
-            break;
-        case 1:
-            // 1 hour
-            timeInterval = 1 * 60 * 60;
-            break;
-        case 2:
-            // 3 hours
-            timeInterval = 3 * 60 * 60;
-            break;
-        case 3:
-            // 6 hours
-            timeInterval = 6 * 60 * 60;
-            break;
-        case 4:
-            // 1 day
-            timeInterval = 1 * 24 * 60 * 60;
-            break;
-        case 5:
-            // 3 days
-            timeInterval = 3 * 24 * 60 * 60;
-            break;
-        case 6:
-            // 1 week
-            timeInterval = 7 * 24 * 60 * 60;
-            break;
-            
-        default:
-            break;
-    }
+    NSDate *newDate = self.expirationPicker.date;
     
-    return [NSDate dateWithTimeIntervalSinceNow: timeInterval];
+    self.expirationLabel.text = [NSString stringWithFormat:@"Expires on %@ at %@", [self.expirationDateFormatter stringFromDate:newDate], [self.expirationTimeFormatter stringFromDate:newDate]];
+    
 }
+- (IBAction)resolutionPickerValueChanged:(id)sender {
+    NSDate *newDate = self.resolutionPicker.date;
+    
+    self.resolutionLabel.text = [NSString stringWithFormat:@"Resolves on %@ at %@'", [self.expirationDateFormatter stringFromDate:newDate], [self.expirationTimeFormatter stringFromDate:newDate]];
+}
+
 
 @end

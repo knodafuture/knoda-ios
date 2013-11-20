@@ -105,8 +105,10 @@ static UINib *nib;
     
     if (self.prediction.hasOutcome && self.prediction.chellange)
         [self updateAndShowPredictionStatusView];
-    else if (self.prediction.canSetOutcome)
+    else if (self.prediction.canSetOutcome && self.prediction.chellange.isOwn)
         [self updateAndShowSettlePredictionView];
+    else if (self.prediction.canSetOutcome && !self.prediction.chellange.isOwn)
+        [self updateAndShowSettleOther];
     else if (![self.prediction isExpired] && !self.prediction.chellange.isOwn)
         [self updateAndShowAgreeDisagreeView];
     else {
@@ -116,15 +118,35 @@ static UINib *nib;
     }
 }
 
+- (void)updateAndShowSettleOther {
+    self.settlePredictionView.hidden = YES;
+    self.predictionStatusView.hidden = YES;
+    self.agreeDisagreeView.hidden = YES;
+    self.settleOtherUsersPrediction.hidden = NO;
+}
+
 - (void)updateAndShowAgreeDisagreeView {
     self.settlePredictionView.hidden = YES;
     self.predictionStatusView.hidden = YES;
     self.agreeDisagreeView.hidden = NO;
+    self.settleOtherUsersPrediction.hidden = YES;
+    
+    if (self.prediction.iAgree) {
+        self.agreeButton.backgroundColor = [UIColor colorFromHex:@"235C37"];
+        self.disagreeButton.backgroundColor = [UIColor colorFromHex:@"77BC1F"];
+    } else if (self.prediction.iDisagree) {
+        self.agreeButton.backgroundColor = [UIColor colorFromHex:@"77BC1F"];
+        self.disagreeButton.backgroundColor = [UIColor colorFromHex:@"234C37"];
+    } else {
+        self.agreeButton.backgroundColor = [UIColor colorFromHex:@"77BC1F"];
+        self.disagreeButton.backgroundColor = [UIColor colorFromHex:@"77BC1F"];
+    }
 }
 - (void)updateAndShowPredictionStatusView {
     self.settlePredictionView.hidden = YES;
     self.predictionStatusView.hidden = NO;
     self.agreeDisagreeView.hidden = YES;
+    self.settleOtherUsersPrediction.hidden = YES;
     
     self.pointsBreakdownLabel.text = [self.prediction pointsString];
     
@@ -143,6 +165,7 @@ static UINib *nib;
     self.settlePredictionView.hidden = NO;
     self.predictionStatusView.hidden = YES;
     self.agreeDisagreeView.hidden = YES;
+    self.settleOtherUsersPrediction.hidden = YES;
 }
 
 #pragma mark KVO

@@ -22,10 +22,14 @@
         self.voitedUsersCount = [[dictionary objectForKey: @"market_size"] integerValue];
         self.agreedPercent    = [[dictionary objectForKey: @"prediction_market"] integerValue];
         self.expired          = [[dictionary objectForKey: @"expired"] boolValue];
+        self.isReadyForResolution = [[dictionary objectForKey:@"is_ready_for_resolution"] boolValue];
         self.settled          = [[dictionary objectForKey: @"settled"] boolValue];
         self.userId           = [[dictionary objectForKey: @"user_id"] integerValue];
         self.userName         = [dictionary objectForKey: @"username"];
         self.commentCount     = [[dictionary objectForKey:@"comment_count"] integerValue];
+        self.shortUrl         = [dictionary objectForKey:@"short_url"];
+        
+        
         id obj = [dictionary objectForKey: @"tags"];
         if([obj isKindOfClass:[NSArray class]] && [obj count]) {
             self.category = [[obj objectAtIndex: 0] objectForKey: @"name"];
@@ -46,8 +50,7 @@
         
         self.creationDate   = [self dateFromObject:dictionary[@"created_at"]];
         self.expirationDate = [self dateFromObject:dictionary[@"expires_at"]];
-        self.unfinishedDate = [self dateFromObject:dictionary[@"unfinished"]];
-
+        self.resolutionDate = [self dateFromObject:dictionary[@"resolution_date"]];
     }
     return self;
 }
@@ -67,21 +70,13 @@
 }
 
 - (BOOL)isFinished {
-    return self.chellange.isOwn && (self.unfinishedDate ? [self.unfinishedDate timeIntervalSinceNow] < 0 : [self.expirationDate timeIntervalSinceNow] < 0);
-}
-
-- (NSString*) description
-{
-    
-    NSString* result = [NSString stringWithFormat: @"\r\r***PREDICTION***\rid: %d\rcategory: %@\rbody: %@\rcreationDate: %@\rexpirationDate: %@\runfinishedDate: %@\ragreeCount: %d\rdisagreeCount: %d\rvoitedUsersCount: %d\ragreePersent: %d\rexpired: %@\rhasOutcome: %@\routcome: %@\rsettled: %@\ruserId: %d\ruserName: %@\ruserAvatars: %@\rchellange: %@\r***", self.ID, self.category, self.body, self.creationDate, self.expirationDate, self.unfinishedDate, self.agreeCount, self.disagreeCount, self.voitedUsersCount, self.agreedPercent, (self.expired) ? @"YES" : @"NO", (self.hasOutcome) ? @"YES" : @"NO", (self.outcome) ? @"YES" : @"NO", (self.settled) ? @"YES" : @"NO", self.userId, self.userName, [NSString stringWithFormat:@"\n%@\n%@\n%@", self.thumbAvatar, self.smallAvatar, self.bigAvatar], self.chellange];
-    
-    return result;
+    return self.chellange.isOwn && [self.expirationDate timeIntervalSinceNow] < 0;
 }
 
 
 - (BOOL) passed72HoursSinceExpiration
 {
-    NSTimeInterval timeInterval = [[NSDate date] timeIntervalSinceDate: (self.unfinishedDate ? : self.expirationDate)];
+    NSTimeInterval timeInterval = [[NSDate date] timeIntervalSinceDate:self.resolutionDate];
     NSTimeInterval secondsIn72Hours = 60 * 60 * 72;
     
     if (timeInterval > secondsIn72Hours)
@@ -227,9 +222,9 @@
 
 - (UIImage *)statusImage {
     if ([self iAgree])
-        return [UIImage imageNamed:@"AgreeMarkerActive"];
+        return [UIImage imageNamed:@"AgreeMarker"];
     else if ([self iDisagree])
-        return [UIImage imageNamed:@"DisagreeMarkerActive"];
+        return [UIImage imageNamed:@"DisagreeMarker"];
     else
         return nil;
 }

@@ -17,7 +17,7 @@
 @property (nonatomic, copy) NSString* body;
 @property (nonatomic, strong) NSDate* creationDate;
 @property (nonatomic, strong) NSDate* expirationDate;
-@property (nonatomic ,strong) NSDate* unfinishedDate;
+@property (nonatomic, strong) NSDate* resolutionDate;
 @property (nonatomic, assign) NSInteger agreeCount;
 @property (nonatomic, assign) NSInteger disagreeCount;
 @property (nonatomic, assign) NSInteger voitedUsersCount;
@@ -26,11 +26,12 @@
 @property (nonatomic, assign) BOOL hasOutcome;
 @property (nonatomic, assign) BOOL outcome;
 @property (nonatomic, assign) BOOL settled;
+@property (nonatomic, assign) BOOL isReadyForResolution;
 @property (nonatomic, assign) NSInteger userId;
 @property (nonatomic, copy) NSString* userName;
 @property (nonatomic, strong) Challenge* chellange;
 @property (nonatomic, assign) NSInteger commentCount;
-
+@property (nonatomic, strong) NSString *shortUrl;
 @property (nonatomic) NSString *thumbAvatar;
 @property (nonatomic) NSString *smallAvatar;
 @property (nonatomic) NSString *bigAvatar;

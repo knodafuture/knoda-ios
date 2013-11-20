@@ -15,7 +15,6 @@
 @property (nonatomic, readonly) Prediction *prediction;
 
 - (id)initWithPredictionId:(NSInteger)predictionId;
-- (id)initWithPredictionId:(NSInteger)predictionId patch:(NSDictionary *)params;
-- (id)initWithPredictionId:(NSInteger)predictionId extendTill:(NSDate *)expDate;
+- (id)initWithPredictionId:(NSInteger)predictionId extendTill:(NSDate *)resolutionDate;
 
 @end

@@ -65,6 +65,13 @@ static UILabel *defaultBodyLabel;
         self.voteImage.image = [UIImage imageNamed:comment.challenge.agree ? @"AgreeMarkerActive" : @"DisagreeMarkerActive"];
     else
         self.voteImage.image = nil;
+    
+    CGRect frame = self.frame;
+    
+    frame.size.height = [CommentCell heightForComment:comment];
+    
+    self.frame = frame;
+
 }
 
 @end

@@ -30,23 +30,22 @@
 
 - (id)initWithPredictionId:(NSInteger)predictionId patch:(NSDictionary *)params {
     if(self = [super initWithParameters:params]) {
-        DLog(@"%@", parameters);
         _patch = YES;
         _predictionId = predictionId;
     }
     return self;
 }
 
-- (id)initWithPredictionId:(NSInteger)predictionId extendTill:(NSDate *)expDate {
-    NSDateComponents *dc = [expDate gmtDateComponents];
-    NSDictionary *params = @{@"prediction[unfinished(1i)]" : @(dc.year),
-                             @"prediction[unfinished(2i)]" : @(dc.month),
-                             @"prediction[unfinished(3i)]" : @(dc.day),
-                             @"prediction[unfinished(4i)]" : @(dc.hour),
-                             @"prediction[unfinished(5i)]" : @(dc.minute)};
+
+- (id)initWithPredictionId:(NSInteger)predictionId extendTill:(NSDate *)resolutionDate {
+    NSDateComponents *dc = [resolutionDate gmtDateComponents];
+    NSDictionary *params = @{@"prediction[resolution_date(1i)]" : @(dc.year),
+                             @"prediction[resolution_date(2i)]" : @(dc.month),
+                             @"prediction[resolution_date(3i)]" : @(dc.day),
+                             @"prediction[resolution_date(4i)]" : @(dc.hour),
+                             @"prediction[resolution_date(5i)]" : @(dc.minute)};
     return ((self = [self initWithPredictionId:predictionId patch:params]));
 }
-
 - (NSString *)httpMethod {
     return _patch ? @"PATCH" : @"GET";
 }

@@ -12,7 +12,6 @@
 
 @interface ProfileCell()
 
-@property (weak, nonatomic) IBOutlet BindableView *avatarView;
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 
 @end
@@ -21,7 +20,6 @@
 
 - (void)setupWithUser:(User *)user {
     self.userNameLabel.text = user.name;
-    [self.avatarView bindToURL:user.thumbImage];
 }
 
 @end

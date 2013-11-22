@@ -22,20 +22,20 @@
 @end
 
 
-@interface PredictionCell : UITableViewCell <BindableViewProtocol>
+@interface PredictionCell : UITableViewCell
 
 @property (nonatomic, weak) id<PredictionCellDelegate> delegate;
 
 @property (nonatomic, strong) Prediction* prediction;
-
-- (void) setUpUserProfileTapGestures : (UITapGestureRecognizer*) recognizer;
+@property (nonatomic, assign) BOOL swipeEnabled;
 - (void) fillWithPrediction: (Prediction*) prediction;
 - (void) resetAgreedDisagreed;
 - (void) updateDates;
 - (void) update;
 
+
 + (PredictionCell *)predictionCellForTableView:(UITableView *)tableView;
 + (CGFloat)heightForPrediction:(Prediction *)prediction;
 
-
+- (IBAction)profileTapped:(id)sender;
 @end

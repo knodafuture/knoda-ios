@@ -38,6 +38,12 @@ static const NSInteger kPageResultsLimit = 25;
     return self;
 }
 
+- (id)initWithOffset:(NSInteger)offset {
+    NSDictionary* params = @{@"list": @"ownedAndPicked", @"limit" : [NSNumber numberWithInteger: kPageResultsLimit], @"offset" : [NSNumber numberWithInteger: offset]};
+    
+    self = [super initWithParameters: params];
+    return self;
+}
 
 - (NSString*) methodName
 {

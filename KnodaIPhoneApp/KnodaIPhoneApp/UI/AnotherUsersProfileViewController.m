@@ -19,20 +19,20 @@
 #import "LoadingView.h"
 #import "PredictionUpdateWebRequest.h"
 #import "LoadingCell.h"
+#import "UserProfileHeaderView.h"
 
 static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 
-@interface AnotherUsersProfileViewController () <PredictionCellDelegate, PredictionDetailsDelegate>
+@interface AnotherUsersProfileViewController () <PredictionCellDelegate, PredictionDetailsDelegate, UITableViewDataSource, UITableViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *userPointsLabel;
-@property (weak, nonatomic) IBOutlet UILabel *userTotalPredictionsLabel;
 @property (weak, nonatomic) IBOutlet UITableView *predictionsTableView;
-@property (weak, nonatomic) IBOutlet BindableView *userAvatarView;
 
 @property (nonatomic, strong) NSMutableArray * predictions;
 
 @property (nonatomic, strong) NSTimer* cellUpdateTimer;
+
+@property (strong, nonatomic) UserProfileHeaderView *headerView;
+@property (strong, nonatomic) UITableViewCell *headerCell;
 
 @end
 
@@ -47,6 +47,16 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
     self.navigationController.navigationBar.translucent = NO;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem backButtonWithTarget:self action:@selector(backPressed:)];
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem addPredictionBarButtonItem];
+    
+    self.headerView = [[UserProfileHeaderView alloc] init];
+    
+    self.headerCell = [[UITableViewCell alloc] init];
+    
+    self.headerCell.frame = self.headerView.bounds;
+    
+    [self.headerCell addSubview:self.headerView];
+    
+    
 }
 - (void)backPressed:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
@@ -116,10 +126,8 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 }
 
 - (void) setUpUserProfileInformationWithUser : (User *) user {
-    [self.userAvatarView bindToURL:user.smallImage];
-    self.userNameLabel.text = user.name;
-    self.userPointsLabel.text = [NSString stringWithFormat:@"%d %@",user.points, NSLocalizedString(@"points", @"")];
-    self.userTotalPredictionsLabel.text = [NSString stringWithFormat:@"%d %@",user.totalPredictions, NSLocalizedString(@"total predictions", @"")];
+    [self.headerView populateWithUser:user];
+    self.title = user.name.uppercaseString;
 }
 
 
@@ -141,7 +149,15 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 }
 
 #pragma mark - TableView datasource
+
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.section == 0)
+        return self.headerCell.frame.size.height;
     
     if (indexPath.row != self.predictions.count)
         return [PredictionCell heightForPrediction:[self.predictions objectAtIndex:indexPath.row]];
@@ -149,11 +165,19 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
         return loadingCellHeight;
 }
 - (NSInteger) tableView: (UITableView*) tableView numberOfRowsInSection: (NSInteger) section {
+    
+    if (section == 0)
+        return 1;
+    
     return (self.predictions.count != 0) ? ((self.predictions.count >= [AnotherUserPredictionsWebRequest limitByPage]) ? self.predictions.count + 1 : self.predictions.count) : 1;
 }
 
 - (UITableViewCell*) tableView: (UITableView*) tableView cellForRowAtIndexPath: (NSIndexPath*) indexPath
 {
+    
+    if (indexPath.section == 0)
+        return self.headerCell;
+    
     UITableViewCell* tableCell;
     
     if (indexPath.row != self.predictions.count)
@@ -212,6 +236,17 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
     }
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    UITableViewCell *stickyCell = self.headerCell;
+    CGRect frame = stickyCell.frame;
+    frame.origin.y = scrollView.contentOffset.y * 0.5;
+    
+    stickyCell.frame = frame;
+    [self.predictionsTableView sendSubviewToBack:stickyCell];
+    
+    
+}
 #pragma mark - PredictionCellDelegate
 
 

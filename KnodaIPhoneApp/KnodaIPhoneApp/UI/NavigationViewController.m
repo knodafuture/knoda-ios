@@ -14,6 +14,7 @@
 #import "SelectPictureViewController.h"
 #import "AlertNavigationCell.h"
 #import "AllAlertsWebRequest.h"
+#import "LoadingView.h" 
 
 static NSString* const kHomeSegue = @"HomeSegue";
 static NSString* const kSelectPictureSegue = @"SelectPictureSegue";
@@ -106,6 +107,8 @@ static NSString* const MENU_SEGUES[MenuItemsCount] = {
         [self openMenuItem: MenuAlerts];
         self.appDelegate.notificationReceived = NO;
     }
+    
+    [self.navigationController setNavigationBarHidden:YES];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -191,6 +194,7 @@ static NSString* const MENU_SEGUES[MenuItemsCount] = {
          newFrame.origin.x += self.masterView.frame.size.width;
          self.movingView.frame = newFrame;
      }];
+    
 }
 
 
@@ -240,7 +244,12 @@ static NSString* const MENU_SEGUES[MenuItemsCount] = {
 
 - (void) updateUserInfo {
     User * user = self.appDelegate.user;
-    self.pointsLabel.text = [NSString stringWithFormat:@"%d",user.points];
+    
+    
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    [formatter setGroupingSeparator:[[NSLocale currentLocale] objectForKey:NSLocaleGroupingSeparator]];
+    
+    self.pointsLabel.text = [NSString stringWithFormat:@"%@",[formatter stringFromNumber:[NSNumber numberWithInteger:user.points]]];
     self.wonLostLabel.text = [NSString stringWithFormat:@"%d-%d",user.won,user.lost];
     self.wonPercantageLabel.text = ![user.winningPercentage isEqual: @0] ? [NSString stringWithFormat:@"%@%@",user.winningPercentage,@"%"] : @"0%";
     self.steakLabel.text = [user.streak length] > 0 ? user.streak : @"-";
@@ -248,7 +257,7 @@ static NSString* const MENU_SEGUES[MenuItemsCount] = {
     NSIndexPath *selectedIndexPath = [self.menuItemsTableView indexPathForSelectedRow];
     
     [self.menuItemsTableView beginUpdates];
-    [self.menuItemsTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:MenuProfile inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.menuItemsTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:MenuProfile inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
     [self.menuItemsTableView endUpdates];
     
     if(![self.menuItemsTableView indexPathForSelectedRow] && selectedIndexPath) {
@@ -323,6 +332,8 @@ static NSString* const MENU_SEGUES[MenuItemsCount] = {
 - (void)hideViewController:(SelectPictureViewController *)vc {
     [vc.navigationController popViewControllerAnimated:NO];
     [self performSegueWithIdentifier: kHomeSegue sender: self];
+    [self.navigationController setNavigationBarHidden:YES];
+    [[LoadingView sharedInstance] hide];
 }
 
 @end

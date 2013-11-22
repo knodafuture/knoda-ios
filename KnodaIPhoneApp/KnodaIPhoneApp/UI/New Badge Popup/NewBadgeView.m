@@ -28,6 +28,9 @@
     badgeView.frame = window.bounds;
     badgeView.badgeImageView.image = badgeImage;
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:badgeView action:@selector(close:)];
+    [badgeView addGestureRecognizer:tap];
+    
     if(animated) {
         badgeView.layer.affineTransform = CGAffineTransformMakeScale(0.01, 0.01);
         
@@ -41,36 +44,6 @@
         [window addSubview:badgeView];
     }
 }
-
-- (IBAction)viewBadges:(UIButton *)sender {
-    
-    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
-    UINavigationController *rootVC = (UINavigationController *)[window rootViewController];
-    
-    if(![rootVC.topViewController isKindOfClass:[NavigationViewController class]]) {
-        DLog(@"cannot find NavigationViewController");
-        [self close:nil];
-        return;
-    }
-    
-    NavigationViewController *nc = (NavigationViewController *)rootVC.topViewController;
-    
-    [nc.detailsController dismissViewControllerAnimated:NO completion:nil];
-    
-    if(nc.masterShown || [nc.detailsController.topViewController isKindOfClass:[BadgesCollectionViewController class]]) {
-        [nc openMenuItem:MenuBadges];
-    }
-    else {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:[NSBundle mainBundle]];
-        BadgesCollectionViewController *vc = (BadgesCollectionViewController *)[storyboard instantiateViewControllerWithIdentifier:@"BadgesCollectionViewController"];
-        
-        [nc.detailsController popToRootViewControllerAnimated:NO];
-        [nc.detailsController pushViewController:vc animated:YES];
-    }
-    
-    [self removeFromSuperview];
-}
-
 - (IBAction)close:(UIButton *)sender {
     [self removeFromSuperview];
 }

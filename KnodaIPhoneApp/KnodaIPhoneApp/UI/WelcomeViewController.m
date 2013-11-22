@@ -14,11 +14,9 @@
 
 @interface WelcomeViewController ()
 
-@property (nonatomic, strong) IBOutlet UILabel* promotionLabel;
 @property (nonatomic, strong) IBOutlet UIScrollView* pagingScroll;
-@property (nonatomic, strong) IBOutlet UIView* contentView;
-
-@property (nonatomic, strong) IBOutlet UIView* loadingView;
+@property (weak, nonatomic) IBOutlet UIImageView *splashView;
+@property (weak, nonatomic) IBOutlet UIView *buttonsContainer;
 
 @end
 
@@ -29,61 +27,65 @@
 {
     [super viewDidLoad];
 	
-    self.promotionLabel.font = [UIFont fontWithName: @"Krona One" size: 13];
-    self.pagingScroll.contentSize = self.contentView.frame.size;
+    self.buttonsContainer.alpha = 0.0;
+        
+    self.navigationController.navigationBar.translucent = NO;
+
+
+}
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
     
     AppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
     NSDictionary* credentials = [appDelegate credentials];
     
     if (credentials != nil)
     {
-        self.loadingView.hidden = NO;
-        
         LoginWebRequest* request = [[LoginWebRequest alloc] initWithUsername: [credentials objectForKey: @"User"] password: [credentials objectForKey: @"Password"]];
         [request executeWithCompletionBlock: ^
-        {
-            if (request.errorCode != 0)
-            {
-                [appDelegate removePassword];
-                [self performSegueWithIdentifier: @"LoginSegue" sender: self];
-            }
-            else
-            {
-                appDelegate.user = request.user;
-                
-                ProfileWebRequest *profileRequest = [ProfileWebRequest new];
-                [profileRequest executeWithCompletionBlock: ^
-                 {
-                     if (profileRequest.isSucceeded)
-                     {
-                         [appDelegate sendToken];
-                         
-                         [appDelegate.user updateWithObject: profileRequest.user];
-                         [self performSegueWithIdentifier: @"ApplicationNavigationSegue" sender: self];
-                     }
-                     else
-                     {
-                         [self performSegueWithIdentifier: @"LoginSegue" sender: self];
-                     }
-                 }];
-            }
-        }];
+         {
+             if (request.errorCode != 0)
+             {
+                 [appDelegate removePassword];
+                 [self showLoginSignup];
+             }
+             else
+             {
+                 appDelegate.user = request.user;
+                 
+                 ProfileWebRequest *profileRequest = [ProfileWebRequest new];
+                 [profileRequest executeWithCompletionBlock: ^
+                  {
+                      if (profileRequest.isSucceeded)
+                      {
+                          [appDelegate sendToken];
+                          
+                          [appDelegate.user updateWithObject: profileRequest.user];
+                          [self performSegueWithIdentifier: @"ApplicationNavigationSegue" sender: self];
+                      }
+                      else
+                      {
+                          [self showLoginSignup];
+                      }
+                  }];
+             }
+         }];
+    } else {
+        [self showLoginSignup];
     }
 }
 
-
-- (void) viewDidUnload
-{
-    self.promotionLabel = nil;
-    self.pagingScroll = nil;
-    self.contentView = nil;
-    
-    [super viewDidUnload];
+- (void)showLoginSignup {
+    [UIView animateWithDuration:0.5 animations:^{
+        self.buttonsContainer.alpha = 1.0;
+    } completion:^(BOOL finished) {
+    }];
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    [super prepareForSegue:segue sender:sender];
-    self.loadingView.hidden = YES;
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO];
 }
 
 @end

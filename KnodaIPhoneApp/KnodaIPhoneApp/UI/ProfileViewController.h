@@ -10,12 +10,8 @@
 
 @class BindableView;
 
-@interface ProfileViewController : BaseRequestingViewController <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface ProfileViewController : BaseRequestingViewController <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
-@property (weak, nonatomic) IBOutlet BindableView *profileAvatarView;
-@property (weak, nonatomic) IBOutlet UITableView *accountDetailsTableView;
-@property (weak, nonatomic) IBOutlet UILabel *loginLabel;
-@property (weak, nonatomic) IBOutlet UILabel *pointsLabel;
 
 @property (nonatomic, assign) BOOL leftButtonItemReturnsBack;
 

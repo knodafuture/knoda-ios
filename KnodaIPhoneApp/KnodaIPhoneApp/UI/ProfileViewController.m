@@ -13,13 +13,11 @@
 #import "AppDelegate.h"
 #import "AppDelegate.h"
 #import "ProfileWebRequest.h"
-#import "UsernameEmailChangeViewController.h"
 #import "UIImage+Utils.h"
 #import "ImageCropperViewController.h"
 #import "BindableView.h"
 #import "LoadingView.h"
-
-static NSString * const accountDetailsTableViewCellIdentifier = @"accountDetailsTableViewCellIdentifier";
+#import "UserProfileHeaderView.h"
 
 static NSString* const kChangeEmailUsernameSegue = @"UsernameEmailSegue";
 static NSString* const kChangePasswordSegue = @"ChangePasswordSegue";
@@ -30,12 +28,20 @@ static const int kDefaultAvatarsCount = 5;
 static const float kAvatarSize = 344.0;
 #define AVATAR_SIZE CGSizeMake(kAvatarSize, kAvatarSize)
 
-@interface ProfileViewController () <ImageCropperDelegate>
+@interface ProfileViewController () <ImageCropperDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) AppDelegate * appDelegate;
-@property (nonatomic, strong) NSArray * accountDetailsArray;
 @property (weak, nonatomic) IBOutlet UIButton *leftNavigationBarItem;
 @property (nonatomic, strong) UIActionSheet *avatarChangeAcitonSheet;
+@property (strong, nonatomic) UserProfileHeaderView *headerView;
+
+@property (weak, nonatomic) IBOutlet UIView *userNameContainer;
+@property (weak, nonatomic) IBOutlet UITextField *userNameField;
+@property (weak, nonatomic) IBOutlet UIView *emailContainer;
+@property (weak, nonatomic) IBOutlet UITextField *emailField;
+
+@property (assign, nonatomic) BOOL canceledEntry;
+
 
 @end
 
@@ -48,9 +54,6 @@ static const float kAvatarSize = 344.0;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"profileBgPattern"]];
-    self.accountDetailsTableView.backgroundView = nil;
-    [self makeProfileImageRoundedCorners];
 
     if (self.leftButtonItemReturnsBack)
         self.navigationItem.leftBarButtonItem = [UIBarButtonItem backButtonWithTarget:self action:@selector(menuButtonPress:)];
@@ -58,33 +61,48 @@ static const float kAvatarSize = 344.0;
         self.navigationItem.leftBarButtonItem = [UIBarButtonItem sideNavBarBUttonItemwithTarget:self action:@selector(menuButtonPress:)];
     self.navigationController.navigationBar.translucent = NO;
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem addPredictionBarButtonItem];
+    
+    self.headerView = [[UserProfileHeaderView alloc] init];
+    [self.view addSubview:self.headerView];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(avatarImageVIewTapped:)];
+    [self.headerView.userAvatarView addGestureRecognizer:tap];
+    
+    UITapGestureRecognizer *doneTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap)];
+    [self.view addGestureRecognizer:doneTap];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self fillInUsersInformation];
+    [self loadUserInformation];
     [[self navigationController] setNavigationBarHidden:NO animated:NO];
     
     [Flurry logEvent: @"Profile_Screen" withParameters: nil timed: YES];
 }
 
-
-- (void) viewDidDisappear: (BOOL) animated
-{
+- (void)didTap {
+    self.canceledEntry = YES;
+    [self.view endEditing:YES];
+}
+- (void) viewDidDisappear: (BOOL) animated {
     [super viewDidDisappear: animated];
     [Flurry endTimedEvent: @"Profile_Screen" withParameters: nil];
 }
 
-
-- (void) makeProfileImageRoundedCorners {
-    self.profileAvatarView.layer.cornerRadius = 10.0;
-    self.profileAvatarView.layer.masksToBounds = YES;
-    self.profileAvatarView.layer.borderWidth = 2.0;
-    self.profileAvatarView.layer.borderColor = [UIColor blackColor].CGColor;
+- (void)populateUserInfo {
+    
+    User * user = self.appDelegate.user;
+    
+    self.title = user.name;
+    
+    [self.headerView populateWithUser:user];
+    
+    self.emailField.text = user.email;
+    self.userNameField.text = user.name;
 }
 
-- (void) fillInUsersInformation {
+- (void)loadUserInformation {
     [[LoadingView sharedInstance] show];
     
     __weak ProfileViewController *weakSelf = self;
@@ -102,12 +120,8 @@ static const float kAvatarSize = 344.0;
             [strongSelf.appDelegate.user updateWithObject:profileWebRequest.user];
         }
         
-        User * user = strongSelf.appDelegate.user;
-        [strongSelf.profileAvatarView bindToURL:user.bigImage];
-        strongSelf.loginLabel.text = user.name;
-        strongSelf.pointsLabel.text = [NSString stringWithFormat:@"%d %@",user.points,NSLocalizedString(@"points", @"")];
-        strongSelf.accountDetailsArray = [NSArray arrayWithObjects:strongSelf.appDelegate.user.name,user.email,NSLocalizedString(@"Change Password", @""), nil];
-        [strongSelf.accountDetailsTableView reloadData];
+        [self populateUserInfo];
+        
     }];
 }
 
@@ -178,7 +192,7 @@ static const float kAvatarSize = 344.0;
             [updateRequest executeWithCompletionBlock:^{
                 if(updateRequest.isSucceeded) {
                     [[(AppDelegate *)[[UIApplication sharedApplication] delegate] user] updateWithObject:updateRequest.user];
-                    strongSelf.profileAvatarView.imageView.image = image;
+                    strongSelf.headerView.userAvatarView.imageView.image = image;
                     [[LoadingView sharedInstance] hide];
                 }
             }];
@@ -235,12 +249,7 @@ static const float kAvatarSize = 344.0;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:kChangeEmailUsernameSegue]) {
-        UsernameEmailChangeViewController *vc =(UsernameEmailChangeViewController*)segue.destinationViewController;
-        vc.userProperyChangeType = [sender[0]integerValue];
-        vc.currentPropertyValue = sender[1];
-    }
-    else if([segue.identifier isEqualToString:kImageCropperSegue]) {
+    if([segue.identifier isEqualToString:kImageCropperSegue]) {
         ImageCropperViewController *vc = (ImageCropperViewController *)segue.destinationViewController;
         vc.image    = sender;
         vc.delegate = self;
@@ -276,46 +285,79 @@ static const float kAvatarSize = 344.0;
     }
 }
 
-#pragma mark - TableView datasource
 
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch (indexPath.row) {
-        case 0:
-            [self performSegueWithIdentifier:kChangeEmailUsernameSegue sender:@[@(UserPropertyTypeUsername),[tableView cellForRowAtIndexPath:indexPath].textLabel.text]];
-            break;
-        case 1:
-            [self performSegueWithIdentifier:kChangeEmailUsernameSegue sender:@[@(UserPropertyTypeEmail),[tableView cellForRowAtIndexPath:indexPath].textLabel.text]];
-            break;
-        case 2:
-            [self performSegueWithIdentifier:kChangePasswordSegue sender:self];
-            break;
-        default:
-            break;
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    
+    if (!self.canceledEntry) {
+        if (textField == self.userNameField)
+            [self saveUsername];
+        else
+            [self saveEmail];
     }
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    self.canceledEntry = NO;
+    
 }
 
-#pragma mark - TableView datasource
-
-- (NSInteger) numberOfSectionsInTableView: (UITableView*) tableView
-{
-    return 1;
-}
-
-- (NSInteger) tableView: (UITableView*) tableView numberOfRowsInSection: (NSInteger) section
-{
-    return [self.accountDetailsArray count];
-}
-
-- (UITableViewCell*) tableView: (UITableView*) tableView cellForRowAtIndexPath: (NSIndexPath*) indexPath
-{
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:accountDetailsTableViewCellIdentifier];
-    if (!cell) {
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:accountDetailsTableViewCellIdentifier];
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if ([string isEqualToString:@"\n"]) {
+        [self.view endEditing:YES];
+        return NO;
     }
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.textLabel.text = self.accountDetailsArray[indexPath.row];
-    return cell;
+    
+    return YES;
 }
+
+- (void)saveUsername {
+    
+    ProfileWebRequest *webRequest = [[ProfileWebRequest alloc]initWithNewUsername:self.userNameField.text];
+    
+    [self updateUserWithRequest:webRequest];
+
+}
+
+- (void)saveEmail {
+    NSString *emailRegex = @"\\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}\\b";
+    NSPredicate *emailPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    NSInteger maxLength = 64;
+    
+    if (![emailPredicate evaluateWithObject:self.emailField.text] || self.emailField.text.length > maxLength) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please enter a valid email address" delegate:Nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        [alert show];
+    }
+    
+    
+    ProfileWebRequest *webRequest = [[ProfileWebRequest alloc]initWithNewEmail:self.emailField.text];
+
+    [self updateUserWithRequest:webRequest];
+
+
+}
+
+- (void)updateUserWithRequest:(ProfileWebRequest *)webRequest {
+    [[LoadingView sharedInstance] show];
+
+    [webRequest executeWithCompletionBlock:^{
+        if(webRequest.isSucceeded) {
+            ProfileWebRequest *updateRequest = [ProfileWebRequest new];
+            [updateRequest executeWithCompletionBlock:^{
+                [[LoadingView sharedInstance] hide];
+                if(updateRequest.isSucceeded) {
+                    [[(AppDelegate *)[[UIApplication sharedApplication] delegate] user] updateWithObject:updateRequest.user];
+                    [self populateUserInfo];
+                }
+            }];
+        }
+        else {
+            [[LoadingView sharedInstance] hide];
+            [[[UIAlertView alloc] initWithTitle:nil
+                                        message:webRequest.localizedErrorDescription
+                                       delegate:nil
+                              cancelButtonTitle:NSLocalizedString(@"OK", @"")
+                              otherButtonTitles:nil] show];
+        }
+        
+    }];
+}
+
 @end

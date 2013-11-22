@@ -62,7 +62,7 @@ static UILabel *defaultBodyLabel;
     self.metaDataLabel.text = [comment createdAtString];
     
     if (comment.challenge)
-        self.voteImage.image = [UIImage imageNamed:comment.challenge.agree ? @"AgreeMarkerActive" : @"DisagreeMarkerActive"];
+        self.voteImage.image = [UIImage imageNamed:comment.challenge.agree ? @"AgreeMarker" : @"DisagreeMarker"];
     else
         self.voteImage.image = nil;
     

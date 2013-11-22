@@ -15,17 +15,12 @@
 
 static NSString* const kApplicationSegue = @"ApplicationNavigationSegue";
 
-@interface LoginViewController ()
+@interface LoginViewController () <UITextFieldDelegate>
 
 @property (nonatomic, readonly) AppDelegate* appDelegate;
 
 @property (nonatomic, strong) IBOutlet UITextField* usernameTextField;
 @property (nonatomic, strong) IBOutlet UITextField* passwordTextField;
-@property (nonatomic, strong) IBOutlet UIView* containerView;
-@property (nonatomic, strong) IBOutlet UIView* errorView;
-@property (nonatomic, strong) IBOutlet UILabel* errorLabel;
-
-@property (nonatomic, assign) BOOL errorShown;
 
 @end
 
@@ -33,12 +28,17 @@ static NSString* const kApplicationSegue = @"ApplicationNavigationSegue";
 
 - (void) viewWillAppear: (BOOL) animated
 {
-    [self hideError];
-    
-    [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(willShowKeyboardNotificationDidRecieve:) name: UIKeyboardWillShowNotification object: nil];
-    [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(willHideKeyboardNotificationDidRecieve:) name: UIKeyboardWillHideNotification object: nil];
-    
     [super viewWillAppear: animated];
+    
+    //[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(willShowKeyboardNotificationDidRecieve:) name: UIKeyboardWillShowNotification object: nil];
+    //[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(willHideKeyboardNotificationDidRecieve:) name: UIKeyboardWillHideNotification object: nil];
+    
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem backButtonWithTarget:self action:@selector(backPressed)];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTitle:@"Sign In" target:self action:@selector(loginButtonPressed:) color:[UIColor whiteColor]];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap)];
+    [self.view addGestureRecognizer:tap];
 }
 
 
@@ -48,8 +48,12 @@ static NSString* const kApplicationSegue = @"ApplicationNavigationSegue";
     
     [super viewWillDisappear: animated];
 }
-
-
+- (void)didTap {
+    [self.view endEditing:YES];
+}
+- (void)backPressed {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 - (void) prepareForSegue: (UIStoryboardSegue*) segue sender: (id) sender
 {
     if ([segue.identifier isEqualToString: @"ForgotPasswordSegue"] && [self.usernameTextField.text rangeOfString: @"@"].location != NSNotFound)
@@ -66,12 +70,10 @@ static NSString* const kApplicationSegue = @"ApplicationNavigationSegue";
 
 
 - (BOOL) checkTextFields
-{
-    BOOL result = YES;
-    
+{    
     if (self.usernameTextField.text.length == 0)
     {
-        result = NO;
+        return NO;
         
         [self showError: NSLocalizedString(@"Username should not be empty", @"")];
         
@@ -79,14 +81,14 @@ static NSString* const kApplicationSegue = @"ApplicationNavigationSegue";
     }
     else if (self.passwordTextField.text.length == 0)
     {
-        result = NO;
+        return NO;
         
         [self showError: NSLocalizedString(@"Password should not be empty", @"")];
         
         [self.passwordTextField becomeFirstResponder];
     }
 
-    return result;
+    return YES;
 }
 
 
@@ -105,9 +107,7 @@ static NSString* const kApplicationSegue = @"ApplicationNavigationSegue";
         {
             [self.passwordTextField resignFirstResponder];
         }
-        
-        [self hideError];
-        
+                
         LoginWebRequest* loginRequest = [[LoginWebRequest alloc] initWithUsername: self.usernameTextField.text password: self.passwordTextField.text];
         [loginRequest executeWithCompletionBlock: ^
          {             
@@ -154,57 +154,29 @@ static NSString* const kApplicationSegue = @"ApplicationNavigationSegue";
 #pragma mark - Handle keyboard show/hide events
 
 
-- (void) willShowKeyboardNotificationDidRecieve: (NSNotification*) notification
-{
-    if ([self.usernameTextField isFirstResponder] || [self.passwordTextField isFirstResponder])
-    {
-        NSTimeInterval animationDuration = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-        CGRect endFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-        UIViewAnimationCurve animationCurve = [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
-        
-        [self moveUpOrDown: YES withAnimationDuration:animationDuration animationCurve:animationCurve keyboardFrame:endFrame];
-    }
-}
-
-- (void) willHideKeyboardNotificationDidRecieve: (NSNotification*) notification
-{
-    if ([self.usernameTextField isFirstResponder] || [self.passwordTextField isFirstResponder])
-    {
-        NSTimeInterval animationDuration = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-        CGRect endFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-        UIViewAnimationCurve animationCurve = [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
-        
-        [self moveUpOrDown:NO withAnimationDuration:animationDuration animationCurve:animationCurve keyboardFrame:endFrame];
-    }
-}
-
-
-- (void) moveUpOrDown: (BOOL) up
-withAnimationDuration: (NSTimeInterval)animationDuration
-       animationCurve: (UIViewAnimationCurve)animationCurve
-        keyboardFrame: (CGRect)keyboardFrame
-{
-    CGRect newContainerFrame = self.containerView.frame;
-    
-    if (up)
-    {
-        CGFloat newY = self.containerView.frame.origin.y - (CGRectGetMaxY(newContainerFrame) - CGRectGetMinY([self.containerView.superview convertRect: keyboardFrame fromView: self.view.window]));
-        
-        if (newY < newContainerFrame.origin.y)
-        {
-            newContainerFrame.origin.y = newY;
-        }
-    }
-    else
-    {
-        newContainerFrame.origin.y = 0;
-    }
-    
-    [UIView animateWithDuration:animationDuration delay:0.0 options:(animationCurve << 16) animations:^
-    {
-        self.containerView.frame = newContainerFrame;
-    } completion: NULL];
-}
+//- (void) willShowKeyboardNotificationDidRecieve: (NSNotification*) notification
+//{
+//    if ([self.usernameTextField isFirstResponder] || [self.passwordTextField isFirstResponder])
+//    {
+//        NSTimeInterval animationDuration = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+//        CGRect endFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+//        UIViewAnimationCurve animationCurve = [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
+//        
+//        [self moveUpOrDown: YES withAnimationDuration:animationDuration animationCurve:animationCurve keyboardFrame:endFrame];
+//    }
+//}
+//
+//- (void) willHideKeyboardNotificationDidRecieve: (NSNotification*) notification
+//{
+//    if ([self.usernameTextField isFirstResponder] || [self.passwordTextField isFirstResponder])
+//    {
+//        NSTimeInterval animationDuration = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+//        CGRect endFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+//        UIViewAnimationCurve animationCurve = [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
+//        
+//        [self moveUpOrDown:NO withAnimationDuration:animationDuration animationCurve:animationCurve keyboardFrame:endFrame];
+//    }
+//}
 
 
 #pragma mark UITextFieldDelegate
@@ -230,39 +202,8 @@ withAnimationDuration: (NSTimeInterval)animationDuration
 
 - (void) showError: (NSString*) error
 {
-    self.errorLabel.text = error;
-    
-    if (!self.errorShown)
-    {
-        self.errorShown = YES;
-        
-        [UIView animateWithDuration: 0.2 animations: ^
-         {
-             CGRect newErrorFrame = self.errorView.frame;
-             newErrorFrame.origin.y += newErrorFrame.size.height;
-             
-             self.errorView.frame = newErrorFrame;
-         }];
-    }
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:error delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    [alert show];
 }
-
-
-- (void) hideError
-{
-    if (self.errorShown)
-    {
-        self.errorLabel.text = nil;
-        self.errorShown = NO;
-        
-        [UIView animateWithDuration: 0.2 animations: ^
-         {
-             CGRect newErrorFrame = self.errorView.frame;
-             newErrorFrame.origin.y -= newErrorFrame.size.height;
-             
-             self.errorView.frame = newErrorFrame;
-         }];
-    }
-}
-
 
 @end

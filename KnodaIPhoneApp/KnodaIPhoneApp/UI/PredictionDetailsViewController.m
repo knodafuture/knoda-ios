@@ -91,6 +91,7 @@ static const float otherUsersCellHeight = 44.0;
     self.tableView.showsVerticalScrollIndicator = NO;
     
     self.navigationController.navigationBar.translucent = NO;
+    
     [self setDefaultBarButtonItems:YES];
     [self.tableView registerClass:UITableViewCell.class forCellReuseIdentifier:@"basicCell"];
     
@@ -150,16 +151,16 @@ static const float otherUsersCellHeight = 44.0;
 }
 
 - (void)setDefaultBarButtonItems:(BOOL)animated {
-    [self.navigationItem setLeftBarButtonItem:[UIBarButtonItem backButtonWithTarget:self action:@selector(backPressed:)] animated:animated];
-    [self.navigationItem setRightBarButtonItem:[UIBarButtonItem addPredictionBarButtonItem] animated:animated];
+    [self.navigationItem setLeftBarButtonItem:[UIBarButtonItem backButtonWithTarget:self action:@selector(backPressed:)]];
+    [self.navigationItem setRightBarButtonItem:[UIBarButtonItem addPredictionBarButtonItem]];
 }
 - (void)composeComment {
     UIBarButtonItem *cancelBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTitle:@"Cancel" target:self action:@selector(cancelComment) color:[UIColor whiteColor]];
     
     UIBarButtonItem *submitBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTitle:@"Submit" target:self action:@selector(submitComment) color:[UIColor whiteColor]];
-    
-    [self.navigationItem setLeftBarButtonItem:cancelBarButtonItem animated:YES];
-    [self.navigationItem setRightBarButtonItem:submitBarButtonItem animated:YES];
+
+    [self.navigationItem setLeftBarButtonItem:cancelBarButtonItem];
+    [self.navigationItem setRightBarButtonItem:submitBarButtonItem];
 }
 
 - (IBAction)showComments:(id)sender {
@@ -188,8 +189,15 @@ static const float otherUsersCellHeight = 44.0;
     [self showDatePicker];
 }
 - (void)submitComment {
-    [[LoadingView sharedInstance] show];
     
+    if (self.commentTextView.text.length == 0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please enter a comment." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        [alert show];
+         return;
+    }
+    
+    [[LoadingView sharedInstance] show];
+
     Comment *comment = [[Comment alloc] init];
     comment.body = self.commentTextView.text;
     comment.createdDate = [NSDate date];
@@ -805,4 +813,14 @@ static const float otherUsersCellHeight = 44.0;
         self.pickerContainerView.frame = frame;
     }];
 }
+
+- (void) profileSelectedWithUserId:(NSInteger)userId inCell:(PredictionCell *)cell {
+    if (self.appDelegate.user.userId == userId) {
+        [self performSegueWithIdentifier:kMyProfileSegue sender:self];
+    }
+    else {
+        [self performSegueWithIdentifier:kUserProfileSegue sender:[NSNumber numberWithInteger:userId]];
+    }
+}
+
 @end

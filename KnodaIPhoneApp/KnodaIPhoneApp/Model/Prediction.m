@@ -232,9 +232,9 @@
 - (NSString *)outcomeString {
     if ([self iAgree])
         return self.outcome ? @"W" : @"L";
-    else
+    else if ([self iDisagree])
         return self.outcome ? @"L" : @"W";
-
+    return nil;
 }
 - (BOOL)win {
     if ([self iAgree])

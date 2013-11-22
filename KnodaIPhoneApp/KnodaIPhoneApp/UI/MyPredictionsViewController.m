@@ -145,7 +145,7 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
 - (void)loadNextPage {
     __weak MyPredictionsViewController *weakSelf = self;
     
-    HistoryMyPredictionsRequest* predictionsRequest = [[HistoryMyPredictionsRequest alloc] initWithLastCreatedDate: ((Prediction*)[self.predictions lastObject]).creationDate];
+    HistoryMyPredictionsRequest* predictionsRequest = [[HistoryMyPredictionsRequest alloc] initWithOffset:self.predictions.count];
     [self executeRequest:predictionsRequest withBlock:^{
         MyPredictionsViewController *strongSelf = weakSelf;
         if(!strongSelf) {
@@ -153,7 +153,7 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
         }
         if (predictionsRequest.errorCode == 0 && predictionsRequest.predictions.count != 0)
         {
-            [strongSelf.predictions addObjectsFromArray: [NSMutableArray arrayWithArray: predictionsRequest.predictions] ];
+            [strongSelf.predictions addObjectsFromArray: [NSMutableArray arrayWithArray: predictionsRequest.predictions]];
             [strongSelf.tableView reloadData];
         }
         else

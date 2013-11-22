@@ -78,6 +78,7 @@ static UINib *nib;
     self.agreeDisagreeView.frame = frame;
     self.settlePredictionView.frame = frame;
     self.predictionStatusView.frame = frame;
+    self.settleOtherUsersPrediction.frame = frame;
     
     [self update];
     

@@ -138,6 +138,7 @@ static const CGFloat kCategorySectionHeight = 40;
 
 - (void)showResolutionPicker {
     [self showPickerView:self.resolutionPickerContainerView under:self.resolutionBar];
+    [self resolutionPickerValueChanged:self.resolutionPicker];
 }
 - (void)hideResolutionPicker {
     [self hidePickerViewAndRestore:self.resolutionPickerContainerView];
@@ -151,6 +152,7 @@ static const CGFloat kCategorySectionHeight = 40;
 - (void) showExpirationDatePicker
 {
     [self showPickerView:self.expirationPickerContainerView under:self.expirationBar];
+    [self expirationPickerValueChanged:self.expirationPicker];
 }
 
 
@@ -264,7 +266,7 @@ static const CGFloat kCategorySectionHeight = 40;
 
 - (IBAction) cancelExpirationPicker: (id) sender
 {
-    self.expirationLabel.text = @"Expires on ...";
+    self.expirationLabel.text = @"Voting ends on...";
     [self hideExpirationDatePicker];
 }
 
@@ -448,7 +450,7 @@ static const CGFloat kCategorySectionHeight = 40;
     
     NSDate *newDate = self.expirationPicker.date;
     
-    self.expirationLabel.text = [NSString stringWithFormat:@"Expires on %@ at %@", [self.expirationDateFormatter stringFromDate:newDate], [self.expirationTimeFormatter stringFromDate:newDate]];
+    self.expirationLabel.text = [NSString stringWithFormat:@"Voting ends on %@ at %@", [self.expirationDateFormatter stringFromDate:newDate], [self.expirationTimeFormatter stringFromDate:newDate]];
     
 }
 - (IBAction)resolutionPickerValueChanged:(id)sender {

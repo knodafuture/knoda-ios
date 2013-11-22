@@ -21,7 +21,7 @@
 #import "AddPredictionViewController.h"
 #import "SendDeviceTokenWebRequest.h"
 #import "RemoveTokenWebRequest.h"
-
+#import "TestFlight.h"
 
 static NSString* const kDevFlurryKey = @"QTDYWKWSJXK9YNDHKN5Z";
 static NSString* const kProductionFlurryKey = @"VQF4B8866XG6256GPQJ5";
@@ -40,20 +40,28 @@ NSString* const kAlertNotification = @"AlertNotification";
     [Flurry startSession: kDevFlurryKey];
     [Flurry setCrashReportingEnabled: YES];
     
+    [TestFlight takeOff:@"4e134864-34a2-4c41-9619-34c33f738d4c"];
+
     UIColor *navBackgroundColor = [UIColor colorFromHex:@"77BC1F"];
     
     if (SYSTEM_VERSION_GREATER_THAN(@"7.0")) {
+        [[UINavigationBar appearance] setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
         [[UINavigationBar appearance] setBarTintColor:navBackgroundColor];
     }
     else {
         [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"NavBar6"] forBarMetrics:UIBarMetricsDefault];
+
         [[UINavigationBar appearance] setTitleVerticalPositionAdjustment:4.0 forBarMetrics:UIBarMetricsDefault];
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
 
     }
+
+    [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
+
     [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
                                                            [UIColor colorFromHex:@"235C37"], UITextAttributeTextColor,
-                                                           [UIFont fontWithName: @"Krona One" size: 15], UITextAttributeFont, nil]];
+                                                           [UIFont fontWithName: @"Krona One" size: 15], UITextAttributeFont,
+                                                           [UIColor clearColor], UITextAttributeTextShadowColor ,nil]];
     
     [UIApplication sharedApplication].keyWindow.backgroundColor = navBackgroundColor;
     [UIApplication sharedApplication].delegate.window.backgroundColor = navBackgroundColor;
@@ -214,7 +222,7 @@ NSString* const kAlertNotification = @"AlertNotification";
     
     UINavigationController *nc = (UINavigationController *)self.window.rootViewController;
     [nc dismissViewControllerAnimated:NO completion:nil];
-    [nc popToRootViewControllerAnimated:YES];
+    [nc popToRootViewControllerAnimated:NO];
     
     [[LoadingView sharedInstance] reset];
 }

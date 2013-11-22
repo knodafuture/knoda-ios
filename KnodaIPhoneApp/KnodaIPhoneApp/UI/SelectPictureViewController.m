@@ -38,9 +38,12 @@ static NSString* const kImageCropperSegue = @"ImageCropperSegue";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.pictureButton.imageView.layer.cornerRadius = 10.0;
-    self.pictureButton.imageView.layer.masksToBounds = YES;
-    
+    [self.navigationController setNavigationBarHidden:NO];
+
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem backButtonWithTarget:self action:@selector(backButtonPressed:)];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTitle:@"Done" target:self action:@selector(doneButtontapped:) color:[UIColor whiteColor]];
+    self.title = @"KNODA";
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -67,9 +70,9 @@ static NSString* const kImageCropperSegue = @"ImageCropperSegue";
 - (IBAction)pictureButtonTapped:(id)sender {
     [[[UIActionSheet alloc] initWithTitle:nil
                                  delegate:self
-                        cancelButtonTitle:NSLocalizedString(@"Continue", @"")
+                        cancelButtonTitle:NSLocalizedString(@"Skip", @"")
                    destructiveButtonTitle:nil
-                        otherButtonTitles:NSLocalizedString(@"Take Photo", @""), NSLocalizedString(@"Choose Existing Photo", @""), NSLocalizedString(@"Skip", @""), nil] showInView:self.view];
+                        otherButtonTitles:NSLocalizedString(@"Take Photo", @""), NSLocalizedString(@"Choose Existing Photo", @""), nil] showInView:self.view];
 }
 
 - (IBAction)doneButtontapped:(id)sender {
@@ -117,7 +120,6 @@ static NSString* const kImageCropperSegue = @"ImageCropperSegue";
         if(profileRequest.isSucceeded) {
             ProfileWebRequest *updateRequest = [ProfileWebRequest new];
             [updateRequest executeWithCompletionBlock:^{
-                [[LoadingView sharedInstance] hide];
                 if(updateRequest.isSucceeded) {
                     [[(AppDelegate *)[[UIApplication sharedApplication] delegate] user] updateWithObject:updateRequest.user];
                 }
@@ -143,9 +145,6 @@ static NSString* const kImageCropperSegue = @"ImageCropperSegue";
         case 1: //choose existing photo
             [self showImagePickerWithSource:(buttonIndex ? UIImagePickerControllerSourceTypePhotoLibrary : UIImagePickerControllerSourceTypeCamera)];
             break;
-        case 2: //skip
-            [self setDefaultAvatar];
-            [self sendAvatar];
         default: //continue
             if(!self.avatarImage) {
                 [self setDefaultAvatar];

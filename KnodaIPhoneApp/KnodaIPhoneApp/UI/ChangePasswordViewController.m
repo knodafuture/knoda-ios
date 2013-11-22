@@ -16,13 +16,12 @@
 
 @interface ChangePasswordViewController ()
 
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-
 @property (nonatomic, readonly) AppDelegate* appDelegate;
 
-@property (weak, nonatomic) IBOutlet CustomizedTextField *retypeNewPasswordTextField;
-@property (weak, nonatomic) IBOutlet CustomizedTextField *currentPasswordTextField;
-@property (weak, nonatomic) IBOutlet CustomizedTextField *usersNewPasswordTextField;
+@property (weak, nonatomic) IBOutlet UITextField *retypeNewPasswordTextField;
+@property (weak, nonatomic) IBOutlet UITextField *currentPasswordTextField;
+@property (weak, nonatomic) IBOutlet UITextField *usersNewPasswordTextField;
+
 
 @end
 
@@ -31,24 +30,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSInteger scrollContentHeight = self.scrollView.frame.size.height;
-    scrollContentHeight = scrollContentHeight > 480 ? scrollContentHeight * 1.05 : scrollContentHeight * 1.23;
-    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, scrollContentHeight);
-    self.scrollView.scrollEnabled = NO;
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"darkBgPattern"]];
+    self.title = @"PASSWORD";
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem backButtonWithTarget:self action:@selector(backButtonPress:)];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTitle:@"Submit" target:self action:@selector(changeButtonPressed:) color:[UIColor whiteColor]];
 }
 
 - (AppDelegate*) appDelegate
 {
     return [UIApplication sharedApplication].delegate;
+    
 }
 
 - (IBAction)backButtonPress:(id)sender {
       [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (IBAction)cancelButtonPress:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)changeButtonPressed:(id)sender {
@@ -143,15 +137,8 @@
     [self.currentPasswordTextField resignFirstResponder];
     [self.self.usersNewPasswordTextField resignFirstResponder];
     [self.retypeNewPasswordTextField resignFirstResponder];
-
-    [self.scrollView scrollRectToVisible:self.scrollView.frame animated:YES];
-    self.scrollView.scrollEnabled = NO;
 }
 
-- (BOOL) textFieldShouldBeginEditing:(UITextField *)textField {
-    self.scrollView.scrollEnabled = YES;
-    return YES;
-}
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {
     

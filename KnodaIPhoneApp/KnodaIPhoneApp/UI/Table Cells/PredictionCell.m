@@ -45,7 +45,7 @@ static CGFloat fullGreenR = 119.0/256.0;
 static CGFloat fullGreenG = 188.0/256.0;
 static CGFloat fullGreenB = 31.0/256.0;
 
-@interface PredictionCell ()
+@interface PredictionCell () <UIGestureRecognizerDelegate>
 @property (nonatomic, strong) IBOutlet UILabel* bodyLabel;
 @property (nonatomic, strong) IBOutlet UILabel* metadataLabel;
 @property (nonatomic, strong) IBOutlet UILabel *commentCountLabel;
@@ -93,6 +93,8 @@ static CGFloat fullGreenB = 31.0/256.0;
     if (!cell)
         cell = [[nib instantiateWithOwner:nil options:nil] lastObject];
     
+    cell.swipeEnabled = YES;
+    
     return cell;
 }
 
@@ -117,8 +119,6 @@ static CGFloat fullGreenB = 31.0/256.0;
     [super awakeFromNib];
     self.avatarView.layer.shadowRadius = 0.0;
     self.avatarView.layer.shadowOffset = CGSizeZero;
-    UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]init];
-    [self setUpUserProfileTapGestures:tapGesture];
 }
 
 - (void)prepareForReuse {
@@ -238,28 +238,14 @@ static CGFloat fullGreenB = 31.0/256.0;
     
     [self updateVoteImage];
 }
-- (void) setUpUserProfileTapGestures : (UITapGestureRecognizer*) recognizer {
-    UITapGestureRecognizer * gestRec = [[UITapGestureRecognizer alloc]init];
-    [self.avatarView setUserInteractionEnabled:YES];
-    [self.avatarView addImageViewGestureRecognizer:gestRec];
-    self.avatarView.delegate = self;
-    
-    [self.usernameLabel setUserInteractionEnabled:YES];
-    self.profileGestureRecognizer = recognizer;
-    [self.usernameLabel addGestureRecognizer:recognizer];
-    [self.profileGestureRecognizer addTarget: self action: @selector(userAvatarLoginTapped)];
+- (IBAction)profileTapped:(id)sender {
+    [self userAvatarLoginTapped];
 }
 
 - (void) userAvatarLoginTapped {
     if ([self.delegate respondsToSelector:@selector(profileSelectedWithUserId:inCell:)]) {
         [self.delegate profileSelectedWithUserId:self.prediction.userId inCell:self];
     }
-}
-
-#pragma mark - Bindable View delegate
-
-- (void) userAvatarTappedWithGestureRecognizer:(UITapGestureRecognizer *)gestureRecognizer {
-    [self userAvatarLoginTapped];
 }
 
 #pragma mark Properties
@@ -286,7 +272,7 @@ static CGFloat fullGreenB = 31.0/256.0;
     {
         agreed = newAgreed;
         if (agreed)
-            self.voteImage.image = [UIImage imageNamed:@"AgreeMarkerActive"];
+            self.voteImage.image = [UIImage imageNamed:@"AgreeMarker"];
     }
 }
 
@@ -303,7 +289,7 @@ static CGFloat fullGreenB = 31.0/256.0;
     {
         disagreed = newDisagreed;
         if (disagreed)
-            self.voteImage.image = [UIImage imageNamed:@"DisagreeMarkerActive"];
+            self.voteImage.image = [UIImage imageNamed:@"DisagreeMarker"];
             
     }
 }
@@ -315,6 +301,10 @@ static CGFloat fullGreenB = 31.0/256.0;
 
     [super touchesBegan:touches withEvent:event];
     
+    
+    if (!self.swipeEnabled)
+        return;
+    
     UITouch *touch = [touches anyObject];
     
     self.initialTouchLocation = [touch locationInView:self];
@@ -323,8 +313,9 @@ static CGFloat fullGreenB = 31.0/256.0;
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     
-    if (self.finishingCellAnimation)
+    if (self.finishingCellAnimation || !self.swipeEnabled)
         return;
+    
     
     UITouch *touch = [touches anyObject];
     
@@ -441,6 +432,9 @@ static CGFloat fullGreenB = 31.0/256.0;
 
     [super touchesCancelled:touches withEvent:event];
     
+    if (!self.swipeEnabled)
+        return;
+    
     self.initialTouchLocation = CGPointZero;
     self.trackingTouch = NO;
     [[self parentTableView] setScrollEnabled:YES];
@@ -449,7 +443,7 @@ static CGFloat fullGreenB = 31.0/256.0;
         [self resetFrames:0.5 completion:nil];
 }
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (!self.trackingTouch) {
+    if (!self.trackingTouch || !self.swipeEnabled) {
         [super touchesEnded:touches withEvent:event];
         return;
     }

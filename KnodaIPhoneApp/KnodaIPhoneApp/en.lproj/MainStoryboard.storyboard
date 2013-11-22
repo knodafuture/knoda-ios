@@ -715,11 +715,11 @@
             <objects>
                 <viewController title="KNODA" id="sd8-UN-EgX" customClass="TermsOfServiceViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zB2-xd-zLn">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" id="ioX-jH-d29">
-                                <rect key="frame" x="0.0" y="44" width="320" height="460"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="524"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
@@ -1612,13 +1612,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="LoginLogoSmall.png" width="96" height="94"/>
         <image name="LoginSwipeArrow.png" width="12" height="20"/>
         <image name="ProfileBtnBg.png" width="320" height="44"/>
-        <image name="SideNavActiveBg" width="16" height="16"/>
-        <image name="SideNavAlertsIcon" width="16" height="16"/>
-        <image name="SideNavBadgesIcon" width="16" height="16"/>
-        <image name="SideNavHistoryIcon" width="16" height="16"/>
-        <image name="SideNavHomeIcon" width="16" height="16"/>
+        <image name="SideNavActiveBg" width="281" height="43"/>
+        <image name="SideNavAlertsIcon" width="51" height="44"/>
+        <image name="SideNavBadgesIcon" width="51" height="44"/>
+        <image name="SideNavHistoryIcon" width="51" height="44"/>
+        <image name="SideNavHomeIcon" width="51" height="44"/>
         <image name="SideNavKnodaLogo.png" width="109" height="44"/>
-        <image name="SideNavProfileIcon" width="16" height="16"/>
+        <image name="SideNavProfileIcon" width="51" height="44"/>
         <image name="SideNavStatsIcon.png" width="51" height="44"/>
         <image name="backArrow.png" width="23" height="19"/>
         <image name="firstStartOverlay.png" width="320" height="470"/>

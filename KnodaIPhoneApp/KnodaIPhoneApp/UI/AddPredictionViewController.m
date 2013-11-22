@@ -137,6 +137,7 @@ static const CGFloat kCategorySectionHeight = 40;
 }
 
 - (void)showResolutionPicker {
+    self.resolutionPicker.minimumDate = [NSDate dateWithTimeInterval:60 sinceDate:self.expirationPicker.date];
     [self showPickerView:self.resolutionPickerContainerView under:self.resolutionBar];
     [self resolutionPickerValueChanged:self.resolutionPicker];
 }
@@ -312,6 +313,9 @@ static const CGFloat kCategorySectionHeight = 40;
     {
         errorMessage = NSLocalizedString(@"Please select a category", @"");
     }
+    else if ([[self expirationDate] timeIntervalSince1970] > [[self resolutionDate] timeIntervalSince1970])
+        errorMessage = @"You can't Knoda Future before the voting deadline";
+    
     
     if (errorMessage != nil)
     {

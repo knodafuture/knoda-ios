@@ -34,4 +34,6 @@
 - (void)configureWithPrediction:(Prediction *)prediction;
 - (void)update;
 
+- (CGFloat)heightForPrediction:(Prediction *)prediction;
+
 @end

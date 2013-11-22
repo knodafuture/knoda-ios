@@ -16,7 +16,6 @@
 		016082231840108200E22521 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 016082221840108200E22521 /* Media.xcassets */; };
 		01608225184012D100E22521 /* Avatars.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01608224184012D100E22521 /* Avatars.xcassets */; };
 		016082271840130200E22521 /* Badges.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 016082261840130200E22521 /* Badges.xcassets */; };
-		0160822B184014FF00E22521 /* libFlurry_4.2.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0160822A184014FF00E22521 /* libFlurry_4.2.3.a */; };
 		016A3D44183D707B00E617FB /* UserProfileHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 016A3D43183D707B00E617FB /* UserProfileHeaderView.m */; };
 		016A3D46183D708900E617FB /* UserProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 016A3D45183D708900E617FB /* UserProfileHeaderView.xib */; };
 		016A3D49183D756300E617FB /* ProfileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 016A3D48183D756300E617FB /* ProfileCell.m */; };
@@ -25,9 +24,6 @@
 		0192BD261838CF1F00A760C8 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 0192BD251838CF1F00A760C8 /* Comment.m */; };
 		0192BD291838D12E00A760C8 /* CommentWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0192BD281838D12E00A760C8 /* CommentWebRequest.m */; };
 		0192BD2C1838D29D00A760C8 /* CreateCommentWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0192BD2B1838D29D00A760C8 /* CreateCommentWebRequest.m */; };
-		01A1DEE5183E9A1000DBBE68 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01A1DEDF183E9A1000DBBE68 /* libTestFlight.a */; };
-		01A1DEE6183E9A1000DBBE68 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 01A1DEE0183E9A1000DBBE68 /* README.md */; };
-		01A1DEE7183E9A1000DBBE68 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 01A1DEE1183E9A1000DBBE68 /* release_notes.md */; };
 		01A1DEE9183E9A1F00DBBE68 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 01A1DEE8183E9A1F00DBBE68 /* libz.dylib */; };
 		01C07658183610E500866A78 /* PredictionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01C07657183610E500866A78 /* PredictionCell.xib */; };
 		01C0765C183611FE00866A78 /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01C0765B183611FE00866A78 /* LoadingCell.xib */; };
@@ -36,6 +32,10 @@
 		01C0766318365B3700866A78 /* BigDaddyPredictionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01C0766218365B3700866A78 /* BigDaddyPredictionCell.xib */; };
 		01C0766618365FB800866A78 /* PredictionDetailsSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C0766518365FB800866A78 /* PredictionDetailsSectionHeader.m */; };
 		01C0766818365FD600866A78 /* PredictionDetailsSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01C0766718365FD600866A78 /* PredictionDetailsSectionHeader.xib */; };
+		01CABC431840223800A92A4E /* libFlurry_4.2.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01CABC421840223800A92A4E /* libFlurry_4.2.3.a */; };
+		01CABC4B1840224700A92A4E /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01CABC451840224700A92A4E /* libTestFlight.a */; };
+		01CABC4C1840224700A92A4E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 01CABC461840224700A92A4E /* README.md */; };
+		01CABC4D1840224700A92A4E /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 01CABC471840224700A92A4E /* release_notes.md */; };
 		3638773F17C4D6EA00703475 /* AnotherUsersProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3638773B17C4D6EA00703475 /* AnotherUsersProfileViewController.m */; };
 		3638774017C4D6EA00703475 /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3638773D17C4D6EA00703475 /* ChangePasswordViewController.m */; };
 		3638774617C4F6A100703475 /* ChangePasswordRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3638774517C4F6A100703475 /* ChangePasswordRequest.m */; };
@@ -143,8 +143,6 @@
 		016082221840108200E22521 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		01608224184012D100E22521 /* Avatars.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Avatars.xcassets; sourceTree = "<group>"; };
 		016082261840130200E22521 /* Badges.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Badges.xcassets; sourceTree = "<group>"; };
-		01608229184014FF00E22521 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
-		0160822A184014FF00E22521 /* libFlurry_4.2.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_4.2.3.a; sourceTree = "<group>"; };
 		016A3D42183D707B00E617FB /* UserProfileHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileHeaderView.h; sourceTree = "<group>"; };
 		016A3D43183D707B00E617FB /* UserProfileHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileHeaderView.m; sourceTree = "<group>"; };
 		016A3D45183D708900E617FB /* UserProfileHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileHeaderView.xib; sourceTree = "<group>"; };
@@ -159,12 +157,6 @@
 		0192BD281838D12E00A760C8 /* CommentWebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentWebRequest.m; sourceTree = "<group>"; };
 		0192BD2A1838D29D00A760C8 /* CreateCommentWebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateCommentWebRequest.h; sourceTree = "<group>"; };
 		0192BD2B1838D29D00A760C8 /* CreateCommentWebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateCommentWebRequest.m; sourceTree = "<group>"; };
-		01A1DEDF183E9A1000DBBE68 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
-		01A1DEE0183E9A1000DBBE68 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		01A1DEE1183E9A1000DBBE68 /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
-		01A1DEE2183E9A1000DBBE68 /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
-		01A1DEE3183E9A1000DBBE68 /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
-		01A1DEE4183E9A1000DBBE68 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		01A1DEE8183E9A1F00DBBE68 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		01C07657183610E500866A78 /* PredictionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PredictionCell.xib; sourceTree = "<group>"; };
 		01C0765B183611FE00866A78 /* LoadingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
@@ -175,6 +167,14 @@
 		01C0766418365FB800866A78 /* PredictionDetailsSectionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PredictionDetailsSectionHeader.h; path = ../PredictionDetailsSectionHeader.h; sourceTree = "<group>"; };
 		01C0766518365FB800866A78 /* PredictionDetailsSectionHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PredictionDetailsSectionHeader.m; path = ../PredictionDetailsSectionHeader.m; sourceTree = "<group>"; };
 		01C0766718365FD600866A78 /* PredictionDetailsSectionHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PredictionDetailsSectionHeader.xib; sourceTree = "<group>"; };
+		01CABC411840223800A92A4E /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
+		01CABC421840223800A92A4E /* libFlurry_4.2.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_4.2.3.a; sourceTree = "<group>"; };
+		01CABC451840224700A92A4E /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		01CABC461840224700A92A4E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		01CABC471840224700A92A4E /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
+		01CABC481840224700A92A4E /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
+		01CABC491840224700A92A4E /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
+		01CABC4A1840224700A92A4E /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		3638773A17C4D6EA00703475 /* AnotherUsersProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnotherUsersProfileViewController.h; sourceTree = "<group>"; };
 		3638773B17C4D6EA00703475 /* AnotherUsersProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnotherUsersProfileViewController.m; sourceTree = "<group>"; };
 		3638773C17C4D6EA00703475 /* ChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordViewController.h; sourceTree = "<group>"; };
@@ -360,15 +360,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01CABC4B1840224700A92A4E /* libTestFlight.a in Frameworks */,
 				01A1DEE9183E9A1F00DBBE68 /* libz.dylib in Frameworks */,
 				9E6F4C5A17D8CCFA00EAB4A0 /* SystemConfiguration.framework in Frameworks */,
 				9E28686F17C659940033FB3C /* Security.framework in Frameworks */,
 				9E76A557179FFF11004F8FC1 /* QuartzCore.framework in Frameworks */,
-				01A1DEE5183E9A1000DBBE68 /* libTestFlight.a in Frameworks */,
-				0160822B184014FF00E22521 /* libFlurry_4.2.3.a in Frameworks */,
 				9E708824178AF68E00F036A8 /* UIKit.framework in Frameworks */,
 				9E708826178AF68E00F036A8 /* Foundation.framework in Frameworks */,
 				9E708828178AF68E00F036A8 /* CoreGraphics.framework in Frameworks */,
+				01CABC431840223800A92A4E /* libFlurry_4.2.3.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,27 +405,28 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		01608228184014FF00E22521 /* Flurry */ = {
+		01CABC401840223800A92A4E /* Flurry */ = {
 			isa = PBXGroup;
 			children = (
-				01608229184014FF00E22521 /* Flurry.h */,
-				0160822A184014FF00E22521 /* libFlurry_4.2.3.a */,
+				01CABC411840223800A92A4E /* Flurry.h */,
+				01CABC421840223800A92A4E /* libFlurry_4.2.3.a */,
 			);
 			path = Flurry;
 			sourceTree = "<group>";
 		};
-		01A1DEDE183E9A1000DBBE68 /* TestFlightSDK2.0.2 */ = {
+		01CABC441840224700A92A4E /* TestFlightSDK2.0.2 */ = {
 			isa = PBXGroup;
 			children = (
-				01A1DEDF183E9A1000DBBE68 /* libTestFlight.a */,
-				01A1DEE0183E9A1000DBBE68 /* README.md */,
-				01A1DEE1183E9A1000DBBE68 /* release_notes.md */,
-				01A1DEE2183E9A1000DBBE68 /* TestFlight+AsyncLogging.h */,
-				01A1DEE3183E9A1000DBBE68 /* TestFlight+ManualSessions.h */,
-				01A1DEE4183E9A1000DBBE68 /* TestFlight.h */,
+				01CABC451840224700A92A4E /* libTestFlight.a */,
+				01CABC461840224700A92A4E /* README.md */,
+				01CABC471840224700A92A4E /* release_notes.md */,
+				01CABC481840224700A92A4E /* TestFlight+AsyncLogging.h */,
+				01CABC491840224700A92A4E /* TestFlight+ManualSessions.h */,
+				01CABC4A1840224700A92A4E /* TestFlight.h */,
 			);
-			path = TestFlightSDK2.0.2;
-			sourceTree = "<group>";
+			name = TestFlightSDK2.0.2;
+			path = KnodaIPhoneApp/TestFlightSDK2.0.2;
+			sourceTree = SOURCE_ROOT;
 		};
 		5707791A17D4E88E0095FF19 /* Login & SingUp Controllers */ = {
 			isa = PBXGroup;
@@ -578,7 +579,8 @@
 		9E06635F178C3C7F00B3E974 /* Thirdparty */ = {
 			isa = PBXGroup;
 			children = (
-				01608228184014FF00E22521 /* Flurry */,
+				01CABC441840224700A92A4E /* TestFlightSDK2.0.2 */,
+				01CABC401840223800A92A4E /* Flurry */,
 				C3C33EFC17D0A56E003CA79C /* ImageCropper */,
 				9E212EB417CCEAFF00BE8166 /* KeychainWrapper */,
 				9E066360178C3C7F00B3E974 /* SBJSON */,
@@ -681,7 +683,6 @@
 			isa = PBXGroup;
 			children = (
 				0160821C1840106300E22521 /* Resources */,
-				01A1DEDE183E9A1000DBBE68 /* TestFlightSDK2.0.2 */,
 				578E9B1A17BA218500A7B304 /* Utils */,
 				9E066374178C3EE200B3E974 /* Model */,
 				9E06635F178C3C7F00B3E974 /* Thirdparty */,
@@ -903,12 +904,12 @@
 			files = (
 				016082211840106300E22521 /* KronaOne-Regular.ttf in Resources */,
 				9E70882E178AF68E00F036A8 /* InfoPlist.strings in Resources */,
+				01CABC4D1840224700A92A4E /* release_notes.md in Resources */,
 				9E70883D178AF68E00F036A8 /* MainStoryboard.storyboard in Resources */,
-				01A1DEE6183E9A1000DBBE68 /* README.md in Resources */,
 				01C0766318365B3700866A78 /* BigDaddyPredictionCell.xib in Resources */,
 				01C0765E183617CE00866A78 /* AddPredictionViewController.xib in Resources */,
-				01A1DEE7183E9A1000DBBE68 /* release_notes.md in Resources */,
 				01C07658183610E500866A78 /* PredictionCell.xib in Resources */,
+				01CABC4C1840224700A92A4E /* README.md in Resources */,
 				0192BD231838CE6300A760C8 /* CommentCell.xib in Resources */,
 				016A3D46183D708900E617FB /* UserProfileHeaderView.xib in Resources */,
 				016082231840108200E22521 /* Media.xcassets in Resources */,
@@ -1125,8 +1126,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/nick/Documents/knodaiphone/KnodaIPhoneApp/KnodaIPhoneApp/TestFlightSDK2.0.2,
-					/Users/nick/Documents/knodaiphone/KnodaIPhoneApp/KnodaIPhoneApp/Thirdparty/Flurry,
+					"$(SRCROOT)/KnodaIPhoneApp/ThirdParty/Flurry",
+					"$(SRCROOT)/KnodaIPhoneApp/TestFlightSDK2.0.2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1147,8 +1148,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/nick/Documents/knodaiphone/KnodaIPhoneApp/KnodaIPhoneApp/TestFlightSDK2.0.2,
-					/Users/nick/Documents/knodaiphone/KnodaIPhoneApp/KnodaIPhoneApp/Thirdparty/Flurry,
+					"$(SRCROOT)/KnodaIPhoneApp/ThirdParty/Flurry",
+					"$(SRCROOT)/KnodaIPhoneApp/TestFlightSDK2.0.2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

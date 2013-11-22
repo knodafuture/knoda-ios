@@ -323,7 +323,7 @@ static const float otherUsersCellHeight = 44.0;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0)
-        return self.predictionCell.frame.size.height;
+        return [self.predictionCell heightForPrediction:self.prediction];
     else {
         if (self.showingComments && self.loadingComments)
             return loadingCellHeight;

@@ -245,7 +245,6 @@ static NSString* const MENU_SEGUES[MenuItemsCount] = {
 - (void) updateUserInfo {
     User * user = self.appDelegate.user;
     
-    
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     [formatter setGroupingSeparator:[[NSLocale currentLocale] objectForKey:NSLocaleGroupingSeparator]];
     
@@ -253,16 +252,6 @@ static NSString* const MENU_SEGUES[MenuItemsCount] = {
     self.wonLostLabel.text = [NSString stringWithFormat:@"%d-%d",user.won,user.lost];
     self.wonPercantageLabel.text = ![user.winningPercentage isEqual: @0] ? [NSString stringWithFormat:@"%@%@",user.winningPercentage,@"%"] : @"0%";
     self.steakLabel.text = [user.streak length] > 0 ? user.streak : @"-";
-    
-    NSIndexPath *selectedIndexPath = [self.menuItemsTableView indexPathForSelectedRow];
-    
-    [self.menuItemsTableView beginUpdates];
-    [self.menuItemsTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:MenuProfile inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-    [self.menuItemsTableView endUpdates];
-    
-    if(![self.menuItemsTableView indexPathForSelectedRow] && selectedIndexPath) {
-        [self.menuItemsTableView selectRowAtIndexPath:selectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-    }
 }
 
 

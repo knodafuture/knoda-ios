@@ -70,7 +70,7 @@
 }
 
 - (BOOL)isFinished {
-    return self.chellange.isOwn && [self.expirationDate timeIntervalSinceNow] < 0;
+    return self.chellange.isOwn && [self.resolutionDate timeIntervalSinceNow] < 0;
 }
 
 

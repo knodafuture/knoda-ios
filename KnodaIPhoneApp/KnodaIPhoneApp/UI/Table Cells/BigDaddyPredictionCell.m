@@ -57,13 +57,21 @@ static UINib *nib;
     return cell;
 }
 
+- (CGFloat)heightForPrediction:(Prediction *)prediction {
+    CGFloat baseHeight = [PredictionCell heightForPrediction:prediction];
+    
+    if ([self showsActionArea])
+        return baseHeight + self.agreeDisagreeView.frame.size.height;
+    else
+        return baseHeight;
+    
+}
+
 - (void)configureWithPrediction:(Prediction *)prediction {
     
     self.prediction = prediction;
     
     [self.predictionCell fillWithPrediction:prediction];
-    
-    
     
     CGRect frame = self.frame;
     if ([self showsActionArea])

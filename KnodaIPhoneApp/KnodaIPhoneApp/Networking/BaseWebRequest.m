@@ -43,10 +43,10 @@ NSString* const kBaseURL = @"api.knoda.com";
 //NSString* const kBaseURL = @"api-dev.knoda.com";
 
 //Uncomment the following line for the test environment
-NSString* const kBaseURL = @"api-test.knoda.com";  // Old server=54.213.86.248
+//NSString* const kBaseURL = @"api-test.knoda.com";  // Old server=54.213.86.248
 
 
-//NSString* const kBaseURL = @"knoda-dev.herokuapp.com";
+NSString* const kBaseURL = @"knoda-dev.herokuapp.com";
 //NSString *const kBaseURL = @"localhost:1234";
 #endif
 

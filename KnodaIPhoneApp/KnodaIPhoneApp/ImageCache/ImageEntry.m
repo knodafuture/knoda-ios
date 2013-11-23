@@ -40,8 +40,6 @@ static const int kMaxFileNameLength = 254;
     
     self.isLoading = YES;
     
-    _cornerRadius = radius;
-    
     ImageLoadCompletionBlock block = [completion copy];
     
     if(!self.image) {
@@ -112,16 +110,22 @@ static const int kMaxFileNameLength = 254;
 - (void)writeImage {
     if(_image) {
         //DLog(@"write img to file: %@", self.imgUrl);
-        NSData *dataImg = UIImagePNGRepresentation(_image);
-        NSError *error = nil;
-        
-        NSString *fileName = [self getFileName];
-        
-        [dataImg writeToFile:fileName options:NSDataWritingAtomic error:&error];
-        _error = error;
-        if(!error) {
-            [self setupCreationDate:fileName];
+        @try {
+            NSData *dataImg = UIImagePNGRepresentation(_image);
+            NSError *error = nil;
+            
+            NSString *fileName = [self getFileName];
+            
+            [dataImg writeToFile:fileName options:NSDataWritingAtomic error:&error];
+            _error = error;
+            if(!error) {
+                [self setupCreationDate:fileName];
+            }
         }
+        @catch (NSException *exception) {
+            NSLog(@"caught exception saving image");
+        }
+
     }
 }
 

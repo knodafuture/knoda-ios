@@ -15,5 +15,5 @@
 
 + (NoContentCell *)noContentWithMessage:(NSString *)message forTableView:(UITableView *)tableView;
 
-
++ (NoContentCell *)noContentWithMessage:(NSString *)message forTableView:(UITableView *)tableView height:(CGFloat)height;
 @end

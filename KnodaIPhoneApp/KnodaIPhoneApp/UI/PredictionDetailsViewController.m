@@ -30,6 +30,8 @@
 #import "Comment.h"
 #import "CommentWebRequest.h"
 #import "CommentCell.h"
+#import "NoContentCell.h"
+#import "PredictorHeaderCell.h"
 
 static NSString* const kCategorySegue      = @"CategoryPredictionsSegue";
 static NSString* const kUserProfileSegue   = @"UserProfileSegue";
@@ -41,7 +43,7 @@ static const int kBSAlertTag = 1001;
 static const int kCommentMaxChars = 300;
 static const float parallaxRatio = 0.5;
 
-static const float otherUsersCellHeight = 44.0;
+static const float otherUsersCellHeight = 22.0;
 
 @interface PredictionDetailsViewController () <UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate, PredictionCellDelegate, UITextViewDelegate> {
     BOOL _loadingUsers;
@@ -234,7 +236,35 @@ static const float otherUsersCellHeight = 44.0;
 
 #pragma mark Actions
 - (IBAction)share:(id)sender {
-    UIActivityViewController *vc = [[UIActivityViewController alloc] initWithActivityItems:@[[NSString stringWithFormat:@"Check out my prediction on Knoda! %@", self.prediction.shortUrl]] applicationActivities:nil];
+    NSString *shareString;
+    
+    if (![self.prediction iAgree] && ![self.prediction iDisagree] && !self.prediction.chellange.isOwn)
+        shareString = @"Check out this prediction on Knoda";
+    else if (!self.prediction.settled && self.prediction.chellange.isOwn)
+        shareString = @"Check out my prediction on Knoda";
+    else if (self.prediction.settled && self.prediction.chellange.isOwn) {
+        if ([self.prediction win])
+            shareString = @"I won my prediction on Knoda";
+        else
+            shareString = @"I lost my prediction on Knoda";
+    }
+    else if (self.prediction.settled && [self.prediction win]) {
+        if ([self.prediction iAgree])
+            shareString = @"I won this prediction that I agreed with on Knoda";
+        else
+            shareString = @"I won this prediction that I disagreed with on Knoda";
+    }
+    else if (self.prediction.chellange) {
+        if ([self.prediction iAgree])
+            shareString = @"I agreed with this prediction on Knoda";
+        else
+            shareString = @"I disagreed with this prediction on Knoda";
+    }
+    
+    shareString = [NSString stringWithFormat:@"%@ %@.", shareString, self.prediction.shortUrl];
+    
+    UIActivityViewController *vc = [[UIActivityViewController alloc] initWithActivityItems:@[shareString] applicationActivities:nil];
+    [vc setValue:@"Check out this prediction on Knoda" forKey:@"subject"];
     [self presentViewController:vc animated:YES completion:nil];
 }
 
@@ -300,6 +330,17 @@ static const float otherUsersCellHeight = 44.0;
     }
 }
 
+- (BOOL)canLoadMoreComments {
+    
+    CGFloat div = (CGFloat)self.comments.count / (CGFloat)[CommentWebRequest limitByPage];
+        
+    if (div >= ceil(div))
+        return YES;
+    
+    return NO;
+    
+}
+
 #pragma mark Private
 
 - (void)updatePredictionUsers:(NSArray *)users agreed:(BOOL)agreed {
@@ -325,12 +366,28 @@ static const float otherUsersCellHeight = 44.0;
     if (indexPath.section == 0)
         return [self.predictionCell heightForPrediction:self.prediction];
     else {
-        if (self.showingComments && self.loadingComments)
+        if (self.showingComments && self.loadingComments) //loading cell
             return loadingCellHeight;
-        else if (self.showingComments && indexPath.row != self.comments.count)
+        else if (self.showingComments && !self.loadingComments && self.comments.count == 0) // no content cell
+            return self.tableView.frame.size.height - ([self.predictionCell heightForPrediction:self.prediction] + predictionDetailsSectionHeaderHeight);
+        else if (self.showingComments && !self.loadingComments && [self canLoadMoreComments]) {//comments + load more
+            if (indexPath.row != self.comments.count) {
+                CGFloat height = [CommentCell heightForComment:[self.comments objectAtIndex:indexPath.row]];
+                NSLog(@"using height for comment %f", height);
+                return height;
+            }
+            else
+                return loadingCellHeight;
+        }
+        else if (self.showingComments && !self.loadingComments)
             return [CommentCell heightForComment:[self.comments objectAtIndex:indexPath.row]];
-        else if (!self.showingComments && !_loadingUsers)
-            return otherUsersCellHeight;
+        else if (!self.showingComments && !_loadingUsers) {
+            if (indexPath.row != 0)
+                return otherUsersCellHeight;
+            else
+                return 44;
+        }
+        
         
     }
     
@@ -355,14 +412,18 @@ static const float otherUsersCellHeight = 44.0;
     if (section == 0)
         return 1;
     else {
-        if (self.showingComments && self.loadingComments)
+        if (self.showingComments && self.loadingComments) //loading cell
             return 1;
-        else if (self.showingComments && !self.loadingComments) {
+        else if (self.showingComments && !self.loadingComments && self.comments.count == 0) //no content cell
+            return 1;
+
+        else if (self.showingComments && !self.loadingComments && [self canLoadMoreComments]) //comments + load more
             return self.comments.count + 1;
-        }
-        else if(!self.showingComments && _loadingUsers)
+        else if (self.showingComments && !self.loadingComments) // comments alone
+            return self.comments.count;
+        else if(!self.showingComments && _loadingUsers) // loading cell
             return 1;
-        else if (!self.showingComments && !_loadingUsers)
+        else if (!self.showingComments && !_loadingUsers) //the tally
             return MAX(self.agreedUsers.count, self.disagreedUsers.count) + 1;
     }
     
@@ -374,11 +435,26 @@ static const float otherUsersCellHeight = 44.0;
         return self.predictionCell;
     }
     
-    if (self.showingComments) {
-        
+    if (self.showingComments && self.loadingComments)
+        return [LoadingCell loadingCellForTableView:tableView];
+    
+    else if (self.showingComments && !self.loadingComments && self.comments.count == 0)
+        return [NoContentCell noContentWithMessage:@"Be the first to comment" forTableView:tableView height:self.tableView.frame.size.height - ([self.predictionCell heightForPrediction:self.prediction] + predictionDetailsSectionHeaderHeight)];
+    
+    else if (self.showingComments && !self.loadingComments && [self canLoadMoreComments]) {
         if (indexPath.row == self.comments.count)
             return [LoadingCell loadingCellForTableView:tableView];
-        
+        else {
+            Comment *comment = [self.comments objectAtIndex:indexPath.row];
+            
+            CommentCell *cell = [CommentCell commentCellForTableView:tableView];
+            
+            [cell fillWithComment:comment];
+            
+            return cell;
+        }
+    }
+    else if (self.showingComments && !self.loadingComments) {
         Comment *comment = [self.comments objectAtIndex:indexPath.row];
         
         CommentCell *cell = [CommentCell commentCellForTableView:tableView];
@@ -386,21 +462,24 @@ static const float otherUsersCellHeight = 44.0;
         [cell fillWithComment:comment];
         
         return cell;
-    } else {
-        
-        if (_loadingUsers)
-            return [LoadingCell loadingCellForTableView:self.tableView];
-        
-        if (indexPath.row == 0)
-            return [tableView dequeueReusableCellWithIdentifier:@"PredictorHeaderCell"];
-        
+    }
+    else if (!self.showingComments && _loadingUsers)
+        return [LoadingCell loadingCellForTableView:self.tableView];
+    else {
+        if (indexPath.row == 0) {
+            PredictorHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PredictorHeaderCell"];
+            NSLog(@"AGREE COUNT %d", self.agreedUsers.count);
+            cell.leftLabel.text = [NSString stringWithFormat:@"Agree %d", self.agreedUsers.count];
+            cell.rightLabel.text = [NSString stringWithFormat:@"Disagree %d", self.disagreedUsers.count];
+            return cell;
+        }
         
         PredictorCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PredictorCell" forIndexPath:indexPath];
-
+        
         int idx = indexPath.row - 1;
         cell.agreedUserName.text    = self.agreedUsers.count > idx ? self.agreedUsers[idx] : @"";
         cell.disagreedUserName.text = self.disagreedUsers.count > idx ? self.disagreedUsers[idx] : @"";
-
+        
         return cell;
     }
 }
@@ -412,8 +491,7 @@ static const float otherUsersCellHeight = 44.0;
             {
                 __weak PredictionDetailsViewController *weakSelf = self;
                 
-                CommentWebRequest* request = [[CommentWebRequest alloc] initWithLastId: ((Comment*)[self.comments lastObject])._id forPredictionId:self.prediction.ID];
-                
+                CommentWebRequest *request = [[CommentWebRequest alloc] initWithOffset:self.comments.count forPredictionId:self.prediction.ID];
                 [self executeRequest:request withBlock:^{
                     PredictionDetailsViewController *strongSelf = weakSelf;
                     if(!strongSelf) {
@@ -439,34 +517,34 @@ static const float otherUsersCellHeight = 44.0;
 
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    
     UITableViewCell *stickyCell = self.predictionCell;
+    
     CGRect frame = stickyCell.frame;
     frame.origin.y = scrollView.contentOffset.y * parallaxRatio;
     
     stickyCell.frame = frame;
-    [self.tableView sendSubviewToBack:stickyCell];
+    [stickyCell.superview sendSubviewToBack:stickyCell];
     
     
-    CGFloat difference = scrollView.contentOffset.y - self.previousContentOffset.y;
-    
-    BOOL scrollingUp = difference < 0;
-    
-    CGFloat height = [self tableView:self.tableView heightForHeaderInSection:1];
-    
-    UIEdgeInsets tableViewInsets = self.tableView.contentInset;
-    if (self.tableView.contentInset.top > -height && scrollView.contentOffset.y > 0 && !scrollingUp) {
-        tableViewInsets.top  = tableViewInsets.top - difference;
-    } else if (self.tableView.contentInset.top <= -height && !scrollingUp) {
-        tableViewInsets.top = -height;
-    } else if (self.tableView.contentInset.top >= -height && self.tableView.contentInset.top < 0 && scrollingUp) {
-        tableViewInsets.top = tableViewInsets.top - difference;
-    } else if (self.tableView.contentInset.top >= 0 && scrollingUp) {
-        tableViewInsets.top = 0;
-    }
-    
-    self.tableView.contentInset = tableViewInsets;
-    self.previousContentOffset = scrollView.contentOffset;
+//    CGFloat difference = scrollView.contentOffset.y - self.previousContentOffset.y;
+//    
+//    BOOL scrollingUp = difference < 0;
+//    
+//    CGFloat height = [self tableView:self.tableView heightForHeaderInSection:1];
+//    
+//    UIEdgeInsets tableViewInsets = self.tableView.contentInset;
+//    if (self.tableView.contentInset.top > -height && scrollView.contentOffset.y > 0 && !scrollingUp) {
+//        tableViewInsets.top  = tableViewInsets.top - difference;
+//    } else if (self.tableView.contentInset.top <= -height && !scrollingUp) {
+//        tableViewInsets.top = -height;
+//    } else if (self.tableView.contentInset.top >= -height && self.tableView.contentInset.top < 0 && scrollingUp) {
+//        tableViewInsets.top = tableViewInsets.top - difference;
+//    } else if (self.tableView.contentInset.top >= 0 && scrollingUp) {
+//        tableViewInsets.top = 0;
+//    }
+//    
+//    self.tableView.contentInset = tableViewInsets;
+//    self.previousContentOffset = scrollView.contentOffset;
 
 
 }
@@ -716,6 +794,9 @@ static const float otherUsersCellHeight = 44.0;
         [self composeComment];
     
     textView.text = @"";
+    
+    self.textCounterLabel.text = [NSString stringWithFormat:@"%d", kCommentMaxChars - textView.text.length];
+    
 }
 
 - (void)willShowKeyBoard:(NSNotification *)object {
@@ -754,7 +835,7 @@ static const float otherUsersCellHeight = 44.0;
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
-    
+    self.textCounterLabel.text = [NSString stringWithFormat:@"%d", kCommentMaxChars - textView.text.length];
 }
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     

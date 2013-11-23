@@ -441,7 +441,7 @@ static const char *MULTIPART_CHARS = "1234567890_-qwertyuiopasdfghjklzxcvbnmQWER
 - (NSString *)encodeString:(NSString *)string {
     if (![string isKindOfClass:NSString.class])
         return string;
-    return (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)string, NULL, (CFStringRef)@"&=+", kCFStringEncodingUTF8));
+    return (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)string, NULL, (CFStringRef)@"&=+;:", kCFStringEncodingUTF8));
 }
 
 @end

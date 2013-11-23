@@ -39,7 +39,7 @@ static const float kAvatarSize = 344.0;
 @property (weak, nonatomic) IBOutlet UITextField *userNameField;
 @property (weak, nonatomic) IBOutlet UIView *emailContainer;
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
-
+@property (weak, nonatomic) IBOutlet UIButton *avatarButton;
 @property (assign, nonatomic) BOOL canceledEntry;
 
 
@@ -63,10 +63,8 @@ static const float kAvatarSize = 344.0;
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem addPredictionBarButtonItem];
     
     self.headerView = [[UserProfileHeaderView alloc] init];
-    [self.view addSubview:self.headerView];
-    
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(avatarImageVIewTapped:)];
-    [self.headerView.userAvatarView addGestureRecognizer:tap];
+    [self.view insertSubview:self.headerView belowSubview:self.avatarButton];
+;
     
     UITapGestureRecognizer *doneTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap)];
     [self.view addGestureRecognizer:doneTap];
@@ -94,7 +92,7 @@ static const float kAvatarSize = 344.0;
     
     User * user = self.appDelegate.user;
     
-    self.title = user.name;
+    self.title = user.name.uppercaseString;
     
     [self.headerView populateWithUser:user];
     

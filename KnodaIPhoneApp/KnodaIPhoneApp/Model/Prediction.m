@@ -141,7 +141,7 @@
     else if (interval < (secondsInMinute * minutesInHour * hoursInDay * daysInMonth * monthInYear))
     {
         NSInteger month = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay * daysInMonth));
-        result = [NSString stringWithFormat: NSLocalizedString(@"made %dmth ago", @""), month];
+        result = [NSString stringWithFormat: NSLocalizedString(@"made %dmo ago", @""), month];
     }
     else
     {
@@ -178,7 +178,7 @@
     
     if (interval < secondsInMinute)
     {
-        result = [NSString stringWithFormat: NSLocalizedString(@"exp %ds%@", @""), (NSInteger)interval, (expired) ? @" ago" : @""];
+        result = [NSString stringWithFormat: expired ? NSLocalizedString(@"closed %ds%@", @"") : NSLocalizedString(@"closes %ds%@", @""), (NSInteger)interval, (expired) ? @" ago" : @""];
     }
     else if (interval < (secondsInMinute * minutesInHour * hoursInDay))
     {
@@ -190,22 +190,22 @@
         NSString* minutesString = (minutes != 0) ? [NSString stringWithFormat: NSLocalizedString(@"%dm", @""), minutes] : @"";
         NSString* space = (hours != 0 && minutes != 0) ? @" " : @"";
         
-        result = [NSString stringWithFormat: NSLocalizedString(@"exp %@%@%@%@", @""), hoursString, space, minutesString, (expired) ? @" ago" : @""];
+        result = [NSString stringWithFormat: expired ? NSLocalizedString(@"closed %@%@%@%@", @"") : NSLocalizedString(@"closes %@%@%@%@", @""), hoursString, space, minutesString, (expired) ? @" ago" : @""];
     }
     else if (interval < (secondsInMinute * minutesInHour * hoursInDay * daysInMonth))
     {
         NSInteger days = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay)) + 1;
-        result = [NSString stringWithFormat: NSLocalizedString(@"exp %dd%@", @""), days, (expired) ? @" ago" : @""];
+        result = [NSString stringWithFormat: expired? NSLocalizedString(@"closed %dd%@", @"") : NSLocalizedString(@"closes %dd%@", @""), days, (expired) ? @" ago" : @""];
     }
     else if (interval < (secondsInMinute * minutesInHour * hoursInDay * daysInMonth * monthInYear))
     {
         NSInteger month = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay * daysInMonth)) + 1;
-        result = [NSString stringWithFormat: NSLocalizedString(@"exp %dmth%@", @""), month, (expired) ? @" ago" : @""];
+        result = [NSString stringWithFormat: expired? NSLocalizedString(@"closed %dmo%@", @"") : NSLocalizedString(@"closes %dmo%@", @""), month, (expired) ? @" ago" : @""];
     }
     else
     {
         NSInteger year = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay * daysInMonth * monthInYear)) + 1;
-        result = [NSString stringWithFormat: NSLocalizedString(@"exp %dyr%@", @""), year, (year != 1) ? @"s" : @"", (expired) ? @" ago" : @""];
+        result = [NSString stringWithFormat: expired ? NSLocalizedString(@"closed %dyr%@", @"") : NSLocalizedString(@"closes %dyr%@", @""), year, (year != 1) ? @"s" : @"", (expired) ? @" ago" : @""];
     }
 
     
@@ -221,6 +221,8 @@
 }
 
 - (UIImage *)statusImage {
+    if (self.chellange.isOwn)
+        return nil;
     if ([self iAgree])
         return [UIImage imageNamed:@"AgreeMarker"];
     else if ([self iDisagree])
@@ -253,7 +255,7 @@
     
     addPoint(self.chellange.basePoints, NSLocalizedString(@"Base", @""));
     addPoint(self.chellange.outcomePoints, NSLocalizedString(@"Outcome", @""));
-    addPoint(self.chellange.marketSizePoints, NSLocalizedString(@"Market size", @""));
+    addPoint(self.chellange.marketSizePoints, NSLocalizedString(@"Market", @""));
     addPoint(self.chellange.predictionMarketPoints, [self marketSizeNameForPoints:self.chellange.predictionMarketPoints]);
     
     return string;

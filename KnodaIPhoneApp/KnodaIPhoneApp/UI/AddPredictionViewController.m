@@ -267,7 +267,7 @@ static const CGFloat kCategorySectionHeight = 40;
 
 - (IBAction) cancelExpirationPicker: (id) sender
 {
-    self.expirationLabel.text = @"Set a voting deadline";
+    self.expirationLabel.text = @"Voting Ends On...";
     [self hideExpirationDatePicker];
 }
 
@@ -290,7 +290,7 @@ static const CGFloat kCategorySectionHeight = 40;
 }
 
 - (IBAction)cancelResolutionPicker:(id)sender {
-    self.resolutionLabel.text = @"Tell us when you'll Knoda Future";
+    self.resolutionLabel.text = @"I'll Knoda Result On...";
     [self hideResolutionPicker];
 
 }
@@ -301,7 +301,7 @@ static const CGFloat kCategorySectionHeight = 40;
 - (void)predict {
     NSString* errorMessage = nil;
     
-    if (self.textView.text.length == 0)
+    if (self.textView.text.length == 0 || self.showPlaceholder)
     {
         errorMessage = NSLocalizedString(@"Please enter your prediction", @"");
     }
@@ -315,7 +315,8 @@ static const CGFloat kCategorySectionHeight = 40;
     }
     else if ([[self expirationDate] timeIntervalSince1970] > [[self resolutionDate] timeIntervalSince1970])
         errorMessage = @"You can't Knoda Future before the voting deadline";
-    
+    else if ([[self expirationDate] timeIntervalSinceNow] < 0 || [[self resolutionDate] timeIntervalSinceNow] < 0)
+        errorMessage = @"You're can't end voting or resolve your prediction in the past";
     
     if (errorMessage != nil)
     {

@@ -28,4 +28,15 @@ static UINib *nib;
     return cell;
 }
 
++ (NoContentCell *)noContentWithMessage:(NSString *)message forTableView:(UITableView *)tableView height:(CGFloat)height {
+    NoContentCell *cell = [NoContentCell noContentWithMessage:message forTableView:tableView];
+    
+    CGRect frame = cell.frame;
+    frame.size.height = height;
+    
+    cell.frame = frame;
+    
+    return cell;
+}
+
 @end

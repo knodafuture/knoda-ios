@@ -19,6 +19,7 @@
 #import "AppDelegate.h" 
 #import "ProfileViewController.h"
 #import "AnotherUsersProfileViewController.h"
+#import "NoContentCell.h"
 
 static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 static NSString* const kMyProfileSegue = @"MyProfileSegue";
@@ -27,6 +28,7 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
 @interface AllAlertsViewController ()
 @property (strong, nonatomic) NSMutableArray *predictions;
 @property (strong, nonatomic) NSMutableArray *webRequests;
+@property (assign, nonatomic) BOOL loading;
 @end
 
 @implementation AllAlertsViewController
@@ -70,7 +72,8 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
 - (void)refresh:(UIRefreshControl *)refresh {
     
     __weak AllAlertsViewController *weakSelf = self;
-    
+    self.loading = YES;
+
     AllAlertsWebRequest* request = [[AllAlertsWebRequest alloc] init];
     
     [self executeRequest:request withBlock:^{
@@ -78,6 +81,7 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
         if(!strongSelf) {
             return;
         }
+        self.loading = NO;
         
         [refresh endRefreshing];
         if (request.errorCode == 0)
@@ -115,7 +119,7 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
                 }
             }
             else {
-                //strongSelf.noContentView.hidden = NO;
+                [self.tableView reloadData];
             }
         }
     }];
@@ -139,6 +143,9 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    if (!self.loading && self.predictions.count == 0)
+        return self.tableView.frame.size.height;
+    
     if (indexPath.row != self.predictions.count)
         return [PredictionCell heightForPrediction:[self.predictions objectAtIndex:indexPath.row]];
     else
@@ -153,6 +160,9 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
 
 - (UITableViewCell*) tableView: (UITableView*) tableView cellForRowAtIndexPath: (NSIndexPath*) indexPath
 {
+    
+    
+    
     if (self.predictions.count != 0)
     {
         PredictionCell *cell = [PredictionCell predictionCellForTableView:tableView];
@@ -160,8 +170,10 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
         cell.delegate = self;
         return cell;
     }
-    else
+    else if (self.loading)
         return [LoadingCell loadingCellForTableView:tableView];
+    else
+        return [NoContentCell noContentWithMessage:@"No alerts right now." forTableView:tableView height:self.tableView.frame.size.height];
 }
 
 

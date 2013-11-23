@@ -120,7 +120,6 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
         }
     }
 }
-
 - (void)refresh:(UIRefreshControl *)refreshControl {
     
     __weak MyPredictionsViewController *weakSelf = self;
@@ -146,7 +145,7 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
             }
             else {
                 //[strongSelf.view addSubview:strongSelf.noContentView];
-                NoContentCell *cell = [NoContentCell noContentWithMessage:@"no predictions" forTableView:self.tableView];
+                NoContentCell *cell = [NoContentCell noContentWithMessage:@"Make your first prediction or vote." forTableView:self.tableView];
                 [self showNoContent:cell];
             }
         }

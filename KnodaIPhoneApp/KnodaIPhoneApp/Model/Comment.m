@@ -72,7 +72,7 @@
     else if (interval < (secondsInMinute * minutesInHour * hoursInDay * daysInMonth * monthInYear))
     {
         NSInteger month = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay * daysInMonth));
-        result = [NSString stringWithFormat: NSLocalizedString(@"made %dmth ago", @""), month];
+        result = [NSString stringWithFormat: NSLocalizedString(@"made %dmo ago", @""), month];
     }
     else
     {

@@ -15,6 +15,7 @@
 #import "AlertNavigationCell.h"
 #import "AllAlertsWebRequest.h"
 #import "LoadingView.h" 
+#import "BadgesWebRequest.h"
 
 static NSString* const kHomeSegue = @"HomeSegue";
 static NSString* const kSelectPictureSegue = @"SelectPictureSegue";
@@ -57,6 +58,7 @@ static NSString* const MENU_SEGUES[MenuItemsCount] = {
 - (void) viewDidLoad {
     [super viewDidLoad];
     
+    
     [self reloadUserInfo];
     if (SYSTEM_VERSION_GREATER_THAN(@"7.0"))
         [self.menuItemsTableView setSeparatorInset:UIEdgeInsetsZero];
@@ -68,6 +70,7 @@ static NSString* const MENU_SEGUES[MenuItemsCount] = {
     
     if(self.appDelegate.user.hasAvatar)
     {
+        [BadgesWebRequest checkNewBadges];
         if (self.appDelegate.notificationReceived)
         {
             [self openMenuItem: MenuAlerts];

@@ -35,5 +35,4 @@
 - (void)update;
 
 - (CGFloat)heightForPrediction:(Prediction *)prediction;
-
 @end

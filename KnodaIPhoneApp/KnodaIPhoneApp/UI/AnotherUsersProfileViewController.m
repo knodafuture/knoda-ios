@@ -175,8 +175,9 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 - (UITableViewCell*) tableView: (UITableView*) tableView cellForRowAtIndexPath: (NSIndexPath*) indexPath
 {
     
-    if (indexPath.section == 0)
+    if (indexPath.section == 0) {
         return self.headerCell;
+    }
     
     UITableViewCell* tableCell;
     
@@ -244,7 +245,7 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
     
     stickyCell.frame = frame;
     
-    [self.predictionsTableView sendSubviewToBack:stickyCell];
+    [stickyCell.superview sendSubviewToBack:stickyCell];
     
     
 }

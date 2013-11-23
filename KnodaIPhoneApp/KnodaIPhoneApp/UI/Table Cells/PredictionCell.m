@@ -208,7 +208,25 @@ static CGFloat fullGreenB = 31.0/256.0;
     else
         self.voteImage.image = [self.prediction statusImage];
     
-    self.outcomeLabel.text = self.prediction.settled ? [self.prediction outcomeString] : @"";
+    if (self.prediction.settled) {
+        if ([self.prediction win]) {
+            self.outcomeLabel.text = @"W";
+            self.outcomeLabel.textColor = [UIColor colorWithRed:fullGreenR green:fullGreenG blue:fullGreenB alpha:1.0];
+        } else {
+            self.outcomeLabel.text = @"L";
+            self.outcomeLabel.textColor = [UIColor colorWithRed:fullRedR green:fullRedG blue:fullRedB alpha:1.0];
+        }
+    } else
+        self.outcomeLabel.text = @"";
+    
+    CGRect frame = self.outcomeLabel.frame;
+    
+    if (self.voteImage.image) {
+        frame.origin.x = self.voteImage.frame.origin.x - 25.0;
+    } else
+        frame.origin.x = self.frame.size.width - 30.0;
+    
+    self.outcomeLabel.frame = frame;
 
 }
 - (void) fillWithPrediction: (Prediction*) prediction
@@ -265,15 +283,11 @@ static CGFloat fullGreenB = 31.0/256.0;
     return agreed;
 }
 
-
 - (void) setAgreed: (BOOL) newAgreed
 {
-    if (!self.agreed && !self.disagreed)
-    {
-        agreed = newAgreed;
-        if (agreed)
-            self.voteImage.image = [UIImage imageNamed:@"AgreeMarker"];
-    }
+    agreed = newAgreed;
+    if (agreed)
+        self.voteImage.image = [UIImage imageNamed:@"AgreeMarker"];
 }
 
 
@@ -285,13 +299,11 @@ static CGFloat fullGreenB = 31.0/256.0;
 
 - (void) setDisagreed: (BOOL) newDisagreed
 {
-    if (!self.agreed && !self.disagreed)
-    {
-        disagreed = newDisagreed;
-        if (disagreed)
-            self.voteImage.image = [UIImage imageNamed:@"DisagreeMarker"];
+
+    disagreed = newDisagreed;
+    if (disagreed)
+        self.voteImage.image = [UIImage imageNamed:@"DisagreeMarker"];
             
-    }
 }
 
 

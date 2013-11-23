@@ -61,9 +61,6 @@
         if(block) {
             block();
         }
-        if(self.isSucceeded) {
-            [BadgesWebRequest checkNewBadges];
-        }
     }];
 }
 

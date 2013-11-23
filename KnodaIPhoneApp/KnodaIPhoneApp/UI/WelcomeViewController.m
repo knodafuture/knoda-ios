@@ -28,12 +28,27 @@
     [super viewDidLoad];
 	
     self.buttonsContainer.alpha = 0.0;
-        
+    self.swipeArrow.alpha = 0.0;
+    self.swipeLabel.alpha = 0.0;
+    
     self.navigationController.navigationBar.translucent = NO;
     [self.navigationController setNavigationBarHidden:YES];
     
-    if ([UIScreen mainScreen].bounds.size.height > 480)
-        self.test.image = [UIImage imageNamed:@"Default@2x-568h.png"];
+    if ([UIScreen mainScreen].bounds.size.height > 480) {
+        self.screen1.image = [UIImage imageNamed:@"Screen1@2x-568h.png"];
+        self.screen2.image = [UIImage imageNamed:@"Screen2@2x-568h.png"];
+        self.screen3.image = [UIImage imageNamed:@"Screen3@2x-568h.png"];
+        self.screen4.image = [UIImage imageNamed:@"Screen4@2x-568h.png"];
+        self.screen5.image = [UIImage imageNamed:@"Screen5@2x-568h.png"];
+    } else {
+        self.screen1.image = [UIImage imageNamed:@"Screen1"];
+        self.screen2.image = [UIImage imageNamed:@"Screen2"];
+        self.screen3.image = [UIImage imageNamed:@"Screen3"];
+        self.screen4.image = [UIImage imageNamed:@"Screen4"];
+        self.screen5.image = [UIImage imageNamed:@"Screen5"];
+    }
+    
+    self.pagingScroll.contentSize = CGSizeMake(self.screen1.frame.size.width * 6, self.screen1.frame.size.height);
 
 
 }
@@ -83,6 +98,8 @@
 - (void)showLoginSignup {
     [UIView animateWithDuration:0.5 animations:^{
         self.buttonsContainer.alpha = 1.0;
+        self.swipeLabel.alpha = 1.0;
+        self.swipeArrow.alpha = 1.0;
     } completion:^(BOOL finished) {
     }];
 }

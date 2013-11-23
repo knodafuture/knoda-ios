@@ -34,7 +34,6 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
 @property (nonatomic, strong) NSTimer* cellUpdateTimer;
 @property (nonatomic, strong) AppDelegate * appDelegate;
 
-@property (weak, nonatomic) IBOutlet UIView *noContentView;
 @property (strong, nonatomic) IBOutlet UIView *firstStartView;
 @property (weak, nonatomic) IBOutlet UIImageView *firstStartImageView;
 
@@ -68,10 +67,15 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
     self.navigationController.navigationBar.translucent = NO;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem sideNavBarBUttonItemwithTarget:self action:@selector(menuPressed:)];
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem addPredictionBarButtonItem];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(closeFirstStartView:)];
+    [self.firstStartView addGestureRecognizer:tap];
 }
+
 - (void)menuPressed:(id)sender {
     [((NavigationViewController*)self.navigationController.parentViewController) toggleNavigationPanel];
 }
+
 - (void) viewDidAppear: (BOOL) animated
 {
     [super viewDidAppear: animated];    
@@ -94,19 +98,19 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
     return self.webRequests;
 }
 
-- (void) setUpNoContentViewHidden: (BOOL) hidden {
-    if (self.noContentView.hidden == hidden) {
-        return;
-    }
-    
-    self.noContentView.hidden = hidden;
-    if (hidden) {
-        [self.noContentView removeFromSuperview];
-    }
-    else {
-        [self.view addSubview:self.noContentView];
-    }
-}
+//- (void) setUpNoContentViewHidden: (BOOL) hidden {
+//    if (self.noContentView.hidden == hidden) {
+//        return;
+//    }
+//    
+//    self.noContentView.hidden = hidden;
+//    if (hidden) {
+//        [self.noContentView removeFromSuperview];
+//    }
+//    else {
+//        [self.view addSubview:self.noContentView];
+//    }
+//}
 
 - (void) showFirstStartOverlay
 {
@@ -114,15 +118,12 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
     
     self.view.userInteractionEnabled = NO;
     
-    CGRect frame = [[[UIApplication sharedApplication] delegate] window].frame;
-    frame.origin.y += 10;
-    frame.size.height -= 10;
+//    CGRect frame = [[[UIApplication sharedApplication] delegate] window].frame;
+//    frame.origin.y += 20;
+//    frame.size.height -= 20;
+//   
+//    self.firstStartView.frame = frame;
     
-    if(IS_PHONEPOD5()) {
-        self.firstStartImageView.image = [UIImage imageNamed:@"firstStartOverlay-568h@2x"];
-    } 
-   
-    self.firstStartView.frame = frame;
     [[[[UIApplication sharedApplication] delegate] window] addSubview:self.firstStartView];
 }
 
@@ -195,8 +196,6 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
             strongSelf.predictions = [NSMutableArray arrayWithArray: predictionsRequest.predictions];
             [strongSelf.tableView reloadData];
         }
-        BOOL hideContentView = strongSelf.predictions.count > 0;
-        [strongSelf setUpNoContentViewHidden:hideContentView];
     }];
 }
 

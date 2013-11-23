@@ -324,6 +324,7 @@ static const float kAvatarSize = 344.0;
     if (![emailPredicate evaluateWithObject:self.emailField.text] || self.emailField.text.length > maxLength) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please enter a valid email address" delegate:Nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         [alert show];
+        return;
     }
     
     

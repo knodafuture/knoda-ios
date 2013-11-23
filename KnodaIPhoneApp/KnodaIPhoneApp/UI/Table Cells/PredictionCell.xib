@@ -189,7 +189,7 @@
     </objects>
     <resources>
         <image name="CommentIcon.png" width="8" height="7"/>
-        <image name="SwipeAgreeArrow" width="33" height="20"/>
+        <image name="SwipeAgreeArrow" width="33" height="17"/>
         <image name="SwipeDisagreeArrow" width="33" height="17"/>
     </resources>
 </document>

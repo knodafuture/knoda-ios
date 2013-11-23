@@ -243,6 +243,7 @@ static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
     frame.origin.y = scrollView.contentOffset.y * 0.5;
     
     stickyCell.frame = frame;
+    
     [self.predictionsTableView sendSubviewToBack:stickyCell];
     
     

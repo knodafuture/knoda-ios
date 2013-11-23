@@ -8,6 +8,7 @@
 
 #import "SignUpRequest.h"
 #import "User.h"
+#import "BadgesWebRequest.h"
 
 @interface SignUpRequest ()
 
@@ -52,6 +53,18 @@
     
     self.user = [[User alloc] initWithDictionary:parsedResult];
     self.user.token = [parsedResult objectForKey: @"auth_token"];
+}
+
+- (void)executeWithCompletionBlock:(RequestCompletionBlock)completion {
+    RequestCompletionBlock block = completion ? [completion copy] : nil;
+    [super executeWithCompletionBlock:^{
+        if(block) {
+            block();
+        }
+        if(self.isSucceeded) {
+            [BadgesWebRequest checkNewBadges];
+        }
+    }];
 }
 
 @end

@@ -28,6 +28,7 @@ static NSString* const kImageCropperSegue = @"ImageCropperSegue";
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 
 @property (nonatomic) UIImage *avatarImage;
+@property (nonatomic, assign) BOOL hasAppeared;
 
 @end
 
@@ -44,15 +45,22 @@ static NSString* const kImageCropperSegue = @"ImageCropperSegue";
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem backButtonWithTarget:self action:@selector(backButtonPressed:)];
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTitle:@"Done" target:self action:@selector(doneButtontapped:) color:[UIColor whiteColor]];
     self.title = @"KNODA";
+    
+    
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self pictureButtonTapped:nil];
+    if (!self.hasAppeared) {
+        [self pictureButtonTapped:nil];
+        self.hasAppeared = YES;
+    }
 }
 
 - (void)setAvatarImage:(UIImage *)avatarImage {

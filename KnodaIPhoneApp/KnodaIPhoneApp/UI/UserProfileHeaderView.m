@@ -32,7 +32,7 @@ static UINib *nib;
     
     self.pointsLabel.text = [NSString stringWithFormat:@"%@", [formatter stringFromNumber:[NSNumber numberWithInteger:user.points]]];
     self.winPercentLabel.text = [NSString stringWithFormat:@"%3.2f%%", [user.winningPercentage floatValue]];
-    self.streakLabel.text = [user.streak length] > 0 ? user.streak : @"-";
+    self.streakLabel.text = [user.streak length] > 0 ? user.streak : @"W0";
     self.winLossLabel.text = [NSString stringWithFormat:@"%d-%d",user.won,user.lost];
     
     
@@ -45,7 +45,7 @@ static UINib *nib;
     textSize = [self.winPercentLabel sizeThatFits:self.winPercentLabel.frame.size];
     
     frame = self.streakLabel.frame;
-    frame.origin.x = self.winPercentLabel.frame.origin.x + textSize.width + 10.0;
+    frame.origin.x = self.winPercentLabel.frame.origin.x + textSize.width + 20.0;
     self.streakLabel.frame = frame;
     
     frame = self.smallStreakLabel.frame;
@@ -55,7 +55,7 @@ static UINib *nib;
     textSize = [self.streakLabel sizeThatFits:self.streakLabel.frame.size];
     
     frame = self.winLossLabel.frame;
-    frame.origin.x = self.streakLabel.frame.origin.x + textSize.width + 10.0;
+    frame.origin.x = self.streakLabel.frame.origin.x + textSize.width + 20.0;
     self.winLossLabel.frame = frame;
     
     frame = self.smallWLLabel.frame;

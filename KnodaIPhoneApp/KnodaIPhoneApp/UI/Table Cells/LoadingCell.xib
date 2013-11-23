@@ -14,15 +14,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="37"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Loading..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jTW-7g-ERz">
-                        <rect key="frame" x="12" y="10" width="92" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
-                        <color key="textColor" red="0.83493970790000005" green="0.83493970790000005" blue="0.83493970790000005" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </label>
                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="gray" id="iJb-al-Y4S">
-                        <rect key="frame" x="97" y="11" width="20" height="20"/>
+                        <rect key="frame" x="150" y="11" width="20" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </activityIndicatorView>
                 </subviews>

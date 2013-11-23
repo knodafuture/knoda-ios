@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface WelcomeViewController : UIViewController
-
+@property (weak, nonatomic) IBOutlet UIImageView *test;
 @end

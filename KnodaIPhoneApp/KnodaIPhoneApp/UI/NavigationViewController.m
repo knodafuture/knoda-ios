@@ -58,6 +58,8 @@ static NSString* const MENU_SEGUES[MenuItemsCount] = {
     [super viewDidLoad];
     
     [self reloadUserInfo];
+    if (SYSTEM_VERSION_GREATER_THAN(@"7.0"))
+        [self.menuItemsTableView setSeparatorInset:UIEdgeInsetsZero];
     
     UITapGestureRecognizer * recognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(toggleNavigationPanel)];
     [self.gestureView addGestureRecognizer:recognizer];
@@ -149,6 +151,9 @@ static NSString* const MENU_SEGUES[MenuItemsCount] = {
 
 - (void) moveToDetailsAnimated: (BOOL) animated
 {
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:animated];
+
     if (animated)
     {
         [UIView animateWithDuration: 0.3 animations: ^
@@ -173,6 +178,11 @@ static NSString* const MENU_SEGUES[MenuItemsCount] = {
     CGRect newFrame = self.movingView.frame;
     newFrame.origin.x -= self.masterView.frame.size.width;
     self.movingView.frame = newFrame;
+    
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+        [[self appDelegate] window].backgroundColor = [UIColor colorFromHex:@"77BC1F"];
+    }
+
 }
 
 
@@ -188,11 +198,16 @@ static NSString* const MENU_SEGUES[MenuItemsCount] = {
     [self updateAlertBadge];
     [self updateUserInfo];
     
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
+    
     [UIView animateWithDuration: 0.3 animations: ^
      {
          CGRect newFrame = self.movingView.frame;
          newFrame.origin.x += self.masterView.frame.size.width;
          self.movingView.frame = newFrame;
+         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
+             [[self appDelegate] window].backgroundColor = [UIColor blackColor];
      }];
     
 }
@@ -251,7 +266,7 @@ static NSString* const MENU_SEGUES[MenuItemsCount] = {
     self.pointsLabel.text = [NSString stringWithFormat:@"%@",[formatter stringFromNumber:[NSNumber numberWithInteger:user.points]]];
     self.wonLostLabel.text = [NSString stringWithFormat:@"%d-%d",user.won,user.lost];
     self.wonPercantageLabel.text = ![user.winningPercentage isEqual: @0] ? [NSString stringWithFormat:@"%@%@",user.winningPercentage,@"%"] : @"0%";
-    self.steakLabel.text = [user.streak length] > 0 ? user.streak : @"-";
+    self.steakLabel.text = [user.streak length] > 0 ? user.streak : @"W0";
 }
 
 

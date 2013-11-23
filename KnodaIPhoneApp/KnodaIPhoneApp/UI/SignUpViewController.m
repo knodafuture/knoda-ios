@@ -44,13 +44,14 @@ static NSString* const kApplicationSegue   = @"ApplicationNavigationSegue";
 
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap)];
     [self.view addGestureRecognizer:tap];
+    [self.navigationController setNavigationBarHidden:NO];
+
 }
 
 - (void) viewWillAppear: (BOOL) animated
 {
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(willShowKeyboardNotificationDidRecieve:) name: UIKeyboardWillShowNotification object: nil];
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(willHideKeyboardNotificationDidRecieve:) name: UIKeyboardWillHideNotification object: nil];
-        
     [super viewWillAppear: animated];
 }
 
@@ -78,28 +79,34 @@ static NSString* const kApplicationSegue   = @"ApplicationNavigationSegue";
 {    
     if (self.emailTextFiled.text.length == 0)
     {
-        return NO;
         
         [self showError: NSLocalizedString(@"Email should not be empty", @"")];
         
         [self.emailTextFiled becomeFirstResponder];
+        
+        return NO;
+
     }
     else if (self.usernameTextField.text.length == 0)
     {
-        return NO;
-                
+        
         [self showError: NSLocalizedString(@"Username should not be empty", @"")];
         
         [self.usernameTextField becomeFirstResponder];
+        return NO;
+
     }
     else if (self.passwordTextField.text.length < kMinPasswordLength)
     {
         
-        return NO;
-                
         [self showError: NSLocalizedString(@"Password should be between 6 and 20 chars lenght", @"")];
         
+
+
         [self.passwordTextField becomeFirstResponder];
+        
+        return NO;
+
     }
     
     return YES;

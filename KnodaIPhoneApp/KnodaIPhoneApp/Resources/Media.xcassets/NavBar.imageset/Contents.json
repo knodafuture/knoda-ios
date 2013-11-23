@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "10_predictions_big.png"
+      "filename" : "NavBar.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "10_predictions_big@2x.png"
+      "filename" : "NavBar@2x.png"
     }
   ],
   "info" : {

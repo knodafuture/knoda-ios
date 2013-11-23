@@ -26,6 +26,12 @@ static NSString* const kApplicationSegue = @"ApplicationNavigationSegue";
 
 @implementation LoginViewController
 
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self.navigationController setNavigationBarHidden:NO];
+
+}
 - (void) viewWillAppear: (BOOL) animated
 {
     [super viewWillAppear: animated];
@@ -39,6 +45,7 @@ static NSString* const kApplicationSegue = @"ApplicationNavigationSegue";
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap)];
     [self.view addGestureRecognizer:tap];
+    
 }
 
 

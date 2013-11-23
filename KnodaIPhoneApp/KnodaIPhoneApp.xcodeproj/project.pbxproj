@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		010ABAC318411B5800C3499E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 010ABAC018411B5800C3499E /* Default.png */; };
+		010ABAC418411B5800C3499E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 010ABAC118411B5800C3499E /* Default@2x.png */; };
+		010ABAC518411B5800C3499E /* Default@2x-568h.png in Resources */ = {isa = PBXBuildFile; fileRef = 010ABAC218411B5800C3499E /* Default@2x-568h.png */; };
 		015FA0B218303CC200253DB2 /* UIColor+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 015FA0B118303CC200253DB2 /* UIColor+Utils.m */; };
 		015FA0B718304A8600253DB2 /* UIBarButtonItem+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 015FA0B618304A8600253DB2 /* UIBarButtonItem+Utils.m */; };
 		015FA0BA18304D7800253DB2 /* UINavigationItem+iOS7Spacing.m in Sources */ = {isa = PBXBuildFile; fileRef = 015FA0B918304D7800253DB2 /* UINavigationItem+iOS7Spacing.m */; };
@@ -15,7 +18,6 @@
 		016082211840106300E22521 /* KronaOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0160821F1840106300E22521 /* KronaOne-Regular.ttf */; };
 		016082231840108200E22521 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 016082221840108200E22521 /* Media.xcassets */; };
 		01608225184012D100E22521 /* Avatars.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01608224184012D100E22521 /* Avatars.xcassets */; };
-		016082271840130200E22521 /* Badges.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 016082261840130200E22521 /* Badges.xcassets */; };
 		016A3D44183D707B00E617FB /* UserProfileHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 016A3D43183D707B00E617FB /* UserProfileHeaderView.m */; };
 		016A3D46183D708900E617FB /* UserProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 016A3D45183D708900E617FB /* UserProfileHeaderView.xib */; };
 		016A3D49183D756300E617FB /* ProfileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 016A3D48183D756300E617FB /* ProfileCell.m */; };
@@ -36,6 +38,10 @@
 		01CABC4B1840224700A92A4E /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01CABC451840224700A92A4E /* libTestFlight.a */; };
 		01CABC4C1840224700A92A4E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 01CABC461840224700A92A4E /* README.md */; };
 		01CABC4D1840224700A92A4E /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 01CABC471840224700A92A4E /* release_notes.md */; };
+		01CABC4F18405A1500A92A4E /* Badges.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01CABC4E18405A1500A92A4E /* Badges.xcassets */; };
+		01CABC5218405A7600A92A4E /* NoContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CABC5118405A7600A92A4E /* NoContentCell.m */; };
+		01CABC5418405A8E00A92A4E /* NoContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01CABC5318405A8E00A92A4E /* NoContentCell.xib */; };
+		01CABC5718405C4800A92A4E /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CABC5618405C4800A92A4E /* BaseTableViewController.m */; };
 		3638773F17C4D6EA00703475 /* AnotherUsersProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3638773B17C4D6EA00703475 /* AnotherUsersProfileViewController.m */; };
 		3638774017C4D6EA00703475 /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3638773D17C4D6EA00703475 /* ChangePasswordViewController.m */; };
 		3638774617C4F6A100703475 /* ChangePasswordRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3638774517C4F6A100703475 /* ChangePasswordRequest.m */; };
@@ -130,6 +136,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		010ABAC018411B5800C3499E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		010ABAC118411B5800C3499E /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		010ABAC218411B5800C3499E /* Default@2x-568h.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x-568h.png"; sourceTree = "<group>"; };
 		015FA0B018303CC200253DB2 /* UIColor+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Utils.h"; sourceTree = "<group>"; };
 		015FA0B118303CC200253DB2 /* UIColor+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Utils.m"; sourceTree = "<group>"; };
 		015FA0B518304A8600253DB2 /* UIBarButtonItem+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Utils.h"; sourceTree = "<group>"; };
@@ -142,7 +151,6 @@
 		0160821F1840106300E22521 /* KronaOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KronaOne-Regular.ttf"; sourceTree = "<group>"; };
 		016082221840108200E22521 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		01608224184012D100E22521 /* Avatars.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Avatars.xcassets; sourceTree = "<group>"; };
-		016082261840130200E22521 /* Badges.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Badges.xcassets; sourceTree = "<group>"; };
 		016A3D42183D707B00E617FB /* UserProfileHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileHeaderView.h; sourceTree = "<group>"; };
 		016A3D43183D707B00E617FB /* UserProfileHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileHeaderView.m; sourceTree = "<group>"; };
 		016A3D45183D708900E617FB /* UserProfileHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileHeaderView.xib; sourceTree = "<group>"; };
@@ -175,6 +183,12 @@
 		01CABC481840224700A92A4E /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
 		01CABC491840224700A92A4E /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
 		01CABC4A1840224700A92A4E /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		01CABC4E18405A1500A92A4E /* Badges.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Badges.xcassets; sourceTree = "<group>"; };
+		01CABC5018405A7600A92A4E /* NoContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoContentCell.h; sourceTree = "<group>"; };
+		01CABC5118405A7600A92A4E /* NoContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoContentCell.m; sourceTree = "<group>"; };
+		01CABC5318405A8E00A92A4E /* NoContentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoContentCell.xib; sourceTree = "<group>"; };
+		01CABC5518405C4800A92A4E /* BaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewController.h; sourceTree = "<group>"; };
+		01CABC5618405C4800A92A4E /* BaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewController.m; sourceTree = "<group>"; };
 		3638773A17C4D6EA00703475 /* AnotherUsersProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnotherUsersProfileViewController.h; sourceTree = "<group>"; };
 		3638773B17C4D6EA00703475 /* AnotherUsersProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnotherUsersProfileViewController.m; sourceTree = "<group>"; };
 		3638773C17C4D6EA00703475 /* ChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordViewController.h; sourceTree = "<group>"; };
@@ -381,6 +395,11 @@
 				016A3D42183D707B00E617FB /* UserProfileHeaderView.h */,
 				016A3D43183D707B00E617FB /* UserProfileHeaderView.m */,
 				016A3D45183D708900E617FB /* UserProfileHeaderView.xib */,
+				01CABC5018405A7600A92A4E /* NoContentCell.h */,
+				01CABC5118405A7600A92A4E /* NoContentCell.m */,
+				01CABC5318405A8E00A92A4E /* NoContentCell.xib */,
+				01CABC5518405C4800A92A4E /* BaseTableViewController.h */,
+				01CABC5618405C4800A92A4E /* BaseTableViewController.m */,
 			);
 			name = "Things I needed";
 			sourceTree = "<group>";
@@ -388,10 +407,13 @@
 		0160821C1840106300E22521 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				010ABAC018411B5800C3499E /* Default.png */,
+				010ABAC118411B5800C3499E /* Default@2x.png */,
+				010ABAC218411B5800C3499E /* Default@2x-568h.png */,
 				0160821D1840106300E22521 /* Fonts */,
 				016082221840108200E22521 /* Media.xcassets */,
 				01608224184012D100E22521 /* Avatars.xcassets */,
-				016082261840130200E22521 /* Badges.xcassets */,
+				01CABC4E18405A1500A92A4E /* Badges.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -906,6 +928,8 @@
 				9E70882E178AF68E00F036A8 /* InfoPlist.strings in Resources */,
 				01CABC4D1840224700A92A4E /* release_notes.md in Resources */,
 				9E70883D178AF68E00F036A8 /* MainStoryboard.storyboard in Resources */,
+				010ABAC518411B5800C3499E /* Default@2x-568h.png in Resources */,
+				010ABAC318411B5800C3499E /* Default.png in Resources */,
 				01C0766318365B3700866A78 /* BigDaddyPredictionCell.xib in Resources */,
 				01C0765E183617CE00866A78 /* AddPredictionViewController.xib in Resources */,
 				01C07658183610E500866A78 /* PredictionCell.xib in Resources */,
@@ -913,13 +937,15 @@
 				0192BD231838CE6300A760C8 /* CommentCell.xib in Resources */,
 				016A3D46183D708900E617FB /* UserProfileHeaderView.xib in Resources */,
 				016082231840108200E22521 /* Media.xcassets in Resources */,
+				01CABC4F18405A1500A92A4E /* Badges.xcassets in Resources */,
 				01C0765C183611FE00866A78 /* LoadingCell.xib in Resources */,
 				571B1D1D17C7BE620013AA41 /* NewBadgeView.xib in Resources */,
 				574314E317CFA88200C8BC75 /* Localizable.strings in Resources */,
-				016082271840130200E22521 /* Badges.xcassets in Resources */,
+				010ABAC418411B5800C3499E /* Default@2x.png in Resources */,
 				01608225184012D100E22521 /* Avatars.xcassets in Resources */,
 				01C0766818365FD600866A78 /* PredictionDetailsSectionHeader.xib in Resources */,
 				016082201840106300E22521 /* HelveticaNeue.dfont in Resources */,
+				01CABC5418405A8E00A92A4E /* NoContentCell.xib in Resources */,
 				573BC37E17D7577D00E668C7 /* LoadingView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -988,6 +1014,7 @@
 				9E3BD6E117C239000087529A /* AllAlertsWebRequest.m in Sources */,
 				36A4054817C24DDD00406A12 /* BadgesCollectionViewController.m in Sources */,
 				36A4054B17C24E5500406A12 /* BadgeCollectionViewCell.m in Sources */,
+				01CABC5218405A7600A92A4E /* NoContentCell.m in Sources */,
 				9EA9D72C17C3B2740001C415 /* ExpiredAlertsWebRequest.m in Sources */,
 				9EA9D72F17C3CAFE0001C415 /* SetSeenAlertsWebRequest.m in Sources */,
 				57D525AB17C388F80031C1EE /* BadgesWebRequest.m in Sources */,
@@ -1000,6 +1027,7 @@
 				57D525CD17C4C2DB0031C1EE /* NSString+Utils.m in Sources */,
 				57D525D017C4D6CB0031C1EE /* UIImage+Utils.m in Sources */,
 				3638774017C4D6EA00703475 /* ChangePasswordViewController.m in Sources */,
+				01CABC5718405C4800A92A4E /* BaseTableViewController.m in Sources */,
 				3638774617C4F6A100703475 /* ChangePasswordRequest.m in Sources */,
 				3638773F17C4D6EA00703475 /* AnotherUsersProfileViewController.m in Sources */,
 				9E28686A17C63E380033FB3C /* SelectPictureViewController.m in Sources */,
@@ -1117,8 +1145,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: James Flexman (PW494ZCC4M)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: James Flexman (PW494ZCC4M)";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KnodaIPhoneApp/KnodaIPhoneApp-Prefix.pch";
@@ -1140,8 +1168,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Knoda, LLC (F489V4H5F6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Knoda, LLC (F489V4H5F6)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KnodaIPhoneApp/KnodaIPhoneApp-Prefix.pch";
 				INFOPLIST_FILE = "KnodaIPhoneApp/KnodaIPhoneApp-Info.plist";

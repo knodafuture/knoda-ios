@@ -30,6 +30,10 @@
     self.buttonsContainer.alpha = 0.0;
         
     self.navigationController.navigationBar.translucent = NO;
+    [self.navigationController setNavigationBarHidden:YES];
+    
+    if ([UIScreen mainScreen].bounds.size.height > 480)
+        self.test.image = [UIImage imageNamed:@"Default@2x-568h.png"];
 
 
 }
@@ -85,7 +89,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:NO];
 }
 
 @end

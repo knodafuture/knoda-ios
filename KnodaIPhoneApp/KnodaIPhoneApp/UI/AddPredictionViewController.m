@@ -267,7 +267,7 @@ static const CGFloat kCategorySectionHeight = 40;
 
 - (IBAction) cancelExpirationPicker: (id) sender
 {
-    self.expirationLabel.text = @"Voting ends on...";
+    self.expirationLabel.text = @"Set a voting deadline";
     [self hideExpirationDatePicker];
 }
 
@@ -290,7 +290,7 @@ static const CGFloat kCategorySectionHeight = 40;
 }
 
 - (IBAction)cancelResolutionPicker:(id)sender {
-    self.resolutionLabel.text = @"Resolves on ...";
+    self.resolutionLabel.text = @"Tell us when you'll Knoda Future";
     [self hideResolutionPicker];
 
 }
@@ -460,7 +460,7 @@ static const CGFloat kCategorySectionHeight = 40;
 - (IBAction)resolutionPickerValueChanged:(id)sender {
     NSDate *newDate = self.resolutionPicker.date;
     
-    self.resolutionLabel.text = [NSString stringWithFormat:@"Resolves on %@ at %@'", [self.expirationDateFormatter stringFromDate:newDate], [self.expirationTimeFormatter stringFromDate:newDate]];
+    self.resolutionLabel.text = [NSString stringWithFormat:@"I'll know on %@ at %@", [self.expirationDateFormatter stringFromDate:newDate], [self.expirationTimeFormatter stringFromDate:newDate]];
 }
 
 

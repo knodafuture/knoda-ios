@@ -23,8 +23,10 @@
 static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 static NSString* const kMyProfileSegue = @"MyProfileSegue";
 static NSString* const kUserProfileSegue       = @"UserProfileSegue";
+
 @interface AllAlertsViewController ()
 @property (strong, nonatomic) NSMutableArray *predictions;
+@property (strong, nonatomic) NSMutableArray *webRequests;
 @end
 
 @implementation AllAlertsViewController
@@ -37,6 +39,14 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem addPredictionBarButtonItem];
     
     self.title = @"ALERTS";
+    
+    UIRefreshControl* refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget: self action: @selector(refresh:) forControlEvents: UIControlEventValueChanged];
+    
+    self.refreshControl = refreshControl;
+}
+- (NSMutableArray *)getWebRequests {
+    return self.webRequests;
 }
 - (void)menuPressed:(id)sender {
     [((NavigationViewController*)self.navigationController.parentViewController) toggleNavigationPanel];
@@ -45,7 +55,7 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
 {
     [super viewDidAppear: animated];
     
-    [self refresh];
+    [self refresh:nil];
     [Flurry logEvent: @"All_Alerts_Screen" withParameters: nil timed: YES];
     }
 
@@ -57,7 +67,7 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
 }
 
 
-- (void)refresh {
+- (void)refresh:(UIRefreshControl *)refresh {
     
     __weak AllAlertsViewController *weakSelf = self;
     
@@ -68,6 +78,8 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
         if(!strongSelf) {
             return;
         }
+        
+        [refresh endRefreshing];
         if (request.errorCode == 0)
         {
             
@@ -103,7 +115,7 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
                 }
             }
             else {
-                strongSelf.noContentView.hidden = NO;
+                //strongSelf.noContentView.hidden = NO;
             }
         }
     }];

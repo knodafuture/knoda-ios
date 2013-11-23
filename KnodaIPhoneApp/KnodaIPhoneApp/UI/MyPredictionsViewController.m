@@ -17,6 +17,7 @@
 #import "AppDelegate.h"
 #import "LoadingCell.h"
 #import "NavigationViewController.h"
+#import "NoContentCell.h"
 
 static NSString* const kPredictionDetailsSegue = @"PredictionDetailsSegue";
 static NSString* const kMyProfileSegue = @"MyProfileSegue";
@@ -31,6 +32,7 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
 
 @property (nonatomic, strong) NSTimer* cellUpdateTimer;
 @property (nonatomic, strong) NSMutableArray *predictions;
+@property (nonatomic, strong) NSMutableArray *webRequests;
 @end
 
 
@@ -43,7 +45,7 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self refresh];
+    [self refresh:nil];
     
     
     self.navigationController.navigationBar.translucent = NO;
@@ -51,8 +53,17 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem sideNavBarBUttonItemwithTarget:self action:@selector(menuPressed:)];
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem addPredictionBarButtonItem];
     
+    self.webRequests = [NSMutableArray array];
+    
+    UIRefreshControl* refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget: self action: @selector(refresh:) forControlEvents: UIControlEventValueChanged];
+    
+    self.refreshControl = refreshControl;
     
     [[(AppDelegate *)[[UIApplication sharedApplication] delegate] user] addObserver:self forKeyPath:@"smallImage" options:NSKeyValueObservingOptionNew context:nil];
+}
+- (NSMutableArray *)getWebRequests {
+    return self.webRequests;
 }
 - (void)menuPressed:(id)sender {
     [((NavigationViewController*)self.navigationController.parentViewController) toggleNavigationPanel];
@@ -65,7 +76,7 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
     _viewAppeared = YES;
     
     if(_needRefresh) {
-        [self refresh];
+        [self refresh:nil];
     }
     
     self.cellUpdateTimer = [NSTimer scheduledTimerWithTimeInterval: 60.0 target: self selector: @selector(updateVisibleCells) userInfo: nil repeats: YES];
@@ -87,7 +98,7 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if([object isKindOfClass:[BaseModelObject class]]) {
         if(_viewAppeared) {
-            [self refresh];
+            [self refresh:nil];
         }
         else {
             _needRefresh = YES;
@@ -110,7 +121,7 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
     }
 }
 
-- (void)refresh {
+- (void)refresh:(UIRefreshControl *)refreshControl {
     
     __weak MyPredictionsViewController *weakSelf = self;
     
@@ -119,6 +130,8 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
     HistoryMyPredictionsRequest* request = [[HistoryMyPredictionsRequest alloc] init];    
     [self executeRequest:request withBlock:^{
         MyPredictionsViewController *strongSelf = weakSelf;
+        
+        [refreshControl endRefreshing];
         if(!strongSelf) {
             return;
         }
@@ -128,10 +141,13 @@ static NSString* const kUserProfileSegue       = @"UserProfileSegue";
             [strongSelf.tableView reloadData];
             
             if ([strongSelf.predictions count] > 0) {
-                [strongSelf.noContentView removeFromSuperview];
+                //[strongSelf.noContentView removeFromSuperview];
+                [self restoreContent];
             }
             else {
-                [strongSelf.view addSubview:strongSelf.noContentView];
+                //[strongSelf.view addSubview:strongSelf.noContentView];
+                NoContentCell *cell = [NoContentCell noContentWithMessage:@"no predictions" forTableView:self.tableView];
+                [self showNoContent:cell];
             }
         }
         strongSelf->_isRefreshing = NO;

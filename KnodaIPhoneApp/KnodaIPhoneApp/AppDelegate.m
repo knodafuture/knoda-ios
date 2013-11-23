@@ -45,8 +45,7 @@ NSString* const kAlertNotification = @"AlertNotification";
     UIColor *navBackgroundColor = [UIColor colorFromHex:@"77BC1F"];
     
     if (SYSTEM_VERSION_GREATER_THAN(@"7.0")) {
-        [[UINavigationBar appearance] setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-        [[UINavigationBar appearance] setBarTintColor:navBackgroundColor];
+        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"NavBar"] forBarMetrics:UIBarMetricsDefault];
     }
     else {
         [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"NavBar6"] forBarMetrics:UIBarMetricsDefault];
@@ -63,7 +62,6 @@ NSString* const kAlertNotification = @"AlertNotification";
                                                            [UIFont fontWithName: @"Krona One" size: 15], UITextAttributeFont,
                                                            [UIColor clearColor], UITextAttributeTextShadowColor ,nil]];
     
-    [UIApplication sharedApplication].keyWindow.backgroundColor = navBackgroundColor;
     [UIApplication sharedApplication].delegate.window.backgroundColor = navBackgroundColor;
     
     KeychainItemWrapper* wrapper = [[KeychainItemWrapper alloc] initWithIdentifier: @"Password" accessGroup: @"F489V4H5F6.com.Knoda.KnodaIPhoneApp"];
@@ -217,6 +215,7 @@ NSString* const kAlertNotification = @"AlertNotification";
     [signOutWebRequest executeWithCompletionBlock:nil];
     
     self.user = nil;
+    
     [self removePassword];
     [[ImageCache instance] clear];
     

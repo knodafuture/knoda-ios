@@ -60,25 +60,21 @@ static UIBarButtonItem *composeBarButtonItem;
 }
 
 + (UIBarButtonItem *)leftBarButtonItemWithImage:(UIImage *)image target:(id)target action:(SEL)action {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, image.size.width + 20.0, 44.0f)];
-	UIButton *button = [[UIButton alloc] initWithFrame:view.bounds];
+	UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, image.size.width * 2, image.size.height)];
 	[button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
-	[view addSubview:button];
-	UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-	imageView.frame = CGRectMake(-4, 22.0f - image.size.height / 2, image.size.width, image.size.height);
-	[view addSubview:imageView];
-	return [[UIBarButtonItem alloc] initWithCustomView:view];
+    [button setImage:image forState:UIControlStateHighlighted];
+    [button setImage:image forState:UIControlStateNormal];
+    [button setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 34.0)];
+	return [[UIBarButtonItem alloc] initWithCustomView:button];
 }
 
 + (UIBarButtonItem *)rightBarButtonItemWithImage:(UIImage *)image target:(id)target action:(SEL)action {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, image.size.width + 20.0, 44.0f)];
-	UIButton *button = [[UIButton alloc] initWithFrame:view.bounds];
+	UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, image.size.width * 2, image.size.height)];
     [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
-	[view addSubview:button];
-	UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-	imageView.frame = CGRectMake(21, 22.0f - image.size.height / 2, image.size.width, image.size.height);
-	[view addSubview:imageView];
-	return [[UIBarButtonItem alloc] initWithCustomView:view];
+    [button setImage:image forState:UIControlStateHighlighted];
+    [button setImage:image forState:UIControlStateNormal];
+    [button setImageEdgeInsets:UIEdgeInsetsMake(0, 21.0, 0, 0)];
+	return [[UIBarButtonItem alloc] initWithCustomView:button];
 }
 
 + (UIBarButtonItem *)sideNavBarBUttonItemwithTarget:(id)target action:(SEL)action {

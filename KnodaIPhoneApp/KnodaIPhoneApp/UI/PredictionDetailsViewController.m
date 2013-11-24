@@ -87,6 +87,11 @@ static const float otherUsersCellHeight = 22.0;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    if (SYSTEM_VERSION_GREATER_THAN(@"7.0"))
+        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [[(AppDelegate *)[[UIApplication sharedApplication] delegate] user] addObserver:self forKeyPath:@"smallImage" options:NSKeyValueObservingOptionNew context:nil];
     self.title = @"DETAILS";
     
@@ -155,12 +160,13 @@ static const float otherUsersCellHeight = 22.0;
 - (void)setDefaultBarButtonItems:(BOOL)animated {
     [self.navigationItem setLeftBarButtonItem:[UIBarButtonItem backButtonWithTarget:self action:@selector(backPressed:)]];
     [self.navigationItem setRightBarButtonItem:[UIBarButtonItem addPredictionBarButtonItem]];
+    self.title = @"DETAILS";
 }
 - (void)composeComment {
     UIBarButtonItem *cancelBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTitle:@"Cancel" target:self action:@selector(cancelComment) color:[UIColor whiteColor]];
     
     UIBarButtonItem *submitBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTitle:@"Submit" target:self action:@selector(submitComment) color:[UIColor whiteColor]];
-
+    self.title = @"COMMENT";
     [self.navigationItem setLeftBarButtonItem:cancelBarButtonItem];
     [self.navigationItem setRightBarButtonItem:submitBarButtonItem];
 }
@@ -468,9 +474,10 @@ static const float otherUsersCellHeight = 22.0;
     else {
         if (indexPath.row == 0) {
             PredictorHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PredictorHeaderCell"];
-            NSLog(@"AGREE COUNT %d", self.agreedUsers.count);
-            cell.leftLabel.text = [NSString stringWithFormat:@"Agree %d", self.agreedUsers.count];
-            cell.rightLabel.text = [NSString stringWithFormat:@"Disagree %d", self.disagreedUsers.count];
+            if (self.agreedUsers || self.disagreedUsers) {
+                cell.leftLabel.text = [NSString stringWithFormat:@"Agree %d", self.agreedUsers.count];
+                cell.rightLabel.text = [NSString stringWithFormat:@"Disagree %d", self.disagreedUsers.count];
+            }
             return cell;
         }
         
@@ -806,11 +813,11 @@ static const float otherUsersCellHeight = 22.0;
     CGRect frame = self.addCommentContainer.frame;
     frame.origin.y = 0;
     
-    CGSize keyboardSize = [[[object userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    //CGSize keyboardSize = [[[object userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
     
     CGRect internalFrame = self.textViewContainer.frame;
     
-    internalFrame.origin.y = (frame.size.height - keyboardSize.height) / 2.0 - (internalFrame.size.height / 2.0);
+    internalFrame.origin.y = 0;
     
     [UIView animateWithDuration:animationDuration * 0.8 animations:^{
         self.addCommentContainer.frame = frame;

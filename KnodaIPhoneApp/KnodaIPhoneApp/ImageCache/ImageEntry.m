@@ -52,6 +52,7 @@ static const int kMaxFileNameLength = 254;
         //DLog(@"found image in memory %@", self.imgUrl);
     }
     
+    NSLog(@"%@", self.error);
     block();
     
     self.isLoading = NO;
@@ -83,7 +84,7 @@ static const int kMaxFileNameLength = 254;
     NSString *fileName = [self getFileName];
     
     if([[NSFileManager defaultManager] fileExistsAtPath:fileName]) {
-        //DLog(@"found img (%@) at storage", self.imgUrl);
+        DLog(@"found img (%@) at storage", self.imgUrl);
         _image = [UIImage imageWithContentsOfFile:[self getFileName]];
         if(_image) {
             [self setupCreationDate:fileName];
@@ -92,40 +93,30 @@ static const int kMaxFileNameLength = 254;
 }
 
 - (void)loadFromServer {
-    //DLog(@"downloading img from %@", [self getImageURL]);
+    DLog(@"downloading img from %@", [self getImageURL]);
     NSError *error = nil;
     NSData *imgData = [NSData dataWithContentsOfURL:[self getImageURL] options:0 error:&error];
     _error = error;
-    if(!error && imgData) {
+    NSLog(@"%@", error);
+    if(!error && imgData && imgData.length > 0) {
         _image = [UIImage imageWithData:imgData];        
         
-        [self writeImage];
+        [self writeData:imgData];
     }
     else {
         _image = nil;
         DLog(@"failed to load image: %@", error);
     }
 }
-
-- (void)writeImage {
-    if(_image) {
-        //DLog(@"write img to file: %@", self.imgUrl);
-        @try {
-            NSData *dataImg = UIImagePNGRepresentation(_image);
-            NSError *error = nil;
-            
-            NSString *fileName = [self getFileName];
-            
-            [dataImg writeToFile:fileName options:NSDataWritingAtomic error:&error];
-            _error = error;
-            if(!error) {
-                [self setupCreationDate:fileName];
-            }
-        }
-        @catch (NSException *exception) {
-            NSLog(@"caught exception saving image");
-        }
-
+- (void)writeData:(NSData *)data {
+    NSError *error = nil;
+    
+    NSString *fileName = [self getFileName];
+    
+    [data writeToFile:fileName options:NSDataWritingAtomic error:&error];
+    _error = error;
+    if(!error) {
+        [self setupCreationDate:fileName];
     }
 }
 

@@ -18,7 +18,7 @@
 - (UIBarButtonItem *)spacer
 {
     UIBarButtonItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    space.width = -16;
+    space.width = -11;
     return space;
 }
 

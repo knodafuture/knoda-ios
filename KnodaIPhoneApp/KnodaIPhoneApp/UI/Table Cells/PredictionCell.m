@@ -313,6 +313,7 @@ static CGFloat fullGreenB = 31.0/256.0;
 
     [super touchesBegan:touches withEvent:event];
     
+    NSLog(@"BEGAN");
     
     if (!self.swipeEnabled)
         return;
@@ -348,10 +349,10 @@ static CGFloat fullGreenB = 31.0/256.0;
     CGRect slidingFrame = self.slidingContainer.frame;
     
     slidingFrame.origin.x = xDelta;
+    //NSLog(@"%f", slidingFrame.origin.x);
     
     if (abs(slidingFrame.origin.x) > slidingFrame.size.width / 2.0)
         return;
-    
     
     if (abs(slidingFrame.origin.x) < 4)
         slidingFrame.origin.x = 0;
@@ -442,6 +443,7 @@ static CGFloat fullGreenB = 31.0/256.0;
 }
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
 
+    NSLog(@"CANCELLED");
     [super touchesCancelled:touches withEvent:event];
     
     if (!self.swipeEnabled)
@@ -455,6 +457,7 @@ static CGFloat fullGreenB = 31.0/256.0;
         [self resetFrames:0.5 completion:nil];
 }
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    NSLog(@"END");
     if (!self.trackingTouch || !self.swipeEnabled) {
         [super touchesEnded:touches withEvent:event];
         return;

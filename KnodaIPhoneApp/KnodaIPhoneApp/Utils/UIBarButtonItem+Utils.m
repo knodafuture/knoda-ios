@@ -65,7 +65,7 @@ static UIBarButtonItem *composeBarButtonItem;
 	[button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
 	[view addSubview:button];
 	UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-	imageView.frame = CGRectMake(0, 22.0f - image.size.height / 2, image.size.width, image.size.height);
+	imageView.frame = CGRectMake(-4, 22.0f - image.size.height / 2, image.size.width, image.size.height);
 	[view addSubview:imageView];
 	return [[UIBarButtonItem alloc] initWithCustomView:view];
 }

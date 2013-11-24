@@ -51,6 +51,11 @@ static NSString* const kMyProfileSegue         = @"MyProfileSegue";
 {
     [super viewDidLoad];
     
+    if ([UIScreen mainScreen].bounds.size.height > 480)
+        self.firstStartImageView.image = [UIImage imageNamed:@"IntroOverlay@2x-568h.png"];
+    else
+        self.firstStartImageView.image = [UIImage imageNamed:@"IntroOverlay"];
+    
     self.webRequests = [NSMutableArray array];
     
     if (self.appDelegate.user.justSignedUp||!self.appDelegate.user) {

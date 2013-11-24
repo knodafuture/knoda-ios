@@ -47,7 +47,7 @@ static UINib *nib;
     
     cell.predictionCell = [PredictionCell predictionCellForTableView:nil];
     cell.predictionCell.delegate = owner;
-    
+    cell.predictionCell.swipeEnabled = NO;
     [cell addSubview:cell.predictionCell];
     
     CGRect frame = cell.predictionCell.frame;

@@ -101,8 +101,6 @@ static NSString* const kApplicationSegue   = @"ApplicationNavigationSegue";
         
         [self showError: NSLocalizedString(@"Password should be between 6 and 20 chars lenght", @"")];
         
-
-
         [self.passwordTextField becomeFirstResponder];
         
         return NO;

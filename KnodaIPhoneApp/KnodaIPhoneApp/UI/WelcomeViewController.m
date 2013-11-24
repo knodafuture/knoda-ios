@@ -32,7 +32,6 @@
     self.swipeLabel.alpha = 0.0;
     
     self.navigationController.navigationBar.translucent = NO;
-    [self.navigationController setNavigationBarHidden:YES];
     
     if ([UIScreen mainScreen].bounds.size.height > 480) {
         self.screen1.image = [UIImage imageNamed:@"Screen1@2x-568h.png"];
@@ -106,6 +105,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES];
+
 }
 
 @end

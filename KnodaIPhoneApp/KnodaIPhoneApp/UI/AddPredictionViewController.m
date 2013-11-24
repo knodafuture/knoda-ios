@@ -126,7 +126,6 @@ static const CGFloat kCategorySectionHeight = 40;
     [super viewWillAppear: animated];
 }
 
-
 - (void) viewWillDisappear: (BOOL) animated
 {
     [[NSNotificationCenter defaultCenter] removeObserver: self];

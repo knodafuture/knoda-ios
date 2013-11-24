@@ -314,7 +314,6 @@ static CGFloat fullGreenB = 31.0/256.0;
     [super touchesBegan:touches withEvent:event];
     
     NSLog(@"BEGAN");
-    
     if (!self.swipeEnabled)
         return;
     
@@ -516,7 +515,4 @@ static CGFloat fullGreenB = 31.0/256.0;
     else
         return (UITableView *)self.superview;
 }
-
-
-
 @end

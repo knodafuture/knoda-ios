@@ -276,7 +276,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="HsJ-Hh-GRm">
-                                <rect key="frame" x="0.0" y="20" width="585" height="548"/>
+                                <rect key="frame" x="0.0" y="20" width="601" height="548"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="fZu-ya-DSM">
@@ -291,7 +291,7 @@
                                     </view>
                                     <view contentMode="scaleToFill" id="Kou-aI-BYZ">
                                         <rect key="frame" x="0.0" y="0.0" width="281" height="548"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" id="vkx-kE-haq">
                                                 <rect key="frame" x="0.0" y="0.0" width="281" height="44"/>
@@ -382,7 +382,7 @@
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 </imageView>
                                                                 <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" id="OK3-MZ-36Y">
-                                                                    <rect key="frame" x="230" y="0.0" width="27" height="44"/>
+                                                                    <rect key="frame" x="245" y="0.0" width="27" height="44"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>

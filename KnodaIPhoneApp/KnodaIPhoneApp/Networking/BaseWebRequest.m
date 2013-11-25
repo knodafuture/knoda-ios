@@ -32,9 +32,9 @@
 
 #ifdef PRODUCTION_ENVIRENMENT
 
-NSString* const kBaseURL = @"api.knoda.com";
 
 #else
+NSString* const kBaseURL = @"api.knoda.com";
 
 //Uncomment the following line for local environment
 //NSString* const kBaseURL = @"127.0.0.1:3000";
@@ -43,7 +43,7 @@ NSString* const kBaseURL = @"api.knoda.com";
 //NSString* const kBaseURL = @"api-dev.knoda.com";
 
 //Uncomment the following line for the test environment
-NSString* const kBaseURL = @"api-test.knoda.com";  // Old server=54.213.86.248
+//NSString* const kBaseURL = @"api-test.knoda.com";  // Old server=54.213.86.248
 
 
 //NSString* const kBaseURL = @"knoda-dev.herokuapp.com";

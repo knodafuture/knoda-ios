@@ -21,12 +21,15 @@
 #import "AddPredictionViewController.h"
 #import "SendDeviceTokenWebRequest.h"
 #import "RemoveTokenWebRequest.h"
+
+
+
+#ifdef TESTFLIGHT
 #import "TestFlight.h"
+#endif
 
-static NSString* const kDevFlurryKey = @"QTDYWKWSJXK9YNDHKN5Z";
-static NSString* const kProductionFlurryKey = @"VQF4B8866XG6256GPQJ5";
-
-
+static NSString* const kFlurryKey = @"QTDYWKWSJXK9YNDHKN5Z";
+static NSString* const kTestFlightKey = @"9bbf4e38-5f9a-427f-b4ca-23625ccee3a0";
 NSString* const kAlertNotification = @"AlertNotification";
 
 @interface AppDelegate() <UIAlertViewDelegate, AddPredictionViewControllerDelegate>
@@ -37,11 +40,17 @@ NSString* const kAlertNotification = @"AlertNotification";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [Flurry startSession: kDevFlurryKey];
-    [Flurry setCrashReportingEnabled: YES];
     
-    [TestFlight takeOff:@"4e134864-34a2-4c41-9619-34c33f738d4c"];
-
+    
+#ifdef TESTFLIGHT
+    [TestFlight takeOff:kTestFlightKey];
+#else
+    [Flurry setCrashReportingEnabled: YES];
+#endif
+    
+    
+    [Flurry startSession: kFlurryKey];
+    
     UIColor *navBackgroundColor = [UIColor colorFromHex:@"77BC1F"];
     
     if (SYSTEM_VERSION_GREATER_THAN(@"7.0")) {

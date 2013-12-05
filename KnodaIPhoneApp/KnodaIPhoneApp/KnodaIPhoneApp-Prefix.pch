@@ -14,6 +14,9 @@
     #import "UIColor+Utils.h"
     #import "UIBarButtonItem+Utils.h"
     #import "UINavigationItem+iOS7Spacing.h"
+    #import "Flurry.h"
+    #import "MTKObserving.h"
+    #import "UINavigationBar+AppearanceUtils.h"
 #endif
 
 #ifdef DEBUG
@@ -22,7 +25,6 @@
     #define DLog(...)
 #endif
 
-#import "Flurry.h"
 
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
 #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)

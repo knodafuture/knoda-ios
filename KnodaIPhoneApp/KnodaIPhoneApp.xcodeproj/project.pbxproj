@@ -1521,8 +1521,6 @@
 					"$(SRCROOT)/KnodaIPhoneApp/ThirdParty/Flurry",
 					"$(SRCROOT)/KnodaIPhoneApp/ThirdParty/TestFlightSDK2.0.2",
 					"$(SDKROOT)/usr/lib/system",
-					/Users/nick/Code/knodaiphone/KnodaIPhoneApp/KnodaIPhoneApp/Thirdparty/Flurry,
-					/Users/nick/Code/knodaiphone/KnodaIPhoneApp/KnodaIPhoneApp/Thirdparty/TestFlightSDK2.0.2,
 				);
 				PRODUCT_NAME = "Knoda Test";
 				PROVISIONING_PROFILE = "F229B453-5DF5-4DB8-8405-F705FD241E1F";
@@ -1547,8 +1545,6 @@
 					"$(SRCROOT)/KnodaIPhoneApp/ThirdParty/Flurry",
 					"$(SRCROOT)/KnodaIPhoneApp/ThirdParty/TestFlightSDK2.0.2",
 					"$(SDKROOT)/usr/lib/system",
-					/Users/nick/Code/knodaiphone/KnodaIPhoneApp/KnodaIPhoneApp/Thirdparty/Flurry,
-					/Users/nick/Code/knodaiphone/KnodaIPhoneApp/KnodaIPhoneApp/Thirdparty/TestFlightSDK2.0.2,
 				);
 				PRODUCT_NAME = "Knoda Test";
 				PROVISIONING_PROFILE = "CA86DB6D-F464-415D-A617-957BCC68D40E";
@@ -1628,9 +1624,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/KnodaIPhoneApp/ThirdParty/Flurry",
-					/Users/nick/Code/knodaiphone/KnodaIPhoneApp/KnodaIPhoneApp/Thirdparty/TestFlightSDK2.0.2,
 					"$(SDKROOT)/usr/lib/system",
-					/Users/nick/Code/knodaiphone/KnodaIPhoneApp/KnodaIPhoneApp/Thirdparty/Flurry,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "EB9DD262-678F-406C-8D7D-D4836E2044F6";
@@ -1653,9 +1647,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/KnodaIPhoneApp/ThirdParty/Flurry",
-					/Users/nick/Code/knodaiphone/KnodaIPhoneApp/KnodaIPhoneApp/Thirdparty/TestFlightSDK2.0.2,
 					"$(SDKROOT)/usr/lib/system",
-					/Users/nick/Code/knodaiphone/KnodaIPhoneApp/KnodaIPhoneApp/Thirdparty/Flurry,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "C7D5D64C-8517-43C5-B622-F058660C65A1";

@@ -112,8 +112,9 @@
     
 }
 
-- (void)objectsWithOffset:(NSInteger)offset completion:(void (^)(NSArray *, NSError *))completionHandler {
-    [[WebApi sharedInstance] getPredictions:offset completion:completionHandler];
+- (void)objectsAfterObject:(id)object completion:(void (^)(NSArray *, NSError *))completionHandler {
+    NSInteger lastId = [(Prediction *)object predictionId];
+    [[WebApi sharedInstance] getPredictionsAfter:lastId completion:completionHandler];
 }
 
 - (void)imageLoader:(ImageLoader *)loader finishedLoadingImage:(UIImage *)image forIndexPath:(NSIndexPath *)indexPath {
@@ -165,6 +166,22 @@
         AnotherUsersProfileViewController *vc = [[AnotherUsersProfileViewController alloc] initWithUserId:userId];
         [self.navigationController pushViewController:vc animated:YES];
     }
+}
+
+- (void)updatePrediction:(Prediction *)prediction {
+    
+    NSInteger indexToExchange = NSNotFound;
+    
+    for (Prediction *oldPrediction in self.pagingDatasource.objects) {
+        if (prediction.predictionId == oldPrediction.predictionId)
+            indexToExchange = [self.pagingDatasource.objects indexOfObject:oldPrediction];
+    }
+    
+    if (indexToExchange == NSNotFound)
+        return;
+    
+    [self.pagingDatasource.objects replaceObjectAtIndex:indexToExchange withObject:prediction];
+    [self.tableView reloadData];
 }
 
 @end

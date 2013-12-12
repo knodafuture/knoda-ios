@@ -23,6 +23,7 @@ NSInteger PageLimit = 25;
 - (void)executeUpdateUserRequest:(WebRequest *)request completion:(void(^)(NSData *responseData, NSError *error))completionHandler;
 - (void)handleResponse:(NSURLResponse *)response withData:(NSData *)data error:(NSError *)error completion:(void(^)(NSData *data, NSError *error))completionHandler;
 
+- (NSDictionary *)parametersDictionary:(NSDictionary *)dictionary withLastId:(NSInteger)lastId;
 - (void)getCachedObjectForKey:(NSString *)key timeout:(NSTimeInterval)timeout inCache:(id<Cache>)cache requestForMiss:(WebRequest *(^)(void))miss completion:(void(^)(NSData *data, NSError *error))completionHandler;
 @end
 
@@ -181,14 +182,17 @@ NSInteger PageLimit = 25;
     
 }
 
-- (void)getPredictions:(NSInteger)offset completion:(void (^)(NSArray *, NSError *))completionHandler {
-    [self getPredictions:offset tag:nil completion:completionHandler];
+- (void)getPredictionsAfter:(NSInteger)lastId completion:(void (^)(NSArray *, NSError *))completionHandler {
+    [self getPredictionsAfter:lastId tag:nil completion:completionHandler];
 }
 
-- (void)getPredictions:(NSInteger)offset tag:(NSString *)tag completion:(void (^)(NSArray *, NSError *))completionHandler {
-    NSMutableDictionary *parameters = [@{@"recent" : @"true", @"limit"  : @(PageLimit), @"offset" : @(offset)} mutableCopy];
+
+- (void)getPredictionsAfter:(NSInteger)lastId tag:(NSString *)tag completion:(void (^)(NSArray *, NSError *))completionHandler {
+    NSMutableDictionary *params = [@{@"recent" : @"true", @"limit"  : @(PageLimit)} mutableCopy];
     if (tag)
-        [parameters setObject:tag forKey:@"tag"];
+        [params setObject:tag forKey:@"tag"];
+    
+    NSDictionary *parameters = [self parametersDictionary:params withLastId:lastId];
     
     WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"GET" path:@"predictions.json" parameters:parameters requiresAuthToken:YES isMultiPartData:NO];
     
@@ -228,8 +232,9 @@ NSInteger PageLimit = 25;
     }];
 }
 
-- (void)getPredictionsForUser:(NSInteger)userId offset:(NSInteger)offset completion:(void (^)(NSArray *, NSError *))completionHandler {
-    NSDictionary *parameters = @{@"offset": @(offset), @"limit" : @(PageLimit), @"count" : @(1)};
+- (void)getPredictionsForUser:(NSInteger)userId after:(NSInteger)lastId completion:(void (^)(NSArray *, NSError *))completionHandler {
+    NSDictionary *parameters = @{@"limit" : @(PageLimit), @"count" : @(1)};
+    parameters = [self parametersDictionary:parameters withLastId:lastId];
     NSString *path = [NSString stringWithFormat:@"users/%d/predictions.json", userId];
     
     WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"GET" path:path parameters:parameters requiresAuthToken:YES isMultiPartData:NO];
@@ -286,9 +291,9 @@ NSInteger PageLimit = 25;
     }];
 }
 
-- (void)getHistory:(NSInteger)offset completion:(void (^)(NSArray *, NSError *))completionHandler {
-    NSDictionary *parameters = @{@"list": @"ownedAndPicked", @"limit" : @(PageLimit), @"offset" : @(offset)};
-    
+- (void)getHistoryAfter:(NSInteger)lastId completion:(void (^)(NSArray *, NSError *))completionHandler {
+    NSDictionary *parameters = @{@"list": @"ownedAndPicked", @"limit" : @(PageLimit)};
+    parameters = [self parametersDictionary:parameters withLastId:lastId];
     WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"GET" path:@"challenges.json" parameters:parameters requiresAuthToken:YES isMultiPartData:NO];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
@@ -352,11 +357,10 @@ NSInteger PageLimit = 25;
     }];
 }
 
-- (void)getCommentsForPrediction:(NSInteger)predictionId offset:(NSInteger)offset completion:(void (^)(NSArray *, NSError *))completionHandler {
+- (void)getCommentsForPrediction:(NSInteger)predictionId last:(NSInteger)lastId completion:(void (^)(NSArray *, NSError *))completionHandler {
     NSDictionary *parameters = @{@"list": @"prediction", @"limit" : @(PageLimit),
-                             @"offset" : @(offset),
-                             @"prediction_id": @(predictionId)};
-    
+                                 @"prediction_id": @(predictionId)};
+    parameters = [self parametersDictionary:parameters withLastId:lastId];
     WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"GET" path:@"comments.json" parameters:parameters requiresAuthToken:YES isMultiPartData:NO];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
@@ -413,12 +417,20 @@ NSInteger PageLimit = 25;
     }];
 }
 
-- (void)getAlerts:(NSInteger)offset completion:(void (^)(NSArray *, NSError *))completionHandler {
-    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"GET" path:@"activityfeed.json" parameters:nil requiresAuthToken:YES isMultiPartData:NO];
+- (void)getUnseenAlertsCompletion:(void (^)(NSArray *, NSError *))completionHandler {
+    
+}
+
+- (void)getAlertsAfter:(NSInteger)lastId completion:(void (^)(NSArray *, NSError *))completionHandler {
+    NSDictionary *parameters = @{};
+    
+    parameters = [self parametersDictionary:parameters withLastId:lastId];
+    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"GET" path:@"activityfeed.json" parameters:parameters requiresAuthToken:YES isMultiPartData:NO];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler([Alert arrayFromData:responseData], error);
     }];
+    
 }
 
 - (void)setSeenAlerts:(NSArray *)seenAlertIds completion:(void (^)(NSError *))completionHandler {
@@ -477,6 +489,16 @@ NSInteger PageLimit = 25;
     
 }
 
+- (NSDictionary *)parametersDictionary:(NSDictionary *)dictionary withLastId:(NSInteger)lastId {
+    if (lastId == 0)
+        return dictionary;
+    
+    NSMutableDictionary *dict = [dictionary mutableCopy];
+    [dict setObject:@(lastId) forKey:@"id_lt"];
+    
+    return dict;
+    
+}
 
 - (void)handleResponse:(NSURLResponse *)response withData:(NSData *)data error:(NSError *)error completion:(void(^)(NSData *data, NSError *error))completionHandler {
 	NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;

@@ -22,7 +22,7 @@
 - (id)initWithTableView:(UITableView *)tableView {
     self = [super init];
     self.currentPage = 0;
-    self.objects = [NSArray array];
+    self.objects = [NSMutableArray array];
     self.pageLoading = NO;
     self.tableView = tableView;
     return self;
@@ -88,9 +88,9 @@
 
 - (void)loadPage:(NSInteger)page completion:(void(^)(void))completion {
     
-    NSInteger offset = page * PageLimit;
+    id lastObject = [self.objects lastObject];
     
-    [self.delegate objectsWithOffset:offset completion:^(NSArray *objectsToAdd, NSError *error) {
+    [self.delegate objectsAfterObject:lastObject completion:^(NSArray *objectsToAdd, NSError *error) {
         
         if (page == 0 && objectsToAdd.count == 0) {
             if ([self.delegate respondsToSelector:@selector(noObjectsRetrievedInPagingDatasource:)])
@@ -103,13 +103,10 @@
             return;
     
         if (page == 0)
-            self.objects = objectsToAdd;
+            self.objects = [objectsToAdd mutableCopy];
             
         else {
-            NSMutableArray *mutableObjects = [self.objects mutableCopy];
-            [mutableObjects addObjectsFromArray:objectsToAdd];
-            
-            self.objects = [NSArray arrayWithArray:mutableObjects];
+            [self.objects addObjectsFromArray:objectsToAdd];
         }
         
         if (self.objects.count > 0) {

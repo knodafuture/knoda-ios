@@ -107,8 +107,9 @@
     }];
 }
 
-- (void)objectsWithOffset:(NSInteger)offset completion:(void (^)(NSArray *, NSError *))completionHandler {
-    [[WebApi sharedInstance] getAlerts:offset completion:completionHandler];
+- (void)objectsAfterObject:(id)object completion:(void (^)(NSArray *, NSError *))completionHandler {
+    NSInteger lastId = [(Alert *)object alertId];
+    [[WebApi sharedInstance] getAlertsAfter:lastId completion:completionHandler];
 }
 
 - (void)sendSeenAlerts {

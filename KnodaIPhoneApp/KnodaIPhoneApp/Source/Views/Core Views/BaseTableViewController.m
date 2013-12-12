@@ -101,7 +101,7 @@
 }
 
 
-- (void)objectsWithOffset:(NSInteger)offset completion:(void (^)(NSArray *, NSError *))completionHandler {
+- (void)objectsAfterObject:(id)object completion:(void (^)(NSArray *, NSError *))completionHandler {
     completionHandler(nil, nil);
 }
 

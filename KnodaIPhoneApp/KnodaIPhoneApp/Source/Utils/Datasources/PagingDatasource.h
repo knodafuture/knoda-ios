@@ -11,14 +11,14 @@
 @class PagingDatasource;
 @protocol PagingDatasourceDelegate <NSObject>
 
-- (void)objectsWithOffset:(NSInteger)offset completion:(void(^)(NSArray *objectsToAdd, NSError *error))completionHandler;
+- (void)objectsAfterObject:(id)object completion:(void(^)(NSArray *objectsToAdd, NSError *error))completionHandler;
 - (void)pagingDatasource:(PagingDatasource *)pagingDatasource willDisplayObjects:(NSArray *)objects;
 - (void)noObjectsRetrievedInPagingDatasource:(PagingDatasource *)pagingDatasource;
 @end
 
 @interface PagingDatasource : NSObject <UITableViewDataSource, UITableViewDelegate>
 
-@property (strong, nonatomic) NSArray *objects;
+@property (strong, nonatomic) NSMutableArray *objects;
 @property (assign, nonatomic) NSInteger currentPage;
 @property (weak, nonatomic) id<PagingDatasourceDelegate> delegate;
 

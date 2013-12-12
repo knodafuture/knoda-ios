@@ -220,7 +220,6 @@
 		013DA8A51853002200B507E4 /* BJImageCropper.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA7AE1853002100B507E4 /* BJImageCropper.m */; };
 		013DA8A61853002200B507E4 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA7B11853002100B507E4 /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		013DA8A71853002200B507E4 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA7B11853002100B507E4 /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		013DA8A81853002200B507E4 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 013DA7B31853002100B507E4 /* libTestFlight.a */; };
 		013DA8A91853002200B507E4 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 013DA7B31853002100B507E4 /* libTestFlight.a */; };
 		013DA8AA1853002200B507E4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 013DA7B81853002100B507E4 /* InfoPlist.strings */; };
 		013DA8AB1853002200B507E4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 013DA7B81853002100B507E4 /* InfoPlist.strings */; };
@@ -563,7 +562,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				013DA8A81853002200B507E4 /* libTestFlight.a in Frameworks */,
 				01A1DEE9183E9A1F00DBBE68 /* libz.dylib in Frameworks */,
 				9E6F4C5A17D8CCFA00EAB4A0 /* SystemConfiguration.framework in Frameworks */,
 				9E28686F17C659940033FB3C /* Security.framework in Frameworks */,

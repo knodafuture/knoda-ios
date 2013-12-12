@@ -144,14 +144,15 @@
     
 }
 
-- (void)objectsWithOffset:(NSInteger)offset completion:(void (^)(NSArray *, NSError *))completionHandler {
+- (void)objectsAfterObject:(id)object completion:(void (^)(NSArray *, NSError *))completionHandler {
+    NSInteger lastId = [(Prediction *)object predictionId];
     
-    if (offset == 0 && self.pagingDatasource.currentPage == 0) {
+    if (self.pagingDatasource.currentPage == 0) {
         [self loadUserInfo:^{
-            [[WebApi sharedInstance] getPredictionsForUser:self.userId offset:offset completion:completionHandler];
+            [[WebApi sharedInstance] getPredictionsForUser:self.userId after:lastId completion:completionHandler];
         }];
     } else
-        [[WebApi sharedInstance] getPredictionsForUser:self.userId offset:offset completion:completionHandler];
+        [[WebApi sharedInstance] getPredictionsForUser:self.userId after:lastId completion:completionHandler];
 }
 
 - (void)profileSelectedWithUserId:(NSInteger)userId inCell:(PredictionCell *)cell {

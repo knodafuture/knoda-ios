@@ -238,7 +238,8 @@
     self.wonPercantageLabel.text = ![user.winningPercentage isEqual: @0] ? [NSString stringWithFormat:@"%@%@",user.winningPercentage,@"%"] : @"0%";
     self.steakLabel.text = [user.streak length] > 0 ? user.streak : @"W0";
     
-    [self.menuItemsTableView reloadData];
+    SideNavCell *cell = (SideNavCell *)[self.menuItemsTableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:MenuProfile-1 inSection:0]];
+    cell.titleLabel.text = user.name;
 }
 
 #pragma mark - UITableViewDataSource

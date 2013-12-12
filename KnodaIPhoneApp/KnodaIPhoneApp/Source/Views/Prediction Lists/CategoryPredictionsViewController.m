@@ -60,8 +60,9 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)objectsWithOffset:(NSInteger)offset completion:(void (^)(NSArray *, NSError *))completionHandler {
-    [[WebApi sharedInstance] getPredictions:offset tag:self.category completion:completionHandler];
+- (void)objectsAfterObject:(id)object completion:(void (^)(NSArray *, NSError *))completionHandler {
+    NSInteger lastId = [(Prediction *)object predictionId];
+    [[WebApi sharedInstance] getPredictionsAfter:lastId tag:self.category completion:completionHandler];
 }
 
 - (void)profileSelectedWithUserId:(NSInteger)userId inCell:(PredictionCell *)cell {

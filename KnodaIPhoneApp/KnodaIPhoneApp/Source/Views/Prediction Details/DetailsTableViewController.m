@@ -188,8 +188,10 @@ static const float parallaxRatio = 0.5;
             completionHandler(nil, nil, error);
     }];
 }
-- (void)objectsWithOffset:(NSInteger)offset completion:(void (^)(NSArray *, NSError *))completionHandler {
-    [[WebApi sharedInstance] getCommentsForPrediction:self.prediction.predictionId offset:0 completion:completionHandler];
+
+- (void)objectsAfterObject:(id)object completion:(void (^)(NSArray *, NSError *))completionHandler {
+    NSInteger lastId = [(Comment *)object commentId];
+    [[WebApi sharedInstance] getCommentsForPrediction:self.prediction.predictionId last:lastId completion:completionHandler];
 }
 
 - (void)noObjectsRetrievedInPagingDatasource:(PagingDatasource *)pagingDatasource {

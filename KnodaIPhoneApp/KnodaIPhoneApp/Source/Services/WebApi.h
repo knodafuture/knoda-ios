@@ -56,13 +56,13 @@ extern NSInteger PageLimit;
 
 // -- Predictions -- //
 
-- (void)getPredictions:(NSInteger)offset completion:(void(^)(NSArray *predictions, NSError *error))completionHandler;
-- (void)getPredictions:(NSInteger)offset tag:(NSString *)tag completion:(void(^)(NSArray *predictions, NSError *error))completionHandler;
+- (void)getPredictionsAfter:(NSInteger)lastId completion:(void(^)(NSArray *predictions, NSError *error))completionHandler;
+
+- (void)getPredictionsAfter:(NSInteger)lastId tag:(NSString *)tag completion:(void(^)(NSArray *predictions, NSError *error))completionHandler;
 - (void)addPrediction:(Prediction *)prediction completion:(void(^)(Prediction *prediction, NSError *error))completionHandler;
 
 - (void)getPrediction:(NSInteger)predictionId completion:(void(^)(Prediction *prediction, NSError *error))completionHandler;
-- (void)getPredictionsForUser:(NSInteger)userId offset:(NSInteger)offset completion:(void(^)(NSArray *predictions, NSError *error))completionHandler;
-
+- (void)getPredictionsForUser:(NSInteger)userId after:(NSInteger)lastId completion:(void(^)(NSArray *predictions, NSError *error))completionHandler;
 - (void)agreeWithPrediction:(NSInteger)predictionId completion:(void(^)(Challenge *challenge, NSError *error))completionHandler;
 - (void)disagreeWithPrediction:(NSInteger)predictionId completion:(void(^)(Challenge *challenge, NSError *error))completionHandler;
 
@@ -71,13 +71,13 @@ extern NSInteger PageLimit;
 
 - (void)setPredictionOutcome:(NSInteger)predictionId correct:(BOOL)correct completion:(void(^)(NSError *error))completionHandler;
 
-- (void)getHistory:(NSInteger)offset completion:(void(^)(NSArray *predictions, NSError *error))completionHandler;
+- (void)getHistoryAfter:(NSInteger)lastId completion:(void(^)(NSArray *predictions, NSError *error))completionHandler;
 - (void)getChallengeForPrediction:(NSInteger)predictionId completion:(void(^)(Challenge *challenge, NSError *error))completionHandler;
 - (void)getCategoriesCompletion:(void(^)(NSArray *categories, NSError *error))completionHandler;
 - (void)updatePrediction:(UpdatePredictionRequest *)updateRequest completion:(void(^)(Prediction *prediction, NSError *error))completionHandler;
 - (void)sendBS:(NSInteger)predictionId completion:(void(^)(NSError *error))completionHandler;
 
-- (void)getCommentsForPrediction:(NSInteger)predictionId offset:(NSInteger)offset completion:(void(^)(NSArray *comments, NSError *error))completionHandler;
+- (void)getCommentsForPrediction:(NSInteger)predictionId last:(NSInteger)lastId completion:(void(^)(NSArray *comments, NSError *error))completionHandler;
 - (void)createComment:(Comment *)comment completion:(void(^)(NSError *error))completionHandler;
 
 - (void)getImage:(NSString *)imageUrl completion:(void(^)(UIImage *image, NSError *error))completionHandler;
@@ -90,6 +90,7 @@ extern NSInteger PageLimit;
 
 
 // -- Alerts -- //
-- (void)getAlerts:(NSInteger)offset completion:(void(^)(NSArray *alerts, NSError *error))completionHandler;
+- (void)getAlertsAfter:(NSInteger)lastId completion:(void(^)(NSArray *alerts, NSError *error))completionHandler;
+- (void)getUnseenAlertsCompletion:(void(^)(NSArray *alerts, NSError *error))completionHandler;
 - (void)setSeenAlerts:(NSArray *)seenAlertIds completion:(void(^)(NSError *error))completionHandler;
 @end

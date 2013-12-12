@@ -46,8 +46,9 @@
     [Flurry endTimedEvent: @"My_Predictions_Screen" withParameters: nil];
 }
 
-- (void)objectsWithOffset:(NSInteger)offset completion:(void (^)(NSArray *, NSError *))completionHandler {
-    [[WebApi sharedInstance] getHistory:offset completion:completionHandler];
+- (void)objectsAfterObject:(id)object completion:(void (^)(NSArray *, NSError *))completionHandler {
+    NSInteger lastId = [(Prediction *)object predictionId];
+    [[WebApi sharedInstance] getHistoryAfter:lastId completion:completionHandler];
 }
 
 - (void)noObjectsRetrievedInPagingDatasource:(PagingDatasource *)pagingDatasource {

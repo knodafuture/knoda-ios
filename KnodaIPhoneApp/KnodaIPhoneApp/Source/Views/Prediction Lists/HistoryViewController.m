@@ -58,6 +58,4 @@
     [self showNoContent:cell];
 }
 
-
-
 @end

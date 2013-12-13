@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @class AddPredictionViewController;
-
+@class Prediction;
 @protocol AddPredictionViewControllerDelegate <NSObject>
 
-- (void)predictionWasMadeInController:(AddPredictionViewController *)vc;
+- (void)addPredictionViewController:(AddPredictionViewController *)viewController didCreatePrediction:(Prediction *)prediction;
 
 @end
 
@@ -20,5 +20,6 @@
 @interface AddPredictionViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate>
 
 @property (nonatomic, weak) id<AddPredictionViewControllerDelegate> delegate;
+
 
 @end

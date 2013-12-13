@@ -14,6 +14,10 @@
 extern NSString *FirstLaunchKey;
 UIKIT_EXTERN NSString *BadgeNotification;
 UIKIT_EXTERN NSString *BadgeNotificationKey;
+
+UIKIT_EXTERN NSString *NewObjectNotification;
+UIKIT_EXTERN NSString *NewPredictionNotificationKey;
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;

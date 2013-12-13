@@ -28,7 +28,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 
 - (void)fillWithPrediction:(Prediction *) prediction;
-- (void)resetAgreedDisagreed;
 - (void)updateDates;
 - (void)update;
 

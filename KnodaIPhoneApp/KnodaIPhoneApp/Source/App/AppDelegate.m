@@ -27,6 +27,8 @@ static NSString *kDeviceTokenIdKey = @"DeviceTokenID";
 NSString *FirstLaunchKey = @"FirstLaunch";
 NSString *BadgeNotification = @"BadgeNotification";
 NSString *BadgeNotificationKey = @"BadgeNotificationKey";
+NSString *NewObjectNotification = @"NewPredictionNotification";
+NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
 
 @interface AppDelegate() <UIAlertViewDelegate, AddPredictionViewControllerDelegate>
 
@@ -153,7 +155,9 @@ NSString *BadgeNotificationKey = @"BadgeNotificationKey";
     [self.window.rootViewController presentViewController:nav animated:YES completion:nil];
 }
 
-- (void)predictionWasMadeInController:(AddPredictionViewController *)vc {
+- (void)addPredictionViewController:(AddPredictionViewController *)viewController didCreatePrediction:(Prediction *)prediction {
+    [[NSNotificationCenter defaultCenter] postNotificationName:NewObjectNotification object:nil userInfo:@{NewPredictionNotificationKey: prediction}];
+    
     [self.window.rootViewController dismissViewControllerAnimated:YES completion:^{
         [[WebApi sharedInstance] checkNewBadges];
     }];

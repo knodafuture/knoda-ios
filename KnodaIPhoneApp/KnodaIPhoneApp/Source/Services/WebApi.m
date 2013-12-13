@@ -418,7 +418,7 @@ NSInteger PageLimit = 25;
 }
 
 - (void)getUnseenAlertsCompletion:(void (^)(NSArray *, NSError *))completionHandler {
-    
+
 }
 
 - (void)getAlertsAfter:(NSInteger)lastId completion:(void (^)(NSArray *, NSError *))completionHandler {
@@ -434,7 +434,18 @@ NSInteger PageLimit = 25;
 }
 
 - (void)setSeenAlerts:(NSArray *)seenAlertIds completion:(void (^)(NSError *))completionHandler {
+    NSMutableString  *idString = [NSMutableString stringWithFormat: @"%d", [[seenAlertIds firstObject] integerValue]];
     
+    for (int i = 1; i < seenAlertIds.count; i++)
+        [idString appendFormat: @"&ids[]=%d", [[seenAlertIds objectAtIndex: i] integerValue]];
+    
+    NSDictionary *parameters = @{@"ids[]" : idString};
+    
+    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"POST" path:@"activityfeed/seen.json" parameters:parameters requiresAuthToken:YES isMultiPartData:NO];
+    
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+        completionHandler(error);
+    }];
 }
 
 - (NSString *)getCreatedObjectId:(NSData *)data {

@@ -109,15 +109,13 @@ static NSMutableDictionary *cellHeightCache;
 
 
 - (void)update {
-    [self resetAgreedDisagreed];
-    
     self.usernameLabel.text = self.prediction.userName;
     self.bodyLabel.text = self.prediction.body;
     
     self.metadataLabel.text = [self.prediction metaDataString];
     
-    self.agreed = [self.prediction iAgree];
-    self.disagreed = [self.prediction iDisagree];
+    agreed = [self.prediction iAgree];
+    disagreed = [self.prediction iDisagree];
     
     
     CGSize metaDataSize = [self.metadataLabel sizeThatFits:self.metadataLabel.frame.size];
@@ -183,8 +181,6 @@ static NSMutableDictionary *cellHeightCache;
     self.commentLabelContainer.frame = commentsFrame;
     
     self.commentCountLabel.text = [NSString stringWithFormat:@"%d", self.prediction.commentCount];
-    
-    [self updateVoteImage];
 }
 
 - (IBAction)profileTapped:(id)sender {
@@ -192,21 +188,25 @@ static NSMutableDictionary *cellHeightCache;
         [self.delegate profileSelectedWithUserId:self.prediction.userId inCell:self];
 }
 
-- (void) resetAgreedDisagreed {
-    agreed = NO;
-    disagreed = NO;
-    
-    self.voteImage.image = nil;
-}
-
 - (BOOL) agreed {
     return agreed;
 }
 
 - (void)setAgreed:(BOOL)newAgreed {
-    agreed = newAgreed;
-    if (agreed)
+    
+    if (agreed == newAgreed)
+        return;
+    
+    if (newAgreed) {
+        if (self.disagreed) { //if if disagreed, subractfromcount
+            disagreed = NO;
+            self.prediction.disagreeCount--;
+        }
         self.voteImage.image = [UIImage imageNamed:@"AgreeMarker"];
+        self.prediction.agreeCount++;
+        [self updateDates];
+    }
+    agreed = newAgreed;
 }
 
 
@@ -216,10 +216,20 @@ static NSMutableDictionary *cellHeightCache;
 
 - (void)setDisagreed:(BOOL)newDisagreed {
 
-    disagreed = newDisagreed;
-    if (disagreed)
+    if (disagreed == newDisagreed)
+        return;
+    
+    if (newDisagreed) {
+        if (self.agreed) {
+            agreed = NO;
+            self.prediction.agreeCount--;
+        }
         self.voteImage.image = [UIImage imageNamed:@"DisagreeMarker"];
-            
+        self.prediction.disagreeCount++;
+        [self updateDates];
+    }
+    
+    disagreed = newDisagreed;
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {

@@ -11,7 +11,7 @@
 #import "WebApi.h"
 #import "LoadingCell.h"
 #import "EmptyDatasource.h"
-
+#import "AppDelegate.h"
 
 @interface BaseTableViewController ()
 @property (strong, nonatomic) EmptyDatasource *emptyDatasource;
@@ -46,17 +46,20 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    if (!self.appeared)
+    if (!self.appeared) {
         [self.pagingDatasource loadPage:0 completion:^{
             [self.tableView reloadData];
         }];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNewObjectNotification:) name:NewObjectNotification object:nil];
+    }
     
     self.appeared = YES;
 }
 
-- (void)viewDidUnload {
+- (void)dealloc {
     [self.graceTimer invalidate];
     self.graceTimer = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)refresh {
@@ -91,6 +94,9 @@
     
 }
 
+- (void)handleNewObjectNotification:(NSNotification *)notification {
+    
+}
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
 	if (!decelerate)
 		[_imageLoader loadVisibleAssets];

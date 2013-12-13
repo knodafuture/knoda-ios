@@ -22,4 +22,6 @@
 - (void)showNoContent:(UITableViewCell *)noContentCell;
 - (void)restoreContent;
 
+- (void)handleNewObjectNotification:(NSNotification *)notification;
+
 @end

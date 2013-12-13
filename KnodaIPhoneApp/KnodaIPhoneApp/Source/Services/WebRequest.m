@@ -10,7 +10,7 @@
 #import "LoginResponse.h"
 
 #ifdef TESTFLIGHT
-NSString const *baseURL = @"http://api-dev.knoda.com/api/";  // Old server=54.213.86.248
+NSString const *baseURL = @"http://api-test.knoda.com/api/";  // Old server=54.213.86.248
 #else
 NSString const *baseURL = @"http://api.knoda.com/api/";
 #endif

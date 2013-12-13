@@ -75,10 +75,13 @@
     NSString* expirationString = [self predictionExpiresIntervalString];
     NSString* creationString = [self predictionCreatedIntervalString];
     
+    CGFloat agreedFloat = ((CGFloat)self.agreeCount / (CGFloat)(self.agreeCount+self.disagreeCount));
+    NSInteger agreedPercent = agreedFloat * 100;
+    
     return [NSString stringWithFormat: NSLocalizedString(@"%@ | %@ | %d%% agree |", @""),
             expirationString,
             creationString,
-            self.agreedPercent];
+             agreedPercent];
 }
 #pragma mark Calculate dates
 

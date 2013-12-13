@@ -25,7 +25,6 @@
     prediction.agreeCount = [dictionary[@"agreed_count"] integerValue];
     prediction.disagreeCount = [dictionary[@"disagreed_count"] integerValue];
     prediction.votedUsersCount = [dictionary[@"market_size"] integerValue];
-    prediction.agreedPercent = [dictionary[@"prediction_market"] integerValue];
     prediction.expired = [dictionary[@"expired"] boolValue];
     prediction.isReadyForResolution = [dictionary[@"is_ready_for_resolution"] boolValue];
     prediction.settled = [dictionary[@"settled"] boolValue];

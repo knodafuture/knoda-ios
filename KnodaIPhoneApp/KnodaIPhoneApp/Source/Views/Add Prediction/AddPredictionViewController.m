@@ -233,7 +233,7 @@ static NSDateFormatter *dateFormatter;
     [[WebApi sharedInstance] addPrediction:prediction completion:^(Prediction *prediction, NSError *error) {
         [[LoadingView sharedInstance] hide];
         if (!error) {
-            [self.delegate predictionWasMadeInController:self];
+            [self.delegate addPredictionViewController:self didCreatePrediction:prediction];
         } else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message:@"Unable to create prediction at this time" delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil];
             [alert show];

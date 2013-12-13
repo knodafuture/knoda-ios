@@ -14,6 +14,7 @@
 #import "PredictionDetailsViewController.h"
 
 @interface AlertsViewController ()
+@property (strong, nonatomic) NSMutableIndexSet *seenIds;
 
 @end
 
@@ -29,6 +30,7 @@
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem addPredictionBarButtonItem];
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem sideNavBarBUttonItemwithTarget:self action:@selector(menuPressed:)];
     
+    self.seenIds = [[NSMutableIndexSet alloc] init];
 }
 
 - (void)menuPressed:(id)sender {
@@ -107,17 +109,33 @@
     }];
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    [super tableView:tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
+    
+    if (indexPath.row >= self.pagingDatasource.objects.count)
+        return;
+    
+    Alert *alert = [self.pagingDatasource.objects objectAtIndex:indexPath.row];
+    
+    if (alert.seen)
+        return;
+    
+    alert.seen = YES;
+    
+    [self.seenIds addIndex:alert.alertId];
+}
+
 - (void)objectsAfterObject:(id)object completion:(void (^)(NSArray *, NSError *))completionHandler {
     NSInteger lastId = [(Alert *)object alertId];
     [[WebApi sharedInstance] getAlertsAfter:lastId completion:completionHandler];
 }
 
 - (void)sendSeenAlerts {
-    NSMutableArray *ids = [NSMutableArray arrayWithCapacity:self.pagingDatasource.objects.count];
+    __block NSMutableArray *ids = [NSMutableArray arrayWithCapacity:self.pagingDatasource.objects.count];
     
-    for (Alert *alert in self.pagingDatasource.objects) {
-        [ids addObject:@(alert.alertId)];
-    }
+    [self.seenIds enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+        [ids addObject:@(idx)];
+    }];
     
     [[WebApi sharedInstance] setSeenAlerts:ids completion:^(NSError *error) {
         if (error)

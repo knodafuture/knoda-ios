@@ -119,6 +119,17 @@
     }];
 }
 
+- (void)insertNewObject:(id)object {
+    if (!object)
+        return;
+    
+    [self.objects insertObject:object atIndex:0];
+    
+    [self.tableView beginUpdates];
+    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:self.section]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView endUpdates];
+}
+
 - (BOOL)canLoadNextPage {
     
     if (self.objects.count == 0)

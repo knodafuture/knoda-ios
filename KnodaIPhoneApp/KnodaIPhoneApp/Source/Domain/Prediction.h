@@ -19,7 +19,6 @@
 
 @property (assign, nonatomic) NSInteger agreeCount;
 @property (assign, nonatomic) NSInteger disagreeCount;
-@property (assign, nonatomic) NSInteger agreedPercent;
 @property (assign, nonatomic) NSInteger votedUsersCount;
 
 @property (assign, nonatomic) NSInteger userId;

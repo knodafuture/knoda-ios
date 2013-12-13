@@ -25,4 +25,7 @@
 - (id)initWithTableView:(UITableView *)tableView;
 - (void)loadPage:(NSInteger)page completion:(void(^)(void))completion;
 - (BOOL)canLoadNextPage;
+
+- (void)insertNewObject:(id)object;
+
 @end

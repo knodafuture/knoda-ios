@@ -31,6 +31,11 @@
     self.navigationController.navigationBar.translucent = NO;
     
 }
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
@@ -38,6 +43,7 @@
     [self observeProperty:@keypath(self.appDelegate.currentUser) withBlock:^(__weak PredictionsViewController *self, id old, id new) {
         [self.tableView reloadData];
     }];
+    
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -136,7 +142,6 @@
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message:@"Unable to agree at this time" delegate: nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles: nil];
             [alert show];
             
-            [cell resetAgreedDisagreed];
         }
     }];
 }
@@ -151,8 +156,6 @@
         else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message:@"Unable to disagree at this time" delegate: nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles: nil];
             [alert show];
-            
-            [cell resetAgreedDisagreed];
         }
     }];
 }
@@ -166,6 +169,12 @@
         AnotherUsersProfileViewController *vc = [[AnotherUsersProfileViewController alloc] initWithUserId:userId];
         [self.navigationController pushViewController:vc animated:YES];
     }
+}
+
+- (void)handleNewObjectNotification:(NSNotification *)notification {
+    Prediction *prediction = [notification.userInfo objectForKey:NewPredictionNotificationKey];
+    
+    [self.pagingDatasource insertNewObject:prediction];
 }
 
 - (void)updatePrediction:(Prediction *)prediction {

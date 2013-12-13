@@ -88,7 +88,9 @@
 
 - (void)loadPage:(NSInteger)page completion:(void(^)(void))completion {
     
-    id lastObject = [self.objects lastObject];
+    id lastObject;
+    if (page != 0)
+        lastObject = [self.objects lastObject];
     
     [self.delegate objectsAfterObject:lastObject completion:^(NSArray *objectsToAdd, NSError *error) {
         
@@ -135,7 +137,7 @@
     if (self.objects.count == 0)
         return 0;
     
-    CGFloat div = (CGFloat)_objects.count / (CGFloat)PageLimit;
+    CGFloat div = (self.currentPage * PageLimit) / (CGFloat)PageLimit;
     
     if (div >= ceil(div))
         return YES;

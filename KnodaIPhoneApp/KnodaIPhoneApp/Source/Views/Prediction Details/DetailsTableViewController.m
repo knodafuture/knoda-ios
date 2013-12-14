@@ -15,6 +15,7 @@
 #import "WebApi.h"
 #import "NoContentCell.h"
 #import "CommentCell.h"
+#import "AppDelegate.h"
 
 static const float parallaxRatio = 0.5;
 
@@ -30,6 +31,10 @@ static const float parallaxRatio = 0.5;
 @end
 
 @implementation DetailsTableViewController
+
+- (AppDelegate *)appDelegate {
+    return [[UIApplication sharedApplication] delegate];
+}
 
 - (id)initWithPrediction:(Prediction *)prediction andOwner:(id<PredictionCellDelegate>)owner {
     self = [super initWithStyle:UITableViewStylePlain];
@@ -140,7 +145,10 @@ static const float parallaxRatio = 0.5;
     
     if (self.showingComments && [cell isKindOfClass:CommentCell.class]) {
         Comment *comment = [self.pagingDatasource.objects objectAtIndex:indexPath.row];
-        ((CommentCell *)cell).avatarView.image = [_imageLoader lazyLoadImage:comment.smallUserImage onIndexPath:indexPath];
+        if (comment.userId == self.appDelegate.currentUser.userId)
+            ((CommentCell *)cell).avatarView.image = [_imageLoader lazyLoadImage:self.appDelegate.currentUser.smallImageUrl onIndexPath:indexPath];
+        else
+            ((CommentCell *)cell).avatarView.image = [_imageLoader lazyLoadImage:comment.smallUserImage onIndexPath:indexPath];
     }
     
     return cell;
@@ -213,7 +221,10 @@ static const float parallaxRatio = 0.5;
 }
 
 - (void)addComment:(Comment *)newComment {
-    [self.commentsDatasource insertNewObject:newComment reload:self.tableView.dataSource == self.commentsDatasource];
+    [self.commentsDatasource insertNewObject:newComment reload:self.showingComments];
+    if (self.showingComments) {
+        [self restoreContent];
+    }
 }
 
 - (void)updateTallyForUser:(NSString *)username agree:(BOOL)agree {

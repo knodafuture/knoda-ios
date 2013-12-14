@@ -9,6 +9,7 @@
 #import "CreateCommentView.h"
 #import "WebApi.h"
 #import "LoadingView.h"
+#import "AppDelegate.h"
 
 static NSString *const defaultCommentText = @"Add a comment...";
 static const int CommentMaxChars = 300;
@@ -116,14 +117,18 @@ static const int CommentMaxChars = 300;
         return;
     }
 
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
     [[LoadingView sharedInstance] show];
 
     Comment *comment = [[Comment alloc] init];
     comment.body = self.commentTextView.text;
     comment.createdDate = [NSDate date];
     comment.predictionId = self.predictionId;
-
-
+    comment.userId = delegate.currentUser.userId;
+    comment.smallUserImage = delegate.currentUser.smallImageUrl;
+    comment.username = delegate.currentUser.name;
+    
     [[WebApi sharedInstance] createComment:comment completion:^(NSError *error) {
         [[LoadingView sharedInstance] hide];
         if (error) {

@@ -166,7 +166,7 @@ static const int kBSAlertTag = 1001;
 }
 
 - (void)backPressed:(UIButton *)sender {
-    //[self.delegate updatePrediction:self.prediction];
+    [self.delegate updatePrediction:self.prediction];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

@@ -134,17 +134,20 @@
     if (!reload)
         return;
     
-    [self.tableView beginUpdates];
-    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:self.section]] withRowAnimation:UITableViewRowAnimationAutomatic];
-    [self.tableView endUpdates];
+    if (self.objects.count == 1)
+        [self.tableView reloadData];
+    else {
+        [self.tableView beginUpdates];
+        [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:self.section]] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableView endUpdates];
+    }
 }
 
 - (BOOL)canLoadNextPage {
-    
-    if (self.objects.count == 0)
-        return 0;
-    
     CGFloat numberOfServerObjects = _objects.count - self.localObjectsCount;
+    
+    if (numberOfServerObjects <= 0)
+        return NO;
     
     CGFloat div = numberOfServerObjects / (CGFloat)PageLimit;
     

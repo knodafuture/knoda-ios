@@ -21,11 +21,12 @@
 @property (strong, nonatomic) NSMutableArray *objects;
 @property (assign, nonatomic) NSInteger currentPage;
 @property (weak, nonatomic) id<PagingDatasourceDelegate> delegate;
+@property (weak, nonatomic) UITableView *tableView;
 
 - (id)initWithTableView:(UITableView *)tableView;
 - (void)loadPage:(NSInteger)page completion:(void(^)(void))completion;
 - (BOOL)canLoadNextPage;
 
-- (void)insertNewObject:(id)object;
+- (void)insertNewObject:(id)object reload:(BOOL)reload;
 
 @end

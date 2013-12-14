@@ -16,4 +16,6 @@
 
 @interface TallyDatasource : PagingDatasource
 
+- (void)updateTallyForUser:(NSString *)username agree:(BOOL)agree;
+
 @end

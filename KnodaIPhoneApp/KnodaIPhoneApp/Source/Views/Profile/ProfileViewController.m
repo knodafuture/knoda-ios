@@ -51,8 +51,6 @@ static const float kAvatarSize = 344.0;
 
     if (self.leftButtonItemReturnsBack)
         self.navigationItem.leftBarButtonItem = [UIBarButtonItem backButtonWithTarget:self action:@selector(menuButtonPress)];
-    else
-        self.navigationItem.leftBarButtonItem = [UIBarButtonItem sideNavBarBUttonItemwithTarget:self action:@selector(menuButtonPress)];
     self.navigationController.navigationBar.translucent = NO;
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem addPredictionBarButtonItem];
     
@@ -112,9 +110,6 @@ static const float kAvatarSize = 344.0;
 - (void)menuButtonPress {
     if (self.leftButtonItemReturnsBack) {
         [self.navigationController popViewControllerAnimated:YES];
-    }
-    else {
-        [((NavigationViewController*)self.navigationController.parentViewController) toggleNavigationPanel];
     }
 }
 

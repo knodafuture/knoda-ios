@@ -77,9 +77,6 @@ static UIBarButtonItem *composeBarButtonItem;
 	return [[UIBarButtonItem alloc] initWithCustomView:button];
 }
 
-+ (UIBarButtonItem *)sideNavBarBUttonItemwithTarget:(id)target action:(SEL)action {
-    return [UIBarButtonItem leftBarButtonItemWithImage:[UIImage imageNamed:@"NavIcon"] target:target action:action];
-}
 + (UIBarButtonItem *)addPredictionBarButtonItem {
     
     if (!composeBarButtonItem) {

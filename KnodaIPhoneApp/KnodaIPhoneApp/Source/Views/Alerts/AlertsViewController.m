@@ -28,7 +28,6 @@
     self.navigationController.navigationBar.translucent = NO;
     
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem addPredictionBarButtonItem];
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem sideNavBarBUttonItemwithTarget:self action:@selector(menuPressed:)];
     
     self.seenIds = [[NSMutableIndexSet alloc] init];
 }
@@ -80,7 +79,7 @@
     if (alert.seen)
         cell.contentView.backgroundColor = [UIColor whiteColor];
     else
-        cell.contentView.backgroundColor = [UIColor colorFromHex:@"f9f9f9"];
+        cell.contentView.backgroundColor = [UIColor greenColor];//[UIColor colorFromHex:@"f9f9f9"];
 
     cell.iconImageView.image = [alert image];
     cell.createdAtLabel.text = alert.createdAtString;
@@ -112,6 +111,7 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     [super tableView:tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
     
+    NSLog(@"%d", indexPath.row);
     if (indexPath.row >= self.pagingDatasource.objects.count)
         return;
     
@@ -121,7 +121,7 @@
         return;
     
     alert.seen = YES;
-    
+        
     [self.seenIds addIndex:alert.alertId];
 }
 

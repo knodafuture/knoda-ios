@@ -36,7 +36,6 @@
     
     self.title = @"BADGES";
     
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem sideNavBarBUttonItemwithTarget:self action:@selector(menuButtonPressed:)];
     self.navigationController.navigationBar.translucent = NO;
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem addPredictionBarButtonItem];
     
@@ -73,10 +72,6 @@
 }
 
 #pragma mark - Outlets actions
-
-- (IBAction)menuButtonPressed:(id)sender {
-    [((NavigationViewController*)self.navigationController.parentViewController) toggleNavigationPanel];
-}
 
 - (IBAction)backButtonPressed:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];

@@ -11,8 +11,8 @@
 #import "PredictorHeaderCell.h"
 
 @interface TallyDatasource () {
-    NSArray *_agreedUsers;
-    NSArray *_disagreedUsers;
+    NSMutableArray *_agreedUsers;
+    NSMutableArray *_disagreedUsers;
 }
 
 @end
@@ -101,8 +101,8 @@
             return;
         }
         
-        _agreedUsers = agreedUsers;
-        _disagreedUsers = disagreedUsers;
+        _agreedUsers = [agreedUsers mutableCopy];
+        _disagreedUsers = [disagreedUsers mutableCopy];
         
         
         if (completion)
@@ -112,5 +112,20 @@
     
 }
 
+- (void)updateTallyForUser:(NSString *)username agree:(BOOL)agree {
+    if (agree) {
+        if ([_agreedUsers containsObject:username])
+            return;
+        if ([_disagreedUsers containsObject:username])
+            [_disagreedUsers removeObject:username];
+        [_agreedUsers addObject:username];
+    } else {
+        if ([_disagreedUsers containsObject:username])
+            return;
+        if ([_agreedUsers containsObject:username])
+            [_agreedUsers removeObject:username];
+        [_disagreedUsers addObject:username];
+    }
+}
 
 @end

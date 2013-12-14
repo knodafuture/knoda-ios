@@ -208,7 +208,8 @@ static const int kBSAlertTag = 1001;
 - (void)sendAgree:(BOOL)agree {
     [[LoadingView sharedInstance] show];
     
-    if (agree)
+    if (agree) {
+        [self.tableViewController updateTallyForUser:self.appDelegate.currentUser.name agree:YES];
         [[WebApi sharedInstance] agreeWithPrediction:self.prediction.predictionId completion:^(Challenge *challenge, NSError *error) {
             [[LoadingView sharedInstance] hide];
             if (!error) {
@@ -219,7 +220,9 @@ static const int kBSAlertTag = 1001;
                 [alert show];
             }
         }];
-    else
+    }
+    else {
+        [self.tableViewController updateTallyForUser:self.appDelegate.currentUser.name agree:NO];
         [[WebApi sharedInstance] disagreeWithPrediction:self.prediction.predictionId completion:^(Challenge *challenge, NSError *error) {
             [[LoadingView sharedInstance] hide];
             if (!error) {
@@ -230,6 +233,7 @@ static const int kBSAlertTag = 1001;
                 [alert show];
             }
         }];
+    }
 }
 
 - (void)sendOutcome:(BOOL)realise {
@@ -383,7 +387,7 @@ static const int kBSAlertTag = 1001;
 
 - (void)createCommentView:(CreateCommentView *)createCommentView didCreateComment:(Comment *)comment {
     self.composingComment = NO;
-    [self.tableViewController.tableView reloadData];
+    [self.tableViewController addComment:comment];
     [self setDefaultBarButtonItems:NO];
 }
 @end

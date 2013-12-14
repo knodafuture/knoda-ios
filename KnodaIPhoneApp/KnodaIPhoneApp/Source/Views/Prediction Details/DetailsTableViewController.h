@@ -10,7 +10,7 @@
 #import "PredictionCell.h"
 
 @class Prediction;
-
+@class Comment;
 @interface DetailsTableViewController : BaseTableViewController
 
 @property (strong, nonatomic) Prediction *prediction;
@@ -19,5 +19,8 @@
 
 - (void)showComments;
 - (void)showTally;
+
+- (void)addComment:(Comment *)newComment;
+- (void)updateTallyForUser:(NSString *)username agree:(BOOL)agree;
 
 @end

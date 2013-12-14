@@ -18,6 +18,7 @@
 #import "SideNavCell.h"
 #import "PredictionsViewController.h"
 #import "AlertsViewController.h"
+#import "SideNavBarButtonItem.h"
 
 @interface NavigationViewController () <SelectPictureDelegate>
 
@@ -38,13 +39,15 @@
 @property (strong, nonatomic) SelectPictureViewController *selectVc;
 @property (readonly, nonatomic) AppDelegate *appDelegate;
 @property (strong, nonatomic) NSMutableDictionary *vcCache;
+
+@property (strong, nonatomic) SideNavBarButtonItem *sideNavBarButtonItem;
 @end
 
 @implementation NavigationViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    self.itemNames = @[@"Home", @"History", @"Alerts", @"Badges", @"Profile"];
+    self.itemNames = @[@"Home", @"History", @"Activity", @"Badges", @"Profile"];
     self.masterShown = NO;
     self.vcCache = [[NSMutableDictionary alloc] init];
     return self;
@@ -60,7 +63,8 @@
     [self.gestureView addGestureRecognizer:recognizer];
     
     [self updateUserInfo];
-    
+    self.sideNavBarButtonItem = [[SideNavBarButtonItem alloc] initWithTarget:self action:@selector(toggleNavigationPanel)];
+    [self updateAlerts];
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -121,6 +125,7 @@
                 viewController = [[HomeViewController alloc] initWithStyle:UITableViewStylePlain];
                 break;
         }
+        viewController.navigationItem.leftBarButtonItem = self.sideNavBarButtonItem;
         [self.vcCache setObject:viewController forKey:@(menuItem)];
     }
     
@@ -195,6 +200,7 @@
     self.gestureView.hidden = NO;
     
     [[WebApi sharedInstance] getCurrentUser:^(User *user, NSError *error) {}];
+    [self updateAlerts];
     
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
@@ -222,6 +228,23 @@
     [self moveToDetailsAnimated:YES];
 }
 
+- (void)updateAlerts {
+    [[WebApi sharedInstance] getUnseenAlertsCompletion:^(NSArray *alerts, NSError *error) {
+        if (error)
+            return;
+        
+        SideNavCell *cell = (SideNavCell *)[self.menuItemsTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:MenuAlerts - 1 inSection:0]];
+        if (alerts.count) {
+            cell.rightInfoLabel.hidden = NO;
+            cell.rightInfoLabel.text = [NSString stringWithFormat:@"%d", alerts.count];
+        }
+        else
+            cell.rightInfoLabel.hidden = YES;
+        
+        [self.sideNavBarButtonItem setAlertsCount:alerts.count];
+        
+    }];
+}
 
 - (AppDelegate *)appDelegate {
     return [UIApplication sharedApplication].delegate;

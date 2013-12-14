@@ -265,6 +265,12 @@
 		013DA90A1854417D00B507E4 /* DetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA9081854417D00B507E4 /* DetailsTableViewController.m */; };
 		013DA9121854759200B507E4 /* CreateCommentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 013DA9111854759200B507E4 /* CreateCommentView.xib */; };
 		013DA9131854759200B507E4 /* CreateCommentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 013DA9111854759200B507E4 /* CreateCommentView.xib */; };
+		014A9E86185BF95100A96678 /* SideNavButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 014A9E81185BF95100A96678 /* SideNavButton.xib */; };
+		014A9E87185BF95100A96678 /* SideNavButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 014A9E81185BF95100A96678 /* SideNavButton.xib */; };
+		014A9E88185BF95100A96678 /* SideNavBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 014A9E82185BF95100A96678 /* SideNavBarButtonItem.m */; };
+		014A9E89185BF95100A96678 /* SideNavBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 014A9E82185BF95100A96678 /* SideNavBarButtonItem.m */; };
+		014A9E8A185BF95100A96678 /* SideNavButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 014A9E84185BF95100A96678 /* SideNavButton.m */; };
+		014A9E8B185BF95100A96678 /* SideNavButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 014A9E84185BF95100A96678 /* SideNavButton.m */; };
 		01598B221857C56D002E2534 /* MTKObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 01598B191857C56D002E2534 /* MTKObserver.m */; };
 		01598B231857C56D002E2534 /* MTKObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 01598B191857C56D002E2534 /* MTKObserver.m */; };
 		01598B241857C56D002E2534 /* NSObject+MTKObserving.m in Sources */ = {isa = PBXBuildFile; fileRef = 01598B1D1857C56D002E2534 /* NSObject+MTKObserving.m */; };
@@ -505,6 +511,11 @@
 		013DA9071854417D00B507E4 /* DetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailsTableViewController.h; sourceTree = "<group>"; };
 		013DA9081854417D00B507E4 /* DetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailsTableViewController.m; sourceTree = "<group>"; };
 		013DA9111854759200B507E4 /* CreateCommentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateCommentView.xib; sourceTree = "<group>"; };
+		014A9E81185BF95100A96678 /* SideNavButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SideNavButton.xib; sourceTree = "<group>"; };
+		014A9E82185BF95100A96678 /* SideNavBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideNavBarButtonItem.m; sourceTree = "<group>"; };
+		014A9E83185BF95100A96678 /* SideNavBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideNavBarButtonItem.h; sourceTree = "<group>"; };
+		014A9E84185BF95100A96678 /* SideNavButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideNavButton.m; sourceTree = "<group>"; };
+		014A9E85185BF95100A96678 /* SideNavButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideNavButton.h; sourceTree = "<group>"; };
 		01598B181857C56D002E2534 /* MTKObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTKObserver.h; sourceTree = "<group>"; };
 		01598B191857C56D002E2534 /* MTKObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTKObserver.m; sourceTree = "<group>"; };
 		01598B1A1857C56D002E2534 /* MTKObserving.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTKObserving.h; sourceTree = "<group>"; };
@@ -721,6 +732,11 @@
 		013DA7361853002100B507E4 /* Core Views */ = {
 			isa = PBXGroup;
 			children = (
+				014A9E81185BF95100A96678 /* SideNavButton.xib */,
+				014A9E82185BF95100A96678 /* SideNavBarButtonItem.m */,
+				014A9E83185BF95100A96678 /* SideNavBarButtonItem.h */,
+				014A9E84185BF95100A96678 /* SideNavButton.m */,
+				014A9E85185BF95100A96678 /* SideNavButton.h */,
 				013DA7371853002100B507E4 /* BaseTableViewController.h */,
 				013DA7381853002100B507E4 /* BaseTableViewController.m */,
 				013DA7391853002100B507E4 /* NavigationViewController.h */,
@@ -1220,6 +1236,7 @@
 				013DA86F1853002200B507E4 /* UserProfileHeaderView.xib in Resources */,
 				013DA81B1853002200B507E4 /* LoadingView.xib in Resources */,
 				013DA8171853002200B507E4 /* LoadingCell.xib in Resources */,
+				014A9E87185BF95100A96678 /* SideNavButton.xib in Resources */,
 				013DA88B1853002200B507E4 /* Screen2@2x.png in Resources */,
 				013DA83F1853002200B507E4 /* PredictionDetailsSectionHeader.xib in Resources */,
 				013DA8291853002200B507E4 /* LoginViewController.xib in Resources */,
@@ -1283,6 +1300,7 @@
 				013DA86E1853002200B507E4 /* UserProfileHeaderView.xib in Resources */,
 				013DA81A1853002200B507E4 /* LoadingView.xib in Resources */,
 				013DA8161853002200B507E4 /* LoadingCell.xib in Resources */,
+				014A9E86185BF95100A96678 /* SideNavButton.xib in Resources */,
 				013DA88A1853002200B507E4 /* Screen2@2x.png in Resources */,
 				013DA83E1853002200B507E4 /* PredictionDetailsSectionHeader.xib in Resources */,
 				013DA8281853002200B507E4 /* LoginViewController.xib in Resources */,
@@ -1333,6 +1351,7 @@
 				013DA7D31853002200B507E4 /* UINavigationItem+iOS7Spacing.m in Sources */,
 				018DF7A718590699004FEDA6 /* Alert.m in Sources */,
 				013DA8C81853004000B507E4 /* Badge.m in Sources */,
+				014A9E8B185BF95100A96678 /* SideNavButton.m in Sources */,
 				013DA8431853002200B507E4 /* PredictorCell.m in Sources */,
 				013DA8D41853004000B507E4 /* User.m in Sources */,
 				013DA90A1854417D00B507E4 /* DetailsTableViewController.m in Sources */,
@@ -1347,6 +1366,7 @@
 				013DA7C31853002200B507E4 /* NSData+Utils.m in Sources */,
 				013DA8D81853004000B507E4 /* Topic.m in Sources */,
 				013DA8651853002200B507E4 /* SelectPictureViewController.m in Sources */,
+				014A9E89185BF95100A96678 /* SideNavBarButtonItem.m in Sources */,
 				013DA8511853002200B507E4 /* PredictionCell.m in Sources */,
 				013DA82B1853002200B507E4 /* SignUpViewController.m in Sources */,
 				013DA8D21853004000B507E4 /* Prediction.m in Sources */,
@@ -1420,6 +1440,7 @@
 				018DF7981858F1FB004FEDA6 /* Alert.m in Sources */,
 				013DA7D21853002200B507E4 /* UINavigationItem+iOS7Spacing.m in Sources */,
 				013DA8C71853004000B507E4 /* Badge.m in Sources */,
+				014A9E8A185BF95100A96678 /* SideNavButton.m in Sources */,
 				013DA8421853002200B507E4 /* PredictorCell.m in Sources */,
 				013DA8D31853004000B507E4 /* User.m in Sources */,
 				018DF79F1858F42F004FEDA6 /* AlertCell.m in Sources */,
@@ -1434,6 +1455,7 @@
 				013DA8CF1853004000B507E4 /* Challenge.m in Sources */,
 				013DA7C21853002200B507E4 /* NSData+Utils.m in Sources */,
 				013DA8D71853004000B507E4 /* Topic.m in Sources */,
+				014A9E88185BF95100A96678 /* SideNavBarButtonItem.m in Sources */,
 				013DA8641853002200B507E4 /* SelectPictureViewController.m in Sources */,
 				013DA8501853002200B507E4 /* PredictionCell.m in Sources */,
 				013DA82A1853002200B507E4 /* SignUpViewController.m in Sources */,

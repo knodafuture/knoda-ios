@@ -13,8 +13,8 @@
 @interface PagingDatasource ()
 
 @property (assign, nonatomic) BOOL pageLoading;
-@property (weak, nonatomic) UITableView *tableView;
 @property (assign, nonatomic) NSInteger section;
+@property (assign, nonatomic) NSInteger localObjectsCount;
 @end
 
 @implementation PagingDatasource
@@ -58,7 +58,7 @@
     self.pageLoading = YES;
     
     [self loadPage:self.currentPage + 1 completion:^{
-        NSInteger beginIndex = (self.currentPage + 1) * PageLimit;
+        NSInteger beginIndex = (self.currentPage + 1) * PageLimit + self.localObjectsCount;
         NSInteger endIndex = self.objects.count - 1;
         
         if ([self canLoadNextPage])
@@ -89,7 +89,9 @@
 - (void)loadPage:(NSInteger)page completion:(void(^)(void))completion {
     
     id lastObject;
-    if (page != 0)
+    if (page == 0)
+        self.localObjectsCount = 0;
+    else
         lastObject = [self.objects lastObject];
     
     [self.delegate objectsAfterObject:lastObject completion:^(NSArray *objectsToAdd, NSError *error) {
@@ -121,11 +123,16 @@
     }];
 }
 
-- (void)insertNewObject:(id)object {
+- (void)insertNewObject:(id)object reload:(BOOL)reload {
     if (!object)
         return;
     
+    self.localObjectsCount++;
+    
     [self.objects insertObject:object atIndex:0];
+    
+    if (!reload)
+        return;
     
     [self.tableView beginUpdates];
     [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:self.section]] withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -137,7 +144,9 @@
     if (self.objects.count == 0)
         return 0;
     
-    CGFloat div = (self.currentPage * PageLimit) / (CGFloat)PageLimit;
+    CGFloat numberOfServerObjects = _objects.count - self.localObjectsCount;
+    
+    CGFloat div = numberOfServerObjects / (CGFloat)PageLimit;
     
     if (div >= ceil(div))
         return YES;

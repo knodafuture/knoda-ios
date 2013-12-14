@@ -60,7 +60,7 @@
     
     if (interval < secondsInMinute)
     {
-        result = [NSString stringWithFormat: NSLocalizedString(@"made %ds ago", @""), (NSInteger)interval];
+        result = [NSString stringWithFormat: NSLocalizedString(@"%ds ago", @""), (NSInteger)interval];
     }
     else if (interval < (secondsInMinute * minutesInHour * hoursInDay))
     {
@@ -72,22 +72,22 @@
         NSString* minutesString = (minutes != 0) ? [NSString stringWithFormat: NSLocalizedString(@"%dm", @""), minutes] : @"";
         NSString* space = (hours != 0 && minutes != 0) ? @" " : @"";
         
-        result = [NSString stringWithFormat: NSLocalizedString(@"made %@%@%@ ago", @""), hoursString, space, minutesString];
+        result = [NSString stringWithFormat: NSLocalizedString(@"%@%@%@ ago", @""), hoursString, space, minutesString];
     }
     else if (interval < (secondsInMinute * minutesInHour * hoursInDay * daysInMonth))
     {
         NSInteger days = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay));
-        result = [NSString stringWithFormat: NSLocalizedString(@"made %dd ago", @""), days];
+        result = [NSString stringWithFormat: NSLocalizedString(@"%dd ago", @""), days];
     }
     else if (interval < (secondsInMinute * minutesInHour * hoursInDay * daysInMonth * monthInYear))
     {
         NSInteger month = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay * daysInMonth));
-        result = [NSString stringWithFormat: NSLocalizedString(@"made %dmo ago", @""), month];
+        result = [NSString stringWithFormat: NSLocalizedString(@"%dmo ago", @""), month];
     }
     else
     {
         NSInteger year = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay * daysInMonth * monthInYear));
-        result = [NSString stringWithFormat: NSLocalizedString(@"made %dyr%@ ago", @""), year, (year != 1) ? @"s" : @""];
+        result = [NSString stringWithFormat: NSLocalizedString(@"%dyr%@ ago", @""), year, (year != 1) ? @"s" : @""];
     }
     
     return result;

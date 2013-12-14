@@ -213,4 +213,11 @@ static const float parallaxRatio = 0.5;
     [self.tableView reloadData];
 }
 
+- (void)addComment:(Comment *)newComment {
+    [self.commentsDatasource insertNewObject:newComment reload:self.tableView.dataSource == self.commentsDatasource];
+}
+
+- (void)updateTallyForUser:(NSString *)username agree:(BOOL)agree {
+    [self.tallyDatasource updateTallyForUser:username agree:agree];
+}
 @end

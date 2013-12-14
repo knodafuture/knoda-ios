@@ -30,13 +30,7 @@
     }
     
     self.title = @"HOME";
-    
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem sideNavBarBUttonItemwithTarget:self action:@selector(menuPressed:)];
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem addPredictionBarButtonItem];
-}
-
-- (void)menuPressed:(id)sender {
-    [((NavigationViewController*)self.navigationController.parentViewController) toggleNavigationPanel];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

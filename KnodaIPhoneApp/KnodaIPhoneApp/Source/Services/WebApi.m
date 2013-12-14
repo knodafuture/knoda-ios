@@ -418,7 +418,13 @@ NSInteger PageLimit = 25;
 }
 
 - (void)getUnseenAlertsCompletion:(void (^)(NSArray *, NSError *))completionHandler {
-
+    NSDictionary *parameters = @{@"list": @"unseen"};
+    
+    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"GET" path:@"activityfeed.json" parameters:parameters requiresAuthToken:YES isMultiPartData:NO];
+    
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+        completionHandler([Alert arrayFromData:responseData], error);
+    }];
 }
 
 - (void)getAlertsAfter:(NSInteger)lastId completion:(void (^)(NSArray *, NSError *))completionHandler {
@@ -443,6 +449,7 @@ NSInteger PageLimit = 25;
     
     WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"POST" path:@"activityfeed/seen.json" parameters:parameters requiresAuthToken:YES isMultiPartData:NO];
     
+    NSLog(@"%@", request.URL.absoluteString);
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler(error);
     }];

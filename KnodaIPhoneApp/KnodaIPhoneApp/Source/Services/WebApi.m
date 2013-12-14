@@ -443,7 +443,7 @@ NSInteger PageLimit = 25;
     NSMutableString  *idString = [NSMutableString stringWithFormat: @"%d", [[seenAlertIds firstObject] integerValue]];
     
     for (int i = 1; i < seenAlertIds.count; i++)
-        [idString appendFormat: @"&ids[]=%d", [[seenAlertIds objectAtIndex: i] integerValue]];
+        [idString appendFormat: @",%d", [[seenAlertIds objectAtIndex: i] integerValue]];
     
     NSDictionary *parameters = @{@"ids[]" : idString};
     

@@ -32,13 +32,11 @@
     
 }
 
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
+    [self.refreshTimer invalidate];
+    self.refreshTimer = nil;
     self.refreshTimer = [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(refreshVisibleCells) userInfo:nil repeats:YES];
     [self observeProperty:@keypath(self.appDelegate.currentUser) withBlock:^(__weak PredictionsViewController *self, id old, id new) {
         [self.tableView reloadData];

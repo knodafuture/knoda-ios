@@ -160,6 +160,8 @@ static const int kBSAlertTag = 1001;
         [UINavigationBar setCustomAppearance];
     }];
     
+    [vc setValue:[NSString stringWithFormat:@"%@ shared a Knoda prediction with you", self.appDelegate.currentUser.name] forKey:@"subject"];
+    
     [self presentViewController:vc animated:YES completion:nil];
 }
 

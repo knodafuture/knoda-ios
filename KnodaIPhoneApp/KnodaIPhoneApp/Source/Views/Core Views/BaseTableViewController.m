@@ -63,6 +63,8 @@
 }
 
 - (void)refresh {
+    [_graceTimer invalidate];
+    _graceTimer = nil;
     _graceTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(onGraceTimerExpired:) userInfo:nil repeats:NO];
     _refreshEnded = NO;
     [self beginRefreshing];

@@ -136,12 +136,13 @@
     
     UINavigationController *vc = [self navigationControllerForMenuItem:menuItem];
     
-    [self.childViewControllers makeObjectsPerformSelector:@selector(willMoveToParentViewController:)];
     [self.detailsView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    
+    [self.childViewControllers makeObjectsPerformSelector:@selector(willMoveToParentViewController:) withObject:nil];
     [self.childViewControllers makeObjectsPerformSelector:@selector(removeFromParentViewController)];
     
+    [vc willMoveToParentViewController:self];
     [self addChildViewController:vc];
+    
     vc.view.frame = self.detailsView.bounds;
 
     [self.detailsView addSubview:vc.view];

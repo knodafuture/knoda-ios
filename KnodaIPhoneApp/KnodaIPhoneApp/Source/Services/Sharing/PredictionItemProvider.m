@@ -9,6 +9,7 @@
 #import "PredictionItemProvider.h"
 #import "Prediction+Utils.h"
 #import "Challenge.h"
+#import "AppDelegate.h"
 
 const NSInteger MaxChars = 140;
 
@@ -34,49 +35,45 @@ const NSInteger MaxChars = 140;
     NSString *shareString;
     
     if ([activityType isEqualToString:UIActivityTypePostToTwitter]) {
-        
         NSString *suffixString = [NSString stringWithFormat:@"... #knoda %@", self.prediction.shortUrl];
-        
-        NSInteger max = MaxChars - suffixString.length;
-        
         NSString *prefixString = self.prediction.body;
+
+        shareString = [self shortenString:prefixString forMaxChars:MaxChars withSuffix:suffixString];
         
-        if (prefixString.length >= max)
-            prefixString = [prefixString substringToIndex:max-1];
+    } else if ([activityType isEqualToString:UIActivityTypePostToFacebook]) {
+        shareString = [NSString stringWithFormat:@"%@ via Knoda.com", self.prediction.body];
+    } else if ([activityType isEqualToString:UIActivityTypeMessage]) {
+        NSString *suffix = [NSString stringWithFormat:@"... %@ via Knoda.com", self.prediction.shortUrl];
+        shareString = [self shortenString:self.prediction.body forMaxChars:MaxChars withSuffix:suffix];
+    } else if ([activityType isEqualToString:UIActivityTypeMail]) {
+        NSMutableString *string = [[NSMutableString alloc] initWithFormat:@"<html>"];
+        [string appendString:self.prediction.body];
+        [string appendFormat:@" %@", self.prediction.shortUrl];
+        [string appendFormat:@"\n <a href=\"https://itunes.apple.com/us/app/knoda/id764642995?ls=1&mt=8\">Download Knoda</a></html>"];
         
-        shareString = [NSString stringWithFormat:@"%@ %@", prefixString, suffixString];
-        NSLog(@"%d", shareString.length);
-        
-    } else {
-        if (![self.prediction iAgree] && ![self.prediction iDisagree] && !self.prediction.challenge.isOwn)
-            shareString = @"Check out this prediction on Knoda";
-        else if (!self.prediction.settled && self.prediction.challenge.isOwn)
-            shareString = @"Check out my prediction on Knoda";
-        else if (self.prediction.settled && self.prediction.challenge.isOwn) {
-            if ([self.prediction win])
-                shareString = @"I won my prediction on Knoda";
-            else
-                shareString = @"I lost my prediction on Knoda";
-        }
-        else if (self.prediction.settled && [self.prediction win]) {
-            if ([self.prediction iAgree])
-                shareString = @"I won this prediction that I agreed with on Knoda";
-            else
-                shareString = @"I won this prediction that I disagreed with on Knoda";
-        }
-        else if (self.prediction.challenge) {
-            if ([self.prediction iAgree])
-                shareString = @"I agreed with this prediction on Knoda";
-            else
-                shareString = @"I disagreed with this prediction on Knoda";
-        }
-        shareString = [NSString stringWithFormat:@"%@ %@.", shareString, self.prediction.shortUrl];
+        return string;
+    }
+    else {
+        return [NSString stringWithFormat:@"%@ %@ via Knoda", self.prediction.body, self.prediction.shortUrl];
     }
     
     return shareString;
 }
 - (NSString *)activityViewController:(UIActivityViewController *)activityViewController subjectForActivityType:(NSString *)activityType; {
-    return @"Check out this prediction on Knoda";
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    return [NSString stringWithFormat:@"%@ shared a Knoda prediction with you", delegate.currentUser.name];
 
+}
+
+- (NSString *)shortenString:(NSString *)string forMaxChars:(NSInteger)maxChars withSuffix:(NSString *)suffix {
+    
+    NSInteger max = maxChars - suffix.length;
+    
+    
+    if (string.length >= max)
+        string = [string substringToIndex:max-1];
+    
+    return [NSString stringWithFormat:@"%@ %@", string, suffix];
 }
 @end

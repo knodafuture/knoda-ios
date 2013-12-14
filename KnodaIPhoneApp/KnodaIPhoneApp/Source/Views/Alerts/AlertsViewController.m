@@ -47,7 +47,7 @@
     
     [Flurry endTimedEvent:@"ActivityFeed" withParameters:nil];
     
-    [self sendSeenAlerts];
+    [self sendSeenAlerts:nil];
 }
 
 
@@ -130,7 +130,16 @@
     [[WebApi sharedInstance] getAlertsAfter:lastId completion:completionHandler];
 }
 
-- (void)sendSeenAlerts {
+- (void)beginRefreshing {
+    [self sendSeenAlerts:^{
+        self.pagingDatasource.currentPage = 0;
+        [self.pagingDatasource loadPage:0 completion:^{
+            [self endRefreshing];
+        }];
+    }];
+}
+
+- (void)sendSeenAlerts:(void(^)(void))completion {
     __block NSMutableArray *ids = [NSMutableArray arrayWithCapacity:self.pagingDatasource.objects.count];
     
     [self.seenIds enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
@@ -140,6 +149,8 @@
     [[WebApi sharedInstance] setSeenAlerts:ids completion:^(NSError *error) {
         if (error)
             NSLog(@"error setting seen alerts");
+        if (completion)
+            completion();
     }];
 }
 

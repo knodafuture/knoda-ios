@@ -449,7 +449,8 @@ NSInteger PageLimit = 25;
     
     WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"POST" path:@"activityfeed/seen.json" parameters:parameters requiresAuthToken:YES isMultiPartData:NO];
     
-    NSLog(@"%@", request.URL.absoluteString);
+    NSLog(@"SETTING SEEN ALERTS URL = %@", request.URL.absoluteString);
+    NSLog(@"BODY = %@", [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler(error);
     }];

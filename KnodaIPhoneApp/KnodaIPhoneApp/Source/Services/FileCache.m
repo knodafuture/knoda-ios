@@ -99,7 +99,6 @@ NSString *const TimestampsUserDefaultsKey	= @"FileCacheTimestamps";
 		NSString *fileName = [_cacheDirectory stringByAppendingPathComponent:hash];
 		
 		NSData *data = [manager contentsAtPath:fileName];
-        NSLog(@"%d", data.length);
 		BOOL stale = [self keyStale:hash];
         
 		dispatch_async(dispatch_get_main_queue(), ^{

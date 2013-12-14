@@ -428,7 +428,7 @@ NSInteger PageLimit = 25;
 }
 
 - (void)getAlertsAfter:(NSInteger)lastId completion:(void (^)(NSArray *, NSError *))completionHandler {
-    NSDictionary *parameters = @{};
+    NSDictionary *parameters = @{@"limit": @(PageLimit)};
     
     parameters = [self parametersDictionary:parameters withLastId:lastId];
     WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"GET" path:@"activityfeed.json" parameters:parameters requiresAuthToken:YES isMultiPartData:NO];

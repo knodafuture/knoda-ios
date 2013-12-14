@@ -132,6 +132,7 @@ static const int CommentMaxChars = 300;
     [[WebApi sharedInstance] createComment:comment completion:^(NSError *error) {
         [[LoadingView sharedInstance] hide];
         if (error) {
+            
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to post comment at this time." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
             [alert show];
         } else {

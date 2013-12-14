@@ -22,7 +22,8 @@
 @interface PredictionCell : UITableViewCell
 
 @property (weak, nonatomic) id<PredictionCellDelegate> delegate;
-
+@property (nonatomic, assign) BOOL agreed;
+@property (nonatomic, assign) BOOL disagreed;
 @property (weak, nonatomic) Prediction *prediction;
 @property (assign, nonatomic) BOOL swipeEnabled;
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;

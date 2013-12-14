@@ -51,7 +51,7 @@
     
     CGRect frame = self.sideNavButton.imageView.frame;
     
-    frame.size.width = textSize.width + 6.0;
+    frame.size.width = textSize.width + 4.0;
     
     if (frame.size.width < 16.0)
         frame.size.width = 16.0;
@@ -63,14 +63,12 @@
     frame = self.sideNavButton.label.frame;
     
     frame.size.width = textSize.width;
-    frame.origin.x = self.sideNavButton.imageView.frame.origin.x + (self.sideNavButton.imageView.frame.size.width / 2.0) - (frame.size.width / 2.0);
+    frame.origin.x = self.sideNavButton.imageView.frame.origin.x + (self.sideNavButton.imageView.frame.size.width / 2.0) - (frame.size.width / 2.0) + .5;
     
     self.sideNavButton.label.frame = frame;
     
     self.sideNavButton.imageView.hidden = NO;
     self.sideNavButton.label.hidden = NO;
-    
-    
     
 }
 

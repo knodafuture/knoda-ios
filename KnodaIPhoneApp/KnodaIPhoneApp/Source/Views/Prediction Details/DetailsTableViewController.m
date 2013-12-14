@@ -19,7 +19,6 @@
 static const float parallaxRatio = 0.5;
 
 @interface DetailsTableViewController () <TallyDatasourceDelegate>
-@property (strong, nonatomic) PredictionDetailsHeaderCell *headerCell;
 @property (strong, nonatomic) PredictionDetailsSectionHeader *sectionHeader;
 @property (assign, nonatomic) BOOL showingComments;
 @property (weak, nonatomic) id<PredictionCellDelegate> owner;

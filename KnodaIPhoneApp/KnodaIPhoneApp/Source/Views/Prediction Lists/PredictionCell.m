@@ -51,8 +51,7 @@ static NSMutableDictionary *cellHeightCache;
 @property (assign, nonatomic) BOOL trackingTouch;
 @property (assign, nonatomic) BOOL finishingCellAnimation;
 
-@property (nonatomic, assign) BOOL agreed;
-@property (nonatomic, assign) BOOL disagreed;
+
 
 @property (assign, nonatomic) BOOL touchMoved;
 @end

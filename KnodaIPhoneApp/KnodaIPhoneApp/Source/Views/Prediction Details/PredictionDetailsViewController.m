@@ -18,6 +18,8 @@
 #import "DatePickerView.h"
 #import "CreateCommentView.h"
 #import "PredictionItemProvider.h"
+#import "PredictionCell.h"
+#import "PredictionDetailsHeaderCell.h"
 
 static const int kBSAlertTag = 1001;
 
@@ -214,6 +216,7 @@ static const int kBSAlertTag = 1001;
             [[LoadingView sharedInstance] hide];
             if (!error) {
                 self.prediction.challenge = challenge;
+                self.tableViewController.headerCell.predictionCell.agreed = YES;
                 self.tableViewController.prediction = self.prediction;
             } else {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message:@"Unable to agree at this time" delegate: nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles: nil];
@@ -227,6 +230,7 @@ static const int kBSAlertTag = 1001;
             [[LoadingView sharedInstance] hide];
             if (!error) {
                 self.prediction.challenge = challenge;
+                self.tableViewController.headerCell.predictionCell.disagreed = YES;
                 self.tableViewController.prediction = self.prediction;
             } else {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message:@"Unable to disagree at this time" delegate: nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles: nil];
@@ -388,6 +392,9 @@ static const int kBSAlertTag = 1001;
 - (void)createCommentView:(CreateCommentView *)createCommentView didCreateComment:(Comment *)comment {
     self.composingComment = NO;
     [self.tableViewController addComment:comment];
+    self.prediction.commentCount++;
+    self.tableViewController.prediction = self.prediction;
+
     [self setDefaultBarButtonItems:NO];
 }
 @end

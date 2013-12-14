@@ -11,9 +11,12 @@
 
 @class Prediction;
 @class Comment;
+@class PredictionDetailsHeaderCell;
 @interface DetailsTableViewController : BaseTableViewController
 
 @property (strong, nonatomic) Prediction *prediction;
+@property (strong, nonatomic) PredictionDetailsHeaderCell *headerCell;
+
 
 - (id)initWithPrediction:(Prediction *)prediction andOwner:(id<PredictionCellDelegate>)owner;
 

@@ -169,9 +169,18 @@ static NSDateFormatter *dateFormatter;
         }
     }
     else
-        [self.categoryPicker selectRow:[self.categories indexOfObject:self.categoryText] inComponent:0 animated:NO];
+        [self.categoryPicker selectRow:[self indexOfTopicWithName:self.categoryText] inComponent:0 animated:NO];
     
     [self showPickerView:self.categoryPickerContainerView under:self.categoryBar completion:nil];
+}
+
+- (NSInteger)indexOfTopicWithName:(NSString *)name {
+    for (Topic *topic in self.categories) {
+        if ([topic.name isEqualToString:name])
+            return [self.categories indexOfObject:topic];
+    }
+    
+    return 0;
 }
 
 - (IBAction)doneCategoryPicker:(id)sender {

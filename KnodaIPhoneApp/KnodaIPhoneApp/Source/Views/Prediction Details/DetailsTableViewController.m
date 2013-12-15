@@ -221,7 +221,7 @@ static const float parallaxRatio = 0.5;
 }
 
 - (void)addComment:(Comment *)newComment {
-    [self.commentsDatasource insertNewObject:newComment reload:self.showingComments];
+    [self.commentsDatasource insertNewObject:newComment atIndex:self.pagingDatasource.objects.count reload:self.showingComments];
     if (self.showingComments) {
         [self restoreContent];
     }

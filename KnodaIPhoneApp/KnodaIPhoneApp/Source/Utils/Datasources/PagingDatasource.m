@@ -13,7 +13,6 @@
 @interface PagingDatasource ()
 
 @property (assign, nonatomic) BOOL pageLoading;
-@property (assign, nonatomic) NSInteger section;
 @property (assign, nonatomic) NSInteger localObjectsCount;
 @end
 
@@ -123,13 +122,13 @@
     }];
 }
 
-- (void)insertNewObject:(id)object reload:(BOOL)reload {
+- (void)insertNewObject:(id)object atIndex:(NSInteger)index reload:(BOOL)reload {
     if (!object)
         return;
     
     self.localObjectsCount++;
     
-    [self.objects insertObject:object atIndex:0];
+    [self.objects insertObject:object atIndex:index];
     
     if (!reload)
         return;
@@ -138,7 +137,7 @@
         [self.tableView reloadData];
     else {
         [self.tableView beginUpdates];
-        [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:self.section]] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:self.section]] withRowAnimation:UITableViewRowAnimationAutomatic];
         [self.tableView endUpdates];
     }
 }

@@ -17,7 +17,7 @@
 @end
 
 @interface PagingDatasource : NSObject <UITableViewDataSource, UITableViewDelegate>
-
+@property (assign, nonatomic) NSInteger section;
 @property (strong, nonatomic) NSMutableArray *objects;
 @property (assign, nonatomic) NSInteger currentPage;
 @property (weak, nonatomic) id<PagingDatasourceDelegate> delegate;
@@ -27,6 +27,6 @@
 - (void)loadPage:(NSInteger)page completion:(void(^)(void))completion;
 - (BOOL)canLoadNextPage;
 
-- (void)insertNewObject:(id)object reload:(BOOL)reload;
+- (void)insertNewObject:(id)object atIndex:(NSInteger)index reload:(BOOL)reload;
 
 @end

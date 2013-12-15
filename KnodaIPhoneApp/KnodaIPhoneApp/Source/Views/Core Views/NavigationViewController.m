@@ -100,6 +100,12 @@
 
     self.activeMenuItem = menuItem;
     [self presentViewControllerForMenuItem:menuItem];
+    
+    if (menuItem == MenuAlerts) {
+        SideNavCell *cell = (SideNavCell *)[self.menuItemsTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:MenuAlerts - 1 inSection:0]];
+        cell.rightInfoLabel.hidden = YES;
+        [self.sideNavBarButtonItem setAlertsCount:0];
+    }
 }
 
 - (UINavigationController *)navigationControllerForMenuItem:(MenuItem)menuItem {

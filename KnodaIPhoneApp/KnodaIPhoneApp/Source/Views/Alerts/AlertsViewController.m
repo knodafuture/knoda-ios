@@ -12,6 +12,7 @@
 #import "WebApi.h"
 #import "LoadingView.h"
 #import "PredictionDetailsViewController.h"
+#import "NoContentCell.h"
 
 @interface AlertsViewController ()
 @property (strong, nonatomic) NSMutableIndexSet *seenIds;
@@ -24,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"ALERTS";
+    self.title = @"ACTIVITY";
     self.navigationController.navigationBar.translucent = NO;
     
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem addPredictionBarButtonItem];
@@ -39,6 +40,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
+    [self beginRefreshing];
     [Flurry logEvent:@"ActivityFeed" timed:YES];
 }
 
@@ -124,6 +126,11 @@
     [self.seenIds addIndex:alert.alertId];
 }
 
+- (void)noObjectsRetrievedInPagingDatasource:(PagingDatasource *)pagingDatasource {
+    NoContentCell *cell = [NoContentCell noContentWithMessage:@"No Activity" forTableView:self.tableView];
+    [self showNoContent:cell];
+}
+
 - (void)objectsAfterObject:(id)object completion:(void (^)(NSArray *, NSError *))completionHandler {
     NSInteger lastId = [(Alert *)object alertId];
     [[WebApi sharedInstance] getAlertsAfter:lastId completion:completionHandler];
@@ -146,8 +153,8 @@
     }];
     
     [[WebApi sharedInstance] setSeenAlerts:ids completion:^(NSError *error) {
-        if (error)
-            NSLog(@"error setting seen alerts");
+        if (!error)
+            [self.seenIds removeAllIndexes];
         if (completion)
             completion();
     }];

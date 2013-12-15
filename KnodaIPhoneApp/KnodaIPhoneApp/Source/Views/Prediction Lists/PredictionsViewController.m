@@ -172,7 +172,7 @@
 - (void)handleNewObjectNotification:(NSNotification *)notification {
     Prediction *prediction = [notification.userInfo objectForKey:NewPredictionNotificationKey];
     
-    [self.pagingDatasource insertNewObject:prediction reload:YES];
+    [self.pagingDatasource insertNewObject:prediction atIndex:0 reload:YES];
 }
 
 - (void)updatePrediction:(Prediction *)prediction {

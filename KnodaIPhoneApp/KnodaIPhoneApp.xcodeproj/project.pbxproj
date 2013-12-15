@@ -220,7 +220,6 @@
 		013DA8A51853002200B507E4 /* BJImageCropper.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA7AE1853002100B507E4 /* BJImageCropper.m */; };
 		013DA8A61853002200B507E4 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA7B11853002100B507E4 /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		013DA8A71853002200B507E4 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA7B11853002100B507E4 /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		013DA8A91853002200B507E4 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 013DA7B31853002100B507E4 /* libTestFlight.a */; };
 		013DA8AA1853002200B507E4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 013DA7B81853002100B507E4 /* InfoPlist.strings */; };
 		013DA8AB1853002200B507E4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 013DA7B81853002100B507E4 /* InfoPlist.strings */; };
 		013DA8AC1853002200B507E4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 013DA7BA1853002100B507E4 /* Localizable.strings */; };
@@ -271,6 +270,29 @@
 		014A9E89185BF95100A96678 /* SideNavBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 014A9E82185BF95100A96678 /* SideNavBarButtonItem.m */; };
 		014A9E8A185BF95100A96678 /* SideNavButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 014A9E84185BF95100A96678 /* SideNavButton.m */; };
 		014A9E8B185BF95100A96678 /* SideNavButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 014A9E84185BF95100A96678 /* SideNavButton.m */; };
+		014A9F05185DA04400A96678 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A9EFE185DA04400A96678 /* libTestFlight.a */; };
+		014A9F06185DA04400A96678 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 014A9EFF185DA04400A96678 /* README.md */; };
+		014A9F07185DA04400A96678 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 014A9EFF185DA04400A96678 /* README.md */; };
+		014A9F08185DA04400A96678 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 014A9F00185DA04400A96678 /* release_notes.md */; };
+		014A9F09185DA04400A96678 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 014A9F00185DA04400A96678 /* release_notes.md */; };
+		014A9F14185DA1C700A96678 /* TapjoyResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 014A9F12185DA1C700A96678 /* TapjoyResources.bundle */; };
+		014A9F15185DA1C700A96678 /* Tapjoy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A9F13185DA1C700A96678 /* Tapjoy.framework */; };
+		014A9F17185DA35000A96678 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A9F16185DA35000A96678 /* AdSupport.framework */; };
+		014A9F19185DA35500A96678 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A9F18185DA35500A96678 /* CFNetwork.framework */; };
+		014A9F1D185DA36A00A96678 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A9F1A185DA36A00A96678 /* CoreLocation.framework */; };
+		014A9F1E185DA36A00A96678 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A9F1B185DA36A00A96678 /* CoreMotion.framework */; };
+		014A9F1F185DA36A00A96678 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A9F1C185DA36A00A96678 /* CoreTelephony.framework */; };
+		014A9F22185DA37500A96678 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A9F20185DA37500A96678 /* EventKit.framework */; };
+		014A9F23185DA37500A96678 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A9F21185DA37500A96678 /* EventKitUI.framework */; };
+		014A9F25185DA38D00A96678 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A9F24185DA38D00A96678 /* libsqlite3.0.dylib */; };
+		014A9F27185DA39200A96678 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A9F26185DA39200A96678 /* libxml2.dylib */; };
+		014A9F29185DA39A00A96678 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A9F28185DA39A00A96678 /* MapKit.framework */; };
+		014A9F2B185DA3A700A96678 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A9F2A185DA3A700A96678 /* MediaPlayer.framework */; };
+		014A9F2D185DA3AD00A96678 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A9F2C185DA3AD00A96678 /* MessageUI.framework */; };
+		014A9F2F185DA3B200A96678 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A9F2E185DA3B200A96678 /* MobileCoreServices.framework */; };
+		014A9F31185DA3BB00A96678 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A9F30185DA3BB00A96678 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		014A9F33185DA3CE00A96678 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A9F32185DA3CE00A96678 /* StoreKit.framework */; };
+		014A9F35185DA3DC00A96678 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A9F34185DA3DC00A96678 /* Twitter.framework */; };
 		01598B221857C56D002E2534 /* MTKObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 01598B191857C56D002E2534 /* MTKObserver.m */; };
 		01598B231857C56D002E2534 /* MTKObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 01598B191857C56D002E2534 /* MTKObserver.m */; };
 		01598B241857C56D002E2534 /* NSObject+MTKObserving.m in Sources */ = {isa = PBXBuildFile; fileRef = 01598B1D1857C56D002E2534 /* NSObject+MTKObserving.m */; };
@@ -463,10 +485,6 @@
 		013DA7AE1853002100B507E4 /* BJImageCropper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BJImageCropper.m; sourceTree = "<group>"; };
 		013DA7B01853002100B507E4 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
 		013DA7B11853002100B507E4 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
-		013DA7B31853002100B507E4 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
-		013DA7B41853002100B507E4 /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
-		013DA7B51853002100B507E4 /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
-		013DA7B61853002100B507E4 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		013DA7B91853002100B507E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
 		013DA7BB1853002100B507E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		013DA7BC1853002100B507E4 /* KnodaIPhoneApp-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "KnodaIPhoneApp-Info.plist"; path = "KnodaIPhoneApp/KnodaIPhoneApp-Info.plist"; sourceTree = "<group>"; };
@@ -516,6 +534,30 @@
 		014A9E83185BF95100A96678 /* SideNavBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideNavBarButtonItem.h; sourceTree = "<group>"; };
 		014A9E84185BF95100A96678 /* SideNavButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideNavButton.m; sourceTree = "<group>"; };
 		014A9E85185BF95100A96678 /* SideNavButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideNavButton.h; sourceTree = "<group>"; };
+		014A9EFE185DA04400A96678 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		014A9EFF185DA04400A96678 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		014A9F00185DA04400A96678 /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
+		014A9F01185DA04400A96678 /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
+		014A9F02185DA04400A96678 /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
+		014A9F03185DA04400A96678 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		014A9F12185DA1C700A96678 /* TapjoyResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TapjoyResources.bundle; sourceTree = "<group>"; };
+		014A9F13185DA1C700A96678 /* Tapjoy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Tapjoy.framework; sourceTree = "<group>"; };
+		014A9F16185DA35000A96678 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		014A9F18185DA35500A96678 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		014A9F1A185DA36A00A96678 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		014A9F1B185DA36A00A96678 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		014A9F1C185DA36A00A96678 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		014A9F20185DA37500A96678 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+		014A9F21185DA37500A96678 /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
+		014A9F24185DA38D00A96678 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		014A9F26185DA39200A96678 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		014A9F28185DA39A00A96678 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		014A9F2A185DA3A700A96678 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		014A9F2C185DA3AD00A96678 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		014A9F2E185DA3B200A96678 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		014A9F30185DA3BB00A96678 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		014A9F32185DA3CE00A96678 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		014A9F34185DA3DC00A96678 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		01598B181857C56D002E2534 /* MTKObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTKObserver.h; sourceTree = "<group>"; };
 		01598B191857C56D002E2534 /* MTKObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTKObserver.m; sourceTree = "<group>"; };
 		01598B1A1857C56D002E2534 /* MTKObserving.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTKObserving.h; sourceTree = "<group>"; };
@@ -557,7 +599,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				013DA8A91853002200B507E4 /* libTestFlight.a in Frameworks */,
+				014A9F05185DA04400A96678 /* libTestFlight.a in Frameworks */,
 				0121E83B184FDBC700B7C5CA /* libz.dylib in Frameworks */,
 				0121E83C184FDBC700B7C5CA /* SystemConfiguration.framework in Frameworks */,
 				0121E83D184FDBC700B7C5CA /* Security.framework in Frameworks */,
@@ -573,13 +615,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01A1DEE9183E9A1F00DBBE68 /* libz.dylib in Frameworks */,
+				014A9F35185DA3DC00A96678 /* Twitter.framework in Frameworks */,
 				9E6F4C5A17D8CCFA00EAB4A0 /* SystemConfiguration.framework in Frameworks */,
+				014A9F33185DA3CE00A96678 /* StoreKit.framework in Frameworks */,
+				014A9F31185DA3BB00A96678 /* Social.framework in Frameworks */,
+				014A9F2F185DA3B200A96678 /* MobileCoreServices.framework in Frameworks */,
+				014A9F2D185DA3AD00A96678 /* MessageUI.framework in Frameworks */,
+				014A9F2B185DA3A700A96678 /* MediaPlayer.framework in Frameworks */,
+				014A9F29185DA39A00A96678 /* MapKit.framework in Frameworks */,
+				014A9F27185DA39200A96678 /* libxml2.dylib in Frameworks */,
+				014A9F25185DA38D00A96678 /* libsqlite3.0.dylib in Frameworks */,
+				9E708826178AF68E00F036A8 /* Foundation.framework in Frameworks */,
+				014A9F22185DA37500A96678 /* EventKit.framework in Frameworks */,
+				014A9F23185DA37500A96678 /* EventKitUI.framework in Frameworks */,
+				014A9F1D185DA36A00A96678 /* CoreLocation.framework in Frameworks */,
+				014A9F1E185DA36A00A96678 /* CoreMotion.framework in Frameworks */,
+				014A9F1F185DA36A00A96678 /* CoreTelephony.framework in Frameworks */,
+				9E708828178AF68E00F036A8 /* CoreGraphics.framework in Frameworks */,
+				014A9F19185DA35500A96678 /* CFNetwork.framework in Frameworks */,
+				014A9F17185DA35000A96678 /* AdSupport.framework in Frameworks */,
+				01A1DEE9183E9A1F00DBBE68 /* libz.dylib in Frameworks */,
 				9E28686F17C659940033FB3C /* Security.framework in Frameworks */,
 				9E76A557179FFF11004F8FC1 /* QuartzCore.framework in Frameworks */,
+				014A9F15185DA1C700A96678 /* Tapjoy.framework in Frameworks */,
 				9E708824178AF68E00F036A8 /* UIKit.framework in Frameworks */,
-				9E708826178AF68E00F036A8 /* Foundation.framework in Frameworks */,
-				9E708828178AF68E00F036A8 /* CoreGraphics.framework in Frameworks */,
 				013DA8A21853002200B507E4 /* libFlurry_4.2.3.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -918,11 +977,12 @@
 		013DA7A81853002100B507E4 /* Thirdparty */ = {
 			isa = PBXGroup;
 			children = (
+				014A9F0F185DA1C700A96678 /* TapjoySDK_iOS_v9.1.2 */,
+				014A9EFD185DA04400A96678 /* TestFlightSDK2.0.2 */,
 				01598B161857C56D002E2534 /* KVOBlocks */,
 				013DA7A91853002100B507E4 /* Flurry */,
 				013DA7AC1853002100B507E4 /* ImageCropper */,
 				013DA7AF1853002100B507E4 /* KeychainWrapper */,
-				013DA7B21853002100B507E4 /* TestFlightSDK2.0.2 */,
 			);
 			name = Thirdparty;
 			path = KnodaIPhoneApp/Thirdparty;
@@ -953,17 +1013,6 @@
 				013DA7B11853002100B507E4 /* KeychainItemWrapper.m */,
 			);
 			path = KeychainWrapper;
-			sourceTree = "<group>";
-		};
-		013DA7B21853002100B507E4 /* TestFlightSDK2.0.2 */ = {
-			isa = PBXGroup;
-			children = (
-				013DA7B31853002100B507E4 /* libTestFlight.a */,
-				013DA7B41853002100B507E4 /* TestFlight+AsyncLogging.h */,
-				013DA7B51853002100B507E4 /* TestFlight+ManualSessions.h */,
-				013DA7B61853002100B507E4 /* TestFlight.h */,
-			);
-			path = TestFlightSDK2.0.2;
 			sourceTree = "<group>";
 		};
 		013DA7B71853002100B507E4 /* en.lproj */ = {
@@ -1020,6 +1069,44 @@
 				013DA9001854330A00B507E4 /* TallyDatasource.m */,
 			);
 			path = Datasources;
+			sourceTree = "<group>";
+		};
+		014A9EFD185DA04400A96678 /* TestFlightSDK2.0.2 */ = {
+			isa = PBXGroup;
+			children = (
+				014A9EFE185DA04400A96678 /* libTestFlight.a */,
+				014A9EFF185DA04400A96678 /* README.md */,
+				014A9F00185DA04400A96678 /* release_notes.md */,
+				014A9F01185DA04400A96678 /* TestFlight+AsyncLogging.h */,
+				014A9F02185DA04400A96678 /* TestFlight+ManualSessions.h */,
+				014A9F03185DA04400A96678 /* TestFlight.h */,
+			);
+			path = TestFlightSDK2.0.2;
+			sourceTree = "<group>";
+		};
+		014A9F0F185DA1C700A96678 /* TapjoySDK_iOS_v9.1.2 */ = {
+			isa = PBXGroup;
+			children = (
+				014A9F10185DA1C700A96678 /* Tapjoy.embeddedframework */,
+			);
+			path = TapjoySDK_iOS_v9.1.2;
+			sourceTree = "<group>";
+		};
+		014A9F10185DA1C700A96678 /* Tapjoy.embeddedframework */ = {
+			isa = PBXGroup;
+			children = (
+				014A9F11185DA1C700A96678 /* Resources */,
+				014A9F13185DA1C700A96678 /* Tapjoy.framework */,
+			);
+			path = Tapjoy.embeddedframework;
+			sourceTree = "<group>";
+		};
+		014A9F11185DA1C700A96678 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				014A9F12185DA1C700A96678 /* TapjoyResources.bundle */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		01598B161857C56D002E2534 /* KVOBlocks */ = {
@@ -1103,6 +1190,22 @@
 		9E708822178AF68E00F036A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				014A9F34185DA3DC00A96678 /* Twitter.framework */,
+				014A9F32185DA3CE00A96678 /* StoreKit.framework */,
+				014A9F30185DA3BB00A96678 /* Social.framework */,
+				014A9F2E185DA3B200A96678 /* MobileCoreServices.framework */,
+				014A9F2C185DA3AD00A96678 /* MessageUI.framework */,
+				014A9F2A185DA3A700A96678 /* MediaPlayer.framework */,
+				014A9F28185DA39A00A96678 /* MapKit.framework */,
+				014A9F26185DA39200A96678 /* libxml2.dylib */,
+				014A9F24185DA38D00A96678 /* libsqlite3.0.dylib */,
+				014A9F20185DA37500A96678 /* EventKit.framework */,
+				014A9F21185DA37500A96678 /* EventKitUI.framework */,
+				014A9F1A185DA36A00A96678 /* CoreLocation.framework */,
+				014A9F1B185DA36A00A96678 /* CoreMotion.framework */,
+				014A9F1C185DA36A00A96678 /* CoreTelephony.framework */,
+				014A9F18185DA35500A96678 /* CFNetwork.framework */,
+				014A9F16185DA35000A96678 /* AdSupport.framework */,
 				013DA6E41852D4F800B507E4 /* libcommonCrypto.dylib */,
 				01A1DEE8183E9A1F00DBBE68 /* libz.dylib */,
 				9E6F4C5917D8CCFA00EAB4A0 /* SystemConfiguration.framework */,
@@ -1194,6 +1297,7 @@
 			files = (
 				013DA8931853002200B507E4 /* Screen4.png in Resources */,
 				013DA8251853002200B507E4 /* ForgotPasswordViewController.xib in Resources */,
+				014A9F09185DA04400A96678 /* release_notes.md in Resources */,
 				013DA89F1853002200B507E4 /* Media.xcassets in Resources */,
 				013DA8111853002200B507E4 /* SideNavCell.xib in Resources */,
 				013DA8531853002200B507E4 /* PredictionCell.xib in Resources */,
@@ -1234,6 +1338,7 @@
 				013DA8031853002200B507E4 /* BadgesCollectionViewController.xib in Resources */,
 				013DA8911853002200B507E4 /* Screen3@2x.png in Resources */,
 				013DA86F1853002200B507E4 /* UserProfileHeaderView.xib in Resources */,
+				014A9F07185DA04400A96678 /* README.md in Resources */,
 				013DA81B1853002200B507E4 /* LoadingView.xib in Resources */,
 				013DA8171853002200B507E4 /* LoadingCell.xib in Resources */,
 				014A9E87185BF95100A96678 /* SideNavButton.xib in Resources */,
@@ -1258,6 +1363,7 @@
 			files = (
 				013DA8921853002200B507E4 /* Screen4.png in Resources */,
 				013DA8241853002200B507E4 /* ForgotPasswordViewController.xib in Resources */,
+				014A9F08185DA04400A96678 /* release_notes.md in Resources */,
 				013DA89E1853002200B507E4 /* Media.xcassets in Resources */,
 				013DA8101853002200B507E4 /* SideNavCell.xib in Resources */,
 				013DA8521853002200B507E4 /* PredictionCell.xib in Resources */,
@@ -1295,9 +1401,11 @@
 				013DA87C1853002200B507E4 /* IntroOverlay@2x-568h.png in Resources */,
 				013DA80C1853002200B507E4 /* NavigationViewController.xib in Resources */,
 				013DA8AC1853002200B507E4 /* Localizable.strings in Resources */,
+				014A9F14185DA1C700A96678 /* TapjoyResources.bundle in Resources */,
 				013DA8021853002200B507E4 /* BadgesCollectionViewController.xib in Resources */,
 				013DA8901853002200B507E4 /* Screen3@2x.png in Resources */,
 				013DA86E1853002200B507E4 /* UserProfileHeaderView.xib in Resources */,
+				014A9F06185DA04400A96678 /* README.md in Resources */,
 				013DA81A1853002200B507E4 /* LoadingView.xib in Resources */,
 				013DA8161853002200B507E4 /* LoadingCell.xib in Resources */,
 				014A9E86185BF95100A96678 /* SideNavButton.xib in Resources */,
@@ -1526,6 +1634,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Nick Rellihan (9TAA35K5AK)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KnodaIPhoneApp/KnodaIPhoneApp-Prefix.pch";
@@ -1539,8 +1648,8 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/KnodaIPhoneApp/ThirdParty/Flurry",
-					"$(SRCROOT)/KnodaIPhoneApp/ThirdParty/TestFlightSDK2.0.2",
 					"$(SDKROOT)/usr/lib/system",
+					"$(SRCROOT)/KnodaIPhoneApp/ThirdParty/TestFlightSDK2.0.2",
 				);
 				PRODUCT_NAME = "Knoda Test";
 				PROVISIONING_PROFILE = "F229B453-5DF5-4DB8-8405-F705FD241E1F";
@@ -1555,6 +1664,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Knoda, LLC (F489V4H5F6)";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KnodaIPhoneApp/KnodaIPhoneApp-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "TESTFLIGHT=1";
@@ -1563,8 +1673,8 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/KnodaIPhoneApp/ThirdParty/Flurry",
-					"$(SRCROOT)/KnodaIPhoneApp/ThirdParty/TestFlightSDK2.0.2",
 					"$(SDKROOT)/usr/lib/system",
+					"$(SRCROOT)/KnodaIPhoneApp/ThirdParty/TestFlightSDK2.0.2",
 				);
 				PRODUCT_NAME = "Knoda Test";
 				PROVISIONING_PROFILE = "CA86DB6D-F464-415D-A617-957BCC68D40E";
@@ -1636,6 +1746,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EXCLUDED_SOURCE_FILE_NAMES = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/KnodaIPhoneApp/ThirdParty/TapjoySDK_iOS_v9.1.2/**",
+				);
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KnodaIPhoneApp/KnodaIPhoneApp-Prefix.pch";
@@ -1660,6 +1774,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Knoda, LLC (F489V4H5F6)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Knoda, LLC (F489V4H5F6)";
 				EXCLUDED_SOURCE_FILE_NAMES = libTestFlight.a;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/KnodaIPhoneApp/ThirdParty/TapjoySDK_iOS_v9.1.2/**",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KnodaIPhoneApp/KnodaIPhoneApp-Prefix.pch";
 				INFOPLIST_FILE = "KnodaIPhoneApp/KnodaIPhoneApp-Info.plist";

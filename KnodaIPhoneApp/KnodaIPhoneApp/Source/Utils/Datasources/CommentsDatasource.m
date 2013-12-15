@@ -35,7 +35,11 @@
     
 }
 
-
+- (void)insertNewObject:(id)object atIndex:(NSInteger)index reload:(BOOL)reload {
+    [super insertNewObject:object atIndex:index reload:reload];
+    
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.objects.count - 1 inSection:self.section] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+}
 
 
 @end

@@ -25,6 +25,7 @@ static const NSInteger kMaxPasswordLength = 20;
 @property (weak, nonatomic) IBOutlet UITextField *emailTextFiled;
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (weak, nonatomic) IBOutlet UIView *textFieldContainerView;
+@property (weak, nonatomic) IBOutlet UILabel *termsLabel;
 @end
 
 @implementation SignUpViewController
@@ -39,6 +40,21 @@ static const NSInteger kMaxPasswordLength = 20;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap)];
     [self.view addGestureRecognizer:tap];
     [self.navigationController setNavigationBarHidden:NO];
+    //By signing up, I agree to the Terms of Service and Privacy Policy
+    
+    NSDictionary *allAttributes = @{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:10.0]};
+    NSDictionary *underlined = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
+    
+    
+    NSMutableAttributedString *termsString = [[NSMutableAttributedString alloc] initWithString:@"By signing up, I agree to the "];
+    
+    [termsString appendAttributedString:[[NSAttributedString alloc] initWithString:@"Terms of Service" attributes:underlined]];
+    [termsString appendAttributedString:[[NSAttributedString alloc] initWithString:@" and "]];
+    [termsString appendAttributedString:[[NSAttributedString alloc] initWithString:@"Privacy Policy" attributes:underlined]];
+    
+    [termsString addAttributes:allAttributes range:NSMakeRange(0, termsString.length)];
+    
+    self.termsLabel.attributedText = termsString;
 
 }
 

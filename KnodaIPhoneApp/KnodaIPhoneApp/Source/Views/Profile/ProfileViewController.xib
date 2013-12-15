@@ -10,6 +10,7 @@
                 <outlet property="avatarButton" destination="saM-Jd-dOL" id="tIq-7l-Eaq"/>
                 <outlet property="emailContainer" destination="t44-U8-XhO" id="NDK-ZC-8Zd"/>
                 <outlet property="emailField" destination="ya2-lc-LLV" id="3dW-tr-KdN"/>
+                <outlet property="termsLabel" destination="rAG-MU-YJM" id="Kj9-WR-wuh"/>
                 <outlet property="userNameContainer" destination="n0L-9M-949" id="dhO-0t-5xC"/>
                 <outlet property="userNameField" destination="sRy-eh-mHw" id="qgL-cd-ygl"/>
                 <outlet property="view" destination="wU5-Ko-fbW" id="aIy-rg-uv1"/>
@@ -110,17 +111,7 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
-                <view contentMode="scaleToFill" id="AUv-h4-sa3">
-                    <rect key="frame" x="70" y="465" width="83" height="1"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
-                    <color key="backgroundColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                </view>
-                <view contentMode="scaleToFill" id="Xry-iN-tVK">
-                    <rect key="frame" x="177" y="465" width="70" height="1"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
-                    <color key="backgroundColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                </view>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Terms of Service and Privacy Policy" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rAG-MU-YJM">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rAG-MU-YJM">
                     <rect key="frame" x="70" y="446" width="180" height="21"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>

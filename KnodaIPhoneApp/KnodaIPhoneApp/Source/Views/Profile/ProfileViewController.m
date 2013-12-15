@@ -39,6 +39,7 @@ static const float kAvatarSize = 344.0;
 @property (weak, nonatomic) IBOutlet UIView *emailContainer;
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
 @property (weak, nonatomic) IBOutlet UIButton *avatarButton;
+@property (weak, nonatomic) IBOutlet UILabel *termsLabel;
 @property (assign, nonatomic) BOOL canceledEntry;
 
 
@@ -60,7 +61,19 @@ static const float kAvatarSize = 344.0;
     UITapGestureRecognizer *doneTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap)];
     [self.view addGestureRecognizer:doneTap];
     
-
+    NSDictionary *allAttributes = @{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:10.0]};
+    NSDictionary *underlined = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
+    
+    
+    NSMutableAttributedString *termsString = [[NSMutableAttributedString alloc] init];
+    
+    [termsString appendAttributedString:[[NSAttributedString alloc] initWithString:@"Terms of Service" attributes:underlined]];
+    [termsString appendAttributedString:[[NSAttributedString alloc] initWithString:@" and "]];
+    [termsString appendAttributedString:[[NSAttributedString alloc] initWithString:@"Privacy Policy" attributes:underlined]];
+    
+    [termsString addAttributes:allAttributes range:NSMakeRange(0, termsString.length)];
+    
+    self.termsLabel.attributedText = termsString;
 }
 
 - (void)viewWillAppear:(BOOL)animated {

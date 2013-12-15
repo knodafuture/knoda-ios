@@ -10,6 +10,7 @@
                 <outlet property="containerView" destination="5lP-KY-DT5" id="0xl-ph-gbb"/>
                 <outlet property="emailTextFiled" destination="WPP-35-nWx" id="ozu-Vb-omM"/>
                 <outlet property="passwordTextField" destination="UvF-rb-yau" id="8Tg-Yr-yhn"/>
+                <outlet property="termsLabel" destination="vtZ-Vz-IQh" id="xoY-YZ-w1b"/>
                 <outlet property="textFieldContainerView" destination="yKm-eL-jbd" id="KFj-JJ-b7n"/>
                 <outlet property="usernameTextField" destination="90u-bN-FKB" id="Cxh-aU-a98"/>
                 <outlet property="view" destination="OEg-gb-2OJ" id="4yM-fV-s4Y"/>
@@ -78,23 +79,13 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         </view>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By signing up, I agree to the Terms of Service and Privacy Policy" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vtZ-Vz-IQh">
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vtZ-Vz-IQh">
                             <rect key="frame" x="10" y="256" width="300" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="10"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <view contentMode="scaleToFill" id="tE6-iJ-RnM">
-                            <rect key="frame" x="139" y="274" width="75" height="1"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        </view>
-                        <view contentMode="scaleToFill" id="Q1M-y5-IVw">
-                            <rect key="frame" x="235" y="274" width="63" height="1"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hGr-qe-tMP">
                             <rect key="frame" x="139" y="247" width="77" height="35"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

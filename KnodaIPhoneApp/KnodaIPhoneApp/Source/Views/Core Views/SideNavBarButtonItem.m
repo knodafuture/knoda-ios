@@ -57,6 +57,7 @@
         frame.size.width = 16.0;
     
     frame.origin.x = self.image.size.width;
+    frame.origin.y = self.sideNavButton.frame.size.height / 2.0 - frame.size.height / 2.0 - 1.0;
     
     self.sideNavButton.imageView.frame = frame;
     
@@ -64,7 +65,7 @@
     
     frame.size.width = textSize.width;
     frame.origin.x = self.sideNavButton.imageView.frame.origin.x + (self.sideNavButton.imageView.frame.size.width / 2.0) - (frame.size.width / 2.0) + .5;
-    
+    frame.origin.y = self.sideNavButton.imageView.frame.origin.y;
     self.sideNavButton.label.frame = frame;
     
     self.sideNavButton.imageView.hidden = NO;

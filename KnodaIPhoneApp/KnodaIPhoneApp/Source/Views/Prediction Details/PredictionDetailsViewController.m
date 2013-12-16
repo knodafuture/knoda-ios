@@ -392,6 +392,7 @@ static const int kBSAlertTag = 1001;
 }
 
 - (void)createCommentView:(CreateCommentView *)createCommentView didCreateComment:(Comment *)comment {
+    comment.challenge = self.prediction.challenge;
     self.composingComment = NO;
     [self.tableViewController addComment:comment];
     self.prediction.commentCount++;

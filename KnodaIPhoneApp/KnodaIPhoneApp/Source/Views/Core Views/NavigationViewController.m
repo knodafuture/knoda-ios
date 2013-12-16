@@ -41,6 +41,7 @@
 @property (strong, nonatomic) NSMutableDictionary *vcCache;
 
 @property (strong, nonatomic) SideNavBarButtonItem *sideNavBarButtonItem;
+@property (strong, nonatomic) NSTimer *pingTimer;
 @end
 
 @implementation NavigationViewController
@@ -72,6 +73,12 @@
     [self observeProperty:@keypath(self.appDelegate.currentUser) withBlock:^(__weak id self, id old, id new) {
         [self updateUserInfo];
     }];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [self.pingTimer invalidate];
+    self.pingTimer = nil;
     
 }
 - (void)viewDidAppear:(BOOL)animated {
@@ -80,8 +87,16 @@
     if (!self.appeared) {
         self.appeared = YES;
     }
+    
+    [self.pingTimer invalidate];
+    self.pingTimer = nil;
+    self.pingTimer = [NSTimer scheduledTimerWithTimeInterval:15 target:self selector:@selector(serverPing) userInfo:nil repeats:YES];
+    
 }
 
+- (void)serverPing {
+    [self updateAlerts];
+}
 - (void)hackAnimationFinished {
     if(!self.appDelegate.currentUser.hasAvatar)
         [self showSelectPictureViewController];
@@ -207,7 +222,6 @@
     self.gestureView.hidden = NO;
     
     [[WebApi sharedInstance] getCurrentUser:^(User *user, NSError *error) {}];
-    [self updateAlerts];
     
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];

@@ -15,7 +15,7 @@
 static WebApi *sharedSingleton;
 
 NSString *const HttpForbiddenNotification = @"HttpForbiddenNotification";
-NSInteger PageLimit = 25;
+NSInteger PageLimit = 50;
 
 @interface WebApi (Internal)
 

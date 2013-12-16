@@ -10,6 +10,7 @@
 
 @interface FirstStartView ()
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIButton *button;
 @end
 
 @implementation FirstStartView
@@ -24,7 +25,16 @@
     else
         self.imageView.image = [UIImage imageNamed:@"IntroOverlay"];
     
+    self.frame = [[UIScreen mainScreen] bounds];
+
+    
     return self;
+}
+
+- (void)didMoveToSuperview {
+    CGRect frame = self.button.frame;
+    frame.origin.y = self.frame.size.height - frame.size.height;
+    self.button.frame = frame;
 }
 
 - (IBAction)close:(id)sender {

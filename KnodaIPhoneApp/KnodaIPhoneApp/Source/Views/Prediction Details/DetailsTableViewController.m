@@ -155,13 +155,16 @@ static const float parallaxRatio = 0.5;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (scrollView.contentOffset.y < 0)
-        return;
+    
     
     UITableViewCell *stickyCell = self.headerCell;
     
     CGRect frame = stickyCell.frame;
-    frame.origin.y = scrollView.contentOffset.y * parallaxRatio;
+    
+//    if (scrollView.contentOffset.y < 0)
+//        frame.origin.y = scrollView.contentOffset.y;
+//    else
+        frame.origin.y = scrollView.contentOffset.y * parallaxRatio;
     
     stickyCell.frame = frame;
     [stickyCell.superview sendSubviewToBack:stickyCell];

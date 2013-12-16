@@ -78,6 +78,7 @@
     
     cell.bodyLabel.attributedText = string;
     
+    
     if (alert.seen)
         cell.contentView.backgroundColor = [UIColor whiteColor];
     else

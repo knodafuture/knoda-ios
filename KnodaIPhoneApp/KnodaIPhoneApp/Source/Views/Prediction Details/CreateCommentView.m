@@ -128,7 +128,7 @@ static const int CommentMaxChars = 300;
     comment.userId = delegate.currentUser.userId;
     comment.smallUserImage = delegate.currentUser.smallImageUrl;
     comment.username = delegate.currentUser.name;
-    
+
     [[WebApi sharedInstance] createComment:comment completion:^(NSError *error) {
         [[LoadingView sharedInstance] hide];
         if (error) {

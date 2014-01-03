@@ -27,7 +27,6 @@
     self.imageView.image = self.image;
     
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem backButtonWithTarget:self action:@selector(back)];
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem addPredictionBarButtonItem];
     
     self.scrollView.maximumZoomScale = 10;
 }

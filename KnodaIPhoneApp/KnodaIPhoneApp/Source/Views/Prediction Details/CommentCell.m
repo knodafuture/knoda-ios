@@ -65,6 +65,7 @@ static NSMutableDictionary *cellHeights;
 
 
 - (void)fillWithComment:(Comment *)comment {
+    self.comment = comment;
     
     self.usernameLabel.text = comment.username;
     self.bodyLabel.text = comment.body;
@@ -83,4 +84,7 @@ static NSMutableDictionary *cellHeights;
 
 }
 
+- (IBAction)profileClicked:(id)sender {
+    [self.delegate userClickedInCommentCellWithUserId:self.comment.userId];
+}
 @end

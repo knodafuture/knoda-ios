@@ -1,0 +1,272 @@
+//
+//  SearchViewController.m
+//  KnodaIPhoneApp
+//
+//  Created by nick on 1/2/14.
+//  Copyright (c) 2014 Knoda. All rights reserved.
+//
+
+#import "SearchViewController.h"
+#import "SearchBar.h"   
+#import "WebApi.h"  
+#import "CategoryPredictionsViewController.h"
+#import "SearchDatasource.h"
+#import "CategoriesDatasource.h"
+#import "PredictionCell.h"
+#import "AnotherUsersProfileViewController.h"
+#import "ProfileViewController.h"
+#import "AppDelegate.h"
+#import "PredictionDetailsViewController.h"
+#import "UserCell.h"
+
+@interface SearchViewController () <SearchBarDelegate, SearchDatasourceDelegate, PredictionCellDelegate, PredictionDetailsDelegate>
+@property (strong, nonatomic) SearchBar *searchBar;
+@property (strong, nonatomic) SearchDatasource *searchDatasource;
+@property (strong, nonatomic) CategoriesDatasource *categoriesDatasource;
+@end
+
+@implementation SearchViewController
+
+- (AppDelegate *)appDelegate {
+    return [[UIApplication sharedApplication] delegate];
+}
+
+- (void)viewDidLoad {
+    
+    self.pagingDatasource = self.categoriesDatasource = [[CategoriesDatasource alloc] initWithTableView:self.tableView];
+    [super viewDidLoad];
+
+    self.searchBar = [[SearchBar alloc] init];
+    self.searchBar.delegate = self;
+    self.searchBar.backgroundColor = [UIColor colorFromHex:@"77BC1F"];
+    
+    CGRect frame = self.searchBar.frame;
+    frame.origin.x = self.view.frame.size.width;
+    self.searchBar.frame = frame;
+    
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem backButtonWithTarget:self action:@selector(back)];
+    
+    self.refreshControl = nil;
+    
+    self.searchDatasource = [[SearchDatasource alloc] initWithTableView:self.tableView];
+    self.searchDatasource.delegate = self;
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self.searchBar.textField becomeFirstResponder];
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController.navigationBar addSubview:self.searchBar];
+
+    NSTimeInterval duration;
+    
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
+        duration = 0.35;
+    else
+        duration = 0.5;
+    
+    CGRect frame = self.searchBar.frame;
+    frame.origin.x = 30;
+    
+    if (animated)
+        [UIView animateWithDuration:duration animations:^{
+            self.searchBar.frame = frame;
+        }];
+    else
+        self.searchBar.frame = frame;
+}
+
+- (void)back {
+    [self removeSearchBar];
+    [self.navigationController popViewControllerAnimated:YES];
+    
+    if ([self.delegate respondsToSelector:@selector(searchViewControllerDidFinish:)])
+        [self.delegate searchViewControllerDidFinish:self];
+}
+
+- (void)removeSearchBar {
+    [self.searchBar removeFromSuperview];
+
+}
+
+- (void)searchBar:(SearchBar *)searchBar didSearchForText:(NSString *)searchText {
+    self.pagingDatasource = self.searchDatasource;
+    
+    [self.pagingDatasource loadPage:0 completion:^{
+        [self.tableView reloadData];
+    }];
+}
+
+- (void)searchBarDidClearText:(SearchBar *)searchBar {
+    self.pagingDatasource = self.categoriesDatasource;
+    
+    [self.pagingDatasource loadPage:0 completion:^{
+        [self.tableView reloadData];
+    }];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+    
+    if ([cell isKindOfClass:PredictionCell.class]) {
+        PredictionCell *pCell = (PredictionCell *)cell;;
+        pCell.delegate = self;
+        if (pCell.prediction.userId == self.appDelegate.currentUser.userId)
+            pCell.avatarImageView.image = [_imageLoader lazyLoadImage:self.appDelegate.currentUser.smallImageUrl onIndexPath:indexPath];
+        else
+            pCell.avatarImageView.image = [_imageLoader lazyLoadImage:pCell.prediction.smallAvatarUrl onIndexPath:indexPath];
+        
+    }
+    
+    if ([cell isKindOfClass:UserCell.class]) {
+        UserCell *uCell = (UserCell *)cell;
+        uCell.avatarImageView.image = [_imageLoader lazyLoadImage:uCell.user.smallImageUrl onIndexPath:indexPath];
+    }
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.pagingDatasource == self.categoriesDatasource)
+        [self categorySelectedAtIndexPath:indexPath];
+    else
+        [self searchResultSelectedAtIndexPath:indexPath];
+
+}
+
+- (void)categorySelectedAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row >= self.pagingDatasource.objects.count)
+        return;
+    
+    Topic *topic = [self.pagingDatasource.objects objectAtIndex:indexPath.row];
+    
+    CategoryPredictionsViewController *vc = [[CategoryPredictionsViewController alloc] initWithCategory:topic.name];
+    
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    [self removeSearchBar];
+}
+
+- (void)searchResultSelectedAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.section == 0) {
+        User *user = [self.searchDatasource.users objectAtIndex:indexPath.row];
+        
+        [self profileSelectedWithUserId:user.userId inCell:nil];
+        return;
+    }
+    
+    Prediction *prediction = [self.searchDatasource.predictions objectAtIndex:indexPath.row];
+    
+    PredictionDetailsViewController *vc = [[PredictionDetailsViewController alloc] initWithPrediction:prediction];
+    
+    vc.delegate = self;
+    
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    [self removeSearchBar];
+    
+}
+
+
+- (void)objectsAfterObject:(id)object completion:(void (^)(NSArray *, NSError *))completionHandler {
+    [[WebApi sharedInstance] getCategoriesCompletion:completionHandler];
+}
+
+
+- (void)getResultsCompletion:(void (^)(NSArray *, NSArray *, NSError *))completionHandler {
+    [[WebApi sharedInstance] searchForUsers:self.searchBar.textField.text completion:^(NSArray *users, NSError *error) {
+        if (error) {
+            completionHandler(nil, nil, error);
+            return;
+        }
+        
+        [[WebApi sharedInstance] searchForPredictions:self.searchBar.textField.text completion:^(NSArray *predictions, NSError *error) {
+            completionHandler(users, predictions, error);
+        }];
+    }];
+}
+
+- (void)predictionAgreed:(Prediction *)prediction inCell:(PredictionCell *) cell {
+    
+    [[WebApi sharedInstance] agreeWithPrediction:prediction.predictionId completion:^(Challenge *challenge, NSError *error) {
+        if (!error) {
+            prediction.challenge = challenge;
+            [cell fillWithPrediction:prediction];
+            [[WebApi sharedInstance] checkNewBadges];
+        }
+        else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message:@"Unable to agree at this time" delegate: nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles: nil];
+            [alert show];
+            
+        }
+    }];
+}
+
+- (void)predictionDisagreed:(Prediction *)prediction inCell:(PredictionCell *) cell {
+    [[WebApi sharedInstance] disagreeWithPrediction:prediction.predictionId completion:^(Challenge *challenge, NSError *error) {
+        if (!error) {
+            prediction.challenge = challenge;
+            [cell fillWithPrediction:prediction];
+            [[WebApi sharedInstance] checkNewBadges];
+        }
+        else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message:@"Unable to disagree at this time" delegate: nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles: nil];
+            [alert show];
+        }
+    }];
+}
+
+- (void)profileSelectedWithUserId:(NSInteger)userId inCell:(PredictionCell *)cell {
+    if (userId == self.appDelegate.currentUser.userId) {
+        ProfileViewController *vc = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:[NSBundle mainBundle]];
+        vc.leftButtonItemReturnsBack = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+        [self removeSearchBar];
+    } else {
+        AnotherUsersProfileViewController *vc = [[AnotherUsersProfileViewController alloc] initWithUserId:userId];
+        [self.navigationController pushViewController:vc animated:YES];
+        [self removeSearchBar];
+    }
+}
+
+- (void)updatePrediction:(Prediction *)prediction {
+    
+    NSInteger indexToExchange = NSNotFound;
+    
+    for (Prediction *oldPrediction in self.searchDatasource.predictions) {
+        if (prediction.predictionId == oldPrediction.predictionId)
+            indexToExchange = [self.pagingDatasource.objects indexOfObject:oldPrediction];
+    }
+    
+    if (indexToExchange == NSNotFound)
+        return;
+    
+    [self.searchDatasource.predictions replaceObjectAtIndex:indexToExchange withObject:prediction];
+    [self.tableView reloadData];
+}
+
+- (void)imageLoader:(ImageLoader *)loader finishedLoadingImage:(UIImage *)image forIndexPath:(NSIndexPath *)indexPath {
+
+    if (self.pagingDatasource == self.categoriesDatasource)
+        return;
+    
+    if (indexPath.section == 0) {
+        UserCell *cell = (UserCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+        if (![cell isKindOfClass:UserCell.class])
+            return;
+        cell.avatarImageView.image = image;
+    }
+    
+    PredictionCell *cell = (PredictionCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+    
+    if (![cell isKindOfClass:PredictionCell.class])
+        return;
+    cell.avatarImageView.image = image;
+}
+@end

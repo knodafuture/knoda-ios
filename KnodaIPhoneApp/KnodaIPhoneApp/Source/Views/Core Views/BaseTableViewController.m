@@ -28,7 +28,7 @@
 	self.tableView.backgroundColor = [UIColor whiteColor];
 	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    self.tableView.showsVerticalScrollIndicator = NO;
+    self.tableView.showsVerticalScrollIndicator = YES;
 
 	_imageLoader = [[ImageLoader alloc] initForTable:self.tableView delegate:self];
 	
@@ -129,6 +129,18 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.pagingDatasource tableView:tableView numberOfRowsInSection:section];
     
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return [self.pagingDatasource numberOfSectionsInTableView:tableView];
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    return [self.pagingDatasource tableView:tableView viewForHeaderInSection:section];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return [self.pagingDatasource tableView:tableView heightForHeaderInSection:section];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {

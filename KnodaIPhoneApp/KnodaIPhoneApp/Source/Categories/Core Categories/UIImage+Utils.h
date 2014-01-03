@@ -12,5 +12,4 @@
 
 - (UIImage *)scaledToSize:(CGSize)size autoScale:(BOOL)scale;
 - (UIImage *)roundedImageWithRadius:(CGFloat)radius;
-
 @end

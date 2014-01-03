@@ -14,5 +14,6 @@
 + (UIBarButtonItem *)styledBarButtonItemWithTitle:(NSString *)title target:(id)target action:(SEL)action color:(UIColor *)color;
 + (UIBarButtonItem *)leftBarButtonItemWithImage:(UIImage *)image target:(id)target action:(SEL)action;
 + (UIBarButtonItem *)rightBarButtonItemWithImage:(UIImage *)image target:(id)target action:(SEL)action;
-+ (UIBarButtonItem *)addPredictionBarButtonItem;
++ (UIBarButtonItem *)addPredictionBarButtonItemWithTarget:(id)target action:(SEL)action;
++ (UIBarButtonItem *)searchBarButtonItemWithTarget:(id)target action:(SEL)action;
 @end

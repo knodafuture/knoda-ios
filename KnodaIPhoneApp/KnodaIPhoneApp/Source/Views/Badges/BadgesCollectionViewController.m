@@ -37,7 +37,6 @@
     self.title = @"BADGES";
     
     self.navigationController.navigationBar.translucent = NO;
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem addPredictionBarButtonItem];
     
     [self.collectionView registerNib:[UINib nibWithNibName:@"BadgesCollectionViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"BadgeCollectionViewCellIdentifier"];
 }

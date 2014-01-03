@@ -12,8 +12,6 @@
 #define PADDING 10.0
 static UIFont *font = nil;
 
-static UIBarButtonItem *composeBarButtonItem;
-
 @implementation UIBarButtonItem (Utils)
 
 + (UIBarButtonItem *)backButtonWithTarget:(id)target action:(SEL)action {
@@ -77,13 +75,13 @@ static UIBarButtonItem *composeBarButtonItem;
 	return [[UIBarButtonItem alloc] initWithCustomView:button];
 }
 
-+ (UIBarButtonItem *)addPredictionBarButtonItem {
++ (UIBarButtonItem *)addPredictionBarButtonItemWithTarget:(id)target action:(SEL)action {
+    return [UIBarButtonItem rightBarButtonItemWithImage:[UIImage imageNamed:@"PredictIcon"] target:target action:action];
     
-    if (!composeBarButtonItem) {
-        AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        composeBarButtonItem = [UIBarButtonItem rightBarButtonItemWithImage:[UIImage imageNamed:@"PredictIcon"] target:delegate action:@selector(presentAddPredictionViewController)];
-    }
-    
-    return composeBarButtonItem;
 }
+
++ (UIBarButtonItem *)searchBarButtonItemWithTarget:(id)target action:(SEL)action {
+    return [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:target action:action];
+}
+
 @end

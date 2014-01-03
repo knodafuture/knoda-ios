@@ -28,7 +28,6 @@
     [super viewDidLoad];
     self.navigationController.navigationBar.translucent = NO;
     self.title = @"HISTORY";
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem addPredictionBarButtonItem];
     
 }
 

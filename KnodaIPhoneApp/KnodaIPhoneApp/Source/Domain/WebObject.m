@@ -39,7 +39,7 @@ NSString *ResponseDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'zzz";
     if (!jsonObject)
         return nil;
     
-    if (![jsonObject isKindOfClass:NSDictionary.class] && [self responseKey]) {
+    if ([jsonObject isKindOfClass:NSDictionary.class] && ![self responseKey]) {
         NSLog(@"Expecting dictionary with response key = %@, aborting serialization", [self responseKey]);
         return nil;
     }

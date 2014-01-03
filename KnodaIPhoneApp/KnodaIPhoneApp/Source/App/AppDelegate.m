@@ -10,7 +10,6 @@
 #import "SignUpRequest.h"
 #import "NewBadgeView.h"
 #import "LoadingView.h"
-#import "AddPredictionViewController.h"
 #import "KeychainItemWrapper.h"
 #import "WelcomeViewController.h"
 #import "NavigationViewController.h"
@@ -32,7 +31,7 @@ NSString *BadgeNotificationKey = @"BadgeNotificationKey";
 NSString *NewObjectNotification = @"NewPredictionNotification";
 NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
 
-@interface AppDelegate() <UIAlertViewDelegate, AddPredictionViewControllerDelegate>
+@interface AppDelegate() <UIAlertViewDelegate>
 
 @end
 
@@ -150,21 +149,6 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
     [self showWelcomeScreenAnimated:YES];
 }
 
-- (void)presentAddPredictionViewController {
-    AddPredictionViewController *vc = [[AddPredictionViewController alloc] initWithNibName:@"AddPredictionViewController" bundle:[NSBundle mainBundle]];
-    vc.delegate = self;
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-    
-    [self.window.rootViewController presentViewController:nav animated:YES completion:nil];
-}
-
-- (void)addPredictionViewController:(AddPredictionViewController *)viewController didCreatePrediction:(Prediction *)prediction {
-    [[NSNotificationCenter defaultCenter] postNotificationName:NewObjectNotification object:nil userInfo:@{NewPredictionNotificationKey: prediction}];
-    
-    [self.window.rootViewController dismissViewControllerAnimated:YES completion:^{
-        [[WebApi sharedInstance] checkNewBadges];
-    }];
-}
 
 - (void)showWelcomeScreenAnimated:(BOOL)animated {
     WelcomeViewController *welcome = [[WelcomeViewController alloc] initWithNibName:@"WelcomeViewController" bundle:[NSBundle mainBundle]];

@@ -30,7 +30,6 @@
     }
     
     self.title = @"HOME";
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem addPredictionBarButtonItem];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

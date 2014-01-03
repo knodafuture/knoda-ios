@@ -35,6 +35,8 @@ static const int kBSAlertTag = 1001;
 @property (assign, nonatomic) BOOL appeared;
 @property (assign, nonatomic) BOOL composingComment;
 
+@property (strong, nonatomic) UIBarButtonItem *rightSideBarButtonItemBackup;
+
 @end
 
 @implementation PredictionDetailsViewController
@@ -111,11 +113,17 @@ static const int kBSAlertTag = 1001;
 }
 
 - (void)setDefaultBarButtonItems:(BOOL)animated {
+    
+    if (self.rightSideBarButtonItemBackup)
+        self.navigationItem.rightBarButtonItem = self.rightSideBarButtonItemBackup;
     [self.navigationItem setLeftBarButtonItem:[UIBarButtonItem backButtonWithTarget:self action:@selector(backPressed:)]];
-    [self.navigationItem setRightBarButtonItem:[UIBarButtonItem addPredictionBarButtonItem]];
     self.title = @"DETAILS";
 }
 - (void)composeComment {
+    
+    if (!self.rightSideBarButtonItemBackup)
+        self.rightSideBarButtonItemBackup = [self.navigationItem.rightBarButtonItems lastObject];
+    
     UIBarButtonItem *cancelBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTitle:@"Cancel" target:self.createCommentView action:@selector(cancel) color:[UIColor whiteColor]];
     
     UIBarButtonItem *submitBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTitle:@"Submit" target:self.createCommentView action:@selector(submit) color:[UIColor whiteColor]];

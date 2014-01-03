@@ -53,7 +53,6 @@ static const float kAvatarSize = 344.0;
     if (self.leftButtonItemReturnsBack)
         self.navigationItem.leftBarButtonItem = [UIBarButtonItem backButtonWithTarget:self action:@selector(menuButtonPress)];
     self.navigationController.navigationBar.translucent = NO;
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem addPredictionBarButtonItem];
     
     self.headerView = [[UserProfileHeaderView alloc] init];
     [self.view insertSubview:self.headerView belowSubview:self.avatarButton];

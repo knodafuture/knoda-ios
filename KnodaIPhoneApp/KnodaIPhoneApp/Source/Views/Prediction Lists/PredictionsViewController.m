@@ -88,19 +88,6 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     [super tableView:tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
-    
-    if ([cell isKindOfClass:PredictionCell.class]) {
-        PredictionCell *pCell = (PredictionCell *)cell;
-        Prediction *prediction = [self.pagingDatasource.objects objectAtIndex:indexPath.row];
-        if ([prediction.userName isEqualToString:@"takawiraa"]) {
-            NSLog(@"%@", prediction);
-        }
-        if (prediction.userId == self.appDelegate.currentUser.userId)
-            pCell.avatarImageView.image = [_imageLoader lazyLoadImage:self.appDelegate.currentUser.smallImageUrl onIndexPath:indexPath];
-        else
-            pCell.avatarImageView.image = [_imageLoader lazyLoadImage:prediction.smallAvatarUrl onIndexPath:indexPath];
-
-    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

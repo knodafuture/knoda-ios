@@ -19,8 +19,12 @@
 #import "PredictionsViewController.h"
 #import "AlertsViewController.h"
 #import "SideNavBarButtonItem.h"
+#import "AddPredictionViewController.h"
+#import "RightSideButtonsView.h"
+#import <QuartzCore/QuartzCore.h>
+#import "SearchViewController.h"
 
-@interface NavigationViewController () <SelectPictureDelegate>
+@interface NavigationViewController () <SearchViewControllerDelegate, SelectPictureDelegate, AddPredictionViewControllerDelegate, UINavigationControllerDelegate, UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *pointsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *wonLostLabel;
@@ -41,7 +45,12 @@
 @property (strong, nonatomic) NSMutableDictionary *vcCache;
 
 @property (strong, nonatomic) SideNavBarButtonItem *sideNavBarButtonItem;
+@property (strong, nonatomic) RightSideButtonsView *rightSideBarButtonsView;
+@property (strong, nonatomic) UIBarButtonItem *rightSideBarButtonItem;
+
 @property (strong, nonatomic) NSTimer *pingTimer;
+@property (weak, nonatomic) UINavigationController *topNavigationController;
+
 @end
 
 @implementation NavigationViewController
@@ -65,6 +74,14 @@
     
     [self updateUserInfo];
     self.sideNavBarButtonItem = [[SideNavBarButtonItem alloc] initWithTarget:self action:@selector(toggleNavigationPanel)];
+    
+    self.rightSideBarButtonsView = [[RightSideButtonsView alloc] init];
+    
+    [self.rightSideBarButtonsView setSearchTarget:self action:@selector(search)];
+    [self.rightSideBarButtonsView setAddPredictionTarget:self action:@selector(presentAddPredictionViewController)];
+    
+    self.rightSideBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.rightSideBarButtonsView];
+    
     [self updateAlerts];
 }
 - (void)viewWillAppear:(BOOL)animated {
@@ -124,8 +141,9 @@
 }
 
 - (UINavigationController *)navigationControllerForMenuItem:(MenuItem)menuItem {
-    UIViewController *viewController = [self.vcCache objectForKey:@(menuItem)];
-    if (!viewController) {
+    UINavigationController *navigationController = [self.vcCache objectForKey:@(menuItem)];
+    if (!navigationController) {
+        UIViewController *viewController;
         switch (menuItem) {
             case MenuHome:
                 viewController = [[HomeViewController alloc] initWithStyle:UITableViewStylePlain];
@@ -147,10 +165,14 @@
                 break;
         }
         viewController.navigationItem.leftBarButtonItem = self.sideNavBarButtonItem;
-        [self.vcCache setObject:viewController forKey:@(menuItem)];
+        navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+        navigationController.delegate = self;
+        [self.vcCache setObject:navigationController forKey:@(menuItem)];
     }
     
-    return [[UINavigationController alloc] initWithRootViewController:viewController];
+    self.topNavigationController = navigationController;
+    
+    return navigationController;
 }
 
 - (void)presentViewControllerForMenuItem:(MenuItem)menuItem {
@@ -264,6 +286,8 @@
         
         [self.sideNavBarButtonItem setAlertsCount:alerts.count];
         
+        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:alerts.count];
+        
     }];
 }
 
@@ -279,7 +303,12 @@
     
     self.pointsLabel.text = [NSString stringWithFormat:@"%@",[formatter stringFromNumber:[NSNumber numberWithInteger:user.points]]];
     self.wonLostLabel.text = [NSString stringWithFormat:@"%d-%d",user.won,user.lost];
-    self.wonPercantageLabel.text = ![user.winningPercentage isEqual: @0] ? [NSString stringWithFormat:@"%@%@",user.winningPercentage,@"%"] : @"0%";
+    if ([user.winningPercentage isEqual:@0])
+        self.wonPercantageLabel.text = @"0%";
+    else if ([user.winningPercentage isEqual:@100])
+        self.wonPercantageLabel.text = @"100%";
+    else
+        self.wonPercantageLabel.text = [NSString stringWithFormat:@"%@%@",user.winningPercentage,@"%"];
     self.steakLabel.text = [user.streak length] > 0 ? user.streak : @"W0";
     
     SideNavCell *cell = (SideNavCell *)[self.menuItemsTableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:MenuProfile-1 inSection:0]];
@@ -312,6 +341,12 @@
     [self openMenuItem:indexPath.row+1];
 }
 
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    
+    if (![viewController isKindOfClass:SearchViewController.class])
+        viewController.navigationItem.rightBarButtonItem = self.rightSideBarButtonItem;
+}
+
 #pragma mark SelectPictureDelegate
 
 - (void)showSelectPictureViewController {
@@ -325,6 +360,34 @@
     [[LoadingView sharedInstance] hide];
     [[WebApi sharedInstance] checkNewBadges];
     [self openMenuItem:MenuHome];
+}
+
+
+- (void)presentAddPredictionViewController {
+    AddPredictionViewController *vc = [[AddPredictionViewController alloc] initWithNibName:@"AddPredictionViewController" bundle:[NSBundle mainBundle]];
+    vc.delegate = self;
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    
+    [self.view.window.rootViewController presentViewController:nav animated:YES completion:nil];
+}
+
+- (void)addPredictionViewController:(AddPredictionViewController *)viewController didCreatePrediction:(Prediction *)prediction {
+    [[NSNotificationCenter defaultCenter] postNotificationName:NewObjectNotification object:nil userInfo:@{NewPredictionNotificationKey: prediction}];
+    
+    [self.view.window.rootViewController dismissViewControllerAnimated:YES completion:^{
+        [[WebApi sharedInstance] checkNewBadges];
+    }];
+}
+
+- (void)search {
+    SearchViewController *vc = [[SearchViewController alloc] initWithStyle:UITableViewStylePlain];
+    vc.delegate = self;
+    [self.rightSideBarButtonsView setSearchButtonHidden:YES];
+    [self.topNavigationController pushViewController:vc animated:YES];
+}
+
+- (void)searchViewControllerDidFinish:(SearchViewController *)searchViewController {
+    [self.rightSideBarButtonsView setSearchButtonHidden:NO];
 }
 
 @end

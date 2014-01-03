@@ -17,6 +17,7 @@
     #import "Flurry.h"
     #import "MTKObserving.h"
     #import "UINavigationBar+AppearanceUtils.h"
+    #import "UIImage+Utils.h"
 #endif
 
 #ifdef DEBUG

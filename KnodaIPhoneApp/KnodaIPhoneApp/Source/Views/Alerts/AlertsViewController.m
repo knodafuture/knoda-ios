@@ -28,8 +28,6 @@
     self.title = @"ACTIVITY";
     self.navigationController.navigationBar.translucent = NO;
     
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem addPredictionBarButtonItem];
-    
     self.seenIds = [[NSMutableIndexSet alloc] init];
 }
 

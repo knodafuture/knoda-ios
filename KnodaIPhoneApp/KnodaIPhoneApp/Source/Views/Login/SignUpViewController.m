@@ -12,6 +12,10 @@
 #import "WebApi.h"
 #import "WebViewController.h"
 
+#ifndef TESTFLIGHT
+#import <Tapjoy/Tapjoy.h>
+#endif
+
 static const NSInteger kMaxUsernameLength = 15;
 static const NSInteger kMinPasswordLength = 6;
 static const NSInteger kMaxPasswordLength = 20;
@@ -128,8 +132,12 @@ static const NSInteger kMaxPasswordLength = 20;
     [[WebApi sharedInstance] sendSignUpWithRequest:request completion:^(LoginResponse *response, NSError *error) {
         [[LoadingView sharedInstance] hide];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:FirstLaunchKey];
-        if (!error)
+        if (!error) {
             [[self appDelegate] doLogin:(LoginRequest *)request withResponse:response];
+#ifndef TESTFLIGHT
+            [Tapjoy actionComplete:@"8e4c3953-3a2d-471b-8775-ce1aca4165f4"];
+#endif
+        }
         
         else
             [self showError:error.localizedDescription];

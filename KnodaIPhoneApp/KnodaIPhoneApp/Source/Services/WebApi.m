@@ -448,11 +448,29 @@ NSInteger PageLimit = 50;
     NSDictionary *parameters = @{@"ids[]" : idString};
     
     WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"POST" path:@"activityfeed/seen.json" parameters:parameters requiresAuthToken:YES isMultiPartData:NO];
-    
-    NSLog(@"SETTING SEEN ALERTS URL = %@", request.URL.absoluteString);
-    NSLog(@"BODY = %@", [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
+
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler(error);
+    }];
+}
+
+- (void)searchForPredictions:(NSString *)searchText completion:(void (^)(NSArray *, NSError *))completionHandler {
+    NSDictionary *parameters = @{@"limit": @(PageLimit), @"q" : searchText};
+    
+    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"GET" path:@"search/predictions.json" parameters:parameters requiresAuthToken:YES isMultiPartData:NO];
+    
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+        completionHandler([Prediction arrayFromData:responseData], error);
+    }];
+}
+
+- (void)searchForUsers:(NSString *)searchText completion:(void (^)(NSArray *, NSError *))completionHandler {
+    NSDictionary *parameters = @{@"limit": @(5), @"q" : searchText};
+    
+    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"GET" path:@"search/users.json" parameters:parameters requiresAuthToken:YES isMultiPartData:NO];
+    
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+        completionHandler([User arrayFromData:responseData], error);
     }];
 }
 

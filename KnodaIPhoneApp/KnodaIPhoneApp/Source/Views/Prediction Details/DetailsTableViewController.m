@@ -19,7 +19,7 @@
 
 static const float parallaxRatio = 0.5;
 
-@interface DetailsTableViewController () <TallyDatasourceDelegate>
+@interface DetailsTableViewController () <TallyDatasourceDelegate, CommentCellDelegate>
 @property (strong, nonatomic) PredictionDetailsSectionHeader *sectionHeader;
 @property (assign, nonatomic) BOOL showingComments;
 @property (weak, nonatomic) id<PredictionCellDelegate> owner;
@@ -144,6 +144,7 @@ static const float parallaxRatio = 0.5;
     UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
     
     if (self.showingComments && [cell isKindOfClass:CommentCell.class]) {
+        ((CommentCell *)cell).delegate = self;
         Comment *comment = [self.pagingDatasource.objects objectAtIndex:indexPath.row];
         if (comment.userId == self.appDelegate.currentUser.userId)
             ((CommentCell *)cell).avatarView.image = [_imageLoader lazyLoadImage:self.appDelegate.currentUser.smallImageUrl onIndexPath:indexPath];
@@ -223,7 +224,7 @@ static const float parallaxRatio = 0.5;
 }
 
 - (void)addComment:(Comment *)newComment {
-    [self.commentsDatasource insertNewObject:newComment atIndex:self.pagingDatasource.objects.count reload:self.showingComments];
+    [self.commentsDatasource insertNewObject:newComment atIndex:self.commentsDatasource.objects.count reload:self.showingComments];
     if (self.showingComments) {
         [self restoreContent];
     }
@@ -232,4 +233,9 @@ static const float parallaxRatio = 0.5;
 - (void)updateTallyForUser:(NSString *)username agree:(BOOL)agree {
     [self.tallyDatasource updateTallyForUser:username agree:agree];
 }
+
+- (void)userClickedInCommentCellWithUserId:(NSInteger)userId {
+    [self.owner profileSelectedWithUserId:userId inCell:nil];
+}
+
 @end

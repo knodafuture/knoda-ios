@@ -31,8 +31,12 @@ static UINib *nib;
     [formatter setGroupingSeparator:[[NSLocale currentLocale] objectForKey:NSLocaleGroupingSeparator]];
     
     self.pointsLabel.text = [NSString stringWithFormat:@"%@", [formatter stringFromNumber:[NSNumber numberWithInteger:user.points]]];
-    self.winPercentLabel.text = [NSString stringWithFormat:@"%3.2f%%", [user.winningPercentage floatValue]];
-    self.streakLabel.text = [user.streak length] > 0 ? user.streak : @"W0";
+    if ([user.winningPercentage isEqual:@0])
+        self.winPercentLabel.text = @"0%";
+    else if ([user.winningPercentage isEqual:@100])
+        self.winPercentLabel.text = @"100%";
+    else
+        self.winPercentLabel.text = [NSString stringWithFormat:@"%@%@",user.winningPercentage,@"%"];    self.streakLabel.text = [user.streak length] > 0 ? user.streak : @"W0";
     self.winLossLabel.text = [NSString stringWithFormat:@"%d-%d",user.won,user.lost];
     
     

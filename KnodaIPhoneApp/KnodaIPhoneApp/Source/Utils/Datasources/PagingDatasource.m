@@ -85,6 +85,18 @@
     return [LoadingCell loadingCellForTableView:tableView];
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 0.0;
+}
+
 - (void)loadPage:(NSInteger)page completion:(void(^)(void))completion {
     
     id lastObject;

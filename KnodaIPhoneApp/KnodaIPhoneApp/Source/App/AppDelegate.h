@@ -29,6 +29,5 @@ UIKIT_EXTERN NSString *NewPredictionNotificationKey;
 - (void)reauthorize:(LoginRequest *)request withResponse:(LoginResponse *)response;
 - (LoginRequest *)loginRequestForSavedUser;
 - (void)logout;
-- (void)presentAddPredictionViewController;
 
 @end

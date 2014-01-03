@@ -291,7 +291,6 @@
 		014A9F2D185DA3AD00A96678 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A9F2C185DA3AD00A96678 /* MessageUI.framework */; };
 		014A9F2F185DA3B200A96678 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A9F2E185DA3B200A96678 /* MobileCoreServices.framework */; };
 		014A9F31185DA3BB00A96678 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A9F30185DA3BB00A96678 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		014A9F33185DA3CE00A96678 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A9F32185DA3CE00A96678 /* StoreKit.framework */; };
 		014A9F35185DA3DC00A96678 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A9F34185DA3DC00A96678 /* Twitter.framework */; };
 		01598B221857C56D002E2534 /* MTKObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 01598B191857C56D002E2534 /* MTKObserver.m */; };
 		01598B231857C56D002E2534 /* MTKObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 01598B191857C56D002E2534 /* MTKObserver.m */; };
@@ -318,6 +317,28 @@
 		018DF7A61858F496004FEDA6 /* AlertCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 018DF7A41858F496004FEDA6 /* AlertCell.xib */; };
 		018DF7A718590699004FEDA6 /* Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = 018DF7971858F1FB004FEDA6 /* Alert.m */; };
 		01A1DEE9183E9A1F00DBBE68 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 01A1DEE8183E9A1F00DBBE68 /* libz.dylib */; };
+		01E8CB561875757E003AE018 /* RightSideButtonsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E8CB551875757E003AE018 /* RightSideButtonsView.m */; };
+		01E8CB58187575EB003AE018 /* RightSideButtonsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E8CB57187575EB003AE018 /* RightSideButtonsView.xib */; };
+		01E8CB59187575EB003AE018 /* RightSideButtonsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E8CB57187575EB003AE018 /* RightSideButtonsView.xib */; };
+		01E8CB5A187575EE003AE018 /* RightSideButtonsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E8CB551875757E003AE018 /* RightSideButtonsView.m */; };
+		01E8CB5E1876480F003AE018 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E8CB5D1876480F003AE018 /* SearchViewController.m */; };
+		01E8CB5F1876480F003AE018 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E8CB5D1876480F003AE018 /* SearchViewController.m */; };
+		01E8CB62187648D1003AE018 /* SearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E8CB61187648D1003AE018 /* SearchBar.m */; };
+		01E8CB63187648D1003AE018 /* SearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E8CB61187648D1003AE018 /* SearchBar.m */; };
+		01E8CB6C18765F71003AE018 /* SearchDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E8CB6B18765F71003AE018 /* SearchDatasource.m */; };
+		01E8CB6D18765F71003AE018 /* SearchDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E8CB6B18765F71003AE018 /* SearchDatasource.m */; };
+		01E8CB701876672C003AE018 /* SearchSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E8CB6F1876672C003AE018 /* SearchSectionHeader.m */; };
+		01E8CB711876672C003AE018 /* SearchSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E8CB6F1876672C003AE018 /* SearchSectionHeader.m */; };
+		01E8CB741876693B003AE018 /* CategoriesDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E8CB731876693B003AE018 /* CategoriesDatasource.m */; };
+		01E8CB751876693B003AE018 /* CategoriesDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E8CB731876693B003AE018 /* CategoriesDatasource.m */; };
+		01E8CB781876786C003AE018 /* NoSearchResultsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E8CB771876786C003AE018 /* NoSearchResultsCell.m */; };
+		01E8CB791876786C003AE018 /* NoSearchResultsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E8CB771876786C003AE018 /* NoSearchResultsCell.m */; };
+		01E8CB7B187678E0003AE018 /* NoSearchResultsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E8CB7A187678E0003AE018 /* NoSearchResultsCell.xib */; };
+		01E8CB7C187678E0003AE018 /* NoSearchResultsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E8CB7A187678E0003AE018 /* NoSearchResultsCell.xib */; };
+		01E8CB7F18767D21003AE018 /* UserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E8CB7E18767D21003AE018 /* UserCell.m */; };
+		01E8CB8018767D21003AE018 /* UserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E8CB7E18767D21003AE018 /* UserCell.m */; };
+		01E8CB8218767D5D003AE018 /* UserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E8CB8118767D5D003AE018 /* UserCell.xib */; };
+		01E8CB8318767D5D003AE018 /* UserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E8CB8118767D5D003AE018 /* UserCell.xib */; };
 		9E28686F17C659940033FB3C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E28686E17C659930033FB3C /* Security.framework */; };
 		9E6F4C5A17D8CCFA00EAB4A0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6F4C5917D8CCFA00EAB4A0 /* SystemConfiguration.framework */; };
 		9E708824178AF68E00F036A8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E708823178AF68E00F036A8 /* UIKit.framework */; };
@@ -556,7 +577,6 @@
 		014A9F2C185DA3AD00A96678 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		014A9F2E185DA3B200A96678 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		014A9F30185DA3BB00A96678 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		014A9F32185DA3CE00A96678 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		014A9F34185DA3DC00A96678 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		01598B181857C56D002E2534 /* MTKObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTKObserver.h; sourceTree = "<group>"; };
 		01598B191857C56D002E2534 /* MTKObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTKObserver.m; sourceTree = "<group>"; };
@@ -585,6 +605,25 @@
 		018DF79E1858F42F004FEDA6 /* AlertCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertCell.m; sourceTree = "<group>"; };
 		018DF7A41858F496004FEDA6 /* AlertCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertCell.xib; sourceTree = "<group>"; };
 		01A1DEE8183E9A1F00DBBE68 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		01E8CB541875757E003AE018 /* RightSideButtonsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RightSideButtonsView.h; sourceTree = "<group>"; };
+		01E8CB551875757E003AE018 /* RightSideButtonsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightSideButtonsView.m; sourceTree = "<group>"; };
+		01E8CB57187575EB003AE018 /* RightSideButtonsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RightSideButtonsView.xib; sourceTree = "<group>"; };
+		01E8CB5C1876480F003AE018 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		01E8CB5D1876480F003AE018 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		01E8CB60187648D1003AE018 /* SearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchBar.h; sourceTree = "<group>"; };
+		01E8CB61187648D1003AE018 /* SearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchBar.m; sourceTree = "<group>"; };
+		01E8CB6A18765F71003AE018 /* SearchDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchDatasource.h; sourceTree = "<group>"; };
+		01E8CB6B18765F71003AE018 /* SearchDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchDatasource.m; sourceTree = "<group>"; };
+		01E8CB6E1876672C003AE018 /* SearchSectionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSectionHeader.h; sourceTree = "<group>"; };
+		01E8CB6F1876672C003AE018 /* SearchSectionHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSectionHeader.m; sourceTree = "<group>"; };
+		01E8CB721876693B003AE018 /* CategoriesDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoriesDatasource.h; sourceTree = "<group>"; };
+		01E8CB731876693B003AE018 /* CategoriesDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoriesDatasource.m; sourceTree = "<group>"; };
+		01E8CB761876786C003AE018 /* NoSearchResultsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoSearchResultsCell.h; sourceTree = "<group>"; };
+		01E8CB771876786C003AE018 /* NoSearchResultsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoSearchResultsCell.m; sourceTree = "<group>"; };
+		01E8CB7A187678E0003AE018 /* NoSearchResultsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoSearchResultsCell.xib; sourceTree = "<group>"; };
+		01E8CB7D18767D21003AE018 /* UserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCell.h; sourceTree = "<group>"; };
+		01E8CB7E18767D21003AE018 /* UserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCell.m; sourceTree = "<group>"; };
+		01E8CB8118767D5D003AE018 /* UserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCell.xib; sourceTree = "<group>"; };
 		9E28686E17C659930033FB3C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		9E6F4C5917D8CCFA00EAB4A0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		9E708820178AF68E00F036A8 /* KnodaIPhoneApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KnodaIPhoneApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -617,7 +656,6 @@
 			files = (
 				014A9F35185DA3DC00A96678 /* Twitter.framework in Frameworks */,
 				9E6F4C5A17D8CCFA00EAB4A0 /* SystemConfiguration.framework in Frameworks */,
-				014A9F33185DA3CE00A96678 /* StoreKit.framework in Frameworks */,
 				014A9F31185DA3BB00A96678 /* Social.framework in Frameworks */,
 				014A9F2F185DA3B200A96678 /* MobileCoreServices.framework in Frameworks */,
 				014A9F2D185DA3AD00A96678 /* MessageUI.framework in Frameworks */,
@@ -749,6 +787,7 @@
 		013DA7271853002100B507E4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				01E8CB5B18764800003AE018 /* Search */,
 				018DF7991858F40F004FEDA6 /* Alerts */,
 				013DA7281853002100B507E4 /* Add Prediction */,
 				013DA72C1853002100B507E4 /* Badges */,
@@ -804,6 +843,9 @@
 				013DA73C1853002100B507E4 /* SideNavCell.h */,
 				013DA73D1853002100B507E4 /* SideNavCell.m */,
 				013DA73E1853002100B507E4 /* SideNavCell.xib */,
+				01E8CB541875757E003AE018 /* RightSideButtonsView.h */,
+				01E8CB551875757E003AE018 /* RightSideButtonsView.m */,
+				01E8CB57187575EB003AE018 /* RightSideButtonsView.xib */,
 			);
 			path = "Core Views";
 			sourceTree = "<group>";
@@ -1067,6 +1109,10 @@
 				013DA8FC185432B100B507E4 /* CommentsDatasource.m */,
 				013DA8FF1854330A00B507E4 /* TallyDatasource.h */,
 				013DA9001854330A00B507E4 /* TallyDatasource.m */,
+				01E8CB6A18765F71003AE018 /* SearchDatasource.h */,
+				01E8CB6B18765F71003AE018 /* SearchDatasource.m */,
+				01E8CB721876693B003AE018 /* CategoriesDatasource.h */,
+				01E8CB731876693B003AE018 /* CategoriesDatasource.m */,
 			);
 			path = Datasources;
 			sourceTree = "<group>";
@@ -1162,6 +1208,25 @@
 			path = Alerts;
 			sourceTree = "<group>";
 		};
+		01E8CB5B18764800003AE018 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				01E8CB5C1876480F003AE018 /* SearchViewController.h */,
+				01E8CB5D1876480F003AE018 /* SearchViewController.m */,
+				01E8CB60187648D1003AE018 /* SearchBar.h */,
+				01E8CB61187648D1003AE018 /* SearchBar.m */,
+				01E8CB6E1876672C003AE018 /* SearchSectionHeader.h */,
+				01E8CB6F1876672C003AE018 /* SearchSectionHeader.m */,
+				01E8CB761876786C003AE018 /* NoSearchResultsCell.h */,
+				01E8CB771876786C003AE018 /* NoSearchResultsCell.m */,
+				01E8CB7A187678E0003AE018 /* NoSearchResultsCell.xib */,
+				01E8CB7D18767D21003AE018 /* UserCell.h */,
+				01E8CB7E18767D21003AE018 /* UserCell.m */,
+				01E8CB8118767D5D003AE018 /* UserCell.xib */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		9E708817178AF68E00F036A8 = {
 			isa = PBXGroup;
 			children = (
@@ -1191,7 +1256,6 @@
 			isa = PBXGroup;
 			children = (
 				014A9F34185DA3DC00A96678 /* Twitter.framework */,
-				014A9F32185DA3CE00A96678 /* StoreKit.framework */,
 				014A9F30185DA3BB00A96678 /* Social.framework */,
 				014A9F2E185DA3B200A96678 /* MobileCoreServices.framework */,
 				014A9F2C185DA3AD00A96678 /* MessageUI.framework */,
@@ -1269,6 +1333,14 @@
 					};
 					9E70881F178AF68E00F036A8 = {
 						DevelopmentTeam = F489V4H5F6;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
+							com.apple.iOS = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -1309,6 +1381,7 @@
 				013DA88F1853002200B507E4 /* Screen3@2x-568h.png in Resources */,
 				013DA8071853002200B507E4 /* NewBadgeView.xib in Resources */,
 				013DA8991853002200B507E4 /* Screen5.png in Resources */,
+				01E8CB8318767D5D003AE018 /* UserCell.xib in Resources */,
 				013DA86B1853002200B507E4 /* WebViewController.xib in Resources */,
 				013DA8871853002200B507E4 /* Screen2.png in Resources */,
 				013DA8311853002200B507E4 /* WelcomeViewController.xib in Resources */,
@@ -1341,6 +1414,8 @@
 				014A9F07185DA04400A96678 /* README.md in Resources */,
 				013DA81B1853002200B507E4 /* LoadingView.xib in Resources */,
 				013DA8171853002200B507E4 /* LoadingCell.xib in Resources */,
+				01E8CB59187575EB003AE018 /* RightSideButtonsView.xib in Resources */,
+				01E8CB7C187678E0003AE018 /* NoSearchResultsCell.xib in Resources */,
 				014A9E87185BF95100A96678 /* SideNavButton.xib in Resources */,
 				013DA88B1853002200B507E4 /* Screen2@2x.png in Resources */,
 				013DA83F1853002200B507E4 /* PredictionDetailsSectionHeader.xib in Resources */,
@@ -1362,6 +1437,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				013DA8921853002200B507E4 /* Screen4.png in Resources */,
+				01E8CB58187575EB003AE018 /* RightSideButtonsView.xib in Resources */,
 				013DA8241853002200B507E4 /* ForgotPasswordViewController.xib in Resources */,
 				014A9F08185DA04400A96678 /* release_notes.md in Resources */,
 				013DA89E1853002200B507E4 /* Media.xcassets in Resources */,
@@ -1401,10 +1477,12 @@
 				013DA87C1853002200B507E4 /* IntroOverlay@2x-568h.png in Resources */,
 				013DA80C1853002200B507E4 /* NavigationViewController.xib in Resources */,
 				013DA8AC1853002200B507E4 /* Localizable.strings in Resources */,
+				01E8CB8218767D5D003AE018 /* UserCell.xib in Resources */,
 				014A9F14185DA1C700A96678 /* TapjoyResources.bundle in Resources */,
 				013DA8021853002200B507E4 /* BadgesCollectionViewController.xib in Resources */,
 				013DA8901853002200B507E4 /* Screen3@2x.png in Resources */,
 				013DA86E1853002200B507E4 /* UserProfileHeaderView.xib in Resources */,
+				01E8CB7B187678E0003AE018 /* NoSearchResultsCell.xib in Resources */,
 				014A9F06185DA04400A96678 /* README.md in Resources */,
 				013DA81A1853002200B507E4 /* LoadingView.xib in Resources */,
 				013DA8161853002200B507E4 /* LoadingCell.xib in Resources */,
@@ -1433,8 +1511,10 @@
 			files = (
 				01598B231857C56D002E2534 /* MTKObserver.m in Sources */,
 				013DA7C71853002200B507E4 /* NSDictionary+Utils.m in Sources */,
+				01E8CB751876693B003AE018 /* CategoriesDatasource.m in Sources */,
 				013DA906185438E600B507E4 /* CreateCommentView.m in Sources */,
 				013DA8CE1853004000B507E4 /* LoginResponse.m in Sources */,
+				01E8CB6D18765F71003AE018 /* SearchDatasource.m in Sources */,
 				013DA80B1853002200B507E4 /* NavigationViewController.m in Sources */,
 				013DA8A51853002200B507E4 /* BJImageCropper.m in Sources */,
 				013DA8CA1853004000B507E4 /* Comment.m in Sources */,
@@ -1442,6 +1522,7 @@
 				013DA8051853002200B507E4 /* NewBadgeView.m in Sources */,
 				013DA7C91853002200B507E4 /* NSString+Utils.m in Sources */,
 				013DA7D11853002200B507E4 /* UILabel+Utils.m in Sources */,
+				01E8CB711876672C003AE018 /* SearchSectionHeader.m in Sources */,
 				013DA8191853002200B507E4 /* LoadingView.m in Sources */,
 				013DA84D1853002200B507E4 /* HomeViewController.m in Sources */,
 				013DA7D91853002200B507E4 /* User+Utils.m in Sources */,
@@ -1465,6 +1546,8 @@
 				013DA90A1854417D00B507E4 /* DetailsTableViewController.m in Sources */,
 				013DA7C51853002200B507E4 /* NSDate+Utils.m in Sources */,
 				013DA8DC1853004000B507E4 /* WebObject.m in Sources */,
+				01E8CB63187648D1003AE018 /* SearchBar.m in Sources */,
+				01E8CB5F1876480F003AE018 /* SearchViewController.m in Sources */,
 				013DA7CD1853002200B507E4 /* UIColor+Utils.m in Sources */,
 				018DF7A31858F484004FEDA6 /* AlertsViewController.m in Sources */,
 				013DA85D1853002200B507E4 /* ImageCropperViewController.m in Sources */,
@@ -1473,15 +1556,18 @@
 				013DA8D01853004000B507E4 /* Challenge.m in Sources */,
 				013DA7C31853002200B507E4 /* NSData+Utils.m in Sources */,
 				013DA8D81853004000B507E4 /* Topic.m in Sources */,
+				01E8CB5A187575EE003AE018 /* RightSideButtonsView.m in Sources */,
 				013DA8651853002200B507E4 /* SelectPictureViewController.m in Sources */,
 				014A9E89185BF95100A96678 /* SideNavBarButtonItem.m in Sources */,
 				013DA8511853002200B507E4 /* PredictionCell.m in Sources */,
+				01E8CB791876786C003AE018 /* NoSearchResultsCell.m in Sources */,
 				013DA82B1853002200B507E4 /* SignUpViewController.m in Sources */,
 				013DA8D21853004000B507E4 /* Prediction.m in Sources */,
 				013DA8591853002200B507E4 /* ChangePasswordViewController.m in Sources */,
 				013DA8F11853FE1000B507E4 /* DatePickerView.m in Sources */,
 				013DA7CB1853002200B507E4 /* UIBarButtonItem+Utils.m in Sources */,
 				013DA8371853002200B507E4 /* CommentCell.m in Sources */,
+				01E8CB8018767D21003AE018 /* UserCell.m in Sources */,
 				01598B2C1858365A002E2534 /* FirstStartView.m in Sources */,
 				018DF7A21858F481004FEDA6 /* AlertCell.m in Sources */,
 				013DA8CC1853004000B507E4 /* LoginRequest.m in Sources */,
@@ -1522,8 +1608,10 @@
 			files = (
 				01598B221857C56D002E2534 /* MTKObserver.m in Sources */,
 				013DA7C61853002200B507E4 /* NSDictionary+Utils.m in Sources */,
+				01E8CB741876693B003AE018 /* CategoriesDatasource.m in Sources */,
 				013DA905185438E600B507E4 /* CreateCommentView.m in Sources */,
 				013DA8CD1853004000B507E4 /* LoginResponse.m in Sources */,
+				01E8CB6C18765F71003AE018 /* SearchDatasource.m in Sources */,
 				013DA80A1853002200B507E4 /* NavigationViewController.m in Sources */,
 				013DA8A41853002200B507E4 /* BJImageCropper.m in Sources */,
 				013DA8C91853004000B507E4 /* Comment.m in Sources */,
@@ -1531,6 +1619,7 @@
 				013DA8041853002200B507E4 /* NewBadgeView.m in Sources */,
 				013DA7C81853002200B507E4 /* NSString+Utils.m in Sources */,
 				013DA7D01853002200B507E4 /* UILabel+Utils.m in Sources */,
+				01E8CB701876672C003AE018 /* SearchSectionHeader.m in Sources */,
 				013DA8181853002200B507E4 /* LoadingView.m in Sources */,
 				013DA84C1853002200B507E4 /* HomeViewController.m in Sources */,
 				013DA7D81853002200B507E4 /* User+Utils.m in Sources */,
@@ -1554,6 +1643,8 @@
 				018DF79F1858F42F004FEDA6 /* AlertCell.m in Sources */,
 				013DA9091854417D00B507E4 /* DetailsTableViewController.m in Sources */,
 				013DA7C41853002200B507E4 /* NSDate+Utils.m in Sources */,
+				01E8CB62187648D1003AE018 /* SearchBar.m in Sources */,
+				01E8CB5E1876480F003AE018 /* SearchViewController.m in Sources */,
 				013DA8DB1853004000B507E4 /* WebObject.m in Sources */,
 				018DF79C1858F41A004FEDA6 /* AlertsViewController.m in Sources */,
 				013DA7CC1853002200B507E4 /* UIColor+Utils.m in Sources */,
@@ -1562,15 +1653,18 @@
 				013DA9011854330A00B507E4 /* TallyDatasource.m in Sources */,
 				013DA8CF1853004000B507E4 /* Challenge.m in Sources */,
 				013DA7C21853002200B507E4 /* NSData+Utils.m in Sources */,
+				01E8CB561875757E003AE018 /* RightSideButtonsView.m in Sources */,
 				013DA8D71853004000B507E4 /* Topic.m in Sources */,
 				014A9E88185BF95100A96678 /* SideNavBarButtonItem.m in Sources */,
 				013DA8641853002200B507E4 /* SelectPictureViewController.m in Sources */,
+				01E8CB781876786C003AE018 /* NoSearchResultsCell.m in Sources */,
 				013DA8501853002200B507E4 /* PredictionCell.m in Sources */,
 				013DA82A1853002200B507E4 /* SignUpViewController.m in Sources */,
 				013DA8D11853004000B507E4 /* Prediction.m in Sources */,
 				013DA8581853002200B507E4 /* ChangePasswordViewController.m in Sources */,
 				013DA8F01853FE1000B507E4 /* DatePickerView.m in Sources */,
 				013DA7CA1853002200B507E4 /* UIBarButtonItem+Utils.m in Sources */,
+				01E8CB7F18767D21003AE018 /* UserCell.m in Sources */,
 				013DA8361853002200B507E4 /* CommentCell.m in Sources */,
 				01598B2B1858365A002E2534 /* FirstStartView.m in Sources */,
 				013DA8CB1853004000B507E4 /* LoginRequest.m in Sources */,
@@ -1761,7 +1855,7 @@
 					"$(SDKROOT)/usr/lib/system",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "EB9DD262-678F-406C-8D7D-D4836E2044F6";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1771,8 +1865,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Knoda, LLC (F489V4H5F6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Knoda, LLC (F489V4H5F6)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EXCLUDED_SOURCE_FILE_NAMES = libTestFlight.a;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1788,7 +1882,7 @@
 					"$(SDKROOT)/usr/lib/system",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "C7D5D64C-8517-43C5-B622-F058660C65A1";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

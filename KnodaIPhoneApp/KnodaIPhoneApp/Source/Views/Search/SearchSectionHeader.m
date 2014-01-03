@@ -19,7 +19,7 @@
     
     [self addSubview:self.label];
     
-    self.label.font = [UIFont fontWithName:@"HelveticaNeue" size:12.0];
+    self.label.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:8.0];
     self.label.textAlignment = NSTextAlignmentCenter;
     self.label.textColor = [UIColor colorFromHex:@"235C37"];
     

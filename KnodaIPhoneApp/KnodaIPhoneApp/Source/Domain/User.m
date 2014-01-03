@@ -11,6 +11,10 @@
 
 @implementation User
 
++ (NSString *)responseKey {
+    return @"users";
+}
+
 + (id)instanceFromDictionary:(NSDictionary *)dictionary {
     
     User *user = [super instanceFromDictionary:dictionary];

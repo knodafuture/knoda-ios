@@ -236,10 +236,7 @@ static NSMutableDictionary *cellHeightCache;
     [super touchesBegan:touches withEvent:event];
 
     self.touchMoved = NO;
-    
-    if (!self.swipeEnabled)
-        return;
-    
+
     UITouch *touch = [touches anyObject];
     
     self.initialTouchLocation = [touch locationInView:self];
@@ -383,7 +380,6 @@ static NSMutableDictionary *cellHeightCache;
 }
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 
-    
     if (!self.touchMoved) {
         if ([self.profileButton hitTest:self.initialTouchLocation withEvent:event]) {
             [self.profileButton sendActionsForControlEvents:UIControlEventTouchUpInside];
@@ -393,8 +389,7 @@ static NSMutableDictionary *cellHeightCache;
         }
     }
     
-    
-    if (!self.trackingTouch || !self.swipeEnabled) {
+    if (!self.trackingTouch) {
         [super touchesEnded:touches withEvent:event];
         return;
     }

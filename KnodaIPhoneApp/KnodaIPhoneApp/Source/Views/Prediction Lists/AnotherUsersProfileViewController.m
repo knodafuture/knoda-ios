@@ -43,6 +43,8 @@
     
     self.headerView = [[UserProfileHeaderView alloc] init];
     
+    [self.headerView.avatarButton addTarget:self action:@selector(profileTapped) forControlEvents:UIControlEventTouchUpInside];
+    
     self.headerCell = [[UITableViewCell alloc] init];
     self.headerCell.selectionStyle = UITableViewCellSelectionStyleNone;
     self.headerCell.frame = self.headerView.bounds;
@@ -83,6 +85,10 @@
     self.title = user.name.uppercaseString;
 }
 
+- (void)profileTapped {
+    ZoomingImageViewController *vc = [[ZoomingImageViewController alloc] initWithImage:self.headerView.avatarImageView.image title:self.title];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 - (IBAction)backButtonPress:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
@@ -121,11 +127,8 @@
     if (indexPath.row >= self.pagingDatasource.objects.count)
         return;
     
-    if (indexPath.section == 0) {
-        ZoomingImageViewController *vc = [[ZoomingImageViewController alloc] initWithImage:self.headerView.avatarImageView.image title:self.title];
-        [self.navigationController pushViewController:vc animated:YES];
+    if (indexPath.section == 0)
         return;
-    }
     
     Prediction *prediction = [self.pagingDatasource.objects objectAtIndex:indexPath.row];
     

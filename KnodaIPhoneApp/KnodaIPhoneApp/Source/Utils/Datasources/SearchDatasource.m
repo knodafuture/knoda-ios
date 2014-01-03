@@ -104,6 +104,7 @@
         User *user = [self.users objectAtIndex:indexPath.row];
         
         UserCell *cell = [UserCell userCellForTableView:tableView];
+        cell.user = user;
         cell.nameLabel.text = user.name;
         return cell;
     }
@@ -114,7 +115,7 @@
     Prediction *prediction = [self.predictions objectAtIndex:indexPath.row];
     
     PredictionCell *cell = [PredictionCell predictionCellForTableView:tableView];
-    
+    cell.swipeEnabled = NO;
     [cell fillWithPrediction:prediction];
     
     return cell;

@@ -9,6 +9,7 @@
 #import "TallyDatasource.h"
 #import "PredictorCell.h"
 #import "PredictorHeaderCell.h"
+#import "TallyUser.h"
 
 @interface TallyDatasource () {
     NSMutableArray *_agreedUsers;
@@ -74,8 +75,8 @@
     PredictorCell *cell = [PredictorCell predictorCellForTableView:tableView];
     
     int idx = indexPath.row - 1;
-    cell.agreedUserName.text    = _agreedUsers.count > idx ? _agreedUsers[idx] : @"";
-    cell.disagreedUserName.text = _disagreedUsers.count > idx ? _disagreedUsers [idx] : @"";
+    
+    [cell setAgreedUser:[self userAtIndex:idx inArray:_agreedUsers] andDisagreedUser:[self userAtIndex:idx inArray:_disagreedUsers]];
     
     return cell;
 
@@ -126,6 +127,24 @@
             [_agreedUsers removeObject:username];
         [_disagreedUsers addObject:username];
     }
+}
+
+
+- (TallyUser *)userAtIndex:(NSInteger)index inArray:(NSArray *)array {
+    if (index >= array.count)
+        return nil;
+    
+    return array[index];
+}
+
+- (NSString *)nameForUserAtIndex:(NSInteger)index inArray:(NSArray *)array {
+    if (index >= array.count)
+        return @"";
+    
+    TallyUser *user = array[index];
+    
+    return user.username;
+        
 }
 
 @end

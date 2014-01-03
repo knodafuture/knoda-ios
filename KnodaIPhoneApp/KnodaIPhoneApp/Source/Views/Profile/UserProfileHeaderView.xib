@@ -95,10 +95,19 @@
                     <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="fsy-jx-qC8">
+                    <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="avatarButton" destination="fsy-jx-qC8" id="lBJ-sM-4eG"/>
                 <outlet property="avatarImageView" destination="9xW-gL-wb5" id="Gdz-9Y-BRr"/>
                 <outlet property="pointsLabel" destination="wr6-5X-PUS" id="2VO-6f-mGn"/>
                 <outlet property="smallPointsLabel" destination="Ero-da-cCr" id="EVk-5q-QlD"/>

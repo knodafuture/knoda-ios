@@ -14,11 +14,11 @@
 #import "Prediction+Utils.h"
 #import "Challenge.h"
 #import "Topic.h"
-#import "WebObject+Utils.h"
 #import "UpdatePredictionRequest.h"
 #import "Badge.h"
 #import "Comment.h"
 #import "Alert.h"
+#import "TallyUser.h"
 
 typedef NS_ENUM(NSInteger, HttpStatus) {
 	HttpStatusOk				= 200,

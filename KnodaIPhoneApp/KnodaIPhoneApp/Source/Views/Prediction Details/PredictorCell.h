@@ -8,12 +8,23 @@
 
 UIKIT_EXTERN CGFloat PredictorCellHeight;
 
+@class TallyUser;
+@protocol PredictorCellDelegate <NSObject>
+
+- (void)predictorCellDidSelectUserWithUserId:(NSInteger)userId;
+
+@end
+
+
+
 @interface PredictorCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *agreedUserName;
-@property (weak, nonatomic) IBOutlet UILabel *disagreedUserName;
+@property (weak, nonatomic) id<PredictorCellDelegate> delegate;
 
 + (PredictorCell *)predictorCellForTableView:(UITableView *)tableView;
+
+- (void)setAgreedUser:(TallyUser *)agreedUser andDisagreedUser:(TallyUser *)disagreedUser;
+
 
 @end
 

@@ -14,6 +14,8 @@
 		0121E83F184FDBC700B7C5CA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E708823178AF68E00F036A8 /* UIKit.framework */; };
 		0121E840184FDBC700B7C5CA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E708825178AF68E00F036A8 /* Foundation.framework */; };
 		0121E841184FDBC700B7C5CA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E708827178AF68E00F036A8 /* CoreGraphics.framework */; };
+		0137DA76187714E600B2AA0F /* TallyUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0137DA75187714E600B2AA0F /* TallyUser.m */; };
+		0137DA77187714E600B2AA0F /* TallyUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0137DA75187714E600B2AA0F /* TallyUser.m */; };
 		013DA7BE1853002200B507E4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA6E91853002100B507E4 /* AppDelegate.m */; };
 		013DA7BF1853002200B507E4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA6E91853002100B507E4 /* AppDelegate.m */; };
 		013DA7C01853002200B507E4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA6EA1853002100B507E4 /* main.m */; };
@@ -42,8 +44,6 @@
 		013DA7D71853002200B507E4 /* Prediction+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA7031853002100B507E4 /* Prediction+Utils.m */; };
 		013DA7D81853002200B507E4 /* User+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA7051853002100B507E4 /* User+Utils.m */; };
 		013DA7D91853002200B507E4 /* User+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA7051853002100B507E4 /* User+Utils.m */; };
-		013DA7DA1853002200B507E4 /* WebObject+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA7071853002100B507E4 /* WebObject+Utils.m */; };
-		013DA7DB1853002200B507E4 /* WebObject+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA7071853002100B507E4 /* WebObject+Utils.m */; };
 		013DA7F01853002200B507E4 /* FileCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA71F1853002100B507E4 /* FileCache.m */; };
 		013DA7F11853002200B507E4 /* FileCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA71F1853002100B507E4 /* FileCache.m */; };
 		013DA7F21853002200B507E4 /* WebApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA7211853002100B507E4 /* WebApi.m */; };
@@ -349,6 +349,8 @@
 
 /* Begin PBXFileReference section */
 		0121E86C184FDBC700B7C5CA /* Knoda Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Knoda Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0137DA74187714E600B2AA0F /* TallyUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TallyUser.h; sourceTree = "<group>"; };
+		0137DA75187714E600B2AA0F /* TallyUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TallyUser.m; sourceTree = "<group>"; };
 		013DA6E41852D4F800B507E4 /* libcommonCrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcommonCrypto.dylib; path = usr/lib/system/libcommonCrypto.dylib; sourceTree = SDKROOT; };
 		013DA6E81853002100B507E4 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		013DA6E91853002100B507E4 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -377,8 +379,6 @@
 		013DA7031853002100B507E4 /* Prediction+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Prediction+Utils.m"; sourceTree = "<group>"; };
 		013DA7041853002100B507E4 /* User+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+Utils.h"; sourceTree = "<group>"; };
 		013DA7051853002100B507E4 /* User+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+Utils.m"; sourceTree = "<group>"; };
-		013DA7061853002100B507E4 /* WebObject+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WebObject+Utils.h"; sourceTree = "<group>"; };
-		013DA7071853002100B507E4 /* WebObject+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WebObject+Utils.m"; sourceTree = "<group>"; };
 		013DA71E1853002100B507E4 /* FileCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileCache.h; sourceTree = "<group>"; };
 		013DA71F1853002100B507E4 /* FileCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileCache.m; sourceTree = "<group>"; };
 		013DA7201853002100B507E4 /* WebApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebApi.h; sourceTree = "<group>"; };
@@ -753,8 +753,6 @@
 				013DA7031853002100B507E4 /* Prediction+Utils.m */,
 				013DA7041853002100B507E4 /* User+Utils.h */,
 				013DA7051853002100B507E4 /* User+Utils.m */,
-				013DA7061853002100B507E4 /* WebObject+Utils.h */,
-				013DA7071853002100B507E4 /* WebObject+Utils.m */,
 			);
 			path = "Domain Categories";
 			sourceTree = "<group>";
@@ -1094,6 +1092,8 @@
 				013DA8C61853004000B507E4 /* WebObject.m */,
 				018DF7961858F1FB004FEDA6 /* Alert.h */,
 				018DF7971858F1FB004FEDA6 /* Alert.m */,
+				0137DA74187714E600B2AA0F /* TallyUser.h */,
+				0137DA75187714E600B2AA0F /* TallyUser.m */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -1535,7 +1535,6 @@
 				013DA8F8185432A200B507E4 /* EmptyDatasource.m in Sources */,
 				013DA8611853002200B507E4 /* ProfileViewController.m in Sources */,
 				013DA8411853002200B507E4 /* PredictionDetailsViewController.m in Sources */,
-				013DA7DB1853002200B507E4 /* WebObject+Utils.m in Sources */,
 				013DA8271853002200B507E4 /* LoginViewController.m in Sources */,
 				013DA7D31853002200B507E4 /* UINavigationItem+iOS7Spacing.m in Sources */,
 				018DF7A718590699004FEDA6 /* Alert.m in Sources */,
@@ -1581,6 +1580,7 @@
 				013DA8011853002200B507E4 /* BadgesCollectionViewController.m in Sources */,
 				01598B3518584645002E2534 /* UINavigationBar+AppearanceUtils.m in Sources */,
 				013DA81D1853002200B507E4 /* NoContentCell.m in Sources */,
+				0137DA77187714E600B2AA0F /* TallyUser.m in Sources */,
 				013DA8FE185432B100B507E4 /* CommentsDatasource.m in Sources */,
 				013DA7F71853002200B507E4 /* ImageLoader.m in Sources */,
 				013DA82F1853002200B507E4 /* WelcomeViewController.m in Sources */,
@@ -1632,7 +1632,6 @@
 				013DA8F7185432A200B507E4 /* EmptyDatasource.m in Sources */,
 				013DA8601853002200B507E4 /* ProfileViewController.m in Sources */,
 				013DA8401853002200B507E4 /* PredictionDetailsViewController.m in Sources */,
-				013DA7DA1853002200B507E4 /* WebObject+Utils.m in Sources */,
 				013DA8261853002200B507E4 /* LoginViewController.m in Sources */,
 				018DF7981858F1FB004FEDA6 /* Alert.m in Sources */,
 				013DA7D21853002200B507E4 /* UINavigationItem+iOS7Spacing.m in Sources */,
@@ -1678,6 +1677,7 @@
 				013DA8001853002200B507E4 /* BadgesCollectionViewController.m in Sources */,
 				01598B3418584645002E2534 /* UINavigationBar+AppearanceUtils.m in Sources */,
 				013DA81C1853002200B507E4 /* NoContentCell.m in Sources */,
+				0137DA76187714E600B2AA0F /* TallyUser.m in Sources */,
 				013DA8FD185432B100B507E4 /* CommentsDatasource.m in Sources */,
 				013DA7F61853002200B507E4 /* ImageLoader.m in Sources */,
 				013DA82E1853002200B507E4 /* WelcomeViewController.m in Sources */,

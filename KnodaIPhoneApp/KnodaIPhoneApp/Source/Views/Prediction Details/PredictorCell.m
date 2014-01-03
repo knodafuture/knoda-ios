@@ -7,10 +7,21 @@
 //
 
 #import "PredictorCell.h"
+#import "TallyUser.h"
 
 static UINib *nib;
 
 CGFloat PredictorCellHeight = 22.0;
+
+@interface PredictorCell ()
+@property (weak, nonatomic) IBOutlet UILabel *agreedUserName;
+@property (weak, nonatomic) IBOutlet UILabel *disagreedUserName;
+
+@property (strong, nonatomic) TallyUser *agreedUser;
+@property (strong, nonatomic) TallyUser *disagreedUser;
+
+@end
+
 
 @implementation PredictorCell
 
@@ -25,6 +36,22 @@ CGFloat PredictorCellHeight = 22.0;
         cell = [[nib instantiateWithOwner:nil options:nil] lastObject];
     
     return cell;
+}
+
+- (void)setAgreedUser:(TallyUser *)agreedUser andDisagreedUser:(TallyUser *)disagreedUser {
+    self.agreedUser = agreedUser;
+    self.agreedUserName.text = agreedUser.username;
+    
+    self.disagreedUser = disagreedUser;
+    self.disagreedUserName.text = disagreedUser.username;
+}
+
+- (IBAction)agreedUserClicked:(id)sender {
+    [self.delegate predictorCellDidSelectUserWithUserId:self.agreedUser.userId];
+}
+
+- (IBAction)disagreedUserClicked:(id)sender {
+    [self.delegate predictorCellDidSelectUserWithUserId:self.disagreedUser.userId];
 }
 
 @end

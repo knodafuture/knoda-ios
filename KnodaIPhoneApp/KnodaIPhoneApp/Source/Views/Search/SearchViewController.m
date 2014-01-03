@@ -19,10 +19,11 @@
 #import "PredictionDetailsViewController.h"
 #import "UserCell.h"
 
-@interface SearchViewController () <SearchBarDelegate, SearchDatasourceDelegate, PredictionCellDelegate, PredictionDetailsDelegate>
+@interface SearchViewController () <SearchBarDelegate, SearchDatasourceDelegate, PredictionDetailsDelegate>
 @property (strong, nonatomic) SearchBar *searchBar;
 @property (strong, nonatomic) SearchDatasource *searchDatasource;
 @property (strong, nonatomic) CategoriesDatasource *categoriesDatasource;
+@property (assign, nonatomic) BOOL shouldBeginEditingSearchText;
 @end
 
 @implementation SearchViewController
@@ -36,6 +37,8 @@
     self.pagingDatasource = self.categoriesDatasource = [[CategoriesDatasource alloc] initWithTableView:self.tableView];
     [super viewDidLoad];
 
+    self.shouldBeginEditingSearchText = YES;
+    
     self.searchBar = [[SearchBar alloc] init];
     self.searchBar.delegate = self;
     self.searchBar.backgroundColor = [UIColor colorFromHex:@"77BC1F"];
@@ -55,8 +58,9 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self.searchBar.textField becomeFirstResponder];
-    
+    if (self.shouldBeginEditingSearchText)
+        [self.searchBar.textField becomeFirstResponder];
+    self.shouldBeginEditingSearchText = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -115,7 +119,6 @@
     
     if ([cell isKindOfClass:PredictionCell.class]) {
         PredictionCell *pCell = (PredictionCell *)cell;;
-        pCell.delegate = self;
         if (pCell.prediction.userId == self.appDelegate.currentUser.userId)
             pCell.avatarImageView.image = [_imageLoader lazyLoadImage:self.appDelegate.currentUser.smallImageUrl onIndexPath:indexPath];
         else
@@ -192,36 +195,6 @@
     }];
 }
 
-- (void)predictionAgreed:(Prediction *)prediction inCell:(PredictionCell *) cell {
-    
-    [[WebApi sharedInstance] agreeWithPrediction:prediction.predictionId completion:^(Challenge *challenge, NSError *error) {
-        if (!error) {
-            prediction.challenge = challenge;
-            [cell fillWithPrediction:prediction];
-            [[WebApi sharedInstance] checkNewBadges];
-        }
-        else {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message:@"Unable to agree at this time" delegate: nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles: nil];
-            [alert show];
-            
-        }
-    }];
-}
-
-- (void)predictionDisagreed:(Prediction *)prediction inCell:(PredictionCell *) cell {
-    [[WebApi sharedInstance] disagreeWithPrediction:prediction.predictionId completion:^(Challenge *challenge, NSError *error) {
-        if (!error) {
-            prediction.challenge = challenge;
-            [cell fillWithPrediction:prediction];
-            [[WebApi sharedInstance] checkNewBadges];
-        }
-        else {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message:@"Unable to disagree at this time" delegate: nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles: nil];
-            [alert show];
-        }
-    }];
-}
-
 - (void)profileSelectedWithUserId:(NSInteger)userId inCell:(PredictionCell *)cell {
     if (userId == self.appDelegate.currentUser.userId) {
         ProfileViewController *vc = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:[NSBundle mainBundle]];
@@ -241,7 +214,7 @@
     
     for (Prediction *oldPrediction in self.searchDatasource.predictions) {
         if (prediction.predictionId == oldPrediction.predictionId)
-            indexToExchange = [self.pagingDatasource.objects indexOfObject:oldPrediction];
+            indexToExchange = [self.searchDatasource.predictions indexOfObject:oldPrediction];
     }
     
     if (indexToExchange == NSNotFound)

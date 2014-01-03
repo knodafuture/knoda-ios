@@ -307,7 +307,7 @@ NSInteger PageLimit = 50;
     WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"GET" path:path parameters:nil requiresAuthToken:YES isMultiPartData:NO];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
-        completionHandler([WebObject arrayOfNamesFromChallengesData:responseData], error);
+        completionHandler([TallyUser arrayFromData:responseData], error);
     }];
 }
 
@@ -317,7 +317,7 @@ NSInteger PageLimit = 50;
     WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"GET" path:path parameters:nil requiresAuthToken:YES isMultiPartData:NO];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
-        completionHandler([WebObject arrayOfNamesFromChallengesData:responseData], error);
+        completionHandler([TallyUser arrayFromData:responseData], error);
     }];
 }
 

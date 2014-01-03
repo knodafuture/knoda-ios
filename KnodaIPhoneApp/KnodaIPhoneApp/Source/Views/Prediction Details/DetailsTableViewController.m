@@ -16,10 +16,11 @@
 #import "NoContentCell.h"
 #import "CommentCell.h"
 #import "AppDelegate.h"
+#import "PredictorCell.h"
 
 static const float parallaxRatio = 0.5;
 
-@interface DetailsTableViewController () <TallyDatasourceDelegate, CommentCellDelegate>
+@interface DetailsTableViewController () <TallyDatasourceDelegate, CommentCellDelegate, PredictorCellDelegate>
 @property (strong, nonatomic) PredictionDetailsSectionHeader *sectionHeader;
 @property (assign, nonatomic) BOOL showingComments;
 @property (weak, nonatomic) id<PredictionCellDelegate> owner;
@@ -143,6 +144,10 @@ static const float parallaxRatio = 0.5;
     
     UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
     
+    if ([cell isKindOfClass:PredictorCell.class])
+        ((PredictorCell *)cell).delegate = self;
+    
+    
     if (self.showingComments && [cell isKindOfClass:CommentCell.class]) {
         ((CommentCell *)cell).delegate = self;
         Comment *comment = [self.pagingDatasource.objects objectAtIndex:indexPath.row];
@@ -217,8 +222,6 @@ static const float parallaxRatio = 0.5;
 }
 
 - (void)restoreContent {
-    if (!self.noContentCell)
-        return;
     self.noContentCell = nil;
     [self.tableView reloadData];
 }
@@ -235,6 +238,10 @@ static const float parallaxRatio = 0.5;
 }
 
 - (void)userClickedInCommentCellWithUserId:(NSInteger)userId {
+    [self.owner profileSelectedWithUserId:userId inCell:nil];
+}
+
+- (void)predictorCellDidSelectUserWithUserId:(NSInteger)userId {
     [self.owner profileSelectedWithUserId:userId inCell:nil];
 }
 

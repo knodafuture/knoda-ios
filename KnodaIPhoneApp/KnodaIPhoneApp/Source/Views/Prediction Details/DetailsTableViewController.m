@@ -234,7 +234,12 @@ static const float parallaxRatio = 0.5;
 }
 
 - (void)updateTallyForUser:(NSString *)username agree:(BOOL)agree {
-    [self.tallyDatasource updateTallyForUser:username agree:agree];
+    
+    TallyUser *tallyUser = [[TallyUser alloc] init];
+    tallyUser.userId = [[self appDelegate] currentUser].userId;
+    tallyUser.username = [[self appDelegate] currentUser].name;
+    
+    [self.tallyDatasource updateTallyForUser:tallyUser agree:agree];
 }
 
 - (void)userClickedInCommentCellWithUserId:(NSInteger)userId {

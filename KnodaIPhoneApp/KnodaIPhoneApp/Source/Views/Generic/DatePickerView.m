@@ -28,7 +28,6 @@ static UINib *nib;
     DatePickerView *pickerView = [[nib instantiateWithOwner:nil options:nil] lastObject];
     
     pickerView.datePicker.date = [NSDate date];
-    
     pickerView.promptLabel.text = prompt;
     pickerView.delegate = delegate;
     return pickerView;

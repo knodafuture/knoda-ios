@@ -8,6 +8,7 @@
 
 #import "PagingDatasource.h"
 
+@class TallyUser;
 @protocol TallyDatasourceDelegate <NSObject, PagingDatasourceDelegate>
 
 - (void)requestTallyCompletion:(void(^)(NSArray *agreedUsers, NSArray *disagreedUsers, NSError *error))completionHandler;
@@ -16,6 +17,6 @@
 
 @interface TallyDatasource : PagingDatasource
 
-- (void)updateTallyForUser:(NSString *)username agree:(BOOL)agree;
+- (void)updateTallyForUser:(TallyUser *)user agree:(BOOL)agree;
 
 @end

@@ -113,19 +113,19 @@
     
 }
 
-- (void)updateTallyForUser:(NSString *)username agree:(BOOL)agree {
+- (void)updateTallyForUser:(TallyUser *)user agree:(BOOL)agree {
     if (agree) {
-        if ([_agreedUsers containsObject:username])
+        if ([_agreedUsers containsObject:user])
             return;
-        if ([_disagreedUsers containsObject:username])
-            [_disagreedUsers removeObject:username];
-        [_agreedUsers addObject:username];
+        if ([_disagreedUsers containsObject:user])
+            [_disagreedUsers removeObject:user];
+        [_agreedUsers addObject:user];
     } else {
-        if ([_disagreedUsers containsObject:username])
+        if ([_disagreedUsers containsObject:user])
             return;
-        if ([_agreedUsers containsObject:username])
-            [_agreedUsers removeObject:username];
-        [_disagreedUsers addObject:username];
+        if ([_agreedUsers containsObject:user])
+            [_agreedUsers removeObject:user];
+        [_disagreedUsers addObject:user];
     }
 }
 
@@ -142,6 +142,9 @@
         return @"";
     
     TallyUser *user = array[index];
+    
+    if (![user isKindOfClass:TallyUser.class])
+        return @"";
     
     return user.username;
         

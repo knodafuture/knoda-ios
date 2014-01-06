@@ -28,4 +28,12 @@
     return user;
 }
 
+- (BOOL)isEqual:(id)object {
+    
+    if (![object isKindOfClass:TallyUser.class])
+        return NO;
+    
+    return self.userId == ((TallyUser *)object).userId;
+}
+
 @end

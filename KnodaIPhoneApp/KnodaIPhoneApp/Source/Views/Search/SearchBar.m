@@ -7,6 +7,7 @@
 //
 
 #import "SearchBar.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface SearchBarTextField : UITextField
 
@@ -38,14 +39,18 @@
     self.customTextField = [[SearchBarTextField alloc] initWithFrame:CGRectMake(10, self.frame.size.height / 2.0 - 15.0, self.frame.size.width - 20, 30)];
     [self addSubview:self.customTextField];
     
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeInfoLight];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    UIImage *buttonImage = [UIImage imageNamed:@"SearchClearIcon"];
 
     CGRect frame = button.frame;
-    
+    frame.size = buttonImage.size;
     frame.origin.x = self.frame.size.width - frame.size.width - 20.0;
     frame.origin.y = self.frame.size.height / 2.0 - frame.size.height / 2.0;
     
     button.frame = frame;
+    
+    [button setBackgroundImage:buttonImage forState:UIControlStateNormal];
     
     [self addSubview:button];
     
@@ -67,12 +72,13 @@
     self.customTextField.enablesReturnKeyAutomatically = YES;
     self.customTextField.returnKeyType = UIReturnKeySearch;
     self.customTextField.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0];
-    self.customTextField.borderStyle = UITextBorderStyleRoundedRect;
+    self.customTextField.borderStyle = UITextBorderStyleNone;
     self.customTextField.delegate = self;
     self.customTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Search Knoda" attributes:@{NSForegroundColorAttributeName: [UIColor colorFromHex:@"77BC1F"]}];
     self.customTextField.backgroundColor = [UIColor colorFromHex:@"235C37"];
     self.customTextField.textColor = [UIColor whiteColor];
-    
+    self.customTextField.layer.cornerRadius = 5.0;
+    self.customTextField.layer.masksToBounds = YES;
     return self;
 }
 

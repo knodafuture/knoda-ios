@@ -72,7 +72,7 @@
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
         duration = 0.35;
     else
-        duration = 0.5;
+        duration = 0.4;
     
     CGRect frame = self.searchBar.frame;
     frame.origin.x = 30;
@@ -158,11 +158,17 @@
 - (void)searchResultSelectedAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.section == 0) {
+        if (indexPath.row >= self.searchDatasource.users.count)
+            return;
+        
         User *user = [self.searchDatasource.users objectAtIndex:indexPath.row];
         
         [self profileSelectedWithUserId:user.userId inCell:nil];
         return;
     }
+    
+    if (indexPath.row >= self.searchDatasource.predictions.count)
+        return;
     
     Prediction *prediction = [self.searchDatasource.predictions objectAtIndex:indexPath.row];
     

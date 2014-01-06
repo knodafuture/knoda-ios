@@ -141,9 +141,8 @@
 }
 
 - (UINavigationController *)navigationControllerForMenuItem:(MenuItem)menuItem {
-    UINavigationController *navigationController = [self.vcCache objectForKey:@(menuItem)];
-    if (!navigationController) {
-        UIViewController *viewController;
+    UIViewController *viewController = [self.vcCache objectForKey:@(menuItem)];
+    if (!viewController) {
         switch (menuItem) {
             case MenuHome:
                 viewController = [[HomeViewController alloc] initWithStyle:UITableViewStylePlain];
@@ -164,12 +163,13 @@
                 viewController = [[HomeViewController alloc] initWithStyle:UITableViewStylePlain];
                 break;
         }
-        viewController.navigationItem.leftBarButtonItem = self.sideNavBarButtonItem;
-        navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
-        navigationController.delegate = self;
-        [self.vcCache setObject:navigationController forKey:@(menuItem)];
+
+        [self.vcCache setObject:viewController forKey:@(menuItem)];
     }
-    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    navigationController.delegate = self;
+    viewController.navigationItem.leftBarButtonItem = self.sideNavBarButtonItem;
+
     self.topNavigationController = navigationController;
     
     return navigationController;

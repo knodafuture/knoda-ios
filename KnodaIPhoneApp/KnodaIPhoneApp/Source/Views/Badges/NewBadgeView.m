@@ -17,6 +17,8 @@
 @property (weak, nonatomic) IBOutlet UIView *badgeBackgroundView;
 @property (weak, nonatomic) IBOutlet UIImageView *badgeImageView;
 
+@property (strong ,nonatomic) NSString *name;
+
 @end
 
 @implementation NewBadgeView
@@ -47,5 +49,7 @@
 - (IBAction)close:(UIButton *)sender {
     [self removeFromSuperview];
 }
+
+
 
 @end

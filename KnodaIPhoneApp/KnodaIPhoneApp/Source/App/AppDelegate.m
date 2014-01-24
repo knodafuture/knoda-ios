@@ -130,7 +130,25 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
     Badge *badge = [badges firstObject];
     
     [NewBadgeView showWithBadge:[UIImage imageNamed:badge.name] animated:YES];
+#ifndef TESTFLIGHT
+
+    [self sendsendshittotapjoyifnecessarybadcodehere:badge.name];
+#endif
+
 }
+
+
+#ifndef TESTFLIGHT
+
+- (void)sendshittotapjoyifnecessarybadcodehere:(NSString *)badgeName {
+    
+    if ([badgeName isEqualToString:@"1_prediction"]) {
+        [Tapjoy actionComplete:TJC_CREATE_FIRST_PREDICTION];
+    }
+    if ([badgeName isEqualToString:@"1_challenge"])
+        [Tapjoy actionComplete:TJC_CREATE_FIRST_CHALLENGE];
+}
+#endif
 
 - (void)clearSavedCredentials {
     [[NSUserDefaults standardUserDefaults] removeObjectForKey: @"User"];

@@ -32,3 +32,8 @@
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 #define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
 #define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
+
+
+#define TJC_CREATE_FIRST_CHALLENGE @"6bc1a51d-68d9-471c-bce8-7234a4c47191" // Create First Challenge
+#define TJC_SIGN_UP_FOR_KNODA_ @"8e4c3953-3a2d-471b-8775-ce1aca4165f4" // Sign Up for Knoda
+#define TJC_CREATE_FIRST_PREDICTION @"cecd4b2a-731a-494a-9b4d-df7786df2fb2" // Create First Prediction

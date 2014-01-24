@@ -44,7 +44,6 @@ static const NSInteger kMaxPasswordLength = 20;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap)];
     [self.view addGestureRecognizer:tap];
     [self.navigationController setNavigationBarHidden:NO];
-    //By signing up, I agree to the Terms of Service and Privacy Policy
     
     NSDictionary *allAttributes = @{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:10.0]};
     NSDictionary *underlined = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
@@ -135,7 +134,7 @@ static const NSInteger kMaxPasswordLength = 20;
         if (!error) {
             [[self appDelegate] doLogin:(LoginRequest *)request withResponse:response];
 #ifndef TESTFLIGHT
-            [Tapjoy actionComplete:@"8e4c3953-3a2d-471b-8775-ce1aca4165f4"];
+            [Tapjoy actionComplete:TJC_SIGN_UP_FOR_KNODA_];
 #endif
         }
         

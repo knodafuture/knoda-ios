@@ -191,6 +191,7 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
 
 - (void)doLogin:(LoginRequest *)request withResponse:(LoginResponse *)response {
 
+    NSLog(@"%@", response.token);
     [self saveRequest:request andResponse:response];
 
     [[WebApi sharedInstance] getCurrentUser:^(User *user, NSError *error) {

@@ -172,9 +172,11 @@ static const char *MULTIPART_CHARS = "1234567890_-qwertyuiopasdfghjklzxcvbnmQWER
         [body appendData:[@"Content-Type: image/png\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
         [body appendData:data];
         [body appendData:[[NSString stringWithFormat:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+
     }
     
     [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", self.boundaryString] dataUsingEncoding:NSUTF8StringEncoding]];
+    
     
     return body;
 }

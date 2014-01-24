@@ -98,6 +98,14 @@ NSInteger PageLimit = 50;
 }
 
 - (void)uploadProfileImage:(UIImage *)profileImage completion:(void (^)(NSError *))completionHandler {
+    
+    NSData *profileData = UIImagePNGRepresentation(profileImage);
+    
+    if (!profileData) {
+        completionHandler([NSError errorWithDomain:@"" code:400 userInfo:@{NSLocalizedDescriptionKey: @"Bad image!"}]);
+        return;
+    }
+    
     NSDictionary *parameters = @{@"Images" : @{@"user[avatar]" : UIImagePNGRepresentation(profileImage)}};
     
     WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"PATCH" path:@"profile.json" parameters:parameters requiresAuthToken:YES isMultiPartData:YES];
@@ -491,6 +499,9 @@ NSInteger PageLimit = 50;
 @implementation WebApi (Internal)
 
 - (void)executeRequest:(WebRequest *)request completion:(void (^)(NSData *, NSError *))completionHandler {
+    NSLog(@"Executing request url: %@", request.URL.absoluteString);
+    NSLog(@"Body: %@", [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
+
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         [self handleResponse:response withData:data error:connectionError completion:completionHandler];
     }];

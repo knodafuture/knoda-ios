@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>A957DA15-F0B1-41AA-AF2C-53593551903C</string>
+	<string>A733D70F-8AED-4BDD-AEB6-EF94C1A4F4C8</string>
 	<key>IDESourceControlProjectName</key>
 	<string>KnodaIPhoneApp</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>3B9546F1-AB83-4A4A-A0A6-4F8F83BBD906</key>
-		<string>https://bitbucket.org/knoda/knodaiphone.git</string>
+		<key>D62F4F54-56FD-4EFF-A42C-8AA004F44BC7</key>
+		<string>https://github.com/knodafuture/knoda-ios.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>KnodaIPhoneApp/KnodaIPhoneApp.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>3B9546F1-AB83-4A4A-A0A6-4F8F83BBD906</key>
+		<key>D62F4F54-56FD-4EFF-A42C-8AA004F44BC7</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://bitbucket.org/knoda/knodaiphone.git</string>
+	<string>https://github.com/knodafuture/knoda-ios.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>3B9546F1-AB83-4A4A-A0A6-4F8F83BBD906</string>
+	<string>D62F4F54-56FD-4EFF-A42C-8AA004F44BC7</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>3B9546F1-AB83-4A4A-A0A6-4F8F83BBD906</string>
+			<string>D62F4F54-56FD-4EFF-A42C-8AA004F44BC7</string>
 			<key>IDESourceControlWCCName</key>
 			<string>knodaiphone</string>
 		</dict>

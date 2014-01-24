@@ -339,6 +339,7 @@
 		01E8CB8018767D21003AE018 /* UserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E8CB7E18767D21003AE018 /* UserCell.m */; };
 		01E8CB8218767D5D003AE018 /* UserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E8CB8118767D5D003AE018 /* UserCell.xib */; };
 		01E8CB8318767D5D003AE018 /* UserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E8CB8118767D5D003AE018 /* UserCell.xib */; };
+		01FFE52C187B7432001C9893 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01FFE52B187B7432001C9893 /* StoreKit.framework */; };
 		9E28686F17C659940033FB3C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E28686E17C659930033FB3C /* Security.framework */; };
 		9E6F4C5A17D8CCFA00EAB4A0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6F4C5917D8CCFA00EAB4A0 /* SystemConfiguration.framework */; };
 		9E708824178AF68E00F036A8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E708823178AF68E00F036A8 /* UIKit.framework */; };
@@ -624,6 +625,7 @@
 		01E8CB7D18767D21003AE018 /* UserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCell.h; sourceTree = "<group>"; };
 		01E8CB7E18767D21003AE018 /* UserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCell.m; sourceTree = "<group>"; };
 		01E8CB8118767D5D003AE018 /* UserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCell.xib; sourceTree = "<group>"; };
+		01FFE52B187B7432001C9893 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		9E28686E17C659930033FB3C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		9E6F4C5917D8CCFA00EAB4A0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		9E708820178AF68E00F036A8 /* KnodaIPhoneApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KnodaIPhoneApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -654,6 +656,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01FFE52C187B7432001C9893 /* StoreKit.framework in Frameworks */,
 				014A9F35185DA3DC00A96678 /* Twitter.framework in Frameworks */,
 				9E6F4C5A17D8CCFA00EAB4A0 /* SystemConfiguration.framework in Frameworks */,
 				014A9F31185DA3BB00A96678 /* Social.framework in Frameworks */,
@@ -1255,6 +1258,7 @@
 		9E708822178AF68E00F036A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				01FFE52B187B7432001C9893 /* StoreKit.framework */,
 				014A9F34185DA3DC00A96678 /* Twitter.framework */,
 				014A9F30185DA3BB00A96678 /* Social.framework */,
 				014A9F2E185DA3B200A96678 /* MobileCoreServices.framework */,

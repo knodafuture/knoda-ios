@@ -24,6 +24,8 @@ NSInteger PageLimit = 50;
 - (void)handleResponse:(NSURLResponse *)response withData:(NSData *)data error:(NSError *)error completion:(void(^)(NSData *data, NSError *error))completionHandler;
 
 - (NSDictionary *)parametersDictionary:(NSDictionary *)dictionary withLastId:(NSInteger)lastId;
+- (NSDictionary *)parametersDictionary:(NSDictionary *)dictionary withGreaterThanLastId:(NSInteger)lastId;
+
 - (void)getCachedObjectForKey:(NSString *)key timeout:(NSTimeInterval)timeout inCache:(id<Cache>)cache requestForMiss:(WebRequest *(^)(void))miss completion:(void(^)(NSData *data, NSError *error))completionHandler;
 @end
 
@@ -368,7 +370,8 @@ NSInteger PageLimit = 50;
 - (void)getCommentsForPrediction:(NSInteger)predictionId last:(NSInteger)lastId completion:(void (^)(NSArray *, NSError *))completionHandler {
     NSDictionary *parameters = @{@"list": @"prediction", @"limit" : @(PageLimit),
                                  @"prediction_id": @(predictionId)};
-    parameters = [self parametersDictionary:parameters withLastId:lastId];
+    parameters = [self parametersDictionary:parameters withGreaterThanLastId:lastId];
+
     WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"GET" path:@"comments.json" parameters:parameters requiresAuthToken:YES isMultiPartData:NO];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
@@ -546,6 +549,16 @@ NSInteger PageLimit = 50;
     
     return dict;
     
+}
+
+- (NSDictionary *)parametersDictionary:(NSDictionary *)dictionary withGreaterThanLastId:(NSInteger)lastId {
+    if (lastId == 0)
+        return dictionary;
+    
+    NSMutableDictionary *dict = [dictionary mutableCopy];
+    [dict setObject:@(lastId) forKey:@"id_gt"];
+    
+    return dict;
 }
 
 - (void)handleResponse:(NSURLResponse *)response withData:(NSData *)data error:(NSError *)error completion:(void(^)(NSData *data, NSError *error))completionHandler {

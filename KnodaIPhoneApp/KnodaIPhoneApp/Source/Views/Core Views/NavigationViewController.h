@@ -18,6 +18,8 @@ typedef enum {
 
 @interface NavigationViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
+
+- (id)initWithFirstMenuItem:(MenuItem)menuItem;
 - (void)toggleNavigationPanel;
 - (void)openMenuItem:(MenuItem)menuItem;
 

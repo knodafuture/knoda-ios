@@ -51,18 +51,22 @@
 @property (strong, nonatomic) NSTimer *pingTimer;
 @property (weak, nonatomic) UINavigationController *topNavigationController;
 
+@property (assign, nonatomic) MenuItem firstMenuItem;
+
 @end
 
 @implementation NavigationViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+
+- (id)initWithFirstMenuItem:(MenuItem)menuItem {
+    self = [super initWithNibName:@"NavigationViewController" bundle:[NSBundle mainBundle]];
     self.itemNames = @[@"Home", @"History", @"Activity", @"Badges", @"Profile"];
     self.masterShown = NO;
     self.vcCache = [[NSMutableDictionary alloc] init];
+    self.firstMenuItem = menuItem;
     return self;
+    
 }
-
 - (void) viewDidLoad {
     [super viewDidLoad];
     
@@ -118,7 +122,7 @@
     if(!self.appDelegate.currentUser.hasAvatar)
         [self showSelectPictureViewController];
     else
-        [self openMenuItem: MenuHome];
+        [self openMenuItem: self.firstMenuItem];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -359,7 +363,7 @@
 - (void)hideViewController:(SelectPictureViewController *)vc {
     [[LoadingView sharedInstance] hide];
     [[WebApi sharedInstance] checkNewBadges];
-    [self openMenuItem:MenuHome];
+    [self openMenuItem:self.firstMenuItem];
 }
 
 

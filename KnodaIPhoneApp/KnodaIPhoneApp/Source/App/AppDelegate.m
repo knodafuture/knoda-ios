@@ -32,7 +32,8 @@ NSString *NewObjectNotification = @"NewPredictionNotification";
 NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
 
 @interface AppDelegate() <UIAlertViewDelegate>
-
+@property (assign, nonatomic) BOOL launchedFromPush;
+@property (strong, nonatomic) NavigationViewController *navigationViewController;
 @end
 
 @implementation AppDelegate
@@ -46,6 +47,11 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
     [Flurry startSession: kFlurryKey];
 #endif
     
+    if (launchOptions != nil) {
+        // Launched from push notification
+        NSDictionary *notification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+        self.launchedFromPush = notification != nil;
+    }
     
     UIColor *navBackgroundColor = [UIColor colorFromHex:@"77BC1F"];
     
@@ -113,6 +119,11 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
     }
 }
 
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (buttonIndex != alertView.cancelButtonIndex)
+        [self.navigationViewController openMenuItem:MenuAlerts];
+}
+
 - (void)newBadge:(NSNotification *)notifcation {
     NSArray *badges = notifcation.userInfo[BadgeNotificationKey];
     
@@ -162,22 +173,31 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
     [UIView transitionFromView:self.window.rootViewController.view toView:vc.view duration:0.5
                        options:UIViewAnimationOptionTransitionCrossDissolve completion:^(BOOL finished) {
          self.window.rootViewController = vc;
+                           self.navigationViewController = nil;
      }];
 }
 
 - (void)showHomeScreen:(BOOL)animated {
     
-    NavigationViewController *vc = [[NavigationViewController alloc] initWithNibName:@"NavigationViewController" bundle:[NSBundle mainBundle]];
-
+    MenuItem startingMenuItem;
+    if (self.launchedFromPush) {
+        startingMenuItem = MenuAlerts;
+        self.launchedFromPush = NO;
+    } else
+        startingMenuItem = MenuHome;
+    
+    
+    self.navigationViewController = [[NavigationViewController alloc] initWithFirstMenuItem:startingMenuItem];
+    
     if (!animated) {
-        self.window.rootViewController = vc;
+        self.window.rootViewController = self.navigationViewController;
         return;
     }
     
-    [UIView transitionFromView:self.window.rootViewController.view toView:vc.view duration:0.5
+    [UIView transitionFromView:self.window.rootViewController.view toView:self.navigationViewController.view duration:0.5
                        options:UIViewAnimationOptionTransitionCrossDissolve completion:^(BOOL finished) {
-        self.window.rootViewController = vc;
-       [vc hackAnimationFinished];
+        self.window.rootViewController = self.navigationViewController;
+       [self.navigationViewController hackAnimationFinished];
     }];
 }
 

@@ -14,11 +14,6 @@
 #import "PredictionDetailsViewController.h"
 #import "NoContentCell.h"
 
-@interface AlertsViewController ()
-@property (strong, nonatomic) NSMutableIndexSet *seenIds;
-
-@end
-
 @implementation AlertsViewController
 
 
@@ -27,8 +22,6 @@
     
     self.title = @"ACTIVITY";
     self.navigationController.navigationBar.translucent = NO;
-    
-    self.seenIds = [[NSMutableIndexSet alloc] init];
 }
 
 - (void)menuPressed:(id)sender {
@@ -46,8 +39,6 @@
     [super viewDidDisappear:animated];
     
     [Flurry endTimedEvent:@"ActivityFeed" withParameters:nil];
-    
-    [self sendSeenAlerts:nil];
 }
 
 
@@ -117,12 +108,7 @@
     
     Alert *alert = [self.pagingDatasource.objects objectAtIndex:indexPath.row];
     
-    if (alert.seen)
-        return;
-    
     alert.seen = YES;
-        
-    [self.seenIds addIndex:alert.alertId];
 }
 
 - (void)noObjectsRetrievedInPagingDatasource:(PagingDatasource *)pagingDatasource {
@@ -133,30 +119,6 @@
 - (void)objectsAfterObject:(id)object completion:(void (^)(NSArray *, NSError *))completionHandler {
     NSInteger lastId = [(Alert *)object alertId];
     [[WebApi sharedInstance] getAlertsAfter:lastId completion:completionHandler];
-}
-
-- (void)beginRefreshing {
-    [self sendSeenAlerts:^{
-        self.pagingDatasource.currentPage = 0;
-        [self.pagingDatasource loadPage:0 completion:^{
-            [self endRefreshing];
-        }];
-    }];
-}
-
-- (void)sendSeenAlerts:(void(^)(void))completion {
-    __block NSMutableArray *ids = [NSMutableArray arrayWithCapacity:self.pagingDatasource.objects.count];
-    
-    [self.seenIds enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
-        [ids addObject:@(idx)];
-    }];
-    
-    [[WebApi sharedInstance] setSeenAlerts:ids completion:^(NSError *error) {
-        if (!error)
-            [self.seenIds removeAllIndexes];
-        if (completion)
-            completion();
-    }];
 }
 
 @end

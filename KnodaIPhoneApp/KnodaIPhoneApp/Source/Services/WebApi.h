@@ -92,7 +92,6 @@ extern NSInteger PageLimit;
 // -- Alerts -- //
 - (void)getAlertsAfter:(NSInteger)lastId completion:(void(^)(NSArray *alerts, NSError *error))completionHandler;
 - (void)getUnseenAlertsCompletion:(void(^)(NSArray *alerts, NSError *error))completionHandler;
-- (void)setSeenAlerts:(NSArray *)seenAlertIds completion:(void(^)(NSError *error))completionHandler;
 
 
 // -- Search -- //

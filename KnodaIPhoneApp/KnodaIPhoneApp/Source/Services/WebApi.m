@@ -450,21 +450,6 @@ NSInteger PageLimit = 50;
     
 }
 
-- (void)setSeenAlerts:(NSArray *)seenAlertIds completion:(void (^)(NSError *))completionHandler {
-    NSMutableString  *idString = [NSMutableString stringWithFormat: @"%d", [[seenAlertIds firstObject] integerValue]];
-    
-    for (int i = 1; i < seenAlertIds.count; i++)
-        [idString appendFormat: @",%d", [[seenAlertIds objectAtIndex: i] integerValue]];
-    
-    NSDictionary *parameters = @{@"ids[]" : idString};
-    
-    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"POST" path:@"activityfeed/seen.json" parameters:parameters requiresAuthToken:YES isMultiPartData:NO];
-
-    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
-        completionHandler(error);
-    }];
-}
-
 - (void)searchForPredictions:(NSString *)searchText completion:(void (^)(NSArray *, NSError *))completionHandler {
     NSDictionary *parameters = @{@"limit": @(PageLimit), @"q" : searchText};
     

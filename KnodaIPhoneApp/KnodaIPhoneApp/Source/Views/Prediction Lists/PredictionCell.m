@@ -45,6 +45,7 @@ static NSMutableDictionary *cellHeightCache;
 @property (weak, nonatomic) IBOutlet UIView *disagreeView;
 @property (weak, nonatomic) IBOutlet UIView *disagreeImageView;
 @property (weak, nonatomic) IBOutlet UIButton *profileButton;
+@property (weak, nonatomic) IBOutlet UIImageView *verifiedCheckmark;
 
 @property (assign, nonatomic) CGPoint initialTouchLocation;
 @property (assign, nonatomic) NSTimeInterval initialTouchTimestamp;
@@ -126,6 +127,19 @@ static NSMutableDictionary *cellHeightCache;
     self.commentLabelContainer.frame = commentsFrame;
     
     self.commentCountLabel.text = [NSString stringWithFormat:@"%d", self.prediction.commentCount];
+    
+    
+    if (!self.prediction.verifiedAccount)
+        self.verifiedCheckmark.hidden = YES;
+    else {
+        self.verifiedCheckmark.hidden = NO;
+        
+        CGSize usernameSize = [self.usernameLabel sizeThatFits:self.usernameLabel.frame.size];
+        CGRect frame = self.verifiedCheckmark.frame;
+        frame.origin.x = self.usernameLabel.frame.origin.x + usernameSize.width + 5.0;
+        self.verifiedCheckmark.frame = frame;
+    }
+    
     
     [self updateVoteImage];
 }

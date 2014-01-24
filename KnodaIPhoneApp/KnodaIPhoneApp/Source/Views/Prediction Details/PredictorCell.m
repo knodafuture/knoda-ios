@@ -20,6 +20,9 @@ CGFloat PredictorCellHeight = 22.0;
 @property (strong, nonatomic) TallyUser *agreedUser;
 @property (strong, nonatomic) TallyUser *disagreedUser;
 
+@property (weak, nonatomic) IBOutlet UIImageView *agreedVerifiedCheckmark;
+@property (weak, nonatomic) IBOutlet UIImageView *disagreedVerifiedCheckmark;
+
 @end
 
 
@@ -44,6 +47,28 @@ CGFloat PredictorCellHeight = 22.0;
     
     self.disagreedUser = disagreedUser;
     self.disagreedUserName.text = disagreedUser.username;
+    
+    
+    if (!agreedUser.verifiedAccount)
+        self.agreedVerifiedCheckmark.hidden = YES;
+    else {
+        self.agreedVerifiedCheckmark.hidden = NO;
+        CGSize textSize = [self.agreedUserName sizeThatFits:self.agreedUserName.frame.size];
+        
+        CGRect frame = self.agreedVerifiedCheckmark.frame;
+        frame.origin.x = self.agreedUserName.frame.origin.x + textSize.width + 5.0;
+    }
+    
+    if (!disagreedUser.verifiedAccount)
+        self.disagreedVerifiedCheckmark.hidden = YES;
+    else {
+        self.disagreedVerifiedCheckmark.hidden = NO;
+        CGSize textSize = [self.disagreedUserName sizeThatFits:self.agreedUserName.frame.size];
+        
+        CGRect frame = self.disagreedVerifiedCheckmark.frame;
+        frame.origin.x = self.disagreedUserName.frame.origin.x + textSize.width + 5.0;
+    }
+    
 }
 
 - (IBAction)agreedUserClicked:(id)sender {

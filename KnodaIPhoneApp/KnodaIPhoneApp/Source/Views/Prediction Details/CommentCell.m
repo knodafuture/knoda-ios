@@ -81,6 +81,17 @@ static NSMutableDictionary *cellHeights;
     frame.size.height = [CommentCell heightForComment:comment];
     
     self.frame = frame;
+    
+    if (!self.comment.verifiedAccount) {
+        self.verifiedCheckmark.hidden = YES;
+    } else {
+        self.verifiedCheckmark.hidden = NO;
+        CGSize textSize = [self.usernameLabel sizeThatFits:self.usernameLabel.frame.size];
+        
+        CGRect frame = self.verifiedCheckmark.frame;
+        frame.origin.x = self.usernameLabel.frame.origin.x + textSize.width + 5.0;
+        self.verifiedCheckmark.frame = frame;
+    }
 
 }
 

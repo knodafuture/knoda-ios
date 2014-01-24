@@ -27,6 +27,7 @@
     comment.createdDate = [comment dateFromObject:dictionary[@"created_at"]];
     comment.challenge = [Challenge instanceFromDictionary:dictionary[@"challenge"]];
     comment.username = dictionary[@"username"];
+    comment.verifiedAccount = [dictionary[@"verified_account"] boolValue];
     NSDictionary *imageDictionary = dictionary[@"user_avatar"];
     
     if ([imageDictionary isKindOfClass:[NSDictionary class]]) {

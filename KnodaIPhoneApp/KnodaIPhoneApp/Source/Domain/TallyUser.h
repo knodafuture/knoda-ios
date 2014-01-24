@@ -13,5 +13,5 @@
 @property (assign, nonatomic) BOOL agree;
 @property (assign, nonatomic) NSInteger userId;
 @property (strong, nonatomic) NSString *username;
-
+@property (assign, nonatomic) BOOL verifiedAccount;
 @end

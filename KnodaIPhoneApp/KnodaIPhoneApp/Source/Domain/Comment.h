@@ -24,4 +24,5 @@
 @property (strong, nonatomic) NSString *smallUserImage;
 @property (strong, nonatomic) NSString *thumbUserImage;
 
+@property (assign, nonatomic) BOOL verifiedAccount;
 @end

@@ -50,12 +50,25 @@
                             <action selector="disagreedUserClicked:" destination="AYr-w4-sTr" eventType="touchUpInside" id="L8s-9I-VqF"/>
                         </connections>
                     </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="VerifiedCheckmark" id="aFl-LN-MIL">
+                        <rect key="frame" x="10" y="3" width="15" height="15"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="VerifiedCheckmark" id="LQ2-h6-AVH">
+                        <rect key="frame" x="20" y="3" width="15" height="15"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="agreedUserName" destination="QN8-LX-NKT" id="vYR-Rt-MB2"/>
+                <outlet property="agreedVerifiedCheckmark" destination="aFl-LN-MIL" id="l7S-PP-VKD"/>
                 <outlet property="disagreedUserName" destination="XNf-zI-RvB" id="8O7-iJ-DUl"/>
+                <outlet property="disagreedVerifiedCheckmark" destination="LQ2-h6-AVH" id="VKz-so-jgW"/>
             </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="VerifiedCheckmark" width="15" height="15"/>
+    </resources>
 </document>

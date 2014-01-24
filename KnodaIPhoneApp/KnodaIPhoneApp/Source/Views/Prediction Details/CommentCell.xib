@@ -59,6 +59,10 @@
                             <action selector="profileClicked:" destination="nJc-cl-idO" eventType="touchUpInside" id="5ad-xu-yab"/>
                         </connections>
                     </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="VerifiedCheckmark" id="NV4-PM-1hY">
+                        <rect key="frame" x="77" y="10" width="15" height="15"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             </tableViewCellContentView>
@@ -68,8 +72,12 @@
                 <outlet property="bodyLabel" destination="ScE-Ca-m0k" id="Ydl-iW-M35"/>
                 <outlet property="metaDataLabel" destination="EQq-bk-p13" id="QqQ-gg-yRJ"/>
                 <outlet property="usernameLabel" destination="YKc-kH-7sI" id="bVK-Zg-aS9"/>
+                <outlet property="verifiedCheckmark" destination="NV4-PM-1hY" id="yJr-tC-RRF"/>
                 <outlet property="voteImage" destination="99u-yC-ehX" id="evP-Sb-Lp5"/>
             </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="VerifiedCheckmark" width="15" height="15"/>
+    </resources>
 </document>

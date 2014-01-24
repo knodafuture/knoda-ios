@@ -30,6 +30,8 @@
 @property (strong, nonatomic) NSString *smallAvatarUrl;
 @property (strong, nonatomic) NSString *largeAvatarUrl;
 
+@property (assign, nonatomic) BOOL verifiedAccount;
+
 @property (strong, nonatomic) Challenge *challenge;
 
 @property (assign, nonatomic) BOOL expired;

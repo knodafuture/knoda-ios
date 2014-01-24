@@ -24,7 +24,7 @@
     user.agree = [dictionary[@"agree"] boolValue];
     user.userId = [dictionary[@"user_id"] integerValue];
     user.username = dictionary[@"username"];
-    
+    user.verifiedAccount = [dictionary[@"verified_account"] boolValue];
     return user;
 }
 

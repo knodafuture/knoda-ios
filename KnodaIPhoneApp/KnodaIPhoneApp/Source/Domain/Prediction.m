@@ -32,6 +32,7 @@
     prediction.userName = dictionary[@"username"];
     prediction.commentCount = [dictionary[@"comment_count"] integerValue];
     prediction.shortUrl = dictionary[@"short_url"];
+    prediction.verifiedAccount = [dictionary[@"verified_account"] boolValue];
     
     id obj = dictionary[@"tags"];
     if ([obj isKindOfClass:[NSArray class]] && [obj count])

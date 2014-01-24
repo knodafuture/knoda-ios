@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *bodyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *metaDataLabel;
 @property (weak, nonatomic) id<CommentCellDelegate>delegate;
+@property (weak, nonatomic) IBOutlet UIImageView *verifiedCheckmark;
 
 + (CommentCell *)commentCellForTableView:(UITableView *)tableView;
 + (CGFloat)heightForComment:(Comment *)comment;

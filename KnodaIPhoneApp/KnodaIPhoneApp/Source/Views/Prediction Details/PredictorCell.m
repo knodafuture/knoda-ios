@@ -57,6 +57,7 @@ CGFloat PredictorCellHeight = 22.0;
         
         CGRect frame = self.agreedVerifiedCheckmark.frame;
         frame.origin.x = self.agreedUserName.frame.origin.x + textSize.width + 5.0;
+        self.agreedVerifiedCheckmark.frame = frame;
     }
     
     if (!disagreedUser.verifiedAccount)
@@ -67,6 +68,7 @@ CGFloat PredictorCellHeight = 22.0;
         
         CGRect frame = self.disagreedVerifiedCheckmark.frame;
         frame.origin.x = self.disagreedUserName.frame.origin.x + textSize.width + 5.0;
+        self.disagreedVerifiedCheckmark.frame = frame;
     }
     
 }

@@ -67,7 +67,7 @@ CGFloat PredictorCellHeight = 22.0;
         CGSize textSize = [self.disagreedUserName sizeThatFits:self.agreedUserName.frame.size];
         
         CGRect frame = self.disagreedVerifiedCheckmark.frame;
-        frame.origin.x = self.disagreedUserName.frame.origin.x + textSize.width + 5.0;
+        frame.origin.x = (self.disagreedUserName.frame.origin.x + self.disagreedUserName.frame.size.width) - frame.size.width - textSize.width - 5.0;
         self.disagreedVerifiedCheckmark.frame = frame;
     }
     

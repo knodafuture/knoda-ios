@@ -94,6 +94,11 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+
+- (void)handleNewObjectNotification:(NSNotification *)notification {
+    
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     if (self.userInfoLoaded)
         return 2;

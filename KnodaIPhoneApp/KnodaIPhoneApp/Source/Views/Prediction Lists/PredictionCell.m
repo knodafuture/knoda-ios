@@ -173,6 +173,10 @@ static NSMutableDictionary *cellHeightCache;
 }
 
 - (void)fillWithPrediction:(Prediction *)prediction {
+    
+    if (self.prediction && self.prediction.predictionId != prediction.predictionId)
+        return;
+    
     self.prediction = prediction;
     
     CGRect frame = self.frame;
@@ -466,5 +470,11 @@ static NSMutableDictionary *cellHeightCache;
     return nil;
 }
 
+- (void)prepareForReuse {
+    [super prepareForReuse];
+    [self.layer removeAllAnimations];
+    self.avatarImageView.image = nil;
+    self.prediction = nil;
+}
 
 @end

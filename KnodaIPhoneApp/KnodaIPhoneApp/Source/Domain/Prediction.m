@@ -9,6 +9,8 @@
 #import "Prediction.h"
 #import "Challenge.h"    
 #import "NSDate+Utils.h"
+#import "PredictionPoints.h"
+
 @implementation Prediction
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
@@ -55,5 +57,10 @@
 
 + (NSValueTransformer *)userAvatarJSONTransformer {
     return [self remoteImageTransformer];
+}
+
++ (NSValueTransformer *)pointsJSONTransformer {
+    return [NSValueTransformer mtl_JSONDictionaryTransformerWithModelClass:PredictionPoints.class];
+
 }
 @end

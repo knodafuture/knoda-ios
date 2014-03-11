@@ -224,8 +224,6 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
 
 - (void)saveRequest:(LoginRequest *)request andResponse:(LoginResponse *)response {
     
-    NSString *login = request.login;
-    
     [[NSUserDefaults standardUserDefaults] setObject:request.login forKey: @"User"];
     [[NSUserDefaults standardUserDefaults] setObject:response.token forKey:LoginResponseKey];
     [self.keychain setObject:request.password forKey:((__bridge id)kSecValueData)];

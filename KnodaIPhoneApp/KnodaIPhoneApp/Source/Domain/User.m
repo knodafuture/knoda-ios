@@ -17,8 +17,8 @@
              @"avatar": @"avatar_image",
              @"winningPercentage" : @"winning_percentage",
              @"totalPredictions": @"total_predictions",
-             @"verifiedAccount" : @"verified_account"
-             };
+             @"verifiedAccount" : @"verified_account",
+             @"name" : @"username"};
 }
 
 + (NSValueTransformer *)avatarJSONTransformer {

@@ -59,6 +59,7 @@ static const NSUInteger kHourMinute        = NSHourCalendarUnit | NSMinuteCalend
     dispatch_once(&onceToken, ^{
         formatter          = [NSDateFormatter new];
         formatter.locale   = [NSLocale currentLocale];
+        formatter.timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
     });
     return formatter;
 }

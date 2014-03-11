@@ -9,18 +9,18 @@
 #import "WebObject.h"
 
 typedef NS_ENUM(NSInteger, ActivityItemType) {
-    AlertTypeUnknown,
-    AlertTypeLost,
-    AlertTypeWon,
-    AlertTypeExpired,
-    AlertTypeComment
+    ActivityTypeUnknown,
+    ActivityTypeLost,
+    ActivityTypeWon,
+    ActivityTypeExpired,
+    ActivityTypeComment
 };
 
 @interface ActivityItem : WebObject
 @property (assign, nonatomic) NSInteger activityItemId;
 @property (assign, nonatomic) NSInteger predictionId;
 @property (assign, nonatomic) NSInteger userId;
-@property (assign, nonatomic) ActivityItemType alertType;
+@property (assign, nonatomic) ActivityItemType type;
 @property (assign, nonatomic) BOOL seen;
 @property (strong, nonatomic) NSDate *creationDate;
 @property (strong, nonatomic) NSString *title;

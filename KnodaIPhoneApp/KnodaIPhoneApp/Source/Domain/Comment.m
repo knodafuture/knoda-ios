@@ -23,4 +23,12 @@
              };
 }
 
++ (NSValueTransformer *)challengeJSONTransformer {
+    return [self challengeTransformer];
+}
+
++ (NSValueTransformer *)userAvatarJSONTransformer {
+    return [self remoteImageTransformer];
+}
+
 @end

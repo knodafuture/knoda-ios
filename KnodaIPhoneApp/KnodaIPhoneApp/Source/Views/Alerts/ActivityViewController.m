@@ -123,17 +123,17 @@
 }
 
 - (UIImage *)imageForActivityItem:(ActivityItem *)item {
-    switch (item.alertType) {
-        case AlertTypeComment:
+    switch (item.type) {
+        case ActivityTypeComment:
             return [UIImage imageNamed:@"ActivityCommentIcon"];
             break;
-        case AlertTypeExpired:
+        case ActivityTypeExpired:
             return [UIImage imageNamed:@"ActivityExpiredIcon"];
             break;
-        case AlertTypeWon:
+        case ActivityTypeWon:
             return [UIImage imageNamed:@"ActivityWonIcon"];
             break;
-        case AlertTypeLost:
+        case ActivityTypeLost:
             return [UIImage imageNamed:@"ActivityLostIcon"];
         default:
             return nil;

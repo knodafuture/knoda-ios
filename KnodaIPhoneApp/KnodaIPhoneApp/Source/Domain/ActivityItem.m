@@ -16,8 +16,26 @@
              @"predictionId": @"prediction_id",
              @"userId" : @"user_id",
              @"creationDate": @"created_at",
-             @"predictionBody": @"prediction_body"
+             @"predictionBody": @"prediction_body",
+             @"type" : @"activity_type"
              };
 }
+
+
++ (NSValueTransformer *)typeJSONTransformer {
+    NSDictionary *states = @{
+                             @"EXPIRED": @(ActivityTypeExpired),
+                             @"WON": @(ActivityTypeWon),
+                             @"LOST": @(ActivityTypeLost),
+                             @"COMMENT": @(ActivityTypeComment)
+                             };
+    
+    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSString *str) {
+        return states[str];
+    } reverseBlock:^(NSNumber *state) {
+        return [states allKeysForObject:state].lastObject;
+    }];
+}
+
 
 @end

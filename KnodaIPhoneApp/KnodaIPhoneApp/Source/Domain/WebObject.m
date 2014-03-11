@@ -12,7 +12,7 @@
 #import "RemoteImage.h"
 #import "Challenge.h"
 
-NSString *responseDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'zzz";
+NSString *responseDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z";
 
 @implementation WebObject
 
@@ -90,7 +90,7 @@ NSString *responseDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'zzz";
 
 + (NSDate *)dateFromObject:(id)obj {
     if (obj && ![obj isKindOfClass: [NSNull class]] && [obj isKindOfClass:[NSString class]])
-        return [NSDate dateFromString:[obj stringByAppendingString: @"GMT"] withFormat:responseDateFormat];
+        return [NSDate dateFromString:obj withFormat:responseDateFormat];
     return nil;
 }
 

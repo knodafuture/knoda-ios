@@ -9,6 +9,7 @@
 #import "WebObject.h"
 
 @class Challenge;
+@class RemoteImage;
 
 @interface Comment : WebObject
 
@@ -17,12 +18,8 @@
 @property (strong, nonatomic) NSString *username;
 @property (assign, nonatomic) NSInteger predictionId;
 @property (strong, nonatomic) NSString *body;
-@property (strong, nonatomic) NSDate *createdDate;
+@property (strong, nonatomic) NSDate *creationDate;
 @property (strong, nonatomic) Challenge *challenge;
-
-@property (strong, nonatomic) NSString *bigUserImage;
-@property (strong, nonatomic) NSString *smallUserImage;
-@property (strong, nonatomic) NSString *thumbUserImage;
-
+@property (strong, nonatomic) RemoteImage *userAvatar;
 @property (assign, nonatomic) BOOL verifiedAccount;
 @end

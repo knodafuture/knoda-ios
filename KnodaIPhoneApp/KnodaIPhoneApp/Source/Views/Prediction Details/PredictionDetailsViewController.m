@@ -211,7 +211,7 @@ static const int kBSAlertTag = 1001;
         [self backPressed:nil];
     }
     else {
-        CategoryPredictionsViewController *vc = [[CategoryPredictionsViewController alloc] initWithCategory:self.prediction.category];
+        CategoryPredictionsViewController *vc = [[CategoryPredictionsViewController alloc] initWithCategory:[self.prediction.categories firstObject]];
         vc.shouldNotOpenProfile = self.shouldNotOpenProfile;
         [self.navigationController pushViewController:vc animated:YES];
     }
@@ -221,7 +221,7 @@ static const int kBSAlertTag = 1001;
     [[LoadingView sharedInstance] show];
     
     if (agree) {
-        [self.tableViewController updateTallyForUser:self.appDelegate.currentUser.name agree:YES];
+        [self.tableViewController updateTallyForUser:self.appDelegate.currentUser agree:YES];
         [[WebApi sharedInstance] agreeWithPrediction:self.prediction.predictionId completion:^(Challenge *challenge, NSError *error) {
             [[LoadingView sharedInstance] hide];
             if (!error) {
@@ -235,7 +235,7 @@ static const int kBSAlertTag = 1001;
         }];
     }
     else {
-        [self.tableViewController updateTallyForUser:self.appDelegate.currentUser.name agree:NO];
+        [self.tableViewController updateTallyForUser:self.appDelegate.currentUser agree:NO];
         [[WebApi sharedInstance] disagreeWithPrediction:self.prediction.predictionId completion:^(Challenge *challenge, NSError *error) {
             [[LoadingView sharedInstance] hide];
             if (!error) {
@@ -296,11 +296,9 @@ static const int kBSAlertTag = 1001;
 - (void)sendNewResolutionDate:(NSDate *)date {
     [[LoadingView sharedInstance] show];
     
-    UpdatePredictionRequest *request = [[UpdatePredictionRequest alloc] init];
-    request.predictionId = self.prediction.predictionId;
-    request.resolutionDate = date;
+    self.prediction.resolutionDate = date;
     
-    [[WebApi sharedInstance] updatePrediction:request completion:^(Prediction *prediction, NSError *error) {
+    [[WebApi sharedInstance] updatePrediction:self.prediction completion:^(Prediction *prediction, NSError *error) {
         if (!error) {
             [[WebApi sharedInstance] getPrediction:self.prediction.predictionId completion:^(Prediction *prediction, NSError *error) {
                 [[LoadingView sharedInstance] hide];

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>4D5517BA-A3FF-48F7-BFE0-0296C8E83A13</string>
+	<key>IDESourceControlProjectName</key>
+	<string>KnodaIPhoneApp</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>599A64E5-72BB-4894-AD0C-769A72CA50A1</key>
+		<string>https://github.com/knodafuture/knoda-ios.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>KnodaIPhoneApp.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>599A64E5-72BB-4894-AD0C-769A72CA50A1</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/knodafuture/knoda-ios.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>599A64E5-72BB-4894-AD0C-769A72CA50A1</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>599A64E5-72BB-4894-AD0C-769A72CA50A1</string>
+			<key>IDESourceControlWCCName</key>
+			<string>knodaiphone</string>
+		</dict>
+	</array>
+</dict>
+</plist>

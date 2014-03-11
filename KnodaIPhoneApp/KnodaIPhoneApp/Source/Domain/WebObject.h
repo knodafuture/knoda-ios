@@ -7,19 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Mantle.h>
 
-extern NSString *ResponseDateFormat;
-
-@interface WebObject : NSObject
+@interface WebObject : MTLModel <MTLJSONSerializing>
 
 
 + (id)instanceFromData:(NSData *)data;
-+ (id)instanceFromDictionary:(NSDictionary *)dictionary;
-
-+ (NSString *)responseKey;
-
 + (NSArray *)arrayFromData:(NSData *)data;
-- (NSDictionary *)parametersDictionary;
-- (NSDate *)dateFromObject:(id)obj;
 
++ (NSValueTransformer *)remoteImageTransformer;
++ (NSValueTransformer *)challengeTransformer;
++ (NSValueTransformer *)boolTransformer;
++ (NSValueTransformer *)dateTransformer;
 @end

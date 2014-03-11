@@ -11,37 +11,17 @@
 
 @implementation User
 
-+ (NSString *)responseKey {
-    return @"users";
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+    return @{
+             @"userId": @"id",
+             @"avatar": @"avatar_image",
+             @"winningPercentage" : @"winning_percentage",
+             @"totalPredictions": @"total_predictions",
+             @"verifiedAccount" : @"verified_account"
+             };
 }
 
-+ (id)instanceFromDictionary:(NSDictionary *)dictionary {
-    
-    User *user = [super instanceFromDictionary:dictionary];
-    
-    user.userId = [dictionary[@"id"] integerValue];
-    user.name = dictionary[@"username"];
-    user.email = dictionary[@"email"];
-    user.points = [dictionary[@"points"] integerValue];
-    user.won = [dictionary[@"won"] integerValue];
-    user.lost = [dictionary[@"lost"] integerValue];
-    user.winningPercentage = [NSNumber numberWithFloat:[dictionary[@"winning_percentage"] floatValue]];
-    user.streak = dictionary[@"streak"];
-    user.alerts = [dictionary[@"alerts"] integerValue];
-    user.badges = [dictionary[@"badges"] integerValue];
-    
-    
-    NSDictionary *avatarImages = dictionary[@"avatar_image"];
-    
-    if(![avatarImages isKindOfClass:[NSNull class]] && avatarImages.count) {
-        user.thumbImageUrl = avatarImages[@"thumb"];
-        user.smallImageUrl = avatarImages[@"small"];
-        user.largeImageUrl   = avatarImages[@"big"];
-    }
-    
-    return user;
-    
++ (NSValueTransformer *)avatarJSONTransformer {
+    return [self remoteImageTransformer];
 }
-
-
 @end

@@ -17,7 +17,7 @@
 #import "BadgesCollectionViewController.h"
 #import "SideNavCell.h"
 #import "PredictionsViewController.h"
-#import "AlertsViewController.h"
+#import "ActivityViewController.h"
 #import "SideNavBarButtonItem.h"
 #import "AddPredictionViewController.h"
 #import "RightSideButtonsView.h"
@@ -152,7 +152,7 @@
                 viewController = [[HomeViewController alloc] initWithStyle:UITableViewStylePlain];
                 break;
             case MenuAlerts:
-                viewController = [[AlertsViewController alloc] initWithStyle:UITableViewStylePlain];
+                viewController = [[ActivityViewController alloc] initWithStyle:UITableViewStylePlain];
                 break;
             case MenuBadges:
                 viewController = [[BadgesCollectionViewController alloc] initWithNibName:@"BadgesCollectionViewController" bundle:[NSBundle mainBundle]];
@@ -276,7 +276,7 @@
 }
 
 - (void)updateAlerts {
-    [[WebApi sharedInstance] getUnseenAlertsCompletion:^(NSArray *alerts, NSError *error) {
+    [[WebApi sharedInstance] getUnseenActivity:^(NSArray *alerts, NSError *error) {
         if (error)
             return;
         

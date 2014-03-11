@@ -11,85 +11,49 @@
 #import "NSDate+Utils.h"
 @implementation Prediction
 
-+ (NSString *)responseKey {
-    return @"predictions";
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+    return @{
+             @"predictionId": @"id",
+             @"creationDate": @"created_at",
+             @"expirationDate" : @"expires_at",
+             @"closeDate": @"closed_at",
+             @"resolutionDate": @"resolution_date",
+             @"shortUrl": @"short_url",
+             @"agreeCount" : @"agreed_count",
+             @"disagreeCount": @"disagreed_count",
+             @"commentCount": @"comment_count",
+             @"userId": @"user_id",
+             @"userAvatar" : @"user_avatar",
+             @"isReadyForResolution": @"is_ready_for_resolution",
+             @"challenge": @"my_challenge",
+             @"points": @"my_points",
+             @"categories" : @"tags",
+             @"verifiedACcount" : @"verified_account",
+             @"outcome" : @"outcome",
+             };
 }
 
-
-+ (id)instanceFromDictionary:(NSDictionary *)dictionary {
-    Prediction *prediction = [super instanceFromDictionary:dictionary];
-    
-    
-    prediction.predictionId = [dictionary[@"id"] integerValue];
-    prediction.body = dictionary[@"body"];
-    prediction.agreeCount = [dictionary[@"agreed_count"] integerValue];
-    prediction.disagreeCount = [dictionary[@"disagreed_count"] integerValue];
-    prediction.votedUsersCount = [dictionary[@"market_size"] integerValue];
-    prediction.expired = [dictionary[@"expired"] boolValue];
-    prediction.isReadyForResolution = [dictionary[@"is_ready_for_resolution"] boolValue];
-    prediction.settled = [dictionary[@"settled"] boolValue];
-    prediction.userId = [dictionary[@"user_id"] integerValue];
-    prediction.userName = dictionary[@"username"];
-    prediction.commentCount = [dictionary[@"comment_count"] integerValue];
-    prediction.shortUrl = dictionary[@"short_url"];
-    prediction.verifiedAccount = [dictionary[@"verified_account"] boolValue];
-    
-    id obj = dictionary[@"tags"];
-    if ([obj isKindOfClass:[NSArray class]] && [obj count])
-        prediction.category = [[obj objectAtIndex: 0] objectForKey: @"name"];
-    
-    obj = dictionary[@"user_avatar"];
-    if ([obj isKindOfClass:[NSDictionary class]]) {
-        prediction.thumbAvatarUrl = obj[@"thumb"];
-        prediction.smallAvatarUrl = obj[@"small"];
-        prediction.largeAvatarUrl = obj[@"big"];
-    }
-    
-    obj = dictionary[@"outcome"];
-    if (obj && ![obj isKindOfClass: [NSNull class]])
-        prediction.outcome = [obj boolValue];
-    
-    prediction.creationDate   = [prediction dateFromObject:dictionary[@"created_at"]];
-    prediction.expirationDate = [prediction dateFromObject:dictionary[@"expires_at"]];
-    prediction.resolutionDate = [prediction dateFromObject:dictionary[@"resolution_date"]];
-    
-    obj = dictionary[@"my_challenge"];
-    
-    if ([obj isKindOfClass:NSDictionary.class])
-        prediction.challenge = [Challenge instanceFromDictionary:obj];
-    
-    obj = dictionary[@"my_points"];
-    
-    if ([obj isKindOfClass:NSDictionary.class]) {
-        prediction.challenge.basePoints = [obj[@"base_points"] integerValue];
-        prediction.challenge.marketSizePoints = [obj[@"market_size_points"] integerValue];
-        prediction.challenge.outcomePoints = [obj[@"outcome_points"] integerValue];
-        prediction.challenge.predictionMarketPoints = [obj[@"prediction_market_points"] integerValue];
-    }
-    
-    return prediction;
++ (NSValueTransformer *)outcomeJSONTransformer {
+    return [self boolTransformer];
 }
 
-- (void)setOutcome:(BOOL)outcome {
-    _outcome = outcome;
-    self.hasOutcome = YES;
++ (NSValueTransformer *)expirationDateJSONTransformer {
+    return [self dateTransformer];
 }
 
-- (NSDictionary *)parametersDictionary {
-    NSDateComponents *dc = [self.expirationDate gmtDateComponents];
-    NSDateComponents *rdc = [self.resolutionDate gmtDateComponents];
-    return @{@"prediction[body]" : self.body,
-             @"prediction[expires_at(1i)]" : @(dc.year),
-             @"prediction[expires_at(2i)]" : @(dc.month),
-             @"prediction[expires_at(3i)]" : @(dc.day),
-             @"prediction[expires_at(4i)]" : @(dc.hour),
-             @"prediction[expires_at(5i)]" : @(dc.minute),
-             @"prediction[resolution_date(1i)" : @(rdc.year),
-             @"prediction[resolution_date(2i)" : @(rdc.month),
-             @"prediction[resolution_date(3i)" : @(rdc.day),
-             @"prediction[resolution_date(4i)" : @(rdc.hour),
-             @"prediction[resolution_date(5i)" : @(rdc.minute),
-             @"prediction[tag_list][]" : self.category};
++ (NSValueTransformer *)closeDateJSONTransformer {
+    return [self dateTransformer];
 }
 
++ (NSValueTransformer *)resolutionDateJSONTransformer {
+    return [self dateTransformer];
+}
+
++ (NSValueTransformer *)challengeJSONTransformer {
+    return [self challengeTransformer];
+}
+
++ (NSValueTransformer *)userAvatarJSONTransformer {
+    return [self remoteImageTransformer];
+}
 @end

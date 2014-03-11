@@ -66,7 +66,7 @@ static UINib *nib;
     frame.origin.x = self.winLossLabel.frame.origin.x + 1.0;
     self.smallWLLabel.frame = frame;
     
-    [[WebApi sharedInstance] getImage:user.largeImageUrl completion:^(UIImage *image, NSError *error) {
+    [[WebApi sharedInstance] getImage:user.avatar.big completion:^(UIImage *image, NSError *error) {
         if (!error)
             self.avatarImageView.image = image;
     }];

@@ -10,8 +10,4 @@
 
 @implementation SignupRequest
 
-- (NSDictionary *)parametersDictionary {
-    return @{@"user[username]" : self.username, @"user[email]" : self.email, @"user[password]" : self.password};
-}
-
 @end

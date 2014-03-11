@@ -12,6 +12,7 @@
 @class Prediction;
 @class Comment;
 @class PredictionDetailsHeaderCell;
+@class User;
 @interface DetailsTableViewController : BaseTableViewController
 
 @property (strong, nonatomic) Prediction *prediction;
@@ -24,6 +25,6 @@
 - (void)showTally;
 
 - (void)addComment:(Comment *)newComment;
-- (void)updateTallyForUser:(NSString *)username agree:(BOOL)agree;
+- (void)updateTallyForUser:(User *)user agree:(BOOL)agree;
 
 @end

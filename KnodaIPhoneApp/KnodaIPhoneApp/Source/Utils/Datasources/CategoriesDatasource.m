@@ -23,7 +23,7 @@
         cell.textLabel.textColor = [UIColor colorFromHex:@"666666"];
     }
     
-    Topic *topic = [self.objects objectAtIndex:indexPath.row];
+    Tag *topic = [self.objects objectAtIndex:indexPath.row];
     
     cell.textLabel.text = topic.name.capitalizedString;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

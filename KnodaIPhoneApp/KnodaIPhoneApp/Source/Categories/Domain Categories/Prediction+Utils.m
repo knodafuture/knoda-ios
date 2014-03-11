@@ -9,45 +9,9 @@
 #import "Prediction+Utils.h"
 #import "Challenge.h"
 #import "NSData+Utils.h"
+#import "PredictionPoints.h"
 
 @implementation Prediction (Utils)
-
-+ (NSArray *)arrayFromHistoryData:(NSData *)data {
-    
-    if (!data)
-        return nil;
-    
-    id jsonObject = [data jsonObject];
-    
-    if (!jsonObject || ![jsonObject isKindOfClass:NSDictionary.class])
-        return nil;
-    
-    NSArray *challenges = jsonObject[@"challenges"];
-    
-    NSMutableArray *returnArray = [[NSMutableArray alloc] initWithCapacity:challenges.count];
-    
-    for (NSDictionary *challenge in challenges) {
-        @autoreleasepool {
-            NSMutableDictionary *mutableChallenge = [challenge mutableCopy];
-            NSDictionary *prediction = mutableChallenge[@"prediction"];
-            [mutableChallenge removeObjectForKey:@"prediction"];
-            
-            NSDictionary *pointsDictionary = mutableChallenge[@"points_details"];
-            [mutableChallenge removeObjectForKey:@"points_details"];
-            
-            if (!prediction || ![prediction isKindOfClass:NSDictionary.class])
-                continue;
-            
-            NSMutableDictionary *copy = [prediction mutableCopy];
-            [copy setObject:[NSDictionary dictionaryWithDictionary:mutableChallenge] forKey:@"my_challenge"];
-            [copy setObject:pointsDictionary forKey:@"my_points"];
-            
-            [returnArray addObject:[self instanceFromDictionary:copy]];
-        }
-    }
-    
-    return [NSArray arrayWithArray:returnArray];
-}
 
 - (BOOL)isExpired {
     return [self.expirationDate timeIntervalSinceNow] < 0;
@@ -233,15 +197,15 @@
         }
     };
     
-    addPoint(self.challenge.basePoints, NSLocalizedString(@"Base", @""));
-    addPoint(self.challenge.outcomePoints, NSLocalizedString(@"Outcome", @""));
-    addPoint(self.challenge.marketSizePoints, NSLocalizedString(@"Market", @""));
-    addPoint(self.challenge.predictionMarketPoints, [self marketSizeNameForPoints:self.challenge.predictionMarketPoints]);
+    addPoint(self.points.basePoints, NSLocalizedString(@"Base", @""));
+    addPoint(self.points.outcomePoints, NSLocalizedString(@"Outcome", @""));
+    addPoint(self.points.marketSizePoints, NSLocalizedString(@"Market", @""));
+    addPoint(self.points.predictionMarketPoints, [self marketSizeNameForPoints:self.points.predictionMarketPoints]);
     
     return string;
 }
 - (NSInteger)totalPoints {
-    return self.challenge.basePoints + self.challenge.outcomePoints + self.challenge.marketSizePoints + self.challenge.predictionMarketPoints;
+    return self.points.basePoints + self.points.outcomePoints + self.points.marketSizePoints + self.points.predictionMarketPoints;
 }
 - (NSString *)marketSizeNameForPoints:(NSInteger)points {
     switch (points) {

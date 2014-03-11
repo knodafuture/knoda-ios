@@ -81,7 +81,7 @@
     
     
     LoginRequest *request = [[LoginRequest alloc] init];
-    request.username = self.usernameTextField.text;
+    request.login = self.usernameTextField.text;
     request.password = self.passwordTextField.text;
     
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];

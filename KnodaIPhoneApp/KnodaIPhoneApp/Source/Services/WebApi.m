@@ -7,7 +7,7 @@
 //
 
 #import "WebApi.h"
-#import "WebRequest.h"
+#import "MultipartRequest.h"
 #import "NSData+Utils.h"
 #import "FileCache.h"
 #import "AppDelegate.h" 
@@ -16,23 +16,33 @@ static WebApi *sharedSingleton;
 
 NSString *const HttpForbiddenNotification = @"HttpForbiddenNotification";
 NSInteger PageLimit = 50;
+#ifdef TESTFLIGHT
+NSString const *baseURL = @"http://api-test.knoda.com/api/";  // Old server=54.213.86.248
+#else
+NSString const *baseURL = @"http://api.knoda.com/api/";
+#endif
 
 @interface WebApi (Internal)
 
-- (void)executeRequest:(WebRequest *)request completion:(void(^)(NSData *responseData, NSError *error))completionHandler;
-- (void)executeUpdateUserRequest:(WebRequest *)request completion:(void(^)(NSData *responseData, NSError *error))completionHandler;
+
+- (void)executeRequest:(NSURLRequest *)request completion:(void(^)(NSData *responseData, NSError *error))completionHandler;
+- (void)executeUpdateUserRequest:(NSURLRequest *)request completion:(void(^)(NSData *responseData, NSError *error))completionHandler;
 - (void)handleResponse:(NSURLResponse *)response withData:(NSData *)data error:(NSError *)error completion:(void(^)(NSData *data, NSError *error))completionHandler;
 
+- (NSString *)savedAuthToken;
+- (NSMutableURLRequest *)requestWithUrl:(NSString *)url method:(NSString *)method payload:(WebObject *)payload;
+- (NSString *)buildUrl:(NSString *)path parameters:(NSDictionary *)parameters;
 - (NSDictionary *)parametersDictionary:(NSDictionary *)dictionary withLastId:(NSInteger)lastId;
 - (NSDictionary *)parametersDictionary:(NSDictionary *)dictionary withGreaterThanLastId:(NSInteger)lastId;
 
-- (void)getCachedObjectForKey:(NSString *)key timeout:(NSTimeInterval)timeout inCache:(id<Cache>)cache requestForMiss:(WebRequest *(^)(void))miss completion:(void(^)(NSData *data, NSError *error))completionHandler;
+- (void)getCachedObjectForKey:(NSString *)key timeout:(NSTimeInterval)timeout inCache:(id<Cache>)cache requestForMiss:(NSURLRequest *(^)(void))miss completion:(void(^)(NSData *data, NSError *error))completionHandler;
 @end
 
 @interface WebApi ()
 
 @property (strong, nonatomic) FileCache *fileCache;
 @property (readonly, nonatomic) AppDelegate *appDelegate;
+@property (strong, nonatomic) NSDictionary *headers;
 @end
 
 @implementation WebApi
@@ -50,6 +60,7 @@ NSInteger PageLimit = 50;
 - (id)init {
     self = [super init];
     self.fileCache = [[FileCache alloc] init];
+    self.headers = @{@"Accept": @"application/json; api_version=2;", @"Content-Type" : @"application/json; charset=utf-8;"};
     return self;
 }
 
@@ -58,9 +69,8 @@ NSInteger PageLimit = 50;
 }
 
 - (void)authenticateUser:(LoginRequest *)loginRequest completion:(void (^)(LoginResponse *, NSError *))completionHandler {
-    NSDictionary *parameters = [loginRequest parametersDictionary];
-    
-    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"POST" path:@"session.json" parameters:parameters requiresAuthToken:NO isMultiPartData:NO];
+    NSString *url = [self buildUrl:@"session.json" parameters:nil];
+    NSURLRequest *request = [self requestWithUrl:url method:@"POST" payload:loginRequest];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler([LoginResponse instanceFromData:responseData], error);
@@ -69,7 +79,8 @@ NSInteger PageLimit = 50;
 
 - (void)getCurrentUser:(void (^)(User *, NSError *))completionHandler {
 
-    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"GET" path:@"profile.json" parameters:nil requiresAuthToken:YES isMultiPartData:NO];
+    NSString *url = [self buildUrl:@"profile.json" parameters:nil];
+    NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         User *user = [User instanceFromData:responseData];
@@ -78,11 +89,9 @@ NSInteger PageLimit = 50;
         completionHandler(user, error);
     }];
 }
-
-- (void)requestPasswordResetForEmail:(NSString *)email completion:(void (^)(NSError *))completionHandler {
-    NSDictionary *parameters = @{@"login": email};
-    
-    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"POST" path:@"password.json" parameters:parameters requiresAuthToken:NO isMultiPartData:NO];
+- (void)requestPasswordReset:(PasswordResetRequest *)resetRequest completion:(void (^)(NSError *))completionHandler {
+    NSString *url = [self buildUrl:@"password.json" parameters:nil];
+    NSURLRequest *request = [self requestWithUrl:url method:@"POST" payload:resetRequest];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler(error);
@@ -90,9 +99,8 @@ NSInteger PageLimit = 50;
 }
 
 - (void)sendSignUpWithRequest:(SignupRequest *)signupRequest completion:(void (^)(LoginResponse *, NSError *))completionHandler {
-    NSDictionary *parameters = [signupRequest parametersDictionary];
-    
-    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"POST" path:@"registration.json" parameters:parameters requiresAuthToken:NO isMultiPartData:NO];
+    NSString *url = [self buildUrl:@"registration.json" parameters:nil];
+    NSURLRequest *request = [self requestWithUrl:url method:@"POST" payload:signupRequest];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler([LoginResponse instanceFromData:responseData], error);
@@ -110,57 +118,47 @@ NSInteger PageLimit = 50;
     
     NSDictionary *parameters = @{@"Images" : @{@"user[avatar]" : UIImagePNGRepresentation(profileImage)}};
     
-    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"PATCH" path:@"profile.json" parameters:parameters requiresAuthToken:YES isMultiPartData:YES];
+    MultipartRequest *request = [[MultipartRequest alloc] initWithHTTPMethod:@"PATCH" url:@"profile.json" parameters:parameters];
     
     [self executeUpdateUserRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler(error);
     }];
 }
 
-- (void)changeUsername:(NSString *)newUsername completion:(void (^)(NSError *))completionHandler {
-    NSDictionary *parameters = @{@"user[username]" : newUsername};
-
-    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"PATCH" path:@"profile.json" parameters:parameters requiresAuthToken:YES isMultiPartData:YES];
+- (void)updateUser:(User *)user completion:(void (^)(User *, NSError *))completionHandler {
+    NSString *url = [self buildUrl:@"profile.json" parameters:nil];
+    NSURLRequest *request = [self requestWithUrl:url method:@"PUT" payload:user];
     
     [self executeUpdateUserRequest:request completion:^(NSData *responseData, NSError *error) {
-        completionHandler(error);
+        completionHandler([User instanceFromData:responseData], error);
     }];
 }
 
-- (void)changeEmail:(NSString *)newEmail completion:(void (^)(NSError *))completionHandler {
-    NSDictionary *parameters = @{@"user[email]" : newEmail};
+- (void)changePassword:(PasswordChangeRequest *)changeRequest completion:(void (^)(User *, NSError *))completionHandler {
     
-    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"PATCH" path:@"profile.json" parameters:parameters requiresAuthToken:YES isMultiPartData:YES];
+    NSString *url = [self buildUrl:@"password.json" parameters:nil];
+    NSURLRequest *request = [self requestWithUrl:url method:@"PUT" payload:changeRequest];
     
     [self executeUpdateUserRequest:request completion:^(NSData *responseData, NSError *error) {
-        completionHandler(error);
+        completionHandler([User instanceFromData:responseData], error);
     }];
-}
-
-- (void)changePassword:(NSString *)currentPassword newPassword:(NSString *)newPassword completion:(void (^)(NSError *))completionHandler {
-    NSDictionary *parameters = @{@"current_password" : currentPassword, @"new_password" : newPassword};
     
-    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"PUT" path:@"password.json" parameters:parameters requiresAuthToken:YES isMultiPartData:YES];
     
-    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
-        NSLog(@"%@", [responseData jsonObject]);
-        completionHandler(error);
-    }];
-
 }
 
 - (void)signoutCompletion:(void (^)(NSError *))completionHandler {
-    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"DELETE" path:@"session.json" parameters:nil requiresAuthToken:YES isMultiPartData:NO];
+    NSString *url = [self buildUrl:@"session.json" parameters:nil];
+    NSURLRequest *request = [self requestWithUrl:url method:@"DELETE" payload:nil];
+    
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler(error);
     }];
 }
-
-- (void)sendToken:(NSString *)token completion:(void (^)(NSString *, NSError *))completionHandler {
-    NSDictionary *parameters = @{@"apple_device_token[token]": token, @"apple_device_token[sandbox]" : @"false"};
+- (void)sendToken:(DeviceToken *)deviceToken completion:(void (^)(NSString *, NSError *))completionHandler {
     
-    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"POST" path:@"apple_device_tokens.json" parameters:parameters requiresAuthToken:YES isMultiPartData:NO];
+    NSString *url = [self buildUrl:@"apple_device_tokens.json" parameters:nil];
+    NSURLRequest *request = [self requestWithUrl:url method:@"POST" payload:deviceToken];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         NSString *tokenId = nil;
@@ -173,8 +171,8 @@ NSInteger PageLimit = 50;
 
 - (void)deleteToken:(NSString *)tokenId completion:(void (^)(NSError *))completionHandler {
     NSString *path = [NSString stringWithFormat: @"apple_device_tokens/%@.json", tokenId];
-    
-    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"DELETE" path:path parameters:nil requiresAuthToken:YES isMultiPartData:NO];
+    NSString *url = [self buildUrl:path parameters:nil];
+    NSURLRequest *request = [self requestWithUrl:url method:@"DELETE" payload:nil];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler(error);
@@ -183,8 +181,8 @@ NSInteger PageLimit = 50;
 
 - (void)getUser:(NSInteger)userId completion:(void (^)(User *, NSError *))completionHandler {
     NSString *path = [NSString stringWithFormat:@"users/%d.json", userId];
-    
-    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"GET" path:path parameters:nil requiresAuthToken:YES isMultiPartData:NO];
+    NSString *url = [self buildUrl:path parameters:nil];
+    NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler([User instanceFromData:responseData], error);
@@ -196,7 +194,6 @@ NSInteger PageLimit = 50;
     [self getPredictionsAfter:lastId tag:nil completion:completionHandler];
 }
 
-
 - (void)getPredictionsAfter:(NSInteger)lastId tag:(NSString *)tag completion:(void (^)(NSArray *, NSError *))completionHandler {
     NSMutableDictionary *params = [@{@"recent" : @"true", @"limit"  : @(PageLimit)} mutableCopy];
     if (tag)
@@ -204,7 +201,8 @@ NSInteger PageLimit = 50;
     
     NSDictionary *parameters = [self parametersDictionary:params withLastId:lastId];
     
-    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"GET" path:@"predictions.json" parameters:parameters requiresAuthToken:YES isMultiPartData:NO];
+    NSString *url = [self buildUrl:@"predictions.json" parameters:parameters];
+    NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler([Prediction arrayFromData:responseData], error);
@@ -212,30 +210,19 @@ NSInteger PageLimit = 50;
 }
 
 - (void)addPrediction:(Prediction *)prediction completion:(void (^)(Prediction *, NSError *))completionHandler {
-    NSDictionary *parameters = [prediction parametersDictionary];
     
-    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"POST" path:@"predictions.json" parameters:parameters requiresAuthToken:YES isMultiPartData:NO];
+    NSString *url = [self buildUrl:@"predictions.json" parameters:nil];
+    NSURLRequest *request = [self requestWithUrl:url method:@"POST" payload:prediction];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
-        if (error) {
-            completionHandler(nil, error);
-            return;
-        } else {
-            NSString *createdId = [self getCreatedObjectId:responseData];
-            if (!createdId)
-                completionHandler(nil, [NSError errorWithDomain:@"http" code:HttpStatusNotFound userInfo:nil]);
-            else
-                [self getPrediction:[createdId integerValue] completion:completionHandler];
-            
-            
-        }
+        completionHandler([Prediction instanceFromData:responseData], error);
     }];
 }
 
 - (void)getPrediction:(NSInteger)predictionId completion:(void (^)(Prediction *, NSError *))completionHandler {
     NSString *path = [NSString stringWithFormat:@"predictions/%d.json", predictionId];
-    
-    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"GET" path:path parameters:Nil requiresAuthToken:YES isMultiPartData:NO];
+    NSString *url = [self buildUrl:path parameters:nil];
+    NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler([Prediction instanceFromData:responseData],error);
@@ -246,8 +233,8 @@ NSInteger PageLimit = 50;
     NSDictionary *parameters = @{@"limit" : @(PageLimit), @"count" : @(1)};
     parameters = [self parametersDictionary:parameters withLastId:lastId];
     NSString *path = [NSString stringWithFormat:@"users/%d/predictions.json", userId];
-    
-    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"GET" path:path parameters:parameters requiresAuthToken:YES isMultiPartData:NO];
+    NSString *url = [self buildUrl:path parameters:parameters];
+    NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler([Prediction arrayFromData:responseData], error);
@@ -256,19 +243,20 @@ NSInteger PageLimit = 50;
 
 - (void)getCategoriesCompletion:(void (^)(NSArray *, NSError *))completionHandler {
     
-    
-    [self getCachedObjectForKey:@"categories" timeout:FileCacheTimeOneDay inCache:self.fileCache requestForMiss:^WebRequest *{
-        WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"GET" path:@"topics.json" parameters:nil requiresAuthToken:YES isMultiPartData:NO];
+    [self getCachedObjectForKey:@"categories" timeout:FileCacheTimeOneDay inCache:self.fileCache requestForMiss:^NSURLRequest *{
+        NSString *url = [self buildUrl:@"topics.json" parameters:nil];
+        NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
         return request;
     } completion:^(NSData *data, NSError *error) {
-        completionHandler([Topic arrayFromData:data], error);
+        completionHandler([Tag arrayFromData:data], error);
     }];
 }
 
 - (void)agreeWithPrediction:(NSInteger)predictionId completion:(void (^)(Challenge *challenge, NSError *))completionHandler {
     NSString *path = [NSString stringWithFormat: @"predictions/%d/agree.json", predictionId];
     
-    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"POST" path:path parameters:nil requiresAuthToken:YES isMultiPartData:NO];
+    NSString *url = [self buildUrl:path parameters:nil];
+    NSURLRequest *request = [self requestWithUrl:url method:@"POST" payload:nil];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         if (!error)
@@ -280,8 +268,8 @@ NSInteger PageLimit = 50;
 
 - (void)disagreeWithPrediction:(NSInteger)predictionId completion:(void (^)(Challenge *challenge, NSError *))completionHandler {
     NSString *path = [NSString stringWithFormat: @"predictions/%d/disagree.json", predictionId];
-    
-    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"POST" path:path parameters:nil requiresAuthToken:YES isMultiPartData:NO];
+    NSString *url = [self buildUrl:path parameters:nil];
+    NSURLRequest *request = [self requestWithUrl:url method:@"POST" payload:nil];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         if (!error)
@@ -293,8 +281,8 @@ NSInteger PageLimit = 50;
 
 - (void)getChallengeForPrediction:(NSInteger)predictionId completion:(void (^)(Challenge *, NSError *))completionHandler {
     NSString *path = [NSString stringWithFormat: @"predictions/%d/challenge.json", predictionId];
-    
-    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"GET" path:path parameters:nil requiresAuthToken:YES isMultiPartData:NO];
+    NSString *url = [self buildUrl:path parameters:nil];
+    NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler([Challenge instanceFromData:responseData], error);
@@ -302,39 +290,40 @@ NSInteger PageLimit = 50;
 }
 
 - (void)getHistoryAfter:(NSInteger)lastId completion:(void (^)(NSArray *, NSError *))completionHandler {
-    NSDictionary *parameters = @{@"list": @"ownedAndPicked", @"limit" : @(PageLimit)};
+    NSDictionary *parameters = @{@"challenged": @"true", @"limit" : @(PageLimit)};
     parameters = [self parametersDictionary:parameters withLastId:lastId];
-    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"GET" path:@"challenges.json" parameters:parameters requiresAuthToken:YES isMultiPartData:NO];
+    NSString *url = [self buildUrl:@"predictions" parameters:parameters];
+    NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
-        completionHandler([Prediction arrayFromHistoryData:responseData], error);
+        completionHandler([Prediction arrayFromData:responseData], error);
     }];
 }
 
 - (void)getAgreedUsers:(NSInteger)predictionId completion:(void (^)(NSArray *, NSError *))completionHandler {
     NSString *path = [NSString stringWithFormat:@"predictions/%d/history_agreed.json", predictionId];
-    
-    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"GET" path:path parameters:nil requiresAuthToken:YES isMultiPartData:NO];
+    NSString *url = [self buildUrl:path parameters:nil];
+    NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
-        completionHandler([TallyUser arrayFromData:responseData], error);
+        completionHandler([User arrayFromData:responseData], error);
     }];
 }
 
 - (void)getDisagreedUsers:(NSInteger)predictionId completion:(void (^)(NSArray *, NSError *))completionHandler {
     NSString *path = [NSString stringWithFormat:@"predictions/%d/history_disagreed.json", predictionId];
-    
-    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"GET" path:path parameters:nil requiresAuthToken:YES isMultiPartData:NO];
+    NSString *url = [self buildUrl:path parameters:nil];
+    NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
-        completionHandler([TallyUser arrayFromData:responseData], error);
+        completionHandler([User arrayFromData:responseData], error);
     }];
 }
 
 - (void)sendBS:(NSInteger)predictionId completion:(void (^)(NSError *))completionHandler {
     NSString *path = [NSString stringWithFormat:@"predictions/%d/bs.json", predictionId];
-    
-    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"POST" path:path parameters:nil requiresAuthToken:YES isMultiPartData:NO];
+    NSString *url = [self buildUrl:path parameters:nil];
+    NSURLRequest *request = [self requestWithUrl:url method:@"POST" payload:nil];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler(error);
@@ -349,18 +338,18 @@ NSInteger PageLimit = 50;
     else
         path = [NSString stringWithFormat:@"predictions/%d/unrealize.json", predictionId];
     
-    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"POST" path:path parameters:nil requiresAuthToken:YES isMultiPartData:NO];
+    NSString *url = [self buildUrl:path parameters:nil];
+    NSURLRequest *request = [self requestWithUrl:url method:@"POST" payload:nil];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler(error);
     }];
 }
 
-- (void)updatePrediction:(UpdatePredictionRequest *)updateRequest completion:(void (^)(Prediction *, NSError *))completionHandler {
-    NSString *path = [NSString stringWithFormat:@"predictions/%d.json", updateRequest.predictionId];
-    NSDictionary *parameters = [updateRequest parametersDictionary];
-    
-    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"PATCH" path:path parameters:parameters requiresAuthToken:YES isMultiPartData:YES];
+- (void)updatePrediction:(Prediction *)prediction completion:(void (^)(Prediction *, NSError *))completionHandler {
+    NSString *path = [NSString stringWithFormat:@"predictions/%d.json", prediction.predictionId];
+    NSString *url = [self buildUrl:path parameters:nil];
+    NSURLRequest *request = [self requestWithUrl:url method:@"PUT" payload:prediction];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler([Prediction instanceFromData:responseData], error);
@@ -371,8 +360,8 @@ NSInteger PageLimit = 50;
     NSDictionary *parameters = @{@"list": @"prediction", @"limit" : @(PageLimit),
                                  @"prediction_id": @(predictionId)};
     parameters = [self parametersDictionary:parameters withGreaterThanLastId:lastId];
-
-    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"GET" path:@"comments.json" parameters:parameters requiresAuthToken:YES isMultiPartData:NO];
+    NSString *url = [self buildUrl:@"comments.json" parameters:parameters];
+    NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler([Comment arrayFromData:responseData], error);
@@ -380,10 +369,8 @@ NSInteger PageLimit = 50;
 }
 
 - (void)createComment:(Comment *)comment completion:(void (^)(NSError *))completionHandler {
-    NSDictionary *params = @{@"comment[text]": comment.body};
-    NSString *path = [NSString stringWithFormat: @"predictions/%d/comment.json", comment.predictionId];
-    
-    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"POST" path:path parameters:params requiresAuthToken:YES isMultiPartData:NO];
+    NSString *url = [self buildUrl:@"comments.json" parameters:nil];
+    NSURLRequest *request = [self requestWithUrl:url method:@"POST" payload:comment];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler(error);
@@ -398,7 +385,8 @@ NSInteger PageLimit = 50;
 }
 
 - (void)getNewBadgesCompletion:(void (^)(NSArray *, NSError *))completionHandler {
-    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"GET" path:@"badges/recent.json" parameters:nil requiresAuthToken:YES isMultiPartData:NO];
+    NSString *url = [self buildUrl:@"badges/recent.json" parameters:nil];
+    NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler([Badge arrayFromData:responseData], error);
@@ -406,7 +394,8 @@ NSInteger PageLimit = 50;
 }
 
 - (void)getAllBadgesCompletion:(void (^)(NSArray *, NSError *))completionHandler {
-    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"GET" path:@"badges.json" parameters:nil requiresAuthToken:YES isMultiPartData:NO];
+    NSString *url = [self buildUrl:@"badges.json" parameters:nil];
+    NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler([Badge arrayFromData:responseData], error);
@@ -415,9 +404,8 @@ NSInteger PageLimit = 50;
 
 - (void)getImage:(NSString *)imageUrl completion:(void (^)(UIImage *, NSError *))completionHandler {
     
-    
-    [self getCachedObjectForKey:imageUrl timeout:FileCacheTimeInfinite inCache:self.fileCache requestForMiss:^WebRequest *{
-        WebRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:imageUrl]];
+    [self getCachedObjectForKey:imageUrl timeout:FileCacheTimeInfinite inCache:self.fileCache requestForMiss:^NSURLRequest *{
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:imageUrl]];
         return request;
 
     } completion:^(NSData *data, NSError *error) {
@@ -428,24 +416,24 @@ NSInteger PageLimit = 50;
     }];
 }
 
-- (void)getUnseenAlertsCompletion:(void (^)(NSArray *, NSError *))completionHandler {
+- (void)getUnseenActivity:(void (^)(NSArray *, NSError *))completionHandler {
     NSDictionary *parameters = @{@"list": @"unseen"};
-    
-    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"GET" path:@"activityfeed.json" parameters:parameters requiresAuthToken:YES isMultiPartData:NO];
+    NSString *url = [self buildUrl:@"activityfeed.json" parameters:parameters];
+    NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
-        completionHandler([Alert arrayFromData:responseData], error);
+        completionHandler([ActivityItem arrayFromData:responseData], error);
     }];
 }
-
-- (void)getAlertsAfter:(NSInteger)lastId completion:(void (^)(NSArray *, NSError *))completionHandler {
+- (void)getActivityAfter:(NSInteger)lastId completion:(void (^)(NSArray *, NSError *))completionHandler {
     NSDictionary *parameters = @{@"limit": @(PageLimit)};
     
     parameters = [self parametersDictionary:parameters withLastId:lastId];
-    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"GET" path:@"activityfeed.json" parameters:parameters requiresAuthToken:YES isMultiPartData:NO];
+    NSString *url = [self buildUrl:@"activityfeed.json" parameters:nil];
+    NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
-        completionHandler([Alert arrayFromData:responseData], error);
+        completionHandler([ActivityItem arrayFromData:responseData], error);
     }];
     
 }
@@ -453,7 +441,8 @@ NSInteger PageLimit = 50;
 - (void)searchForPredictions:(NSString *)searchText completion:(void (^)(NSArray *, NSError *))completionHandler {
     NSDictionary *parameters = @{@"limit": @(PageLimit), @"q" : searchText};
     
-    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"GET" path:@"search/predictions.json" parameters:parameters requiresAuthToken:YES isMultiPartData:NO];
+    NSString *url = [self buildUrl:@"search/predictions.json" parameters:parameters];
+    NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler([Prediction arrayFromData:responseData], error);
@@ -463,7 +452,8 @@ NSInteger PageLimit = 50;
 - (void)searchForUsers:(NSString *)searchText completion:(void (^)(NSArray *, NSError *))completionHandler {
     NSDictionary *parameters = @{@"limit": @(5), @"q" : searchText};
     
-    WebRequest *request = [[WebRequest alloc] initWithHTTPMethod:@"GET" path:@"search/users.json" parameters:parameters requiresAuthToken:YES isMultiPartData:NO];
+    NSString *url = [self buildUrl:@"search/users.json" parameters:parameters];
+    NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler([User arrayFromData:responseData], error);
@@ -486,29 +476,86 @@ NSInteger PageLimit = 50;
 
 @implementation WebApi (Internal)
 
-- (void)executeRequest:(WebRequest *)request completion:(void (^)(NSData *, NSError *))completionHandler {
+- (NSString *)savedAuthToken {
+    NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:LoginResponseKey];
+    
+    if ([token isKindOfClass:NSString.class])
+        return token;
+    
+    return nil;
+}
+
+- (NSMutableURLRequest *)requestWithUrl:(NSString *)url method:(NSString *)method payload:(WebObject *)payload {
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
+    
+    for (NSString *key in self.headers) {
+        [request setValue:self.headers[key] forHTTPHeaderField:key];
+    }
+    
+    [request setHTTPMethod:method];
+    
+    if (payload) {
+        
+        NSDictionary *dictionary = [MTLJSONAdapter JSONDictionaryFromModel:payload];
+        
+        [request setHTTPBody:[NSJSONSerialization dataWithJSONObject:dictionary options:0 error:nil]];
+    }
+    
+    return request;
+}
+
+- (NSString *)buildUrl:(NSString *)path parameters:(NSDictionary *)parameters {
+    
+    if (!parameters)
+        parameters = @{};
+    else {
+        NSString *authToken = [self savedAuthToken];
+        if (authToken) {
+            NSMutableDictionary *tmp = [parameters mutableCopy];
+            [tmp setObject:authToken forKey:@"auth_token"];
+            parameters = tmp;
+        }
+    }
+    
+    NSMutableString *url = [[NSString stringWithFormat:@"%@%@", baseURL, path] mutableCopy];
+    
+    BOOL first = YES;
+    
+    for (NSString *key in parameters) {
+        if (first) {
+            [url appendFormat:@"?%@=%@", key, parameters[key]];
+            first = NO;
+        } else
+            [url appendFormat:@"&%@=%@", key, parameters[key]];
+    }
+    
+    return url;
+    
+    
+}
+
+- (void)executeRequest:(NSURLRequest *)request completion:(void (^)(NSData *, NSError *))completionHandler {
     NSLog(@"Executing request url: %@", request.URL.absoluteString);
     NSLog(@"Body: %@", [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
-
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         [self handleResponse:response withData:data error:connectionError completion:completionHandler];
     }];
 }
 
-- (void)executeUpdateUserRequest:(WebRequest *)request completion:(void (^)(NSData *, NSError *))completionHandler {
+- (void)executeUpdateUserRequest:(NSURLRequest *)request completion:(void (^)(NSData *, NSError *))completionHandler {
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         if (error)
             completionHandler(nil, error);
-        else
-            [self getCurrentUser:^(User *user, NSError *error) {
-                if (!error)
-                    [self.appDelegate setValue:user forKey:@"currentUser"];
-                completionHandler(responseData, nil);
-            }];
+        else {
+            
+            User *user = [User instanceFromData:responseData];
+            if (user)
+                [self.appDelegate setValue:user forKey:@"currentUser"];
+        }
     }];
 }
 
-- (void)getCachedObjectForKey:(NSString *)key timeout:(NSTimeInterval)timeout inCache:(id<Cache>)cache requestForMiss:(WebRequest *(^)(void))miss completion:(void (^)(NSData *, NSError *))completionHandler {
+- (void)getCachedObjectForKey:(NSString *)key timeout:(NSTimeInterval)timeout inCache:(id<Cache>)cache requestForMiss:(NSURLRequest *(^)(void))miss completion:(void (^)(NSData *, NSError *))completionHandler {
     [cache dataForKey:key complete:^(NSData *data, BOOL stale) {
         if (data && !stale)
             completionHandler(data, nil);

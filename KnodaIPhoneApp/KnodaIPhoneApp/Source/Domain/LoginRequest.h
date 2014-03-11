@@ -9,6 +9,6 @@
 #import "WebObject.h"
 
 @interface LoginRequest : WebObject
-@property (strong, nonatomic) NSString *username;
+@property (strong, nonatomic) NSString *login;
 @property (strong, nonatomic) NSString *password;
 @end

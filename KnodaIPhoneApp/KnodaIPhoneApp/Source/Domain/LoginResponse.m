@@ -12,16 +12,8 @@ const NSString *LoginResponseKey = @"LoginResponse";
 
 @implementation LoginResponse
 
-+ (id)instanceFromDictionary:(NSDictionary *)dictionary {
-    
-    LoginResponse *response = [super instanceFromDictionary:dictionary];
-    
-    response.email = dictionary[@"email"];
-    response.token = dictionary[@"auth_token"];
-    
-    return response;
-    
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+    return @{@"token" : @"auth_token"};
 }
-
 
 @end

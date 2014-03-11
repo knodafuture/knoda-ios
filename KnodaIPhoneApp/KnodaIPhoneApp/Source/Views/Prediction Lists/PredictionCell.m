@@ -109,7 +109,7 @@ static NSMutableDictionary *cellHeightCache;
 
 
 - (void)update {
-    self.usernameLabel.text = self.prediction.userName;
+    self.usernameLabel.text = self.prediction.username;
     self.bodyLabel.text = self.prediction.body;
     
     self.metadataLabel.text = [self.prediction metaDataString];

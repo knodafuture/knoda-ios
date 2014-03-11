@@ -14,8 +14,6 @@
 		0121E83F184FDBC700B7C5CA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E708823178AF68E00F036A8 /* UIKit.framework */; };
 		0121E840184FDBC700B7C5CA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E708825178AF68E00F036A8 /* Foundation.framework */; };
 		0121E841184FDBC700B7C5CA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E708827178AF68E00F036A8 /* CoreGraphics.framework */; };
-		0137DA76187714E600B2AA0F /* TallyUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0137DA75187714E600B2AA0F /* TallyUser.m */; };
-		0137DA77187714E600B2AA0F /* TallyUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0137DA75187714E600B2AA0F /* TallyUser.m */; };
 		013DA7BE1853002200B507E4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA6E91853002100B507E4 /* AppDelegate.m */; };
 		013DA7BF1853002200B507E4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA6E91853002100B507E4 /* AppDelegate.m */; };
 		013DA7C01853002200B507E4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA6EA1853002100B507E4 /* main.m */; };
@@ -48,8 +46,8 @@
 		013DA7F11853002200B507E4 /* FileCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA71F1853002100B507E4 /* FileCache.m */; };
 		013DA7F21853002200B507E4 /* WebApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA7211853002100B507E4 /* WebApi.m */; };
 		013DA7F31853002200B507E4 /* WebApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA7211853002100B507E4 /* WebApi.m */; };
-		013DA7F41853002200B507E4 /* WebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA7231853002100B507E4 /* WebRequest.m */; };
-		013DA7F51853002200B507E4 /* WebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA7231853002100B507E4 /* WebRequest.m */; };
+		013DA7F41853002200B507E4 /* MultipartRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA7231853002100B507E4 /* MultipartRequest.m */; };
+		013DA7F51853002200B507E4 /* MultipartRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA7231853002100B507E4 /* MultipartRequest.m */; };
 		013DA7F61853002200B507E4 /* ImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA7261853002100B507E4 /* ImageLoader.m */; };
 		013DA7F71853002200B507E4 /* ImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA7261853002100B507E4 /* ImageLoader.m */; };
 		013DA7F81853002200B507E4 /* AddPredictionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA72A1853002100B507E4 /* AddPredictionViewController.m */; };
@@ -240,10 +238,8 @@
 		013DA8D41853004000B507E4 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA8BE1853004000B507E4 /* User.m */; };
 		013DA8D51853004000B507E4 /* SignupRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA8C01853004000B507E4 /* SignupRequest.m */; };
 		013DA8D61853004000B507E4 /* SignupRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA8C01853004000B507E4 /* SignupRequest.m */; };
-		013DA8D71853004000B507E4 /* Topic.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA8C21853004000B507E4 /* Topic.m */; };
-		013DA8D81853004000B507E4 /* Topic.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA8C21853004000B507E4 /* Topic.m */; };
-		013DA8D91853004000B507E4 /* UpdatePredictionRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA8C41853004000B507E4 /* UpdatePredictionRequest.m */; };
-		013DA8DA1853004000B507E4 /* UpdatePredictionRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA8C41853004000B507E4 /* UpdatePredictionRequest.m */; };
+		013DA8D71853004000B507E4 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA8C21853004000B507E4 /* Tag.m */; };
+		013DA8D81853004000B507E4 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA8C21853004000B507E4 /* Tag.m */; };
 		013DA8DB1853004000B507E4 /* WebObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA8C61853004000B507E4 /* WebObject.m */; };
 		013DA8DC1853004000B507E4 /* WebObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA8C61853004000B507E4 /* WebObject.m */; };
 		013DA8E71853098600B507E4 /* AnotherUsersProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA8E61853098600B507E4 /* AnotherUsersProfileViewController.m */; };
@@ -308,14 +304,28 @@
 		01598B391858E483002E2534 /* ZoomingImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01598B371858E483002E2534 /* ZoomingImageViewController.m */; };
 		01598B3B1858E4B3002E2534 /* ZoomingImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01598B3A1858E4B3002E2534 /* ZoomingImageViewController.xib */; };
 		01598B3C1858E4B3002E2534 /* ZoomingImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01598B3A1858E4B3002E2534 /* ZoomingImageViewController.xib */; };
-		018DF7981858F1FB004FEDA6 /* Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = 018DF7971858F1FB004FEDA6 /* Alert.m */; };
-		018DF79C1858F41A004FEDA6 /* AlertsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 018DF79B1858F41A004FEDA6 /* AlertsViewController.m */; };
+		018DF7981858F1FB004FEDA6 /* ActivityItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 018DF7971858F1FB004FEDA6 /* ActivityItem.m */; };
+		018DF79C1858F41A004FEDA6 /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 018DF79B1858F41A004FEDA6 /* ActivityViewController.m */; };
 		018DF79F1858F42F004FEDA6 /* AlertCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 018DF79E1858F42F004FEDA6 /* AlertCell.m */; };
 		018DF7A21858F481004FEDA6 /* AlertCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 018DF79E1858F42F004FEDA6 /* AlertCell.m */; };
-		018DF7A31858F484004FEDA6 /* AlertsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 018DF79B1858F41A004FEDA6 /* AlertsViewController.m */; };
+		018DF7A31858F484004FEDA6 /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 018DF79B1858F41A004FEDA6 /* ActivityViewController.m */; };
 		018DF7A51858F496004FEDA6 /* AlertCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 018DF7A41858F496004FEDA6 /* AlertCell.xib */; };
 		018DF7A61858F496004FEDA6 /* AlertCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 018DF7A41858F496004FEDA6 /* AlertCell.xib */; };
-		018DF7A718590699004FEDA6 /* Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = 018DF7971858F1FB004FEDA6 /* Alert.m */; };
+		018DF7A718590699004FEDA6 /* ActivityItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 018DF7971858F1FB004FEDA6 /* ActivityItem.m */; };
+		01939FFD18CE54330088D168 /* RemoteImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 01939FFC18CE54330088D168 /* RemoteImage.m */; };
+		01939FFE18CE54350088D168 /* RemoteImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 01939FFC18CE54330088D168 /* RemoteImage.m */; };
+		0193A00118CE564D0088D168 /* PredictionPoints.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193A00018CE564D0088D168 /* PredictionPoints.m */; };
+		0193A00218CE564D0088D168 /* PredictionPoints.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193A00018CE564D0088D168 /* PredictionPoints.m */; };
+		0193A00518CE6AE90088D168 /* ParamBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193A00418CE6AE90088D168 /* ParamBuilder.m */; };
+		0193A00618CE6AE90088D168 /* ParamBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193A00418CE6AE90088D168 /* ParamBuilder.m */; };
+		0193A00918CF50340088D168 /* PasswordResetRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193A00818CF50340088D168 /* PasswordResetRequest.m */; };
+		0193A00A18CF50340088D168 /* PasswordResetRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193A00818CF50340088D168 /* PasswordResetRequest.m */; };
+		0193A00D18CF53930088D168 /* PasswordChangeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193A00C18CF53930088D168 /* PasswordChangeRequest.m */; };
+		0193A00E18CF53930088D168 /* PasswordChangeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193A00C18CF53930088D168 /* PasswordChangeRequest.m */; };
+		0193A01118CF55140088D168 /* DeviceToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193A01018CF55140088D168 /* DeviceToken.m */; };
+		0193A01218CF55140088D168 /* DeviceToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193A01018CF55140088D168 /* DeviceToken.m */; };
+		0193A01518CF5FE90088D168 /* ActivityItem+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193A01418CF5FE90088D168 /* ActivityItem+Utils.m */; };
+		0193A01618CF5FE90088D168 /* ActivityItem+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193A01418CF5FE90088D168 /* ActivityItem+Utils.m */; };
 		01A1DEE9183E9A1F00DBBE68 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 01A1DEE8183E9A1F00DBBE68 /* libz.dylib */; };
 		01E8CB561875757E003AE018 /* RightSideButtonsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E8CB551875757E003AE018 /* RightSideButtonsView.m */; };
 		01E8CB58187575EB003AE018 /* RightSideButtonsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E8CB57187575EB003AE018 /* RightSideButtonsView.xib */; };
@@ -340,6 +350,8 @@
 		01E8CB8218767D5D003AE018 /* UserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E8CB8118767D5D003AE018 /* UserCell.xib */; };
 		01E8CB8318767D5D003AE018 /* UserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E8CB8118767D5D003AE018 /* UserCell.xib */; };
 		01FFE52C187B7432001C9893 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01FFE52B187B7432001C9893 /* StoreKit.framework */; };
+		129025DD2FFF4D9FA85D4A70 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D053512337C4121BADACAB9 /* libPods.a */; };
+		50D776ADE5CA49A68908C526 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D053512337C4121BADACAB9 /* libPods.a */; };
 		9E28686F17C659940033FB3C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E28686E17C659930033FB3C /* Security.framework */; };
 		9E6F4C5A17D8CCFA00EAB4A0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6F4C5917D8CCFA00EAB4A0 /* SystemConfiguration.framework */; };
 		9E708824178AF68E00F036A8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E708823178AF68E00F036A8 /* UIKit.framework */; };
@@ -350,8 +362,6 @@
 
 /* Begin PBXFileReference section */
 		0121E86C184FDBC700B7C5CA /* Knoda Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Knoda Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0137DA74187714E600B2AA0F /* TallyUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TallyUser.h; sourceTree = "<group>"; };
-		0137DA75187714E600B2AA0F /* TallyUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TallyUser.m; sourceTree = "<group>"; };
 		013DA6E41852D4F800B507E4 /* libcommonCrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcommonCrypto.dylib; path = usr/lib/system/libcommonCrypto.dylib; sourceTree = SDKROOT; };
 		013DA6E81853002100B507E4 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		013DA6E91853002100B507E4 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -384,8 +394,8 @@
 		013DA71F1853002100B507E4 /* FileCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileCache.m; sourceTree = "<group>"; };
 		013DA7201853002100B507E4 /* WebApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebApi.h; sourceTree = "<group>"; };
 		013DA7211853002100B507E4 /* WebApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebApi.m; sourceTree = "<group>"; };
-		013DA7221853002100B507E4 /* WebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebRequest.h; sourceTree = "<group>"; };
-		013DA7231853002100B507E4 /* WebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebRequest.m; sourceTree = "<group>"; };
+		013DA7221853002100B507E4 /* MultipartRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultipartRequest.h; sourceTree = "<group>"; };
+		013DA7231853002100B507E4 /* MultipartRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultipartRequest.m; sourceTree = "<group>"; };
 		013DA7251853002100B507E4 /* ImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLoader.h; sourceTree = "<group>"; };
 		013DA7261853002100B507E4 /* ImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageLoader.m; sourceTree = "<group>"; };
 		013DA7291853002100B507E4 /* AddPredictionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPredictionViewController.h; sourceTree = "<group>"; };
@@ -527,10 +537,8 @@
 		013DA8BE1853004000B507E4 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		013DA8BF1853004000B507E4 /* SignupRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupRequest.h; sourceTree = "<group>"; };
 		013DA8C01853004000B507E4 /* SignupRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupRequest.m; sourceTree = "<group>"; };
-		013DA8C11853004000B507E4 /* Topic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Topic.h; sourceTree = "<group>"; };
-		013DA8C21853004000B507E4 /* Topic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Topic.m; sourceTree = "<group>"; };
-		013DA8C31853004000B507E4 /* UpdatePredictionRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdatePredictionRequest.h; sourceTree = "<group>"; };
-		013DA8C41853004000B507E4 /* UpdatePredictionRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdatePredictionRequest.m; sourceTree = "<group>"; };
+		013DA8C11853004000B507E4 /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tag.h; sourceTree = "<group>"; };
+		013DA8C21853004000B507E4 /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tag.m; sourceTree = "<group>"; };
 		013DA8C51853004000B507E4 /* WebObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebObject.h; sourceTree = "<group>"; };
 		013DA8C61853004000B507E4 /* WebObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebObject.m; sourceTree = "<group>"; };
 		013DA8E51853098600B507E4 /* AnotherUsersProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnotherUsersProfileViewController.h; sourceTree = "<group>"; };
@@ -598,13 +606,27 @@
 		01598B361858E483002E2534 /* ZoomingImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZoomingImageViewController.h; sourceTree = "<group>"; };
 		01598B371858E483002E2534 /* ZoomingImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZoomingImageViewController.m; sourceTree = "<group>"; };
 		01598B3A1858E4B3002E2534 /* ZoomingImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZoomingImageViewController.xib; sourceTree = "<group>"; };
-		018DF7961858F1FB004FEDA6 /* Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Alert.h; sourceTree = "<group>"; };
-		018DF7971858F1FB004FEDA6 /* Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Alert.m; sourceTree = "<group>"; };
-		018DF79A1858F41A004FEDA6 /* AlertsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertsViewController.h; sourceTree = "<group>"; };
-		018DF79B1858F41A004FEDA6 /* AlertsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertsViewController.m; sourceTree = "<group>"; };
+		018DF7961858F1FB004FEDA6 /* ActivityItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityItem.h; sourceTree = "<group>"; };
+		018DF7971858F1FB004FEDA6 /* ActivityItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityItem.m; sourceTree = "<group>"; };
+		018DF79A1858F41A004FEDA6 /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewController.h; sourceTree = "<group>"; };
+		018DF79B1858F41A004FEDA6 /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewController.m; sourceTree = "<group>"; };
 		018DF79D1858F42F004FEDA6 /* AlertCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertCell.h; sourceTree = "<group>"; };
 		018DF79E1858F42F004FEDA6 /* AlertCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertCell.m; sourceTree = "<group>"; };
 		018DF7A41858F496004FEDA6 /* AlertCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertCell.xib; sourceTree = "<group>"; };
+		01939FFB18CE54330088D168 /* RemoteImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteImage.h; sourceTree = "<group>"; };
+		01939FFC18CE54330088D168 /* RemoteImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteImage.m; sourceTree = "<group>"; };
+		01939FFF18CE564D0088D168 /* PredictionPoints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PredictionPoints.h; sourceTree = "<group>"; };
+		0193A00018CE564D0088D168 /* PredictionPoints.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PredictionPoints.m; sourceTree = "<group>"; };
+		0193A00318CE6AE90088D168 /* ParamBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParamBuilder.h; sourceTree = "<group>"; };
+		0193A00418CE6AE90088D168 /* ParamBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParamBuilder.m; sourceTree = "<group>"; };
+		0193A00718CF50340088D168 /* PasswordResetRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordResetRequest.h; sourceTree = "<group>"; };
+		0193A00818CF50340088D168 /* PasswordResetRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordResetRequest.m; sourceTree = "<group>"; };
+		0193A00B18CF53930088D168 /* PasswordChangeRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordChangeRequest.h; sourceTree = "<group>"; };
+		0193A00C18CF53930088D168 /* PasswordChangeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordChangeRequest.m; sourceTree = "<group>"; };
+		0193A00F18CF55140088D168 /* DeviceToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceToken.h; sourceTree = "<group>"; };
+		0193A01018CF55140088D168 /* DeviceToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceToken.m; sourceTree = "<group>"; };
+		0193A01318CF5FE90088D168 /* ActivityItem+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ActivityItem+Utils.h"; sourceTree = "<group>"; };
+		0193A01418CF5FE90088D168 /* ActivityItem+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ActivityItem+Utils.m"; sourceTree = "<group>"; };
 		01A1DEE8183E9A1F00DBBE68 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		01E8CB541875757E003AE018 /* RightSideButtonsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RightSideButtonsView.h; sourceTree = "<group>"; };
 		01E8CB551875757E003AE018 /* RightSideButtonsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightSideButtonsView.m; sourceTree = "<group>"; };
@@ -626,6 +648,8 @@
 		01E8CB7E18767D21003AE018 /* UserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCell.m; sourceTree = "<group>"; };
 		01E8CB8118767D5D003AE018 /* UserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCell.xib; sourceTree = "<group>"; };
 		01FFE52B187B7432001C9893 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		2D053512337C4121BADACAB9 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8825C313D9324F9BA336C19A /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		9E28686E17C659930033FB3C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		9E6F4C5917D8CCFA00EAB4A0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		9E708820178AF68E00F036A8 /* KnodaIPhoneApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KnodaIPhoneApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -649,6 +673,7 @@
 				0121E840184FDBC700B7C5CA /* Foundation.framework in Frameworks */,
 				0121E841184FDBC700B7C5CA /* CoreGraphics.framework in Frameworks */,
 				013DA8A31853002200B507E4 /* libFlurry_4.2.3.a in Frameworks */,
+				50D776ADE5CA49A68908C526 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -681,6 +706,7 @@
 				014A9F15185DA1C700A96678 /* Tapjoy.framework in Frameworks */,
 				9E708824178AF68E00F036A8 /* UIKit.framework in Frameworks */,
 				013DA8A21853002200B507E4 /* libFlurry_4.2.3.a in Frameworks */,
+				129025DD2FFF4D9FA85D4A70 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -756,6 +782,8 @@
 				013DA7031853002100B507E4 /* Prediction+Utils.m */,
 				013DA7041853002100B507E4 /* User+Utils.h */,
 				013DA7051853002100B507E4 /* User+Utils.m */,
+				0193A01318CF5FE90088D168 /* ActivityItem+Utils.h */,
+				0193A01418CF5FE90088D168 /* ActivityItem+Utils.m */,
 			);
 			path = "Domain Categories";
 			sourceTree = "<group>";
@@ -768,9 +796,11 @@
 				013DA71F1853002100B507E4 /* FileCache.m */,
 				013DA7201853002100B507E4 /* WebApi.h */,
 				013DA7211853002100B507E4 /* WebApi.m */,
-				013DA7221853002100B507E4 /* WebRequest.h */,
-				013DA7231853002100B507E4 /* WebRequest.m */,
+				013DA7221853002100B507E4 /* MultipartRequest.h */,
+				013DA7231853002100B507E4 /* MultipartRequest.m */,
 				013DA8ED1853E45700B507E4 /* Cache.h */,
+				0193A00318CE6AE90088D168 /* ParamBuilder.h */,
+				0193A00418CE6AE90088D168 /* ParamBuilder.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1087,16 +1117,22 @@
 				013DA8BE1853004000B507E4 /* User.m */,
 				013DA8BF1853004000B507E4 /* SignupRequest.h */,
 				013DA8C01853004000B507E4 /* SignupRequest.m */,
-				013DA8C11853004000B507E4 /* Topic.h */,
-				013DA8C21853004000B507E4 /* Topic.m */,
-				013DA8C31853004000B507E4 /* UpdatePredictionRequest.h */,
-				013DA8C41853004000B507E4 /* UpdatePredictionRequest.m */,
+				013DA8C11853004000B507E4 /* Tag.h */,
+				013DA8C21853004000B507E4 /* Tag.m */,
 				013DA8C51853004000B507E4 /* WebObject.h */,
 				013DA8C61853004000B507E4 /* WebObject.m */,
-				018DF7961858F1FB004FEDA6 /* Alert.h */,
-				018DF7971858F1FB004FEDA6 /* Alert.m */,
-				0137DA74187714E600B2AA0F /* TallyUser.h */,
-				0137DA75187714E600B2AA0F /* TallyUser.m */,
+				018DF7961858F1FB004FEDA6 /* ActivityItem.h */,
+				018DF7971858F1FB004FEDA6 /* ActivityItem.m */,
+				01939FFB18CE54330088D168 /* RemoteImage.h */,
+				01939FFC18CE54330088D168 /* RemoteImage.m */,
+				01939FFF18CE564D0088D168 /* PredictionPoints.h */,
+				0193A00018CE564D0088D168 /* PredictionPoints.m */,
+				0193A00718CF50340088D168 /* PasswordResetRequest.h */,
+				0193A00818CF50340088D168 /* PasswordResetRequest.m */,
+				0193A00B18CF53930088D168 /* PasswordChangeRequest.h */,
+				0193A00C18CF53930088D168 /* PasswordChangeRequest.m */,
+				0193A00F18CF55140088D168 /* DeviceToken.h */,
+				0193A01018CF55140088D168 /* DeviceToken.m */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -1202,8 +1238,8 @@
 		018DF7991858F40F004FEDA6 /* Alerts */ = {
 			isa = PBXGroup;
 			children = (
-				018DF79A1858F41A004FEDA6 /* AlertsViewController.h */,
-				018DF79B1858F41A004FEDA6 /* AlertsViewController.m */,
+				018DF79A1858F41A004FEDA6 /* ActivityViewController.h */,
+				018DF79B1858F41A004FEDA6 /* ActivityViewController.m */,
 				018DF79D1858F42F004FEDA6 /* AlertCell.h */,
 				018DF79E1858F42F004FEDA6 /* AlertCell.m */,
 				018DF7A41858F496004FEDA6 /* AlertCell.xib */,
@@ -1242,6 +1278,7 @@
 				013DA7BD1853002100B507E4 /* KnodaIPhoneApp-Prefix.pch */,
 				9E708822178AF68E00F036A8 /* Frameworks */,
 				9E708821178AF68E00F036A8 /* Products */,
+				8825C313D9324F9BA336C19A /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 			wrapsLines = 0;
@@ -1282,6 +1319,7 @@
 				9E708823178AF68E00F036A8 /* UIKit.framework */,
 				9E708825178AF68E00F036A8 /* Foundation.framework */,
 				9E708827178AF68E00F036A8 /* CoreGraphics.framework */,
+				2D053512337C4121BADACAB9 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1293,9 +1331,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0121E869184FDBC700B7C5CA /* Build configuration list for PBXNativeTarget "KnodaTestflight" */;
 			buildPhases = (
+				BECF141D78DE4EF4A6B37A5A /* Check Pods Manifest.lock */,
 				0121E7D9184FDBC700B7C5CA /* Sources */,
 				0121E839184FDBC700B7C5CA /* Frameworks */,
 				0121E843184FDBC700B7C5CA /* Resources */,
+				17310727D699489BA4CE03E9 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1310,9 +1350,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9E708843178AF68E00F036A8 /* Build configuration list for PBXNativeTarget "KnodaIPhoneApp" */;
 			buildPhases = (
+				BE1371A4E85245D8A1DDA3D9 /* Check Pods Manifest.lock */,
 				9E70881C178AF68E00F036A8 /* Sources */,
 				9E70881D178AF68E00F036A8 /* Frameworks */,
 				9E70881E178AF68E00F036A8 /* Resources */,
+				3B43CCCDE40F4E95BABB09A0 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1508,6 +1550,69 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		17310727D699489BA4CE03E9 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3B43CCCDE40F4E95BABB09A0 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BE1371A4E85245D8A1DDA3D9 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		BECF141D78DE4EF4A6B37A5A /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		0121E7D9184FDBC700B7C5CA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1520,15 +1625,20 @@
 				013DA8CE1853004000B507E4 /* LoginResponse.m in Sources */,
 				01E8CB6D18765F71003AE018 /* SearchDatasource.m in Sources */,
 				013DA80B1853002200B507E4 /* NavigationViewController.m in Sources */,
+				0193A01218CF55140088D168 /* DeviceToken.m in Sources */,
 				013DA8A51853002200B507E4 /* BJImageCropper.m in Sources */,
+				0193A00618CE6AE90088D168 /* ParamBuilder.m in Sources */,
 				013DA8CA1853004000B507E4 /* Comment.m in Sources */,
-				013DA7F51853002200B507E4 /* WebRequest.m in Sources */,
+				013DA7F51853002200B507E4 /* MultipartRequest.m in Sources */,
 				013DA8051853002200B507E4 /* NewBadgeView.m in Sources */,
 				013DA7C91853002200B507E4 /* NSString+Utils.m in Sources */,
+				01939FFE18CE54350088D168 /* RemoteImage.m in Sources */,
 				013DA7D11853002200B507E4 /* UILabel+Utils.m in Sources */,
 				01E8CB711876672C003AE018 /* SearchSectionHeader.m in Sources */,
+				0193A00218CE564D0088D168 /* PredictionPoints.m in Sources */,
 				013DA8191853002200B507E4 /* LoadingView.m in Sources */,
 				013DA84D1853002200B507E4 /* HomeViewController.m in Sources */,
+				0193A00E18CF53930088D168 /* PasswordChangeRequest.m in Sources */,
 				013DA7D91853002200B507E4 /* User+Utils.m in Sources */,
 				013DA7D71853002200B507E4 /* Prediction+Utils.m in Sources */,
 				013DA8551853002200B507E4 /* PredictionsViewController.m in Sources */,
@@ -1541,7 +1651,7 @@
 				013DA8411853002200B507E4 /* PredictionDetailsViewController.m in Sources */,
 				013DA8271853002200B507E4 /* LoginViewController.m in Sources */,
 				013DA7D31853002200B507E4 /* UINavigationItem+iOS7Spacing.m in Sources */,
-				018DF7A718590699004FEDA6 /* Alert.m in Sources */,
+				018DF7A718590699004FEDA6 /* ActivityItem.m in Sources */,
 				013DA8C81853004000B507E4 /* Badge.m in Sources */,
 				014A9E8B185BF95100A96678 /* SideNavButton.m in Sources */,
 				013DA8431853002200B507E4 /* PredictorCell.m in Sources */,
@@ -1552,13 +1662,13 @@
 				01E8CB63187648D1003AE018 /* SearchBar.m in Sources */,
 				01E8CB5F1876480F003AE018 /* SearchViewController.m in Sources */,
 				013DA7CD1853002200B507E4 /* UIColor+Utils.m in Sources */,
-				018DF7A31858F484004FEDA6 /* AlertsViewController.m in Sources */,
+				018DF7A31858F484004FEDA6 /* ActivityViewController.m in Sources */,
 				013DA85D1853002200B507E4 /* ImageCropperViewController.m in Sources */,
 				01598B391858E483002E2534 /* ZoomingImageViewController.m in Sources */,
 				013DA9021854330A00B507E4 /* TallyDatasource.m in Sources */,
 				013DA8D01853004000B507E4 /* Challenge.m in Sources */,
 				013DA7C31853002200B507E4 /* NSData+Utils.m in Sources */,
-				013DA8D81853004000B507E4 /* Topic.m in Sources */,
+				013DA8D81853004000B507E4 /* Tag.m in Sources */,
 				01E8CB5A187575EE003AE018 /* RightSideButtonsView.m in Sources */,
 				013DA8651853002200B507E4 /* SelectPictureViewController.m in Sources */,
 				014A9E89185BF95100A96678 /* SideNavBarButtonItem.m in Sources */,
@@ -1584,19 +1694,19 @@
 				013DA8011853002200B507E4 /* BadgesCollectionViewController.m in Sources */,
 				01598B3518584645002E2534 /* UINavigationBar+AppearanceUtils.m in Sources */,
 				013DA81D1853002200B507E4 /* NoContentCell.m in Sources */,
-				0137DA77187714E600B2AA0F /* TallyUser.m in Sources */,
 				013DA8FE185432B100B507E4 /* CommentsDatasource.m in Sources */,
 				013DA7F71853002200B507E4 /* ImageLoader.m in Sources */,
 				013DA82F1853002200B507E4 /* WelcomeViewController.m in Sources */,
 				013DA7FD1853002200B507E4 /* BadgeCollectionViewCell.m in Sources */,
 				013DA7F31853002200B507E4 /* WebApi.m in Sources */,
 				013DA8691853002200B507E4 /* WebViewController.m in Sources */,
+				0193A00A18CF50340088D168 /* PasswordResetRequest.m in Sources */,
 				013DA8E81853098600B507E4 /* AnotherUsersProfileViewController.m in Sources */,
 				013DA7F91853002200B507E4 /* AddPredictionViewController.m in Sources */,
 				013DA7C11853002200B507E4 /* main.m in Sources */,
 				013DA80F1853002200B507E4 /* SideNavCell.m in Sources */,
 				013DA8471853002200B507E4 /* PredictorHeaderCell.m in Sources */,
-				013DA8DA1853004000B507E4 /* UpdatePredictionRequest.m in Sources */,
+				0193A01618CF5FE90088D168 /* ActivityItem+Utils.m in Sources */,
 				01598B251857C56D002E2534 /* NSObject+MTKObserving.m in Sources */,
 				013DA83D1853002200B507E4 /* PredictionDetailsSectionHeader.m in Sources */,
 				013DA7BF1853002200B507E4 /* AppDelegate.m in Sources */,
@@ -1617,15 +1727,20 @@
 				013DA8CD1853004000B507E4 /* LoginResponse.m in Sources */,
 				01E8CB6C18765F71003AE018 /* SearchDatasource.m in Sources */,
 				013DA80A1853002200B507E4 /* NavigationViewController.m in Sources */,
+				0193A01118CF55140088D168 /* DeviceToken.m in Sources */,
 				013DA8A41853002200B507E4 /* BJImageCropper.m in Sources */,
+				0193A00518CE6AE90088D168 /* ParamBuilder.m in Sources */,
 				013DA8C91853004000B507E4 /* Comment.m in Sources */,
-				013DA7F41853002200B507E4 /* WebRequest.m in Sources */,
+				013DA7F41853002200B507E4 /* MultipartRequest.m in Sources */,
 				013DA8041853002200B507E4 /* NewBadgeView.m in Sources */,
 				013DA7C81853002200B507E4 /* NSString+Utils.m in Sources */,
+				01939FFD18CE54330088D168 /* RemoteImage.m in Sources */,
 				013DA7D01853002200B507E4 /* UILabel+Utils.m in Sources */,
 				01E8CB701876672C003AE018 /* SearchSectionHeader.m in Sources */,
+				0193A00118CE564D0088D168 /* PredictionPoints.m in Sources */,
 				013DA8181853002200B507E4 /* LoadingView.m in Sources */,
 				013DA84C1853002200B507E4 /* HomeViewController.m in Sources */,
+				0193A00D18CF53930088D168 /* PasswordChangeRequest.m in Sources */,
 				013DA7D81853002200B507E4 /* User+Utils.m in Sources */,
 				013DA7D61853002200B507E4 /* Prediction+Utils.m in Sources */,
 				013DA8541853002200B507E4 /* PredictionsViewController.m in Sources */,
@@ -1637,7 +1752,7 @@
 				013DA8601853002200B507E4 /* ProfileViewController.m in Sources */,
 				013DA8401853002200B507E4 /* PredictionDetailsViewController.m in Sources */,
 				013DA8261853002200B507E4 /* LoginViewController.m in Sources */,
-				018DF7981858F1FB004FEDA6 /* Alert.m in Sources */,
+				018DF7981858F1FB004FEDA6 /* ActivityItem.m in Sources */,
 				013DA7D21853002200B507E4 /* UINavigationItem+iOS7Spacing.m in Sources */,
 				013DA8C71853004000B507E4 /* Badge.m in Sources */,
 				014A9E8A185BF95100A96678 /* SideNavButton.m in Sources */,
@@ -1649,7 +1764,7 @@
 				01E8CB62187648D1003AE018 /* SearchBar.m in Sources */,
 				01E8CB5E1876480F003AE018 /* SearchViewController.m in Sources */,
 				013DA8DB1853004000B507E4 /* WebObject.m in Sources */,
-				018DF79C1858F41A004FEDA6 /* AlertsViewController.m in Sources */,
+				018DF79C1858F41A004FEDA6 /* ActivityViewController.m in Sources */,
 				013DA7CC1853002200B507E4 /* UIColor+Utils.m in Sources */,
 				013DA85C1853002200B507E4 /* ImageCropperViewController.m in Sources */,
 				01598B381858E483002E2534 /* ZoomingImageViewController.m in Sources */,
@@ -1657,7 +1772,7 @@
 				013DA8CF1853004000B507E4 /* Challenge.m in Sources */,
 				013DA7C21853002200B507E4 /* NSData+Utils.m in Sources */,
 				01E8CB561875757E003AE018 /* RightSideButtonsView.m in Sources */,
-				013DA8D71853004000B507E4 /* Topic.m in Sources */,
+				013DA8D71853004000B507E4 /* Tag.m in Sources */,
 				014A9E88185BF95100A96678 /* SideNavBarButtonItem.m in Sources */,
 				013DA8641853002200B507E4 /* SelectPictureViewController.m in Sources */,
 				01E8CB781876786C003AE018 /* NoSearchResultsCell.m in Sources */,
@@ -1681,19 +1796,19 @@
 				013DA8001853002200B507E4 /* BadgesCollectionViewController.m in Sources */,
 				01598B3418584645002E2534 /* UINavigationBar+AppearanceUtils.m in Sources */,
 				013DA81C1853002200B507E4 /* NoContentCell.m in Sources */,
-				0137DA76187714E600B2AA0F /* TallyUser.m in Sources */,
 				013DA8FD185432B100B507E4 /* CommentsDatasource.m in Sources */,
 				013DA7F61853002200B507E4 /* ImageLoader.m in Sources */,
 				013DA82E1853002200B507E4 /* WelcomeViewController.m in Sources */,
 				013DA7FC1853002200B507E4 /* BadgeCollectionViewCell.m in Sources */,
 				013DA7F21853002200B507E4 /* WebApi.m in Sources */,
 				013DA8681853002200B507E4 /* WebViewController.m in Sources */,
+				0193A00918CF50340088D168 /* PasswordResetRequest.m in Sources */,
 				013DA8E71853098600B507E4 /* AnotherUsersProfileViewController.m in Sources */,
 				013DA7F81853002200B507E4 /* AddPredictionViewController.m in Sources */,
 				013DA7C01853002200B507E4 /* main.m in Sources */,
 				013DA80E1853002200B507E4 /* SideNavCell.m in Sources */,
 				013DA8461853002200B507E4 /* PredictorHeaderCell.m in Sources */,
-				013DA8D91853004000B507E4 /* UpdatePredictionRequest.m in Sources */,
+				0193A01518CF5FE90088D168 /* ActivityItem+Utils.m in Sources */,
 				01598B241857C56D002E2534 /* NSObject+MTKObserving.m in Sources */,
 				013DA83C1853002200B507E4 /* PredictionDetailsSectionHeader.m in Sources */,
 				013DA7BE1853002200B507E4 /* AppDelegate.m in Sources */,
@@ -1727,6 +1842,7 @@
 /* Begin XCBuildConfiguration section */
 		0121E86A184FDBC700B7C5CA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8825C313D9324F9BA336C19A /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1757,6 +1873,7 @@
 		};
 		0121E86B184FDBC700B7C5CA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8825C313D9324F9BA336C19A /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1838,6 +1955,7 @@
 		};
 		9E708844178AF68E00F036A8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8825C313D9324F9BA336C19A /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1866,6 +1984,7 @@
 		};
 		9E708845178AF68E00F036A8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8825C313D9324F9BA336C19A /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

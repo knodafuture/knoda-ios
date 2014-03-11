@@ -8,7 +8,7 @@
 
 UIKIT_EXTERN CGFloat PredictorCellHeight;
 
-@class TallyUser;
+@class User;
 @protocol PredictorCellDelegate <NSObject>
 
 - (void)predictorCellDidSelectUserWithUserId:(NSInteger)userId;
@@ -23,7 +23,7 @@ UIKIT_EXTERN CGFloat PredictorCellHeight;
 
 + (PredictorCell *)predictorCellForTableView:(UITableView *)tableView;
 
-- (void)setAgreedUser:(TallyUser *)agreedUser andDisagreedUser:(TallyUser *)disagreedUser;
+- (void)setAgreedUser:(User *)agreedUser andDisagreedUser:(User *)disagreedUser;
 
 
 @end

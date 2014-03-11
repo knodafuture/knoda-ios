@@ -9,7 +9,7 @@
 #import "TallyDatasource.h"
 #import "PredictorCell.h"
 #import "PredictorHeaderCell.h"
-#import "TallyUser.h"
+#import "User.h"
 
 @interface TallyDatasource () {
     NSMutableArray *_agreedUsers;
@@ -113,24 +113,32 @@
     
 }
 
-- (void)updateTallyForUser:(TallyUser *)user agree:(BOOL)agree {
+- (void)updateTallyForUser:(User *)user agree:(BOOL)agree {
     if (agree) {
-        if ([_agreedUsers containsObject:user])
+        if ([self indexOfUser:user inArray:_agreedUsers] != NSNotFound)
             return;
-        if ([_disagreedUsers containsObject:user])
-            [_disagreedUsers removeObject:user];
+        if ([self indexOfUser:user inArray:_disagreedUsers] != NSNotFound)
+            [_disagreedUsers removeObjectAtIndex:[self indexOfUser:user inArray:_disagreedUsers]];
         [_agreedUsers addObject:user];
     } else {
-        if ([_disagreedUsers containsObject:user])
+        if ([self indexOfUser:user inArray:_disagreedUsers] != NSNotFound)
             return;
-        if ([_agreedUsers containsObject:user])
-            [_agreedUsers removeObject:user];
+        if ([self indexOfUser:user inArray:_agreedUsers] != NSNotFound)
+            [_agreedUsers removeObjectAtIndex:[self indexOfUser:user inArray:_agreedUsers]];
         [_disagreedUsers addObject:user];
     }
 }
 
+- (NSInteger)indexOfUser:(User *)user inArray:(NSArray *)array {
+    for (User *u in array) {
+        if ([user.name isEqualToString:user.name])
+            return [array indexOfObject:u];
+    }
+    
+    return NSNotFound;
+}
 
-- (TallyUser *)userAtIndex:(NSInteger)index inArray:(NSArray *)array {
+- (User *)userAtIndex:(NSInteger)index inArray:(NSArray *)array {
     if (index >= array.count)
         return nil;
     
@@ -141,12 +149,12 @@
     if (index >= array.count)
         return @"";
     
-    TallyUser *user = array[index];
+    User *user = array[index];
     
-    if (![user isKindOfClass:TallyUser.class])
+    if (![user isKindOfClass:User.class])
         return @"";
     
-    return user.username;
+    return user.name;
         
 }
 

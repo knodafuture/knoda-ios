@@ -11,7 +11,7 @@
 @implementation User (Utils)
 
 - (BOOL)hasAvatar {
-    return self.largeImageUrl.length && self.smallImageUrl.length && self.thumbImageUrl.length;
+    return self.avatar != nil;
 }
 
 @end

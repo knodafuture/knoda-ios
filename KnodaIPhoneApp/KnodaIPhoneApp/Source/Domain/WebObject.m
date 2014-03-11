@@ -9,26 +9,27 @@
 #import "WebObject.h"
 #import "NSData+Utils.h"
 #import "NSDate+Utils.h"
+#import "RemoteImage.h"
+#import "Challenge.h"
 
-NSString *ResponseDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'zzz";
+NSString *responseDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'zzz";
 
 @implementation WebObject
 
 + (id)instanceFromData:(NSData *)data {
-    return [self instanceFromDictionary:[data jsonObject]];
-}
-
-+ (id)instanceFromDictionary:(NSDictionary *)dictionary {
+    id jsonObject = [data jsonObject];
     
-    if (![dictionary isKindOfClass:NSDictionary.class])
+    if (!jsonObject || ![jsonObject isKindOfClass:NSDictionary.class])
         return nil;
     
-    return [[self alloc] init];
+    NSError *error;
     
-}
-
-+ (NSString *)responseKey {
-    return nil;
+    id object = [MTLJSONAdapter modelOfClass:self.class fromJSONDictionary:jsonObject error:&error];
+    
+    if (error)
+        return nil;
+    
+    return object;
 }
 
 
@@ -36,43 +37,65 @@ NSString *ResponseDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'zzz";
     
     id jsonObject = [data jsonObject];
     
-    if (!jsonObject)
+    if (!jsonObject || ![jsonObject isKindOfClass:NSArray.class])
         return nil;
     
-    if ([jsonObject isKindOfClass:NSDictionary.class] && ![self responseKey]) {
-        NSLog(@"Expecting dictionary with response key = %@, aborting serialization", [self responseKey]);
-        return nil;
-    }
-    
-    NSArray *array;
-    
-    if ([jsonObject isKindOfClass:NSArray.class])
-        array = jsonObject;
-    else if ([jsonObject isKindOfClass:NSDictionary.class] && [self responseKey])
-        array = jsonObject[[self responseKey]];
+    NSArray *array = jsonObject;
 
     NSMutableArray *returnArray = [[NSMutableArray alloc] initWithCapacity:array.count];
     
-    for (id object in array) {
+    for (NSDictionary *object in array) {
         if (![object isKindOfClass:NSDictionary.class])
             continue;
         
-        id serializedObject = [self instanceFromDictionary:object];
+        NSError *error;
+        id serializedObject = [MTLJSONAdapter modelOfClass:self.class fromJSONDictionary:object error:&error];
         
-        if (serializedObject)
+        if (serializedObject && !error)
             [returnArray addObject:serializedObject];
     }
     
     return [NSArray arrayWithArray:returnArray];
 }
 
-- (NSDictionary *)parametersDictionary {
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
     return nil;
 }
 
-- (NSDate *)dateFromObject:(id)obj {
++ (NSValueTransformer *)remoteImageTransformer {
+    return [NSValueTransformer mtl_JSONDictionaryTransformerWithModelClass:RemoteImage.class];
+}
+
++ (NSValueTransformer *)challengeTransformer {
+    return [NSValueTransformer mtl_JSONDictionaryTransformerWithModelClass:Challenge.class];
+}
+
++ (NSValueTransformer *)boolTransformer {
+    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^id(id value) {
+                if (!value)
+                    return @NO;
+                return value;
+            } reverseBlock:^id(id boolValue) {
+                return [boolValue boolValue] ? @YES : @NO;
+            }];
+}
+
++ (NSValueTransformer *)dateTransformer {
+    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSString *str) {
+        return [self dateFromObject:str];
+    } reverseBlock:^(NSDate *date) {
+        return [date stringWithFormat:responseDateFormat];
+    }];
+}
+
++ (NSDate *)dateFromObject:(id)obj {
     if (obj && ![obj isKindOfClass: [NSNull class]] && [obj isKindOfClass:[NSString class]])
-        return [NSDate dateFromString:[obj stringByAppendingString: @"GMT"] withFormat:ResponseDateFormat];
+        return [NSDate dateFromString:[obj stringByAppendingString: @"GMT"] withFormat:responseDateFormat];
     return nil;
 }
+
++ (NSValueTransformer *)creationDateJSONTransformer {
+    return [self dateTransformer];
+}
+
 @end

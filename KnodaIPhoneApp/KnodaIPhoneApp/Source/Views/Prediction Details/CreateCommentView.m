@@ -123,10 +123,10 @@ static const int CommentMaxChars = 300;
 
     Comment *comment = [[Comment alloc] init];
     comment.body = self.commentTextView.text;
-    comment.createdDate = [NSDate date];
+    comment.creationDate = [NSDate date];
     comment.predictionId = self.predictionId;
     comment.userId = delegate.currentUser.userId;
-    comment.smallUserImage = delegate.currentUser.smallImageUrl;
+    comment.userAvatar = delegate.currentUser.avatar;
     comment.username = delegate.currentUser.name;
 
     [[WebApi sharedInstance] createComment:comment completion:^(NSError *error) {

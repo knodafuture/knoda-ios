@@ -82,14 +82,14 @@ static UINib *nib;
     [self configureVariableSpot];
     
     if (!self.predictionCell.avatarImageView.image)
-        [[WebApi sharedInstance] getImage:self.prediction.smallAvatarUrl completion:^(UIImage *image, NSError *error) {
+        [[WebApi sharedInstance] getImage:self.prediction.userAvatar.small completion:^(UIImage *image, NSError *error) {
             if (image && !error)
                 self.predictionCell.avatarImageView.image = image;
         }];
 }
 
 - (BOOL)showsActionArea {
-    if (self.prediction.hasOutcome && self.prediction.challenge)
+    if (self.prediction.closeDate && self.prediction.challenge)
         return YES;
     else if (self.prediction.canSetOutcome)
         return YES;
@@ -102,7 +102,7 @@ static UINib *nib;
 
 - (void)configureVariableSpot {
     
-    if (self.prediction.hasOutcome && self.prediction.challenge)
+    if (self.prediction.closeDate && self.prediction.challenge)
         [self updateAndShowPredictionStatusView];
     else if (self.prediction.canSetOutcome && self.prediction.challenge.isOwn)
         [self updateAndShowSettlePredictionView];

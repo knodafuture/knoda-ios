@@ -82,7 +82,7 @@ static NSDateFormatter *dateFormatter;
     [self.view addGestureRecognizer:tap];
     
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [[WebApi sharedInstance] getImage:appDelegate.currentUser.largeImageUrl completion:^(UIImage *image, NSError *error) {
+    [[WebApi sharedInstance] getImage:appDelegate.currentUser.avatar.big completion:^(UIImage *image, NSError *error) {
         if (!error)
             self.avatarView.image = image;
     }];
@@ -175,7 +175,7 @@ static NSDateFormatter *dateFormatter;
 }
 
 - (NSInteger)indexOfTopicWithName:(NSString *)name {
-    for (Topic *topic in self.categories) {
+    for (Tag *topic in self.categories) {
         if ([topic.name isEqualToString:name])
             return [self.categories indexOfObject:topic];
     }
@@ -237,7 +237,7 @@ static NSDateFormatter *dateFormatter;
     prediction.body = self.textView.text;
     prediction.expirationDate = [self expirationDate];
     prediction.resolutionDate = [self resolutionDate];
-    prediction.category = self.categoryText;
+    prediction.categories = @[self.categoryText];
     
     [[WebApi sharedInstance] addPrediction:prediction completion:^(Prediction *prediction, NSError *error) {
         [[LoadingView sharedInstance] hide];
@@ -375,7 +375,7 @@ static NSDateFormatter *dateFormatter;
         if (self.categories.count == 0)
             return NSLocalizedString(@"Loading Categories...", @"");
         else {
-            Topic *topic = [self.categories objectAtIndex:row];
+            Tag *topic = [self.categories objectAtIndex:row];
             return topic.name;
         }
     }

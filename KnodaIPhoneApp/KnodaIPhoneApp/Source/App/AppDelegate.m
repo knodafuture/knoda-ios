@@ -92,7 +92,10 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
     if (!deviceToken)
         return;
     
-    [[WebApi sharedInstance] sendToken:deviceToken completion:^(NSString *tokenId, NSError *error) {
+    DeviceToken *token = [[DeviceToken alloc] init];
+    token.token = deviceToken;
+    
+    [[WebApi sharedInstance] sendToken:token completion:^(NSString *tokenId, NSError *error) {
         if (!error)
             [[NSUserDefaults standardUserDefaults] setObject:tokenId forKey:kDeviceTokenIdKey];
     }];
@@ -220,7 +223,7 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
 }
 
 - (void)saveRequest:(LoginRequest *)request andResponse:(LoginResponse *)response {
-    [[NSUserDefaults standardUserDefaults] setObject:request.username forKey: @"User"];
+    [[NSUserDefaults standardUserDefaults] setObject:request.login forKey: @"User"];
     [[NSUserDefaults standardUserDefaults] setObject:response.token forKey:LoginResponseKey];
     [self.keychain setObject:request.password forKey:((__bridge id)kSecValueData)];
     
@@ -267,7 +270,7 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
         return nil;
     
     LoginRequest *request = [[LoginRequest alloc] init];
-    request.username = username;
+    request.login = username;
     request.password = password;
     
     return request;

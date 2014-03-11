@@ -152,9 +152,9 @@ static const float parallaxRatio = 0.5;
         ((CommentCell *)cell).delegate = self;
         Comment *comment = [self.pagingDatasource.objects objectAtIndex:indexPath.row];
         if (comment.userId == self.appDelegate.currentUser.userId)
-            ((CommentCell *)cell).avatarView.image = [_imageLoader lazyLoadImage:self.appDelegate.currentUser.smallImageUrl onIndexPath:indexPath];
+            ((CommentCell *)cell).avatarView.image = [_imageLoader lazyLoadImage:self.appDelegate.currentUser.avatar.small onIndexPath:indexPath];
         else
-            ((CommentCell *)cell).avatarView.image = [_imageLoader lazyLoadImage:comment.smallUserImage onIndexPath:indexPath];
+            ((CommentCell *)cell).avatarView.image = [_imageLoader lazyLoadImage:comment.userAvatar.small onIndexPath:indexPath];
     }
     
     return cell;
@@ -233,13 +233,9 @@ static const float parallaxRatio = 0.5;
     }
 }
 
-- (void)updateTallyForUser:(NSString *)username agree:(BOOL)agree {
+- (void)updateTallyForUser:(User *)user agree:(BOOL)agree {
     
-    TallyUser *tallyUser = [[TallyUser alloc] init];
-    tallyUser.userId = [[self appDelegate] currentUser].userId;
-    tallyUser.username = [[self appDelegate] currentUser].name;
-    
-    [self.tallyDatasource updateTallyForUser:tallyUser agree:agree];
+    [self.tallyDatasource updateTallyForUser:user agree:agree];
 }
 
 - (void)userClickedInCommentCellWithUserId:(NSInteger)userId {

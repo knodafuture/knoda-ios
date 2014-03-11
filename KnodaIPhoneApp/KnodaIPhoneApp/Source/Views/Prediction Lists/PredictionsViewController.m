@@ -79,9 +79,9 @@
     cell.delegate = self;
     
     if (prediction.userId == self.appDelegate.currentUser.userId)
-        cell.avatarImageView.image = [_imageLoader lazyLoadImage:self.appDelegate.currentUser.smallImageUrl onIndexPath:indexPath];
+        cell.avatarImageView.image = [_imageLoader lazyLoadImage:self.appDelegate.currentUser.avatar.small onIndexPath:indexPath];
     else
-        cell.avatarImageView.image = [_imageLoader lazyLoadImage:prediction.smallAvatarUrl onIndexPath:indexPath];
+        cell.avatarImageView.image = [_imageLoader lazyLoadImage:prediction.userAvatar.small onIndexPath:indexPath];
     
     return cell;
 }

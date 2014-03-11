@@ -53,9 +53,12 @@
     }
     [self hideKeyboard];
     [[LoadingView sharedInstance] show];
-    
-    
-    [[WebApi sharedInstance] changePassword:self.currentPasswordTextField.text newPassword:self.usersNewPasswordTextField.text completion:^(NSError *error) {
+
+    PasswordChangeRequest *request = [[PasswordChangeRequest alloc] init];
+    request.password = self.usersNewPasswordTextField.text;
+    request.currentPassword = self.currentPasswordTextField.text;
+
+    [[WebApi sharedInstance] changePassword:request completion:^(User *user, NSError *error) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:nil delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok", @"") otherButtonTitles:nil];
 
         if (error) {
@@ -70,7 +73,7 @@
         alertView.message = NSLocalizedString(@"Password has been changed succesfully", @"");
 
         LoginRequest *request = [[LoginRequest alloc] init];
-        request.username = self.appDelegate.currentUser.name;
+        request.login = self.appDelegate.currentUser.name;
         request.password = self.usersNewPasswordTextField.text;
         
         [[WebApi sharedInstance] authenticateUser:request completion:^(LoginResponse *response, NSError *error) {

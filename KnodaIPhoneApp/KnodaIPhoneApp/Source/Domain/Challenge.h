@@ -8,18 +8,16 @@
 
 #import "WebObject.h"
 
+@class PredictionPoints;
+
 @interface Challenge : WebObject
 
-@property (nonatomic, assign) NSInteger challengeId;
-@property (nonatomic, assign) BOOL seen;
-@property (nonatomic, assign) BOOL agree;
-@property (nonatomic, assign) BOOL isOwn;
-@property (nonatomic, assign) BOOL isRight;
-@property (nonatomic, assign) BOOL isFinished;
-@property (nonatomic, assign) BOOL isBS;
-@property (nonatomic, assign) NSInteger basePoints;
-@property (nonatomic, assign) NSInteger outcomePoints;
-@property (nonatomic, assign) NSInteger marketSizePoints;
-@property (nonatomic, assign) NSInteger predictionMarketPoints;
-
+@property (assign, nonatomic) NSInteger challengeId;
+@property (assign, nonatomic) BOOL seen;
+@property (assign, nonatomic) BOOL agree;
+@property (assign, nonatomic) BOOL isOwn;
+@property (assign, nonatomic) BOOL isRight;
+@property (assign, nonatomic) BOOL isFinished;
+@property (assign, nonatomic) BOOL isBS;
+@property (assign, nonatomic) NSInteger basePoints;
 @end

@@ -58,7 +58,10 @@
     
     [self.view endEditing:YES];
     
-    [[WebApi sharedInstance] requestPasswordResetForEmail:self.textField.text completion:^(NSError *error) {
+    PasswordResetRequest *request = [[PasswordResetRequest alloc] init];
+    request.login = self.textField.text;
+    
+    [[WebApi sharedInstance] requestPasswordReset:request completion:^(NSError *error) {
         [[LoadingView sharedInstance] hide];
         
         NSString *message;

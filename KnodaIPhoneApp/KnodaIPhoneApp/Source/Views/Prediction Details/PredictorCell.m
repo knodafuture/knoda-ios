@@ -7,8 +7,7 @@
 //
 
 #import "PredictorCell.h"
-#import "TallyUser.h"
-
+#import "User.h"
 static UINib *nib;
 
 CGFloat PredictorCellHeight = 22.0;
@@ -17,8 +16,8 @@ CGFloat PredictorCellHeight = 22.0;
 @property (weak, nonatomic) IBOutlet UILabel *agreedUserName;
 @property (weak, nonatomic) IBOutlet UILabel *disagreedUserName;
 
-@property (strong, nonatomic) TallyUser *agreedUser;
-@property (strong, nonatomic) TallyUser *disagreedUser;
+@property (strong, nonatomic) User *agreedUser;
+@property (strong, nonatomic) User *disagreedUser;
 
 @property (weak, nonatomic) IBOutlet UIImageView *agreedVerifiedCheckmark;
 @property (weak, nonatomic) IBOutlet UIImageView *disagreedVerifiedCheckmark;
@@ -41,12 +40,12 @@ CGFloat PredictorCellHeight = 22.0;
     return cell;
 }
 
-- (void)setAgreedUser:(TallyUser *)agreedUser andDisagreedUser:(TallyUser *)disagreedUser {
+- (void)setAgreedUser:(User *)agreedUser andDisagreedUser:(User *)disagreedUser {
     self.agreedUser = agreedUser;
-    self.agreedUserName.text = agreedUser.username;
+    self.agreedUserName.text = agreedUser.name;
     
     self.disagreedUser = disagreedUser;
-    self.disagreedUserName.text = disagreedUser.username;
+    self.disagreedUserName.text = disagreedUser.name;
     
     
     if (!agreedUser.verifiedAccount)

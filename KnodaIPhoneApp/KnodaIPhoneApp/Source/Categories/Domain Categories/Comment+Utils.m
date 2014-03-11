@@ -15,7 +15,7 @@
     
     NSDate* now = [NSDate date];
     
-    NSTimeInterval interval = [now timeIntervalSinceDate: self.createdDate];
+    NSTimeInterval interval = [now timeIntervalSinceDate: self.creationDate];
     
     NSInteger secondsInMinute = 60;
     NSInteger minutesInHour = 60;

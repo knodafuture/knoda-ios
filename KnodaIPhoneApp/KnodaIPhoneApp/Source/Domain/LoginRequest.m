@@ -10,9 +10,4 @@
 
 @implementation LoginRequest
 
-- (NSDictionary *)parametersDictionary {
-    return @{@"user[login": self.username, @"user[password]" : self.password};
-
-}
-
 @end

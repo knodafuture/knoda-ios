@@ -13,12 +13,13 @@
 #import "SignupRequest.h"
 #import "Prediction+Utils.h"
 #import "Challenge.h"
-#import "Topic.h"
-#import "UpdatePredictionRequest.h"
+#import "Tag.h"
 #import "Badge.h"
 #import "Comment.h"
-#import "Alert.h"
-#import "TallyUser.h"
+#import "ActivityItem.h"
+#import "PasswordResetRequest.h"
+#import "PasswordChangeRequest.h"
+#import "DeviceToken.h"
 
 typedef NS_ENUM(NSInteger, HttpStatus) {
 	HttpStatusOk				= 200,
@@ -43,14 +44,13 @@ extern NSInteger PageLimit;
 
 - (void)authenticateUser:(LoginRequest *)loginRequest completion:(void(^)(LoginResponse *response, NSError *error))completionHandler;
 - (void)getCurrentUser:(void(^)(User *user, NSError *error))completionHandler;
-- (void)requestPasswordResetForEmail:(NSString *)email completion:(void(^)(NSError *error))completionHandler;
+- (void)requestPasswordReset:(PasswordResetRequest *)resetRequest completion:(void(^)(NSError *error))completionHandler;
 - (void)sendSignUpWithRequest:(SignupRequest *)signupRequest completion:(void(^)(LoginResponse *response, NSError *error))completionHandler;
 - (void)uploadProfileImage:(UIImage *)profileImage completion:(void(^)(NSError *error))completionHandler;
-- (void)changeUsername:(NSString *)newUsername completion:(void(^)(NSError *error))completionHandler;
-- (void)changeEmail:(NSString *)newEmail completion:(void(^)(NSError *error))completionHandler;
-- (void)changePassword:(NSString *)currentPassword newPassword:(NSString *)newPassword completion:(void(^)(NSError *error))completionHandler;
+- (void)updateUser:(User *)user completion:(void(^)(User *user, NSError *error))completionHandler;
+- (void)changePassword:(PasswordChangeRequest *)changeRequest completion:(void(^)(User *user, NSError *error))completionHandler;
 - (void)signoutCompletion:(void(^)(NSError *error))completionHandler;
-- (void)sendToken:(NSString *)token completion:(void(^)(NSString *tokenId, NSError *error))completionHandler;
+- (void)sendToken:(DeviceToken *)deviceToken completion:(void(^)(NSString *tokenId, NSError *error))completionHandler;
 - (void)deleteToken:(NSString *)tokenId completion:(void(^)(NSError *error))completionHandler;
 - (void)getUser:(NSInteger)userId completion:(void(^)(User *user, NSError *error))completionHandler;
 
@@ -74,7 +74,7 @@ extern NSInteger PageLimit;
 - (void)getHistoryAfter:(NSInteger)lastId completion:(void(^)(NSArray *predictions, NSError *error))completionHandler;
 - (void)getChallengeForPrediction:(NSInteger)predictionId completion:(void(^)(Challenge *challenge, NSError *error))completionHandler;
 - (void)getCategoriesCompletion:(void(^)(NSArray *categories, NSError *error))completionHandler;
-- (void)updatePrediction:(UpdatePredictionRequest *)updateRequest completion:(void(^)(Prediction *prediction, NSError *error))completionHandler;
+- (void)updatePrediction:(Prediction *)prediction completion:(void(^)(Prediction *prediction, NSError *error))completionHandler;
 - (void)sendBS:(NSInteger)predictionId completion:(void(^)(NSError *error))completionHandler;
 
 - (void)getCommentsForPrediction:(NSInteger)predictionId last:(NSInteger)lastId completion:(void(^)(NSArray *comments, NSError *error))completionHandler;
@@ -89,9 +89,9 @@ extern NSInteger PageLimit;
 - (void)getAllBadgesCompletion:(void(^)(NSArray *badges, NSError *error))completionHandler;
 
 
-// -- Alerts -- //
-- (void)getAlertsAfter:(NSInteger)lastId completion:(void(^)(NSArray *alerts, NSError *error))completionHandler;
-- (void)getUnseenAlertsCompletion:(void(^)(NSArray *alerts, NSError *error))completionHandler;
+// -- Activity -- //
+- (void)getActivityAfter:(NSInteger)lastId completion:(void(^)(NSArray *activityItems, NSError *error))completionHandler;
+- (void)getUnseenActivity:(void(^)(NSArray *activityItems, NSError *error))completionHandler;
 
 
 // -- Search -- //

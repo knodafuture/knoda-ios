@@ -290,7 +290,9 @@ static const float kAvatarSize = 344.0;
 - (void)saveUsername {
     
     [[LoadingView sharedInstance] show];
-    [[WebApi sharedInstance] changeUsername:self.userNameField.text completion:^(NSError *error) {
+    User *user = [self.appDelegate.currentUser copy];
+    user.name = self.userNameField.text;
+    [[WebApi sharedInstance] updateUser:user completion:^(User *user, NSError *error) {
         if (error)
             [[[UIAlertView alloc] initWithTitle:nil
                                         message:error.localizedDescription
@@ -299,9 +301,7 @@ static const float kAvatarSize = 344.0;
                               otherButtonTitles:nil] show];
         
         [[LoadingView sharedInstance] hide];
-        
     }];
-
 }
 
 - (void)saveEmail {
@@ -315,8 +315,11 @@ static const float kAvatarSize = 344.0;
         return;
     }
     
+    User *user = [self.appDelegate.currentUser copy];
+    user.email = self.emailField.text;
+    
     [[LoadingView sharedInstance] show];
-    [[WebApi sharedInstance] changeEmail:self.emailField.text completion:^(NSError *error) {
+    [[WebApi sharedInstance] updateUser:user completion:^(User *user, NSError *error) {
         if (error)
             [[[UIAlertView alloc] initWithTitle:nil
                                         message:error.localizedDescription
@@ -325,7 +328,6 @@ static const float kAvatarSize = 344.0;
                               otherButtonTitles:nil] show];
         
         [[LoadingView sharedInstance] hide];
-
     }];
 }
 

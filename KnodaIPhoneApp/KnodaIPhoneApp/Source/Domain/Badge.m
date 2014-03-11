@@ -10,16 +10,4 @@
 
 @implementation Badge
 
-+ (NSString *)responseKey {
-    return @"badges";
-}
-
-+ (id)instanceFromDictionary:(NSDictionary *)dictionary {
-    Badge *badge = [super instanceFromDictionary:dictionary];
-    
-    badge.name = dictionary[@"name"];
-    
-    return badge;
-}
-
 @end

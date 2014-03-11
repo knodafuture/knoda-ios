@@ -10,8 +10,6 @@
 
 @interface Prediction (Utils)
 
-+ (NSArray *)arrayFromHistoryData:(NSData *)data;
-
 - (BOOL)isExpired;
 - (BOOL)isFinished;
 - (BOOL)passed72HoursSinceExpiration;

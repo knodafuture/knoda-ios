@@ -10,22 +10,14 @@
 
 @implementation Challenge
 
-+ (id)instanceFromDictionary:(NSDictionary *)dictionary {
-    Challenge *challenge = [super instanceFromDictionary:dictionary];
-    
-    if (!challenge)
-        return nil;
-    
-    challenge.challengeId = [dictionary[@"id"] integerValue];
-    challenge.seen = [dictionary[@"seen"] boolValue];
-    challenge.agree = [dictionary[@"agree"] boolValue];
-    challenge.isOwn = [dictionary[@"is_own"] boolValue];
-    challenge.isRight = [dictionary[@"is_right"] boolValue];
-    challenge.isFinished = [dictionary[@"is_finished"] boolValue];
-    challenge.isBS = [dictionary[@"bs"] boolValue];
-    
-    
-    return challenge;
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+    return @{
+             @"challengeId": @"id",
+             @"isOwn": @"is_own",
+             @"isRight": @"is_right",
+             @"isFinished": @"is_finished",
+             @"isBS": @"bs"
+             };
 }
 
 @end

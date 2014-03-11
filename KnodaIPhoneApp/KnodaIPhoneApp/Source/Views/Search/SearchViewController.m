@@ -120,15 +120,15 @@
     if ([cell isKindOfClass:PredictionCell.class]) {
         PredictionCell *pCell = (PredictionCell *)cell;;
         if (pCell.prediction.userId == self.appDelegate.currentUser.userId)
-            pCell.avatarImageView.image = [_imageLoader lazyLoadImage:self.appDelegate.currentUser.smallImageUrl onIndexPath:indexPath];
+            pCell.avatarImageView.image = [_imageLoader lazyLoadImage:self.appDelegate.currentUser.avatar.small onIndexPath:indexPath];
         else
-            pCell.avatarImageView.image = [_imageLoader lazyLoadImage:pCell.prediction.smallAvatarUrl onIndexPath:indexPath];
+            pCell.avatarImageView.image = [_imageLoader lazyLoadImage:pCell.prediction.userAvatar.small onIndexPath:indexPath];
         
     }
     
     if ([cell isKindOfClass:UserCell.class]) {
         UserCell *uCell = (UserCell *)cell;
-        uCell.avatarImageView.image = [_imageLoader lazyLoadImage:uCell.user.smallImageUrl onIndexPath:indexPath];
+        uCell.avatarImageView.image = [_imageLoader lazyLoadImage:uCell.user.avatar.small onIndexPath:indexPath];
     }
     
     return cell;
@@ -146,7 +146,7 @@
     if (indexPath.row >= self.pagingDatasource.objects.count)
         return;
     
-    Topic *topic = [self.pagingDatasource.objects objectAtIndex:indexPath.row];
+    Tag *topic = [self.pagingDatasource.objects objectAtIndex:indexPath.row];
     
     CategoryPredictionsViewController *vc = [[CategoryPredictionsViewController alloc] initWithCategory:topic.name];
     

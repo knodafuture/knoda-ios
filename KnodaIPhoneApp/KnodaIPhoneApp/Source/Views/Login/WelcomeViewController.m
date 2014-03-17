@@ -11,6 +11,7 @@
 #import "SignUpViewController.h"
 #import "AppDelegate.h"
 #import "WebApi.h"
+#import "UserManager.h"
 
 @interface WelcomeViewController ()
 
@@ -62,19 +63,18 @@
 
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    LoginRequest *request = [appDelegate loginRequestForSavedUser];
+    LoginRequest *request = [[UserManager sharedInstance] loginRequestForSavedUser];
     
     if (!request) {
         [self showLoginSignup];
         return;
     }
     
-    
-    [[WebApi sharedInstance] authenticateUser:request completion:^(LoginResponse *response, NSError *error) {
+    [[UserManager sharedInstance] login:request completion:^(User *user, NSError *error) {
         if (error)
             [self showLoginSignup];
         else
-            [appDelegate doLogin:request withResponse:response];
+            [appDelegate login];
     }];
 
 }

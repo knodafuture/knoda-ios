@@ -15,8 +15,8 @@
 #import "WebApi.h"
 #import "NoContentCell.h"
 #import "CommentCell.h"
-#import "AppDelegate.h"
 #import "PredictorCell.h"
+#import "UserManager.h"
 
 static const float parallaxRatio = 0.5;
 
@@ -33,9 +33,6 @@ static const float parallaxRatio = 0.5;
 
 @implementation DetailsTableViewController
 
-- (AppDelegate *)appDelegate {
-    return [[UIApplication sharedApplication] delegate];
-}
 
 - (id)initWithPrediction:(Prediction *)prediction andOwner:(id<PredictionCellDelegate>)owner {
     self = [super initWithStyle:UITableViewStylePlain];
@@ -151,8 +148,8 @@ static const float parallaxRatio = 0.5;
     if (self.showingComments && [cell isKindOfClass:CommentCell.class]) {
         ((CommentCell *)cell).delegate = self;
         Comment *comment = [self.pagingDatasource.objects objectAtIndex:indexPath.row];
-        if (comment.userId == self.appDelegate.currentUser.userId)
-            ((CommentCell *)cell).avatarView.image = [_imageLoader lazyLoadImage:self.appDelegate.currentUser.avatar.small onIndexPath:indexPath];
+        if (comment.userId == [UserManager sharedInstance].user.userId)
+            ((CommentCell *)cell).avatarView.image = [_imageLoader lazyLoadImage:[UserManager sharedInstance].user.avatar.small onIndexPath:indexPath];
         else
             ((CommentCell *)cell).avatarView.image = [_imageLoader lazyLoadImage:comment.userAvatar.small onIndexPath:indexPath];
     }

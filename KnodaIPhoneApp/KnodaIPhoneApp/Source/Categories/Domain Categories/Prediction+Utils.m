@@ -191,9 +191,9 @@
 - (NSString *)pointsString {
     __block NSMutableString *string = [NSMutableString string];
     
-    void (^addPoint)(int, NSString*) = ^(int point, NSString *name) {
+    void (^addPoint)(NSInteger, NSString*) = ^(NSInteger point, NSString *name) {
         if(point > 0) {
-            [string appendFormat:@"+%d %@\n", point, name];
+            [string appendFormat:@"+%ld %@\n", (long)point, name];
         }
     };
     

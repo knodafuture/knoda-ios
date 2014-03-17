@@ -8,11 +8,11 @@
 
 #import "SelectPictureViewController.h"
 #import "UIImage+Utils.h"
-#import "AppDelegate.h"
 #import "ImageCropperViewController.h"
 #import "LoadingView.h"
 #import <QuartzCore/QuartzCore.h>
 #import "WebApi.h"
+#import "UserManager.h"
 
 static const int kDefaultAvatarsCount = 5;
 
@@ -78,7 +78,7 @@ static NSString* const kImageCropperSegue = @"ImageCropperSegue";
 - (void)showImagePickerWithSource:(UIImagePickerControllerSourceType)sourceType {
     
     if(![UIImagePickerController isSourceTypeAvailable:sourceType]) {
-        DLog(@"UIImagePickerController sourceType (%d) unavailable", sourceType);
+        DLog(@"UIImagePickerController sourceType (%ld) unavailable",(long) sourceType);
         return;
     }
     
@@ -99,7 +99,7 @@ static NSString* const kImageCropperSegue = @"ImageCropperSegue";
 
 - (void)sendAvatar {
     [[LoadingView sharedInstance] show];
-    [[WebApi sharedInstance] uploadProfileImage:self.avatarImage completion:^(NSError *error) {        
+    [[UserManager sharedInstance] uploadProfileImage:self.avatarImage completion:^(User *user, NSError *error) {
         if (error)
             [[[UIAlertView alloc] initWithTitle:nil
                                         message:error.localizedDescription

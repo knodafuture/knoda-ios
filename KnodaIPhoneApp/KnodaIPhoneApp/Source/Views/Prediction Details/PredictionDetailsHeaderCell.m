@@ -150,7 +150,7 @@ static UINib *nib;
     
     self.pointsBreakdownLabel.text = [self.prediction pointsString];
     
-    self.totalPointsLabel.text = [NSString stringWithFormat:@"%d", [self.prediction totalPoints]];
+    self.totalPointsLabel.text = [NSString stringWithFormat:@"%ld", (long)[self.prediction totalPoints]];
     
     if ([self.prediction win]) {
         self.outcomeLabel.text = @"YOU WON!";

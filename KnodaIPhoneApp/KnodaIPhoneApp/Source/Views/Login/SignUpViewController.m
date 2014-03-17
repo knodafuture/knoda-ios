@@ -11,7 +11,7 @@
 #import "LoadingView.h"
 #import "WebApi.h"
 #import "WebViewController.h"
-
+#import "UserManager.h"
 #ifndef TESTFLIGHT
 #import <Tapjoy/Tapjoy.h>
 #endif
@@ -128,11 +128,11 @@ static const NSInteger kMaxPasswordLength = 20;
     
     [[LoadingView sharedInstance] show];
     
-    [[WebApi sharedInstance] sendSignUpWithRequest:request completion:^(LoginResponse *response, NSError *error) {
+    [[UserManager sharedInstance] signup:request completion:^(User *user, NSError *error) {
         [[LoadingView sharedInstance] hide];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:FirstLaunchKey];
         if (!error) {
-            [[self appDelegate] doLogin:(LoginRequest *)request withResponse:response];
+            [[self appDelegate] login];
 #ifndef TESTFLIGHT
             [Tapjoy actionComplete:TJC_SIGN_UP_FOR_KNODA_];
 #endif

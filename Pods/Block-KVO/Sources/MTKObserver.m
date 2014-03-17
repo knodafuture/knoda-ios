@@ -166,7 +166,7 @@
 	// Here we check for equality. Two values are equal when they have equal pointers (e.g. nils) or they respond to -isEqual: with YES.
     if (old == new || (old && [new isEqual:old])) return;
     
-    for (MTKBlockChange block in [self.afterSettingBlocks copy]) {
+    for (MTKBlockChange block in self.afterSettingBlocks) {
         block(self.target, old, new);
     }
 }
@@ -175,7 +175,7 @@
 	// Prevent calling blocks when really nothing was inserted.
     if ([new respondsToSelector:@selector(count)] && [new count] == 0) return;
     
-    for (MTKBlockInsert block in [self.afterInsertionBlocks copy]) {
+    for (MTKBlockInsert block in self.afterInsertionBlocks) {
         block(self.target, new, indexes);
     }
 }
@@ -184,7 +184,7 @@
 	// Prevent calling blocks when really nothing was removed.
     if ([old respondsToSelector:@selector(count)] && [old count] == 0) return;
     
-    for (MTKBlockRemove block in [self.afterRemovalBlocks copy]) {
+    for (MTKBlockRemove block in self.afterRemovalBlocks) {
         block(self.target, old, indexes);
     }
 }
@@ -194,7 +194,7 @@
     if ([old respondsToSelector:@selector(count)] && [old count] == 0) return;
     if ([new respondsToSelector:@selector(count)] && [new count] == 0) return;
     
-    for (MTKBlockReplace block in [self.afterReplacementBlocks copy]) {
+    for (MTKBlockReplace block in self.afterReplacementBlocks) {
         block(self.target, old, new, indexes);
     }
 }

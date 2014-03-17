@@ -12,11 +12,11 @@
 #import "AnotherUsersProfileViewController.h"
 #import "AppDelegate.h"
 #import "FirstStartView.h"
+#import "UserManager.h"
 
 @interface HomeViewController () <FirstStartViewDelegate>
 
 @property (strong, nonatomic) NSArray *predictions;
-@property (strong, nonatomic) AppDelegate * appDelegate;
 @property (strong, nonatomic) FirstStartView *firstStartView;
 @end
 
@@ -25,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:FirstLaunchKey] || !self.appDelegate.currentUser) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:FirstLaunchKey] || ![UserManager sharedInstance].user) {
         [self showFirstStartOverlay];
     }
     

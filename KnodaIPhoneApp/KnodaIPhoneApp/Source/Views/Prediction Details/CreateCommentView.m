@@ -9,10 +9,10 @@
 #import "CreateCommentView.h"
 #import "WebApi.h"
 #import "LoadingView.h"
-#import "AppDelegate.h"
+#import "UserManager.h"
 
 static NSString *const defaultCommentText = @"Add a comment...";
-static const int CommentMaxChars = 300;
+static const NSInteger CommentMaxChars = 300;
 
 @interface CreateCommentView () <UITextViewDelegate>
 @property (assign, nonatomic) CGFloat initialOrigin;
@@ -70,12 +70,12 @@ static const int CommentMaxChars = 300;
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
-    self.textCounterLabel.text = [NSString stringWithFormat:@"%d", CommentMaxChars - textView.text.length];
+    self.textCounterLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)(CommentMaxChars - textView.text.length)];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     
-    int len = textView.text.length - range.length + text.length;
+    NSInteger len = textView.text.length - range.length + text.length;
     
     if ([text isEqualToString:@"\n"]) {
         [self submit];
@@ -83,9 +83,10 @@ static const int CommentMaxChars = 300;
     }
     
     if(len <= CommentMaxChars) {
-        self.textCounterLabel.text = [NSString stringWithFormat:@"%d", CommentMaxChars - len];
+        self.textCounterLabel.text = [NSString stringWithFormat:@"%ld", (unsigned long)(CommentMaxChars - len)];
         return YES;
     }
+    
     
     return NO;
 }
@@ -97,7 +98,7 @@ static const int CommentMaxChars = 300;
     
     textView.text = @"";
     
-    self.textCounterLabel.text = [NSString stringWithFormat:@"%d", CommentMaxChars - textView.text.length];
+    self.textCounterLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)(CommentMaxChars - textView.text.length)];
     
 }
 
@@ -116,8 +117,6 @@ static const int CommentMaxChars = 300;
         [alert show];
         return;
     }
-
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     [[LoadingView sharedInstance] show];
 
@@ -125,9 +124,9 @@ static const int CommentMaxChars = 300;
     comment.body = self.commentTextView.text;
     comment.creationDate = [NSDate date];
     comment.predictionId = self.predictionId;
-    comment.userId = delegate.currentUser.userId;
-    comment.userAvatar = delegate.currentUser.avatar;
-    comment.username = delegate.currentUser.name;
+    comment.userId = [UserManager sharedInstance].user.userId;
+    comment.userAvatar = [UserManager sharedInstance].user.avatar;
+    comment.username = [UserManager sharedInstance].user.name;
 
     [[WebApi sharedInstance] createComment:comment completion:^(NSError *error) {
         [[LoadingView sharedInstance] hide];

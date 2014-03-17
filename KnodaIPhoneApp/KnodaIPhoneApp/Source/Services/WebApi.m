@@ -26,7 +26,6 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
 
 
 - (void)executeRequest:(NSURLRequest *)request completion:(void(^)(NSData *responseData, NSError *error))completionHandler;
-- (void)executeUpdateUserRequest:(NSURLRequest *)request completion:(void(^)(NSData *responseData, NSError *error))completionHandler;
 - (void)handleResponse:(NSURLResponse *)response withData:(NSData *)data error:(NSError *)error completion:(void(^)(NSData *data, NSError *error))completionHandler;
 
 - (NSString *)savedAuthToken;
@@ -83,10 +82,7 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
     NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
-        User *user = [User instanceFromData:responseData];
-        if (!error)
-            [self.appDelegate setValue:user forKey:@"currentUser"];
-        completionHandler(user, error);
+        completionHandler([User instanceFromData:responseData], error);
     }];
 }
 - (void)requestPasswordReset:(PasswordResetRequest *)resetRequest completion:(void (^)(NSError *))completionHandler {
@@ -120,7 +116,7 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
     
     MultipartRequest *request = [[MultipartRequest alloc] initWithHTTPMethod:@"PATCH" url:@"profile.json" parameters:parameters];
     
-    [self executeUpdateUserRequest:request completion:^(NSData *responseData, NSError *error) {
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler(error);
     }];
 }
@@ -129,7 +125,7 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
     NSString *url = [self buildUrl:@"profile.json" parameters:nil];
     NSURLRequest *request = [self requestWithUrl:url method:@"PUT" payload:user];
     
-    [self executeUpdateUserRequest:request completion:^(NSData *responseData, NSError *error) {
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler([User instanceFromData:responseData], error);
     }];
 }
@@ -139,7 +135,7 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
     NSString *url = [self buildUrl:@"password.json" parameters:nil];
     NSURLRequest *request = [self requestWithUrl:url method:@"PUT" payload:changeRequest];
     
-    [self executeUpdateUserRequest:request completion:^(NSData *responseData, NSError *error) {
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler([User instanceFromData:responseData], error);
     }];
     
@@ -180,7 +176,7 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
 }
 
 - (void)getUser:(NSInteger)userId completion:(void (^)(User *, NSError *))completionHandler {
-    NSString *path = [NSString stringWithFormat:@"users/%d.json", userId];
+    NSString *path = [NSString stringWithFormat:@"users/%ld.json", (long)userId];
     NSString *url = [self buildUrl:path parameters:nil];
     NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
     
@@ -220,7 +216,7 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
 }
 
 - (void)getPrediction:(NSInteger)predictionId completion:(void (^)(Prediction *, NSError *))completionHandler {
-    NSString *path = [NSString stringWithFormat:@"predictions/%d.json", predictionId];
+    NSString *path = [NSString stringWithFormat:@"predictions/%ld.json", (long)predictionId];
     NSString *url = [self buildUrl:path parameters:nil];
     NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
     
@@ -232,7 +228,7 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
 - (void)getPredictionsForUser:(NSInteger)userId after:(NSInteger)lastId completion:(void (^)(NSArray *, NSError *))completionHandler {
     NSDictionary *parameters = @{@"limit" : @(PageLimit), @"count" : @(1)};
     parameters = [self parametersDictionary:parameters withLastId:lastId];
-    NSString *path = [NSString stringWithFormat:@"users/%d/predictions.json", userId];
+    NSString *path = [NSString stringWithFormat:@"users/%ld/predictions.json", (long)userId];
     NSString *url = [self buildUrl:path parameters:parameters];
     NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
     
@@ -253,7 +249,7 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
 }
 
 - (void)agreeWithPrediction:(NSInteger)predictionId completion:(void (^)(Challenge *challenge, NSError *))completionHandler {
-    NSString *path = [NSString stringWithFormat: @"predictions/%d/agree.json", predictionId];
+    NSString *path = [NSString stringWithFormat: @"predictions/%ld/agree.json", (long)predictionId];
     
     NSString *url = [self buildUrl:path parameters:nil];
     NSURLRequest *request = [self requestWithUrl:url method:@"POST" payload:nil];
@@ -267,7 +263,7 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
 }
 
 - (void)disagreeWithPrediction:(NSInteger)predictionId completion:(void (^)(Challenge *challenge, NSError *))completionHandler {
-    NSString *path = [NSString stringWithFormat: @"predictions/%d/disagree.json", predictionId];
+    NSString *path = [NSString stringWithFormat: @"predictions/%ld/disagree.json", (long)predictionId];
     NSString *url = [self buildUrl:path parameters:nil];
     NSURLRequest *request = [self requestWithUrl:url method:@"POST" payload:nil];
     
@@ -280,7 +276,7 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
 }
 
 - (void)getChallengeForPrediction:(NSInteger)predictionId completion:(void (^)(Challenge *, NSError *))completionHandler {
-    NSString *path = [NSString stringWithFormat: @"predictions/%d/challenge.json", predictionId];
+    NSString *path = [NSString stringWithFormat: @"predictions/%ld/challenge.json", (long)predictionId];
     NSString *url = [self buildUrl:path parameters:nil];
     NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
     
@@ -301,7 +297,7 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
 }
 
 - (void)getAgreedUsers:(NSInteger)predictionId completion:(void (^)(NSArray *, NSError *))completionHandler {
-    NSString *path = [NSString stringWithFormat:@"predictions/%d/history_agreed.json", predictionId];
+    NSString *path = [NSString stringWithFormat:@"predictions/%ld/history_agreed.json", (long)predictionId];
     NSString *url = [self buildUrl:path parameters:nil];
     NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
     
@@ -311,7 +307,7 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
 }
 
 - (void)getDisagreedUsers:(NSInteger)predictionId completion:(void (^)(NSArray *, NSError *))completionHandler {
-    NSString *path = [NSString stringWithFormat:@"predictions/%d/history_disagreed.json", predictionId];
+    NSString *path = [NSString stringWithFormat:@"predictions/%ld/history_disagreed.json", (long)predictionId];
     NSString *url = [self buildUrl:path parameters:nil];
     NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
     
@@ -321,7 +317,7 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
 }
 
 - (void)sendBS:(NSInteger)predictionId completion:(void (^)(NSError *))completionHandler {
-    NSString *path = [NSString stringWithFormat:@"predictions/%d/bs.json", predictionId];
+    NSString *path = [NSString stringWithFormat:@"predictions/%ld/bs.json", (long)predictionId];
     NSString *url = [self buildUrl:path parameters:nil];
     NSURLRequest *request = [self requestWithUrl:url method:@"POST" payload:nil];
     
@@ -334,9 +330,9 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
     NSString *path;
     
     if (correct)
-        path = [NSString stringWithFormat:@"predictions/%d/realize.json", predictionId];
+        path = [NSString stringWithFormat:@"predictions/%ld/realize.json", (long)predictionId];
     else
-        path = [NSString stringWithFormat:@"predictions/%d/unrealize.json", predictionId];
+        path = [NSString stringWithFormat:@"predictions/%ld/unrealize.json", (long)predictionId];
     
     NSString *url = [self buildUrl:path parameters:nil];
     NSURLRequest *request = [self requestWithUrl:url method:@"POST" payload:nil];
@@ -347,7 +343,7 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
 }
 
 - (void)updatePrediction:(Prediction *)prediction completion:(void (^)(Prediction *, NSError *))completionHandler {
-    NSString *path = [NSString stringWithFormat:@"predictions/%d.json", prediction.predictionId];
+    NSString *path = [NSString stringWithFormat:@"predictions/%ld.json", (long)prediction.predictionId];
     NSString *url = [self buildUrl:path parameters:nil];
     NSURLRequest *request = [self requestWithUrl:url method:@"PUT" payload:prediction];
     
@@ -541,27 +537,13 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
         [self handleResponse:response withData:data error:connectionError completion:completionHandler];
     }];
 }
-
-- (void)executeUpdateUserRequest:(NSURLRequest *)request completion:(void (^)(NSData *, NSError *))completionHandler {
-    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
-        if (error)
-            completionHandler(nil, error);
-        else {
-            
-            User *user = [User instanceFromData:responseData];
-            if (user)
-                [self.appDelegate setValue:user forKey:@"currentUser"];
-        }
-    }];
-}
-
 - (void)getCachedObjectForKey:(NSString *)key timeout:(NSTimeInterval)timeout inCache:(id<Cache>)cache requestForMiss:(NSURLRequest *(^)(void))miss completion:(void (^)(NSData *, NSError *))completionHandler {
     [cache dataForKey:key complete:^(NSData *data, BOOL stale) {
         if (data && !stale)
             completionHandler(data, nil);
         else
             [self executeRequest:miss() completion:^(NSData *responseData, NSError *error) {
-                NSLog(@"%d", responseData.length);
+                NSLog(@"%lu", (unsigned long)responseData.length);
                 if (!error) {
                     [cache setData:responseData key:key timeout:timeout];
                 }
@@ -600,7 +582,7 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
 	}
 	else if (httpResponse.statusCode >= 300) {
 		NSLog(@"Error for request: %@", response.URL.absoluteString);
-		NSLog(@"Error code: %d, message: %@", [httpResponse statusCode], [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+		NSLog(@"Error code: %ld, message: %@", (long)[httpResponse statusCode], [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
 		
         NSDictionary *errors = [data jsonObject];
         NSDictionary *userInfo = @{NSLocalizedDescriptionKey: [self buildLocalizedErrorDescriptionFromErrorDictionary:errors]};

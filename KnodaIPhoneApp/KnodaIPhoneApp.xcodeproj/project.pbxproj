@@ -288,10 +288,8 @@
 		014A9F2F185DA3B200A96678 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A9F2E185DA3B200A96678 /* MobileCoreServices.framework */; };
 		014A9F31185DA3BB00A96678 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A9F30185DA3BB00A96678 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		014A9F35185DA3DC00A96678 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A9F34185DA3DC00A96678 /* Twitter.framework */; };
-		01598B221857C56D002E2534 /* MTKObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 01598B191857C56D002E2534 /* MTKObserver.m */; };
-		01598B231857C56D002E2534 /* MTKObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 01598B191857C56D002E2534 /* MTKObserver.m */; };
-		01598B241857C56D002E2534 /* NSObject+MTKObserving.m in Sources */ = {isa = PBXBuildFile; fileRef = 01598B1D1857C56D002E2534 /* NSObject+MTKObserving.m */; };
-		01598B251857C56D002E2534 /* NSObject+MTKObserving.m in Sources */ = {isa = PBXBuildFile; fileRef = 01598B1D1857C56D002E2534 /* NSObject+MTKObserving.m */; };
+		014F4E2418D73F5600A2F764 /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 014F4E2318D73F5600A2F764 /* UserManager.m */; };
+		014F4E2518D73F5900A2F764 /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 014F4E2318D73F5600A2F764 /* UserManager.m */; };
 		01598B271858364F002E2534 /* FirstStartView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01598B261858364F002E2534 /* FirstStartView.xib */; };
 		01598B281858364F002E2534 /* FirstStartView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01598B261858364F002E2534 /* FirstStartView.xib */; };
 		01598B2B1858365A002E2534 /* FirstStartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01598B2A1858365A002E2534 /* FirstStartView.m */; };
@@ -587,15 +585,8 @@
 		014A9F2E185DA3B200A96678 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		014A9F30185DA3BB00A96678 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		014A9F34185DA3DC00A96678 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
-		01598B181857C56D002E2534 /* MTKObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTKObserver.h; sourceTree = "<group>"; };
-		01598B191857C56D002E2534 /* MTKObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTKObserver.m; sourceTree = "<group>"; };
-		01598B1A1857C56D002E2534 /* MTKObserving.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTKObserving.h; sourceTree = "<group>"; };
-		01598B1B1857C56D002E2534 /* MTKObservingMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTKObservingMacros.h; sourceTree = "<group>"; };
-		01598B1C1857C56D002E2534 /* NSObject+MTKObserving.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MTKObserving.h"; sourceTree = "<group>"; };
-		01598B1D1857C56D002E2534 /* NSObject+MTKObserving.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MTKObserving.m"; sourceTree = "<group>"; };
-		01598B1F1857C56D002E2534 /* keypath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = keypath.h; sourceTree = "<group>"; };
-		01598B201857C56D002E2534 /* metamacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = metamacros.h; sourceTree = "<group>"; };
-		01598B211857C56D002E2534 /* scope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scope.h; sourceTree = "<group>"; };
+		014F4E2218D73F5600A2F764 /* UserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserManager.h; sourceTree = "<group>"; };
+		014F4E2318D73F5600A2F764 /* UserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserManager.m; sourceTree = "<group>"; };
 		01598B261858364F002E2534 /* FirstStartView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstStartView.xib; sourceTree = "<group>"; };
 		01598B291858365A002E2534 /* FirstStartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstStartView.h; sourceTree = "<group>"; };
 		01598B2A1858365A002E2534 /* FirstStartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstStartView.m; sourceTree = "<group>"; };
@@ -801,6 +792,8 @@
 				013DA8ED1853E45700B507E4 /* Cache.h */,
 				0193A00318CE6AE90088D168 /* ParamBuilder.h */,
 				0193A00418CE6AE90088D168 /* ParamBuilder.m */,
+				014F4E2218D73F5600A2F764 /* UserManager.h */,
+				014F4E2318D73F5600A2F764 /* UserManager.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1052,7 +1045,6 @@
 			children = (
 				014A9F0F185DA1C700A96678 /* TapjoySDK_iOS_v9.1.2 */,
 				014A9EFD185DA04400A96678 /* TestFlightSDK2.0.2 */,
-				01598B161857C56D002E2534 /* KVOBlocks */,
 				013DA7A91853002100B507E4 /* Flurry */,
 				013DA7AC1853002100B507E4 /* ImageCropper */,
 				013DA7AF1853002100B507E4 /* KeychainWrapper */,
@@ -1192,38 +1184,6 @@
 				014A9F12185DA1C700A96678 /* TapjoyResources.bundle */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		01598B161857C56D002E2534 /* KVOBlocks */ = {
-			isa = PBXGroup;
-			children = (
-				01598B171857C56D002E2534 /* Sources */,
-			);
-			path = KVOBlocks;
-			sourceTree = "<group>";
-		};
-		01598B171857C56D002E2534 /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-				01598B181857C56D002E2534 /* MTKObserver.h */,
-				01598B191857C56D002E2534 /* MTKObserver.m */,
-				01598B1A1857C56D002E2534 /* MTKObserving.h */,
-				01598B1B1857C56D002E2534 /* MTKObservingMacros.h */,
-				01598B1C1857C56D002E2534 /* NSObject+MTKObserving.h */,
-				01598B1D1857C56D002E2534 /* NSObject+MTKObserving.m */,
-				01598B1E1857C56D002E2534 /* Utilities */,
-			);
-			path = Sources;
-			sourceTree = "<group>";
-		};
-		01598B1E1857C56D002E2534 /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				01598B1F1857C56D002E2534 /* keypath.h */,
-				01598B201857C56D002E2534 /* metamacros.h */,
-				01598B211857C56D002E2534 /* scope.h */,
-			);
-			path = Utilities;
 			sourceTree = "<group>";
 		};
 		01598B2D18583F46002E2534 /* Sharing */ = {
@@ -1618,7 +1578,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01598B231857C56D002E2534 /* MTKObserver.m in Sources */,
 				013DA7C71853002200B507E4 /* NSDictionary+Utils.m in Sources */,
 				01E8CB751876693B003AE018 /* CategoriesDatasource.m in Sources */,
 				013DA906185438E600B507E4 /* CreateCommentView.m in Sources */,
@@ -1652,6 +1611,7 @@
 				013DA8271853002200B507E4 /* LoginViewController.m in Sources */,
 				013DA7D31853002200B507E4 /* UINavigationItem+iOS7Spacing.m in Sources */,
 				018DF7A718590699004FEDA6 /* ActivityItem.m in Sources */,
+				014F4E2518D73F5900A2F764 /* UserManager.m in Sources */,
 				013DA8C81853004000B507E4 /* Badge.m in Sources */,
 				014A9E8B185BF95100A96678 /* SideNavButton.m in Sources */,
 				013DA8431853002200B507E4 /* PredictorCell.m in Sources */,
@@ -1707,7 +1667,6 @@
 				013DA80F1853002200B507E4 /* SideNavCell.m in Sources */,
 				013DA8471853002200B507E4 /* PredictorHeaderCell.m in Sources */,
 				0193A01618CF5FE90088D168 /* ActivityItem+Utils.m in Sources */,
-				01598B251857C56D002E2534 /* NSObject+MTKObserving.m in Sources */,
 				013DA83D1853002200B507E4 /* PredictionDetailsSectionHeader.m in Sources */,
 				013DA7BF1853002200B507E4 /* AppDelegate.m in Sources */,
 				013DA8D61853004000B507E4 /* SignupRequest.m in Sources */,
@@ -1720,7 +1679,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01598B221857C56D002E2534 /* MTKObserver.m in Sources */,
 				013DA7C61853002200B507E4 /* NSDictionary+Utils.m in Sources */,
 				01E8CB741876693B003AE018 /* CategoriesDatasource.m in Sources */,
 				013DA905185438E600B507E4 /* CreateCommentView.m in Sources */,
@@ -1754,6 +1712,7 @@
 				013DA8261853002200B507E4 /* LoginViewController.m in Sources */,
 				018DF7981858F1FB004FEDA6 /* ActivityItem.m in Sources */,
 				013DA7D21853002200B507E4 /* UINavigationItem+iOS7Spacing.m in Sources */,
+				014F4E2418D73F5600A2F764 /* UserManager.m in Sources */,
 				013DA8C71853004000B507E4 /* Badge.m in Sources */,
 				014A9E8A185BF95100A96678 /* SideNavButton.m in Sources */,
 				013DA8421853002200B507E4 /* PredictorCell.m in Sources */,
@@ -1809,7 +1768,6 @@
 				013DA80E1853002200B507E4 /* SideNavCell.m in Sources */,
 				013DA8461853002200B507E4 /* PredictorHeaderCell.m in Sources */,
 				0193A01518CF5FE90088D168 /* ActivityItem+Utils.m in Sources */,
-				01598B241857C56D002E2534 /* NSObject+MTKObserving.m in Sources */,
 				013DA83C1853002200B507E4 /* PredictionDetailsSectionHeader.m in Sources */,
 				013DA7BE1853002200B507E4 /* AppDelegate.m in Sources */,
 				013DA8D51853004000B507E4 /* SignupRequest.m in Sources */,

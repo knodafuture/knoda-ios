@@ -8,16 +8,14 @@
 
 #import "AddPredictionViewController.h"
 #import "LoadingView.h"
-#import "AppDelegate.h"
 #import "WebApi.h"
 #import "DatePickerView.h"
+#import "UserManager.h"
 
 #define TEXT_FONT        [UIFont fontWithName:@"HelveticaNeue" size:15]
 #define PLACEHOLDER_FONT [UIFont fontWithName:@"HelveticaNeue-Italic" size:15]
 
 static const int kPredictionCharsLimit = 300;
-
-static const CGFloat kCategorySectionHeight = 40;
 
 static NSDateFormatter *timeFormatter;
 static NSDateFormatter *dateFormatter;
@@ -81,8 +79,7 @@ static NSDateFormatter *dateFormatter;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap)];
     [self.view addGestureRecognizer:tap];
     
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [[WebApi sharedInstance] getImage:appDelegate.currentUser.avatar.big completion:^(UIImage *image, NSError *error) {
+    [[WebApi sharedInstance] getImage:[UserManager sharedInstance].user.avatar.big completion:^(UIImage *image, NSError *error) {
         if (!error)
             self.avatarView.image = image;
     }];
@@ -331,7 +328,7 @@ static NSDateFormatter *dateFormatter;
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     
-    int len = textView.text.length - range.length + text.length;
+    NSInteger len = textView.text.length - range.length + text.length;
     
     if ([text isEqualToString:@"\n"]) {
         [self.view endEditing:YES];
@@ -339,7 +336,7 @@ static NSDateFormatter *dateFormatter;
     }
     
     if(len <= kPredictionCharsLimit) {
-        self.charsLabel.text = [NSString stringWithFormat:@"%d", (self.showPlaceholder ? kPredictionCharsLimit : (kPredictionCharsLimit - len))];
+        self.charsLabel.text = [NSString stringWithFormat:@"%ld", (long)(self.showPlaceholder ? kPredictionCharsLimit : (kPredictionCharsLimit - len))];
         self.predictBarButtonItem.enabled = !self.showPlaceholder && len > 0;
         
         return YES;

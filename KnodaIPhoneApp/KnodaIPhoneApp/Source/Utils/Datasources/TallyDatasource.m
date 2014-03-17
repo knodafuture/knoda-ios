@@ -66,17 +66,18 @@
 
     if (indexPath.row == 0) {
         PredictorHeaderCell *cell = [PredictorHeaderCell predictorHeaderCellForTableView:tableView];
-        cell.leftLabel.text = [NSString stringWithFormat:@"Agree %d", _agreedUsers.count];
-        cell.rightLabel.text = [NSString stringWithFormat:@"Disagree %d", _disagreedUsers.count];
+        cell.leftLabel.text = [NSString stringWithFormat:@"Agree %lu", (unsigned long)_agreedUsers.count];
+        cell.rightLabel.text = [NSString stringWithFormat:@"Disagree %lu", (unsigned long)_disagreedUsers.count];
         return cell;
     }
     
     
     PredictorCell *cell = [PredictorCell predictorCellForTableView:tableView];
     
-    int idx = indexPath.row - 1;
+    NSInteger idx = indexPath.row - 1;
     
     [cell setAgreedUser:[self userAtIndex:idx inArray:_agreedUsers] andDisagreedUser:[self userAtIndex:idx inArray:_disagreedUsers]];
+    
     
     return cell;
 

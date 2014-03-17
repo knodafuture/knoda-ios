@@ -43,7 +43,7 @@
         return;
     }
     
-    self.sideNavButton.label.text = [NSString stringWithFormat:@"%d", alertsCount];
+    self.sideNavButton.label.text = [NSString stringWithFormat:@"%ld", (long)alertsCount];
     
     CGSize textSize = [self.sideNavButton.label sizeThatFits:CGSizeMake(self.sideNavButton.frame.size.width, self.sideNavButton.label.frame.size.height)];
     
@@ -52,6 +52,7 @@
     CGRect frame = self.sideNavButton.imageView.frame;
     
     frame.size.width = textSize.width + 4.0;
+    
     
     if (frame.size.width < 16.0)
         frame.size.width = 16.0;

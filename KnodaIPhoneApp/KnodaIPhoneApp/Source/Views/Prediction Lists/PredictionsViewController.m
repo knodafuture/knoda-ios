@@ -13,17 +13,13 @@
 #import "ProfileViewController.h"
 #import "AnotherUsersProfileViewController.h"
 #import "PredictionDetailsViewController.h"
+#import "UserManager.h"
 
 @interface PredictionsViewController ()
 @property (strong, nonatomic) NSTimer *refreshTimer;
-@property (readonly, nonatomic) AppDelegate *appDelegate;
 @end
 
 @implementation PredictionsViewController
-
-- (AppDelegate *)appDelegate {
-    return [[UIApplication sharedApplication] delegate];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -38,7 +34,8 @@
     [self.refreshTimer invalidate];
     self.refreshTimer = nil;
     self.refreshTimer = [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(refreshVisibleCells) userInfo:nil repeats:YES];
-    [self observeProperty:@keypath(self.appDelegate.currentUser) withBlock:^(__weak PredictionsViewController *self, id old, id new) {
+    
+    [self observeNotification:UserChangedNotificationName withBlock:^(__weak PredictionsViewController *self, NSNotification *notification) {
         [self.tableView reloadData];
     }];
     
@@ -78,8 +75,8 @@
     [cell fillWithPrediction:prediction];
     cell.delegate = self;
     
-    if (prediction.userId == self.appDelegate.currentUser.userId)
-        cell.avatarImageView.image = [_imageLoader lazyLoadImage:self.appDelegate.currentUser.avatar.small onIndexPath:indexPath];
+    if (prediction.userId == [UserManager sharedInstance].user.userId)
+        cell.avatarImageView.image = [_imageLoader lazyLoadImage:[UserManager sharedInstance].user.avatar.small onIndexPath:indexPath];
     else
         cell.avatarImageView.image = [_imageLoader lazyLoadImage:prediction.userAvatar.small onIndexPath:indexPath];
     
@@ -146,7 +143,7 @@
 }
 
 - (void)profileSelectedWithUserId:(NSInteger)userId inCell:(PredictionCell *)cell {
-    if (userId == self.appDelegate.currentUser.userId) {
+    if (userId == [UserManager sharedInstance].user.userId) {
         ProfileViewController *vc = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:[NSBundle mainBundle]];
         vc.leftButtonItemReturnsBack = YES;
         [self.navigationController pushViewController:vc animated:YES];
@@ -176,6 +173,10 @@
     
     [self.pagingDatasource.objects replaceObjectAtIndex:indexToExchange withObject:prediction];
     [self.tableView reloadData];
+}
+
+- (void)dealloc {
+    [self removeAllObservations];
 }
 
 @end

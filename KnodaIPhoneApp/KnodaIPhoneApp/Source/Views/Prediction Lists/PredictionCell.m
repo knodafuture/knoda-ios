@@ -126,10 +126,11 @@ static NSMutableDictionary *cellHeightCache;
     
     self.commentLabelContainer.frame = commentsFrame;
     
-    self.commentCountLabel.text = [NSString stringWithFormat:@"%d", self.prediction.commentCount];
+    self.commentCountLabel.text = [NSString stringWithFormat:@"%ld", (long)self.prediction.commentCount];
     
     
     if (!self.prediction.verifiedAccount)
+        
         self.verifiedCheckmark.hidden = YES;
     else {
         self.verifiedCheckmark.hidden = NO;
@@ -197,7 +198,7 @@ static NSMutableDictionary *cellHeightCache;
     
     self.commentLabelContainer.frame = commentsFrame;
     
-    self.commentCountLabel.text = [NSString stringWithFormat:@"%d", self.prediction.commentCount];
+    self.commentCountLabel.text = [NSString stringWithFormat:@"%ld", (long)self.prediction.commentCount];
 }
 
 - (IBAction)profileTapped:(id)sender {

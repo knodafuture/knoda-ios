@@ -37,7 +37,8 @@ static UINib *nib;
         self.winPercentLabel.text = @"100%";
     else
         self.winPercentLabel.text = [NSString stringWithFormat:@"%@%@",user.winningPercentage,@"%"];    self.streakLabel.text = [user.streak length] > 0 ? user.streak : @"W0";
-    self.winLossLabel.text = [NSString stringWithFormat:@"%d-%d",user.won,user.lost];
+    self.winLossLabel.text = [NSString stringWithFormat:@"%lu-%lu",(unsigned long)user.won,(unsigned long)user.lost];
+    
     
     
     CGSize textSize = [self.pointsLabel sizeThatFits:self.pointsLabel.frame.size];

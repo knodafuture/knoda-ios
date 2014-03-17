@@ -15,7 +15,7 @@
     #import "UIBarButtonItem+Utils.h"
     #import "UINavigationItem+iOS7Spacing.h"
     #import "Flurry.h"
-    #import "MTKObserving.h"
+    #import <Block-KVO/MTKObserving.h>
     #import "UINavigationBar+AppearanceUtils.h"
     #import "UIImage+Utils.h"
 #endif

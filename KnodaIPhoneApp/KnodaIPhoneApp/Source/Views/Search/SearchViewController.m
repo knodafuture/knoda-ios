@@ -15,7 +15,7 @@
 #import "PredictionCell.h"
 #import "AnotherUsersProfileViewController.h"
 #import "ProfileViewController.h"
-#import "AppDelegate.h"
+#import "UserManager.h"
 #import "PredictionDetailsViewController.h"
 #import "UserCell.h"
 
@@ -27,10 +27,6 @@
 @end
 
 @implementation SearchViewController
-
-- (AppDelegate *)appDelegate {
-    return [[UIApplication sharedApplication] delegate];
-}
 
 - (void)viewDidLoad {
     
@@ -119,8 +115,8 @@
     
     if ([cell isKindOfClass:PredictionCell.class]) {
         PredictionCell *pCell = (PredictionCell *)cell;;
-        if (pCell.prediction.userId == self.appDelegate.currentUser.userId)
-            pCell.avatarImageView.image = [_imageLoader lazyLoadImage:self.appDelegate.currentUser.avatar.small onIndexPath:indexPath];
+        if (pCell.prediction.userId == [UserManager sharedInstance].user.userId)
+            pCell.avatarImageView.image = [_imageLoader lazyLoadImage:[UserManager sharedInstance].user.avatar.small onIndexPath:indexPath];
         else
             pCell.avatarImageView.image = [_imageLoader lazyLoadImage:pCell.prediction.userAvatar.small onIndexPath:indexPath];
         
@@ -202,7 +198,7 @@
 }
 
 - (void)profileSelectedWithUserId:(NSInteger)userId inCell:(PredictionCell *)cell {
-    if (userId == self.appDelegate.currentUser.userId) {
+    if (userId == [UserManager sharedInstance].user.userId) {
         ProfileViewController *vc = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:[NSBundle mainBundle]];
         vc.leftButtonItemReturnsBack = YES;
         [self.navigationController pushViewController:vc animated:YES];

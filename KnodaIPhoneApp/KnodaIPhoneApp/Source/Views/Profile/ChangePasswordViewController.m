@@ -7,13 +7,10 @@
 //
 
 #import "ChangePasswordViewController.h"
-#import "AppDelegate.h"
 #import "LoadingView.h"
 #import "WebApi.h"
-
+#import "UserManager.h"
 @interface ChangePasswordViewController ()
-
-@property (nonatomic, readonly) AppDelegate* appDelegate;
 
 @property (weak, nonatomic) IBOutlet UITextField *retypeNewPasswordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *currentPasswordTextField;
@@ -30,12 +27,6 @@
     self.title = @"PASSWORD";
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem backButtonWithTarget:self action:@selector(backButtonPress:)];
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTitle:@"Submit" target:self action:@selector(changeButtonPressed:) color:[UIColor whiteColor]];
-}
-
-- (AppDelegate*) appDelegate
-{
-    return [UIApplication sharedApplication].delegate;
-    
 }
 
 - (IBAction)backButtonPress:(id)sender {
@@ -73,22 +64,18 @@
         alertView.message = NSLocalizedString(@"Password has been changed succesfully", @"");
 
         LoginRequest *request = [[LoginRequest alloc] init];
-        request.login = self.appDelegate.currentUser.name;
+        request.login = [UserManager sharedInstance].user.name;
         request.password = self.usersNewPasswordTextField.text;
         
-        [[WebApi sharedInstance] authenticateUser:request completion:^(LoginResponse *response, NSError *error) {
-            
+        [[UserManager sharedInstance] login:request completion:^(User *user, NSError *error) {
             [[LoadingView sharedInstance] hide];
             
             if (error) {
                 alertView.title = NSLocalizedString(@"Error", @"");
                 alertView.message = error.localizedDescription;
-                
-                [self.appDelegate logout];
                 return;
             }
             
-            [self.appDelegate reauthorize:request withResponse:response];
             [self.navigationController popViewControllerAnimated:YES];
         }];
     }];

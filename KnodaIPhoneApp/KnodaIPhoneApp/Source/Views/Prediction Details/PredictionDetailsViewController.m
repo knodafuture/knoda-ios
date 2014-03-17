@@ -10,7 +10,6 @@
 #import "AnotherUsersProfileViewController.h"
 #import "ProfileViewController.h"
 #import "CategoryPredictionsViewController.h"
-#import "AppDelegate.h"
 #import "LoadingView.h"
 #import "WebApi.h"
 #import "DetailsTableViewController.h"
@@ -20,6 +19,7 @@
 #import "PredictionItemProvider.h"
 #import "PredictionCell.h"
 #import "PredictionDetailsHeaderCell.h"
+#import "UserManager.h"
 
 static const int kBSAlertTag = 1001;
 
@@ -168,7 +168,7 @@ static const int kBSAlertTag = 1001;
         [UINavigationBar setCustomAppearance];
     }];
     
-    [vc setValue:[NSString stringWithFormat:@"%@ shared a Knoda prediction with you", self.appDelegate.currentUser.name] forKey:@"subject"];
+    [vc setValue:[NSString stringWithFormat:@"%@ shared a Knoda prediction with you", [UserManager sharedInstance].user.name] forKey:@"subject"];
     
     [self presentViewController:vc animated:YES completion:nil];
 }
@@ -221,7 +221,7 @@ static const int kBSAlertTag = 1001;
     [[LoadingView sharedInstance] show];
     
     if (agree) {
-        [self.tableViewController updateTallyForUser:self.appDelegate.currentUser agree:YES];
+        [self.tableViewController updateTallyForUser:[UserManager sharedInstance].user agree:YES];
         [[WebApi sharedInstance] agreeWithPrediction:self.prediction.predictionId completion:^(Challenge *challenge, NSError *error) {
             [[LoadingView sharedInstance] hide];
             if (!error) {
@@ -235,7 +235,7 @@ static const int kBSAlertTag = 1001;
         }];
     }
     else {
-        [self.tableViewController updateTallyForUser:self.appDelegate.currentUser agree:NO];
+        [self.tableViewController updateTallyForUser:[UserManager sharedInstance].user agree:NO];
         [[WebApi sharedInstance] disagreeWithPrediction:self.prediction.predictionId completion:^(Challenge *challenge, NSError *error) {
             [[LoadingView sharedInstance] hide];
             if (!error) {
@@ -323,15 +323,11 @@ static const int kBSAlertTag = 1001;
     }
 }
 
-- (AppDelegate *)appDelegate {
-    return [UIApplication sharedApplication].delegate;
-}
-
 - (void)profileSelectedWithUserId:(NSInteger)userId inCell:(PredictionCell *)cell {
     if (self.shouldNotOpenProfile)
         return;
     
-    if (userId == [self appDelegate].currentUser.userId) {
+    if (userId == [UserManager sharedInstance].user.userId) {
         ProfileViewController *vc = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:[NSBundle mainBundle]];
         vc.leftButtonItemReturnsBack = YES;
         [self.navigationController pushViewController:vc animated:YES];

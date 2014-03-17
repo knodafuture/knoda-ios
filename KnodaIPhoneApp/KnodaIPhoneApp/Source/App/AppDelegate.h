@@ -21,13 +21,8 @@ UIKIT_EXTERN NSString *NewPredictionNotificationKey;
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) KeychainItemWrapper *keychain;
-@property (strong, nonatomic) User *currentUser;
 
-
-- (void)doLogin:(LoginRequest *)request withResponse:(LoginResponse *)response;
-- (void)reauthorize:(LoginRequest *)request withResponse:(LoginResponse *)response;
-- (LoginRequest *)loginRequestForSavedUser;
+- (void)login;
 - (void)logout;
 
 @end

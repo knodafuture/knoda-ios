@@ -9,7 +9,7 @@
 #import "PredictionItemProvider.h"
 #import "Prediction+Utils.h"
 #import "Challenge.h"
-#import "AppDelegate.h"
+#import "UserManager.h"
 
 const NSInteger MaxChars = 140;
 
@@ -59,10 +59,8 @@ const NSInteger MaxChars = 140;
     
     return shareString;
 }
-- (NSString *)activityViewController:(UIActivityViewController *)activityViewController subjectForActivityType:(NSString *)activityType; {
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    return [NSString stringWithFormat:@"%@ shared a Knoda prediction with you", delegate.currentUser.name];
+- (NSString *)activityViewController:(UIActivityViewController *)activityViewController subjectForActivityType:(NSString *)activityType; {    
+    return [NSString stringWithFormat:@"%@ shared a Knoda prediction with you", [UserManager sharedInstance].user.name];
 
 }
 

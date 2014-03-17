@@ -6,6 +6,12 @@
 // project.
 
 
+// Block-KVO
+#define COCOAPODS_POD_AVAILABLE_Block_KVO
+#define COCOAPODS_VERSION_MAJOR_Block_KVO 2
+#define COCOAPODS_VERSION_MINOR_Block_KVO 2
+#define COCOAPODS_VERSION_PATCH_Block_KVO 1
+
 // Mantle
 #define COCOAPODS_POD_AVAILABLE_Mantle
 #define COCOAPODS_VERSION_MAJOR_Mantle 1

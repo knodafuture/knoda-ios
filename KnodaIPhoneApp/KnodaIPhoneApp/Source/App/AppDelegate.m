@@ -61,7 +61,6 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
     [UINavigationBar setCustomAppearance];
     [UIApplication sharedApplication].delegate.window.backgroundColor = navBackgroundColor;
     
-    self.keychain = [[KeychainItemWrapper alloc] initWithIdentifier: @"Password" accessGroup:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logout) name:HttpForbiddenNotification object:nil];
     
@@ -72,33 +71,12 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
     [self.window makeKeyAndVisible];
     
     [self showWelcomeScreenAnimated:NO];
-    
-    [self observeProperty:@keypath(self.currentUser) withBlock:^(__weak id self, User* old, User* new) {
-        if (!new)
-            return;
-        [[NSUserDefaults standardUserDefaults] setObject:new.name forKey: @"User"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }];
+
     
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newBadge:) name:BadgeNotification object:nil];
     
     return YES;
-}
-
-- (void)submitDeviceToken {
-    NSString *deviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:kDeviceTokenKey];
-    
-    if (!deviceToken)
-        return;
-    
-    DeviceToken *token = [[DeviceToken alloc] init];
-    token.token = deviceToken;
-    
-    [[WebApi sharedInstance] sendToken:token completion:^(NSString *tokenId, NSError *error) {
-        if (!error)
-            [[NSUserDefaults standardUserDefaults] setObject:tokenId forKey:kDeviceTokenIdKey];
-    }];
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
@@ -117,8 +95,6 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
     {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:alertString delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"") otherButtonTitles:NSLocalizedString(@"Show", @""), nil];
         [alertView show];
-        
-        //TODO REDO SHOW ALERTS
     }
 }
 
@@ -153,33 +129,6 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
 }
 #endif
 
-- (void)clearSavedCredentials {
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey: @"User"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:LoginResponseKey];
-    [self.keychain resetKeychainItem];
-}
-
-- (void)removeToken {
-    NSString *deviceTokenId = [[NSUserDefaults standardUserDefaults] objectForKey:kDeviceTokenIdKey];
-    
-    if (!deviceTokenId)
-        return;
-    
-    
-    [[WebApi sharedInstance] deleteToken:deviceTokenId completion:^(NSError *error) {}];
-}
-
-- (void)logout {
-    [[WebApi sharedInstance] signoutCompletion:^(NSError *error) {}];
-    
-    self.currentUser = nil;
-    
-    [self clearSavedCredentials];
-
-    [[LoadingView sharedInstance] reset];
-    
-    [self showWelcomeScreenAnimated:YES];
-}
 
 
 - (void)showWelcomeScreenAnimated:(BOOL)animated {
@@ -222,59 +171,15 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
     }];
 }
 
-- (void)saveRequest:(LoginRequest *)request andResponse:(LoginResponse *)response {
-    
-    [[NSUserDefaults standardUserDefaults] setObject:request.login forKey: @"User"];
-    [[NSUserDefaults standardUserDefaults] setObject:response.token forKey:LoginResponseKey];
-    [self.keychain setObject:request.password forKey:((__bridge id)kSecValueData)];
-    
-    [[NSUserDefaults standardUserDefaults] synchronize];
+- (void)login {
+    [[LoadingView sharedInstance] reset];
+    [self showHomeScreen:YES];
 }
 
-- (void)doLogin:(LoginRequest *)request withResponse:(LoginResponse *)response {
-
-    NSLog(@"%@", response.token);
-    [self saveRequest:request andResponse:response];
-
-    [[WebApi sharedInstance] getCurrentUser:^(User *user, NSError *error) {
-        [[LoadingView sharedInstance] hide];
-        if (error) {
-            [self logout];
-            [self showWelcomeScreenAnimated:YES];
-        } else {
-            [self setValue:user forKey:@"currentUser"];
-            [self submitDeviceToken];
-            [self showHomeScreen:YES];
-        }
-    }];
-}
-
-- (void)reauthorize:(LoginRequest *)request withResponse:(LoginResponse *)response {
-    [self saveRequest:request andResponse:response];
+- (void)logout {
+    [[LoadingView sharedInstance] reset];
     
-    [[WebApi sharedInstance] getCurrentUser:^(User *user, NSError *error) {
-        if (error) {
-            [self logout];
-            [self showWelcomeScreenAnimated:YES];
-        } else {
-            [self setValue:user forKey:@"currentUser"];
-            [self submitDeviceToken];
-        }
-    }];
-}
-
-- (LoginRequest *)loginRequestForSavedUser {
-    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey: @"User"];
-    NSString *password = [self.keychain objectForKey: ((__bridge id)kSecValueData)];
-    
-    if (!username || !password)
-        return nil;
-    
-    LoginRequest *request = [[LoginRequest alloc] init];
-    request.login = username;
-    request.password = password;
-    
-    return request;
+    [self showWelcomeScreenAnimated:YES];
 }
 
 @end

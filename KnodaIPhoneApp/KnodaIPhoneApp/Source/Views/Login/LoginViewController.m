@@ -11,6 +11,7 @@
 #import "ForgotPasswordViewController.h"
 #import "LoadingView.h"
 #import "WebApi.h"
+#import "UserManager.h"
 
 @interface LoginViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
@@ -86,9 +87,9 @@
     
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    [[WebApi sharedInstance] authenticateUser:request completion:^(LoginResponse *response, NSError *error) {
+    [[UserManager sharedInstance] login:request completion:^(User *user, NSError *error) {
         if (!error)
-            [appDelegate doLogin:request withResponse:response];
+            [appDelegate login];
         else {
             [[LoadingView sharedInstance] hide];
             if (error.code == HttpStatusForbidden)

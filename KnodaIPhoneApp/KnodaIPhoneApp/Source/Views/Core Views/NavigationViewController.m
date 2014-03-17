@@ -23,6 +23,7 @@
 #import "RightSideButtonsView.h"
 #import <QuartzCore/QuartzCore.h>
 #import "SearchViewController.h"
+#import "UserManager.h"
 
 @interface NavigationViewController () <SearchViewControllerDelegate, SelectPictureDelegate, AddPredictionViewControllerDelegate, UINavigationControllerDelegate, UISearchBarDelegate>
 
@@ -52,6 +53,7 @@
 @property (weak, nonatomic) UINavigationController *topNavigationController;
 
 @property (assign, nonatomic) MenuItem firstMenuItem;
+@property (readonly, nonatomic) UserManager *userManger;
 
 @end
 
@@ -64,6 +66,7 @@
     self.masterShown = NO;
     self.vcCache = [[NSMutableDictionary alloc] init];
     self.firstMenuItem = menuItem;
+    _userManger = [UserManager sharedInstance];
     return self;
     
 }
@@ -91,7 +94,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self observeProperty:@keypath(self.appDelegate.currentUser) withBlock:^(__weak id self, id old, id new) {
+    [self observeNotification:UserChangedNotificationName withBlock:^(__weak id self, NSNotification *notification) {
         [self updateUserInfo];
     }];
 }
@@ -119,7 +122,7 @@
     [self updateAlerts];
 }
 - (void)hackAnimationFinished {
-    if(!self.appDelegate.currentUser.hasAvatar)
+    if(![UserManager sharedInstance].user.hasAvatar)
         [self showSelectPictureViewController];
     else
         [self openMenuItem: self.firstMenuItem];
@@ -247,7 +250,7 @@
     self.masterShown = YES;
     self.gestureView.hidden = NO;
     
-    [[WebApi sharedInstance] getCurrentUser:^(User *user, NSError *error) {}];
+    [[UserManager sharedInstance] refreshUser:^(User *user, NSError *error) {}];
     
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
@@ -283,7 +286,7 @@
         SideNavCell *cell = (SideNavCell *)[self.menuItemsTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:MenuAlerts - 1 inSection:0]];
         if (alerts.count) {
             cell.rightInfoLabel.hidden = NO;
-            cell.rightInfoLabel.text = [NSString stringWithFormat:@"%d", alerts.count];
+            cell.rightInfoLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)alerts.count];
         }
         else
             cell.rightInfoLabel.hidden = YES;
@@ -300,13 +303,14 @@
 }
 
 - (void)updateUserInfo {
-    User * user = self.appDelegate.currentUser;
+    User * user = [UserManager sharedInstance].user;
     
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     [formatter setGroupingSeparator:[[NSLocale currentLocale] objectForKey:NSLocaleGroupingSeparator]];
     
     self.pointsLabel.text = [NSString stringWithFormat:@"%@",[formatter stringFromNumber:[NSNumber numberWithInteger:user.points]]];
-    self.wonLostLabel.text = [NSString stringWithFormat:@"%d-%d",user.won,user.lost];
+    self.wonLostLabel.text = [NSString stringWithFormat:@"%lu-%lu",(unsigned long)user.won,(unsigned long)
+                              user.lost];
     if ([user.winningPercentage isEqual:@0])
         self.wonPercantageLabel.text = @"0%";
     else if ([user.winningPercentage isEqual:@100])
@@ -331,7 +335,7 @@
     cell.icon.image = [UIImage imageNamed:[NSString stringWithFormat:@"SideNav%@Icon", self.itemNames[indexPath.row]]];
     
     if (indexPath.row == MenuProfile - 1)
-        cell.titleLabel.text = self.appDelegate.currentUser.name;
+        cell.titleLabel.text = [UserManager sharedInstance].user.name;
     else
         cell.titleLabel.text = self.itemNames[indexPath.row];
     
@@ -392,6 +396,10 @@
 
 - (void)searchViewControllerDidFinish:(SearchViewController *)searchViewController {
     [self.rightSideBarButtonsView setSearchButtonHidden:NO];
+}
+
+- (void)dealloc {
+    [self removeAllObservations];
 }
 
 @end

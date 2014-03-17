@@ -17,6 +17,7 @@
 #import "WebApi.h"
 #import "WebViewController.h"
 #import "ChangePasswordViewController.h"
+#import "UserManager.h"
 
 static NSString* const kChangeEmailUsernameSegue = @"UsernameEmailSegue";
 static NSString* const kChangePasswordSegue = @"ChangePasswordSegue";
@@ -80,9 +81,11 @@ static const float kAvatarSize = 344.0;
     
     [self loadUserInformation];
     [[self navigationController] setNavigationBarHidden:NO animated:NO];
-    [self observeProperty:@keypath(self.appDelegate.currentUser) withBlock:^(__weak id self, id old, id new) {
+    
+    [self observeNotification:UserChangedNotificationName withBlock:^(__weak id self, NSNotification *notification) {
         [self populateUserInfo];
     }];
+
     [Flurry logEvent: @"Profile_Screen" withParameters: nil timed: YES];
 }
 
@@ -100,7 +103,7 @@ static const float kAvatarSize = 344.0;
 
 - (void)populateUserInfo {
     
-    User *user = self.appDelegate.currentUser;
+    User *user = [UserManager sharedInstance].user;
     
     self.title = user.name.uppercaseString;
     
@@ -158,7 +161,7 @@ static const float kAvatarSize = 344.0;
 - (void)showImagePickerWithSource:(UIImagePickerControllerSourceType)sourceType {
     
     if(![UIImagePickerController isSourceTypeAvailable:sourceType]) {
-        DLog(@"UIImagePickerController sourceType (%d) unavailable", sourceType);
+        DLog(@"UIImagePickerController sourceType (%ld) unavailable", (long)sourceType);
         return;
     }
     
@@ -178,7 +181,7 @@ static const float kAvatarSize = 344.0;
     self.headerView.avatarImageView.image = image;
     [[LoadingView sharedInstance] show];
     
-    [[WebApi sharedInstance] uploadProfileImage:image completion:^(NSError *error) {
+    [[UserManager sharedInstance] uploadProfileImage:image completion:^(User *user, NSError *error) {
         [[LoadingView sharedInstance] hide];
         
         if (error) {
@@ -290,9 +293,9 @@ static const float kAvatarSize = 344.0;
 - (void)saveUsername {
     
     [[LoadingView sharedInstance] show];
-    User *user = [self.appDelegate.currentUser copy];
+    User *user = [[UserManager sharedInstance].user copy];
     user.name = self.userNameField.text;
-    [[WebApi sharedInstance] updateUser:user completion:^(User *user, NSError *error) {
+    [[UserManager sharedInstance] updateUser:user completion:^(User *user, NSError *error) {
         if (error)
             [[[UIAlertView alloc] initWithTitle:nil
                                         message:error.localizedDescription
@@ -315,11 +318,11 @@ static const float kAvatarSize = 344.0;
         return;
     }
     
-    User *user = [self.appDelegate.currentUser copy];
+    User *user = [[UserManager sharedInstance].user copy];
     user.email = self.emailField.text;
     
     [[LoadingView sharedInstance] show];
-    [[WebApi sharedInstance] updateUser:user completion:^(User *user, NSError *error) {
+    [[UserManager sharedInstance] updateUser:user completion:^(User *user, NSError *error) {
         if (error)
             [[[UIAlertView alloc] initWithTitle:nil
                                         message:error.localizedDescription
@@ -329,6 +332,10 @@ static const float kAvatarSize = 344.0;
         
         [[LoadingView sharedInstance] hide];
     }];
+}
+
+- (void)dealloc {
+    [self removeAllObservations];
 }
 
 @end

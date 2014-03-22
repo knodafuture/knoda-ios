@@ -20,6 +20,9 @@
 #import "PasswordResetRequest.h"
 #import "PasswordChangeRequest.h"
 #import "DeviceToken.h"
+#import "Group.h"
+#import "Member.h"
+#import "Invitation.h"
 
 typedef NS_ENUM(NSInteger, HttpStatus) {
 	HttpStatusOk				= 200,
@@ -53,7 +56,7 @@ extern NSInteger PageLimit;
 - (void)sendToken:(DeviceToken *)deviceToken completion:(void(^)(NSString *tokenId, NSError *error))completionHandler;
 - (void)deleteToken:(NSString *)tokenId completion:(void(^)(NSError *error))completionHandler;
 - (void)getUser:(NSInteger)userId completion:(void(^)(User *user, NSError *error))completionHandler;
-
+- (void)autoCompleteUsers:(NSString *)query completion:(void(^)(NSArray *users, NSError *error))completionHandler;
 // -- Predictions -- //
 
 - (void)getPredictionsAfter:(NSInteger)lastId completion:(void(^)(NSArray *predictions, NSError *error))completionHandler;
@@ -100,4 +103,12 @@ extern NSInteger PageLimit;
 - (void)searchForPredictions:(NSString *)searchText completion:(void(^)(NSArray *predictions, NSError *error))completionHandler;
 
 
+// -- Groups -- //
+
+- (void)getGroups:(void(^)(NSArray *groups, NSError *error))completionHandler;
+- (void)getPredictionsForGroup:(NSInteger)groupId after:(NSInteger)lastId completion:(void(^)(NSArray *predictions, NSError *error))completionHandler;
+- (void)getMembersForGroup:(NSInteger)groupId completion:(void(^)(NSArray *members, NSError *error))completionHandler;
+- (void)sendInvites:(NSArray *)invitations completion:(void(^)(NSArray *invitations, NSError *error))completionHandler;
+- (void)createGroup:(Group *)group completion:(void(^)(Group *group, NSError *error))completionHandler;
+- (void)updateGroup:(Group *)group completion:(void(^)(Group *group, NSError *error))completionHandler;
 @end

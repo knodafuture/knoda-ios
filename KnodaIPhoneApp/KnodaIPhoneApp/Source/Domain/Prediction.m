@@ -32,6 +32,7 @@
              @"categories" : @"tags",
              @"verifiedACcount" : @"verified_account",
              @"outcome" : @"outcome",
+             @"groupId" : @"group_id"
              };
 }
 

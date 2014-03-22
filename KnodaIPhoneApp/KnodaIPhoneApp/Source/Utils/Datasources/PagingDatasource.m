@@ -12,7 +12,6 @@
 
 @interface PagingDatasource ()
 
-@property (assign, nonatomic) BOOL pageLoading;
 @property (assign, nonatomic) NSInteger localObjectsCount;
 @end
 

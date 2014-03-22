@@ -17,6 +17,7 @@ extern NSString *ChangedUserKey;
 @interface UserManager : NSObject
 
 @property (readonly, nonatomic) User *user;
+@property (readonly, nonatomic) NSArray *groups;
 
 - (void)refreshUser:(void(^)(User *user, NSError *error))completionHandler;
 - (void)updateUser:(User *)user completion:(void(^)(User *user, NSError *error))completionHandler;

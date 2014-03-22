@@ -28,6 +28,10 @@ static NSDateFormatter *dateFormatter;
 @property (weak, nonatomic) IBOutlet UILabel *expirationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *resolutionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *charsLabel;
+@property (weak, nonatomic) IBOutlet UIPickerView *groupPicker;
+@property (weak, nonatomic) IBOutlet UILabel *groupsLabel;
+@property (weak, nonatomic) IBOutlet UIView *groupsBar;
+@property (weak, nonatomic) IBOutlet UIView *groupPickerContainerView;
 
 @property (weak, nonatomic) IBOutlet UIView *categoryPickerContainerView;
 @property (weak, nonatomic) IBOutlet UIView *expirationBar;
@@ -41,7 +45,7 @@ static NSDateFormatter *dateFormatter;
 @property (strong, nonatomic) NSArray *categories;
 @property (strong, nonatomic) NSString *categoryText;
 @property (strong, nonatomic) NSString *placeholderText;
-
+@property (strong, nonatomic) Group *selectedGroup;
 @property (assign, nonatomic) BOOL showPlaceholder;
 
 @property (strong, nonatomic) DatePickerView *datePickerView;
@@ -171,6 +175,14 @@ static NSDateFormatter *dateFormatter;
     [self showPickerView:self.categoryPickerContainerView under:self.categoryBar completion:nil];
 }
 
+- (IBAction)selectGroupPressed:(id)sender {
+    if (!self.selectedGroup)
+        [self pickerView:self.groupPicker didSelectRow:0 inComponent:0];
+    else
+        [self pickerView:self.groupPicker didSelectRow:[[UserManager sharedInstance].groups indexOfObject:self.selectedGroup] inComponent:0];
+    [self showPickerView:self.groupPickerContainerView under:self.groupsBar completion:nil];
+}
+
 - (NSInteger)indexOfTopicWithName:(NSString *)name {
     for (Tag *topic in self.categories) {
         if ([topic.name isEqualToString:name])
@@ -193,6 +205,11 @@ static NSDateFormatter *dateFormatter;
 
     [self hideActivePickerCompletion:nil];
 }
+
+- (IBAction)cancelGroupsPicker:(id)sender {
+    [self hideActivePickerCompletion:nil];
+}
+
 
 - (BOOL)validate {
     NSString *errorMessage = nil;
@@ -235,6 +252,9 @@ static NSDateFormatter *dateFormatter;
     prediction.expirationDate = [self expirationDate];
     prediction.resolutionDate = [self resolutionDate];
     prediction.categories = @[self.categoryText];
+    
+    if (self.selectedGroup)
+        prediction.groupId = self.selectedGroup.groupId;
     
     [[WebApi sharedInstance] addPrediction:prediction completion:^(Prediction *prediction, NSError *error) {
         [[LoadingView sharedInstance] hide];
@@ -362,7 +382,12 @@ static NSDateFormatter *dateFormatter;
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return (self.categories.count == 0) ? 1 : self.categories.count;
+    if (pickerView == self.categoryPicker)
+        return (self.categories.count == 0) ? 1 : self.categories.count;
+    else if (pickerView == self.groupPicker)
+        return ([UserManager sharedInstance].groups.count == 0) ? 1 : [UserManager sharedInstance].groups.count + 1;
+    
+    return 0;
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
@@ -375,14 +400,33 @@ static NSDateFormatter *dateFormatter;
             Tag *topic = [self.categories objectAtIndex:row];
             return topic.name;
         }
+    } else if (pickerView == self.groupPicker) {
+        if ([UserManager sharedInstance].groups.count == 0) {
+            return NSLocalizedString(@"You aren't a member of any groups", @"");
+        }
+        if (row == 0)
+            return @"Public";
+        Group *group = [UserManager sharedInstance].groups[row-1];
+        return group.name;
     }
     
     return result;
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    self.categoryText = [[self.categories objectAtIndex: row] name];
-    self.categoryLabel.text = self.categoryText;
+    
+    if (pickerView == self.categoryPicker) {
+        self.categoryText = [[self.categories objectAtIndex: row] name];
+        self.categoryLabel.text = self.categoryText;
+    } else if (pickerView == self.groupPicker) {
+        if (row == 0) {
+            self.selectedGroup = nil;
+            self.groupsLabel.text = @"Public";
+        } else {
+            self.selectedGroup = [UserManager sharedInstance].groups[row-1];
+            self.groupsLabel.text = self.selectedGroup.name;
+        }
+    }
 }
 
 - (void)datePickerView:(DatePickerView *)pickerView didChangeToDate:(NSDate *)date {

@@ -6,7 +6,7 @@ PODS:
 
 DEPENDENCIES:
   - Block-KVO
-  - Mantle
+  - Mantle (~> 1.4)
 
 SPEC CHECKSUMS:
   Block-KVO: 7b298fb4617e948179b4c7725569feff7bd58337

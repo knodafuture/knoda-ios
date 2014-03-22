@@ -25,5 +25,4 @@
 
 @property (strong, nonatomic) RemoteImage *avatar;
 @property (assign, nonatomic) BOOL verifiedAccount;
-
 @end

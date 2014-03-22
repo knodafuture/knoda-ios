@@ -61,8 +61,4 @@
     //Check badges
     //[BadgesWebRequest checkNewBadges];
 }
-
-- (AppDelegate *)appDelegate {
-    return [[UIApplication sharedApplication] delegate];
-}
 @end

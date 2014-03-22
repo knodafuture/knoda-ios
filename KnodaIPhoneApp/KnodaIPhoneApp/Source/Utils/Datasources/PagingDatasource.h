@@ -22,6 +22,7 @@
 @property (assign, nonatomic) NSInteger currentPage;
 @property (weak, nonatomic) id<PagingDatasourceDelegate> delegate;
 @property (weak, nonatomic) UITableView *tableView;
+@property (assign, nonatomic) BOOL pageLoading;
 
 - (id)initWithTableView:(UITableView *)tableView;
 - (void)loadPage:(NSInteger)page completion:(void(^)(void))completion;

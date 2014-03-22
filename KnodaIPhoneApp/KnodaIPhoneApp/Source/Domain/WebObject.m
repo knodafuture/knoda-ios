@@ -98,4 +98,17 @@ NSString *responseDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z";
     return [self dateTransformer];
 }
 
++ (NSData *)dataFromArrayOfWebObjects:(NSArray *)objects {
+    
+    NSMutableArray *result = [NSMutableArray arrayWithCapacity:objects.count];
+    
+    for (WebObject *object in objects) {
+        NSDictionary *dictionary = [MTLJSONAdapter JSONDictionaryFromModel:object];
+        [result addObject:dictionary];
+    }
+    
+    return [NSJSONSerialization dataWithJSONObject:result options:0 error:nil];
+    
+}
+
 @end

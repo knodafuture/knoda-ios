@@ -45,9 +45,15 @@ static UserManager *sharedSingleton;
         if (!error) {
             _user = user;
             [self sendNotification];
-        } else
+            [[WebApi sharedInstance] getGroups:^(NSArray *groups, NSError *error) {
+                if (!error)
+                    _groups = groups;
+                completionHandler(user, error);
+            }];
+        } else {
             NSLog(@"Error getting user: %@", [error localizedDescription]);
-        completionHandler(self.user, error);
+            completionHandler(nil, error);
+        }
     }];
 }
 

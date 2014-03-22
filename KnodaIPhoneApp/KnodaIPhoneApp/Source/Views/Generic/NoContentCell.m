@@ -24,7 +24,11 @@ static UINib *nib;
         cell = [[nib instantiateWithOwner:nil options:nil] lastObject];
     
     cell.messageLabel.text = message;
+    [cell.messageLabel sizeToFit];
     
+    CGRect frame = cell.messageLabel.frame;
+    frame.size.width = cell.frame.size.width - 10.0;
+    cell.messageLabel.frame = frame;
     return cell;
 }
 

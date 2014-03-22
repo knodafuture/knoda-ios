@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 Knoda. All rights reserved.
 //
 typedef NS_ENUM(NSInteger, MenuItem) {
-    MenuUnknown = 0,
     MenuHome,
-    MenuHistory,
     MenuAlerts,
+    MenuGroups,
+    MenuHistory,
     MenuBadges,
     MenuProfile,
     MenuItemsCount

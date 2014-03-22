@@ -19,4 +19,6 @@
 + (NSValueTransformer *)challengeTransformer;
 + (NSValueTransformer *)boolTransformer;
 + (NSValueTransformer *)dateTransformer;
+
++ (NSData *)dataFromArrayOfWebObjects:(NSArray *)objects;
 @end

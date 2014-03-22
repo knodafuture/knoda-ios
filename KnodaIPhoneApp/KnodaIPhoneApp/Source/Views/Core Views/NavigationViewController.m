@@ -24,6 +24,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "SearchViewController.h"
 #import "UserManager.h"
+#import "GroupsViewController.h"
 
 @interface NavigationViewController () <SearchViewControllerDelegate, SelectPictureDelegate, AddPredictionViewControllerDelegate, UINavigationControllerDelegate, UISearchBarDelegate>
 
@@ -62,10 +63,10 @@
 
 - (id)initWithFirstMenuItem:(MenuItem)menuItem {
     self = [super initWithNibName:@"NavigationViewController" bundle:[NSBundle mainBundle]];
-    self.itemNames = @[@"Home", @"History", @"Activity", @"Badges", @"Profile"];
+    self.itemNames = @[@"Home", @"Activity", @"Groups", @"History",  @"Badges", @"Profile"];
     self.masterShown = NO;
     self.vcCache = [[NSMutableDictionary alloc] init];
-    self.firstMenuItem = menuItem;
+    self.firstMenuItem = MenuGroups;
     _userManger = [UserManager sharedInstance];
     return self;
     
@@ -134,7 +135,7 @@
 
 - (void)openMenuItem:(MenuItem)menuItem {
     
-    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:menuItem-1 inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:menuItem inSection:0];
     [self.menuItemsTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
 
     self.activeMenuItem = menuItem;
@@ -165,6 +166,9 @@
                 break;
             case MenuProfile:
                 viewController = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:[NSBundle mainBundle]];
+                break;
+            case MenuGroups:
+                viewController = [[GroupsViewController alloc] initWithStyle:UITableViewStylePlain];
                 break;
             default:
                 viewController = [[HomeViewController alloc] initWithStyle:UITableViewStylePlain];
@@ -334,7 +338,7 @@
     
     cell.icon.image = [UIImage imageNamed:[NSString stringWithFormat:@"SideNav%@Icon", self.itemNames[indexPath.row]]];
     
-    if (indexPath.row == MenuProfile - 1)
+    if (indexPath.row == MenuProfile)
         cell.titleLabel.text = [UserManager sharedInstance].user.name;
     else
         cell.titleLabel.text = self.itemNames[indexPath.row];
@@ -346,7 +350,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self openMenuItem:indexPath.row+1];
+    [self openMenuItem:indexPath.row];
 }
 
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {

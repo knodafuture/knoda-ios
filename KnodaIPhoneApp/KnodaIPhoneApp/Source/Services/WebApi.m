@@ -524,6 +524,20 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
     }];
 }
 
+- (void)getLeaderBoardForGroup:(NSInteger)groupId location:(NSString *)location completion:(void (^)(NSArray *, NSError *))completionHandler {
+    NSDictionary *parameters;
+    
+    if (location)
+        parameters = @{@"board": location};
+    NSString *path = [NSString stringWithFormat:@"groups/%ld/leaderboard.json", (long)groupId];
+    NSString *url = [self buildUrl:path parameters:parameters];
+    NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
+    
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+        completionHandler([Leader arrayFromData:responseData], error);
+    }];
+}
+
 - (NSString *)getCreatedObjectId:(NSData *)data {
     if (!data)
         return nil;

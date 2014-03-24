@@ -12,6 +12,7 @@
 #import "WebApi.h"
 #import "NoContentCell.h"
 #import "GroupSettingsViewController.h"
+#import "RankingsViewController.h"
 
 @interface GroupPredictionsViewController ()
 @property (strong, nonatomic) Group *group;
@@ -68,7 +69,8 @@
 }
 
 - (IBAction)rankingsPressed:(id)sender {
-    
+    RankingsViewController *vc = [[RankingsViewController alloc] initWithGroup:self.group];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)settingsPressed:(id)sender {

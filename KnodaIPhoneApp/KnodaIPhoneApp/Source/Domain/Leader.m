@@ -9,5 +9,14 @@
 #import "Leader.h"
 
 @implementation Leader
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+    return @{
+             @"avatar": @"avatar_image"
+             };
+}
 
+
++ (NSValueTransformer *)avatarJSONTransformer {
+    return [self remoteImageTransformer];
+}
 @end

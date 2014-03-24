@@ -111,4 +111,5 @@ extern NSInteger PageLimit;
 - (void)sendInvites:(NSArray *)invitations completion:(void(^)(NSArray *invitations, NSError *error))completionHandler;
 - (void)createGroup:(Group *)group completion:(void(^)(Group *group, NSError *error))completionHandler;
 - (void)updateGroup:(Group *)group completion:(void(^)(Group *group, NSError *error))completionHandler;
+- (void)getLeaderBoardForGroup:(NSInteger)groupId location:(NSString *)location completion:(void(^)(NSArray *leaders, NSError *error))completionHandler;
 @end

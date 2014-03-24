@@ -212,8 +212,6 @@
 		013DA89D1853002200B507E4 /* Screen5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 013DA7A51853002100B507E4 /* Screen5@2x.png */; };
 		013DA89E1853002200B507E4 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 013DA7A61853002100B507E4 /* Media.xcassets */; };
 		013DA89F1853002200B507E4 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 013DA7A61853002100B507E4 /* Media.xcassets */; };
-		013DA8A21853002200B507E4 /* libFlurry_4.2.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 013DA7AB1853002100B507E4 /* libFlurry_4.2.3.a */; };
-		013DA8A31853002200B507E4 /* libFlurry_4.2.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 013DA7AB1853002100B507E4 /* libFlurry_4.2.3.a */; };
 		013DA8A41853002200B507E4 /* BJImageCropper.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA7AE1853002100B507E4 /* BJImageCropper.m */; };
 		013DA8A51853002200B507E4 /* BJImageCropper.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA7AE1853002100B507E4 /* BJImageCropper.m */; };
 		013DA8A61853002200B507E4 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA7B11853002100B507E4 /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -266,7 +264,6 @@
 		014A9E89185BF95100A96678 /* SideNavBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 014A9E82185BF95100A96678 /* SideNavBarButtonItem.m */; };
 		014A9E8A185BF95100A96678 /* SideNavButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 014A9E84185BF95100A96678 /* SideNavButton.m */; };
 		014A9E8B185BF95100A96678 /* SideNavButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 014A9E84185BF95100A96678 /* SideNavButton.m */; };
-		014A9F05185DA04400A96678 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A9EFE185DA04400A96678 /* libTestFlight.a */; };
 		014A9F06185DA04400A96678 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 014A9EFF185DA04400A96678 /* README.md */; };
 		014A9F07185DA04400A96678 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 014A9EFF185DA04400A96678 /* README.md */; };
 		014A9F08185DA04400A96678 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 014A9F00185DA04400A96678 /* release_notes.md */; };
@@ -371,6 +368,16 @@
 		01DBEAD418DA4D0B000F2E50 /* Member.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DBEAD218DA4D0B000F2E50 /* Member.m */; };
 		01DBEAD718DA4E88000F2E50 /* MemberTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DBEAD618DA4E88000F2E50 /* MemberTableViewCell.m */; };
 		01DBEAD818DA4E88000F2E50 /* MemberTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DBEAD618DA4E88000F2E50 /* MemberTableViewCell.m */; };
+		01E2576818E0741A009D3782 /* RankingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E2576718E0741A009D3782 /* RankingsTableViewController.m */; };
+		01E2576918E0741A009D3782 /* RankingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E2576718E0741A009D3782 /* RankingsTableViewController.m */; };
+		01E2576B18E0743A009D3782 /* RankingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E2576A18E0743A009D3782 /* RankingsTableViewCell.xib */; };
+		01E2576C18E0743A009D3782 /* RankingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E2576A18E0743A009D3782 /* RankingsTableViewCell.xib */; };
+		01E2576F18E0750C009D3782 /* RankingsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E2576E18E0750C009D3782 /* RankingsTableViewCell.m */; };
+		01E2577018E0750C009D3782 /* RankingsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E2576E18E0750C009D3782 /* RankingsTableViewCell.m */; };
+		01E2577418E07D9B009D3782 /* RankingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E2577218E07D9B009D3782 /* RankingsViewController.m */; };
+		01E2577518E07D9B009D3782 /* RankingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E2577218E07D9B009D3782 /* RankingsViewController.m */; };
+		01E2577618E07D9B009D3782 /* RankingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E2577318E07D9B009D3782 /* RankingsViewController.xib */; };
+		01E2577718E07D9B009D3782 /* RankingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E2577318E07D9B009D3782 /* RankingsViewController.xib */; };
 		01E8CB561875757E003AE018 /* RightSideButtonsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E8CB551875757E003AE018 /* RightSideButtonsView.m */; };
 		01E8CB58187575EB003AE018 /* RightSideButtonsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E8CB57187575EB003AE018 /* RightSideButtonsView.xib */; };
 		01E8CB59187575EB003AE018 /* RightSideButtonsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E8CB57187575EB003AE018 /* RightSideButtonsView.xib */; };
@@ -397,6 +404,8 @@
 		01F82CD518DD3E430000E96B /* CreateGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F82CD218DD3E430000E96B /* CreateGroupViewController.m */; };
 		01F82CD618DD3E430000E96B /* CreateGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F82CD318DD3E430000E96B /* CreateGroupViewController.xib */; };
 		01F82CD718DD3E430000E96B /* CreateGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F82CD318DD3E430000E96B /* CreateGroupViewController.xib */; };
+		01F82CDB18DD451D0000E96B /* libFlurry_4.3.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F82CDA18DD451D0000E96B /* libFlurry_4.3.2.a */; };
+		01F82CDC18DD451D0000E96B /* libFlurry_4.3.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F82CDA18DD451D0000E96B /* libFlurry_4.3.2.a */; };
 		01FFE52C187B7432001C9893 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01FFE52B187B7432001C9893 /* StoreKit.framework */; };
 		129025DD2FFF4D9FA85D4A70 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D053512337C4121BADACAB9 /* libPods.a */; };
 		50D776ADE5CA49A68908C526 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D053512337C4121BADACAB9 /* libPods.a */; };
@@ -559,8 +568,6 @@
 		013DA7A51853002100B507E4 /* Screen5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen5@2x.png"; sourceTree = "<group>"; };
 		013DA7A61853002100B507E4 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		013DA7A71853002100B507E4 /* KnodaTestFlight-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "KnodaTestFlight-Info.plist"; path = "KnodaIPhoneApp/KnodaTestFlight-Info.plist"; sourceTree = "<group>"; };
-		013DA7AA1853002100B507E4 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
-		013DA7AB1853002100B507E4 /* libFlurry_4.2.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_4.2.3.a; sourceTree = "<group>"; };
 		013DA7AD1853002100B507E4 /* BJImageCropper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BJImageCropper.h; sourceTree = "<group>"; };
 		013DA7AE1853002100B507E4 /* BJImageCropper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BJImageCropper.m; sourceTree = "<group>"; };
 		013DA7B01853002100B507E4 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
@@ -706,6 +713,14 @@
 		01DBEAD218DA4D0B000F2E50 /* Member.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Member.m; sourceTree = "<group>"; };
 		01DBEAD518DA4E88000F2E50 /* MemberTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberTableViewCell.h; sourceTree = "<group>"; };
 		01DBEAD618DA4E88000F2E50 /* MemberTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberTableViewCell.m; sourceTree = "<group>"; };
+		01E2576618E0741A009D3782 /* RankingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankingsTableViewController.h; sourceTree = "<group>"; };
+		01E2576718E0741A009D3782 /* RankingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RankingsTableViewController.m; sourceTree = "<group>"; };
+		01E2576A18E0743A009D3782 /* RankingsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RankingsTableViewCell.xib; sourceTree = "<group>"; };
+		01E2576D18E0750C009D3782 /* RankingsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankingsTableViewCell.h; sourceTree = "<group>"; };
+		01E2576E18E0750C009D3782 /* RankingsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RankingsTableViewCell.m; sourceTree = "<group>"; };
+		01E2577118E07D9B009D3782 /* RankingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankingsViewController.h; sourceTree = "<group>"; };
+		01E2577218E07D9B009D3782 /* RankingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RankingsViewController.m; sourceTree = "<group>"; };
+		01E2577318E07D9B009D3782 /* RankingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RankingsViewController.xib; sourceTree = "<group>"; };
 		01E8CB541875757E003AE018 /* RightSideButtonsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RightSideButtonsView.h; sourceTree = "<group>"; };
 		01E8CB551875757E003AE018 /* RightSideButtonsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightSideButtonsView.m; sourceTree = "<group>"; };
 		01E8CB57187575EB003AE018 /* RightSideButtonsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RightSideButtonsView.xib; sourceTree = "<group>"; };
@@ -728,6 +743,8 @@
 		01F82CD118DD3E430000E96B /* CreateGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateGroupViewController.h; sourceTree = "<group>"; };
 		01F82CD218DD3E430000E96B /* CreateGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateGroupViewController.m; sourceTree = "<group>"; };
 		01F82CD318DD3E430000E96B /* CreateGroupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateGroupViewController.xib; sourceTree = "<group>"; };
+		01F82CD918DD451D0000E96B /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
+		01F82CDA18DD451D0000E96B /* libFlurry_4.3.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_4.3.2.a; sourceTree = "<group>"; };
 		01FFE52B187B7432001C9893 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		2D053512337C4121BADACAB9 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8825C313D9324F9BA336C19A /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = "<group>"; };
@@ -745,8 +762,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01F82CDC18DD451D0000E96B /* libFlurry_4.3.2.a in Frameworks */,
 				01DBEAC418DA3C18000F2E50 /* AddressBook.framework in Frameworks */,
-				014A9F05185DA04400A96678 /* libTestFlight.a in Frameworks */,
 				0121E83B184FDBC700B7C5CA /* libz.dylib in Frameworks */,
 				0121E83C184FDBC700B7C5CA /* SystemConfiguration.framework in Frameworks */,
 				0121E83D184FDBC700B7C5CA /* Security.framework in Frameworks */,
@@ -754,7 +771,6 @@
 				0121E83F184FDBC700B7C5CA /* UIKit.framework in Frameworks */,
 				0121E840184FDBC700B7C5CA /* Foundation.framework in Frameworks */,
 				0121E841184FDBC700B7C5CA /* CoreGraphics.framework in Frameworks */,
-				013DA8A31853002200B507E4 /* libFlurry_4.2.3.a in Frameworks */,
 				50D776ADE5CA49A68908C526 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -786,9 +802,9 @@
 				01A1DEE9183E9A1F00DBBE68 /* libz.dylib in Frameworks */,
 				9E28686F17C659940033FB3C /* Security.framework in Frameworks */,
 				9E76A557179FFF11004F8FC1 /* QuartzCore.framework in Frameworks */,
+				01F82CDB18DD451D0000E96B /* libFlurry_4.3.2.a in Frameworks */,
 				014A9F15185DA1C700A96678 /* Tapjoy.framework in Frameworks */,
 				9E708824178AF68E00F036A8 /* UIKit.framework in Frameworks */,
-				013DA8A21853002200B507E4 /* libFlurry_4.2.3.a in Frameworks */,
 				129025DD2FFF4D9FA85D4A70 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1138,23 +1154,14 @@
 		013DA7A81853002100B507E4 /* Thirdparty */ = {
 			isa = PBXGroup;
 			children = (
+				01F82CD818DD451D0000E96B /* Flurry */,
 				014A9F0F185DA1C700A96678 /* TapjoySDK_iOS_v9.1.2 */,
 				014A9EFD185DA04400A96678 /* TestFlightSDK2.0.2 */,
-				013DA7A91853002100B507E4 /* Flurry */,
 				013DA7AC1853002100B507E4 /* ImageCropper */,
 				013DA7AF1853002100B507E4 /* KeychainWrapper */,
 			);
 			name = Thirdparty;
 			path = KnodaIPhoneApp/Thirdparty;
-			sourceTree = "<group>";
-		};
-		013DA7A91853002100B507E4 /* Flurry */ = {
-			isa = PBXGroup;
-			children = (
-				013DA7AA1853002100B507E4 /* Flurry.h */,
-				013DA7AB1853002100B507E4 /* libFlurry_4.2.3.a */,
-			);
-			path = Flurry;
 			sourceTree = "<group>";
 		};
 		013DA7AC1853002100B507E4 /* ImageCropper */ = {
@@ -1330,6 +1337,14 @@
 				01F82CD118DD3E430000E96B /* CreateGroupViewController.h */,
 				01F82CD218DD3E430000E96B /* CreateGroupViewController.m */,
 				01F82CD318DD3E430000E96B /* CreateGroupViewController.xib */,
+				01E2576618E0741A009D3782 /* RankingsTableViewController.h */,
+				01E2576718E0741A009D3782 /* RankingsTableViewController.m */,
+				01E2576A18E0743A009D3782 /* RankingsTableViewCell.xib */,
+				01E2576D18E0750C009D3782 /* RankingsTableViewCell.h */,
+				01E2576E18E0750C009D3782 /* RankingsTableViewCell.m */,
+				01E2577118E07D9B009D3782 /* RankingsViewController.h */,
+				01E2577218E07D9B009D3782 /* RankingsViewController.m */,
+				01E2577318E07D9B009D3782 /* RankingsViewController.xib */,
 			);
 			path = Groups;
 			sourceTree = "<group>";
@@ -1363,6 +1378,15 @@
 				01E8CB8118767D5D003AE018 /* UserCell.xib */,
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		01F82CD818DD451D0000E96B /* Flurry */ = {
+			isa = PBXGroup;
+			children = (
+				01F82CD918DD451D0000E96B /* Flurry.h */,
+				01F82CDA18DD451D0000E96B /* libFlurry_4.3.2.a */,
+			);
+			path = Flurry;
 			sourceTree = "<group>";
 		};
 		9E708817178AF68E00F036A8 = {
@@ -1547,6 +1571,7 @@
 				013DA89D1853002200B507E4 /* Screen5@2x.png in Resources */,
 				013DA8731853002200B507E4 /* Badges.xcassets in Resources */,
 				013DA8391853002200B507E4 /* CommentCell.xib in Resources */,
+				01E2576C18E0743A009D3782 /* RankingsTableViewCell.xib in Resources */,
 				01598B281858364F002E2534 /* FirstStartView.xib in Resources */,
 				013DA8791853002200B507E4 /* Default@2x-568h.png in Resources */,
 				013DA85B1853002200B507E4 /* ChangePasswordViewController.xib in Resources */,
@@ -1558,6 +1583,7 @@
 				013DA89B1853002200B507E4 /* Screen5@2x-568h.png in Resources */,
 				013DA87D1853002200B507E4 /* IntroOverlay@2x-568h.png in Resources */,
 				013DA80D1853002200B507E4 /* NavigationViewController.xib in Resources */,
+				01E2577718E07D9B009D3782 /* RankingsViewController.xib in Resources */,
 				013DA8AD1853002200B507E4 /* Localizable.strings in Resources */,
 				01B67BB018DB5D8E00D22D2B /* InvitationSearchView.xib in Resources */,
 				013DA8031853002200B507E4 /* BadgesCollectionViewController.xib in Resources */,
@@ -1618,6 +1644,7 @@
 				013DA7FA1853002200B507E4 /* AddPredictionViewController.xib in Resources */,
 				013DA8821853002200B507E4 /* Screen1@2x-568h.png in Resources */,
 				01DBEAA918D9F44F000F2E50 /* CreateGroupCell.xib in Resources */,
+				01E2577618E07D9B009D3782 /* RankingsViewController.xib in Resources */,
 				013DA87A1853002200B507E4 /* IntroOverlay.png in Resources */,
 				013DA8481853002200B507E4 /* PredictorHeaderCell.xib in Resources */,
 				01B67BA818DB4BDE00D22D2B /* MemberTableViewCell.xib in Resources */,
@@ -1627,6 +1654,7 @@
 				013DA8381853002200B507E4 /* CommentCell.xib in Resources */,
 				01598B271858364F002E2534 /* FirstStartView.xib in Resources */,
 				013DA8781853002200B507E4 /* Default@2x-568h.png in Resources */,
+				01E2576B18E0743A009D3782 /* RankingsTableViewCell.xib in Resources */,
 				013DA85A1853002200B507E4 /* ChangePasswordViewController.xib in Resources */,
 				013DA85E1853002200B507E4 /* ImageCropperViewController.xib in Resources */,
 				013DA8841853002200B507E4 /* Screen1@2x.png in Resources */,
@@ -1746,6 +1774,7 @@
 				013DA80B1853002200B507E4 /* NavigationViewController.m in Sources */,
 				0193A01218CF55140088D168 /* DeviceToken.m in Sources */,
 				013DA8A51853002200B507E4 /* BJImageCropper.m in Sources */,
+				01E2576918E0741A009D3782 /* RankingsTableViewController.m in Sources */,
 				0193A00618CE6AE90088D168 /* ParamBuilder.m in Sources */,
 				013DA8CA1853004000B507E4 /* Comment.m in Sources */,
 				013DA7F51853002200B507E4 /* MultipartRequest.m in Sources */,
@@ -1782,12 +1811,14 @@
 				013DA8C81853004000B507E4 /* Badge.m in Sources */,
 				014A9E8B185BF95100A96678 /* SideNavButton.m in Sources */,
 				013DA8431853002200B507E4 /* PredictorCell.m in Sources */,
+				01E2577518E07D9B009D3782 /* RankingsViewController.m in Sources */,
 				013DA8D41853004000B507E4 /* User.m in Sources */,
 				013DA90A1854417D00B507E4 /* DetailsTableViewController.m in Sources */,
 				013DA7C51853002200B507E4 /* NSDate+Utils.m in Sources */,
 				01B67BB418DB630300D22D2B /* Invitation.m in Sources */,
 				013DA8DC1853004000B507E4 /* WebObject.m in Sources */,
 				01E8CB63187648D1003AE018 /* SearchBar.m in Sources */,
+				01E2577018E0750C009D3782 /* RankingsTableViewCell.m in Sources */,
 				01E8CB5F1876480F003AE018 /* SearchViewController.m in Sources */,
 				013DA7CD1853002200B507E4 /* UIColor+Utils.m in Sources */,
 				018DF7A31858F484004FEDA6 /* ActivityViewController.m in Sources */,
@@ -1862,6 +1893,7 @@
 				013DA80A1853002200B507E4 /* NavigationViewController.m in Sources */,
 				0193A01118CF55140088D168 /* DeviceToken.m in Sources */,
 				013DA8A41853002200B507E4 /* BJImageCropper.m in Sources */,
+				01E2576818E0741A009D3782 /* RankingsTableViewController.m in Sources */,
 				0193A00518CE6AE90088D168 /* ParamBuilder.m in Sources */,
 				013DA8C91853004000B507E4 /* Comment.m in Sources */,
 				013DA7F41853002200B507E4 /* MultipartRequest.m in Sources */,
@@ -1898,12 +1930,14 @@
 				013DA8C71853004000B507E4 /* Badge.m in Sources */,
 				014A9E8A185BF95100A96678 /* SideNavButton.m in Sources */,
 				013DA8421853002200B507E4 /* PredictorCell.m in Sources */,
+				01E2577418E07D9B009D3782 /* RankingsViewController.m in Sources */,
 				013DA8D31853004000B507E4 /* User.m in Sources */,
 				018DF79F1858F42F004FEDA6 /* AlertCell.m in Sources */,
 				013DA9091854417D00B507E4 /* DetailsTableViewController.m in Sources */,
 				01B67BB318DB630300D22D2B /* Invitation.m in Sources */,
 				013DA7C41853002200B507E4 /* NSDate+Utils.m in Sources */,
 				01E8CB62187648D1003AE018 /* SearchBar.m in Sources */,
+				01E2576F18E0750C009D3782 /* RankingsTableViewCell.m in Sources */,
 				01E8CB5E1876480F003AE018 /* SearchViewController.m in Sources */,
 				013DA8DB1853004000B507E4 /* WebObject.m in Sources */,
 				018DF79C1858F41A004FEDA6 /* ActivityViewController.m in Sources */,
@@ -2010,6 +2044,7 @@
 					"$(SRCROOT)/KnodaIPhoneApp/ThirdParty/Flurry",
 					"$(SDKROOT)/usr/lib/system",
 					"$(SRCROOT)/KnodaIPhoneApp/ThirdParty/TestFlightSDK2.0.2",
+					"$(PROJECT_DIR)/KnodaIPhoneApp/Thirdparty/Flurry",
 				);
 				PRODUCT_NAME = "Knoda Test";
 				PROVISIONING_PROFILE = "F229B453-5DF5-4DB8-8405-F705FD241E1F";
@@ -2036,6 +2071,7 @@
 					"$(SRCROOT)/KnodaIPhoneApp/ThirdParty/Flurry",
 					"$(SDKROOT)/usr/lib/system",
 					"$(SRCROOT)/KnodaIPhoneApp/ThirdParty/TestFlightSDK2.0.2",
+					"$(PROJECT_DIR)/KnodaIPhoneApp/Thirdparty/Flurry",
 				);
 				PRODUCT_NAME = "Knoda Test";
 				PROVISIONING_PROFILE = "CA86DB6D-F464-415D-A617-957BCC68D40E";
@@ -2121,6 +2157,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/KnodaIPhoneApp/ThirdParty/Flurry",
 					"$(SDKROOT)/usr/lib/system",
+					"$(PROJECT_DIR)/KnodaIPhoneApp/Thirdparty/Flurry",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2149,6 +2186,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/KnodaIPhoneApp/ThirdParty/Flurry",
 					"$(SDKROOT)/usr/lib/system",
+					"$(PROJECT_DIR)/KnodaIPhoneApp/Thirdparty/Flurry",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

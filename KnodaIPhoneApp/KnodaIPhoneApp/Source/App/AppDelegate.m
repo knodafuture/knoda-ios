@@ -42,7 +42,7 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
 #ifdef TESTFLIGHT
     //[TestFlight takeOff:kTestFlightKey];
 #else
-    [Tapjoy requestTapjoyConnect:@"e22aa80e-473f-4015-88b6-c8fa717ca9bd" secretKey:@"c6hlD8xuRyo3acWyfUl8" options:@{TJC_OPTION_ENABLE_LOGGING:@(YES)}];
+   [Tapjoy requestTapjoyConnect:@"e22aa80e-473f-4015-88b6-c8fa717ca9bd" secretKey:@"c6hlD8xuRyo3acWyfUl8" options:@{TJC_OPTION_ENABLE_LOGGING:@(YES)}];
     [Flurry setCrashReportingEnabled: YES];
     [Flurry startSession: kFlurryKey];
 #endif
@@ -176,6 +176,7 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
 }
 
 - (void)logout {
+    
     [[LoadingView sharedInstance] reset];
     
     [self showWelcomeScreenAnimated:YES];

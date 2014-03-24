@@ -250,8 +250,6 @@
     if (buttonIndex == actionSheet.cancelButtonIndex)
         return;
     
-    NSLog(@"%d", buttonIndex);
-    
     NSArray *values = [self arrayOfValuesFromContact:self.actionSheetContact];
     
     NSString *selectedValue = [values objectAtIndex:buttonIndex];

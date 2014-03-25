@@ -13,10 +13,7 @@
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
              @"activityItemId": @"id",
-             @"predictionId": @"prediction_id",
-             @"userId" : @"user_id",
              @"creationDate": @"created_at",
-             @"predictionBody": @"prediction_body",
              @"type" : @"activity_type"
              };
 }
@@ -27,7 +24,8 @@
                              @"EXPIRED": @(ActivityTypeExpired),
                              @"WON": @(ActivityTypeWon),
                              @"LOST": @(ActivityTypeLost),
-                             @"COMMENT": @(ActivityTypeComment)
+                             @"COMMENT": @(ActivityTypeComment),
+                             @"INVITATION" : @(ActivityTypeInvitation)
                              };
     
     return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSString *str) {
@@ -36,6 +34,7 @@
         return [states allKeysForObject:state].lastObject;
     }];
 }
+
 
 
 @end

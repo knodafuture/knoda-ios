@@ -60,7 +60,7 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
 - (id)init {
     self = [super init];
     self.fileCache = [[FileCache alloc] init];
-    self.headers = @{@"Accept": @"application/json; api_version=2;", @"Content-Type" : @"application/json; charset=utf-8;"};
+    self.headers = @{@"Accept": @"application/json; api_version=3;", @"Content-Type" : @"application/json; charset=utf-8;"};
     return self;
 }
 

@@ -56,4 +56,39 @@
     
     return result;
 }
+
+- (NSString *)stripTag:(NSString *)tag fromString:(NSString *)string {
+    NSString *openP = [string stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"<%@>", tag] withString:@""];
+    return [openP stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"</%@>", tag] withString:@""];
+}
+
+- (NSAttributedString *)attributedText {
+    NSString *stripped = [self stripTag:@"p" fromString:self.text];
+    
+    NSRange openRange = [stripped rangeOfString:@"<b>"];
+    
+    if (openRange.location == NSNotFound)
+        return nil;
+    
+    NSRange endRange = [stripped rangeOfString:@"</b>"];
+    
+    if (endRange.location == NSNotFound)
+        return nil;
+    
+    NSRange boldRange = NSMakeRange(openRange.location, endRange.location - 2);
+    
+    stripped = [self stripTag:@"b" fromString:stripped];
+    
+    NSDictionary *titleAttributes = @{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:13.0]};
+    NSDictionary *bodyAttributes = @{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Light" size:13.0]};
+    
+    NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:stripped attributes:nil];
+    [string setAttributes:bodyAttributes range:NSMakeRange(0, string.length)];
+    [string setAttributes:titleAttributes range:boldRange];
+
+    return string;
+}
+
+
+
 @end

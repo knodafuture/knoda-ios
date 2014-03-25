@@ -14,6 +14,7 @@
 #import "PredictionDetailsViewController.h"
 #import "NoContentCell.h"
 #import "ActivityItem+Utils.h"
+#import "NSString+Utils.h"
 
 @implementation ActivityViewController
 
@@ -58,22 +59,9 @@
     
     AlertCell *cell = [AlertCell alertCellForTableView:tableView];
     
-    NSDictionary *titleAttributes = @{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:13.0]};
-    NSDictionary *bodyAttributes = @{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Light" size:13.0]};
-    
-    NSString *bodyString = [NSString stringWithFormat:@" \"%@\"", alert.predictionBody];
-    NSMutableAttributedString *string = [[NSMutableAttributedString alloc] init];
-    [string appendAttributedString:[[NSAttributedString alloc] initWithString:alert.title attributes:titleAttributes]];
-    [string appendAttributedString:[[NSAttributedString alloc] initWithString:bodyString attributes:bodyAttributes]];
-    
-    cell.bodyLabel.attributedText = string;
-    
-    
-    if (alert.seen)
-        cell.contentView.backgroundColor = [UIColor whiteColor];
-    else
-        cell.contentView.backgroundColor = [UIColor colorFromHex:@"f9f9f9"];
 
+    cell.bodyLabel.attributedText = [alert attributedText];
+    
     cell.iconImageView.image = [self imageForActivityItem:alert];
     cell.createdAtLabel.text = [alert creationString];
     
@@ -87,29 +75,23 @@
     ActivityItem *alert = [self.pagingDatasource.objects objectAtIndex:indexPath.row];
     [[LoadingView sharedInstance] show];
     
-    [[WebApi sharedInstance] getPrediction:alert.predictionId completion:^(Prediction *prediction, NSError *error) {
-        [[LoadingView sharedInstance] hide];
-        
-        if (!error) {
-            PredictionDetailsViewController *vc = [[PredictionDetailsViewController alloc] initWithPrediction:prediction];
-            [self.navigationController pushViewController:vc animated:YES];
-        } else {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"An unknown error occured." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-            [alert show];
-        }
-        
-    }];
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    [super tableView:tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
+    if (alert.type != ActivityTypeInvitation) {
     
-    if (indexPath.row >= self.pagingDatasource.objects.count)
-        return;
-    
-    ActivityItem *alert = [self.pagingDatasource.objects objectAtIndex:indexPath.row];
-    
-    alert.seen = YES;
+        [[WebApi sharedInstance] getPrediction:[alert.target integerValue] completion:^(Prediction *prediction, NSError *error) {
+            [[LoadingView sharedInstance] hide];
+            
+            if (!error) {
+                PredictionDetailsViewController *vc = [[PredictionDetailsViewController alloc] initWithPrediction:prediction];
+                [self.navigationController pushViewController:vc animated:YES];
+            } else {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"An unknown error occured." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                [alert show];
+            }
+            
+        }];
+    } else {
+        NSLog(@"INVITATION");
+    }
 }
 
 - (void)noObjectsRetrievedInPagingDatasource:(PagingDatasource *)pagingDatasource {

@@ -287,7 +287,7 @@
         if (error)
             return;
         
-        SideNavCell *cell = (SideNavCell *)[self.menuItemsTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:MenuAlerts - 1 inSection:0]];
+        SideNavCell *cell = (SideNavCell *)[self.menuItemsTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:MenuAlerts inSection:0]];
         if (alerts.count) {
             cell.rightInfoLabel.hidden = NO;
             cell.rightInfoLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)alerts.count];
@@ -323,7 +323,7 @@
         self.wonPercantageLabel.text = [NSString stringWithFormat:@"%@%@",user.winningPercentage,@"%"];
     self.steakLabel.text = [user.streak length] > 0 ? user.streak : @"W0";
     
-    SideNavCell *cell = (SideNavCell *)[self.menuItemsTableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:MenuProfile-1 inSection:0]];
+    SideNavCell *cell = (SideNavCell *)[self.menuItemsTableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:MenuProfile inSection:0]];
     cell.titleLabel.text = user.name;
 }
 

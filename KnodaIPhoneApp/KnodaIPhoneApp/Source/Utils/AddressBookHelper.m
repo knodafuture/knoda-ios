@@ -45,7 +45,7 @@
         
         NSMutableArray* items = [NSMutableArray arrayWithCapacity:sortedPeople.count];
         
-        for (int i = 0; i < sortedPeople.count - 1; i++) {
+        for (int i = 0; i < sortedPeople.count; i++) {
             ABRecordRef person = (__bridge ABRecordRef)([sortedPeople objectAtIndex:i]);
             Contact *contact = [self processRecord:person];
             

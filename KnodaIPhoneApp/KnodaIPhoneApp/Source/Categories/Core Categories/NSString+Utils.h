@@ -11,5 +11,4 @@
 @interface NSString (Utils)
 
 - (NSString *)md5Hash;
-
 @end

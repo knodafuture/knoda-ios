@@ -10,4 +10,5 @@
 
 @interface ActivityItem (Utils)
 - (NSString *)creationString;
+- (NSAttributedString *)attributedText;
 @end

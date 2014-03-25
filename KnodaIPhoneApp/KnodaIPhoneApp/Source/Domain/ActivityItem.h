@@ -13,17 +13,15 @@ typedef NS_ENUM(NSInteger, ActivityItemType) {
     ActivityTypeLost,
     ActivityTypeWon,
     ActivityTypeExpired,
-    ActivityTypeComment
+    ActivityTypeComment,
+    ActivityTypeInvitation
 };
 
 @interface ActivityItem : WebObject
 @property (assign, nonatomic) NSInteger activityItemId;
-@property (assign, nonatomic) NSInteger predictionId;
-@property (assign, nonatomic) NSInteger userId;
+@property (strong, nonatomic) NSString *target;
 @property (assign, nonatomic) ActivityItemType type;
-@property (assign, nonatomic) BOOL seen;
 @property (strong, nonatomic) NSDate *creationDate;
-@property (strong, nonatomic) NSString *title;
-@property (strong, nonatomic) NSString *predictionBody;
+@property (strong, nonatomic) NSString *text;
 
 @end

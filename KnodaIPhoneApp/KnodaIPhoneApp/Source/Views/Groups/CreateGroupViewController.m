@@ -97,8 +97,10 @@ static const float kAvatarSize = 344.0;
 }
 
 - (void)finish {
-    [[LoadingView sharedInstance] hide];
-    [self cancel];
+    [[UserManager sharedInstance] refreshUser:^(User *user, NSError *error) {
+        [[LoadingView sharedInstance] hide];
+        [self cancel];
+    }];
 }
 
 - (IBAction)avatarImageVIewTapped:(id)sender {

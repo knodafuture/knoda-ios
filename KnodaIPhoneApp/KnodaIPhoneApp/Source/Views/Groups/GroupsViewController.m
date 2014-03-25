@@ -91,7 +91,7 @@
 }
 
 - (void)objectsAfterObject:(id)object completion:(void (^)(NSArray *, NSError *))completionHandler {
-    [[WebApi sharedInstance] getGroups:completionHandler];
+    completionHandler([UserManager sharedInstance].groups, nil);
 }
 
 - (IBAction)createGroup:(id)sender {

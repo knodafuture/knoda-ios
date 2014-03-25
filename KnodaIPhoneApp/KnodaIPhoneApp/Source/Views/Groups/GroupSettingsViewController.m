@@ -14,6 +14,7 @@
 #import "LoadingCell.h"
 #import "MemberTableViewCell.h"
 #import "CreateGroupViewController.h"
+#import "LoadingView.h"
 
 @interface GroupSettingsViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) Group *group;
@@ -120,7 +121,14 @@
 }
 
 - (IBAction)leaveGroup:(id)sender {
+    [[LoadingView sharedInstance] hide];
     
+    [[WebApi sharedInstance] deleteMembership:self.group.myMembership completion:^(NSError *error) {
+        [[UserManager sharedInstance] refreshUser:^(User *user, NSError *error) {
+            [[LoadingView sharedInstance] hide];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }];
+    }];
 }
 
 - (IBAction)sendInvites:(id)sender {

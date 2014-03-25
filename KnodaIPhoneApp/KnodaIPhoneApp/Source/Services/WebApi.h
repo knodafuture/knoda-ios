@@ -113,4 +113,5 @@ extern NSInteger PageLimit;
 - (void)updateGroup:(Group *)group completion:(void(^)(Group *group, NSError *error))completionHandler;
 - (void)getLeaderBoardForGroup:(NSInteger)groupId location:(NSString *)location completion:(void(^)(NSArray *leaders, NSError *error))completionHandler;
 - (void)uploadImageForGroup:(Group *)group image:(UIImage *)image completion:(void(^)(NSError *error))completionHandler;
+- (void)deleteMembership:(Member *)member completion:(void(^)(NSError *error))completionHandler;
 @end

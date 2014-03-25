@@ -9,7 +9,7 @@
 #import "WebObject.h"
 #import "Leader.h"
 #import "RemoteImage.h"
-
+@class Member;
 @interface Group : WebObject
 @property (assign, nonatomic) NSInteger groupId;
 @property (strong, nonatomic) NSString *name;
@@ -20,4 +20,5 @@
 @property (strong, nonatomic) RemoteImage *avatar;
 @property (assign, nonatomic) NSInteger owner;
 @property (strong, nonatomic) NSString *shareUrl;
+@property (strong, nonatomic) Member *myMembership;
 @end

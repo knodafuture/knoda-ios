@@ -7,6 +7,7 @@
 //
 
 #import "Group.h"
+#import "Member.h"
 
 @implementation Group
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
@@ -17,7 +18,8 @@
              @"leader" : @"leader_info",
              @"memberCount" : @"member_count",
              @"avatar" : @"avatar_image",
-             @"shareUrl" : @"share_url"
+             @"shareUrl" : @"share_url",
+             @"myMembership" : @"my_membership"
     };
 }
 
@@ -27,5 +29,9 @@
 
 + (NSValueTransformer *)avatarJSONTransformer {
     return [super remoteImageTransformer];
+}
+
++ (NSValueTransformer *)myMembershipJSONTransformer {
+    return [NSValueTransformer mtl_JSONDictionaryTransformerWithModelClass:Member.class];
 }
 @end

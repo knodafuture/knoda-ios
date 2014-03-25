@@ -558,6 +558,17 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
     }];
 }
 
+- (void)deleteMembership:(Member *)member completion:(void (^)(NSError *))completionHandler {
+    NSString *path = [NSString stringWithFormat:@"memberships/%ld.json", (long)member.memberId];
+    NSString *url = [self buildUrl:path parameters:nil];
+    
+    NSURLRequest *request = [self requestWithUrl:url method:@"DELETE" payload:nil];
+    
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+        completionHandler(error);
+    }];
+}
+
 - (NSString *)getCreatedObjectId:(NSData *)data {
     if (!data)
         return nil;
@@ -613,7 +624,8 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
     
     if (!parameters)
         parameters = @{};
-        NSString *authToken = [self savedAuthToken];
+    
+    NSString *authToken = [self savedAuthToken];
     
     if (authToken) {
         NSMutableDictionary *tmp = [parameters mutableCopy];

@@ -538,6 +538,26 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
     }];
 }
 
+- (void)uploadImageForGroup:(Group *)group image:(UIImage *)image completion:(void(^)(NSError *error))completionHandler {
+
+    NSData *profileData = UIImagePNGRepresentation(image);
+    
+    if (!profileData) {
+        completionHandler([NSError errorWithDomain:@"" code:400 userInfo:@{NSLocalizedDescriptionKey: @"Bad image!"}]);
+        return;
+    }
+    
+    NSDictionary *parameters = @{@"Images" : @{@"avatar" : UIImagePNGRepresentation(image)}};
+    
+    NSString *path = [NSString stringWithFormat:@"groups/%ld.json", (long)group.groupId];
+    NSString *url = [self buildUrl:path parameters:nil];
+    MultipartRequest *request = [[MultipartRequest alloc] initWithHTTPMethod:@"PUT" url:url parameters:parameters];
+    
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+        completionHandler(error);
+    }];
+}
+
 - (NSString *)getCreatedObjectId:(NSData *)data {
     if (!data)
         return nil;
@@ -593,13 +613,12 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
     
     if (!parameters)
         parameters = @{};
-    else {
         NSString *authToken = [self savedAuthToken];
-        if (authToken) {
-            NSMutableDictionary *tmp = [parameters mutableCopy];
-            [tmp setObject:authToken forKey:@"auth_token"];
-            parameters = tmp;
-        }
+    
+    if (authToken) {
+        NSMutableDictionary *tmp = [parameters mutableCopy];
+        [tmp setObject:authToken forKey:@"auth_token"];
+        parameters = tmp;
     }
     
     NSMutableString *url = [[NSString stringWithFormat:@"%@%@", baseURL, path] mutableCopy];

@@ -28,6 +28,11 @@
     self.createGroupsCell = [[[UINib nibWithNibName:@"CreateGroupCell" bundle:[NSBundle mainBundle]] instantiateWithOwner:nil options:nil] firstObject];
     
 }
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self.pagingDatasource loadPage:0 completion:^{}];
+}
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 2;
 }
@@ -86,7 +91,7 @@
 }
 
 - (void)objectsAfterObject:(id)object completion:(void (^)(NSArray *, NSError *))completionHandler {
-    completionHandler([UserManager sharedInstance].groups, nil);
+    [[WebApi sharedInstance] getGroups:completionHandler];
 }
 
 - (IBAction)createGroup:(id)sender {

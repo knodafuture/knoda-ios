@@ -16,7 +16,7 @@
 #import "CreateGroupViewController.h"
 #import "LoadingView.h"
 
-@interface GroupSettingsViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface GroupSettingsViewController () <UITableViewDataSource, UITableViewDelegate, MemberTableViewCellDelegate>
 @property (strong, nonatomic) Group *group;
 @property (weak, nonatomic) IBOutlet UIImageView *groupImageView;
 @property (weak, nonatomic) IBOutlet UILabel *groupNameLabel;
@@ -70,7 +70,9 @@
     }
     
     [self.groupDescriptionLabel sizeToFit];
-    
+}
+
+- (void)refresh {
     [[WebApi sharedInstance] getMembersForGroup:self.group.groupId completion:^(NSArray *members, NSError *error) {
         if (!error) {
             self.members = members;
@@ -108,7 +110,7 @@
     
     Member *member = [self.members objectAtIndex:indexPath.row];
     
-    MemberTableViewCell *cell = [MemberTableViewCell cellForTableView:tableView];
+    MemberTableViewCell *cell = [MemberTableViewCell cellForTableView:tableView delegate:self indexPath:indexPath];
     
     cell.nameLabel.text = member.username;
     
@@ -128,6 +130,15 @@
             [[LoadingView sharedInstance] hide];
             [self.navigationController popToRootViewControllerAnimated:YES];
         }];
+    }];
+}
+
+- (void)MemberTableViewCell:(MemberTableViewCell *)cell didRemoveOnIndexPath:(NSIndexPath *)indexPath {
+    
+    Member *member = [self.members objectAtIndex:indexPath.row];
+    
+    [[WebApi sharedInstance] deleteMembership:member completion:^(NSError *error) {
+        [self refresh];
     }];
 }
 

@@ -7,11 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+@class MemberTableViewCell;
+@protocol MemberTableViewCellDelegate <NSObject>
+
+- (void)MemberTableViewCell:(MemberTableViewCell *)cell didRemoveOnIndexPath:(NSIndexPath *)indexPath;
+
+@end
 
 @interface MemberTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UIButton *removeButton;
+@property (weak, nonatomic) IBOutlet UIButton *removeConfirmButton;
 
-+ (MemberTableViewCell *)cellForTableView:(UITableView *)tableView;
++ (MemberTableViewCell *)cellForTableView:(UITableView *)tableView delegate:(id<MemberTableViewCellDelegate>)delegate indexPath:(NSIndexPath *)indexPath;
 
 @end

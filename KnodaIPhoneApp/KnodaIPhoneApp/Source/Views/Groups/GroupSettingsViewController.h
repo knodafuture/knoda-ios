@@ -13,4 +13,6 @@
 
 - (id)initWithGroup:(Group *)group;
 
+- (id)initWithGroup:(Group *)group invitationCode:(NSString *)invitationCode;
+
 @end

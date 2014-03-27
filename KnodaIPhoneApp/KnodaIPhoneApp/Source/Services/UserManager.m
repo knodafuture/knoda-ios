@@ -150,6 +150,13 @@ static UserManager *sharedSingleton;
     return request;
 }
 
+- (void)saveSignUpRequest:(SignupRequest *)request andResponse:(LoginResponse *)response {
+    [[NSUserDefaults standardUserDefaults] setObject:request.email forKey: @"User"];
+    [[NSUserDefaults standardUserDefaults] setObject:response.token forKey:LoginResponseKey];
+    [self.keychain setObject:request.password forKey:((__bridge id)kSecValueData)];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
 
 - (void)saveRequest:(LoginRequest *)request andResponse:(LoginResponse *)response {
     

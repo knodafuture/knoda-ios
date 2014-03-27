@@ -66,7 +66,7 @@
     self.itemNames = @[@"Home", @"Activity", @"Groups", @"History",  @"Badges", @"Profile"];
     self.masterShown = NO;
     self.vcCache = [[NSMutableDictionary alloc] init];
-    self.firstMenuItem = MenuGroups;
+    self.firstMenuItem = MenuHome;
     _userManger = [UserManager sharedInstance];
     return self;
     

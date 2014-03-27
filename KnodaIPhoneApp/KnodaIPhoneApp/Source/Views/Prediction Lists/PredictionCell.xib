@@ -141,6 +141,17 @@
                                 <rect key="frame" x="127" y="10" width="15" height="15"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PredictGroupsIcon" id="upR-cO-fOe">
+                                <rect key="frame" x="11" y="82" width="13" height="13"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="KU Crew" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VHO-TT-Ymu">
+                                <rect key="frame" x="32" y="77" width="300" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -156,6 +167,8 @@
                 <outlet property="commentLabelContainer" destination="Yt6-9W-Q2S" id="VX3-qL-2MY"/>
                 <outlet property="disagreeImageView" destination="l8G-JN-vDK" id="7gj-mz-2j2"/>
                 <outlet property="disagreeView" destination="Qv2-fI-zVg" id="t8W-1r-bAd"/>
+                <outlet property="groupImageView" destination="upR-cO-fOe" id="4cc-ds-GOd"/>
+                <outlet property="groupNameLabel" destination="VHO-TT-Ymu" id="L3P-FC-rCd"/>
                 <outlet property="metadataLabel" destination="b1Y-l1-01z" id="9Hu-pO-7oM"/>
                 <outlet property="outcomeLabel" destination="Fzh-XO-Pbc" id="w2k-iC-M88"/>
                 <outlet property="profileButton" destination="vke-HR-jPe" id="Owr-9P-nKZ"/>
@@ -168,6 +181,7 @@
     </objects>
     <resources>
         <image name="CommentIcon.png" width="8" height="7"/>
+        <image name="PredictGroupsIcon" width="13" height="13"/>
         <image name="SwipeAgreeArrow" width="33" height="17"/>
         <image name="SwipeDisagreeArrow" width="33" height="17"/>
         <image name="VerifiedCheckmark" width="15" height="15"/>

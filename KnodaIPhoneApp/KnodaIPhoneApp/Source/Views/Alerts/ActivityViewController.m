@@ -15,6 +15,7 @@
 #import "NoContentCell.h"
 #import "ActivityItem+Utils.h"
 #import "NSString+Utils.h"
+#import "GroupSettingsViewController.h"
 
 @implementation ActivityViewController
 
@@ -90,7 +91,17 @@
             
         }];
     } else {
-        NSLog(@"INVITATION");
+        
+        [[WebApi sharedInstance] getInvitationDetails:alert.target completion:^(InvitationCodeDetails *details, NSError *error) {
+            [[LoadingView sharedInstance] hide];
+            if (!error) {
+                GroupSettingsViewController *vc = [[GroupSettingsViewController alloc] initWithGroup:details.group invitationCode:alert.target];
+                [self.navigationController pushViewController:vc animated:YES];
+            } else {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"An unknown error occured." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                [alert show];
+            }
+        }];
     }
 }
 
@@ -117,6 +128,8 @@
             break;
         case ActivityTypeLost:
             return [UIImage imageNamed:@"ActivityLostIcon"];
+        case ActivityTypeInvitation:
+            return [UIImage imageNamed:@"ActivityGroupsIcon"];
         default:
             return nil;
             break;

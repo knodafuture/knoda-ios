@@ -12,6 +12,7 @@
                 <outlet property="groupImageView" destination="6aJ-C1-lYX" id="f8f-KS-Pm2"/>
                 <outlet property="groupNameLabel" destination="qJQ-Lj-Vim" id="ts8-rO-YMV"/>
                 <outlet property="inviteView" destination="DX5-ct-AeB" id="pFM-GQ-8Ui"/>
+                <outlet property="joinGroupView" destination="uIs-Og-PTp" id="joW-17-uej"/>
                 <outlet property="leaveGroupView" destination="zMG-fr-8Op" id="1eW-I7-TT4"/>
                 <outlet property="tableView" destination="y1H-R2-GlY" id="43f-xp-hdd"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Fkd-gz-TkQ"/>
@@ -66,6 +67,33 @@
                                     </state>
                                     <connections>
                                         <action selector="leaveGroup:" destination="-1" eventType="touchUpInside" id="bN0-2P-nKp"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        </view>
+                        <view hidden="YES" contentMode="scaleToFill" id="uIs-Og-PTp" userLabel="Join Group">
+                            <rect key="frame" x="0.0" y="86" width="320" height="40"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Join Group" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="i8M-Kz-q7G">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" red="0.13725490200000001" green="0.36078431370000003" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ADm-Pw-jsa">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                                    <state key="normal">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="joinGroup:" destination="-1" eventType="touchUpInside" id="Tix-r2-8ga"/>
                                     </connections>
                                 </button>
                             </subviews>

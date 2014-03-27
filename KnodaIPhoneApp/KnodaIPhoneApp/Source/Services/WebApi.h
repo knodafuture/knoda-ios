@@ -23,6 +23,7 @@
 #import "Group.h"
 #import "Member.h"
 #import "Invitation.h"
+#import "InvitationCodeDetails.h"
 
 typedef NS_ENUM(NSInteger, HttpStatus) {
 	HttpStatusOk				= 200,
@@ -106,6 +107,7 @@ extern NSInteger PageLimit;
 // -- Groups -- //
 
 - (void)getGroups:(void(^)(NSArray *groups, NSError *error))completionHandler;
+- (void)getGroup:(NSInteger)groupId completion:(void(^)(Group *group, NSError *error))completionHandler;
 - (void)getPredictionsForGroup:(NSInteger)groupId after:(NSInteger)lastId completion:(void(^)(NSArray *predictions, NSError *error))completionHandler;
 - (void)getMembersForGroup:(NSInteger)groupId completion:(void(^)(NSArray *members, NSError *error))completionHandler;
 - (void)sendInvites:(NSArray *)invitations completion:(void(^)(NSArray *invitations, NSError *error))completionHandler;
@@ -114,4 +116,6 @@ extern NSInteger PageLimit;
 - (void)getLeaderBoardForGroup:(NSInteger)groupId location:(NSString *)location completion:(void(^)(NSArray *leaders, NSError *error))completionHandler;
 - (void)uploadImageForGroup:(Group *)group image:(UIImage *)image completion:(void(^)(NSError *error))completionHandler;
 - (void)deleteMembership:(Member *)member completion:(void(^)(NSError *error))completionHandler;
+- (void)getInvitationDetails:(NSString *)code completion:(void(^)(InvitationCodeDetails *details, NSError *error))completionHandler;
+- (void)consumeInviteCode:(NSString *)code forGroup:(Group *)group completion:(void(^)(Member *membership, NSError *error))completionHandler;
 @end

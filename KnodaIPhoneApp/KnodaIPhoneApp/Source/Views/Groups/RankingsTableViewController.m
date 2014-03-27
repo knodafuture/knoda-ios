@@ -59,9 +59,10 @@
     cell.rankLabel.text = [NSString stringWithFormat:@"%ld", (long)leader.rank];
     cell.usernameLabel.text = leader.username;
     cell.winLossLabel.text = [NSString stringWithFormat:@"%ld-%ld", (long)leader.won, (long)leader.lost];
-    long total = leader.won + leader.lost;
-    if (total > 0)
-        cell.winPercentLabel.text = [NSString stringWithFormat:@"%ld%%", (long)leader.won / (long)(leader.won + leader.lost)];
+    double total = leader.won + leader.lost;
+    if (total > 0) {
+        cell.winPercentLabel.text = [NSString stringWithFormat:@"%2.2f%%", (double)leader.won / total * 100.0];
+    }
     else
         cell.winPercentLabel.text = @"-";
     

@@ -30,9 +30,10 @@
              @"challenge": @"my_challenge",
              @"points": @"my_points",
              @"categories" : @"tags",
-             @"verifiedACcount" : @"verified_account",
+             @"verifiedAccount" : @"verified_account",
              @"outcome" : @"outcome",
-             @"groupId" : @"group_id"
+             @"groupId" : @"group_id",
+             @"groupName" : @"group_name"
              };
 }
 

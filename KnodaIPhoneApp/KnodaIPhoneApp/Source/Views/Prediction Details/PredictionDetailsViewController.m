@@ -20,6 +20,7 @@
 #import "PredictionCell.h"
 #import "PredictionDetailsHeaderCell.h"
 #import "UserManager.h"
+#import "GroupPredictionsViewController.h"
 
 static const int kBSAlertTag = 1001;
 
@@ -210,10 +211,24 @@ static const int kBSAlertTag = 1001;
     if(self.shouldNotOpenCategory) {
         [self backPressed:nil];
     }
-    else {
+    if (!self.prediction.groupName) {
         CategoryPredictionsViewController *vc = [[CategoryPredictionsViewController alloc] initWithCategory:[self.prediction.categories firstObject]];
         vc.shouldNotOpenProfile = self.shouldNotOpenProfile;
         [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        [[LoadingView sharedInstance] show];
+        
+        [[WebApi sharedInstance] getGroup:self.prediction.groupId completion:^(Group *group, NSError *error) {
+            [[LoadingView sharedInstance] hide];
+            
+            if (error) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Sorry, something went wrong" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                [alert show];
+            } else {
+                GroupPredictionsViewController *vc = [[GroupPredictionsViewController alloc] initWithGroup:group];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+        }];
     }
 }
 

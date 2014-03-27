@@ -53,7 +53,7 @@ static const float parallaxRatio = 0.5;
     
     [super viewDidLoad];
     self.headerCell = [PredictionDetailsHeaderCell predictionCellWithOwner:self.owner];
-    self.sectionHeader = [PredictionDetailsSectionHeader sectionHeaderWithOwner:self.owner];
+    self.sectionHeader = [PredictionDetailsSectionHeader sectionHeaderWithOwner:self.owner forPrediction:self.prediction];
     
     [self.headerCell configureWithPrediction:self.prediction];
 }

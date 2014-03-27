@@ -15,6 +15,7 @@
 @interface Prediction : WebObject
 @property (assign, nonatomic) NSInteger predictionId;
 @property (assign, nonatomic) NSInteger groupId;
+@property (strong, nonatomic) NSString *groupName;
 @property (strong, nonatomic) NSString *body;
 
 @property (strong, nonatomic) NSArray *categories;

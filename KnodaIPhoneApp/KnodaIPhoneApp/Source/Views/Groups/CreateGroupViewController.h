@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+
+extern NSString *GroupChangedNotificationName;
+extern NSString *GroupChangedNotificationKey;
 @class Group;
 @interface CreateGroupViewController : UIViewController
 

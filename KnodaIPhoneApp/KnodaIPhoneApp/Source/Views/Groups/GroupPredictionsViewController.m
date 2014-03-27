@@ -13,6 +13,7 @@
 #import "NoContentCell.h"
 #import "GroupSettingsViewController.h"
 #import "RankingsViewController.h"
+#import "CreateGroupViewController.h"
 
 @interface GroupPredictionsViewController ()
 @property (strong, nonatomic) Group *group;
@@ -30,16 +31,32 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = self.group.name.uppercaseString;
     [self.navigationItem setLeftBarButtonItem:[UIBarButtonItem backButtonWithTarget:self action:@selector(back)]];
     
     self.headerCell = [[[UINib nibWithNibName:@"GroupPredictionsHeaderCell" bundle:[NSBundle mainBundle]] instantiateWithOwner:self options:nil] firstObject];
+    [self populate];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupChanged:) name:GroupChangedNotificationName object:nil];
+}
+
+- (void)populate {
+    self.title = self.group.name.uppercaseString;
     self.leaderNameLabel.text = self.group.leader.username;
+
 }
 
 - (void)back {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+- (void)groupChanged:(NSNotification *)notification {
+    Group *changedGroup = [notification.userInfo objectForKey:GroupChangedNotificationKey];
+    
+    if (changedGroup.groupId == self.group.groupId) {
+        [self populate];
+    }
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear: animated];
     [Flurry logEvent: @"Group_Prediction_List" withParameters: nil timed: YES];
@@ -115,6 +132,7 @@
     
     PredictionDetailsViewController *vc = [[PredictionDetailsViewController alloc] initWithPrediction:prediction];
     vc.delegate = self;
+    vc.shouldNotOpenCategory = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

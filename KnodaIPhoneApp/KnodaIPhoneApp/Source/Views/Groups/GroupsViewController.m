@@ -27,12 +27,21 @@
     self.view.backgroundColor = [UIColor colorFromHex:@"EFEFEF"];
     self.createGroupsCell = [[[UINib nibWithNibName:@"CreateGroupCell" bundle:[NSBundle mainBundle]] instantiateWithOwner:nil options:nil] firstObject];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupChanged:) name:GroupChangedNotificationName object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self.pagingDatasource loadPage:0 completion:^{}];
 }
+
+- (void)groupChanged:(NSNotification *)notification {
+    [[UserManager sharedInstance] refreshUser:^(User *user, NSError *error) {
+        [self.pagingDatasource loadPage:0 completion:^{}];
+    }];
+}
+
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 2;
 }

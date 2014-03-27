@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class Prediction;
 const extern CGFloat PredictionDetailsSectionHeaderHeight;
 
 @interface PredictionDetailsSectionHeader : UIView
 
-+ (PredictionDetailsSectionHeader *)sectionHeaderWithOwner:(id)owner;
++ (PredictionDetailsSectionHeader *)sectionHeaderWithOwner:(id)owner forPrediction:(Prediction *)prediction;
 @end

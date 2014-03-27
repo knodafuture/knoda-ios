@@ -477,6 +477,16 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
     }];
 }
 
+- (void)getGroup:(NSInteger)groupId completion:(void (^)(Group *, NSError *))completionHandler {
+    NSString *path = [NSString stringWithFormat:@"groups/%ld.json", (long)groupId];
+    NSString *url = [self buildUrl:path parameters:nil];
+    NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
+    
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+        completionHandler([Group instanceFromData:responseData], error);
+    }];
+}
+
 - (void)getPredictionsForGroup:(NSInteger)groupId after:(NSInteger)lastId completion:(void (^)(NSArray *, NSError *))completionHandler {
     NSString *path = [NSString stringWithFormat:@"groups/%ld/predictions.json", (long)groupId];
     NSString *url = [self buildUrl:path parameters:nil];
@@ -516,7 +526,8 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
 
 - (void)updateGroup:(Group *)group completion:(void (^)(Group *, NSError *))completionHandler {
     
-    NSString *url = [self buildUrl:@"groups.json" parameters:nil];
+    NSString *path = [NSString stringWithFormat:@"groups/%ld.json", (long)group.groupId];
+    NSString *url = [self buildUrl:path parameters:nil];
     NSURLRequest *request = [self requestWithUrl:url method:@"PUT" payload:group];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
@@ -566,6 +577,26 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler(error);
+    }];
+}
+
+- (void)getInvitationDetails:(NSString *)code completion:(void (^)(InvitationCodeDetails *, NSError *))completionHandler {
+    NSString *path = [NSString stringWithFormat:@"invitations/%@.json", code];
+    NSString *url = [self buildUrl:path parameters:nil];
+    NSURLRequest *request = [self requestWithUrl:url method:@"GET" data:nil];
+    
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+        completionHandler([InvitationCodeDetails instanceFromData:responseData], error);
+    }];
+}
+
+- (void)consumeInviteCode:(NSString *)code forGroup:(Group *)group completion:(void (^)(Member *, NSError *))completionHandler {
+    NSString *url = [self buildUrl:@"memberships.json" parameters:nil];
+    NSDictionary *dict = @{@"code": code, @"group_id" : @(group.groupId)};
+    NSURLRequest *request = [self requestWithUrl:url method:@"POST" data:[NSJSONSerialization dataWithJSONObject:dict options:0 error:nil]];
+    
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+        completionHandler([Member instanceFromData:responseData], error);
     }];
 }
 

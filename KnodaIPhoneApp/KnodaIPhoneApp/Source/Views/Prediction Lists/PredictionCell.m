@@ -20,6 +20,7 @@ static CGFloat minDistanceForSwipe = 3.0;
 static UIFont *defaultBodyLabelFont;
 static CGFloat defaultHeight;
 static UILabel *defaultBodyLabel;
+static PredictionCell *referenceCell;
 
 static CGFloat fullRedR = 254.0/256.0;
 static CGFloat fullRedG = 50.0/256.0;
@@ -46,7 +47,8 @@ static NSMutableDictionary *cellHeightCache;
 @property (weak, nonatomic) IBOutlet UIView *disagreeImageView;
 @property (weak, nonatomic) IBOutlet UIButton *profileButton;
 @property (weak, nonatomic) IBOutlet UIImageView *verifiedCheckmark;
-
+@property (weak, nonatomic) IBOutlet UIImageView *groupImageView;
+@property (weak, nonatomic) IBOutlet UILabel *groupNameLabel;
 @property (assign, nonatomic) CGPoint initialTouchLocation;
 @property (assign, nonatomic) NSTimeInterval initialTouchTimestamp;
 @property (assign, nonatomic) BOOL trackingTouch;
@@ -65,7 +67,7 @@ static NSMutableDictionary *cellHeightCache;
     nib = [UINib nibWithNibName:@"PredictionCell" bundle:[NSBundle mainBundle]];
     
     PredictionCell *tmp = [[nib instantiateWithOwner:nil options:nil] lastObject];
-    
+    referenceCell = tmp;
     initialAgreeImageFrame = tmp.agreeImageView.frame;
     initialDisagreeImageFrame = tmp.disagreeImageView.frame;
     defaultBodyLabelFont = tmp.bodyLabel.font;
@@ -76,7 +78,7 @@ static NSMutableDictionary *cellHeightCache;
 }
 
 + (PredictionCell *)predictionCellForTableView:(UITableView *)tableView {
-    PredictionCell *cell = (PredictionCell *)[tableView dequeueReusableCellWithIdentifier:@"PredictionCell"];
+    PredictionCell *cell;
     
     if (!cell)
         cell = [[nib instantiateWithOwner:nil options:nil] lastObject];
@@ -101,6 +103,9 @@ static NSMutableDictionary *cellHeightCache;
         height = defaultHeight;
     else
         height = defaultHeight + (textSize.height - defaultBodyLabel.frame.size.height);
+    
+    if (prediction.groupName)
+        height = height + referenceCell.groupNameLabel.frame.size.height;
     
     [cellHeightCache setObject:@(height) forKey:@(prediction.predictionId)];
     
@@ -183,6 +188,26 @@ static NSMutableDictionary *cellHeightCache;
     CGRect frame = self.frame;
     frame.size.height = [PredictionCell heightForPrediction:self.prediction];
     self.frame = frame;
+    
+    if (!self.prediction.groupName) {
+        self.groupImageView.hidden = YES;
+        self.groupNameLabel.hidden = YES;
+        
+    } else {
+        frame = self.metadataLabel.frame;
+        frame.origin.y -= self.groupNameLabel.frame.size.height;
+        self.metadataLabel.frame = frame;
+        frame = self.commentLabelContainer.frame;
+        frame.origin.y -= self.groupNameLabel.frame.size.height;
+        self.commentLabelContainer.frame = frame;
+        frame = self.bodyLabel.frame;
+        frame.size.height -= self.groupNameLabel.frame.size.height;
+        self.bodyLabel.frame = frame;
+        self.groupNameLabel.hidden = NO;
+        self.groupImageView.hidden = NO;
+        self.groupNameLabel.text = self.prediction.groupName;
+    }
+    
     [self update];
 }
 

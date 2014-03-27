@@ -132,7 +132,8 @@ static const NSInteger kMaxPasswordLength = 20;
         [[LoadingView sharedInstance] hide];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:FirstLaunchKey];
         if (!error) {
-            [[self appDelegate] login];
+            AppDelegate *test = (AppDelegate *)[UIApplication sharedApplication].delegate;
+            [test login];
 #ifndef TESTFLIGHT
             [Tapjoy actionComplete:TJC_SIGN_UP_FOR_KNODA_];
 #endif

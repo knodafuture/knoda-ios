@@ -27,6 +27,16 @@
     return [NSValueTransformer mtl_JSONDictionaryTransformerWithModelClass:Leader.class];
 }
 
++ (NSValueTransformer *)rankJSONTransformer {
+    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^id(id value) {
+        if (!value)
+            return @(0);
+        return value;
+    } reverseBlock:^id(id value) {
+        return value;
+    }];
+}
+
 + (NSValueTransformer *)avatarJSONTransformer {
     return [super remoteImageTransformer];
 }

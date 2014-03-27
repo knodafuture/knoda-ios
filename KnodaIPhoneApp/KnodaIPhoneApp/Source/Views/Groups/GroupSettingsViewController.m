@@ -16,7 +16,7 @@
 #import "CreateGroupViewController.h"
 #import "LoadingView.h"
 
-@interface GroupSettingsViewController () <UITableViewDataSource, UITableViewDelegate, MemberTableViewCellDelegate>
+@interface GroupSettingsViewController () <UITableViewDataSource, UITableViewDelegate, MemberTableViewCellDelegate, UIActionSheetDelegate>
 @property (strong, nonatomic) Group *group;
 @property (weak, nonatomic) IBOutlet UIImageView *groupImageView;
 @property (weak, nonatomic) IBOutlet UILabel *groupNameLabel;
@@ -25,7 +25,9 @@
 @property (weak, nonatomic) IBOutlet UIView *inviteView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *editGroupView;
+@property (weak, nonatomic) IBOutlet UIView *joinGroupView;
 @property (strong, nonatomic) NSArray *members;
+@property (strong, nonatomic) NSString *invitationCode;
 @end
 
 @implementation GroupSettingsViewController
@@ -36,27 +38,47 @@
     return self;
 }
 
+- (id)initWithGroup:(Group *)group invitationCode:(NSString *)invitationCode {
+    self = [self initWithGroup:group];
+    self.invitationCode = invitationCode;
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"SETTINGS";
     [self.navigationItem setLeftBarButtonItem:[UIBarButtonItem backButtonWithTarget:self action:@selector(back)]];
     
+
+    [self populate];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupChanged:) name:GroupChangedNotificationName object:nil];
+}
+
+- (void)populate {
     [[WebApi sharedInstance] getImage:self.group.avatar.small completion:^(UIImage *image, NSError *error) {
         if (!error && image)
             self.groupImageView.image = image;
     }];
     
-    if ([UserManager sharedInstance].user.userId == self.group.owner) {
-        self.inviteView.hidden = NO;
-    } else {
+    if (self.invitationCode && !self.group.myMembership) {
         self.inviteView.hidden = YES;
         self.editGroupView.hidden = YES;
-        CGRect frame = self.tableView.frame;
-        frame.size.height = self.view.frame.size.height - frame.origin.y;
-        self.tableView.frame = frame;
+        self.leaveGroupView.hidden = YES;
+        self.joinGroupView.hidden = NO;
+    } else {
+        self.joinGroupView.hidden = YES;
+        if ([UserManager sharedInstance].user.userId == self.group.owner) {
+            self.inviteView.hidden = NO;
+        } else {
+            self.inviteView.hidden = YES;
+            self.editGroupView.hidden = YES;
+            CGRect frame = self.tableView.frame;
+            frame.size.height = self.view.frame.size.height - frame.origin.y;
+            self.tableView.frame = frame;
+        }
+        self.leaveGroupView.hidden = !self.inviteView.hidden;
+        
     }
-    
-    self.leaveGroupView.hidden = !self.inviteView.hidden;
     
     self.groupNameLabel.text = self.group.name;
     self.groupDescriptionLabel.text = self.group.groupDescription;
@@ -70,6 +92,9 @@
     }
     
     [self.groupDescriptionLabel sizeToFit];
+    
+    if (!self.invitationCode)
+        [self refresh];
 }
 
 - (void)refresh {
@@ -81,7 +106,17 @@
     }];
 }
 
+- (void)groupChanged:(NSNotification *)notification {
+    Group *newGroup = [notification.userInfo objectForKey:GroupChangedNotificationKey];
+    
+    if (newGroup.groupId == self.group.groupId) {
+        self.group = newGroup;
+        [self populate];
+        [self refresh];
+    }
+}
 - (void)back {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -91,22 +126,14 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (!self.members)
-        return loadingCellHeight;
     return 44.0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (!self.members)
-        return 1;
-    
     return self.members.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (!self.members)
-        return [LoadingCell loadingCellForTableView:tableView];
     
     Member *member = [self.members objectAtIndex:indexPath.row];
     
@@ -123,14 +150,41 @@
 }
 
 - (IBAction)leaveGroup:(id)sender {
-    [[LoadingView sharedInstance] hide];
+    UIActionSheet * actionSheet = [[UIActionSheet alloc]initWithTitle:NSLocalizedString(@"Are you sure you want to leave?", @"") delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"Log Out" otherButtonTitles:@"Cancel", nil];
+    [actionSheet showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        [[LoadingView sharedInstance] hide];
+        
+        [[WebApi sharedInstance] deleteMembership:self.group.myMembership completion:^(NSError *error) {
+            [[UserManager sharedInstance] refreshUser:^(User *user, NSError *error) {
+                [[LoadingView sharedInstance] hide];
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }];
+        }];
+    }
+}
+- (IBAction)joinGroup:(id)sender {
     
-    [[WebApi sharedInstance] deleteMembership:self.group.myMembership completion:^(NSError *error) {
-        [[UserManager sharedInstance] refreshUser:^(User *user, NSError *error) {
-            [[LoadingView sharedInstance] hide];
-            [self.navigationController popToRootViewControllerAnimated:YES];
+    [[LoadingView sharedInstance] show];
+    
+    [[WebApi sharedInstance] consumeInviteCode:self.invitationCode forGroup:self.group completion:^(Member *membership, NSError *error) {
+        [[LoadingView sharedInstance] hide];
+        if (error) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"An Unknown Error Occurred" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+            [alert show];
+            return;
+        }
+        
+        [[WebApi sharedInstance] getGroup:self.group.groupId completion:^(Group *group, NSError *error) {
+            self.group = group;
+            self.invitationCode = nil;
+            [self populate];
         }];
     }];
+    
 }
 
 - (void)MemberTableViewCell:(MemberTableViewCell *)cell didRemoveOnIndexPath:(NSIndexPath *)indexPath {

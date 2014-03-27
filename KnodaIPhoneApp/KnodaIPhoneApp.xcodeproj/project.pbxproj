@@ -346,6 +346,8 @@
 		01B67BB018DB5D8E00D22D2B /* InvitationSearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01B67BAE18DB5D8E00D22D2B /* InvitationSearchView.xib */; };
 		01B67BB318DB630300D22D2B /* Invitation.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B67BB218DB630300D22D2B /* Invitation.m */; };
 		01B67BB418DB630300D22D2B /* Invitation.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B67BB218DB630300D22D2B /* Invitation.m */; };
+		01BFDC7218E4B9AB0098F81F /* InvitationCodeDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BFDC7118E4B9AB0098F81F /* InvitationCodeDetails.m */; };
+		01BFDC7318E4B9AB0098F81F /* InvitationCodeDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BFDC7118E4B9AB0098F81F /* InvitationCodeDetails.m */; };
 		01DBEAA918D9F44F000F2E50 /* CreateGroupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01DBEAA818D9F44F000F2E50 /* CreateGroupCell.xib */; };
 		01DBEAAA18D9F44F000F2E50 /* CreateGroupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01DBEAA818D9F44F000F2E50 /* CreateGroupCell.xib */; };
 		01DBEAAD18DA036E000F2E50 /* GroupSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DBEAAC18DA036E000F2E50 /* GroupSettingsViewController.m */; };
@@ -696,6 +698,8 @@
 		01B67BAE18DB5D8E00D22D2B /* InvitationSearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvitationSearchView.xib; sourceTree = "<group>"; };
 		01B67BB118DB630300D22D2B /* Invitation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Invitation.h; sourceTree = "<group>"; };
 		01B67BB218DB630300D22D2B /* Invitation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Invitation.m; sourceTree = "<group>"; };
+		01BFDC7018E4B9AB0098F81F /* InvitationCodeDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitationCodeDetails.h; sourceTree = "<group>"; };
+		01BFDC7118E4B9AB0098F81F /* InvitationCodeDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitationCodeDetails.m; sourceTree = "<group>"; };
 		01DBEAA818D9F44F000F2E50 /* CreateGroupCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateGroupCell.xib; sourceTree = "<group>"; };
 		01DBEAAB18DA036E000F2E50 /* GroupSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupSettingsViewController.h; sourceTree = "<group>"; };
 		01DBEAAC18DA036E000F2E50 /* GroupSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupSettingsViewController.m; sourceTree = "<group>"; };
@@ -1235,6 +1239,8 @@
 				01DBEAD218DA4D0B000F2E50 /* Member.m */,
 				01B67BB118DB630300D22D2B /* Invitation.h */,
 				01B67BB218DB630300D22D2B /* Invitation.m */,
+				01BFDC7018E4B9AB0098F81F /* InvitationCodeDetails.h */,
+				01BFDC7118E4B9AB0098F81F /* InvitationCodeDetails.m */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -1856,6 +1862,7 @@
 				01598B3518584645002E2534 /* UINavigationBar+AppearanceUtils.m in Sources */,
 				013DA81D1853002200B507E4 /* NoContentCell.m in Sources */,
 				013DA8FE185432B100B507E4 /* CommentsDatasource.m in Sources */,
+				01BFDC7318E4B9AB0098F81F /* InvitationCodeDetails.m in Sources */,
 				013DA7F71853002200B507E4 /* ImageLoader.m in Sources */,
 				013DA82F1853002200B507E4 /* WelcomeViewController.m in Sources */,
 				013DA7FD1853002200B507E4 /* BadgeCollectionViewCell.m in Sources */,
@@ -1975,6 +1982,7 @@
 				01598B3418584645002E2534 /* UINavigationBar+AppearanceUtils.m in Sources */,
 				013DA81C1853002200B507E4 /* NoContentCell.m in Sources */,
 				013DA8FD185432B100B507E4 /* CommentsDatasource.m in Sources */,
+				01BFDC7218E4B9AB0098F81F /* InvitationCodeDetails.m in Sources */,
 				013DA7F61853002200B507E4 /* ImageLoader.m in Sources */,
 				013DA82E1853002200B507E4 /* WelcomeViewController.m in Sources */,
 				013DA7FC1853002200B507E4 /* BadgeCollectionViewCell.m in Sources */,

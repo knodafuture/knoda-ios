@@ -82,7 +82,7 @@ extern NSInteger PageLimit;
 - (void)sendBS:(NSInteger)predictionId completion:(void(^)(NSError *error))completionHandler;
 
 - (void)getCommentsForPrediction:(NSInteger)predictionId last:(NSInteger)lastId completion:(void(^)(NSArray *comments, NSError *error))completionHandler;
-- (void)createComment:(Comment *)comment completion:(void(^)(NSError *error))completionHandler;
+- (void)createComment:(Comment *)comment completion:(void(^)(Comment *createdComment, NSError *error))completionHandler;
 
 - (void)getImage:(NSString *)imageUrl completion:(void(^)(UIImage *image, NSError *error))completionHandler;
 
@@ -114,8 +114,9 @@ extern NSInteger PageLimit;
 - (void)createGroup:(Group *)group completion:(void(^)(Group *group, NSError *error))completionHandler;
 - (void)updateGroup:(Group *)group completion:(void(^)(Group *group, NSError *error))completionHandler;
 - (void)getLeaderBoardForGroup:(NSInteger)groupId location:(NSString *)location completion:(void(^)(NSArray *leaders, NSError *error))completionHandler;
-- (void)uploadImageForGroup:(Group *)group image:(UIImage *)image completion:(void(^)(NSError *error))completionHandler;
+- (void)uploadImageForGroup:(Group *)group image:(UIImage *)image completion:(void(^)(Group *newGroup, NSError *error))completionHandler;
 - (void)deleteMembership:(Member *)member completion:(void(^)(NSError *error))completionHandler;
+- (void)deleteGroupAvatar:(Group *)group completion:(void(^)(NSError *error))completionHandler;
 - (void)getInvitationDetails:(NSString *)code completion:(void(^)(InvitationCodeDetails *details, NSError *error))completionHandler;
 - (void)consumeInviteCode:(NSString *)code forGroup:(Group *)group completion:(void(^)(Member *membership, NSError *error))completionHandler;
 @end

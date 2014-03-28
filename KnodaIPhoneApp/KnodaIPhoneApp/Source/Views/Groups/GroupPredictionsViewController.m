@@ -60,6 +60,8 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear: animated];
     [Flurry logEvent: @"Group_Prediction_List" withParameters: nil timed: YES];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:ActiveGroupChangedNotificationName object:nil userInfo:@{ActiveGroupNotificationKey: self.group}];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {

@@ -87,7 +87,7 @@ static UserManager *sharedSingleton;
             return;
         }
         
-        [self saveRequest:(LoginRequest *)request andResponse:response];
+        [self saveSignUpRequest:request andResponse:response];
         [self refreshUser:completionHandler];
         [self submitDeviceToken];
     }];

@@ -348,6 +348,8 @@
 		01B67BB418DB630300D22D2B /* Invitation.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B67BB218DB630300D22D2B /* Invitation.m */; };
 		01BFDC7218E4B9AB0098F81F /* InvitationCodeDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BFDC7118E4B9AB0098F81F /* InvitationCodeDetails.m */; };
 		01BFDC7318E4B9AB0098F81F /* InvitationCodeDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BFDC7118E4B9AB0098F81F /* InvitationCodeDetails.m */; };
+		01BFDC7518E5C8110098F81F /* GroupAvatars.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01BFDC7418E5C8110098F81F /* GroupAvatars.xcassets */; };
+		01BFDC7618E5C8110098F81F /* GroupAvatars.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01BFDC7418E5C8110098F81F /* GroupAvatars.xcassets */; };
 		01DBEAA918D9F44F000F2E50 /* CreateGroupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01DBEAA818D9F44F000F2E50 /* CreateGroupCell.xib */; };
 		01DBEAAA18D9F44F000F2E50 /* CreateGroupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01DBEAA818D9F44F000F2E50 /* CreateGroupCell.xib */; };
 		01DBEAAD18DA036E000F2E50 /* GroupSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DBEAAC18DA036E000F2E50 /* GroupSettingsViewController.m */; };
@@ -700,6 +702,7 @@
 		01B67BB218DB630300D22D2B /* Invitation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Invitation.m; sourceTree = "<group>"; };
 		01BFDC7018E4B9AB0098F81F /* InvitationCodeDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitationCodeDetails.h; sourceTree = "<group>"; };
 		01BFDC7118E4B9AB0098F81F /* InvitationCodeDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitationCodeDetails.m; sourceTree = "<group>"; };
+		01BFDC7418E5C8110098F81F /* GroupAvatars.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = GroupAvatars.xcassets; sourceTree = "<group>"; };
 		01DBEAA818D9F44F000F2E50 /* CreateGroupCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateGroupCell.xib; sourceTree = "<group>"; };
 		01DBEAAB18DA036E000F2E50 /* GroupSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupSettingsViewController.h; sourceTree = "<group>"; };
 		01DBEAAC18DA036E000F2E50 /* GroupSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupSettingsViewController.m; sourceTree = "<group>"; };
@@ -1115,6 +1118,7 @@
 				013DA78F1853002100B507E4 /* Fonts */,
 				013DA7921853002100B507E4 /* Images */,
 				013DA7A61853002100B507E4 /* Media.xcassets */,
+				01BFDC7418E5C8110098F81F /* GroupAvatars.xcassets */,
 			);
 			name = Resources;
 			path = KnodaIPhoneApp/Resources;
@@ -1599,6 +1603,7 @@
 				014A9F07185DA04400A96678 /* README.md in Resources */,
 				013DA81B1853002200B507E4 /* LoadingView.xib in Resources */,
 				013DA8171853002200B507E4 /* LoadingCell.xib in Resources */,
+				01BFDC7618E5C8110098F81F /* GroupAvatars.xcassets in Resources */,
 				01DBEABB18DA29C6000F2E50 /* GroupSettingsViewController.xib in Resources */,
 				01E8CB59187575EB003AE018 /* RightSideButtonsView.xib in Resources */,
 				01E8CB7C187678E0003AE018 /* NoSearchResultsCell.xib in Resources */,
@@ -1672,6 +1677,7 @@
 				014FDF8818D9F103006B51D9 /* GroupPredictionsHeaderCell.xib in Resources */,
 				013DA89A1853002200B507E4 /* Screen5@2x-568h.png in Resources */,
 				013DA87C1853002200B507E4 /* IntroOverlay@2x-568h.png in Resources */,
+				01BFDC7518E5C8110098F81F /* GroupAvatars.xcassets in Resources */,
 				013DA80C1853002200B507E4 /* NavigationViewController.xib in Resources */,
 				013DA8AC1853002200B507E4 /* Localizable.strings in Resources */,
 				01E8CB8218767D5D003AE018 /* UserCell.xib in Resources */,

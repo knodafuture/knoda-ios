@@ -108,8 +108,11 @@
         if (error) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
             [alert show];
-        } else
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"You're invitations are on their way" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+            [alert show];
             [self cancel];
+        }
     }];
 }
 

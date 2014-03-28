@@ -115,7 +115,8 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
     
     NSDictionary *parameters = @{@"Images" : @{@"user[avatar]" : UIImagePNGRepresentation(profileImage)}};
     
-    MultipartRequest *request = [[MultipartRequest alloc] initWithHTTPMethod:@"PATCH" url:@"profile.json" parameters:parameters];
+    NSString *url = [self buildUrl:@"profile.json" parameters:nil];
+    MultipartRequest *request = [[MultipartRequest alloc] initWithHTTPMethod:@"PATCH" url:url parameters:parameters];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler(error);
@@ -376,12 +377,12 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
     }];
 }
 
-- (void)createComment:(Comment *)comment completion:(void (^)(NSError *))completionHandler {
+- (void)createComment:(Comment *)comment completion:(void (^)(Comment *newComment, NSError *))completionHandler {
     NSString *url = [self buildUrl:@"comments.json" parameters:nil];
     NSURLRequest *request = [self requestWithUrl:url method:@"POST" payload:comment];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
-        completionHandler(error);
+        completionHandler([Comment instanceFromData:responseData], error);
     }];
 }
 
@@ -549,12 +550,12 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
     }];
 }
 
-- (void)uploadImageForGroup:(Group *)group image:(UIImage *)image completion:(void(^)(NSError *error))completionHandler {
+- (void)uploadImageForGroup:(Group *)group image:(UIImage *)image completion:(void(^)(Group *newGroup, NSError *error))completionHandler {
 
     NSData *profileData = UIImagePNGRepresentation(image);
     
     if (!profileData) {
-        completionHandler([NSError errorWithDomain:@"" code:400 userInfo:@{NSLocalizedDescriptionKey: @"Bad image!"}]);
+        completionHandler(nil, [NSError errorWithDomain:@"" code:400 userInfo:@{NSLocalizedDescriptionKey: @"Bad image!"}]);
         return;
     }
     
@@ -565,7 +566,7 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
     MultipartRequest *request = [[MultipartRequest alloc] initWithHTTPMethod:@"PUT" url:url parameters:parameters];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
-        completionHandler(error);
+        completionHandler([Group instanceFromData:responseData], error);
     }];
 }
 
@@ -573,6 +574,16 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
     NSString *path = [NSString stringWithFormat:@"memberships/%ld.json", (long)member.memberId];
     NSString *url = [self buildUrl:path parameters:nil];
     
+    NSURLRequest *request = [self requestWithUrl:url method:@"DELETE" payload:nil];
+    
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+        completionHandler(error);
+    }];
+}
+
+- (void)deleteGroupAvatar:(Group *)group completion:(void (^)(NSError *))completionHandler {
+    NSString *path = [NSString stringWithFormat:@"groups/%ld/avatar.json", (long)group.groupId];
+    NSString *url = [self buildUrl:path parameters:nil];
     NSURLRequest *request = [self requestWithUrl:url method:@"DELETE" payload:nil];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {

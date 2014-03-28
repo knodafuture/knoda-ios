@@ -107,6 +107,7 @@
             </subviews>
             <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
+                <outlet property="shareImageView" destination="E3p-1h-ri7" id="MRC-H7-qQ6"/>
                 <outlet property="similarImageView" destination="KSs-2R-TdW" id="WlT-Gc-Cfv"/>
                 <outlet property="similarLabel" destination="rNU-x8-z1h" id="zAS-R4-6oQ"/>
             </connections>

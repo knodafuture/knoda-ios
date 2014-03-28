@@ -62,6 +62,12 @@ static NSDateFormatter *dateFormatter;
 
 @implementation AddPredictionViewController
 
+- (id)initWithActiveGroup:(Group *)group {
+    self = [super initWithNibName:@"AddPredictionViewController" bundle:[NSBundle mainBundle]];
+    self.selectedGroup = group;
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -87,6 +93,11 @@ static NSDateFormatter *dateFormatter;
         if (!error)
             self.avatarView.image = image;
     }];
+    
+    if (self.selectedGroup) {
+        [self pickerView:self.groupPicker didSelectRow:[[UserManager sharedInstance].groups indexOfObject:self.selectedGroup] + 1 inComponent:0];
+        [self.groupPicker selectRow:[[UserManager sharedInstance].groups indexOfObject:self.selectedGroup] + 1 inComponent:0 animated:NO];
+    }
 }
 
 - (void)didTap {
@@ -178,8 +189,10 @@ static NSDateFormatter *dateFormatter;
 - (IBAction)selectGroupPressed:(id)sender {
     if (!self.selectedGroup)
         [self pickerView:self.groupPicker didSelectRow:0 inComponent:0];
-    else
-        [self pickerView:self.groupPicker didSelectRow:[[UserManager sharedInstance].groups indexOfObject:self.selectedGroup] inComponent:0];
+    else {
+        [self pickerView:self.groupPicker didSelectRow:[[UserManager sharedInstance].groups indexOfObject:self.selectedGroup] + 1 inComponent:0];
+        [self.groupPicker selectRow:[[UserManager sharedInstance].groups indexOfObject:self.selectedGroup] + 1 inComponent:0 animated:NO];
+    }
     [self showPickerView:self.groupPickerContainerView under:self.groupsBar completion:nil];
 }
 

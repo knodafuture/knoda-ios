@@ -154,6 +154,12 @@ static const int kBSAlertTag = 1001;
 }
 
 - (IBAction)share:(id)sender {
+    
+    if (self.prediction.groupName) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Hold on, this is a private group prediction. You won't be be able to share it with the world." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [alert show];
+        return;
+    }
 
     PredictionItemProvider *item = [[PredictionItemProvider alloc] initWithPrediction:self.prediction];
     UIActivityViewController *vc = [[UIActivityViewController alloc] initWithActivityItems:@[item] applicationActivities:nil];

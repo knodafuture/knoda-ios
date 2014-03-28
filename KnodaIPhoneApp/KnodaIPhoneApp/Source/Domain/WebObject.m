@@ -107,8 +107,22 @@ NSString *responseDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z";
         [result addObject:dictionary];
     }
     
-    return [NSJSONSerialization dataWithJSONObject:result options:0 error:nil];
+    NSData *data = [NSJSONSerialization dataWithJSONObject:result options:0 error:nil];
+    NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+    return data;
     
+}
+
+- (NSDictionary *)dictionaryValue {
+    NSMutableDictionary *modifiedDictionaryValue = [[super dictionaryValue] mutableCopy];
+    
+    for (NSString *originalKey in [super dictionaryValue]) {
+        if ([self valueForKey:originalKey] == nil) {
+            [modifiedDictionaryValue removeObjectForKey:originalKey];
+        }
+    }
+    
+    return [modifiedDictionaryValue copy];
 }
 
 @end

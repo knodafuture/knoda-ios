@@ -9,6 +9,10 @@
 #import "WebObject.h"
 #import "Leader.h"
 #import "RemoteImage.h"
+
+extern NSString *ActiveGroupChangedNotificationName;
+extern NSString *ActiveGroupNotificationKey;
+
 @class Member;
 @interface Group : WebObject
 @property (assign, nonatomic) NSInteger groupId;

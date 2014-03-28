@@ -29,41 +29,34 @@
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem backButtonWithTarget:self action:@selector(back)];
     self.title = @"RANKINGS";
-    RankingsTableViewController *weekly = [[RankingsTableViewController alloc] initWithGroup:self.group location:@"weekly"];
+    RankingsTableViewController *weekly = [[RankingsTableViewController alloc] initWithGroup:self.group location:nil];
     RankingsTableViewController *monthly = [[RankingsTableViewController alloc] initWithGroup:self.group location:@"monthly"];
-    RankingsTableViewController *allTime = [[RankingsTableViewController alloc] initWithGroup:self.group location:nil];
+    RankingsTableViewController *allTime = [[RankingsTableViewController alloc] initWithGroup:self.group location:@"alltime"];
     self.rankingLists = @[weekly, monthly, allTime];
     
-    
-    UILabel *weeklyLabel = [self headerLabel];
-    weeklyLabel.text = @"Last 7 Days";
-    [self.headerView addSubview:weeklyLabel];
-    [weeklyLabel sizeToFit];
-    weeklyLabel.alpha = 1.0;
-    
-    CGRect frame = weeklyLabel.frame;
-    frame.origin.x = 10;
-    frame.origin.y = (self.headerView.frame.size.height / 2.0) - (frame.size.height / 2.0);
-    weeklyLabel.frame = frame;
-    
     UILabel *monthlyLabel = [self headerLabel];
-    monthlyLabel.text = @"Last 30 Days";
+    monthlyLabel.text = @"30 DAY";
     [self.headerView addSubview:monthlyLabel];
-    [monthlyLabel sizeToFit];
     
+    CGRect frame = monthlyLabel.frame;
     frame = monthlyLabel.frame;
     frame.origin.x = (self.headerView.frame.size.width / 2.0) - (frame.size.width / 2.0);
-    frame.origin.y = (self.headerView.frame.size.height / 2.0) - (frame.size.height / 2.0);
     monthlyLabel.frame = frame;
     
+    UILabel *weeklyLabel = [self headerLabel];
+    weeklyLabel.text = @"7 DAY";
+    [self.headerView addSubview:weeklyLabel];
+    weeklyLabel.alpha = 1.0;
+    
+    frame.origin.x = monthlyLabel.frame.origin.x - frame.size.width;
+    weeklyLabel.frame = frame;
+    
     UILabel *allTimeLabel = [self headerLabel];
-    allTimeLabel.text = @"All-Time";
+    allTimeLabel.text = @"ALL-TIME";
     [self.headerView addSubview:allTimeLabel];
-    [allTimeLabel sizeToFit];
     
     frame = allTimeLabel.frame;
-    frame.origin.x = self.headerView.frame.size.width - frame.size.width - 10;
-    frame.origin.y = (self.headerView.frame.size.height / 2.0) - (frame.size.height / 2.0);
+    frame.origin.x = monthlyLabel.frame.origin.x + monthlyLabel.frame.size.width;
     allTimeLabel.frame = frame;
     
     self.buttons = @[weeklyLabel, monthlyLabel, allTimeLabel];
@@ -90,10 +83,11 @@
 }
 
 - (UILabel *)headerLabel {
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.headerView.frame.size.height)];
-    label.font = [UIFont fontWithName:@"HelveticaNeue" size:13.0];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.headerView.frame.size.width * .25, self.headerView.frame.size.height)];
+    label.font = [UIFont fontWithName:@"HelveticaNeue" size:11.0];
     label.textColor = [UIColor whiteColor];
     label.userInteractionEnabled = YES;
+    label.textAlignment = NSTextAlignmentCenter;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelTapped:)];
     [label addGestureRecognizer:tap];
     label.alpha = 0.25;
@@ -120,9 +114,10 @@
     NSInteger index = [self.buttons indexOfObject:sender.view];
     UIViewController *vc = [self.rankingLists objectAtIndex:index];
     [self.scrollView setContentOffset:CGPointMake(vc.view.frame.origin.x, 0) animated:YES];
+    [self selectIndex:index];
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     CGFloat pageWidth = scrollView.frame.size.width;
     float fractionalPage = scrollView.contentOffset.x / pageWidth;
     NSInteger page = lround(fractionalPage);

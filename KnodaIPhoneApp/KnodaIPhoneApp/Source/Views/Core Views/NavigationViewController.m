@@ -56,6 +56,8 @@
 @property (assign, nonatomic) MenuItem firstMenuItem;
 @property (readonly, nonatomic) UserManager *userManger;
 
+@property (strong, nonatomic) Group *activeGroup;
+
 @end
 
 @implementation NavigationViewController
@@ -91,7 +93,16 @@
     self.rightSideBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.rightSideBarButtonsView];
     
     [self updateAlerts];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(activeGroupChanged:) name:ActiveGroupChangedNotificationName object:nil];
+    
 }
+
+- (void)activeGroupChanged:(NSNotification *)notification {
+    Group *newGroup = [notification.userInfo objectForKey:ActiveGroupNotificationKey];
+    if (newGroup)
+        self.activeGroup = newGroup;
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
@@ -103,12 +114,11 @@
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [self.pingTimer invalidate];
-    self.pingTimer = nil;
-    
+    self.pingTimer = nil;    
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
+
     if (!self.appeared) {
         self.appeared = YES;
     }
@@ -176,7 +186,12 @@
         }
 
         [self.vcCache setObject:viewController forKey:@(menuItem)];
+        
     }
+    
+    if (menuItem != MenuGroups)
+        self.activeGroup = nil;
+    
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
     navigationController.delegate = self;
     viewController.navigationItem.leftBarButtonItem = self.sideNavBarButtonItem;
@@ -362,7 +377,7 @@
 #pragma mark SelectPictureDelegate
 
 - (void)showSelectPictureViewController {
-    self.selectVc = [[SelectPictureViewController alloc] initWithNibName:@"SelectPictureViewController" bundle:[NSBundle mainBundle]];
+    self.selectVc = [[SelectPictureViewController alloc] initWithBaseDefaultImageName:@"avatar"];
     self.selectVc.delegate = self;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:self.selectVc];
     
@@ -376,7 +391,7 @@
 
 
 - (void)presentAddPredictionViewController {
-    AddPredictionViewController *vc = [[AddPredictionViewController alloc] initWithNibName:@"AddPredictionViewController" bundle:[NSBundle mainBundle]];
+    AddPredictionViewController *vc = [[AddPredictionViewController alloc] initWithActiveGroup:self.activeGroup];
     vc.delegate = self;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     
@@ -404,6 +419,7 @@
 
 - (void)dealloc {
     [self removeAllObservations];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

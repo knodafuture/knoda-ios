@@ -128,7 +128,7 @@ static const NSInteger CommentMaxChars = 300;
     comment.userAvatar = [UserManager sharedInstance].user.avatar;
     comment.username = [UserManager sharedInstance].user.name;
 
-    [[WebApi sharedInstance] createComment:comment completion:^(NSError *error) {
+    [[WebApi sharedInstance] createComment:comment completion:^(Comment *newComment, NSError *error) {
         [[LoadingView sharedInstance] hide];
         if (error) {
             

@@ -27,20 +27,28 @@
                         <state key="normal" image="RemoveUserIcon">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <connections>
+                            <action selector="remove:" destination="gIe-gB-O7z" eventType="touchUpInside" id="Jw2-Vq-jQE"/>
+                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="LXf-bK-dNG">
-                        <rect key="frame" x="321" y="-5" width="92" height="54"/>
+                        <rect key="frame" x="321" y="0.0" width="92" height="44"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.99607843139999996" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                         <state key="normal" title="REMOVE?">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <connections>
+                            <action selector="confirmRemove:" destination="gIe-gB-O7z" eventType="touchUpInside" id="BRj-3r-6lN"/>
+                        </connections>
                     </button>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="nameLabel" destination="6PH-Dm-lF9" id="zAS-Ic-OYa"/>
+                <outlet property="removeButton" destination="aV5-iR-oae" id="AU8-Kb-k5V"/>
+                <outlet property="removeConfirmButton" destination="LXf-bK-dNG" id="ivs-jI-E3P"/>
             </connections>
         </tableViewCell>
     </objects>

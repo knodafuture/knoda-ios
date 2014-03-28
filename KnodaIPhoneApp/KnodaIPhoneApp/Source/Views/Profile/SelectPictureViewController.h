@@ -13,6 +13,7 @@
 @interface SelectPictureViewController : UIViewController
 
 @property (nonatomic, weak) id<SelectPictureDelegate> delegate;
+- (id)initWithBaseDefaultImageName:(NSString *)baseImageName;
 
 - (IBAction)backButtonPressed:(UIButton *)sender;
 - (IBAction)pictureButtonTapped:(id)sender;
@@ -21,6 +22,7 @@
 @end
 
 @protocol SelectPictureDelegate <NSObject>
+
 
 - (void)hideViewController:(SelectPictureViewController *)vc;
 

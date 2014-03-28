@@ -10,6 +10,7 @@
 
 @class AddPredictionViewController;
 @class Prediction;
+@class Group;
 @protocol AddPredictionViewControllerDelegate <NSObject>
 
 - (void)addPredictionViewController:(AddPredictionViewController *)viewController didCreatePrediction:(Prediction *)prediction;
@@ -18,6 +19,8 @@
 
 
 @interface AddPredictionViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate>
+
+- (id)initWithActiveGroup:(Group *)group;
 
 @property (nonatomic, weak) id<AddPredictionViewControllerDelegate> delegate;
 

@@ -9,7 +9,7 @@
 #import "WebObject.h"
 @class Group;
 @interface InvitationCodeDetails : WebObject
-@property (assign, nonatomic) NSInteger invitationId;
+@property (assign, nonatomic) NSNumber *invitationId;
 @property (strong, nonatomic) NSString *link;
 @property (strong, nonatomic) Group *group;
 @end

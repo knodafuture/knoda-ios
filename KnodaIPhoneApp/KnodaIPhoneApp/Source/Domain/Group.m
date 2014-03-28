@@ -8,6 +8,8 @@
 
 #import "Group.h"
 #import "Member.h"
+NSString *ActiveGroupChangedNotificationName = @"ACTIVEGROUPNOTIFICATION";
+NSString *ActiveGroupNotificationKey = @"ACTIVEGROUP";
 
 @implementation Group
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
@@ -19,7 +21,8 @@
              @"memberCount" : @"member_count",
              @"avatar" : @"avatar_image",
              @"shareUrl" : @"share_url",
-             @"myMembership" : @"my_membership"
+             @"myMembership" : @"my_membership",
+             @"ownerId" : @"owner"
     };
 }
 

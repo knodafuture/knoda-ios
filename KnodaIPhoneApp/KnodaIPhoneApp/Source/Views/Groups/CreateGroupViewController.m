@@ -11,19 +11,19 @@
 #import "LoadingView.h"
 #import "UserManager.h"
 #import "ImageCropperViewController.h"
+#import "GroupSettingsViewController.h"
 
 NSString *GroupChangedNotificationName = @"GORUPCHANGED";
 NSString *GroupChangedNotificationKey = @"CHANGEGROUP";
 
-static const int kDefaultAvatarsCount = 5;
 #define TEXT_FONT        [UIFont fontWithName:@"HelveticaNeue" size:15]
 #define PLACEHOLDER_FONT [UIFont fontWithName:@"HelveticaNeue-Italic" size:15]
-static const int kPredictionCharsLimit = 300;
-
+static const int kPredictionCharsLimit = 140;
+static const int kMaxNameChars = 30;
 static const float kAvatarSize = 344.0;
 #define AVATAR_SIZE CGSizeMake(kAvatarSize, kAvatarSize)
 
-@interface CreateGroupViewController () <ImageCropperDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, UITextViewDelegate>
+@interface CreateGroupViewController () <ImageCropperDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, UITextViewDelegate>
 @property (strong, nonatomic) Group *group;
 @property (weak, nonatomic) IBOutlet UITextField *groupNameTextField;
 @property (weak, nonatomic) IBOutlet UITextView *groupDescriptionTextView;
@@ -46,13 +46,13 @@ static const float kAvatarSize = 344.0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"NEW GROUP";
     self.placeholderText = NSLocalizedString(@"Group description...", @"");
     self.navigationController.navigationBar.translucent = NO;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTitle:@"Cancel" target:self action:@selector(cancel) color:[UIColor whiteColor]];
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTitle:@"Submit" target:self action:@selector(submit) color:[UIColor whiteColor]];
     
     if (self.group) {
+        self.title = @"EDIT GROUP";
         _showPlaceholder = false;
         self.groupNameTextField.text = self.group.name;
         self.groupDescriptionTextView.text = self.group.groupDescription;
@@ -61,10 +61,14 @@ static const float kAvatarSize = 344.0;
             if (image && !error) {
                 self.groupImageView.image = image;
                 self.startImage = image;
+            } else {
+                self.groupImagePrompt.hidden = NO;
             }
         }];
-    } else
+    } else {
+        self.title = @"NEW GROUP";
         self.showPlaceholder = YES;
+    }
 }
 
 - (void)cancel {
@@ -87,6 +91,11 @@ static const float kAvatarSize = 344.0;
 }
 - (void)submit {
     
+    if (![self validate])
+        return;
+    
+    [self.view endEditing:YES];
+    
     [[LoadingView sharedInstance] show];
     
     if (self.group) {
@@ -97,13 +106,23 @@ static const float kAvatarSize = 344.0;
             if (!error)
                 self.group = newGroup;
             if (self.groupImageView.image != self.startImage) {
-                [[WebApi sharedInstance] uploadImageForGroup:newGroup image:self.groupImageView.image completion:^(NSError *error) {
-                    [self finish];
-                }];
+                if (self.groupImageView.image == nil) {
+                    [[WebApi sharedInstance] deleteGroupAvatar:self.group completion:^(NSError *error) {
+                        [[WebApi sharedInstance] getGroup:self.group.groupId completion:^(Group *group, NSError *error) {
+                            self.group = group;
+                            [self finish:nil];
+                        }];
+                    }];
+                } else {
+                    [[WebApi sharedInstance] uploadImageForGroup:newGroup image:self.groupImageView.image completion:^(Group *finalGroup, NSError *error) {
+                        self.group = finalGroup;
+                        [self finish:nil];
+                    }];
+                }
                 return;
             }
             
-            [self finish];
+            [self finish:newGroup];
         }];
     } else {
         Group *group = [[Group alloc] init];
@@ -112,24 +131,30 @@ static const float kAvatarSize = 344.0;
         
         [[WebApi sharedInstance] createGroup:group completion:^(Group *newGroup, NSError *error) {
             if (self.groupImageView.image != nil) {
-                [[WebApi sharedInstance] uploadImageForGroup:newGroup image:self.groupImageView.image completion:^(NSError *error) {
-                    [self finish];
+                [[WebApi sharedInstance] uploadImageForGroup:newGroup image:self.groupImageView.image completion:^(Group *finalGroup, NSError *error) {
+                    [self finish:finalGroup];
                 }];
             } else {
-                [self finish];
+                [self finish:newGroup];
             }
         }];
     }
 }
 
-- (void)finish {
+- (void)finish:(Group *)createdGroup {
     [[UserManager sharedInstance] refreshUser:^(User *user, NSError *error) {
         [[LoadingView sharedInstance] hide];
-        [self cancel];
         
         if (self.group) {
             [[NSNotificationCenter defaultCenter] postNotificationName:GroupChangedNotificationName object:self userInfo:@{GroupChangedNotificationKey: self.group}];
+            [self cancel];
+        } else {
+            GroupSettingsViewController *vc = [[GroupSettingsViewController alloc] initWithNewlyCreatedGroup:createdGroup];
+            [self.navigationController pushViewController:vc animated:YES];
         }
+        
+        
+        
     }];
 }
 - (void)setShowPlaceholder:(BOOL)showPlaceholder {
@@ -209,6 +234,17 @@ static const float kAvatarSize = 344.0;
     [vc dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+        NSString *resultString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        
+        if (resultString.length > kMaxNameChars) {
+            resultString = [resultString substringToIndex: kMaxNameChars - 1];
+            textField.text = resultString;
+            return NO;
+        }
+    return YES;
+}
+
 #pragma mark - UIActionSheet delegate
 
 - (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -219,8 +255,8 @@ static const float kAvatarSize = 344.0;
             break;
         case 2: //skip
         {
-            NSString *imgName = [NSString stringWithFormat:@"avatar_%d.png", (arc4random() % kDefaultAvatarsCount + 1)];
-            self.groupImageView.image = [UIImage imageNamed:imgName];
+            self.groupImageView.image = nil;
+            self.groupImagePrompt.hidden = NO;
         }
         default: //continue
             break;

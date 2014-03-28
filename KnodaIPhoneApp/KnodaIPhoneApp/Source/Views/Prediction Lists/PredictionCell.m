@@ -53,6 +53,7 @@ static NSMutableDictionary *cellHeightCache;
 @property (assign, nonatomic) NSTimeInterval initialTouchTimestamp;
 @property (assign, nonatomic) BOOL trackingTouch;
 @property (assign, nonatomic) BOOL finishingCellAnimation;
+@property (assign, nonatomic) BOOL frameAdjusted;
 
 
 
@@ -194,18 +195,21 @@ static NSMutableDictionary *cellHeightCache;
         self.groupNameLabel.hidden = YES;
         
     } else {
-        frame = self.metadataLabel.frame;
-        frame.origin.y -= self.groupNameLabel.frame.size.height;
-        self.metadataLabel.frame = frame;
-        frame = self.commentLabelContainer.frame;
-        frame.origin.y -= self.groupNameLabel.frame.size.height;
-        self.commentLabelContainer.frame = frame;
-        frame = self.bodyLabel.frame;
-        frame.size.height -= self.groupNameLabel.frame.size.height;
-        self.bodyLabel.frame = frame;
-        self.groupNameLabel.hidden = NO;
-        self.groupImageView.hidden = NO;
-        self.groupNameLabel.text = self.prediction.groupName;
+            if (!self.frameAdjusted) {
+                frame = self.metadataLabel.frame;
+                frame.origin.y -= self.groupNameLabel.frame.size.height;
+                self.metadataLabel.frame = frame;
+                frame = self.commentLabelContainer.frame;
+                frame.origin.y -= self.groupNameLabel.frame.size.height;
+                self.commentLabelContainer.frame = frame;
+                frame = self.bodyLabel.frame;
+                frame.size.height -= self.groupNameLabel.frame.size.height;
+                self.bodyLabel.frame = frame;
+                self.groupNameLabel.hidden = NO;
+                self.groupImageView.hidden = NO;
+                self.groupNameLabel.text = self.prediction.groupName;
+                self.frameAdjusted = YES;
+            }
     }
     
     [self update];

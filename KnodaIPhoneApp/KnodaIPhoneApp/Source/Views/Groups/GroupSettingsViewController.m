@@ -28,6 +28,8 @@
 @property (weak, nonatomic) IBOutlet UIView *joinGroupView;
 @property (strong, nonatomic) NSArray *members;
 @property (strong, nonatomic) NSString *invitationCode;
+@property (assign, nonatomic) BOOL modal;
+@property (assign, nonatomic) CGRect originalDescriptionFrame;
 @end
 
 @implementation GroupSettingsViewController
@@ -35,6 +37,12 @@
 - (id)initWithGroup:(Group *)group {
     self = [super initWithNibName:@"GroupSettingsViewController" bundle:[NSBundle mainBundle]];
     self.group = group;
+    return self;
+}
+
+- (id)initWithNewlyCreatedGroup:(Group *)group {
+    self = [self initWithGroup:group];
+    self.modal = YES;
     return self;
 }
 
@@ -47,11 +55,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"SETTINGS";
-    [self.navigationItem setLeftBarButtonItem:[UIBarButtonItem backButtonWithTarget:self action:@selector(back)]];
+    self.originalDescriptionFrame = self.groupDescriptionLabel.frame;
+    
+    if (self.modal ) {
+        [self.navigationItem setRightBarButtonItem:[UIBarButtonItem styledBarButtonItemWithTitle:@"Done" target:self action:@selector(dismiss) color:[UIColor whiteColor]]];
+        [self.navigationItem setLeftBarButtonItem:nil];
+        self.navigationItem.hidesBackButton = YES;
+    } else
+        [self.navigationItem setLeftBarButtonItem:[UIBarButtonItem backButtonWithTarget:self action:@selector(back)]];
     
 
     [self populate];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupChanged:) name:GroupChangedNotificationName object:nil];
+}
+
+- (void)dismiss {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)populate {
@@ -77,23 +96,23 @@
             self.tableView.frame = frame;
         }
         self.leaveGroupView.hidden = !self.inviteView.hidden;
-        
+        if (self.modal) {
+            self.editGroupView.hidden = YES;
+        }
     }
     
     self.groupNameLabel.text = self.group.name;
     self.groupDescriptionLabel.text = self.group.groupDescription;
     
-    CGSize sizeThatFits = [self.groupDescriptionLabel sizeThatFits:self.groupDescriptionLabel.frame.size];
+    CGSize sizeThatFits = [self.groupDescriptionLabel sizeThatFits:self.originalDescriptionFrame.size];
     
-    if (sizeThatFits.height < self.groupDescriptionLabel.frame.size.height) {
-        CGRect frame = self.groupDescriptionLabel.frame;
-        frame.size.height = sizeThatFits.height;
-        self.groupDescriptionLabel.frame = frame;
-    }
+    CGRect frame = self.originalDescriptionFrame;
+    frame.size.height = sizeThatFits.height;
+    self.groupDescriptionLabel.frame = frame;
     
     [self.groupDescriptionLabel sizeToFit];
     
-    if (!self.invitationCode)
+    if (!self.invitationCode || self.group.myMembership)
         [self refresh];
 }
 
@@ -141,6 +160,9 @@
     
     cell.nameLabel.text = member.username;
     
+    BOOL isOwner = self.group.owner == [UserManager sharedInstance].user.userId && member.userId != [UserManager sharedInstance].user.userId;
+    cell.removeButton.hidden = !isOwner;
+    
     if (indexPath.row % 2 == 0)
         cell.backgroundColor = [UIColor whiteColor];
     else
@@ -150,7 +172,7 @@
 }
 
 - (IBAction)leaveGroup:(id)sender {
-    UIActionSheet * actionSheet = [[UIActionSheet alloc]initWithTitle:NSLocalizedString(@"Are you sure you want to leave?", @"") delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"Log Out" otherButtonTitles:@"Cancel", nil];
+    UIActionSheet * actionSheet = [[UIActionSheet alloc]initWithTitle:NSLocalizedString(@"Are you sure you want to leave?", @"") delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"Leave group" otherButtonTitles:@"Cancel", nil];
     [actionSheet showInView:self.view];
 }
 

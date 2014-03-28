@@ -12,6 +12,7 @@
 #import "GroupTableViewCell.h"
 #import "GroupPredictionsViewController.h"
 #import "CreateGroupViewController.h"
+#import "NoContentCell.h"   
 
 @interface GroupsViewController ()
 @property (strong, nonatomic) UITableViewCell *createGroupsCell;
@@ -32,12 +33,16 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self.pagingDatasource loadPage:0 completion:^{}];
+    [self.pagingDatasource loadPage:0 completion:^{
+        [self.tableView reloadData];
+    }];
 }
 
 - (void)groupChanged:(NSNotification *)notification {
     [[UserManager sharedInstance] refreshUser:^(User *user, NSError *error) {
-        [self.pagingDatasource loadPage:0 completion:^{}];
+        [self.pagingDatasource loadPage:0 completion:^{
+            [self.tableView reloadData];
+        }];
     }];
 }
 
@@ -48,7 +53,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0)
-        return 44.0;
+        return 48.0;
     
     if (indexPath.row >= self.pagingDatasource.objects.count)
         return [super tableView:tableView heightForRowAtIndexPath:indexPath];
@@ -85,12 +90,14 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == self.pagingDatasource.objects.count)
-        return;
+    
     if (indexPath.section == 0) {
         [self createGroup:nil];
         return;
     }
+    if (indexPath.row == self.pagingDatasource.objects.count)
+        return;
+
 
     Group *group = [UserManager sharedInstance].groups[indexPath.row];
     
@@ -107,6 +114,23 @@
     CreateGroupViewController *vc = [[CreateGroupViewController alloc] initWithGroup:nil];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     [self presentViewController:nav animated:YES completion:nil];
+}
+
+- (void)noObjectsRetrievedInPagingDatasource:(PagingDatasource *)pagingDatasource {
+    NoContentCell *cell = [NoContentCell noContentWithMessage:@"You are not in any groups. Create a group with your friends to start making private predictions." forTableView:self.tableView];
+    [self showNoContent:cell];
+    
+    self.createGroupsCell.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(createGroup:)];
+    [self.createGroupsCell addGestureRecognizer:tap];
+    self.tableView.tableHeaderView = self.createGroupsCell;
+    [self showNoContent:cell];
+}
+- (void)restoreContent {
+    self.tableView.tableHeaderView = nil;
+    self.createGroupsCell.userInteractionEnabled = NO;
+    self.createGroupsCell.gestureRecognizers = nil;
+    [super restoreContent];
 }
 
 - (void)imageLoader:(ImageLoader *)loader finishedLoadingImage:(UIImage *)image forIndexPath:(NSIndexPath *)indexPath {

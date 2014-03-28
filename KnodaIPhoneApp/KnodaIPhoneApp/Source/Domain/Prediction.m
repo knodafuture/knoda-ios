@@ -36,6 +36,19 @@
              @"groupName" : @"group_name"
              };
 }
++ (NSValueTransformer *)groupIdJSONTransformer {
+    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^id(id value) {
+        if (!value)
+            return @(0);
+        return value;
+    } reverseBlock:^id(NSValue *value) {
+        int final = 0;
+        [value getValue:&final];
+        if (final == 0)
+            return nil;
+        return value;
+    }];
+}
 
 + (NSValueTransformer *)outcomeJSONTransformer {
     return [self boolTransformer];

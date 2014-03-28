@@ -28,12 +28,20 @@ static NSString* const kImageCropperSegue = @"ImageCropperSegue";
 
 @property (nonatomic) UIImage *avatarImage;
 @property (nonatomic, assign) BOOL hasAppeared;
+@property (strong, nonatomic) NSString *baseImageName;
 
 @end
 
 @implementation SelectPictureViewController
 
 #pragma mark View lifecycle
+
+
+- (id)initWithBaseDefaultImageName:(NSString *)baseImageName {
+    self = [super initWithNibName:@"SelectPictureViewController" bundle:[NSBundle mainBundle]];
+    self.baseImageName = baseImageName;
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -93,7 +101,7 @@ static NSString* const kImageCropperSegue = @"ImageCropperSegue";
 }
 
 - (void)setDefaultAvatar {
-    NSString *imgName = [NSString stringWithFormat:@"avatar_%d.png", (arc4random() % kDefaultAvatarsCount + 1)];    
+    NSString *imgName = [NSString stringWithFormat:@"%@_%d.png", self.baseImageName, (arc4random() % kDefaultAvatarsCount + 1)];
     self.avatarImage = [UIImage imageNamed:imgName];
 }
 

@@ -12,7 +12,7 @@
 @interface GroupSettingsViewController : UIViewController
 
 - (id)initWithGroup:(Group *)group;
-
+- (id)initWithNewlyCreatedGroup:(Group *)group;
 - (id)initWithGroup:(Group *)group invitationCode:(NSString *)invitationCode;
 
 @end

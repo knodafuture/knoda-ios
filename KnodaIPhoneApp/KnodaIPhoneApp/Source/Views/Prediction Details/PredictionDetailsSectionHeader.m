@@ -15,6 +15,7 @@ const CGFloat PredictionDetailsSectionHeaderHeight = 55.0;
 @interface PredictionDetailsSectionHeader ()
 @property (weak, nonatomic) IBOutlet UILabel *similarLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *similarImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *shareImageView;
 @end
 @implementation PredictionDetailsSectionHeader
 
@@ -27,8 +28,9 @@ const CGFloat PredictionDetailsSectionHeaderHeight = 55.0;
     PredictionDetailsSectionHeader *header = [[nib instantiateWithOwner:owner options:nil] lastObject];
     
     if (prediction.groupName) {
-        header.similarLabel.text = prediction.groupName;
+        header.similarLabel.text = @"VIEW GROUP";
         header.similarImageView.image = [UIImage imageNamed:@"ActionGroupIcon"];
+        header.shareImageView.image = [UIImage imageNamed:@"ActionShareIconInactive"];
     }
     
     return header;

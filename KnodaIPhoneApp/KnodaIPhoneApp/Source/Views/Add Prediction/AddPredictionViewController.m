@@ -187,6 +187,10 @@ static NSDateFormatter *dateFormatter;
 }
 
 - (IBAction)selectGroupPressed:(id)sender {
+    
+    if ([UserManager sharedInstance].groups.count == 0 || ![UserManager sharedInstance].groups)
+        return;
+    
     if (!self.selectedGroup)
         [self pickerView:self.groupPicker didSelectRow:0 inComponent:0];
     else {

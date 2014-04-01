@@ -54,6 +54,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [Flurry logEvent: @"Group_Settings"];
     self.title = @"SETTINGS";
     self.originalDescriptionFrame = self.groupDescriptionLabel.frame;
     
@@ -226,6 +227,8 @@
 }
 
 - (IBAction)shareLink:(id)sender {
+    [Flurry logEvent: @"Group_Share_Link"];
+
     NSString *message = [NSString stringWithFormat:@"Join my group %@ on Knoda! %@", self.group.name, self.group.shareUrl];
     UIActivityViewController *vc = [[UIActivityViewController alloc] initWithActivityItems:@[message] applicationActivities:nil];
     

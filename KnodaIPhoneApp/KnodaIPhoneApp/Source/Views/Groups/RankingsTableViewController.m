@@ -61,7 +61,11 @@
     cell.winLossLabel.text = [NSString stringWithFormat:@"%ld-%ld", (long)leader.won, (long)leader.lost];
     double total = leader.won + leader.lost;
     if (total > 0) {
-        cell.winPercentLabel.text = [NSString stringWithFormat:@"%2.2f%%", (double)leader.won / total * 100.0];
+        double percent = (double)leader.won / total * 100.0;
+        if (percent == 100.0)
+            cell.winPercentLabel.text = @"100%";
+        else
+            cell.winPercentLabel.text = [NSString stringWithFormat:@"%2.2f%%", percent];
     }
     else
         cell.winPercentLabel.text = @"-";

@@ -109,8 +109,13 @@
 - (void)objectsAfterObject:(id)object completion:(void (^)(NSArray *, NSError *))completionHandler {
     completionHandler([UserManager sharedInstance].groups, nil);
 }
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+}
+
 
 - (IBAction)createGroup:(id)sender {
+    [Flurry logEvent: @"Create_Group"];
+
     CreateGroupViewController *vc = [[CreateGroupViewController alloc] initWithGroup:nil];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     [self presentViewController:nav animated:YES completion:nil];

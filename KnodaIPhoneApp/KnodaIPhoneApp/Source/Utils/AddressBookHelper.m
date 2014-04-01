@@ -38,27 +38,27 @@
     }
     
     if (accessGranted) {
-        
-        ABRecordRef source = ABAddressBookCopyDefaultSource(addressBook);
-        CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeopleInSourceWithSortOrdering(addressBook, source, kABPersonSortByFirstName);
-        NSArray *sortedPeople = CFBridgingRelease(allPeople);
-        
-        NSMutableArray* items = [NSMutableArray arrayWithCapacity:sortedPeople.count];
-        
-        for (int i = 0; i < sortedPeople.count; i++) {
-            ABRecordRef person = (__bridge ABRecordRef)([sortedPeople objectAtIndex:i]);
-            Contact *contact = [self processRecord:person];
-            
-            if (contact)
-                [items addObject:contact];
+        NSMutableArray* items = [NSMutableArray array];
+
+        CFArrayRef allSources = ABAddressBookCopyArrayOfAllSources(addressBook);
+        for (CFIndex i = 0; i < CFArrayGetCount(allSources); i++) {
+            ABRecordRef source = (ABRecordRef)CFArrayGetValueAtIndex(allSources, i);
+            CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeopleInSourceWithSortOrdering(addressBook, source, kABPersonSortByFirstName);
+            NSArray *sortedPeople = CFBridgingRelease(allPeople);
+            for (int i = 0; i < sortedPeople.count; i++) {
+                ABRecordRef person = (__bridge ABRecordRef)([sortedPeople objectAtIndex:i]);
+                Contact *contact = [self processRecord:person];
+                
+                if (contact)
+                    [items addObject:contact];
+            }
         }
         
-        CFRelease(source);
+        CFRelease(allSources);
         CFRelease(addressBook);
         return items;
         
     } else {
-        CFRelease(addressBook);
         return nil;
     }
 }

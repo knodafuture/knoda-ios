@@ -84,7 +84,7 @@
 
 - (UILabel *)headerLabel {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.headerView.frame.size.width * .25, self.headerView.frame.size.height)];
-    label.font = [UIFont fontWithName:@"HelveticaNeue" size:11.0];
+    label.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:11.0];
     label.textColor = [UIColor whiteColor];
     label.userInteractionEnabled = YES;
     label.textAlignment = NSTextAlignmentCenter;
@@ -107,6 +107,9 @@
     }];
     
     self.activePage = index;
+    NSString *event = [NSString stringWithFormat:@"RANKINGS_%@", next.text];
+    [Flurry logEvent:event];
+
 }
 
 - (void)labelTapped:(UIGestureRecognizer *)sender {

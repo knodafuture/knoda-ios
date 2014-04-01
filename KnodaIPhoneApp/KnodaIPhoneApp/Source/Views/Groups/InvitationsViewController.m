@@ -67,7 +67,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [Flurry logEvent: @"Group_Invitations"];
+
     [self.tableView reloadData];
 	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.title = @"INVITE";

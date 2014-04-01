@@ -157,6 +157,9 @@
     Prediction *prediction = [notification.userInfo objectForKey:NewPredictionNotificationKey];
     
     [self.pagingDatasource insertNewObject:prediction atIndex:0 reload:YES];
+    
+    if (self.tableView.dataSource != self.pagingDatasource)
+        [self restoreContent];
 }
 
 - (void)updatePrediction:(Prediction *)prediction {

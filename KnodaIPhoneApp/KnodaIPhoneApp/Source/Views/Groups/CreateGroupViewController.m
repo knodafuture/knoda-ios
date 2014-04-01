@@ -17,7 +17,7 @@ NSString *GroupChangedNotificationName = @"GORUPCHANGED";
 NSString *GroupChangedNotificationKey = @"CHANGEGROUP";
 
 #define TEXT_FONT        [UIFont fontWithName:@"HelveticaNeue" size:15]
-#define PLACEHOLDER_FONT [UIFont fontWithName:@"HelveticaNeue-Italic" size:15]
+#define PLACEHOLDER_FONT [UIFont fontWithName:@"HelveticaNeue" size:15]
 static const int kPredictionCharsLimit = 140;
 static const int kMaxNameChars = 30;
 static const float kAvatarSize = 344.0;
@@ -46,6 +46,7 @@ static const float kAvatarSize = 344.0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     self.placeholderText = NSLocalizedString(@"Group description...", @"");
     self.navigationController.navigationBar.translucent = NO;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTitle:@"Cancel" target:self action:@selector(cancel) color:[UIColor whiteColor]];
@@ -159,6 +160,7 @@ static const float kAvatarSize = 344.0;
 }
 - (void)setShowPlaceholder:(BOOL)showPlaceholder {
     _showPlaceholder = showPlaceholder;
+    self.groupDescriptionTextView.textColor = _showPlaceholder ? [UIColor colorFromHex:@"CBCBD0"] : [UIColor blackColor];
     self.groupDescriptionTextView.text = _showPlaceholder ? self.placeholderText : @"";
     self.groupDescriptionTextView.font = _showPlaceholder ? PLACEHOLDER_FONT : TEXT_FONT;
 }

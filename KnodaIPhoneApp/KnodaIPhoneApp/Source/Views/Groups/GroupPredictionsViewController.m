@@ -14,6 +14,7 @@
 #import "GroupSettingsViewController.h"
 #import "RankingsViewController.h"
 #import "CreateGroupViewController.h"
+#import "AppDelegate.h"
 
 @interface GroupPredictionsViewController ()
 @property (strong, nonatomic) Group *group;
@@ -85,6 +86,18 @@
 - (void)restoreContent {
     self.tableView.tableHeaderView = nil;
     [super restoreContent];
+}
+
+- (void)handleNewObjectNotification:(NSNotification *)notification {
+    Prediction *prediction = [notification.userInfo objectForKey:NewPredictionNotificationKey];
+    
+    if (prediction.groupId != self.group.groupId)
+        return;
+    
+    [self.pagingDatasource insertNewObject:prediction atIndex:0 reload:YES];
+    
+    if (self.tableView.dataSource != self.pagingDatasource)
+        [self restoreContent];
 }
 
 - (IBAction)rankingsPressed:(id)sender {

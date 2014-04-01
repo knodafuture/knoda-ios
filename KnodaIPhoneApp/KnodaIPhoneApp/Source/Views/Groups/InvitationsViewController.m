@@ -110,7 +110,7 @@
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
             [alert show];
         } else {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"You're invitations are on their way" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Your invitations are on their way" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
             [alert show];
             [self cancel];
         }

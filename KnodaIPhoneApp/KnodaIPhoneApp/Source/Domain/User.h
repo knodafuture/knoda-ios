@@ -12,6 +12,7 @@
 @interface User : WebObject
 
 @property (assign, nonatomic) NSInteger userId;
+@property (assign, nonatomic) NSInteger user_id;
 @property (assign, nonatomic) NSUInteger points;
 @property (assign, nonatomic) NSUInteger won;
 @property (assign, nonatomic) NSUInteger lost;

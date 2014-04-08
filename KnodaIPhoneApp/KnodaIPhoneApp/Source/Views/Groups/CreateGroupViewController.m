@@ -19,7 +19,7 @@ NSString *GroupChangedNotificationKey = @"CHANGEGROUP";
 #define TEXT_FONT        [UIFont fontWithName:@"HelveticaNeue" size:15]
 #define PLACEHOLDER_FONT [UIFont fontWithName:@"HelveticaNeue" size:15]
 static const int kPredictionCharsLimit = 140;
-static const int kMaxNameChars = 30;
+static const int kMaxNameChars = 29;
 static const float kAvatarSize = 344.0;
 #define AVATAR_SIZE CGSizeMake(kAvatarSize, kAvatarSize)
 
@@ -145,7 +145,6 @@ static const float kAvatarSize = 344.0;
 - (void)finish:(Group *)createdGroup {
     [[UserManager sharedInstance] refreshUser:^(User *user, NSError *error) {
         [[LoadingView sharedInstance] hide];
-        
         if (self.group) {
             [[NSNotificationCenter defaultCenter] postNotificationName:GroupChangedNotificationName object:self userInfo:@{GroupChangedNotificationKey: self.group}];
             [self cancel];
@@ -153,9 +152,6 @@ static const float kAvatarSize = 344.0;
             GroupSettingsViewController *vc = [[GroupSettingsViewController alloc] initWithNewlyCreatedGroup:createdGroup];
             [self.navigationController pushViewController:vc animated:YES];
         }
-        
-        
-        
     }];
 }
 - (void)setShowPlaceholder:(BOOL)showPlaceholder {
@@ -170,7 +166,7 @@ static const float kAvatarSize = 344.0;
                                                                    delegate:self
                                                           cancelButtonTitle:NSLocalizedString(@"Cancel", @"")
                                                      destructiveButtonTitle:nil
-                                                          otherButtonTitles:NSLocalizedString(@"Take Photo", @""), NSLocalizedString(@"Choose Existing Photo", @""), NSLocalizedString(@"Set Default", @""), nil];
+                                                          otherButtonTitles:NSLocalizedString(@"Take Photo", @""), NSLocalizedString(@"Choose Existing Photo", @""), NSLocalizedString(@"Use Default", @""), nil];
     }
     [self.avatarChangeAcitonSheet showInView:self.view];
 }

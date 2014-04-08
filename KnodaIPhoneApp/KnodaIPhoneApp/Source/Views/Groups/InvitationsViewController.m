@@ -134,7 +134,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (self.items.count == 0) {
-        return [NoContentCell noContentWithMessage:@"Find your friends using the search bar above" forTableView:tableView height:self.tableView.frame.size.height];
+        return [NoContentCell noContentWithMessage:@"Find your friends on Knoda using the search bar above. You can also type a name, phone number, or email address to invite them from your contact list." forTableView:tableView height:self.tableView.frame.size.height];
     }
     
     

@@ -490,7 +490,8 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
 
 - (void)getPredictionsForGroup:(NSInteger)groupId after:(NSInteger)lastId completion:(void (^)(NSArray *, NSError *))completionHandler {
     NSString *path = [NSString stringWithFormat:@"groups/%ld/predictions.json", (long)groupId];
-    NSString *url = [self buildUrl:path parameters:nil];
+    NSDictionary *parameters = [self parametersDictionary:@{@"limit": @(PageLimit)} withLastId:lastId];
+    NSString *url = [self buildUrl:path parameters:parameters];
     NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler([Prediction arrayFromData:responseData], error);

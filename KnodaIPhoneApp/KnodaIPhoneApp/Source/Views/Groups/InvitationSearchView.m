@@ -31,8 +31,8 @@
     CGRect frame = self.frame;
     frame.size.height = frame.size.height - self.tableView.frame.size.height;
     self.frame = frame;
-    self.results = [NSMutableArray array];
     self.allContacts = [AddressBookHelper contactsWithEmailOrPhone];
+    self.results = [self.allContacts mutableCopy];
     return self;
 }
 - (void)willMoveToSuperview:(UIView *)newSuperview {
@@ -153,7 +153,7 @@
 - (void)resetUI {
     [self.textfield resignFirstResponder];
     self.textfield.text = @"";
-    [self.results removeAllObjects];
+    self.results = [self.allContacts mutableCopy];
     [self.tableView reloadData];
 }
 
@@ -167,7 +167,16 @@
     
     for (User *user in users) {
         NSInteger indexToInsert = [self.results indexOfObject:user inSortedRange:NSMakeRange(0, self.results.count) options:NSBinarySearchingInsertionIndex usingComparator:^NSComparisonResult(id obj1, id obj2) {
-            return [[obj2 name] compare:[obj1 name]];
+            NSComparisonResult result = [[obj2 name] compare:[obj2 name]];
+            if (result == NSOrderedSame) {
+                if ([obj2 isKindOfClass:User.class] && [obj1 isKindOfClass:Contact.class])
+                    return NSOrderedAscending;
+                else if ([obj1 isKindOfClass:User.class] && [obj2 isKindOfClass:Contact.class])
+                    return NSOrderedDescending;
+                return NSOrderedSame;
+            }
+            
+            return result;
         }];
         [self.results insertObject:user atIndex:indexToInsert];
     }
@@ -182,11 +191,11 @@
     [self.results removeAllObjects];
     
     NSLog(@"SEARCHING FOR %@", self.textfield.text);
-//    [[WebApi sharedInstance] autoCompleteUsers:query completion:^(NSArray *users, NSError *error) {
-//        if (!error)
-//            [self addUsersToResults:users];
-//        [self.tableView reloadData];
-//    }];
+    [[WebApi sharedInstance] autoCompleteUsers:query completion:^(NSArray *users, NSError *error) {
+        if (!error)
+            [self addUsersToResults:users];
+        [self.tableView reloadData];
+    }];
     
     NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(Contact* evaluatedObject, NSDictionary *bindings) {
         

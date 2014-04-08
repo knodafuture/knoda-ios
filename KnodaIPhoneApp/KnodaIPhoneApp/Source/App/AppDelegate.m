@@ -108,9 +108,9 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
     Badge *badge = [badges firstObject];
     
     [NewBadgeView showWithBadge:[UIImage imageNamed:badge.name] animated:YES];
+    
 #ifndef TESTFLIGHT
-
-    [self sendsendshittotapjoyifnecessarybadcodehere:badge.name];
+    [self sendshittotapjoyifnecessarybadcodehere:badge.name];
 #endif
 
 }

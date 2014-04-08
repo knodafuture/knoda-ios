@@ -73,11 +73,11 @@ CGFloat PredictorCellHeight = 22.0;
 }
 
 - (IBAction)agreedUserClicked:(id)sender {
-    [self.delegate predictorCellDidSelectUserWithUserId:self.agreedUser.userId];
+    [self.delegate predictorCellDidSelectUserWithUserId:self.agreedUser.user_id];
 }
 
 - (IBAction)disagreedUserClicked:(id)sender {
-    [self.delegate predictorCellDidSelectUserWithUserId:self.disagreedUser.userId];
+    [self.delegate predictorCellDidSelectUserWithUserId:self.disagreedUser.user_id];
 }
 
 @end

@@ -196,7 +196,7 @@
     [[WebApi sharedInstance] consumeInviteCode:self.invitationCode forGroup:self.group completion:^(Member *membership, NSError *error) {
         [[LoadingView sharedInstance] hide];
         if (error) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"An Unknown Error Occurred" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to join the group at this time." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
             [alert show];
             return;
         }

@@ -14,4 +14,22 @@
     return self.avatar != nil;
 }
 
+- (SocialAccount *)twitterAccount {
+    for (SocialAccount *account in self.socialAccounts) {
+        if ([account.providerName isEqualToString:@"twitter"])
+            return account;
+    }
+    
+    return nil;
+}
+
+- (SocialAccount *)facebookAccount {
+    for (SocialAccount *account in self.socialAccounts) {
+        if ([account.providerName isEqualToString:@"facebook"])
+            return account;
+    }
+    
+    return nil;
+}
+
 @end

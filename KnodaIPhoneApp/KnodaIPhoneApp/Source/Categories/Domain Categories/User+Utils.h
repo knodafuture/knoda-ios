@@ -7,9 +7,11 @@
 //
 
 #import "User.h"
+#import "SocialAccount.h"   
 
 @interface User (Utils)
 
 @property (readonly, nonatomic) BOOL hasAvatar;
-
+@property (readonly, nonatomic) SocialAccount *twitterAccount;
+@property (readonly, nonatomic) SocialAccount *facebookAccount;
 @end

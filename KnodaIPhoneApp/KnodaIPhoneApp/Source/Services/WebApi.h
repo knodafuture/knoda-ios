@@ -24,6 +24,7 @@
 #import "Member.h"
 #import "Invitation.h"
 #import "InvitationCodeDetails.h"
+#import "SocialAccount.h" 
 
 typedef NS_ENUM(NSInteger, HttpStatus) {
 	HttpStatusOk				= 200,
@@ -58,6 +59,14 @@ extern NSInteger PageLimit;
 - (void)deleteToken:(NSString *)tokenId completion:(void(^)(NSError *error))completionHandler;
 - (void)getUser:(NSInteger)userId completion:(void(^)(User *user, NSError *error))completionHandler;
 - (void)autoCompleteUsers:(NSString *)query completion:(void(^)(NSArray *users, NSError *error))completionHandler;
+
+- (void)socialSignIn:(SocialAccount *)request completion:(void(^)(LoginResponse *response, NSError *error))completionHandler;
+- (void)addSocialAccount:(SocialAccount *)account completion:(void(^)(SocialAccount *account, NSError *error))completionHandler;
+- (void)deleteSocialAccount:(SocialAccount *)account completion:(void(^)(NSError *error))completionHandler;
+
+- (void)postPredictionToFacebook:(Prediction *)prediction completion:(void(^)(NSError *error))completionHandler;
+- (void)postPredictionToTwitter:(Prediction *)prediction completion:(void(^)(NSError *error))completionHandler;
+
 // -- Predictions -- //
 
 - (void)getPredictionsAfter:(NSInteger)lastId completion:(void(^)(NSArray *predictions, NSError *error))completionHandler;

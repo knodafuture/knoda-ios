@@ -8,6 +8,7 @@
 //
 
 #import "User.h"
+#import "SocialAccount.h"
 
 @implementation User
 
@@ -18,10 +19,15 @@
              @"winningPercentage" : @"winning_percentage",
              @"totalPredictions": @"total_predictions",
              @"verifiedAccount" : @"verified_account",
-             @"name" : @"username"};
+             @"name" : @"username",
+             @"socialAccounts" : @"social_accounts"};
 }
 
 + (NSValueTransformer *)avatarJSONTransformer {
     return [self remoteImageTransformer];
+}
+
++ (NSValueTransformer *)socialAccountsJSONTransformer {
+    return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:SocialAccount.class];
 }
 @end

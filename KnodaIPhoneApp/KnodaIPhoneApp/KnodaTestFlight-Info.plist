@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.5</string>
+	<string>1.6</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -29,12 +29,17 @@
 			<string>com.knoda.testflight</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>fb455514421245892</string>
 				<string>knoda</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.5</string>
+	<string>1.6</string>
+	<key>FacebookAppID</key>
+	<string>455514421245892</string>
+	<key>FacebookDisplayName</key>
+	<string>Knoda</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>

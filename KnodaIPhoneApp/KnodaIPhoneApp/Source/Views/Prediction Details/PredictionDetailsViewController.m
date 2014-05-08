@@ -21,6 +21,7 @@
 #import "PredictionDetailsHeaderCell.h"
 #import "UserManager.h"
 #import "GroupPredictionsViewController.h"
+#import "UIActionSheet+Blocks.h"
 
 static const int kBSAlertTag = 1001;
 
@@ -161,12 +162,59 @@ static const int kBSAlertTag = 1001;
         return;
     }
 
+
+    if (![UserManager sharedInstance].user.facebookAccount && ![UserManager sharedInstance].user.twitterAccount) {
+        [self showDefaultShare];
+        return;
+    }
+    
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"How would you like to share?" delegate:nil cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
+    for (SocialAccount *account in [UserManager sharedInstance].user.socialAccounts) {
+        [sheet addButtonWithTitle:account.providerName.capitalizedString];
+    }
+    
+    [sheet addButtonWithTitle:@"Other"];
+    __unsafe_unretained PredictionDetailsViewController *this = self;
+    sheet.tapBlock = ^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+        if (buttonIndex == actionSheet.destructiveButtonIndex)
+            return;
+        
+        if (buttonIndex == [UserManager sharedInstance].user.socialAccounts.count)
+            [this showDefaultShare];
+        else
+            [this shareWithSocialAccount:[UserManager sharedInstance].user.socialAccounts[buttonIndex]];
+            
+    };
+    sheet.destructiveButtonIndex = [sheet addButtonWithTitle:@"Cancel"];
+    [sheet showInView:self.view];
+}
+
+- (void)shareWithSocialAccount:(SocialAccount *)account {
+    [[LoadingView sharedInstance] show];
+    if ([account.providerName isEqualToString:@"twitter"])
+        [[WebApi sharedInstance] postPredictionToTwitter:self.prediction completion:^(NSError *error){
+            [[LoadingView sharedInstance] hide];
+            if (error) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"An unknown error occured." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                [alert show];
+            }
+        }];
+    else if ([account.providerName isEqualToString:@"facebook"])
+        [[WebApi sharedInstance] postPredictionToFacebook:self.prediction completion:^(NSError *error){
+            [[LoadingView sharedInstance] hide];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"An unknown error occured." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+            [alert show];
+        }];
+    
+}
+
+- (void)showDefaultShare {
     PredictionItemProvider *item = [[PredictionItemProvider alloc] initWithPrediction:self.prediction];
     UIActivityViewController *vc = [[UIActivityViewController alloc] initWithActivityItems:@[item] applicationActivities:nil];
     
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
         [vc setExcludedActivityTypes:@[UIActivityTypePostToWeibo, UIActivityTypePostToVimeo, UIActivityTypePostToTencentWeibo,
-                                   UIActivityTypePostToFlickr, UIActivityTypeAssignToContact, UIActivityTypeAirDrop, UIActivityTypeAddToReadingList, UIActivityTypeSaveToCameraRoll, UIActivityTypePrint]];
+                                       UIActivityTypePostToFlickr, UIActivityTypeAssignToContact, UIActivityTypeAirDrop, UIActivityTypeAddToReadingList, UIActivityTypeSaveToCameraRoll, UIActivityTypePrint]];
     else
         [vc setExcludedActivityTypes:@[UIActivityTypePostToWeibo, UIActivityTypeAssignToContact, UIActivityTypePrint, UIActivityTypeSaveToCameraRoll]];
     [UINavigationBar setDefaultAppearance];

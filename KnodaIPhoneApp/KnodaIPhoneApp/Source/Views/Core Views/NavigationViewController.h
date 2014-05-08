@@ -17,10 +17,12 @@ typedef NS_ENUM(NSInteger, MenuItem) {
 
 @interface NavigationViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
+@property (strong, nonatomic) NSURL *launchUrl;
+
 
 - (id)initWithFirstMenuItem:(MenuItem)menuItem;
 - (void)toggleNavigationPanel;
 - (void)openMenuItem:(MenuItem)menuItem;
-
+- (void)handleOpenUrl:(NSURL *)url;
 - (void)hackAnimationFinished;
 @end

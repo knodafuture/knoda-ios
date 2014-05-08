@@ -97,6 +97,34 @@
     
 }
 
+- (void)handleOpenUrl:(NSURL *)url {
+    
+    NSString *host = [url host];
+    if ([[url scheme] isEqualToString:@"knoda"]) {
+    
+        if ([host isEqualToString:@"predictions"]) {
+            [self showPrediction:[[[url pathComponents] lastObject] integerValue]];
+        }
+    } else {
+        NSRange locationOfShare = [url.path rangeOfString:@"/share"];
+        if (locationOfShare.location == NSNotFound)
+            return;
+        NSString *newUrl = [NSString stringWithFormat:@"knoda:/%@", [url.path substringToIndex:[url.path rangeOfString:@"/share"].location]];
+        [self handleOpenUrl:[NSURL URLWithString:newUrl]];
+    }
+}
+
+- (void)showPrediction:(NSInteger)predictionId {
+    [[LoadingView sharedInstance] show];
+    [[WebApi sharedInstance] getPrediction:predictionId completion:^(Prediction *prediction, NSError *error) {
+        [[LoadingView sharedInstance] hide];
+        if (error)
+            return;
+        PredictionDetailsViewController *vc = [[PredictionDetailsViewController alloc] initWithPrediction:prediction];
+        [self.topNavigationController pushViewController:vc animated:YES];
+    }];
+}
+
 - (void)activeGroupChanged:(NSNotification *)notification {
     Group *newGroup = [notification.userInfo objectForKey:ActiveGroupNotificationKey];
     if (newGroup)
@@ -135,8 +163,12 @@
 - (void)hackAnimationFinished {
     if(![UserManager sharedInstance].user.hasAvatar)
         [self showSelectPictureViewController];
-    else
+    else {
         [self openMenuItem: self.firstMenuItem];
+        if (self.launchUrl) {
+            [self handleOpenUrl:self.launchUrl];
+        }
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

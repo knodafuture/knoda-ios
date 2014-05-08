@@ -18,6 +18,9 @@
 #import "WebViewController.h"
 #import "ChangePasswordViewController.h"
 #import "UserManager.h"
+#import "TwitterManager.h"
+#import "FacebookManager.h" 
+#import "UIActionSheet+Blocks.h"
 
 static NSString* const kChangeEmailUsernameSegue = @"UsernameEmailSegue";
 static NSString* const kChangePasswordSegue = @"ChangePasswordSegue";
@@ -43,6 +46,11 @@ static const float kAvatarSize = 344.0;
 @property (weak, nonatomic) IBOutlet UILabel *termsLabel;
 @property (assign, nonatomic) BOOL canceledEntry;
 
+@property (weak, nonatomic) IBOutlet UISwitch *twitterSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *facebookSwitch;
+@property (weak, nonatomic) IBOutlet UILabel *twitterLabel;
+@property (weak, nonatomic) IBOutlet UILabel *facebookLabel;
+
 
 @end
 
@@ -51,6 +59,7 @@ static const float kAvatarSize = 344.0;
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.emailField.clearsOnBeginEditing = ![UserManager sharedInstance].user.email;
     if (self.leftButtonItemReturnsBack)
         self.navigationItem.leftBarButtonItem = [UIBarButtonItem backButtonWithTarget:self action:@selector(menuButtonPress)];
     self.navigationController.navigationBar.translucent = NO;
@@ -74,6 +83,11 @@ static const float kAvatarSize = 344.0;
     [termsString addAttributes:allAttributes range:NSMakeRange(0, termsString.length)];
     
     self.termsLabel.attributedText = termsString;
+    
+    self.twitterSwitch.onTintColor = [UIColor colorFromHex:@"2BA9E1"];
+    self.twitterSwitch.tintColor = [UIColor colorFromHex:@"efefef"];
+    self.facebookSwitch.tintColor = [UIColor colorFromHex:@"efefef"];
+    self.facebookSwitch.onTintColor = [UIColor colorFromHex:@"3B5998"];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -109,8 +123,29 @@ static const float kAvatarSize = 344.0;
     
     [self.headerView populateWithUser:user];
     
-    self.emailField.text = user.email;
+    
+    if (user.email && ![user.email isEqualToString:@""])
+        self.emailField.text = user.email;
+    else
+        self.emailField.text = @"Add your email.";
     self.userNameField.text = user.name;
+    
+    
+    if (user.twitterAccount != nil) {
+        self.twitterLabel.text = [NSString stringWithFormat:@"@%@", user.twitterAccount.providerAccountName];
+        self.twitterSwitch.on = YES;
+    } else {
+        self.twitterLabel.text = @"Connect to Twitter";
+        self.twitterSwitch.on = NO;
+    }
+    
+    if (user.facebookAccount != nil) {
+        self.facebookLabel.text = user.facebookAccount.providerAccountName;
+        self.facebookSwitch.on = YES;
+    } else {
+        self.facebookLabel.text = @"Connect to Facebook";
+        self.facebookSwitch.on = NO;
+    }
 }
 
 - (void)loadUserInformation {
@@ -339,5 +374,144 @@ static const float kAvatarSize = 344.0;
 - (void)dealloc {
     [self removeAllObservations];
 }
+
+
+- (IBAction)twitterButtonPressed:(id)sender {
+    if ([UserManager sharedInstance].user.twitterAccount)
+        [self removeTwitterAccount];
+    else
+        [self addTwitterAccount];
+}
+
+- (IBAction)facebookButtonPressed:(id)sender {
+    if ([UserManager sharedInstance].user.facebookAccount)
+        [self removeFacebookAccount];
+    else
+        [self addFacebookAccount];
+}
+
+- (IBAction)twitterToggleValueChanged:(id)sender {
+    [self twitterButtonPressed:sender];
+}
+
+- (IBAction)facebookToggleValueChanged:(id)sender {
+    [self facebookButtonPressed:sender];
+}
+
+- (void)addTwitterAccount {
+    [[LoadingView sharedInstance] show];
+    [[TwitterManager sharedInstance] performReverseAuth:^(SocialAccount *request, NSError *error) {
+        if (error) {
+            [[LoadingView sharedInstance] hide];
+            [self populateUserInfo];
+            return;
+        }
+        
+        [[UserManager sharedInstance] addSocialAccount:request completion:^(User *user, NSError *error) {
+            [self populateUserInfo];
+            [[LoadingView sharedInstance] hide];
+            if (error)
+                [[[UIAlertView alloc] initWithTitle:nil
+                                            message:error.localizedDescription
+                                           delegate:nil
+                                  cancelButtonTitle:NSLocalizedString(@"OK", @"")
+                                  otherButtonTitles:nil] show];
+        }];
+    }];
+}
+
+- (void)removeTwitterAccount {
+    
+    User *user = [UserManager sharedInstance].user;
+    
+    if ((!user.email || [user.email isEqualToString:@""]) && !user.facebookAccount) {
+        [[[UIAlertView alloc] initWithTitle:@"Error" message:@"You must enter an email address before removing your last social account, or your account will be lost forever." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+        [self populateUserInfo];
+        return;
+    }
+    
+    [UIActionSheet showInView:self.view withTitle:@"Are you sure?" cancelButtonTitle:@"No" destructiveButtonTitle:@"Yes, remove this account." otherButtonTitles:nil tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+        if (buttonIndex == actionSheet.cancelButtonIndex) {
+            [self populateUserInfo];
+            return;
+        }
+        [self twitterAccountRemovalConfirm];
+    }];
+}
+
+- (void)twitterAccountRemovalConfirm {
+    [[LoadingView sharedInstance] show];
+    [[UserManager sharedInstance] deleteSocialAccount:[UserManager sharedInstance].user.twitterAccount completion:^(User *user, NSError *error) {
+        [[LoadingView sharedInstance] hide];
+        [self populateUserInfo];
+        if (error)
+            [[[UIAlertView alloc] initWithTitle:nil
+                                        message:error.localizedDescription
+                                       delegate:nil
+                              cancelButtonTitle:NSLocalizedString(@"OK", @"")
+                              otherButtonTitles:nil] show];
+    }];
+}
+
+- (void)addFacebookAccount {
+    [[LoadingView sharedInstance] show];
+    [[FacebookManager sharedInstance] openSession:^(NSDictionary *data, NSError *error) {
+        if (error) {
+            [[LoadingView sharedInstance] hide];
+            [[[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+            [self populateUserInfo];
+            return;
+        }
+        SocialAccount *request = [[SocialAccount alloc] init];
+        request.providerName = @"facebook";
+        request.providerId = data[@"id"];
+        request.accessToken = [[FacebookManager sharedInstance] accessTokenForCurrentSession];
+
+        
+        [[UserManager sharedInstance] addSocialAccount:request completion:^(User *user, NSError *error) {
+            [self populateUserInfo];
+            [[LoadingView sharedInstance] hide];
+            if (error)
+                [[[UIAlertView alloc] initWithTitle:nil
+                                            message:error.localizedDescription
+                                           delegate:nil
+                                  cancelButtonTitle:NSLocalizedString(@"OK", @"")
+                                  otherButtonTitles:nil] show];
+        }];
+    }];
+}
+
+- (void)removeFacebookAccount {
+    User *user = [UserManager sharedInstance].user;
+    
+    if ((!user.email || [user.email isEqualToString:@""]) && !user.twitterAccount) {
+        [[[UIAlertView alloc] initWithTitle:@"Error" message:@"You must enter an email address before removing your last social account, or your account will be lost forever." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+        [self populateUserInfo];
+        return;
+    }
+    
+    [UIActionSheet showInView:self.view withTitle:@"Are you sure?" cancelButtonTitle:@"No" destructiveButtonTitle:@"Yes, remove this account." otherButtonTitles:nil tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+        if (buttonIndex == actionSheet.cancelButtonIndex) {
+            [self populateUserInfo];
+            return;
+        }
+        [self facebokAccountRemovalConfirm];
+    }];
+}
+
+- (void)facebokAccountRemovalConfirm {
+    [[LoadingView sharedInstance] show];
+    [[UserManager sharedInstance] deleteSocialAccount:[UserManager sharedInstance].user.facebookAccount completion:^(User *user, NSError *error) {
+        [[LoadingView sharedInstance] hide];
+        [self populateUserInfo];
+        if (error)
+            [[[UIAlertView alloc] initWithTitle:nil
+                                        message:error.localizedDescription
+                                       delegate:nil
+                              cancelButtonTitle:NSLocalizedString(@"OK", @"")
+                              otherButtonTitles:nil] show];
+    }];
+}
+
 
 @end

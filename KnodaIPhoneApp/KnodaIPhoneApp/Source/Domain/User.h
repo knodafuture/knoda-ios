@@ -26,4 +26,6 @@
 
 @property (strong, nonatomic) RemoteImage *avatar;
 @property (assign, nonatomic) BOOL verifiedAccount;
+
+@property (strong, nonatomic) NSArray *socialAccounts;
 @end

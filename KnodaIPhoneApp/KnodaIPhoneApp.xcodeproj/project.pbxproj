@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0101F56019139E8700623417 /* UIActionSheet+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 0101F55F19139E8700623417 /* UIActionSheet+Blocks.m */; };
+		0101F56119139E8700623417 /* UIActionSheet+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 0101F55F19139E8700623417 /* UIActionSheet+Blocks.m */; };
 		0121E83B184FDBC700B7C5CA /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 01A1DEE8183E9A1F00DBBE68 /* libz.dylib */; };
 		0121E83C184FDBC700B7C5CA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6F4C5917D8CCFA00EAB4A0 /* SystemConfiguration.framework */; };
 		0121E83D184FDBC700B7C5CA /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E28686E17C659930033FB3C /* Security.framework */; };
@@ -180,36 +182,6 @@
 		013DA87D1853002200B507E4 /* IntroOverlay@2x-568h.png in Resources */ = {isa = PBXBuildFile; fileRef = 013DA7951853002100B507E4 /* IntroOverlay@2x-568h.png */; };
 		013DA87E1853002200B507E4 /* IntroOverlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 013DA7961853002100B507E4 /* IntroOverlay@2x.png */; };
 		013DA87F1853002200B507E4 /* IntroOverlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 013DA7961853002100B507E4 /* IntroOverlay@2x.png */; };
-		013DA8801853002200B507E4 /* Screen1.png in Resources */ = {isa = PBXBuildFile; fileRef = 013DA7971853002100B507E4 /* Screen1.png */; };
-		013DA8811853002200B507E4 /* Screen1.png in Resources */ = {isa = PBXBuildFile; fileRef = 013DA7971853002100B507E4 /* Screen1.png */; };
-		013DA8821853002200B507E4 /* Screen1@2x-568h.png in Resources */ = {isa = PBXBuildFile; fileRef = 013DA7981853002100B507E4 /* Screen1@2x-568h.png */; };
-		013DA8831853002200B507E4 /* Screen1@2x-568h.png in Resources */ = {isa = PBXBuildFile; fileRef = 013DA7981853002100B507E4 /* Screen1@2x-568h.png */; };
-		013DA8841853002200B507E4 /* Screen1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 013DA7991853002100B507E4 /* Screen1@2x.png */; };
-		013DA8851853002200B507E4 /* Screen1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 013DA7991853002100B507E4 /* Screen1@2x.png */; };
-		013DA8861853002200B507E4 /* Screen2.png in Resources */ = {isa = PBXBuildFile; fileRef = 013DA79A1853002100B507E4 /* Screen2.png */; };
-		013DA8871853002200B507E4 /* Screen2.png in Resources */ = {isa = PBXBuildFile; fileRef = 013DA79A1853002100B507E4 /* Screen2.png */; };
-		013DA8881853002200B507E4 /* Screen2@2x-568h.png in Resources */ = {isa = PBXBuildFile; fileRef = 013DA79B1853002100B507E4 /* Screen2@2x-568h.png */; };
-		013DA8891853002200B507E4 /* Screen2@2x-568h.png in Resources */ = {isa = PBXBuildFile; fileRef = 013DA79B1853002100B507E4 /* Screen2@2x-568h.png */; };
-		013DA88A1853002200B507E4 /* Screen2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 013DA79C1853002100B507E4 /* Screen2@2x.png */; };
-		013DA88B1853002200B507E4 /* Screen2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 013DA79C1853002100B507E4 /* Screen2@2x.png */; };
-		013DA88C1853002200B507E4 /* Screen3.png in Resources */ = {isa = PBXBuildFile; fileRef = 013DA79D1853002100B507E4 /* Screen3.png */; };
-		013DA88D1853002200B507E4 /* Screen3.png in Resources */ = {isa = PBXBuildFile; fileRef = 013DA79D1853002100B507E4 /* Screen3.png */; };
-		013DA88E1853002200B507E4 /* Screen3@2x-568h.png in Resources */ = {isa = PBXBuildFile; fileRef = 013DA79E1853002100B507E4 /* Screen3@2x-568h.png */; };
-		013DA88F1853002200B507E4 /* Screen3@2x-568h.png in Resources */ = {isa = PBXBuildFile; fileRef = 013DA79E1853002100B507E4 /* Screen3@2x-568h.png */; };
-		013DA8901853002200B507E4 /* Screen3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 013DA79F1853002100B507E4 /* Screen3@2x.png */; };
-		013DA8911853002200B507E4 /* Screen3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 013DA79F1853002100B507E4 /* Screen3@2x.png */; };
-		013DA8921853002200B507E4 /* Screen4.png in Resources */ = {isa = PBXBuildFile; fileRef = 013DA7A01853002100B507E4 /* Screen4.png */; };
-		013DA8931853002200B507E4 /* Screen4.png in Resources */ = {isa = PBXBuildFile; fileRef = 013DA7A01853002100B507E4 /* Screen4.png */; };
-		013DA8941853002200B507E4 /* Screen4@2x-568h.png in Resources */ = {isa = PBXBuildFile; fileRef = 013DA7A11853002100B507E4 /* Screen4@2x-568h.png */; };
-		013DA8951853002200B507E4 /* Screen4@2x-568h.png in Resources */ = {isa = PBXBuildFile; fileRef = 013DA7A11853002100B507E4 /* Screen4@2x-568h.png */; };
-		013DA8961853002200B507E4 /* Screen4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 013DA7A21853002100B507E4 /* Screen4@2x.png */; };
-		013DA8971853002200B507E4 /* Screen4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 013DA7A21853002100B507E4 /* Screen4@2x.png */; };
-		013DA8981853002200B507E4 /* Screen5.png in Resources */ = {isa = PBXBuildFile; fileRef = 013DA7A31853002100B507E4 /* Screen5.png */; };
-		013DA8991853002200B507E4 /* Screen5.png in Resources */ = {isa = PBXBuildFile; fileRef = 013DA7A31853002100B507E4 /* Screen5.png */; };
-		013DA89A1853002200B507E4 /* Screen5@2x-568h.png in Resources */ = {isa = PBXBuildFile; fileRef = 013DA7A41853002100B507E4 /* Screen5@2x-568h.png */; };
-		013DA89B1853002200B507E4 /* Screen5@2x-568h.png in Resources */ = {isa = PBXBuildFile; fileRef = 013DA7A41853002100B507E4 /* Screen5@2x-568h.png */; };
-		013DA89C1853002200B507E4 /* Screen5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 013DA7A51853002100B507E4 /* Screen5@2x.png */; };
-		013DA89D1853002200B507E4 /* Screen5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 013DA7A51853002100B507E4 /* Screen5@2x.png */; };
 		013DA89E1853002200B507E4 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 013DA7A61853002100B507E4 /* Media.xcassets */; };
 		013DA89F1853002200B507E4 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 013DA7A61853002100B507E4 /* Media.xcassets */; };
 		013DA8A41853002200B507E4 /* BJImageCropper.m in Sources */ = {isa = PBXBuildFile; fileRef = 013DA7AE1853002100B507E4 /* BJImageCropper.m */; };
@@ -350,6 +322,28 @@
 		01BFDC7318E4B9AB0098F81F /* InvitationCodeDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BFDC7118E4B9AB0098F81F /* InvitationCodeDetails.m */; };
 		01BFDC7518E5C8110098F81F /* GroupAvatars.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01BFDC7418E5C8110098F81F /* GroupAvatars.xcassets */; };
 		01BFDC7618E5C8110098F81F /* GroupAvatars.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01BFDC7418E5C8110098F81F /* GroupAvatars.xcassets */; };
+		01C4A49B190E3D2F00E08031 /* TWAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C4A491190E3D2F00E08031 /* TWAPIManager.m */; };
+		01C4A49C190E3D2F00E08031 /* TWAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C4A491190E3D2F00E08031 /* TWAPIManager.m */; };
+		01C4A49D190E3D2F00E08031 /* TWSignedRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C4A493190E3D2F00E08031 /* TWSignedRequest.m */; };
+		01C4A49E190E3D2F00E08031 /* TWSignedRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C4A493190E3D2F00E08031 /* TWSignedRequest.m */; };
+		01C4A49F190E3D2F00E08031 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C4A496190E3D2F00E08031 /* NSData+Base64.m */; };
+		01C4A4A0190E3D2F00E08031 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C4A496190E3D2F00E08031 /* NSData+Base64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		01C4A4A1190E3D2F00E08031 /* OAuth+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C4A498190E3D2F00E08031 /* OAuth+Additions.m */; };
+		01C4A4A2190E3D2F00E08031 /* OAuth+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C4A498190E3D2F00E08031 /* OAuth+Additions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		01C4A4A3190E3D2F00E08031 /* OAuthCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C4A49A190E3D2F00E08031 /* OAuthCore.m */; };
+		01C4A4A4190E3D2F00E08031 /* OAuthCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C4A49A190E3D2F00E08031 /* OAuthCore.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		01C4A4A6190E3DC100E08031 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C4A4A5190E3DC100E08031 /* Accounts.framework */; };
+		01C4A4A7190E3FA600E08031 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C4A4A5190E3DC100E08031 /* Accounts.framework */; };
+		01C4A4A8190E3FAB00E08031 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A9F34185DA3DC00A96678 /* Twitter.framework */; };
+		01C4A4A9190E401A00E08031 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A9F30185DA3BB00A96678 /* Social.framework */; };
+		01C4A4AC190E61B300E08031 /* SocialAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C4A4AB190E61B300E08031 /* SocialAccount.m */; };
+		01C4A4AD190E61B300E08031 /* SocialAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C4A4AB190E61B300E08031 /* SocialAccount.m */; };
+		01C4A4AF190E6A1D00E08031 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C4A4AE190E6A1D00E08031 /* FacebookSDK.framework */; };
+		01C4A4B0190E6A1D00E08031 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C4A4AE190E6A1D00E08031 /* FacebookSDK.framework */; };
+		01D73407190EC6200070481E /* FacebookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D73406190EC6200070481E /* FacebookManager.m */; };
+		01D73408190EC6200070481E /* FacebookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D73406190EC6200070481E /* FacebookManager.m */; };
+		01D7340B19126B230070481E /* TwitterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D7340A19126B230070481E /* TwitterManager.m */; };
+		01D7340C19126B230070481E /* TwitterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D7340A19126B230070481E /* TwitterManager.m */; };
 		01DBEAA918D9F44F000F2E50 /* CreateGroupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01DBEAA818D9F44F000F2E50 /* CreateGroupCell.xib */; };
 		01DBEAAA18D9F44F000F2E50 /* CreateGroupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01DBEAA818D9F44F000F2E50 /* CreateGroupCell.xib */; };
 		01DBEAAD18DA036E000F2E50 /* GroupSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DBEAAC18DA036E000F2E50 /* GroupSettingsViewController.m */; };
@@ -422,6 +416,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0101F55E19139E8700623417 /* UIActionSheet+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+Blocks.h"; sourceTree = "<group>"; };
+		0101F55F19139E8700623417 /* UIActionSheet+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+Blocks.m"; sourceTree = "<group>"; };
 		0121E86C184FDBC700B7C5CA /* Knoda Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Knoda Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		013DA6E41852D4F800B507E4 /* libcommonCrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcommonCrypto.dylib; path = usr/lib/system/libcommonCrypto.dylib; sourceTree = SDKROOT; };
 		013DA6E81853002100B507E4 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -555,21 +551,6 @@
 		013DA7941853002100B507E4 /* IntroOverlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IntroOverlay.png; sourceTree = "<group>"; };
 		013DA7951853002100B507E4 /* IntroOverlay@2x-568h.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IntroOverlay@2x-568h.png"; sourceTree = "<group>"; };
 		013DA7961853002100B507E4 /* IntroOverlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IntroOverlay@2x.png"; sourceTree = "<group>"; };
-		013DA7971853002100B507E4 /* Screen1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Screen1.png; sourceTree = "<group>"; };
-		013DA7981853002100B507E4 /* Screen1@2x-568h.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen1@2x-568h.png"; sourceTree = "<group>"; };
-		013DA7991853002100B507E4 /* Screen1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen1@2x.png"; sourceTree = "<group>"; };
-		013DA79A1853002100B507E4 /* Screen2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Screen2.png; sourceTree = "<group>"; };
-		013DA79B1853002100B507E4 /* Screen2@2x-568h.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen2@2x-568h.png"; sourceTree = "<group>"; };
-		013DA79C1853002100B507E4 /* Screen2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen2@2x.png"; sourceTree = "<group>"; };
-		013DA79D1853002100B507E4 /* Screen3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Screen3.png; sourceTree = "<group>"; };
-		013DA79E1853002100B507E4 /* Screen3@2x-568h.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen3@2x-568h.png"; sourceTree = "<group>"; };
-		013DA79F1853002100B507E4 /* Screen3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen3@2x.png"; sourceTree = "<group>"; };
-		013DA7A01853002100B507E4 /* Screen4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Screen4.png; sourceTree = "<group>"; };
-		013DA7A11853002100B507E4 /* Screen4@2x-568h.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen4@2x-568h.png"; sourceTree = "<group>"; };
-		013DA7A21853002100B507E4 /* Screen4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen4@2x.png"; sourceTree = "<group>"; };
-		013DA7A31853002100B507E4 /* Screen5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Screen5.png; sourceTree = "<group>"; };
-		013DA7A41853002100B507E4 /* Screen5@2x-568h.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen5@2x-568h.png"; sourceTree = "<group>"; };
-		013DA7A51853002100B507E4 /* Screen5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen5@2x.png"; sourceTree = "<group>"; };
 		013DA7A61853002100B507E4 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		013DA7A71853002100B507E4 /* KnodaTestFlight-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "KnodaTestFlight-Info.plist"; path = "KnodaIPhoneApp/KnodaTestFlight-Info.plist"; sourceTree = "<group>"; };
 		013DA7AD1853002100B507E4 /* BJImageCropper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BJImageCropper.h; sourceTree = "<group>"; };
@@ -703,6 +684,24 @@
 		01BFDC7018E4B9AB0098F81F /* InvitationCodeDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitationCodeDetails.h; sourceTree = "<group>"; };
 		01BFDC7118E4B9AB0098F81F /* InvitationCodeDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitationCodeDetails.m; sourceTree = "<group>"; };
 		01BFDC7418E5C8110098F81F /* GroupAvatars.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = GroupAvatars.xcassets; sourceTree = "<group>"; };
+		01C4A490190E3D2F00E08031 /* TWAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWAPIManager.h; sourceTree = "<group>"; };
+		01C4A491190E3D2F00E08031 /* TWAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWAPIManager.m; sourceTree = "<group>"; };
+		01C4A492190E3D2F00E08031 /* TWSignedRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWSignedRequest.h; sourceTree = "<group>"; };
+		01C4A493190E3D2F00E08031 /* TWSignedRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWSignedRequest.m; sourceTree = "<group>"; };
+		01C4A495190E3D2F00E08031 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		01C4A496190E3D2F00E08031 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		01C4A497190E3D2F00E08031 /* OAuth+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OAuth+Additions.h"; sourceTree = "<group>"; };
+		01C4A498190E3D2F00E08031 /* OAuth+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OAuth+Additions.m"; sourceTree = "<group>"; };
+		01C4A499190E3D2F00E08031 /* OAuthCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthCore.h; sourceTree = "<group>"; };
+		01C4A49A190E3D2F00E08031 /* OAuthCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthCore.m; sourceTree = "<group>"; };
+		01C4A4A5190E3DC100E08031 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		01C4A4AA190E61B300E08031 /* SocialAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialAccount.h; sourceTree = "<group>"; };
+		01C4A4AB190E61B300E08031 /* SocialAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialAccount.m; sourceTree = "<group>"; };
+		01C4A4AE190E6A1D00E08031 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		01D73405190EC6200070481E /* FacebookManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookManager.h; sourceTree = "<group>"; };
+		01D73406190EC6200070481E /* FacebookManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookManager.m; sourceTree = "<group>"; };
+		01D7340919126B230070481E /* TwitterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterManager.h; sourceTree = "<group>"; };
+		01D7340A19126B230070481E /* TwitterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterManager.m; sourceTree = "<group>"; };
 		01DBEAA818D9F44F000F2E50 /* CreateGroupCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateGroupCell.xib; sourceTree = "<group>"; };
 		01DBEAAB18DA036E000F2E50 /* GroupSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupSettingsViewController.h; sourceTree = "<group>"; };
 		01DBEAAC18DA036E000F2E50 /* GroupSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupSettingsViewController.m; sourceTree = "<group>"; };
@@ -769,6 +768,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01C4A4A9190E401A00E08031 /* Social.framework in Frameworks */,
+				01C4A4A8190E3FAB00E08031 /* Twitter.framework in Frameworks */,
+				01C4A4A7190E3FA600E08031 /* Accounts.framework in Frameworks */,
 				01F82CDC18DD451D0000E96B /* libFlurry_4.3.2.a in Frameworks */,
 				01DBEAC418DA3C18000F2E50 /* AddressBook.framework in Frameworks */,
 				0121E83B184FDBC700B7C5CA /* libz.dylib in Frameworks */,
@@ -779,6 +781,7 @@
 				0121E840184FDBC700B7C5CA /* Foundation.framework in Frameworks */,
 				0121E841184FDBC700B7C5CA /* CoreGraphics.framework in Frameworks */,
 				50D776ADE5CA49A68908C526 /* libPods.a in Frameworks */,
+				01C4A4B0190E6A1D00E08031 /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -786,8 +789,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01C4A4A6190E3DC100E08031 /* Accounts.framework in Frameworks */,
 				01DBEAC518DA3C24000F2E50 /* AddressBook.framework in Frameworks */,
 				01FFE52C187B7432001C9893 /* StoreKit.framework in Frameworks */,
+				01C4A4AF190E6A1D00E08031 /* FacebookSDK.framework in Frameworks */,
 				014A9F35185DA3DC00A96678 /* Twitter.framework in Frameworks */,
 				9E6F4C5A17D8CCFA00EAB4A0 /* SystemConfiguration.framework in Frameworks */,
 				014A9F31185DA3BB00A96678 /* Social.framework in Frameworks */,
@@ -855,6 +860,8 @@
 		013DA6EC1853002100B507E4 /* Core Categories */ = {
 			isa = PBXGroup;
 			children = (
+				0101F55E19139E8700623417 /* UIActionSheet+Blocks.h */,
+				0101F55F19139E8700623417 /* UIActionSheet+Blocks.m */,
 				013DA6ED1853002100B507E4 /* NSData+Utils.h */,
 				013DA6EE1853002100B507E4 /* NSData+Utils.m */,
 				013DA6EF1853002100B507E4 /* NSDate+Utils.h */,
@@ -909,6 +916,10 @@
 				0193A00418CE6AE90088D168 /* ParamBuilder.m */,
 				014F4E2218D73F5600A2F764 /* UserManager.h */,
 				014F4E2318D73F5600A2F764 /* UserManager.m */,
+				01D73405190EC6200070481E /* FacebookManager.h */,
+				01D73406190EC6200070481E /* FacebookManager.m */,
+				01D7340919126B230070481E /* TwitterManager.h */,
+				01D7340A19126B230070481E /* TwitterManager.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1140,21 +1151,6 @@
 				013DA7941853002100B507E4 /* IntroOverlay.png */,
 				013DA7951853002100B507E4 /* IntroOverlay@2x-568h.png */,
 				013DA7961853002100B507E4 /* IntroOverlay@2x.png */,
-				013DA7971853002100B507E4 /* Screen1.png */,
-				013DA7981853002100B507E4 /* Screen1@2x-568h.png */,
-				013DA7991853002100B507E4 /* Screen1@2x.png */,
-				013DA79A1853002100B507E4 /* Screen2.png */,
-				013DA79B1853002100B507E4 /* Screen2@2x-568h.png */,
-				013DA79C1853002100B507E4 /* Screen2@2x.png */,
-				013DA79D1853002100B507E4 /* Screen3.png */,
-				013DA79E1853002100B507E4 /* Screen3@2x-568h.png */,
-				013DA79F1853002100B507E4 /* Screen3@2x.png */,
-				013DA7A01853002100B507E4 /* Screen4.png */,
-				013DA7A11853002100B507E4 /* Screen4@2x-568h.png */,
-				013DA7A21853002100B507E4 /* Screen4@2x.png */,
-				013DA7A31853002100B507E4 /* Screen5.png */,
-				013DA7A41853002100B507E4 /* Screen5@2x-568h.png */,
-				013DA7A51853002100B507E4 /* Screen5@2x.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -1162,6 +1158,9 @@
 		013DA7A81853002100B507E4 /* Thirdparty */ = {
 			isa = PBXGroup;
 			children = (
+				01C4A4AE190E6A1D00E08031 /* FacebookSDK.framework */,
+				01C4A48F190E3D2F00E08031 /* ReverseAuth */,
+				01C4A494190E3D2F00E08031 /* ABOAuthCore */,
 				01F82CD818DD451D0000E96B /* Flurry */,
 				014A9F0F185DA1C700A96678 /* TapjoySDK_iOS_v9.1.2 */,
 				014A9EFD185DA04400A96678 /* TestFlightSDK2.0.2 */,
@@ -1245,6 +1244,8 @@
 				01B67BB218DB630300D22D2B /* Invitation.m */,
 				01BFDC7018E4B9AB0098F81F /* InvitationCodeDetails.h */,
 				01BFDC7118E4B9AB0098F81F /* InvitationCodeDetails.m */,
+				01C4A4AA190E61B300E08031 /* SocialAccount.h */,
+				01C4A4AB190E61B300E08031 /* SocialAccount.m */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -1371,6 +1372,30 @@
 			path = Alerts;
 			sourceTree = "<group>";
 		};
+		01C4A48F190E3D2F00E08031 /* ReverseAuth */ = {
+			isa = PBXGroup;
+			children = (
+				01C4A490190E3D2F00E08031 /* TWAPIManager.h */,
+				01C4A491190E3D2F00E08031 /* TWAPIManager.m */,
+				01C4A492190E3D2F00E08031 /* TWSignedRequest.h */,
+				01C4A493190E3D2F00E08031 /* TWSignedRequest.m */,
+			);
+			path = ReverseAuth;
+			sourceTree = "<group>";
+		};
+		01C4A494190E3D2F00E08031 /* ABOAuthCore */ = {
+			isa = PBXGroup;
+			children = (
+				01C4A495190E3D2F00E08031 /* NSData+Base64.h */,
+				01C4A496190E3D2F00E08031 /* NSData+Base64.m */,
+				01C4A497190E3D2F00E08031 /* OAuth+Additions.h */,
+				01C4A498190E3D2F00E08031 /* OAuth+Additions.m */,
+				01C4A499190E3D2F00E08031 /* OAuthCore.h */,
+				01C4A49A190E3D2F00E08031 /* OAuthCore.m */,
+			);
+			path = ABOAuthCore;
+			sourceTree = "<group>";
+		};
 		01E8CB5B18764800003AE018 /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -1428,6 +1453,7 @@
 		9E708822178AF68E00F036A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				01C4A4A5190E3DC100E08031 /* Accounts.framework */,
 				01DBEAC318DA3C18000F2E50 /* AddressBook.framework */,
 				01FFE52B187B7432001C9893 /* StoreKit.framework */,
 				014A9F34185DA3DC00A96678 /* Twitter.framework */,
@@ -1547,7 +1573,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				013DA8931853002200B507E4 /* Screen4.png in Resources */,
 				013DA8251853002200B507E4 /* ForgotPasswordViewController.xib in Resources */,
 				014A9F09185DA04400A96678 /* release_notes.md in Resources */,
 				013DA89F1853002200B507E4 /* Media.xcassets in Resources */,
@@ -1559,26 +1584,18 @@
 				01DBEAC218DA3BE2000F2E50 /* InvitationsViewController.xib in Resources */,
 				013DA7FF1853002200B507E4 /* BadgesCollectionViewCell.xib in Resources */,
 				013DA8351853002200B507E4 /* PredictionDetailsHeaderCell.xib in Resources */,
-				013DA88D1853002200B507E4 /* Screen3.png in Resources */,
-				013DA88F1853002200B507E4 /* Screen3@2x-568h.png in Resources */,
 				013DA8071853002200B507E4 /* NewBadgeView.xib in Resources */,
-				013DA8991853002200B507E4 /* Screen5.png in Resources */,
 				01E8CB8318767D5D003AE018 /* UserCell.xib in Resources */,
 				013DA86B1853002200B507E4 /* WebViewController.xib in Resources */,
 				01F82CD718DD3E430000E96B /* CreateGroupViewController.xib in Resources */,
-				013DA8871853002200B507E4 /* Screen2.png in Resources */,
 				013DA8311853002200B507E4 /* WelcomeViewController.xib in Resources */,
-				013DA8891853002200B507E4 /* Screen2@2x-568h.png in Resources */,
-				013DA8951853002200B507E4 /* Screen4@2x-568h.png in Resources */,
 				013DA8751853002200B507E4 /* HelveticaNeue.dfont in Resources */,
 				013DA7FB1853002200B507E4 /* AddPredictionViewController.xib in Resources */,
-				013DA8831853002200B507E4 /* Screen1@2x-568h.png in Resources */,
 				014FDF6C18D7721F006B51D9 /* GroupTableViewCell.xib in Resources */,
 				013DA87B1853002200B507E4 /* IntroOverlay.png in Resources */,
 				013DA8491853002200B507E4 /* PredictorHeaderCell.xib in Resources */,
 				013DA8771853002200B507E4 /* KronaOne-Regular.ttf in Resources */,
 				014FDF8918D9F103006B51D9 /* GroupPredictionsHeaderCell.xib in Resources */,
-				013DA89D1853002200B507E4 /* Screen5@2x.png in Resources */,
 				013DA8731853002200B507E4 /* Badges.xcassets in Resources */,
 				013DA8391853002200B507E4 /* CommentCell.xib in Resources */,
 				01E2576C18E0743A009D3782 /* RankingsTableViewCell.xib in Resources */,
@@ -1586,11 +1603,9 @@
 				013DA8791853002200B507E4 /* Default@2x-568h.png in Resources */,
 				013DA85B1853002200B507E4 /* ChangePasswordViewController.xib in Resources */,
 				013DA85F1853002200B507E4 /* ImageCropperViewController.xib in Resources */,
-				013DA8851853002200B507E4 /* Screen1@2x.png in Resources */,
 				01598B3C1858E4B3002E2534 /* ZoomingImageViewController.xib in Resources */,
 				013DA8631853002200B507E4 /* ProfileViewController.xib in Resources */,
 				013DA9131854759200B507E4 /* CreateCommentView.xib in Resources */,
-				013DA89B1853002200B507E4 /* Screen5@2x-568h.png in Resources */,
 				013DA87D1853002200B507E4 /* IntroOverlay@2x-568h.png in Resources */,
 				013DA80D1853002200B507E4 /* NavigationViewController.xib in Resources */,
 				01E2577718E07D9B009D3782 /* RankingsViewController.xib in Resources */,
@@ -1598,7 +1613,6 @@
 				01B67BB018DB5D8E00D22D2B /* InvitationSearchView.xib in Resources */,
 				013DA8031853002200B507E4 /* BadgesCollectionViewController.xib in Resources */,
 				01B67BA918DB4BDE00D22D2B /* MemberTableViewCell.xib in Resources */,
-				013DA8911853002200B507E4 /* Screen3@2x.png in Resources */,
 				013DA86F1853002200B507E4 /* UserProfileHeaderView.xib in Resources */,
 				014A9F07185DA04400A96678 /* README.md in Resources */,
 				013DA81B1853002200B507E4 /* LoadingView.xib in Resources */,
@@ -1608,7 +1622,6 @@
 				01E8CB59187575EB003AE018 /* RightSideButtonsView.xib in Resources */,
 				01E8CB7C187678E0003AE018 /* NoSearchResultsCell.xib in Resources */,
 				014A9E87185BF95100A96678 /* SideNavButton.xib in Resources */,
-				013DA88B1853002200B507E4 /* Screen2@2x.png in Resources */,
 				013DA83F1853002200B507E4 /* PredictionDetailsSectionHeader.xib in Resources */,
 				013DA8291853002200B507E4 /* LoginViewController.xib in Resources */,
 				013DA8AB1853002200B507E4 /* InfoPlist.strings in Resources */,
@@ -1617,10 +1630,8 @@
 				013DA8711853002200B507E4 /* Avatars.xcassets in Resources */,
 				013DA8451853002200B507E4 /* PredictorCell.xib in Resources */,
 				01DBEAAA18D9F44F000F2E50 /* CreateGroupCell.xib in Resources */,
-				013DA8811853002200B507E4 /* Screen1.png in Resources */,
 				013DA8211853002200B507E4 /* DatePickerView.xib in Resources */,
 				013DA8671853002200B507E4 /* SelectPictureViewController.xib in Resources */,
-				013DA8971853002200B507E4 /* Screen4@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1628,7 +1639,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				013DA8921853002200B507E4 /* Screen4.png in Resources */,
 				01E8CB58187575EB003AE018 /* RightSideButtonsView.xib in Resources */,
 				013DA8241853002200B507E4 /* ForgotPasswordViewController.xib in Resources */,
 				014A9F08185DA04400A96678 /* release_notes.md in Resources */,
@@ -1640,27 +1650,19 @@
 				013DA7FE1853002200B507E4 /* BadgesCollectionViewCell.xib in Resources */,
 				014FDF6B18D7721F006B51D9 /* GroupTableViewCell.xib in Resources */,
 				013DA8341853002200B507E4 /* PredictionDetailsHeaderCell.xib in Resources */,
-				013DA88C1853002200B507E4 /* Screen3.png in Resources */,
 				01DBEAC118DA3BE2000F2E50 /* InvitationsViewController.xib in Resources */,
-				013DA88E1853002200B507E4 /* Screen3@2x-568h.png in Resources */,
 				013DA8061853002200B507E4 /* NewBadgeView.xib in Resources */,
-				013DA8981853002200B507E4 /* Screen5.png in Resources */,
 				013DA86A1853002200B507E4 /* WebViewController.xib in Resources */,
-				013DA8861853002200B507E4 /* Screen2.png in Resources */,
 				01DBEABA18DA29C6000F2E50 /* GroupSettingsViewController.xib in Resources */,
 				013DA8301853002200B507E4 /* WelcomeViewController.xib in Resources */,
-				013DA8881853002200B507E4 /* Screen2@2x-568h.png in Resources */,
-				013DA8941853002200B507E4 /* Screen4@2x-568h.png in Resources */,
 				013DA8741853002200B507E4 /* HelveticaNeue.dfont in Resources */,
 				013DA7FA1853002200B507E4 /* AddPredictionViewController.xib in Resources */,
-				013DA8821853002200B507E4 /* Screen1@2x-568h.png in Resources */,
 				01DBEAA918D9F44F000F2E50 /* CreateGroupCell.xib in Resources */,
 				01E2577618E07D9B009D3782 /* RankingsViewController.xib in Resources */,
 				013DA87A1853002200B507E4 /* IntroOverlay.png in Resources */,
 				013DA8481853002200B507E4 /* PredictorHeaderCell.xib in Resources */,
 				01B67BA818DB4BDE00D22D2B /* MemberTableViewCell.xib in Resources */,
 				013DA8761853002200B507E4 /* KronaOne-Regular.ttf in Resources */,
-				013DA89C1853002200B507E4 /* Screen5@2x.png in Resources */,
 				013DA8721853002200B507E4 /* Badges.xcassets in Resources */,
 				013DA8381853002200B507E4 /* CommentCell.xib in Resources */,
 				01598B271858364F002E2534 /* FirstStartView.xib in Resources */,
@@ -1668,14 +1670,12 @@
 				01E2576B18E0743A009D3782 /* RankingsTableViewCell.xib in Resources */,
 				013DA85A1853002200B507E4 /* ChangePasswordViewController.xib in Resources */,
 				013DA85E1853002200B507E4 /* ImageCropperViewController.xib in Resources */,
-				013DA8841853002200B507E4 /* Screen1@2x.png in Resources */,
 				01B67BAF18DB5D8E00D22D2B /* InvitationSearchView.xib in Resources */,
 				01598B3B1858E4B3002E2534 /* ZoomingImageViewController.xib in Resources */,
 				01DBEACB18DA4033000F2E50 /* InvitationTableViewCell.xib in Resources */,
 				013DA8621853002200B507E4 /* ProfileViewController.xib in Resources */,
 				013DA9121854759200B507E4 /* CreateCommentView.xib in Resources */,
 				014FDF8818D9F103006B51D9 /* GroupPredictionsHeaderCell.xib in Resources */,
-				013DA89A1853002200B507E4 /* Screen5@2x-568h.png in Resources */,
 				013DA87C1853002200B507E4 /* IntroOverlay@2x-568h.png in Resources */,
 				01BFDC7518E5C8110098F81F /* GroupAvatars.xcassets in Resources */,
 				013DA80C1853002200B507E4 /* NavigationViewController.xib in Resources */,
@@ -1683,14 +1683,12 @@
 				01E8CB8218767D5D003AE018 /* UserCell.xib in Resources */,
 				014A9F14185DA1C700A96678 /* TapjoyResources.bundle in Resources */,
 				013DA8021853002200B507E4 /* BadgesCollectionViewController.xib in Resources */,
-				013DA8901853002200B507E4 /* Screen3@2x.png in Resources */,
 				013DA86E1853002200B507E4 /* UserProfileHeaderView.xib in Resources */,
 				01E8CB7B187678E0003AE018 /* NoSearchResultsCell.xib in Resources */,
 				014A9F06185DA04400A96678 /* README.md in Resources */,
 				013DA81A1853002200B507E4 /* LoadingView.xib in Resources */,
 				013DA8161853002200B507E4 /* LoadingCell.xib in Resources */,
 				014A9E86185BF95100A96678 /* SideNavButton.xib in Resources */,
-				013DA88A1853002200B507E4 /* Screen2@2x.png in Resources */,
 				013DA83E1853002200B507E4 /* PredictionDetailsSectionHeader.xib in Resources */,
 				013DA8281853002200B507E4 /* LoginViewController.xib in Resources */,
 				013DA8AA1853002200B507E4 /* InfoPlist.strings in Resources */,
@@ -1698,11 +1696,9 @@
 				013DA87E1853002200B507E4 /* IntroOverlay@2x.png in Resources */,
 				013DA8701853002200B507E4 /* Avatars.xcassets in Resources */,
 				013DA8441853002200B507E4 /* PredictorCell.xib in Resources */,
-				013DA8801853002200B507E4 /* Screen1.png in Resources */,
 				013DA8201853002200B507E4 /* DatePickerView.xib in Resources */,
 				013DA8661853002200B507E4 /* SelectPictureViewController.xib in Resources */,
 				01F82CD618DD3E430000E96B /* CreateGroupViewController.xib in Resources */,
-				013DA8961853002200B507E4 /* Screen4@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1791,7 +1787,9 @@
 				013DA8CA1853004000B507E4 /* Comment.m in Sources */,
 				013DA7F51853002200B507E4 /* MultipartRequest.m in Sources */,
 				013DA8051853002200B507E4 /* NewBadgeView.m in Sources */,
+				01C4A4AD190E61B300E08031 /* SocialAccount.m in Sources */,
 				013DA7C91853002200B507E4 /* NSString+Utils.m in Sources */,
+				01C4A4A2190E3D2F00E08031 /* OAuth+Additions.m in Sources */,
 				01B67BAD18DB5CA300D22D2B /* InvitationSearchView.m in Sources */,
 				01939FFE18CE54350088D168 /* RemoteImage.m in Sources */,
 				01DBEAAE18DA036E000F2E50 /* GroupSettingsViewController.m in Sources */,
@@ -1801,6 +1799,7 @@
 				01E8CB711876672C003AE018 /* SearchSectionHeader.m in Sources */,
 				01DBEAD818DA4E88000F2E50 /* MemberTableViewCell.m in Sources */,
 				0193A00218CE564D0088D168 /* PredictionPoints.m in Sources */,
+				01C4A4A4190E3D2F00E08031 /* OAuthCore.m in Sources */,
 				013DA8191853002200B507E4 /* LoadingView.m in Sources */,
 				013DA84D1853002200B507E4 /* HomeViewController.m in Sources */,
 				0193A00E18CF53930088D168 /* PasswordChangeRequest.m in Sources */,
@@ -1809,6 +1808,7 @@
 				013DA7D71853002200B507E4 /* Prediction+Utils.m in Sources */,
 				013DA8551853002200B507E4 /* PredictionsViewController.m in Sources */,
 				013DA8091853002200B507E4 /* BaseTableViewController.m in Sources */,
+				01C4A49E190E3D2F00E08031 /* TWSignedRequest.m in Sources */,
 				013DA7F11853002200B507E4 /* FileCache.m in Sources */,
 				013DA8151853002200B507E4 /* LoadingCell.m in Sources */,
 				013DA84B1853002200B507E4 /* CategoryPredictionsViewController.m in Sources */,
@@ -1825,6 +1825,7 @@
 				013DA8431853002200B507E4 /* PredictorCell.m in Sources */,
 				01E2577518E07D9B009D3782 /* RankingsViewController.m in Sources */,
 				013DA8D41853004000B507E4 /* User.m in Sources */,
+				01D7340C19126B230070481E /* TwitterManager.m in Sources */,
 				013DA90A1854417D00B507E4 /* DetailsTableViewController.m in Sources */,
 				013DA7C51853002200B507E4 /* NSDate+Utils.m in Sources */,
 				01B67BB418DB630300D22D2B /* Invitation.m in Sources */,
@@ -1860,14 +1861,17 @@
 				013DA7CF1853002200B507E4 /* UIImage+Utils.m in Sources */,
 				013DA8231853002200B507E4 /* ForgotPasswordViewController.m in Sources */,
 				013DA8FA185432A200B507E4 /* PagingDatasource.m in Sources */,
+				01C4A4A0190E3D2F00E08031 /* NSData+Base64.m in Sources */,
 				01DBEAD018DA4194000F2E50 /* InvitationTableViewCell.m in Sources */,
 				013DA86D1853002200B507E4 /* UserProfileHeaderView.m in Sources */,
 				013DA7D51853002200B507E4 /* Comment+Utils.m in Sources */,
 				013DA8331853002200B507E4 /* PredictionDetailsHeaderCell.m in Sources */,
 				013DA8011853002200B507E4 /* BadgesCollectionViewController.m in Sources */,
+				0101F56119139E8700623417 /* UIActionSheet+Blocks.m in Sources */,
 				01598B3518584645002E2534 /* UINavigationBar+AppearanceUtils.m in Sources */,
 				013DA81D1853002200B507E4 /* NoContentCell.m in Sources */,
 				013DA8FE185432B100B507E4 /* CommentsDatasource.m in Sources */,
+				01D73408190EC6200070481E /* FacebookManager.m in Sources */,
 				01BFDC7318E4B9AB0098F81F /* InvitationCodeDetails.m in Sources */,
 				013DA7F71853002200B507E4 /* ImageLoader.m in Sources */,
 				013DA82F1853002200B507E4 /* WelcomeViewController.m in Sources */,
@@ -1875,6 +1879,7 @@
 				01DBEABF18DA2C13000F2E50 /* InvitationsViewController.m in Sources */,
 				013DA7F31853002200B507E4 /* WebApi.m in Sources */,
 				014FDF7418D77519006B51D9 /* Leader.m in Sources */,
+				01C4A49C190E3D2F00E08031 /* TWAPIManager.m in Sources */,
 				013DA8691853002200B507E4 /* WebViewController.m in Sources */,
 				0193A00A18CF50340088D168 /* PasswordResetRequest.m in Sources */,
 				013DA8E81853098600B507E4 /* AnotherUsersProfileViewController.m in Sources */,
@@ -1911,7 +1916,9 @@
 				013DA8C91853004000B507E4 /* Comment.m in Sources */,
 				013DA7F41853002200B507E4 /* MultipartRequest.m in Sources */,
 				013DA8041853002200B507E4 /* NewBadgeView.m in Sources */,
+				01C4A4AC190E61B300E08031 /* SocialAccount.m in Sources */,
 				013DA7C81853002200B507E4 /* NSString+Utils.m in Sources */,
+				01C4A4A1190E3D2F00E08031 /* OAuth+Additions.m in Sources */,
 				01B67BAC18DB5CA300D22D2B /* InvitationSearchView.m in Sources */,
 				01939FFD18CE54330088D168 /* RemoteImage.m in Sources */,
 				01DBEAAD18DA036E000F2E50 /* GroupSettingsViewController.m in Sources */,
@@ -1921,6 +1928,7 @@
 				01E8CB701876672C003AE018 /* SearchSectionHeader.m in Sources */,
 				01DBEAD718DA4E88000F2E50 /* MemberTableViewCell.m in Sources */,
 				0193A00118CE564D0088D168 /* PredictionPoints.m in Sources */,
+				01C4A4A3190E3D2F00E08031 /* OAuthCore.m in Sources */,
 				013DA8181853002200B507E4 /* LoadingView.m in Sources */,
 				013DA84C1853002200B507E4 /* HomeViewController.m in Sources */,
 				0193A00D18CF53930088D168 /* PasswordChangeRequest.m in Sources */,
@@ -1929,6 +1937,7 @@
 				013DA7D61853002200B507E4 /* Prediction+Utils.m in Sources */,
 				013DA8541853002200B507E4 /* PredictionsViewController.m in Sources */,
 				013DA8081853002200B507E4 /* BaseTableViewController.m in Sources */,
+				01C4A49D190E3D2F00E08031 /* TWSignedRequest.m in Sources */,
 				013DA7F01853002200B507E4 /* FileCache.m in Sources */,
 				013DA8141853002200B507E4 /* LoadingCell.m in Sources */,
 				013DA84A1853002200B507E4 /* CategoryPredictionsViewController.m in Sources */,
@@ -1945,6 +1954,7 @@
 				013DA8421853002200B507E4 /* PredictorCell.m in Sources */,
 				01E2577418E07D9B009D3782 /* RankingsViewController.m in Sources */,
 				013DA8D31853004000B507E4 /* User.m in Sources */,
+				01D7340B19126B230070481E /* TwitterManager.m in Sources */,
 				018DF79F1858F42F004FEDA6 /* AlertCell.m in Sources */,
 				013DA9091854417D00B507E4 /* DetailsTableViewController.m in Sources */,
 				01B67BB318DB630300D22D2B /* Invitation.m in Sources */,
@@ -1980,14 +1990,17 @@
 				013DA7CE1853002200B507E4 /* UIImage+Utils.m in Sources */,
 				013DA8221853002200B507E4 /* ForgotPasswordViewController.m in Sources */,
 				013DA8F9185432A200B507E4 /* PagingDatasource.m in Sources */,
+				01C4A49F190E3D2F00E08031 /* NSData+Base64.m in Sources */,
 				01DBEACF18DA4194000F2E50 /* InvitationTableViewCell.m in Sources */,
 				013DA86C1853002200B507E4 /* UserProfileHeaderView.m in Sources */,
 				013DA7D41853002200B507E4 /* Comment+Utils.m in Sources */,
 				013DA8321853002200B507E4 /* PredictionDetailsHeaderCell.m in Sources */,
 				013DA8001853002200B507E4 /* BadgesCollectionViewController.m in Sources */,
+				0101F56019139E8700623417 /* UIActionSheet+Blocks.m in Sources */,
 				01598B3418584645002E2534 /* UINavigationBar+AppearanceUtils.m in Sources */,
 				013DA81C1853002200B507E4 /* NoContentCell.m in Sources */,
 				013DA8FD185432B100B507E4 /* CommentsDatasource.m in Sources */,
+				01D73407190EC6200070481E /* FacebookManager.m in Sources */,
 				01BFDC7218E4B9AB0098F81F /* InvitationCodeDetails.m in Sources */,
 				013DA7F61853002200B507E4 /* ImageLoader.m in Sources */,
 				013DA82E1853002200B507E4 /* WelcomeViewController.m in Sources */,
@@ -1995,6 +2008,7 @@
 				01DBEABE18DA2C13000F2E50 /* InvitationsViewController.m in Sources */,
 				013DA7F21853002200B507E4 /* WebApi.m in Sources */,
 				014FDF7318D77519006B51D9 /* Leader.m in Sources */,
+				01C4A49B190E3D2F00E08031 /* TWAPIManager.m in Sources */,
 				013DA8681853002200B507E4 /* WebViewController.m in Sources */,
 				0193A00918CF50340088D168 /* PasswordResetRequest.m in Sources */,
 				013DA8E71853098600B507E4 /* AnotherUsersProfileViewController.m in Sources */,
@@ -2042,7 +2056,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Nick Rellihan (9TAA35K5AK)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/KnodaIPhoneApp/Thirdparty",
+				);
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KnodaIPhoneApp/KnodaIPhoneApp-Prefix.pch";
@@ -2074,7 +2091,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Knoda, LLC (F489V4H5F6)";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/KnodaIPhoneApp/Thirdparty",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KnodaIPhoneApp/KnodaIPhoneApp-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "TESTFLIGHT=1";
@@ -2165,6 +2185,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/KnodaIPhoneApp/ThirdParty/TapjoySDK_iOS_v9.1.2/**",
+					"$(PROJECT_DIR)/KnodaIPhoneApp/Thirdparty",
 				);
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2204,6 +2225,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/KnodaIPhoneApp/ThirdParty/TapjoySDK_iOS_v9.1.2/**",
+					"$(PROJECT_DIR)/KnodaIPhoneApp/Thirdparty",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KnodaIPhoneApp/KnodaIPhoneApp-Prefix.pch";

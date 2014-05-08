@@ -13,6 +13,7 @@
 #import "KeychainItemWrapper.h"
 #import "WelcomeViewController.h"
 #import "NavigationViewController.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 #ifdef TESTFLIGHT
 #import "TestFlight.h"
@@ -34,6 +35,7 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
 @interface AppDelegate() <UIAlertViewDelegate>
 @property (assign, nonatomic) BOOL launchedFromPush;
 @property (strong, nonatomic) NavigationViewController *navigationViewController;
+@property (strong, nonatomic) NSURL *launchUrl;
 @end
 
 @implementation AppDelegate
@@ -49,8 +51,12 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
     
     if (launchOptions != nil) {
         // Launched from push notification
-        NSDictionary *notification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-        self.launchedFromPush = notification != nil;
+        if ([launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]) {
+            NSDictionary *notification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+            self.launchedFromPush = notification != nil;
+        } else if ([launchOptions objectForKey:UIApplicationLaunchOptionsURLKey]) {
+            self.launchUrl = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
+        }
     }
     
     UIColor *navBackgroundColor = [UIColor colorFromHex:@"77BC1F"];
@@ -72,12 +78,50 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
     
     [self showWelcomeScreenAnimated:NO];
     
-    
+    NSLog(@"launched'");
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newBadge:) name:BadgeNotification object:nil];
-    
     return YES;
 }
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    
+    BOOL handledByFB = [FBAppCall handleOpenURL:url
+                                                  sourceApplication:sourceApplication
+                                                    fallbackHandler:^(FBAppCall *call) {
+                                                        
+                                                        // Retrieve the link associated with the post
+                                                        NSURL *targetURL = [[call appLinkData] targetURL];
+                                                        
+                                                        self.launchUrl = targetURL;
+                                                    }
+                                            ];
+    
+    if (!handledByFB) {
+        self.launchUrl = url;
+        return YES;
+    } else
+        return handledByFB;
+    
+    return NO;
+}
 
+- (void)setLaunchUrl:(NSURL *)launchUrl {
+    if (self.navigationViewController)
+        [self.navigationViewController handleOpenUrl:launchUrl];
+    _launchUrl = launchUrl;
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    [FBSession.activeSession handleDidBecomeActive];
+
+    // Handle the user leaving the app while the Facebook login dialog is being shown
+    // For example: when the user presses the iOS "home" button while the login dialog is active
+    [FBAppCall handleDidBecomeActive];
+    
+    [FBSettings setDefaultAppID:@"455514421245892"];
+    [FBAppEvents activateApp];
+}
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
     NSString *tokenString = [[[deviceToken description]
@@ -157,6 +201,9 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
     
     
     self.navigationViewController = [[NavigationViewController alloc] initWithFirstMenuItem:startingMenuItem];
+    
+    if (self.launchUrl)
+        self.navigationViewController.launchUrl = self.launchUrl;
     
     if (!animated) {
         self.window.rootViewController = self.navigationViewController;

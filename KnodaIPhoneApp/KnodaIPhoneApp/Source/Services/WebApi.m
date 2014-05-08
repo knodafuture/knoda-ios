@@ -17,7 +17,7 @@ static WebApi *sharedSingleton;
 NSString *const HttpForbiddenNotification = @"HttpForbiddenNotification";
 NSInteger PageLimit = 50;
 #ifdef TESTFLIGHT
-NSString const *baseURL = @"http://api-test.knoda.com/api/";  // Old server=54.213.86.248
+NSString const *baseURL = @"http://captaincold.knoda.com/api/";  // Old server=54.213.86.248
 #else
 NSString const *baseURL = @"http://api.knoda.com/api/";
 #endif
@@ -101,6 +101,51 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler([LoginResponse instanceFromData:responseData], error);
+    }];
+}
+
+- (void)socialSignIn:(SocialAccount *)request completion:(void (^)(LoginResponse *, NSError *))completionHandler {
+    NSString *url = [self buildUrl:@"session.json" parameters:nil];
+    NSURLRequest *req = [self requestWithUrl:url method:@"POST" payload:request];
+    
+    [self executeRequest:req completion:^(NSData *responseData, NSError *error) {
+        completionHandler([LoginResponse instanceFromData:responseData], error);
+    }];
+}
+
+- (void)addSocialAccount:(SocialAccount *)account completion:(void (^)(SocialAccount *, NSError *))completionHandler {
+    NSString *url = [self buildUrl:@"social_accounts.json" parameters:nil];
+    NSURLRequest *request = [self requestWithUrl:url method:@"POST" payload:account];
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+        completionHandler([SocialAccount instanceFromData:responseData], error);
+    }];
+}
+
+- (void)deleteSocialAccount:(SocialAccount *)account completion:(void (^)(NSError *))completionHandler {
+    NSString *path = [NSString stringWithFormat:@"social_accounts/%@.json", account.socialAccountId];
+    NSString *url = [self buildUrl:path parameters:nil];
+    NSURLRequest *request = [self requestWithUrl:url method:@"DELETE" payload:nil];
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+        completionHandler(error);
+    }];
+}
+
+- (void)postPredictionToFacebook:(Prediction *)prediction completion:(void (^)(NSError *))completionHandler {
+    NSDictionary *params = @{@"prediction_id": @(prediction.predictionId)};
+    NSString *url = [self buildUrl:@"facebook.json" parameters:params];
+    NSURLRequest *request = [self requestWithUrl:url method:@"POST" payload:nil];
+    
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+        completionHandler(error);
+    }];
+}
+
+- (void)postPredictionToTwitter:(Prediction *)prediction completion:(void (^)(NSError *))completionHandler  {
+    NSDictionary *params = @{@"prediction_id": @(prediction.predictionId)};
+    NSString *url = [self buildUrl:@"twitter.json" parameters:params];
+    NSURLRequest *request = [self requestWithUrl:url method:@"POST" payload:nil];
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+        completionHandler(error);
     }];
 }
 
@@ -394,6 +439,7 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
 }
 
 - (void)getNewBadgesCompletion:(void (^)(NSArray *, NSError *))completionHandler {
+    NSLog(@"CHECKING NEW BADGES");
     NSString *url = [self buildUrl:@"badges/recent.json" parameters:nil];
     NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
     
@@ -438,7 +484,7 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
     NSDictionary *parameters = @{@"limit": @(PageLimit)};
     
     parameters = [self parametersDictionary:parameters withLastId:lastId];
-    NSString *url = [self buildUrl:@"activityfeed.json" parameters:nil];
+    NSString *url = [self buildUrl:@"activityfeed.json" parameters:parameters];
     NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
@@ -766,7 +812,19 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
     if (![errors isKindOfClass:NSDictionary.class])
         return @"";
     
-    NSString *errorKey = [errors.allKeys firstObject];
+    NSString *errorKey;
+    
+    for (NSString *key in errors.allKeys) {
+        if ([key isEqualToString:@"user_facing"])
+            errorKey = key;
+    }
+    
+    if (!errorKey)
+        errorKey = [errors.allKeys firstObject];
+    
+    if ([errorKey isEqualToString:@"user_facing"]) {
+        return [errors[errorKey] firstObject];
+    }
     
     id errorDescription = errors[errorKey];
     

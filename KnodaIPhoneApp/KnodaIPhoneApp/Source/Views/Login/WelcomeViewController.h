@@ -10,12 +10,4 @@
 
 @interface WelcomeViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UIImageView *screen1;
-@property (weak, nonatomic) IBOutlet UIImageView *screen2;
-@property (weak, nonatomic) IBOutlet UIImageView *screen3;
-@property (weak, nonatomic) IBOutlet UIImageView *screen4;
-@property (weak, nonatomic) IBOutlet UIImageView *screen5;
-
-@property (weak, nonatomic) IBOutlet UILabel *swipeLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *swipeArrow;
 @end

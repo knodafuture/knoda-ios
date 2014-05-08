@@ -12,11 +12,24 @@
 #import "AppDelegate.h"
 #import "WebApi.h"
 #import "UserManager.h"
+#import <Accounts/Accounts.h>
+#import "TWAPIManager.h"    
+#import "LoadingView.h"
+#import "AppDelegate.h"
+#import "UserManager.h"
+#import "FacebookManager.h"
+#import "WebViewController.h"
+#import "TwitterManager.h"  
+
+#define ERROR_TITLE_MSG @"Whoa, there cowboy"
+#define ERROR_NO_ACCOUNTS @"You must add a Twitter account in your iPhone's settings to continue."
+#define ERROR_PERM_ACCESS @"Sorry, you can't sign in with Twitter without granting us access to the accounts on your device."
+#define ERROR_OK @"OK"
 
 @interface WelcomeViewController ()
-
-@property (weak, nonatomic) IBOutlet UIScrollView *pagingScroll;
-@property (weak, nonatomic) IBOutlet UIView *buttonsContainer;
+@property (strong, nonatomic) NSArray *twitterAccounts;
+@property (weak, nonatomic) IBOutlet UILabel *termsLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *splashImage;
 
 @end
 
@@ -25,31 +38,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	
-    self.buttonsContainer.alpha = 0.0;
-    self.swipeArrow.alpha = 0.0;
-    self.swipeLabel.alpha = 0.0;
-    self.pagingScroll.scrollEnabled = NO;
-    self.navigationController.navigationBar.translucent = NO;
-
-    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
-        self.edgesForExtendedLayout = UIRectEdgeNone;
-        self.extendedLayoutIncludesOpaqueBars = NO;
-    }
-        
-    if ([UIScreen mainScreen].bounds.size.height > 480) {
-        self.screen1.image = [UIImage imageNamed:@"Screen1@2x-568h.png"];
-        self.screen2.image = [UIImage imageNamed:@"Screen2@2x-568h.png"];
-        self.screen3.image = [UIImage imageNamed:@"Screen3@2x-568h.png"];
-        self.screen4.image = [UIImage imageNamed:@"Screen4@2x-568h.png"];
-        self.screen5.image = [UIImage imageNamed:@"Screen5@2x-568h.png"];
-    } else {
-        self.screen1.image = [UIImage imageNamed:@"Screen1"];
-        self.screen2.image = [UIImage imageNamed:@"Screen2"];
-        self.screen3.image = [UIImage imageNamed:@"Screen3"];
-        self.screen4.image = [UIImage imageNamed:@"Screen4"];
-        self.screen5.image = [UIImage imageNamed:@"Screen5"];
-    }
+    
+    NSDictionary *allAttributes = @{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:10.0]};
+    NSDictionary *underlined = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
+    
+    
+    NSMutableAttributedString *termsString = [[NSMutableAttributedString alloc] initWithString:@"By signing up, I agree to the "];
+    
+    [termsString appendAttributedString:[[NSAttributedString alloc] initWithString:@"Terms of Service" attributes:underlined]];
+    [termsString appendAttributedString:[[NSAttributedString alloc] initWithString:@" and "]];
+    [termsString appendAttributedString:[[NSAttributedString alloc] initWithString:@"Privacy Policy" attributes:underlined]];
+    
+    [termsString addAttributes:allAttributes range:NSMakeRange(0, termsString.length)];
+    
+    self.termsLabel.attributedText = termsString;
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -57,20 +59,18 @@
 
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewWillAppear:YES];
+    [self.navigationController setNavigationBarHidden:NO];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    self.pagingScroll.contentSize = CGSizeMake(self.screen1.frame.size.width * 6, self.screen1.frame.size.height);
 
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    LoginRequest *request = [[UserManager sharedInstance] loginRequestForSavedUser];
     
-    if (!request) {
-        [self showLoginSignup];
-        return;
-    }
-    
-    [[UserManager sharedInstance] login:request completion:^(User *user, NSError *error) {
+    [[UserManager sharedInstance] authenticateSavedUser:^(User *user, NSError *error) {
         if (error)
             [self showLoginSignup];
         else
@@ -78,13 +78,18 @@
     }];
 
 }
+- (IBAction)termsPressed:(id)sender {
+    WebViewController *vc = [[WebViewController alloc] initWithURL:@"http://knoda.com/terms"];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
+- (IBAction)privacyPolicyPressed:(id)sender {
+    WebViewController *vc = [[WebViewController alloc] initWithURL:@"http://knoda.com/privacy"];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 - (void)showLoginSignup {
-    self.pagingScroll.scrollEnabled = YES;
     [UIView animateWithDuration:0.5 animations:^{
-        self.buttonsContainer.alpha = 1.0;
-        self.swipeLabel.alpha = 1.0;
-        self.swipeArrow.alpha = 1.0;
+        self.splashImage.alpha = 0;
     } completion:^(BOOL finished){}];
 }
 
@@ -98,5 +103,60 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)twitterSignIn:(SocialAccount *)request {
+    [[LoadingView sharedInstance] show];
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    [[UserManager sharedInstance] socialSignIn:request completion:^(User *user, NSError *error) {
+        if (!error)
+            [appDelegate login];
+        else {
+            [[LoadingView sharedInstance] hide];
+            [self showError:[error localizedDescription]];
+        }
+    }];
+}
+- (void)showError:(NSString *)error {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:error delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    [alert show];
+}
+
+- (IBAction)twitter:(id)sender {
+    [[TwitterManager sharedInstance] performReverseAuth:^(SocialAccount *request, NSError *error) {
+        if (error) {
+            return;
+        }
+        [self twitterSignIn:request];
+    }];
+}
+
+- (IBAction)facebook:(id)sender {
+    [[LoadingView sharedInstance] show];
+    // If the session state is any of the two "open" states when the button is clicked
+    [[FacebookManager sharedInstance] openSession:^(NSDictionary *data, NSError *error) {
+        SocialAccount *request = [[SocialAccount alloc] init];
+        request.providerName = @"facebook";
+        request.providerId = data[@"id"];
+        request.accessToken = [[FacebookManager sharedInstance] accessTokenForCurrentSession];
+        
+        NSLog(@"%@", [MTLJSONAdapter JSONDictionaryFromModel:request]);
+        
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        
+        [[UserManager sharedInstance] socialSignIn:request completion:^(User *user, NSError *error) {
+            if (!error)
+                [appDelegate login];
+            else {
+                [[LoadingView sharedInstance] hide];
+                [self showError:[error localizedDescription]];
+            }
+        }];
+    }];
+}
 
 @end

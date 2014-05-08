@@ -58,6 +58,14 @@ static NSDateFormatter *dateFormatter;
 @property (strong, nonatomic) NSDate *expirationDate;
 @property (strong, nonatomic) NSDate *resolutionDate;
 
+@property (weak, nonatomic) IBOutlet UIImageView *facebookShareImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *twitterShareImageView;
+@property (weak, nonatomic) IBOutlet UILabel *facebookShareLabel;
+@property (weak, nonatomic) IBOutlet UILabel *twitterShareLabel;
+
+@property (assign, nonatomic) BOOL shouldShareToFacebook;
+@property (assign, nonatomic) BOOL shouldShareToTwitter;
+
 @end
 
 @implementation AddPredictionViewController
@@ -276,6 +284,10 @@ static NSDateFormatter *dateFormatter;
     [[WebApi sharedInstance] addPrediction:prediction completion:^(Prediction *prediction, NSError *error) {
         [[LoadingView sharedInstance] hide];
         if (!error) {
+            if (self.shouldShareToTwitter)
+                [[WebApi sharedInstance] postPredictionToTwitter:prediction completion:^(NSError *error){}];
+            if (self.shouldShareToFacebook)
+                [[WebApi sharedInstance] postPredictionToFacebook:prediction completion:^(NSError *error){}];
             [self.delegate addPredictionViewController:self didCreatePrediction:prediction];
         } else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message:@"Unable to create prediction at this time" delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil];
@@ -471,6 +483,47 @@ static NSDateFormatter *dateFormatter;
 - (void)datePickerView:(DatePickerView *)pickerView didFinishWithDate:(NSDate *)date {
     [self datePickerView:pickerView didChangeToDate:date];
     [self hideActivePickerCompletion:nil];
+}
+
+- (IBAction)facebookShare:(id)sender {
+    
+    User *user = [UserManager sharedInstance].user;
+    
+    if (!user.facebookAccount) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"You don't have a Facebook account associated in your profile, add one to share predictions instantly." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
+    self.shouldShareToFacebook = !self.shouldShareToFacebook;
+    
+    if (self.shouldShareToFacebook) {
+        self.facebookShareImageView.image = [UIImage imageNamed:@"FacebookShareActive"];
+        self.facebookShareLabel.textColor = [UIColor colorFromHex:@"3B5998"];
+    } else {
+        self.facebookShareImageView.image = [UIImage imageNamed:@"FacebookShare"];
+        self.facebookShareLabel.textColor = [UIColor colorFromHex:@"666666"];
+    }
+}
+
+- (IBAction)twitterShare:(id)sender {
+    User *user = [UserManager sharedInstance].user;
+    
+    if (!user.twitterAccount) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"You don't have a Twitter account associated in your profile, add one to share predictions instantly." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
+    self.shouldShareToTwitter = !self.shouldShareToTwitter;
+    
+    if (self.shouldShareToTwitter) {
+        self.twitterShareImageView.image = [UIImage imageNamed:@"TwitterShareActive"];
+        self.twitterShareLabel.textColor = [UIColor colorFromHex:@"2BA9E1"];
+    } else {
+        self.twitterShareImageView.image = [UIImage imageNamed:@"TwitterShare"];
+        self.twitterShareLabel.textColor = [UIColor colorFromHex:@"666666"];
+    }
 }
 
 

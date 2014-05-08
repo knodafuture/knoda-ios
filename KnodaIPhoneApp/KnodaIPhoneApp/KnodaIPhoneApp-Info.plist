@@ -29,6 +29,7 @@
 			<string>com.Knoda.KnodaIPhoneApp</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>fb455514421245892</string>
 				<string>knoda</string>
 			</array>
 		</dict>
@@ -56,5 +57,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>FacebookAppID</key>
+	<string>455514421245892</string>
+	<key>FacebookDisplayName</key>
+	<string>Knoda</string>
 </dict>
 </plist>

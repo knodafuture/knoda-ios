@@ -11,6 +11,7 @@
 #import "LoginRequest.h"    
 #import "SignupRequest.h"   
 #import "LoginResponse.h"
+#import "SocialAccount.h"
 
 extern NSString *UserChangedNotificationName;
 extern NSString *ChangedUserKey;
@@ -19,6 +20,7 @@ extern NSString *ChangedUserKey;
 @property (readonly, nonatomic) User *user;
 @property (readonly, nonatomic) NSArray *groups;
 
+- (void)authenticateSavedUser:(void(^)(User *user, NSError *error))completionHandler;
 - (void)refreshUser:(void(^)(User *user, NSError *error))completionHandler;
 - (void)updateUser:(User *)user completion:(void(^)(User *user, NSError *error))completionHandler;
 - (void)login:(LoginRequest *)request completion:(void(^)(User *user, NSError *error))completionHandler;
@@ -26,8 +28,9 @@ extern NSString *ChangedUserKey;
 - (void)signout:(void(^)(NSError *error))completionHandler;
 - (void)uploadProfileImage:(UIImage *)profileImage completion:(void(^)(User *user, NSError *error))completionHandler;
 
-- (LoginRequest *)loginRequestForSavedUser;
-
+- (void)socialSignIn:(SocialAccount *)request completion:(void(^)(User *user, NSError *error))completionHandler;
+- (void)addSocialAccount:(SocialAccount *)account completion:(void(^)(User *user, NSError *error))completionHandler;
+- (void)deleteSocialAccount:(SocialAccount *)account completion:(void(^)(User *user, NSError *error))completionHandler;
 
 + (UserManager *)sharedInstance;
 

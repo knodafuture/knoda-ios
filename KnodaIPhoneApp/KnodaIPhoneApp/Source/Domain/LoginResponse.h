@@ -11,7 +11,7 @@
 extern NSString *LoginResponseKey;
 
 @interface LoginResponse : WebObject
-
+@property (strong, nonatomic) NSString *login;
 @property (strong, nonatomic) NSString *email;
 @property (strong, nonatomic) NSString *token;
 

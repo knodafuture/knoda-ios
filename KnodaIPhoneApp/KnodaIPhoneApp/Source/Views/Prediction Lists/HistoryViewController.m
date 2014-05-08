@@ -42,7 +42,7 @@
 }
 
 - (void)objectsAfterObject:(id)object completion:(void (^)(NSArray *, NSError *))completionHandler {
-    NSInteger lastId = [(Prediction *)object predictionId];
+    NSInteger lastId = [(Prediction *)object challenge].challengeId;
     [[WebApi sharedInstance] getHistoryAfter:lastId completion:completionHandler];
 }
 

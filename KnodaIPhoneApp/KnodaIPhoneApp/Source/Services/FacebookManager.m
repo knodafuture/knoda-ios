@@ -8,6 +8,8 @@
 
 #import "FacebookManager.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import "WebApi.h"
+#import "UserManager.h"
 
 static FacebookManager *sharedSingleton;
 
@@ -54,20 +56,26 @@ static FacebookManager *sharedSingleton;
     }];
 }
 
-- (void)reauthorizeWithPublishIfNecessary:(FBSession *)session {
+- (void)share:(Prediction *)prediction completion:(void (^)(NSError *))completion {
+    [self reauthorizeWithPublishIfNecessary:FBSession.activeSession completion:^{
+        [[WebApi sharedInstance] postPredictionToFacebook:prediction completion:completion];
+    }];
+}
+
+- (void)reauthorizeWithPublishIfNecessary:(FBSession *)session completion:(void(^)(void))completion {
     
     if ([session.permissions containsObject:@"publish_actions"]) {
-        [self getUserProfile];
+        completion();
         return;
     }
         
     
     [session requestNewPublishPermissions:@[@"publish_actions"] defaultAudience:FBSessionDefaultAudienceEveryone completionHandler:^(FBSession *session, NSError *error) {
-        if (error) {
-            [self finish:nil error:error];
-            return;
-        }
-        [self getUserProfile];
+        SocialAccount *facebookAccount = [UserManager sharedInstance].user.facebookAccount;
+        facebookAccount.accessToken = session.accessTokenData.accessToken;
+        [[WebApi sharedInstance] updateSocialAccount:facebookAccount completion:^(SocialAccount *account, NSError *error) {
+            completion();
+        }];
     }];
 }
 
@@ -90,7 +98,7 @@ static FacebookManager *sharedSingleton;
 
 - (void)sessionStateChanged:(FBSession *)session state:(FBSessionState)state error:(NSError *)error {
     if (!error && state == FBSessionStateOpen){
-        [self reauthorizeWithPublishIfNecessary:session];
+        [self getUserProfile];
         return;
     }
 

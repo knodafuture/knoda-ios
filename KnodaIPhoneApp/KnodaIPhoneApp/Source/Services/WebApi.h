@@ -63,7 +63,7 @@ extern NSInteger PageLimit;
 - (void)socialSignIn:(SocialAccount *)request completion:(void(^)(LoginResponse *response, NSError *error))completionHandler;
 - (void)addSocialAccount:(SocialAccount *)account completion:(void(^)(SocialAccount *account, NSError *error))completionHandler;
 - (void)deleteSocialAccount:(SocialAccount *)account completion:(void(^)(NSError *error))completionHandler;
-
+- (void)updateSocialAccount:(SocialAccount *)socialAccount completion:(void(^)(SocialAccount *account, NSError *error))completionHandler;
 - (void)postPredictionToFacebook:(Prediction *)prediction completion:(void(^)(NSError *error))completionHandler;
 - (void)postPredictionToTwitter:(Prediction *)prediction completion:(void(^)(NSError *error))completionHandler;
 

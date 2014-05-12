@@ -2052,6 +2052,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8825C313D9324F9BA336C19A /* Pods.xcconfig */;
 			buildSettings = {
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					i386,
+				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Nick Rellihan (9TAA35K5AK)";
@@ -2077,8 +2081,10 @@
 					"$(SRCROOT)/KnodaIPhoneApp/ThirdParty/TestFlightSDK2.0.2",
 					"$(PROJECT_DIR)/KnodaIPhoneApp/Thirdparty/Flurry",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "Knoda Test";
 				PROVISIONING_PROFILE = "F229B453-5DF5-4DB8-8405-F705FD241E1F";
+				VALID_ARCHS = "arm64 armv7 armv7s i386";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2087,6 +2093,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8825C313D9324F9BA336C19A /* Pods.xcconfig */;
 			buildSettings = {
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					i386,
+				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -2107,8 +2117,10 @@
 					"$(SRCROOT)/KnodaIPhoneApp/ThirdParty/TestFlightSDK2.0.2",
 					"$(PROJECT_DIR)/KnodaIPhoneApp/Thirdparty/Flurry",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "Knoda Test";
 				PROVISIONING_PROFILE = "9D526CA8-AAA3-4DC0-B485-D2C71C17BC9E";
+				VALID_ARCHS = "arm64 armv7 armv7s i386";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -2202,6 +2214,7 @@
 					"$(SDKROOT)/usr/lib/system",
 					"$(PROJECT_DIR)/KnodaIPhoneApp/Thirdparty/Flurry",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s";

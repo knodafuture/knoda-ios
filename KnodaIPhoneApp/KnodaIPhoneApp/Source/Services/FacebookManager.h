@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+@class Prediction;
 @interface FacebookManager : NSObject
 
 + (FacebookManager *)sharedInstance;
@@ -15,6 +15,7 @@
 - (void)handleAppLaunch;
 
 - (void)openSession:(void(^)(NSDictionary *data, NSError *error))completionHandler;
+- (void)share:(Prediction *)prediction completion:(void(^)(NSError *error))completion;
 - (NSString *)accessTokenForCurrentSession;
 
 @end

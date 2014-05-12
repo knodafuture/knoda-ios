@@ -11,6 +11,7 @@
 #import "WebApi.h"
 #import "DatePickerView.h"
 #import "UserManager.h"
+#import "FacebookManager.h"
 
 #define TEXT_FONT        [UIFont fontWithName:@"HelveticaNeue" size:15]
 #define PLACEHOLDER_FONT [UIFont fontWithName:@"HelveticaNeue-Italic" size:15]
@@ -287,7 +288,7 @@ static NSDateFormatter *dateFormatter;
             if (self.shouldShareToTwitter)
                 [[WebApi sharedInstance] postPredictionToTwitter:prediction completion:^(NSError *error){}];
             if (self.shouldShareToFacebook)
-                [[WebApi sharedInstance] postPredictionToFacebook:prediction completion:^(NSError *error){}];
+                [[FacebookManager sharedInstance] share:prediction completion:^(NSError *error){}];
             [self.delegate addPredictionViewController:self didCreatePrediction:prediction];
         } else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message:@"Unable to create prediction at this time" delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil];

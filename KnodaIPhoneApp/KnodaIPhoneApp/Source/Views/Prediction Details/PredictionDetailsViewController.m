@@ -22,6 +22,7 @@
 #import "UserManager.h"
 #import "GroupPredictionsViewController.h"
 #import "UIActionSheet+Blocks.h"
+#import "FacebookManager.h"
 
 static const int kBSAlertTag = 1001;
 
@@ -162,7 +163,6 @@ static const int kBSAlertTag = 1001;
         return;
     }
 
-
     if (![UserManager sharedInstance].user.facebookAccount && ![UserManager sharedInstance].user.twitterAccount) {
         [self showDefaultShare];
         return;
@@ -200,10 +200,12 @@ static const int kBSAlertTag = 1001;
             }
         }];
     else if ([account.providerName isEqualToString:@"facebook"])
-        [[WebApi sharedInstance] postPredictionToFacebook:self.prediction completion:^(NSError *error){
+        [[FacebookManager sharedInstance] share:self.prediction completion:^(NSError *error){
             [[LoadingView sharedInstance] hide];
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"An unknown error occured." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-            [alert show];
+            if (error) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"An unknown error occured." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                [alert show];
+            }
         }];
     
 }

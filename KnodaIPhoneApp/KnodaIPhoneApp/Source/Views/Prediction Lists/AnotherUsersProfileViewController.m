@@ -15,6 +15,7 @@
 #import "UserProfileHeaderView.h"
 #import "WebApi.h"
 #import "ZoomingImageViewController.h"
+#import "NoContentCell.h"
 
 @interface AnotherUsersProfileViewController ()
 
@@ -128,6 +129,16 @@
     return [super tableView:tableView cellForRowAtIndexPath:indexPath];
 }
 
+- (void)noObjectsRetrievedInPagingDatasource:(PagingDatasource *)pagingDatasource {
+    NoContentCell *cell = [NoContentCell noContentWithMessage:@"This user hasn't made any predictions yet." forTableView:self.tableView];
+    [self showNoContent:cell];
+    self.tableView.tableHeaderView = self.headerCell;
+    [self showNoContent:cell];
+}
+- (void)restoreContent {
+    self.tableView.tableHeaderView = nil;
+    [super restoreContent];
+}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row >= self.pagingDatasource.objects.count)
         return;

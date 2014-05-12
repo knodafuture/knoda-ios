@@ -298,6 +298,9 @@ static NSMutableDictionary *cellHeightCache;
     
     CGPoint currentLocation = [touch locationInView:self];
     
+    if (currentLocation.x < 20)
+        return;
+    
     CGFloat maxDelta = MAX(abs(self.initialTouchLocation.x - currentLocation.x), abs(self.initialTouchLocation.y - currentLocation.y));
     
     if (maxDelta > minDistanceForSwipe)

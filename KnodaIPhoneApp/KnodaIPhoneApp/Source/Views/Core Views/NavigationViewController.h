@@ -21,7 +21,7 @@ typedef NS_ENUM(NSInteger, MenuItem) {
 
 
 - (id)initWithFirstMenuItem:(MenuItem)menuItem;
-- (void)toggleNavigationPanel;
+- (void)toggleSideNav;
 - (void)openMenuItem:(MenuItem)menuItem;
 - (void)handleOpenUrl:(NSURL *)url;
 - (void)hackAnimationFinished;

@@ -25,18 +25,20 @@
 #import "SearchViewController.h"
 #import "UserManager.h"
 #import "GroupsViewController.h"
+#import "NavigationScrollView.h"
 
-@interface NavigationViewController () <SearchViewControllerDelegate, SelectPictureDelegate, AddPredictionViewControllerDelegate, UINavigationControllerDelegate, UISearchBarDelegate>
+CGFloat const SideNavBezelWidth = 20.0f;
+
+@interface NavigationViewController () <UIScrollViewDelegate, SearchViewControllerDelegate, SelectPictureDelegate, AddPredictionViewControllerDelegate, UINavigationControllerDelegate, UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *pointsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *wonLostLabel;
 @property (weak, nonatomic) IBOutlet UILabel *wonPercantageLabel;
 @property (weak, nonatomic) IBOutlet UILabel *steakLabel;
-@property (weak, nonatomic) IBOutlet UIView *masterView;
-@property (weak, nonatomic) IBOutlet UIView *detailsView;
-@property (weak, nonatomic) IBOutlet UIView *movingView;
 @property (weak, nonatomic) IBOutlet UITableView *menuItemsTableView;
-@property (weak, nonatomic) IBOutlet UIView *gestureView;
+@property (assign, nonatomic) BOOL sideNavVisible;
+@property (weak, nonatomic) IBOutlet NavigationScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIView *sideNavView;
 
 @property (assign, nonatomic) BOOL appeared;
 @property (assign, nonatomic) BOOL masterShown;
@@ -51,7 +53,7 @@
 @property (strong, nonatomic) UIBarButtonItem *rightSideBarButtonItem;
 
 @property (strong, nonatomic) NSTimer *pingTimer;
-@property (weak, nonatomic) UINavigationController *topNavigationController;
+@property (strong, nonatomic) UINavigationController *visibleViewController;
 
 @property (assign, nonatomic) MenuItem firstMenuItem;
 @property (readonly, nonatomic) UserManager *userManger;
@@ -79,11 +81,8 @@
     if (SYSTEM_VERSION_GREATER_THAN(@"7.0"))
         [self.menuItemsTableView setSeparatorInset:UIEdgeInsetsZero];
     
-    UITapGestureRecognizer * recognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(toggleNavigationPanel)];
-    [self.gestureView addGestureRecognizer:recognizer];
-    
     [self updateUserInfo];
-    self.sideNavBarButtonItem = [[SideNavBarButtonItem alloc] initWithTarget:self action:@selector(toggleNavigationPanel)];
+    self.sideNavBarButtonItem = [[SideNavBarButtonItem alloc] initWithTarget:self action:@selector(toggleSideNav)];
     
     self.rightSideBarButtonsView = [[RightSideButtonsView alloc] init];
     
@@ -95,6 +94,9 @@
     [self updateAlerts];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(activeGroupChanged:) name:ActiveGroupChangedNotificationName object:nil];
     
+	self.scrollView.bezelWidth = SideNavBezelWidth;
+	self.scrollView.contentSize = CGSizeMake(self.sideNavView.frame.size.width + self.scrollView.frame.size.width, 0);
+	self.scrollView.contentOffset = CGPointMake(self.sideNavView.frame.size.width, 0);
 }
 
 - (void)handleOpenUrl:(NSURL *)url {
@@ -121,7 +123,7 @@
         if (error)
             return;
         PredictionDetailsViewController *vc = [[PredictionDetailsViewController alloc] initWithPrediction:prediction];
-        [self.topNavigationController pushViewController:vc animated:YES];
+        [self.visibleViewController pushViewController:vc animated:YES];
     }];
 }
 
@@ -190,6 +192,11 @@
     }
 }
 
+- (void)presentViewControllerForMenuItem:(MenuItem)menuItem {
+    UINavigationController *controller = [self navigationControllerForMenuItem:menuItem];
+    [self showViewController:controller];
+}
+
 - (UINavigationController *)navigationControllerForMenuItem:(MenuItem)menuItem {
     UIViewController *viewController = [self.vcCache objectForKey:@(menuItem)];
     if (!viewController) {
@@ -227,106 +234,8 @@
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
     navigationController.delegate = self;
     viewController.navigationItem.leftBarButtonItem = self.sideNavBarButtonItem;
-
-    self.topNavigationController = navigationController;
     
     return navigationController;
-}
-
-- (void)presentViewControllerForMenuItem:(MenuItem)menuItem {
-    
-    UINavigationController *vc = [self navigationControllerForMenuItem:menuItem];
-    
-    [self.detailsView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    [self.childViewControllers makeObjectsPerformSelector:@selector(willMoveToParentViewController:) withObject:nil];
-    [self.childViewControllers makeObjectsPerformSelector:@selector(removeFromParentViewController)];
-    
-    [vc willMoveToParentViewController:self];
-    [self addChildViewController:vc];
-    
-    vc.view.frame = self.detailsView.bounds;
-
-    [self.detailsView addSubview:vc.view];
-
-    [vc didMoveToParentViewController:self];
-    
-    [self moveToDetailsAnimated:self.appeared];
-}
-
-- (void)moveToDetailsAnimated: (BOOL) animated {
-    
-    if (!self.masterShown)
-        return;
-    
-    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:animated];
-
-    if (animated)
-        [UIView animateWithDuration:0.3 animations:^{
-             [self moveToDetails];
-         }];
-    else
-        [self moveToDetails];
-}
-
-
-- (void)moveToDetails {
-    [Flurry endTimedEvent: @"Navigation_Screen" withParameters: nil];
-    
-    self.masterShown = NO;
-    self.gestureView.hidden = YES;
-    
-    CGRect newFrame = self.movingView.frame;
-    newFrame.origin.x -= self.masterView.frame.size.width;
-    self.movingView.frame = newFrame;
-    
-    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
-        [[self appDelegate] window].backgroundColor = [UIColor colorFromHex:@"77BC1F"];
-    }
-
-}
-
-- (void)moveToMasterAnimated:(BOOL)animated {
-    if (animated)
-        [UIView animateWithDuration:0.3 animations:^{
-            [self moveToMaster];
-        }];
-    else
-        [self moveToMaster];
-}
-
-- (void)moveToMaster {
-    [Flurry logEvent: @"Navigation_Screen" withParameters: nil timed: YES];
-        
-    self.masterShown = YES;
-    self.gestureView.hidden = NO;
-    
-    [[UserManager sharedInstance] refreshUser:^(User *user, NSError *error) {}];
-    
-    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
-    
-     CGRect newFrame = self.movingView.frame;
-     newFrame.origin.x += self.masterView.frame.size.width;
-     self.movingView.frame = newFrame;
-     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
-         [[self appDelegate] window].backgroundColor = [UIColor blackColor];
-    
-}
-
-
-- (void)toggleNavigationPanel
-{
-    if (self.masterShown)
-        [self moveToDetailsAnimated: YES];
-    else {
-        self.gestureView.hidden = NO;
-        [self moveToMasterAnimated:YES];
-    }
-}
-
-- (void) animatedMoveToDetailsWithGestureRecognizer : (UITapGestureRecognizer *) recognizer {
-    [self moveToDetailsAnimated:YES];
 }
 
 - (void)updateAlerts {
@@ -442,7 +351,7 @@
     SearchViewController *vc = [[SearchViewController alloc] initWithStyle:UITableViewStylePlain];
     vc.delegate = self;
     [self.rightSideBarButtonsView setSearchButtonHidden:YES];
-    [self.topNavigationController pushViewController:vc animated:YES];
+    [self.visibleViewController pushViewController:vc animated:YES];
 }
 
 - (void)searchViewControllerDidFinish:(SearchViewController *)searchViewController {
@@ -452,6 +361,75 @@
 - (void)dealloc {
     [self removeAllObservations];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)showViewController:(UINavigationController *)navigationController {
+	if (self.visibleViewController)
+		[self.visibleViewController.view removeFromSuperview];
+	
+	navigationController.view.frame = CGRectMake(self.sideNavView.frame.size.width, 0, self.view.frame.size.width, self.view.frame.size.height);
+	
+	self.visibleViewController = navigationController;
+	self.scrollView.detailsView = navigationController.view;
+	
+	[self.scrollView addSubview:navigationController.view];
+	[self hideSideNav];
+}
+
+- (void)toggleSideNav {
+	if (self.sideNavVisible)
+		[self hideSideNav];
+	else
+		[self showSideNav];
+}
+
+- (void)showSideNav {
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
+        [[self appDelegate] window].backgroundColor = [UIColor blackColor];
+    }
+	[self.scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+}
+
+- (void)hideSideNav {
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
+        [[self appDelegate] window].backgroundColor = [UIColor colorFromHex:@"77BC1F"];
+    }
+	[self.scrollView setContentOffset:CGPointMake(self.sideNavView.frame.size.width, 0) animated:YES];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+	CGRect frame = self.sideNavView.frame;
+	frame.origin.x = scrollView.contentOffset.x;
+	self.sideNavView.frame = frame;
+
+	if (scrollView.contentOffset.x == 0) {
+		self.sideNavVisible = YES;
+		self.scrollView.bezelWidth = self.view.frame.size.width;
+		self.visibleViewController.topViewController.view.userInteractionEnabled = NO;
+        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+            [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
+            [[self appDelegate] window].backgroundColor = [UIColor blackColor];
+        }
+	}
+	else if (scrollView.contentOffset.x == self.sideNavView.frame.size.width) {
+		self.sideNavVisible = NO;
+		self.scrollView.bezelWidth = SideNavBezelWidth;
+		self.visibleViewController.topViewController.view.userInteractionEnabled = YES;
+        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+            [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:NO];
+            [[self appDelegate] window].backgroundColor = [UIColor colorFromHex:@"77BC1F"];
+        }
+	}
+}
+
+- (CGFloat)sideNavDistanceFromClosed {
+	return self.scrollView.contentOffset.x;
+}
+
+- (CGFloat)sideNavDistanceFromOpen {
+	return ABS(self.sideNavView.frame.size.width - self.scrollView.contentOffset.x);
 }
 
 @end

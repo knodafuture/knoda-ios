@@ -7,16 +7,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NavigationViewController">
             <connections>
-                <outlet property="detailsView" destination="pZy-Bz-wee" id="a14-ti-P79"/>
-                <outlet property="gestureView" destination="imM-an-Asp" id="Mih-eR-cLG"/>
-                <outlet property="masterView" destination="pLZ-m5-uKJ" id="YWV-zA-F33"/>
-                <outlet property="menuItemsTableView" destination="5Fl-cW-A5w" id="G4h-iZ-sGE"/>
-                <outlet property="movingView" destination="Nxe-gy-hNf" id="3Yh-oo-TL2"/>
-                <outlet property="pointsLabel" destination="aWL-8Z-mUM" id="05V-Kb-fC8"/>
-                <outlet property="steakLabel" destination="ccl-nr-5LW" id="dc2-qS-Gpb"/>
+                <outlet property="menuItemsTableView" destination="L6a-E1-kQa" id="s3h-ih-bY0"/>
+                <outlet property="pointsLabel" destination="iPA-B2-nLI" id="NN1-Kk-Iwb"/>
+                <outlet property="scrollView" destination="Vny-OY-14t" id="30b-8r-dOr"/>
+                <outlet property="sideNavView" destination="p9U-ZT-eGN" id="kh2-5e-3ah"/>
+                <outlet property="steakLabel" destination="Jda-1o-5Op" id="to9-TH-2Xm"/>
                 <outlet property="view" destination="pin-4q-9Kd" id="Jha-Fa-hRI"/>
-                <outlet property="wonLostLabel" destination="s1o-aB-DRT" id="UXH-Yk-jpA"/>
-                <outlet property="wonPercantageLabel" destination="Fw9-s2-iVl" id="CTR-pp-L7j"/>
+                <outlet property="wonLostLabel" destination="YS8-4r-rjQ" id="L8j-ni-hC8"/>
+                <outlet property="wonPercantageLabel" destination="lKq-aM-JzQ" id="tj5-Cb-aBq"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -24,97 +22,87 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" id="Nxe-gy-hNf">
-                    <rect key="frame" x="-281" y="20" width="601" height="548"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="Vny-OY-14t" customClass="NavigationScrollView">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <view contentMode="scaleToFill" id="pZy-Bz-wee">
-                            <rect key="frame" x="281" y="0.0" width="320" height="548"/>
-                            <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
-                            <color key="backgroundColor" red="0.46666666670000001" green="0.73725490199999999" blue="0.1215686275" alpha="1" colorSpace="calibratedRGB"/>
-                        </view>
-                        <view hidden="YES" contentMode="scaleToFill" id="imM-an-Asp">
-                            <rect key="frame" x="281" y="0.0" width="320" height="548"/>
-                            <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
-                            <inset key="insetFor6xAndEarlier" minX="0.0" minY="0.0" maxX="0.0" maxY="20"/>
-                        </view>
-                        <view contentMode="scaleToFill" id="pLZ-m5-uKJ">
-                            <rect key="frame" x="0.0" y="0.0" width="281" height="548"/>
+                        <view contentMode="scaleToFill" id="p9U-ZT-eGN">
+                            <rect key="frame" x="0.0" y="20" width="281" height="548"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                             <subviews>
-                                <view contentMode="scaleToFill" id="HbV-kV-5gF">
+                                <view contentMode="scaleToFill" id="ieb-DH-YAo">
                                     <rect key="frame" x="0.0" y="0.0" width="281" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="SideNavKnodaLogo.png" id="RLu-nq-LuL">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="SideNavKnodaLogo.png" id="LyP-Dq-uim">
                                     <rect key="frame" x="0.0" y="0.0" width="109" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
-                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="5Fl-cW-A5w">
+                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="L6a-E1-kQa">
                                     <rect key="frame" x="0.0" y="44" width="281" height="264"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <color key="separatorColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <connections>
-                                        <outlet property="dataSource" destination="-1" id="tVd-GG-rxK"/>
-                                        <outlet property="delegate" destination="-1" id="C31-yh-SHg"/>
+                                        <outlet property="dataSource" destination="-1" id="TSu-ba-uPw"/>
+                                        <outlet property="delegate" destination="-1" id="vtB-sW-674"/>
                                     </connections>
                                 </tableView>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="SideNavStatsIcon.png" id="IKB-XR-FZ4">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="SideNavStatsIcon.png" id="bPC-ff-afS">
                                     <rect key="frame" x="0.0" y="316" width="51" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="1,203" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aWL-8Z-mUM">
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="1,203" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iPA-B2-nLI">
                                     <rect key="frame" x="51" y="324" width="86" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="points" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="i6B-Na-rvF">
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="points" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9UE-Mm-Jhw">
                                     <rect key="frame" x="54" y="349" width="28" height="14"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="9"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="1,203" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Fw9-s2-iVl">
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="1,203" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lKq-aM-JzQ">
                                     <rect key="frame" x="51" y="369" width="86" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="win %" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OuG-Dg-SMp">
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="win %" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Dt2-3n-2Es">
                                     <rect key="frame" x="54" y="394" width="28" height="14"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="9"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="123-132" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="s1o-aB-DRT">
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="123-132" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YS8-4r-rjQ">
                                     <rect key="frame" x="179" y="324" width="102" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="W-L" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qRd-5l-xNt">
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="W-L" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hFQ-OZ-JpM">
                                     <rect key="frame" x="180" y="349" width="28" height="14"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="9"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="1,203" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ccl-nr-5LW">
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="1,203" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Jda-1o-5Op">
                                     <rect key="frame" x="179" y="369" width="102" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="streak" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DYS-y2-hiz">
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="streak" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="z79-5Y-UVf">
                                     <rect key="frame" x="180" y="394" width="28" height="14"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="9"/>
@@ -125,9 +113,10 @@
                             <color key="backgroundColor" red="0.16862745100000001" green="0.16862745100000001" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="0.0"/>
-                </view>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="MAf-tK-M7v"/>
+                    </connections>
+                </scrollView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
         </view>

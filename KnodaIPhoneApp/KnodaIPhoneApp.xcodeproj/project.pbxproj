@@ -283,6 +283,8 @@
 		01598B391858E483002E2534 /* ZoomingImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01598B371858E483002E2534 /* ZoomingImageViewController.m */; };
 		01598B3B1858E4B3002E2534 /* ZoomingImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01598B3A1858E4B3002E2534 /* ZoomingImageViewController.xib */; };
 		01598B3C1858E4B3002E2534 /* ZoomingImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01598B3A1858E4B3002E2534 /* ZoomingImageViewController.xib */; };
+		0159B76919210A1A008B28E7 /* NavigationScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0159B76819210A1A008B28E7 /* NavigationScrollView.m */; };
+		0159B76A19210EB4008B28E7 /* NavigationScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0159B76819210A1A008B28E7 /* NavigationScrollView.m */; };
 		01871E0F18D75D6900A2B809 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 01871E0E18D75D6900A2B809 /* Group.m */; };
 		01871E1018D75D6900A2B809 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 01871E0E18D75D6900A2B809 /* Group.m */; };
 		01871E1418D75DF500A2B809 /* GroupsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01871E1318D75DF500A2B809 /* GroupsViewController.m */; };
@@ -649,6 +651,8 @@
 		01598B361858E483002E2534 /* ZoomingImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZoomingImageViewController.h; sourceTree = "<group>"; };
 		01598B371858E483002E2534 /* ZoomingImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZoomingImageViewController.m; sourceTree = "<group>"; };
 		01598B3A1858E4B3002E2534 /* ZoomingImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZoomingImageViewController.xib; sourceTree = "<group>"; };
+		0159B76719210A1A008B28E7 /* NavigationScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationScrollView.h; sourceTree = "<group>"; };
+		0159B76819210A1A008B28E7 /* NavigationScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationScrollView.m; sourceTree = "<group>"; };
 		01871E0D18D75D6900A2B809 /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
 		01871E0E18D75D6900A2B809 /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
 		01871E1218D75DF500A2B809 /* GroupsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupsViewController.h; sourceTree = "<group>"; };
@@ -983,6 +987,8 @@
 		013DA7361853002100B507E4 /* Core Views */ = {
 			isa = PBXGroup;
 			children = (
+				0159B76719210A1A008B28E7 /* NavigationScrollView.h */,
+				0159B76819210A1A008B28E7 /* NavigationScrollView.m */,
 				014A9E81185BF95100A96678 /* SideNavButton.xib */,
 				014A9E82185BF95100A96678 /* SideNavBarButtonItem.m */,
 				014A9E83185BF95100A96678 /* SideNavBarButtonItem.h */,
@@ -1815,6 +1821,7 @@
 				013DA8F8185432A200B507E4 /* EmptyDatasource.m in Sources */,
 				013DA8611853002200B507E4 /* ProfileViewController.m in Sources */,
 				013DA8411853002200B507E4 /* PredictionDetailsViewController.m in Sources */,
+				0159B76A19210EB4008B28E7 /* NavigationScrollView.m in Sources */,
 				013DA8271853002200B507E4 /* LoginViewController.m in Sources */,
 				013DA7D31853002200B507E4 /* UINavigationItem+iOS7Spacing.m in Sources */,
 				018DF7A718590699004FEDA6 /* ActivityItem.m in Sources */,
@@ -1944,6 +1951,7 @@
 				013DA8F7185432A200B507E4 /* EmptyDatasource.m in Sources */,
 				013DA8601853002200B507E4 /* ProfileViewController.m in Sources */,
 				013DA8401853002200B507E4 /* PredictionDetailsViewController.m in Sources */,
+				0159B76919210A1A008B28E7 /* NavigationScrollView.m in Sources */,
 				013DA8261853002200B507E4 /* LoginViewController.m in Sources */,
 				018DF7981858F1FB004FEDA6 /* ActivityItem.m in Sources */,
 				013DA7D21853002200B507E4 /* UINavigationItem+iOS7Spacing.m in Sources */,

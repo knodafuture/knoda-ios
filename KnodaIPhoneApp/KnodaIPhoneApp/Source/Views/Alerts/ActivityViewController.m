@@ -27,10 +27,6 @@
     self.navigationController.navigationBar.translucent = NO;
 }
 
-- (void)menuPressed:(id)sender {
-    [((NavigationViewController*)self.navigationController.parentViewController) toggleNavigationPanel];
-}
-
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     

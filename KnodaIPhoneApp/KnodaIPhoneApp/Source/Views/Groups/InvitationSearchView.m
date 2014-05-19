@@ -130,7 +130,7 @@
             }
             actionSheet.cancelButtonIndex = [actionSheet addButtonWithTitle:@"Cancel"];
             self.actionSheetContact = contact;
-            [actionSheet showInView:self.superview];
+            [actionSheet showInView:[UIApplication sharedApplication].keyWindow];
         }
         
         

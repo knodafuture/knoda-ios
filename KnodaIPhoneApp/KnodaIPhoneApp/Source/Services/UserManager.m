@@ -85,7 +85,6 @@ static UserManager *sharedSingleton;
             completionHandler(nil, error);
             return;
         }
-        NSLog(@"%@", response.token);
         [self saveSocialSignInRequest:request andResponse:response];
         [self refreshUser:completionHandler];
         [self submitDeviceToken];

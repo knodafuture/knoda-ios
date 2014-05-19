@@ -157,36 +157,40 @@ static const int kBSAlertTag = 1001;
 
 - (IBAction)share:(id)sender {
     
+    
+    
     if (self.prediction.groupName) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Hold on, this is a private group prediction. You won't be able to share it with the world." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
         [alert show];
         return;
     }
-
-    if (![UserManager sharedInstance].user.facebookAccount && ![UserManager sharedInstance].user.twitterAccount) {
-        [self showDefaultShare];
-        return;
-    }
     
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"How would you like to share?" delegate:nil cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
-    for (SocialAccount *account in [UserManager sharedInstance].user.socialAccounts) {
-        [sheet addButtonWithTitle:account.providerName.capitalizedString];
-    }
-    
-    [sheet addButtonWithTitle:@"Other"];
-    __unsafe_unretained PredictionDetailsViewController *this = self;
-    sheet.tapBlock = ^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
-        if (buttonIndex == actionSheet.destructiveButtonIndex)
-            return;
-        
-        if (buttonIndex == [UserManager sharedInstance].user.socialAccounts.count)
-            [this showDefaultShare];
-        else
-            [this shareWithSocialAccount:[UserManager sharedInstance].user.socialAccounts[buttonIndex]];
-            
-    };
-    sheet.destructiveButtonIndex = [sheet addButtonWithTitle:@"Cancel"];
-    [sheet showInView:self.view];
+    [self showDefaultShare];
+//
+//    if (![UserManager sharedInstance].user.facebookAccount && ![UserManager sharedInstance].user.twitterAccount) {
+//        [self showDefaultShare];
+//        return;
+//    }
+//    
+//    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"How would you like to share?" delegate:nil cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
+//    for (SocialAccount *account in [UserManager sharedInstance].user.socialAccounts) {
+//        [sheet addButtonWithTitle:account.providerName.capitalizedString];
+//    }
+//    
+//    [sheet addButtonWithTitle:@"Other"];
+//    __unsafe_unretained PredictionDetailsViewController *this = self;
+//    sheet.tapBlock = ^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+//        if (buttonIndex == actionSheet.destructiveButtonIndex)
+//            return;
+//        
+//        if (buttonIndex == [UserManager sharedInstance].user.socialAccounts.count)
+//            [this showDefaultShare];
+//        else
+//            [this shareWithSocialAccount:[UserManager sharedInstance].user.socialAccounts[buttonIndex]];
+//            
+//    };
+//    sheet.destructiveButtonIndex = [sheet addButtonWithTitle:@"Cancel"];
+//    [sheet showInView:[UIApplication sharedApplication].keyWindow];
 }
 
 - (void)shareWithSocialAccount:(SocialAccount *)account {

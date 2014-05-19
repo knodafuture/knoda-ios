@@ -139,6 +139,13 @@
     [[LoadingView sharedInstance] show];
     // If the session state is any of the two "open" states when the button is clicked
     [[FacebookManager sharedInstance] openSession:^(NSDictionary *data, NSError *error) {
+        
+        if (error) {
+            [[LoadingView sharedInstance] hide];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+            [alert show];
+            return;
+        }
         SocialAccount *request = [[SocialAccount alloc] init];
         request.providerName = @"facebook";
         request.providerId = data[@"id"];

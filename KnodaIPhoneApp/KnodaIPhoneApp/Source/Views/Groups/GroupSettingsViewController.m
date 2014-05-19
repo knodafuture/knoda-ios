@@ -174,7 +174,7 @@
 
 - (IBAction)leaveGroup:(id)sender {
     UIActionSheet * actionSheet = [[UIActionSheet alloc]initWithTitle:NSLocalizedString(@"Are you sure you want to leave?", @"") delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"Leave group" otherButtonTitles:@"Cancel", nil];
-    [actionSheet showInView:self.view];
+    [actionSheet showInView:[UIApplication sharedApplication].keyWindow];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
@@ -202,6 +202,7 @@
         }
         
         [[WebApi sharedInstance] getGroup:self.group.groupId completion:^(Group *group, NSError *error) {
+            [[UserManager sharedInstance] refreshUser:^(User *user, NSError *error) {}];
             self.group = group;
             self.invitationCode = nil;
             [self populate];

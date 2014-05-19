@@ -168,7 +168,7 @@ static const float kAvatarSize = 344.0;
                                                      destructiveButtonTitle:nil
                                                           otherButtonTitles:NSLocalizedString(@"Take Photo", @""), NSLocalizedString(@"Choose Existing Photo", @""), NSLocalizedString(@"Use Default", @""), nil];
     }
-    [self.avatarChangeAcitonSheet showInView:self.view];
+    [self.avatarChangeAcitonSheet showInView:[UIApplication sharedApplication].keyWindow];
 }
 
 - (void)showImagePickerWithSource:(UIImagePickerControllerSourceType)sourceType {

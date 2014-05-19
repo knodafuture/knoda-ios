@@ -12,6 +12,8 @@
 #import "DatePickerView.h"
 #import "UserManager.h"
 #import "FacebookManager.h"
+#import "UIActionSheet+Blocks.h"
+#import "TwitterManager.h"
 
 #define TEXT_FONT        [UIFont fontWithName:@"HelveticaNeue" size:15]
 #define PLACEHOLDER_FONT [UIFont fontWithName:@"HelveticaNeue-Italic" size:15]
@@ -459,6 +461,13 @@ static NSDateFormatter *dateFormatter;
     }
 }
 
+- (void)setSelectedGroup:(Group *)selectedGroup {
+    _selectedGroup = selectedGroup;
+    self.shouldShareToTwitter = NO;
+    self.shouldShareToFacebook = NO;
+    
+}
+
 - (void)datePickerView:(DatePickerView *)pickerView didChangeToDate:(NSDate *)date {
     if (pickerView == self.expirationPickerView) {
         self.expirationDate = date;
@@ -491,12 +500,95 @@ static NSDateFormatter *dateFormatter;
     User *user = [UserManager sharedInstance].user;
     
     if (!user.facebookAccount) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"You don't have a Facebook account associated in your profile, add one to share predictions instantly." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        
+        UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"In order to share instantly, you need a Facebook account associated in your profile. Would you like to add one now?" delegate:nil cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
+        sheet.cancelButtonIndex = [sheet addButtonWithTitle:@"No"];
+        [sheet addButtonWithTitle:@"Yes"];
+        sheet.didDismissBlock = ^(UIActionSheet *sheet, NSInteger buttonIndex) {
+            if (buttonIndex == sheet.cancelButtonIndex)
+                return;
+            [self addFacebook];
+            
+        };
+        
+        [sheet showInView:[UIApplication sharedApplication].keyWindow];
+        return;
+    }
+    
+    
+    
+    if (!self.shouldShareToFacebook && self.selectedGroup) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"You cannot share private group predictions." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        [alert show];
+    }
+    
+    self.shouldShareToFacebook = !self.shouldShareToFacebook;
+
+    
+
+}
+
+- (void)addFacebook {
+    [[LoadingView sharedInstance] show];
+    [[FacebookManager sharedInstance] openSession:^(NSDictionary *data, NSError *error) {
+        if (error) {
+            [[LoadingView sharedInstance] hide];
+            [[[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+            return;
+        }
+        SocialAccount *request = [[SocialAccount alloc] init];
+        request.providerName = @"facebook";
+        request.providerId = data[@"id"];
+        request.accessToken = [[FacebookManager sharedInstance] accessTokenForCurrentSession];
+        
+        
+        [[UserManager sharedInstance] addSocialAccount:request completion:^(User *user, NSError *error) {
+            [[LoadingView sharedInstance] hide];
+            if (error)
+                [[[UIAlertView alloc] initWithTitle:nil
+                                            message:error.localizedDescription
+                                           delegate:nil
+                                  cancelButtonTitle:NSLocalizedString(@"OK", @"")
+                                  otherButtonTitles:nil] show];
+            else
+                [self facebookShare:nil];
+        }];
+    }];
+}
+
+- (IBAction)twitterShare:(id)sender {
+    User *user = [UserManager sharedInstance].user;
+    
+    if (!user.twitterAccount) {
+        
+        UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"In order to share instantly, you need a Twitter account associated in your profile. Would you like to add one now?" delegate:nil cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
+        sheet.cancelButtonIndex = [sheet addButtonWithTitle:@"No"];
+        [sheet addButtonWithTitle:@"Yes"];
+        sheet.didDismissBlock = ^(UIActionSheet *sheet, NSInteger buttonIndex) {
+            if (buttonIndex == sheet.cancelButtonIndex)
+                return;
+            [self addTwitter];
+            
+        };
+        
+        [sheet showInView:[UIApplication sharedApplication].keyWindow];
+        return;
+    }
+    
+    
+    if (!self.shouldShareToTwitter && self.selectedGroup) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"You cannot share private group predictions." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         [alert show];
         return;
     }
     
-    self.shouldShareToFacebook = !self.shouldShareToFacebook;
+    self.shouldShareToTwitter = !self.shouldShareToTwitter;
+    
+
+}
+
+- (void)setShouldShareToFacebook:(BOOL)shouldShareToFacebook {
+    _shouldShareToFacebook = shouldShareToFacebook;
     
     if (self.shouldShareToFacebook) {
         self.facebookShareImageView.image = [UIImage imageNamed:@"FacebookShareActive"];
@@ -507,16 +599,8 @@ static NSDateFormatter *dateFormatter;
     }
 }
 
-- (IBAction)twitterShare:(id)sender {
-    User *user = [UserManager sharedInstance].user;
-    
-    if (!user.twitterAccount) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"You don't have a Twitter account associated in your profile, add one to share predictions instantly." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
-        return;
-    }
-    
-    self.shouldShareToTwitter = !self.shouldShareToTwitter;
+- (void)setShouldShareToTwitter:(BOOL)shouldShareToTwitter {
+    _shouldShareToTwitter = shouldShareToTwitter;
     
     if (self.shouldShareToTwitter) {
         self.twitterShareImageView.image = [UIImage imageNamed:@"TwitterShareActive"];
@@ -527,6 +611,27 @@ static NSDateFormatter *dateFormatter;
     }
 }
 
+- (void)addTwitter {
+    [[LoadingView sharedInstance] show];
+    [[TwitterManager sharedInstance] performReverseAuth:^(SocialAccount *request, NSError *error) {
+        if (error) {
+            [[LoadingView sharedInstance] hide];
+            return;
+        }
+        
+        [[UserManager sharedInstance] addSocialAccount:request completion:^(User *user, NSError *error) {
+            [[LoadingView sharedInstance] hide];
+            if (error)
+                [[[UIAlertView alloc] initWithTitle:nil
+                                            message:error.localizedDescription
+                                           delegate:nil
+                                  cancelButtonTitle:NSLocalizedString(@"OK", @"")
+                                  otherButtonTitles:nil] show];
+            else
+                [self twitterShare:nil];
+        }];
+    }];
+}
 
 
 @end

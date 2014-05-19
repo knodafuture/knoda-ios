@@ -56,16 +56,18 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal">
                         <attributedString key="attributedTitle">
-                            <fragment content="Fellow Knodian? ">
+                            <fragment content="Knoda User? ">
                                 <attributes>
                                     <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <font key="NSFont" size="11" name="HelveticaNeue"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                 </attributes>
                             </fragment>
                             <fragment content="Login">
                                 <attributes>
                                     <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <font key="NSFont" size="11" name="HelveticaNeue-Bold"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                 </attributes>
                             </fragment>
                         </attributedString>

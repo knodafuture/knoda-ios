@@ -41,6 +41,9 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
+    [self window].backgroundColor = [UIColor blackColor];
+
 #ifdef TESTFLIGHT
     //[TestFlight takeOff:kTestFlightKey];
 #else

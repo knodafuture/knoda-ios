@@ -328,11 +328,11 @@
 		01C4A49C190E3D2F00E08031 /* TWAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C4A491190E3D2F00E08031 /* TWAPIManager.m */; };
 		01C4A49D190E3D2F00E08031 /* TWSignedRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C4A493190E3D2F00E08031 /* TWSignedRequest.m */; };
 		01C4A49E190E3D2F00E08031 /* TWSignedRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C4A493190E3D2F00E08031 /* TWSignedRequest.m */; };
-		01C4A49F190E3D2F00E08031 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C4A496190E3D2F00E08031 /* NSData+Base64.m */; };
+		01C4A49F190E3D2F00E08031 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C4A496190E3D2F00E08031 /* NSData+Base64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		01C4A4A0190E3D2F00E08031 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C4A496190E3D2F00E08031 /* NSData+Base64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		01C4A4A1190E3D2F00E08031 /* OAuth+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C4A498190E3D2F00E08031 /* OAuth+Additions.m */; };
+		01C4A4A1190E3D2F00E08031 /* OAuth+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C4A498190E3D2F00E08031 /* OAuth+Additions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		01C4A4A2190E3D2F00E08031 /* OAuth+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C4A498190E3D2F00E08031 /* OAuth+Additions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		01C4A4A3190E3D2F00E08031 /* OAuthCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C4A49A190E3D2F00E08031 /* OAuthCore.m */; };
+		01C4A4A3190E3D2F00E08031 /* OAuthCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C4A49A190E3D2F00E08031 /* OAuthCore.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		01C4A4A4190E3D2F00E08031 /* OAuthCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C4A49A190E3D2F00E08031 /* OAuthCore.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		01C4A4A6190E3DC100E08031 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C4A4A5190E3DC100E08031 /* Accounts.framework */; };
 		01C4A4A7190E3FA600E08031 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C4A4A5190E3DC100E08031 /* Accounts.framework */; };
@@ -2060,10 +2060,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8825C313D9324F9BA336C19A /* Pods.xcconfig */;
 			buildSettings = {
-				ARCHS = (
-					"$(ARCHS_STANDARD)",
-					i386,
-				);
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Nick Rellihan (9TAA35K5AK)";
@@ -2092,7 +2089,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "Knoda Test";
 				PROVISIONING_PROFILE = "F229B453-5DF5-4DB8-8405-F705FD241E1F";
-				VALID_ARCHS = "arm64 armv7 armv7s i386";
+				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2101,10 +2098,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8825C313D9324F9BA336C19A /* Pods.xcconfig */;
 			buildSettings = {
-				ARCHS = (
-					"$(ARCHS_STANDARD)",
-					i386,
-				);
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -2128,7 +2122,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "Knoda Test";
 				PROVISIONING_PROFILE = "9D526CA8-AAA3-4DC0-B485-D2C71C17BC9E";
-				VALID_ARCHS = "arm64 armv7 armv7s i386";
+				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -135,7 +135,6 @@ CGFloat const SideNavBezelWidth = 20.0f;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
     [self observeNotification:UserChangedNotificationName withBlock:^(__weak id self, NSNotification *notification) {
         [self updateUserInfo];
     }];
@@ -166,6 +165,7 @@ CGFloat const SideNavBezelWidth = 20.0f;
     if(![UserManager sharedInstance].user.hasAvatar)
         [self showSelectPictureViewController];
     else {
+        self.sideNavView.hidden = NO;
         [self openMenuItem: self.firstMenuItem];
         if (self.launchUrl) {
             [self handleOpenUrl:self.launchUrl];
@@ -328,6 +328,7 @@ CGFloat const SideNavBezelWidth = 20.0f;
     [[LoadingView sharedInstance] hide];
     [[WebApi sharedInstance] checkNewBadges];
     [self openMenuItem:self.firstMenuItem];
+    self.sideNavView.hidden = NO;
 }
 
 
@@ -384,18 +385,13 @@ CGFloat const SideNavBezelWidth = 20.0f;
 }
 
 - (void)showSideNav {
-    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
-        [[self appDelegate] window].backgroundColor = [UIColor blackColor];
-    }
 	[self.scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
 }
 
 - (void)hideSideNav {
-    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
-        [[self appDelegate] window].backgroundColor = [UIColor colorFromHex:@"77BC1F"];
-    }
+//    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+//        [[self appDelegate] window].backgroundColor = [UIColor colorFromHex:@"77BC1F"];
+//    }
 	[self.scrollView setContentOffset:CGPointMake(self.sideNavView.frame.size.width, 0) animated:YES];
 }
 
@@ -408,19 +404,11 @@ CGFloat const SideNavBezelWidth = 20.0f;
 		self.sideNavVisible = YES;
 		self.scrollView.bezelWidth = self.view.frame.size.width;
 		self.visibleViewController.topViewController.view.userInteractionEnabled = NO;
-        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
-            [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
-            [[self appDelegate] window].backgroundColor = [UIColor blackColor];
-        }
 	}
 	else if (scrollView.contentOffset.x == self.sideNavView.frame.size.width) {
 		self.sideNavVisible = NO;
 		self.scrollView.bezelWidth = SideNavBezelWidth;
 		self.visibleViewController.topViewController.view.userInteractionEnabled = YES;
-        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
-            [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:NO];
-            [[self appDelegate] window].backgroundColor = [UIColor colorFromHex:@"77BC1F"];
-        }
 	}
 }
 

@@ -76,7 +76,7 @@ static NSString* const kImageCropperSegue = @"ImageCropperSegue";
                                  delegate:self
                         cancelButtonTitle:NSLocalizedString(@"Use Default", @"")
                    destructiveButtonTitle:nil
-                        otherButtonTitles:NSLocalizedString(@"Take Photo", @""), NSLocalizedString(@"Choose Existing Photo", @""), nil] showInView:self.view];
+                        otherButtonTitles:NSLocalizedString(@"Take Photo", @""), NSLocalizedString(@"Choose Existing Photo", @""), nil] showInView:[UIApplication sharedApplication].keyWindow];
 }
 
 - (IBAction)doneButtontapped:(id)sender {

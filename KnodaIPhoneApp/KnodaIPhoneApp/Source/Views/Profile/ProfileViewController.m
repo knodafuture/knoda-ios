@@ -127,7 +127,7 @@ static const float kAvatarSize = 344.0;
     if (user.email && ![user.email isEqualToString:@""])
         self.emailField.text = user.email;
     else
-        self.emailField.text = @"Add your email.";
+        self.emailField.text = @"Add email";
     self.userNameField.text = user.name;
     
     
@@ -154,7 +154,7 @@ static const float kAvatarSize = 344.0;
 
 - (IBAction)signOut:(id)sender {
     UIActionSheet * actionSheet = [[UIActionSheet alloc]initWithTitle:NSLocalizedString(@"Are you sure you want to log out?", @"") delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"Log Out" otherButtonTitles:@"Cancel", nil];
-    [actionSheet showInView:self.view];
+    [actionSheet showInView:[UIApplication sharedApplication].keyWindow];
 }
 
 - (void)menuButtonPress {
@@ -190,7 +190,7 @@ static const float kAvatarSize = 344.0;
                                                      destructiveButtonTitle:nil
                                                           otherButtonTitles:NSLocalizedString(@"Take Photo", @""), NSLocalizedString(@"Choose Existing Photo", @""), NSLocalizedString(@"Set Default", @""), nil];
     }
-    [self.avatarChangeAcitonSheet showInView:self.view];
+    [self.avatarChangeAcitonSheet showInView:[UIApplication sharedApplication].keyWindow];
 }
 
 - (void)showImagePickerWithSource:(UIImagePickerControllerSourceType)sourceType {
@@ -430,7 +430,7 @@ static const float kAvatarSize = 344.0;
         return;
     }
     
-    [UIActionSheet showInView:self.view withTitle:@"Are you sure?" cancelButtonTitle:@"No" destructiveButtonTitle:@"Yes, remove this account." otherButtonTitles:nil tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+    [UIActionSheet showInView:[UIApplication sharedApplication].keyWindow withTitle:@"Are you sure?" cancelButtonTitle:@"No" destructiveButtonTitle:@"Yes, remove this account." otherButtonTitles:nil tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
         if (buttonIndex == actionSheet.cancelButtonIndex) {
             [self populateUserInfo];
             return;
@@ -490,7 +490,7 @@ static const float kAvatarSize = 344.0;
         return;
     }
     
-    [UIActionSheet showInView:self.view withTitle:@"Are you sure?" cancelButtonTitle:@"No" destructiveButtonTitle:@"Yes, remove this account." otherButtonTitles:nil tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+    [UIActionSheet showInView:[UIApplication sharedApplication].keyWindow withTitle:@"Are you sure?" cancelButtonTitle:@"No" destructiveButtonTitle:@"Yes, remove this account." otherButtonTitles:nil tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
         if (buttonIndex == actionSheet.cancelButtonIndex) {
             [self populateUserInfo];
             return;

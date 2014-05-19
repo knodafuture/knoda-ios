@@ -140,10 +140,11 @@ static TwitterManager *sharedSingleton;
     sheet.tapBlock = ^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
         if (buttonIndex != actionSheet.cancelButtonIndex) {
             [self performReverseAuthForAccount:[this.twitterAccounts objectAtIndex:buttonIndex] completion:completionHandler];
+        } else {
+            completionHandler(nil, [NSError errorWithDomain:@"twitter" code:500 userInfo:nil]);
         }
     };
     
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [sheet showInView:delegate.window.rootViewController.view];
+    [sheet showInView:[UIApplication sharedApplication].keyWindow];
 }
 @end

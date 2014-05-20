@@ -269,7 +269,6 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
     NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
 
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
-        NSLog(@"%@", [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding]);
         completionHandler([Prediction arrayFromData:responseData], error);
     }];
 }

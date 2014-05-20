@@ -35,11 +35,11 @@ const NSInteger MaxChars = 140;
     NSString *shareString;
     
     if ([activityType isEqualToString:UIActivityTypePostToTwitter]) {
-        NSString *suffixString = [NSString stringWithFormat:@"... #knoda %@", self.prediction.shortUrl];
+        NSString *suffixString = [NSString stringWithFormat:@"... via @KNODAfuture %@", self.prediction.shortUrl];
         NSString *prefixString = self.prediction.body;
 
         shareString = [self shortenString:prefixString forMaxChars:MaxChars withSuffix:suffixString];
-        
+         
     } else if ([activityType isEqualToString:UIActivityTypePostToFacebook]) {
         shareString = [NSString stringWithFormat:@"%@ %@ via Knoda.com", self.prediction.body, self.prediction.shortUrl];
     } else if ([activityType isEqualToString:UIActivityTypeMessage]) {

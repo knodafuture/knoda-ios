@@ -234,12 +234,21 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
     [self showWelcomeScreenAnimated:YES];
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    if([title isEqualToString:@"Update"])
+    {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://itunes.apple.com/us/app/knoda/id764642995?mt=8"]];
+    }
+}
+
 - (void)deprecatedApi {
     [[LoadingView sharedInstance] reset];
     
     
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"App Version No Longer Accessible." message:@"This version of the app is no longer supported, please update now to the current verison to continue enjoying Knoda." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"App Version No Longer Accessible." message:@"This version of the app is no longer supported, please update now to the current verison to continue enjoying Knoda." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Update", nil];
     [[UserManager sharedInstance] clearSavedCredentials];
     [self showWelcomeScreenAnimated:YES];
     [alert show];

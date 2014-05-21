@@ -18,7 +18,7 @@ NSString *const HttpForbiddenNotification = @"HttpForbiddenNotification";
 NSString *const DeprecatedAPI = @"DeprecatedAPI";
 NSInteger PageLimit = 50;
 #ifdef TESTFLIGHT
-NSString const *baseURL = @"http://captaincold.knoda/api/";  // Old server=54.213.86.248
+NSString const *baseURL = @"http://captaincloud.knoda/api/";  // Old server=54.213.86.248
 #else
 NSString const *baseURL = @"http://api.knoda.com/api/";
 #endif
@@ -797,7 +797,6 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
 
 - (void)handleResponse:(NSURLResponse *)response withData:(NSData *)data error:(NSError *)error completion:(void(^)(NSData *data, NSError *error))completionHandler {
     NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-    NSInteger status = httpResponse.statusCode;
         if (error != nil && [error code] == NSURLErrorUserCancelledAuthentication) {
 		[[NSNotificationCenter defaultCenter] postNotificationName:HttpForbiddenNotification object:nil];
 	}

@@ -846,8 +846,8 @@
 			isa = PBXGroup;
 			children = (
 				013DA6E81853002100B507E4 /* AppDelegate.h */,
-				013DA6EA1853002100B507E4 /* main.m */,
 				013DA6E91853002100B507E4 /* AppDelegate.m */,
+				013DA6EA1853002100B507E4 /* main.m */,
 			);
 			path = App;
 			sourceTree = "<group>";

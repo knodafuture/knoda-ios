@@ -846,8 +846,8 @@
 			isa = PBXGroup;
 			children = (
 				013DA6E81853002100B507E4 /* AppDelegate.h */,
-				013DA6E91853002100B507E4 /* AppDelegate.m */,
 				013DA6EA1853002100B507E4 /* main.m */,
+				013DA6E91853002100B507E4 /* AppDelegate.m */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -1222,11 +1222,11 @@
 				013DA8BC1853004000B507E4 /* Prediction.m */,
 				013DA8BD1853004000B507E4 /* User.h */,
 				013DA8BE1853004000B507E4 /* User.m */,
+				013DA8C51853004000B507E4 /* WebObject.h */,
 				013DA8BF1853004000B507E4 /* SignupRequest.h */,
 				013DA8C01853004000B507E4 /* SignupRequest.m */,
 				013DA8C11853004000B507E4 /* Tag.h */,
 				013DA8C21853004000B507E4 /* Tag.m */,
-				013DA8C51853004000B507E4 /* WebObject.h */,
 				013DA8C61853004000B507E4 /* WebObject.m */,
 				018DF7961858F1FB004FEDA6 /* ActivityItem.h */,
 				018DF7971858F1FB004FEDA6 /* ActivityItem.m */,

@@ -15,9 +15,10 @@
 static WebApi *sharedSingleton;
 
 NSString *const HttpForbiddenNotification = @"HttpForbiddenNotification";
+NSString *const DeprecatedAPI = @"DeprecatedAPI";
 NSInteger PageLimit = 50;
 #ifdef TESTFLIGHT
-NSString const *baseURL = @"http://captaincold.knoda.com/api/";  // Old server=54.213.86.248
+NSString const *baseURL = @"http://localhost:3000/api/";  // Old server=54.213.86.248
 #else
 NSString const *baseURL = @"http://api.knoda.com/api/";
 #endif
@@ -795,10 +796,15 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
 }
 
 - (void)handleResponse:(NSURLResponse *)response withData:(NSData *)data error:(NSError *)error completion:(void(^)(NSData *data, NSError *error))completionHandler {
-	NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-    if (error != nil && [error code] == NSURLErrorUserCancelledAuthentication) {
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+    NSInteger status = httpResponse.statusCode;
+        if (error != nil && [error code] == NSURLErrorUserCancelledAuthentication) {
 		[[NSNotificationCenter defaultCenter] postNotificationName:HttpForbiddenNotification object:nil];
 	}
+    else if ((httpResponse.statusCode == HttpStatusGone)) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:DeprecatedAPI object:nil];
+        return;
+    }
 	else if (httpResponse.statusCode >= 300) {
 		NSLog(@"Error for request: %@", response.URL.absoluteString);
 		NSLog(@"Error code: %ld, message: %@", (long)[httpResponse statusCode], [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);

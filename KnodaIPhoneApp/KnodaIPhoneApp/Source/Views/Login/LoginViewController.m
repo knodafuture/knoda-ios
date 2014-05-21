@@ -94,6 +94,9 @@
             [[LoadingView sharedInstance] hide];
             if (error.code == HttpStatusForbidden)
                 [self showError:NSLocalizedString(@"Invalid username or password", @"")];
+            else if (error.code == HttpStatusGone) {
+                [self showError:NSLocalizedString(@"This version of the app is no longer available. Please update and try again.", @"")];
+            }
             else
                 [self showError:@"An unknown error occurred. Please try again later"];
         }

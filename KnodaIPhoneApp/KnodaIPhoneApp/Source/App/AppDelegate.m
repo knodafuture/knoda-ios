@@ -13,6 +13,7 @@
 #import "KeychainItemWrapper.h"
 #import "WelcomeViewController.h"
 #import "NavigationViewController.h"
+#import "UserManager.h"
 #import <FacebookSDK/FacebookSDK.h>
 
 #ifdef TESTFLIGHT
@@ -72,6 +73,7 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
     
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logout) name:HttpForbiddenNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deprecatedApi) name: DeprecatedAPI object:nil];
     
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
     
@@ -231,5 +233,20 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
     
     [self showWelcomeScreenAnimated:YES];
 }
+
+- (void)deprecatedApi {
+    [[LoadingView sharedInstance] reset];
+    
+    
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"App Version No Longer Accessible." message:@"This version of the app is no longer supported, please update now to the current verison to continue enjoying Knoda." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    [[UserManager sharedInstance] clearSavedCredentials];
+    [self showWelcomeScreenAnimated:YES];
+    [alert show];
+    
+    
+}
+
+
 
 @end

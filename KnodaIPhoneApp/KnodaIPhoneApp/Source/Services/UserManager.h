@@ -27,6 +27,7 @@ extern NSString *ChangedUserKey;
 - (void)signup:(SignupRequest *)request completion:(void(^)(User *user, NSError *error))completionHandler;
 - (void)signout:(void(^)(NSError *error))completionHandler;
 - (void)uploadProfileImage:(UIImage *)profileImage completion:(void(^)(User *user, NSError *error))completionHandler;
+- (void)clearSavedCredentials;
 
 - (void)socialSignIn:(SocialAccount *)request completion:(void(^)(User *user, NSError *error))completionHandler;
 - (void)addSocialAccount:(SocialAccount *)account completion:(void(^)(User *user, NSError *error))completionHandler;

@@ -173,6 +173,8 @@ static UserManager *sharedSingleton;
     
     if (request) {
         [self login:request completion:completionHandler];
+        NSString *inStr = [@(self.user.userId) stringValue];
+        [Flurry setUserID:inStr];
         return;
     }
     
@@ -180,6 +182,8 @@ static UserManager *sharedSingleton;
     
     if (savedAccount) {
         [self socialSignIn:savedAccount completion:completionHandler];
+        NSString *inStr = [@(self.user.userId) stringValue];
+        [Flurry setUserID:inStr];
         return;
     }
     

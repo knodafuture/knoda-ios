@@ -116,7 +116,7 @@ static NSDateFormatter *dateFormatter;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [Flurry logEvent: @"Add_Prediction_Screen" withParameters: nil timed: YES];
+    [Flurry logEvent: @"CREATE_PREDICTION_START"];
     [super viewDidAppear: animated];
     
     self.datePickerView = [DatePickerView datePickerViewWithPrompt:nil delegate:self];
@@ -143,7 +143,7 @@ static NSDateFormatter *dateFormatter;
 - (void)viewWillDisappear:(BOOL)animated {
     [[NSNotificationCenter defaultCenter] removeObserver: self];
     
-    [Flurry endTimedEvent: @"Add_Prediction_Screen" withParameters: nil];
+    [Flurry logEvent: @"CREATE_PREDICTION_SUCCESS"];
     
     [super viewWillDisappear: animated];
 }

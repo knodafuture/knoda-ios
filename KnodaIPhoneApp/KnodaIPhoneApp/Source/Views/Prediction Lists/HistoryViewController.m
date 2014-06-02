@@ -33,12 +33,12 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear: animated];
-    [Flurry logEvent: @"My_Predictions_Screen" withParameters: nil timed: YES];
+    [Flurry logEvent: @"HISTORY" withParameters: nil timed: YES];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    [Flurry endTimedEvent: @"My_Predictions_Screen" withParameters: nil];
+    [Flurry endTimedEvent: @"HISTORY" withParameters: nil];
 }
 
 - (void)objectsAfterObject:(id)object completion:(void (^)(NSArray *, NSError *))completionHandler {

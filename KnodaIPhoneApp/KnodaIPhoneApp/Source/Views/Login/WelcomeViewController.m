@@ -38,7 +38,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [Flurry logEvent:@"LANDING"];
     NSDictionary *allAttributes = @{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:10.0]};
     NSDictionary *underlined = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
     
@@ -96,11 +96,13 @@
 - (IBAction)login:(id)sender {
     LoginViewController *vc = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:[NSBundle mainBundle]];
     [self.navigationController pushViewController:vc animated:YES];
+    [Flurry logEvent:@"LOGIN_EMAIL"];
 }
 
 - (IBAction)signup:(id)sender {
     SignUpViewController *vc = [[SignUpViewController alloc] initWithNibName:@"SignUpViewController" bundle:[NSBundle mainBundle]];
     [self.navigationController pushViewController:vc animated:YES];
+    [Flurry logEvent:@"SIGNUP_EMAIL"];
 }
 
 - (void)dealloc {
@@ -113,8 +115,20 @@
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     [[UserManager sharedInstance] socialSignIn:request completion:^(User *user, NSError *error) {
-        if (!error)
+        
+        if (!error) {
+            NSDate *today = [NSDate date];
+            NSDate *newDate = [today dateByAddingTimeInterval:-60];
+            if (user.createdAt <= newDate) {
+                [Flurry logEvent:@"SIGNUP_TWITTER"];
+                
+            } else {
+                [Flurry logEvent:@"LOGIN_TWITTER"];
+            }
+            NSString *inStr = [@(user.userId) stringValue];
+            [Flurry setUserID:inStr];
             [appDelegate login];
+        }
         else {
             [[LoadingView sharedInstance] hide];
             [self showError:[error localizedDescription]];
@@ -156,8 +170,18 @@
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         
         [[UserManager sharedInstance] socialSignIn:request completion:^(User *user, NSError *error) {
-            if (!error)
+            if (!error) {
+                NSDate *today = [NSDate date];
+                NSDate *newDate = [today dateByAddingTimeInterval:-60];
+                if (user.createdAt <= newDate) {
+                    [Flurry logEvent:@"SIGNUP_FACEBOOK"];
+                } else {
+                    [Flurry logEvent:@"LOGIN_FACEBOOK"];
+                }
+                NSString *inStr = [@(user.userId) stringValue];
+                [Flurry setUserID:inStr];
                 [appDelegate login];
+            }
             else {
                 [[LoadingView sharedInstance] hide];
                 [self showError:[error localizedDescription]];

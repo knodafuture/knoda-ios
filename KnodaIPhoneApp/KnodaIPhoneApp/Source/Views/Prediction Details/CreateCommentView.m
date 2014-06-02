@@ -26,7 +26,7 @@ static const NSInteger CommentMaxChars = 300;
     CreateCommentView *view = [[nib instantiateWithOwner:nil options:nil] lastObject];
     view.delegate = delegate;
     view.predictionId = predictionId;
-    
+    [Flurry logEvent:@"CREATE_COMMENT"];
     return view;
 }
 

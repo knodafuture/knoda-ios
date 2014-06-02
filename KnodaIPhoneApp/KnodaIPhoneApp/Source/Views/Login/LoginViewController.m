@@ -88,8 +88,11 @@
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     [[UserManager sharedInstance] login:request completion:^(User *user, NSError *error) {
-        if (!error)
+        if (!error) {
             [appDelegate login];
+        NSString *inStr = [@(user.userId) stringValue];
+        [Flurry setUserID:inStr];
+         }
         else {
             [[LoadingView sharedInstance] hide];
             if (error.code == HttpStatusForbidden)

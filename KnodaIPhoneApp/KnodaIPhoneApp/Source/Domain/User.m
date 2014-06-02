@@ -20,7 +20,8 @@
              @"totalPredictions": @"total_predictions",
              @"verifiedAccount" : @"verified_account",
              @"name" : @"username",
-             @"socialAccounts" : @"social_accounts"};
+             @"socialAccounts" : @"social_accounts",
+             @"createdAt" : @"created_at"};
 }
 
 + (NSValueTransformer *)avatarJSONTransformer {

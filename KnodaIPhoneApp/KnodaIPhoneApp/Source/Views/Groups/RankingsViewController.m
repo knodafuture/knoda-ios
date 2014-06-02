@@ -35,7 +35,7 @@
     self.rankingLists = @[weekly, monthly, allTime];
     
     UILabel *monthlyLabel = [self headerLabel];
-    monthlyLabel.text = @"30 DAY";
+    monthlyLabel.text = @"GROUP_LEADERBOARD_MONTHLY";
     [self.headerView addSubview:monthlyLabel];
     
     CGRect frame = monthlyLabel.frame;
@@ -44,7 +44,7 @@
     monthlyLabel.frame = frame;
     
     UILabel *weeklyLabel = [self headerLabel];
-    weeklyLabel.text = @"7 DAY";
+    weeklyLabel.text = @"GROUP_LEADERBOARD_WEEKLY";
     [self.headerView addSubview:weeklyLabel];
     weeklyLabel.alpha = 1.0;
     
@@ -52,7 +52,7 @@
     weeklyLabel.frame = frame;
     
     UILabel *allTimeLabel = [self headerLabel];
-    allTimeLabel.text = @"ALL-TIME";
+    allTimeLabel.text = @"GROUP_LEADERBOARD_ALLTIME";
     [self.headerView addSubview:allTimeLabel];
     
     frame = allTimeLabel.frame;
@@ -107,7 +107,7 @@
     }];
     
     self.activePage = index;
-    NSString *event = [NSString stringWithFormat:@"RANKINGS_%@", next.text];
+    NSString *event = [NSString stringWithFormat:@"%@", next.text];
     [Flurry logEvent:event];
 
 }

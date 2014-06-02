@@ -134,6 +134,8 @@ static const NSInteger kMaxPasswordLength = 20;
         if (!error) {
             AppDelegate *test = (AppDelegate *)[UIApplication sharedApplication].delegate;
             [test login];
+            NSString *inStr = [@(user.userId) stringValue];
+            [Flurry setUserID:inStr];
 #ifndef TESTFLIGHT
             [Tapjoy actionComplete:TJC_SIGN_UP_FOR_KNODA_];
 #endif

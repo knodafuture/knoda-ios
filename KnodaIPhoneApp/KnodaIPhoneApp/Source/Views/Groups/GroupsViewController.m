@@ -114,11 +114,12 @@
 
 
 - (IBAction)createGroup:(id)sender {
-    [Flurry logEvent: @"Create_Group"];
+    [Flurry logEvent: @"CREATE_GROUP_START"];
 
     CreateGroupViewController *vc = [[CreateGroupViewController alloc] initWithGroup:nil];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     [self presentViewController:nav animated:YES completion:nil];
+    [Flurry logEvent: @"CREATE_GROUP_SUCCESS"];
 }
 
 - (void)noObjectsRetrievedInPagingDatasource:(PagingDatasource *)pagingDatasource {

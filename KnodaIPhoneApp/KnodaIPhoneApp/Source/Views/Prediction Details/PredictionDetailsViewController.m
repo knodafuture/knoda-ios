@@ -165,32 +165,30 @@ static const int kBSAlertTag = 1001;
         return;
     }
     
-    [self showDefaultShare];
-//
-//    if (![UserManager sharedInstance].user.facebookAccount && ![UserManager sharedInstance].user.twitterAccount) {
-//        [self showDefaultShare];
-//        return;
-//    }
-//    
-//    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"How would you like to share?" delegate:nil cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
-//    for (SocialAccount *account in [UserManager sharedInstance].user.socialAccounts) {
-//        [sheet addButtonWithTitle:account.providerName.capitalizedString];
-//    }
-//    
-//    [sheet addButtonWithTitle:@"Other"];
-//    __unsafe_unretained PredictionDetailsViewController *this = self;
-//    sheet.tapBlock = ^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
-//        if (buttonIndex == actionSheet.destructiveButtonIndex)
-//            return;
-//        
-//        if (buttonIndex == [UserManager sharedInstance].user.socialAccounts.count)
-//            [this showDefaultShare];
-//        else
-//            [this shareWithSocialAccount:[UserManager sharedInstance].user.socialAccounts[buttonIndex]];
-//            
-//    };
-//    sheet.destructiveButtonIndex = [sheet addButtonWithTitle:@"Cancel"];
-//    [sheet showInView:[UIApplication sharedApplication].keyWindow];
+    if (![UserManager sharedInstance].user.facebookAccount && ![UserManager sharedInstance].user.twitterAccount) {
+        [self showDefaultShare];
+        return;
+    }
+    
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"How would you like to share?" delegate:nil cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
+    for (SocialAccount *account in [UserManager sharedInstance].user.socialAccounts) {
+        [sheet addButtonWithTitle:account.providerName.capitalizedString];
+    }
+    
+    [sheet addButtonWithTitle:@"Other"];
+    __unsafe_unretained PredictionDetailsViewController *this = self;
+    sheet.tapBlock = ^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+        if (buttonIndex == actionSheet.destructiveButtonIndex)
+            return;
+        
+        if (buttonIndex == [UserManager sharedInstance].user.socialAccounts.count)
+            [this showDefaultShare];
+        else
+            [this shareWithSocialAccount:[UserManager sharedInstance].user.socialAccounts[buttonIndex]];
+            
+    };
+    sheet.destructiveButtonIndex = [sheet addButtonWithTitle:@"Cancel"];
+    [sheet showInView:[UIApplication sharedApplication].keyWindow];
 }
 
 - (void)shareWithSocialAccount:(SocialAccount *)account {

@@ -520,12 +520,10 @@ static NSDateFormatter *dateFormatter;
     if (!self.shouldShareToFacebook && self.selectedGroup) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"You cannot share private group predictions." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         [alert show];
+        return;
     }
     
     self.shouldShareToFacebook = !self.shouldShareToFacebook;
-
-    
-
 }
 
 - (void)addFacebook {
@@ -583,10 +581,7 @@ static NSDateFormatter *dateFormatter;
     }
     
     self.shouldShareToTwitter = !self.shouldShareToTwitter;
-    
-
 }
-
 - (void)setShouldShareToFacebook:(BOOL)shouldShareToFacebook {
     _shouldShareToFacebook = shouldShareToFacebook;
     

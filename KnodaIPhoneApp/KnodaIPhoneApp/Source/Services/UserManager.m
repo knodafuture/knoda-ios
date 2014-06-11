@@ -130,8 +130,6 @@ static UserManager *sharedSingleton;
         [self clearSavedCredentials];
         completionHandler(error);
     }];
-    
-
 }
 
 - (void)clearSavedCredentials {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -16,6 +16,8 @@
                 <outlet property="containerView" destination="qjL-1G-acy" id="Ic8-oI-UAc"/>
                 <outlet property="expirationBar" destination="WlW-OT-caG" id="JPy-FP-c8c"/>
                 <outlet property="expirationLabel" destination="a87-rn-bdT" id="38A-cg-DHV"/>
+                <outlet property="facebookShareImageView" destination="uf8-mi-t4q" id="19H-nG-vcp"/>
+                <outlet property="facebookShareLabel" destination="Zb2-I6-aAU" id="cd7-yR-G3x"/>
                 <outlet property="groupPicker" destination="gg5-ox-TaI" id="9qS-Xo-7NS"/>
                 <outlet property="groupPickerContainerView" destination="ppB-Zs-QWY" id="nwS-7m-JNe"/>
                 <outlet property="groupsBar" destination="5oB-R4-WnC" id="Hra-G2-Zys"/>
@@ -130,11 +132,11 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 </view>
                                 <view contentMode="scaleToFill" id="aMv-Ra-QLs">
-                                    <rect key="frame" x="0.0" y="296" width="320" height="44"/>
+                                    <rect key="frame" x="162" y="296" width="158" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="me1-Sv-GJ7">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="152" height="44"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -144,11 +146,39 @@
                                             </connections>
                                         </button>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TwitterShare" id="Vgc-ZC-Bf7">
-                                            <rect key="frame" x="10" y="16" width="13" height="11"/>
+                                            <rect key="frame" x="8" y="13" width="22" height="18"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </imageView>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share prediction on Twitter" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sMd-5Z-Wg2">
-                                            <rect key="frame" x="33" y="11" width="244" height="21"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Twitter" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sMd-5Z-Wg2">
+                                            <rect key="frame" x="38" y="11" width="100" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                </view>
+                                <view contentMode="scaleToFill" id="kLC-wf-1Tv">
+                                    <rect key="frame" x="0.0" y="296" width="158" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mmn-9a-G18">
+                                            <rect key="frame" x="0.0" y="0.0" width="152" height="44"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="facebookShare:" destination="-1" eventType="touchUpInside" id="dcJ-nx-KsX"/>
+                                            </connections>
+                                        </button>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FacebookShare" id="uf8-mi-t4q">
+                                            <rect key="frame" x="13" y="11" width="22" height="22"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Facebook" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Zb2-I6-aAU">
+                                            <rect key="frame" x="43" y="11" width="100" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -307,9 +337,10 @@
         </view>
     </objects>
     <resources>
+        <image name="FacebookShare" width="22" height="22"/>
         <image name="PredictCalendarIcon" width="13" height="13"/>
         <image name="PredictCategoryIcon" width="13" height="13"/>
         <image name="PredictGroupsIcon" width="13" height="13"/>
-        <image name="TwitterShare" width="13" height="11"/>
+        <image name="TwitterShare" width="22" height="18"/>
     </resources>
 </document>

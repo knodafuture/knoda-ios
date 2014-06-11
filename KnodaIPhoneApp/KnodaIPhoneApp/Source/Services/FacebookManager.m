@@ -44,7 +44,7 @@ static FacebookManager *sharedSingleton;
     BOOL cachedToken = FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded;
     
     if (!cachedToken) {
-        [FBSession openActiveSessionWithReadPermissions:@[] allowLoginUI:YES
+        [FBSession openActiveSessionWithReadPermissions:@[@"email"] allowLoginUI:YES
                                       completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
                                           [self sessionStateChanged:session state:state error:error];
                                       }];

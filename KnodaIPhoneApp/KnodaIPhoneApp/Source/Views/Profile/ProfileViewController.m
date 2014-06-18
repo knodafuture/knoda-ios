@@ -21,6 +21,7 @@
 #import "TwitterManager.h"
 #import "FacebookManager.h" 
 #import "UIActionSheet+Blocks.h"
+#import "RightSideButtonsView.h"
 
 static NSString* const kChangeEmailUsernameSegue = @"UsernameEmailSegue";
 static NSString* const kChangePasswordSegue = @"ChangePasswordSegue";

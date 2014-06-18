@@ -9,6 +9,7 @@
 
 #import "User.h"
 #import "SocialAccount.h"
+#import "NotificationSettings.h"
 
 @implementation User
 
@@ -31,4 +32,5 @@
 + (NSValueTransformer *)socialAccountsJSONTransformer {
     return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:SocialAccount.class];
 }
+
 @end

@@ -26,6 +26,8 @@
 #import "UserManager.h"
 #import "GroupsViewController.h"
 #import "NavigationScrollView.h"
+#import "NotificationSettingsViewController.h"
+
 
 CGFloat const SideNavBezelWidth = 20.0f;
 
@@ -86,8 +88,10 @@ CGFloat const SideNavBezelWidth = 20.0f;
     
     self.rightSideBarButtonsView = [[RightSideButtonsView alloc] init];
     
+    
     [self.rightSideBarButtonsView setSearchTarget:self action:@selector(search)];
     [self.rightSideBarButtonsView setAddPredictionTarget:self action:@selector(presentAddPredictionViewController)];
+    [self.rightSideBarButtonsView setSettingsTarget:self action:@selector(settings)];
     
     self.rightSideBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.rightSideBarButtonsView];
     
@@ -194,6 +198,11 @@ CGFloat const SideNavBezelWidth = 20.0f;
 
 - (void)presentViewControllerForMenuItem:(MenuItem)menuItem {
     UINavigationController *controller = [self navigationControllerForMenuItem:menuItem];
+    if (menuItem == MenuProfile) {
+        [_rightSideBarButtonsView setbuttonsHidden:YES];
+    }else {
+        [_rightSideBarButtonsView setbuttonsHidden:NO];
+    }
     [self showViewController:controller];
 }
 
@@ -313,6 +322,9 @@ CGFloat const SideNavBezelWidth = 20.0f;
     
     if (![viewController isKindOfClass:SearchViewController.class])
         viewController.navigationItem.rightBarButtonItem = self.rightSideBarButtonItem;
+    /*if (![viewController isKindOfClass:SettingsViewController.class]) {
+        viewController.navigationItem.rightBarButtonItem = self.rightSideBarButtonItem;
+    }*/
 }
 
 #pragma mark SelectPictureDelegate
@@ -355,10 +367,30 @@ CGFloat const SideNavBezelWidth = 20.0f;
     [self.visibleViewController pushViewController:vc animated:YES];
 }
 
+-(void)settings {
+    NotificationSettingsViewController *vc = [[NotificationSettingsViewController alloc] init];
+    [self.rightSideBarButtonsView setbuttonsHidden:YES];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    [self presentViewController:nav animated:YES completion:nil];
+    NSLog(@"poop");
+}
+/*
+-(void)settings:(SettingsViewController *)settingsViewController {
+    SettingsViewController *vc = [[SettingsViewController alloc] initWithActiveGroup:self.activeGroup];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    
+    [self presentViewController:nav animated:YES completion:nil];    
+}
+ */
+
 - (void)searchViewControllerDidFinish:(SearchViewController *)searchViewController {
     [self.rightSideBarButtonsView setSearchButtonHidden:NO];
 }
-
+/*
+-(void)settingsViewControllerDidFinish:(SettingsViewController *)settingsViewController {
+    [self.rightSideBarButtonsView setbuttonsHidden:NO];
+}
+*/
 - (void)dealloc {
     [self removeAllObservations];
     [[NSNotificationCenter defaultCenter] removeObserver:self];

@@ -18,7 +18,7 @@ NSString *const HttpForbiddenNotification = @"HttpForbiddenNotification";
 NSString *const DeprecatedAPI = @"DeprecatedAPI";
 NSInteger PageLimit = 50;
 #ifdef TESTFLIGHT
-NSString const *baseURL = @"http://captaincold.knoda/api/";  // Old server=54.213.86.248
+NSString const *baseURL = @"http://captaincold.knoda.com/api/";  // Old server=54.213.86.248
 #else
 NSString const *baseURL = @"http://api.knoda.com/api/";
 #endif
@@ -75,6 +75,15 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
 
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler([LoginResponse instanceFromData:responseData], error);
+    }];
+}
+
+- (void)getNotificationSettings:(void (^)(NSArray *, NSError *))completionHandler {
+    NSString *url = [self buildUrl:@"notification_settings.json" parameters:nil];
+    NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
+    
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+        completionHandler([NotificationSettings arrayFromData:responseData], error);
     }];
 }
 

@@ -409,6 +409,14 @@
 		01FFE52C187B7432001C9893 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01FFE52B187B7432001C9893 /* StoreKit.framework */; };
 		129025DD2FFF4D9FA85D4A70 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D053512337C4121BADACAB9 /* libPods.a */; };
 		50D776ADE5CA49A68908C526 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D053512337C4121BADACAB9 /* libPods.a */; };
+		7B5AE8AE19509E42004167CF /* NotificationSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5AE8AD19509E42004167CF /* NotificationSettings.m */; };
+		7B5AE8AF1950A47A004167CF /* NotificationSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5AE8AD19509E42004167CF /* NotificationSettings.m */; };
+		7B5AE8B71950BA06004167CF /* settingsTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5AE8B51950BA06004167CF /* settingsTableCell.m */; };
+		7B5AE8B81950BA06004167CF /* settingsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B5AE8B61950BA06004167CF /* settingsTableCell.xib */; };
+		7BC9A2641951DF2600483305 /* settingsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B5AE8B61950BA06004167CF /* settingsTableCell.xib */; };
+		7BC9A2661951DF9200483305 /* settingsTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5AE8B51950BA06004167CF /* settingsTableCell.m */; };
+		7BC9A2691951EADB00483305 /* NotificationSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC9A2681951EADB00483305 /* NotificationSettingsViewController.m */; };
+		7BC9A26A1951EB8100483305 /* NotificationSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC9A2681951EADB00483305 /* NotificationSettingsViewController.m */; };
 		9E28686F17C659940033FB3C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E28686E17C659930033FB3C /* Security.framework */; };
 		9E6F4C5A17D8CCFA00EAB4A0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6F4C5917D8CCFA00EAB4A0 /* SystemConfiguration.framework */; };
 		9E708824178AF68E00F036A8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E708823178AF68E00F036A8 /* UIKit.framework */; };
@@ -757,6 +765,13 @@
 		01F82CDA18DD451D0000E96B /* libFlurry_4.3.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_4.3.2.a; sourceTree = "<group>"; };
 		01FFE52B187B7432001C9893 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		2D053512337C4121BADACAB9 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B5AE8AC19509E42004167CF /* NotificationSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationSettings.h; sourceTree = "<group>"; };
+		7B5AE8AD19509E42004167CF /* NotificationSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationSettings.m; sourceTree = "<group>"; };
+		7B5AE8B41950BA06004167CF /* settingsTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = settingsTableCell.h; sourceTree = "<group>"; };
+		7B5AE8B51950BA06004167CF /* settingsTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = settingsTableCell.m; sourceTree = "<group>"; };
+		7B5AE8B61950BA06004167CF /* settingsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = settingsTableCell.xib; sourceTree = "<group>"; };
+		7BC9A2671951EADB00483305 /* NotificationSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationSettingsViewController.h; sourceTree = "<group>"; };
+		7BC9A2681951EADB00483305 /* NotificationSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationSettingsViewController.m; sourceTree = "<group>"; };
 		8825C313D9324F9BA336C19A /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		9E28686E17C659930033FB3C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		9E6F4C5917D8CCFA00EAB4A0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -1102,6 +1117,11 @@
 		013DA7771853002100B507E4 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				7BC9A2671951EADB00483305 /* NotificationSettingsViewController.h */,
+				7BC9A2681951EADB00483305 /* NotificationSettingsViewController.m */,
+				7B5AE8B41950BA06004167CF /* settingsTableCell.h */,
+				7B5AE8B51950BA06004167CF /* settingsTableCell.m */,
+				7B5AE8B61950BA06004167CF /* settingsTableCell.xib */,
 				013DA77A1853002100B507E4 /* ChangePasswordViewController.h */,
 				013DA77B1853002100B507E4 /* ChangePasswordViewController.m */,
 				013DA77C1853002100B507E4 /* ChangePasswordViewController.xib */,
@@ -1252,6 +1272,8 @@
 				01BFDC7118E4B9AB0098F81F /* InvitationCodeDetails.m */,
 				01C4A4AA190E61B300E08031 /* SocialAccount.h */,
 				01C4A4AB190E61B300E08031 /* SocialAccount.m */,
+				7B5AE8AC19509E42004167CF /* NotificationSettings.h */,
+				7B5AE8AD19509E42004167CF /* NotificationSettings.m */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -1541,10 +1563,10 @@
 				ORGANIZATIONNAME = Knoda;
 				TargetAttributes = {
 					0121E7D8184FDBC700B7C5CA = {
-						DevelopmentTeam = F489V4H5F6;
+						DevelopmentTeam = 3D247B7547;
 					};
 					9E70881F178AF68E00F036A8 = {
-						DevelopmentTeam = F489V4H5F6;
+						DevelopmentTeam = 3D247B7547;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
 								enabled = 0;
@@ -1579,6 +1601,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BC9A2641951DF2600483305 /* settingsTableCell.xib in Resources */,
 				013DA8251853002200B507E4 /* ForgotPasswordViewController.xib in Resources */,
 				014A9F09185DA04400A96678 /* release_notes.md in Resources */,
 				013DA89F1853002200B507E4 /* Media.xcassets in Resources */,
@@ -1680,6 +1703,7 @@
 				01598B3B1858E4B3002E2534 /* ZoomingImageViewController.xib in Resources */,
 				01DBEACB18DA4033000F2E50 /* InvitationTableViewCell.xib in Resources */,
 				013DA8621853002200B507E4 /* ProfileViewController.xib in Resources */,
+				7B5AE8B81950BA06004167CF /* settingsTableCell.xib in Resources */,
 				013DA9121854759200B507E4 /* CreateCommentView.xib in Resources */,
 				014FDF8818D9F103006B51D9 /* GroupPredictionsHeaderCell.xib in Resources */,
 				013DA87C1853002200B507E4 /* IntroOverlay@2x-568h.png in Resources */,
@@ -1778,6 +1802,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BC9A26A1951EB8100483305 /* NotificationSettingsViewController.m in Sources */,
+				7BC9A2661951DF9200483305 /* settingsTableCell.m in Sources */,
+				7B5AE8AF1950A47A004167CF /* NotificationSettings.m in Sources */,
 				013DA7C71853002200B507E4 /* NSDictionary+Utils.m in Sources */,
 				01E8CB751876693B003AE018 /* CategoriesDatasource.m in Sources */,
 				01871E1018D75D6900A2B809 /* Group.m in Sources */,
@@ -1917,6 +1944,7 @@
 				01E8CB6C18765F71003AE018 /* SearchDatasource.m in Sources */,
 				013DA80A1853002200B507E4 /* NavigationViewController.m in Sources */,
 				0193A01118CF55140088D168 /* DeviceToken.m in Sources */,
+				7BC9A2691951EADB00483305 /* NotificationSettingsViewController.m in Sources */,
 				013DA8A41853002200B507E4 /* BJImageCropper.m in Sources */,
 				01E2576818E0741A009D3782 /* RankingsTableViewController.m in Sources */,
 				0193A00518CE6AE90088D168 /* ParamBuilder.m in Sources */,
@@ -1951,6 +1979,7 @@
 				013DA8F7185432A200B507E4 /* EmptyDatasource.m in Sources */,
 				013DA8601853002200B507E4 /* ProfileViewController.m in Sources */,
 				013DA8401853002200B507E4 /* PredictionDetailsViewController.m in Sources */,
+				7B5AE8B71950BA06004167CF /* settingsTableCell.m in Sources */,
 				0159B76919210A1A008B28E7 /* NavigationScrollView.m in Sources */,
 				013DA8261853002200B507E4 /* LoginViewController.m in Sources */,
 				018DF7981858F1FB004FEDA6 /* ActivityItem.m in Sources */,
@@ -2000,6 +2029,7 @@
 				013DA8F9185432A200B507E4 /* PagingDatasource.m in Sources */,
 				01C4A49F190E3D2F00E08031 /* NSData+Base64.m in Sources */,
 				01DBEACF18DA4194000F2E50 /* InvitationTableViewCell.m in Sources */,
+				7B5AE8AE19509E42004167CF /* NotificationSettings.m in Sources */,
 				013DA86C1853002200B507E4 /* UserProfileHeaderView.m in Sources */,
 				013DA7D41853002200B507E4 /* Comment+Utils.m in Sources */,
 				013DA8321853002200B507E4 /* PredictionDetailsHeaderCell.m in Sources */,
@@ -2063,7 +2093,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Nick Rellihan (9TAA35K5AK)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2088,7 +2118,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "Knoda Test";
-				PROVISIONING_PROFILE = "F229B453-5DF5-4DB8-8405-F705FD241E1F";
+				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2102,7 +2132,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Knoda, LLC (F489V4H5F6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/KnodaIPhoneApp/Thirdparty",
@@ -2121,7 +2151,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "Knoda Test";
-				PROVISIONING_PROFILE = "9D526CA8-AAA3-4DC0-B485-D2C71C17BC9E";
+				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};

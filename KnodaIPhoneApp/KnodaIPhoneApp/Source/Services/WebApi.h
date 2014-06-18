@@ -25,6 +25,7 @@
 #import "Invitation.h"
 #import "InvitationCodeDetails.h"
 #import "SocialAccount.h" 
+#import "NotificationSettings.h"
 
 typedef NS_ENUM(NSInteger, HttpStatus) {
 	HttpStatusOk				= 200,
@@ -46,6 +47,8 @@ extern NSInteger PageLimit;
 @interface WebApi : NSObject
 
 + (WebApi *)sharedInstance;
+
+
 
 // -- Login/Signup/Profile -- //
 
@@ -130,4 +133,8 @@ extern NSInteger PageLimit;
 - (void)deleteGroupAvatar:(Group *)group completion:(void(^)(NSError *error))completionHandler;
 - (void)getInvitationDetails:(NSString *)code completion:(void(^)(InvitationCodeDetails *details, NSError *error))completionHandler;
 - (void)consumeInviteCode:(NSString *)code forGroup:(Group *)group completion:(void(^)(Member *membership, NSError *error))completionHandler;
+
+// -- Notifications Settings -- //
+
+- (void)getNotificationSettings:(void(^)(NSArray *settings, NSError *error)) completionHandler;
 @end

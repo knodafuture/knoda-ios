@@ -15,9 +15,6 @@
     
     self = [[nib instantiateWithOwner:nil options:nil] lastObject];
     
-    self.settingsButton.hidden = YES;
-    self.settingsImageView.hidden = YES;
-    
     return self;
 }
 
@@ -29,24 +26,8 @@
     [self.searchButton addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
 }
 
--(void)setSettingsTarget:(id)target action:(SEL)action {
-    [self.settingsButton addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
-}
-
-
-
 - (void)setSearchButtonHidden:(BOOL)hidden {
     self.searchButton.hidden = hidden;
     self.searchImageView.hidden = hidden;
 }
-
--(void)setbuttonsHidden:(BOOL)hidden {
-    self.searchButton.hidden = hidden;
-    self.searchImageView.hidden = hidden;
-    self.addPredictionButton.hidden = hidden;
-    self.addPredictionImageView.hidden = hidden;
-    self.settingsButton.hidden = !hidden;
-    self.settingsImageView.hidden = !hidden;
-}
-
 @end

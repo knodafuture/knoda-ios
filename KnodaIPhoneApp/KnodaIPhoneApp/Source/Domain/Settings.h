@@ -9,6 +9,6 @@
 #import "WebObject.h"
 
 @interface Settings : WebObject
-@property (assign, nonatomic) NSString *name;
+@property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSArray *settings;
 @end

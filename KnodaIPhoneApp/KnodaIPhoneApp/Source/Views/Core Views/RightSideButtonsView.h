@@ -14,14 +14,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
 @property (weak, nonatomic) IBOutlet UIImageView *addPredictionImageView;
 @property (weak, nonatomic) IBOutlet UIButton *addPredictionButton;
-@property (weak, nonatomic) IBOutlet UIButton *settingsButton;
-@property (weak, nonatomic) IBOutlet UIImageView *settingsImageView;
 
 - (void)setAddPredictionTarget:(id)target action:(SEL)action;
 - (void)setSearchTarget:(id)target action:(SEL)action;
--(void)setSettingsTarget:(id)target action:(SEL)action;
 
 - (void)setSearchButtonHidden:(BOOL)hidden;
-- (void)setbuttonsHidden:(BOOL)hidden;
-
 @end

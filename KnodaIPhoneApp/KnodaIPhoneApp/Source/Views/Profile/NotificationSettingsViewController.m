@@ -7,44 +7,20 @@
 //
 
 #import "NotificationSettingsViewController.h"
-#import "settingsTableCell.h"
+#import "SettingTableViewCell.h"
 #import "WebApi.h"
 #import "NotificationSettings.h"
 
-@interface NotificationSettingsViewController () {
-    Settings *settings;
-    UIView *header;
-    NotificationSettings *notificationSettings;
-}
+@interface NotificationSettingsViewController ()
+
+@property (strong, nonatomic) NSArray *settings;
 
 @end
 
 @implementation NotificationSettingsViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
-- (NSInteger)numberOfSections {
-    
-    return [settings settings].count;
-
-}
-
-- (NSInteger)numberOfRowsInSection:(NSInteger)section {
-    return 1;
-}
-
-- (void)viewDidLoad
-{
-    [[WebApi sharedInstance] getSettings:settings completion:^(Settings *settings, NSError *error) {
-    }];
-    NSLog(@"%@", settings.settings);
+- (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTitle:@"Cancel" target:self action:@selector(cancel) color:[UIColor whiteColor]];
     self.title = @"SETTINGS";
@@ -55,38 +31,55 @@
         self.tableView.scrollEnabled = YES;
     }
     
-    //self.tableView. = [settings name];
-    
+    [self refresh];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)refresh {
+    [[WebApi sharedInstance] getSettingsCompletion:^(NSArray *settings, NSError *error) {
+        self.settings = settings;
+        [self.tableView reloadData];
+    }];
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return self.settings.count;
+}
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return [self.settings[0] name];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    NSInteger ret = [self.settings[section] settings].count;
+    return ret;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    settingsTableCell *cell = [settingsTableCell cellForTableView:tableView];
-    //if (indexPath.row >= self.pagingDatasource.objects.count)
-        //return [super tableView:tableView cellForRowAtIndexPath:indexPath];
+    SettingTableViewCell *cell = [SettingTableViewCell cellForTableView:tableView];
     
-    //NotificationSettings *setting = [self.pagingDatasource.objects objectAtIndex:indexPath.row];
+    Settings *settings = self.settings[indexPath.section];
     
-    /*
+    NotificationSettings *setting = settings.settings[indexPath.row];
+    
     cell.displayName.text = [setting displayName];
     cell.descriptionView.text = [setting description];
     cell.switchIndicator.on = [setting active];
     cell.switchIndicator.tag = indexPath.row;
-    */
     [cell.switchIndicator addTarget:self action:@selector(updateSwitch:) forControlEvents:UIControlEventValueChanged];
     
     return cell;
 }
 
--(void)updateSwitch:(UISwitch *)sender {
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0)
+        return 86.0;
+    else {
+        return 86.0;
+    }
+}
+
+- (void)updateSwitch:(UISwitch *)sender {
     NSLog(@"%ld", (long)sender.tag);
     NSInteger row = sender.tag;
    // NSArray *settings = self.pagingDatasource.objects;
@@ -102,13 +95,7 @@
 }
 
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0)
-        return 86.0;
-    else {
-        return 86.0;
-    }
-}
+
 
 - (void)cancel {
     [self dismissViewControllerAnimated:YES completion:nil];

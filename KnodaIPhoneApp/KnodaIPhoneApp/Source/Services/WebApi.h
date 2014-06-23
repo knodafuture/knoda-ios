@@ -137,7 +137,7 @@ extern NSInteger PageLimit;
 
 // -- Settings -- //
 
-- (void)getSettings:(Settings *)settings completion:(void (^)(Settings *, NSError *))completionHandler;
+- (void)getSettingsCompletion:(void (^)(NSArray *settings, NSError *error))completionHandler;
 - (void)updateNotificationStatus:(NotificationSettings *)settings completion:(void (^)(NotificationSettings *, NSError *))completionHandler;
 
 @end

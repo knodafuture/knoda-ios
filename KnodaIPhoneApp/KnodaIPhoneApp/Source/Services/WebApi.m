@@ -77,28 +77,12 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
         completionHandler([LoginResponse instanceFromData:responseData], error);
     }];
 }
-/*
-- (void)getNotification:(NSInteger)lastId completion:(void (^)(NSArray *, NSError *))completionHandler {
-    NSDictionary *parameters = @{@"limit": @(PageLimit)};
-    
-    parameters = [self parametersDictionary:parameters withLastId:lastId];
-    NSString *url = [self buildUrl:@"notification_settings.json" parameters:parameters];
-    NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
-    
-    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
-        completionHandler([NotificationSettings arrayFromData:responseData], error);
-    }];
-    
-}
-*/
 
-- (void)getSettings:(Settings *)settings completion:(void (^)(Settings *, NSError *))completionHandler {
+- (void)getSettingsCompletion:(void (^)(NSArray *, NSError *))completionHandler {
     NSString *url = [self buildUrl:@"settings.json" parameters:nil];
     NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
-    NSLog(@"Request");
-    NSLog(@"%@", request);
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
-        completionHandler([Settings instanceFromData:responseData], error);
+        completionHandler([Settings arrayFromData:responseData], error);
     }];
 }
 -(void)updateNotificationStatus:(NotificationSettings *)settings completion:(void (^)(NotificationSettings *, NSError *))completionHandler {

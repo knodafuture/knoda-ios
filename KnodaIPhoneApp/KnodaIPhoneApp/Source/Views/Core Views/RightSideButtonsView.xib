@@ -19,10 +19,6 @@
                     <rect key="frame" x="0.0" y="13" width="29" height="21"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SettingsIcon" id="RWy-of-pk2" userLabel="settingsImage">
-                    <rect key="frame" x="29" y="11" width="29" height="21"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="32E-2V-4xl">
                     <rect key="frame" x="0.0" y="0.0" width="29" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -39,14 +35,6 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ph9-ns-9Qo" userLabel="settings">
-                    <rect key="frame" x="29" y="0.0" width="29" height="44"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
@@ -54,14 +42,11 @@
                 <outlet property="addPredictionImageView" destination="b6c-4u-7cx" id="awN-Ck-Ft7"/>
                 <outlet property="searchButton" destination="32E-2V-4xl" id="g9p-Oj-51o"/>
                 <outlet property="searchImageView" destination="tTc-wc-x7d" id="Yui-Qf-j1t"/>
-                <outlet property="settingsButton" destination="ph9-ns-9Qo" id="LLf-Xm-Lk2"/>
-                <outlet property="settingsImageView" destination="RWy-of-pk2" id="LPE-aA-xdd"/>
             </connections>
         </view>
     </objects>
     <resources>
         <image name="NavSearchIcon" width="29" height="21"/>
         <image name="PredictIcon" width="29" height="21"/>
-        <image name="SettingsIcon" width="20" height="20"/>
     </resources>
 </document>

@@ -10,9 +10,9 @@
 
 
 
-@interface settingsTableCell : UITableViewCell
+@interface SettingTableViewCell : UITableViewCell
 
-+ (settingsTableCell *)cellForTableView:(UITableView *)tableView;
++ (SettingTableViewCell *)cellForTableView:(UITableView *)tableView;
 
 @property (weak, nonatomic) IBOutlet UISwitch *switchIndicator;
 

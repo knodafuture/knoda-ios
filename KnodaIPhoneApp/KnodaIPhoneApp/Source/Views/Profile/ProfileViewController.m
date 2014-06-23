@@ -22,6 +22,7 @@
 #import "FacebookManager.h" 
 #import "UIActionSheet+Blocks.h"
 #import "RightSideButtonsView.h"
+#import "NotificationSettingsViewController.h"
 
 static NSString* const kChangeEmailUsernameSegue = @"UsernameEmailSegue";
 static NSString* const kChangePasswordSegue = @"ChangePasswordSegue";

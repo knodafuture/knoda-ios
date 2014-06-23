@@ -9,10 +9,10 @@
 #import "WebObject.h"
 
 @interface NotificationSettings : WebObject
-@property (assign, nonatomic) NSInteger *userId;
+@property (assign, nonatomic) NSInteger Id;
 @property (strong, nonatomic) NSString *setting;
 @property (strong, nonatomic) NSString *displayName;
 @property (strong, nonatomic) NSString *description;
-@property (assign, nonatomic) BOOL *active;
+@property (assign, nonatomic) BOOL active;
 
 @end

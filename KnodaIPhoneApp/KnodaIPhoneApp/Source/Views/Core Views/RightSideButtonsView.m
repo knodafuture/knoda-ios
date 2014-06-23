@@ -47,7 +47,6 @@
     self.addPredictionImageView.hidden = hidden;
     self.settingsButton.hidden = !hidden;
     self.settingsImageView.hidden = !hidden;
-    NSLog(@"Tapped");
 }
 
 @end

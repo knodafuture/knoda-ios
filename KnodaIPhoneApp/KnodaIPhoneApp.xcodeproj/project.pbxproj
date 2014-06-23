@@ -409,6 +409,8 @@
 		01FFE52C187B7432001C9893 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01FFE52B187B7432001C9893 /* StoreKit.framework */; };
 		129025DD2FFF4D9FA85D4A70 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D053512337C4121BADACAB9 /* libPods.a */; };
 		50D776ADE5CA49A68908C526 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D053512337C4121BADACAB9 /* libPods.a */; };
+		7B0DB02419549B380066EF6D /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DB02319549B380066EF6D /* Settings.m */; };
+		7B0DB0251954AC170066EF6D /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DB02319549B380066EF6D /* Settings.m */; };
 		7B5AE8AE19509E42004167CF /* NotificationSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5AE8AD19509E42004167CF /* NotificationSettings.m */; };
 		7B5AE8AF1950A47A004167CF /* NotificationSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5AE8AD19509E42004167CF /* NotificationSettings.m */; };
 		7B5AE8B71950BA06004167CF /* settingsTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5AE8B51950BA06004167CF /* settingsTableCell.m */; };
@@ -765,6 +767,8 @@
 		01F82CDA18DD451D0000E96B /* libFlurry_4.3.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_4.3.2.a; sourceTree = "<group>"; };
 		01FFE52B187B7432001C9893 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		2D053512337C4121BADACAB9 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B0DB02219549B380066EF6D /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
+		7B0DB02319549B380066EF6D /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
 		7B5AE8AC19509E42004167CF /* NotificationSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationSettings.h; sourceTree = "<group>"; };
 		7B5AE8AD19509E42004167CF /* NotificationSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationSettings.m; sourceTree = "<group>"; };
 		7B5AE8B41950BA06004167CF /* settingsTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = settingsTableCell.h; sourceTree = "<group>"; };
@@ -1274,6 +1278,8 @@
 				01C4A4AB190E61B300E08031 /* SocialAccount.m */,
 				7B5AE8AC19509E42004167CF /* NotificationSettings.h */,
 				7B5AE8AD19509E42004167CF /* NotificationSettings.m */,
+				7B0DB02219549B380066EF6D /* Settings.h */,
+				7B0DB02319549B380066EF6D /* Settings.m */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -1802,6 +1808,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B0DB0251954AC170066EF6D /* Settings.m in Sources */,
 				7BC9A26A1951EB8100483305 /* NotificationSettingsViewController.m in Sources */,
 				7BC9A2661951DF9200483305 /* settingsTableCell.m in Sources */,
 				7B5AE8AF1950A47A004167CF /* NotificationSettings.m in Sources */,
@@ -1997,6 +2004,7 @@
 				01B67BB318DB630300D22D2B /* Invitation.m in Sources */,
 				013DA7C41853002200B507E4 /* NSDate+Utils.m in Sources */,
 				01E8CB62187648D1003AE018 /* SearchBar.m in Sources */,
+				7B0DB02419549B380066EF6D /* Settings.m in Sources */,
 				01E2576F18E0750C009D3782 /* RankingsTableViewCell.m in Sources */,
 				01E8CB5E1876480F003AE018 /* SearchViewController.m in Sources */,
 				013DA8DB1853004000B507E4 /* WebObject.m in Sources */,

@@ -9,7 +9,7 @@
 
 #import "User.h"
 #import "SocialAccount.h"
-#import "NotificationSettings.h"
+
 
 @implementation User
 

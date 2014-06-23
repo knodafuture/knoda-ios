@@ -322,9 +322,6 @@ CGFloat const SideNavBezelWidth = 20.0f;
     
     if (![viewController isKindOfClass:SearchViewController.class])
         viewController.navigationItem.rightBarButtonItem = self.rightSideBarButtonItem;
-    /*if (![viewController isKindOfClass:SettingsViewController.class]) {
-        viewController.navigationItem.rightBarButtonItem = self.rightSideBarButtonItem;
-    }*/
 }
 
 #pragma mark SelectPictureDelegate
@@ -372,25 +369,12 @@ CGFloat const SideNavBezelWidth = 20.0f;
     [self.rightSideBarButtonsView setbuttonsHidden:YES];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     [self presentViewController:nav animated:YES completion:nil];
-    NSLog(@"poop");
 }
-/*
--(void)settings:(SettingsViewController *)settingsViewController {
-    SettingsViewController *vc = [[SettingsViewController alloc] initWithActiveGroup:self.activeGroup];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-    
-    [self presentViewController:nav animated:YES completion:nil];    
-}
- */
 
 - (void)searchViewControllerDidFinish:(SearchViewController *)searchViewController {
     [self.rightSideBarButtonsView setSearchButtonHidden:NO];
 }
-/*
--(void)settingsViewControllerDidFinish:(SettingsViewController *)settingsViewController {
-    [self.rightSideBarButtonsView setbuttonsHidden:NO];
-}
-*/
+
 - (void)dealloc {
     [self removeAllObservations];
     [[NSNotificationCenter defaultCenter] removeObserver:self];

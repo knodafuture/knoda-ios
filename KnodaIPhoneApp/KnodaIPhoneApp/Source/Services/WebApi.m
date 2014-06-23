@@ -77,15 +77,42 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
         completionHandler([LoginResponse instanceFromData:responseData], error);
     }];
 }
-
-- (void)getNotificationSettings:(void (^)(NSArray *, NSError *))completionHandler {
-    NSString *url = [self buildUrl:@"notification_settings.json" parameters:nil];
+/*
+- (void)getNotification:(NSInteger)lastId completion:(void (^)(NSArray *, NSError *))completionHandler {
+    NSDictionary *parameters = @{@"limit": @(PageLimit)};
+    
+    parameters = [self parametersDictionary:parameters withLastId:lastId];
+    NSString *url = [self buildUrl:@"notification_settings.json" parameters:parameters];
     NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler([NotificationSettings arrayFromData:responseData], error);
     }];
+    
 }
+*/
+
+- (void)getSettings:(Settings *)settings completion:(void (^)(Settings *, NSError *))completionHandler {
+    NSString *url = [self buildUrl:@"settings.json" parameters:nil];
+    NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
+    NSLog(@"Request");
+    NSLog(@"%@", request);
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+        completionHandler([Settings instanceFromData:responseData], error);
+    }];
+}
+-(void)updateNotificationStatus:(NotificationSettings *)settings completion:(void (^)(NotificationSettings *, NSError *))completionHandler {
+    NSString *path = [NSString stringWithFormat:@"notification_settings/%ld.json", (long)settings.Id];
+    NSString *url = [self buildUrl:path parameters:nil];
+    NSURLRequest *request = [self requestWithUrl:url method:@"PUT" payload:settings];
+    
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+        completionHandler([NotificationSettings instanceFromData:responseData], error);
+    }];
+
+}
+
+
 
 - (void)getCurrentUser:(void (^)(User *, NSError *))completionHandler {
 

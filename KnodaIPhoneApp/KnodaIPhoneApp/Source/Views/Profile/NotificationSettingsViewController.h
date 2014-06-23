@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BaseTableViewController.h"
+//#import "BaseTableViewController.h"
 
-@interface NotificationSettingsViewController : BaseTableViewController
+@interface NotificationSettingsViewController : UITableViewController
+
 
 @end

@@ -26,6 +26,7 @@
 #import "InvitationCodeDetails.h"
 #import "SocialAccount.h" 
 #import "NotificationSettings.h"
+#import "Settings.h"
 
 typedef NS_ENUM(NSInteger, HttpStatus) {
 	HttpStatusOk				= 200,
@@ -134,7 +135,9 @@ extern NSInteger PageLimit;
 - (void)getInvitationDetails:(NSString *)code completion:(void(^)(InvitationCodeDetails *details, NSError *error))completionHandler;
 - (void)consumeInviteCode:(NSString *)code forGroup:(Group *)group completion:(void(^)(Member *membership, NSError *error))completionHandler;
 
-// -- Notifications Settings -- //
+// -- Settings -- //
 
-- (void)getNotificationSettings:(void(^)(NSArray *settings, NSError *error)) completionHandler;
+- (void)getSettings:(Settings *)settings completion:(void (^)(Settings *, NSError *))completionHandler;
+- (void)updateNotificationStatus:(NotificationSettings *)settings completion:(void (^)(NotificationSettings *, NSError *))completionHandler;
+
 @end

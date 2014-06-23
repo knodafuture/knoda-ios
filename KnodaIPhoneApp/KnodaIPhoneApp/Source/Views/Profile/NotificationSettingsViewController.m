@@ -66,9 +66,9 @@
     cell.descriptionView.text = [setting description];
     cell.switchIndicator.on = [setting active];
     cell.switchIndicator.tag = indexPath.row;
-    [cell.switchIndicator addTarget:self action:@selector(updateSwitch:) forControlEvents:UIControlEventValueChanged];
-    
-    return cell;
+    cell.switchIndicator.selected = false;
+    [cell.switchIndicator addTarget:self action:@selector(settingsChanged:inCell:) forControlEvents:UIControlEventValueChanged];
+        return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -79,23 +79,10 @@
     }
 }
 
-- (void)updateSwitch:(UISwitch *)sender {
-    NSLog(@"%ld", (long)sender.tag);
-    NSInteger row = sender.tag;
-   // NSArray *settings = self.pagingDatasource.objects;
-    
-   /* NotificationSettings *setting = settings[row];
-    if (sender.isOn) {
-        setting.active = YES;
-    } else if (!sender.isOn) {
-        setting.active = NO;
-    }*/
-    
-    //[[WebApi sharedInstance] updateNotificationStatus:setting completion:^(NotificationSettings *settings, NSError *error) {}];
+- (void)settingsChanged:(NotificationSettings *)notificationSetting inCell:(SettingTableViewCell *)cell {
+    [[WebApi sharedInstance]updateNotificationStatus:notificationSetting completion:^(NotificationSettings *set, NSError *err) {
+    }];
 }
-
-
-
 
 - (void)cancel {
     [self dismissViewControllerAnimated:YES completion:nil];

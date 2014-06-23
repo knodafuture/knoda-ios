@@ -6,9 +6,10 @@
 //  Copyright (c) 2014 Knoda. All rights reserved.
 //
 
+#import "SettingTableViewCell.h"
 #import <UIKit/UIKit.h>
 
-@interface NotificationSettingsViewController : UITableViewController
+@interface NotificationSettingsViewController : UITableViewController <SettingsDelegate>
 
 
 @end

@@ -29,4 +29,12 @@ static UINib *nib;
 }
 
 
+
+
+- (IBAction)switchChanged:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(settingsChanged:inCell:)]) {
+        [Flurry logEvent: @"Swiped_Agree"];
+        [self.delegate settingsChanged:self.notificationSettings inCell:self];
+    }
+}
 @end

@@ -67,8 +67,9 @@
     cell.switchIndicator.on = [setting active];
     cell.switchIndicator.tag = indexPath.row;
     cell.switchIndicator.selected = false;
-    [cell.switchIndicator addTarget:self action:@selector(settingsChanged:inCell:) forControlEvents:UIControlEventValueChanged];
-        return cell;
+    cell.notificationSettings = setting;
+    cell.delegate = self;
+    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -80,6 +81,15 @@
 }
 
 - (void)settingsChanged:(NotificationSettings *)notificationSetting inCell:(SettingTableViewCell *)cell {
+    
+    NSLog(@"%d", notificationSetting.Id);
+    if(notificationSetting.active){
+        notificationSetting.active = NO;
+    }
+    else {
+        notificationSetting.active = YES;
+    }
+        
     [[WebApi sharedInstance]updateNotificationStatus:notificationSetting completion:^(NotificationSettings *set, NSError *err) {
     }];
 }

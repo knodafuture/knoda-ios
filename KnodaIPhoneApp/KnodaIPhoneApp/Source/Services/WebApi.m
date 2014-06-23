@@ -85,10 +85,10 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
         completionHandler([Settings arrayFromData:responseData], error);
     }];
 }
--(void)updateNotificationStatus:(NotificationSettings *)settings completion:(void (^)(NotificationSettings *, NSError *))completionHandler {
-    NSString *path = [NSString stringWithFormat:@"notification_settings/%ld.json", (long)settings.Id];
+-(void)updateNotificationStatus:(NotificationSettings *)setting completion:(void (^)(NotificationSettings *, NSError *))completionHandler {
+    NSString *path = [NSString stringWithFormat:@"settings/%ld.json", (long)setting.Id];
     NSString *url = [self buildUrl:path parameters:nil];
-    NSURLRequest *request = [self requestWithUrl:url method:@"PUT" payload:settings];
+    NSURLRequest *request = [self requestWithUrl:url method:@"PUT" payload:setting];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler([NotificationSettings instanceFromData:responseData], error);

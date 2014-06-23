@@ -1,0 +1,22 @@
+//
+//  TabbedViewController.h
+//  KnodaIPhoneApp
+//
+//  Created by nick on 6/22/14.
+//  Copyright (c) 2014 Knoda. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface TabbedViewController : UIViewController
+
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIView *headerView;
+@property (assign, nonatomic) NSInteger activePage;
+@property (strong, nonatomic) NSArray *viewControllers;
+@property (strong, nonatomic) NSArray *buttons;
+
+
+- (void)addViewController:(UIViewController *)viewController title:(NSString *)title;
+
+@end

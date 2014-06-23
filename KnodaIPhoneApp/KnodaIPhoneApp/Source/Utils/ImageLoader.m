@@ -67,8 +67,14 @@
             return;
         }
         
-        if (image)
+        if (image) {
+            
+            if ([self.delegate respondsToSelector:@selector(imageLoader:willCacheImage:forIndexPath:)]) {
+                image = [self.delegate imageLoader:self willCacheImage:image forIndexPath:indexPath];
+            }
+            
             [_cache setObject:image forKey:imageUrl];
+        }
         
         [_tableAssetsDownloading removeObjectForKey:indexPath];
         [_tableAssetsWaiting removeObjectForKey:indexPath];

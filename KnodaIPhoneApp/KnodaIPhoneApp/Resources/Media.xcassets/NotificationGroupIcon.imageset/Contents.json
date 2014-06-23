@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "ActivityLostIcon.png"
+      "filename" : "NotificationGroupIcon.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "ActivityLostIcon@2x.png"
+      "filename" : "NotificationGroupIcon@2x.png"
     }
   ],
   "info" : {

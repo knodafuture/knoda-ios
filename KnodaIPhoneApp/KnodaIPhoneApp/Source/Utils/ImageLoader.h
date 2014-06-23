@@ -13,7 +13,7 @@
 @protocol ImageLoaderDelegate <NSObject>
 
 - (void)imageLoader:(ImageLoader *)loader finishedLoadingImage:(UIImage *)image forIndexPath:(NSIndexPath *)indexPath;
-
+- (UIImage *)imageLoader:(ImageLoader *)loader willCacheImage:(UIImage *)image forIndexPath:(NSIndexPath *)indexPath;
 @end
 
 @interface ImageLoader : NSObject

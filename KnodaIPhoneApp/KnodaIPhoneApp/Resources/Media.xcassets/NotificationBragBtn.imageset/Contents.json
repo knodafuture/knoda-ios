@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "ActivityWonIcon.png"
+      "filename" : "NotificationBragBtn.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "ActivityWonIcon@2x.png"
+      "filename" : "NotificationBragBtn@2x.png"
     }
   ],
   "info" : {

@@ -289,6 +289,8 @@
 		01871E1018D75D6900A2B809 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 01871E0E18D75D6900A2B809 /* Group.m */; };
 		01871E1418D75DF500A2B809 /* GroupsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01871E1318D75DF500A2B809 /* GroupsViewController.m */; };
 		01871E1518D75DF500A2B809 /* GroupsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01871E1318D75DF500A2B809 /* GroupsViewController.m */; };
+		018A66AA1950AC8D00D4C832 /* NotificationSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 018A66A91950AC8D00D4C832 /* NotificationSettings.m */; };
+		018A66AB1950AC8D00D4C832 /* NotificationSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 018A66A91950AC8D00D4C832 /* NotificationSettings.m */; };
 		018DF7981858F1FB004FEDA6 /* ActivityItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 018DF7971858F1FB004FEDA6 /* ActivityItem.m */; };
 		018DF79C1858F41A004FEDA6 /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 018DF79B1858F41A004FEDA6 /* ActivityViewController.m */; };
 		018DF79F1858F42F004FEDA6 /* AlertCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 018DF79E1858F42F004FEDA6 /* AlertCell.m */; };
@@ -312,6 +314,16 @@
 		0193A01518CF5FE90088D168 /* ActivityItem+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193A01418CF5FE90088D168 /* ActivityItem+Utils.m */; };
 		0193A01618CF5FE90088D168 /* ActivityItem+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193A01418CF5FE90088D168 /* ActivityItem+Utils.m */; };
 		01A1DEE9183E9A1F00DBBE68 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 01A1DEE8183E9A1F00DBBE68 /* libz.dylib */; };
+		01A67870195778E5002FDE1F /* TabbedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A6786F195778E5002FDE1F /* TabbedViewController.m */; };
+		01A67871195778E5002FDE1F /* TabbedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A6786F195778E5002FDE1F /* TabbedViewController.m */; };
+		01A6787319577E1C002FDE1F /* TabbedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A6787219577E1C002FDE1F /* TabbedViewController.xib */; };
+		01A6787419577E1C002FDE1F /* TabbedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A6787219577E1C002FDE1F /* TabbedViewController.xib */; };
+		01A678771957B1D4002FDE1F /* NewActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A678761957B1D4002FDE1F /* NewActivityViewController.m */; };
+		01A678781957B1D4002FDE1F /* NewActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A678761957B1D4002FDE1F /* NewActivityViewController.m */; };
+		01A6787B1957B4B5002FDE1F /* WinActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A6787A1957B4B5002FDE1F /* WinActivityTableViewCell.m */; };
+		01A6787C1957B4B5002FDE1F /* WinActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A6787A1957B4B5002FDE1F /* WinActivityTableViewCell.m */; };
+		01A6787E1957B4C2002FDE1F /* WinActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A6787D1957B4C2002FDE1F /* WinActivityTableViewCell.xib */; };
+		01A6787F1957B4C2002FDE1F /* WinActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A6787D1957B4C2002FDE1F /* WinActivityTableViewCell.xib */; };
 		01B67BA818DB4BDE00D22D2B /* MemberTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01B67BA718DB4BDE00D22D2B /* MemberTableViewCell.xib */; };
 		01B67BA918DB4BDE00D22D2B /* MemberTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01B67BA718DB4BDE00D22D2B /* MemberTableViewCell.xib */; };
 		01B67BAC18DB5CA300D22D2B /* InvitationSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B67BAB18DB5CA300D22D2B /* InvitationSearchView.m */; };
@@ -376,8 +388,6 @@
 		01E2577018E0750C009D3782 /* RankingsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E2576E18E0750C009D3782 /* RankingsTableViewCell.m */; };
 		01E2577418E07D9B009D3782 /* RankingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E2577218E07D9B009D3782 /* RankingsViewController.m */; };
 		01E2577518E07D9B009D3782 /* RankingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E2577218E07D9B009D3782 /* RankingsViewController.m */; };
-		01E2577618E07D9B009D3782 /* RankingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E2577318E07D9B009D3782 /* RankingsViewController.xib */; };
-		01E2577718E07D9B009D3782 /* RankingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E2577318E07D9B009D3782 /* RankingsViewController.xib */; };
 		01E8CB561875757E003AE018 /* RightSideButtonsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E8CB551875757E003AE018 /* RightSideButtonsView.m */; };
 		01E8CB58187575EB003AE018 /* RightSideButtonsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E8CB57187575EB003AE018 /* RightSideButtonsView.xib */; };
 		01E8CB59187575EB003AE018 /* RightSideButtonsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E8CB57187575EB003AE018 /* RightSideButtonsView.xib */; };
@@ -667,6 +677,8 @@
 		01871E0E18D75D6900A2B809 /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
 		01871E1218D75DF500A2B809 /* GroupsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupsViewController.h; sourceTree = "<group>"; };
 		01871E1318D75DF500A2B809 /* GroupsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupsViewController.m; sourceTree = "<group>"; };
+		018A66A81950AC8D00D4C832 /* NotificationSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationSettings.h; sourceTree = "<group>"; };
+		018A66A91950AC8D00D4C832 /* NotificationSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationSettings.m; sourceTree = "<group>"; };
 		018DF7961858F1FB004FEDA6 /* ActivityItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityItem.h; sourceTree = "<group>"; };
 		018DF7971858F1FB004FEDA6 /* ActivityItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityItem.m; sourceTree = "<group>"; };
 		018DF79A1858F41A004FEDA6 /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewController.h; sourceTree = "<group>"; };
@@ -689,6 +701,14 @@
 		0193A01318CF5FE90088D168 /* ActivityItem+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ActivityItem+Utils.h"; sourceTree = "<group>"; };
 		0193A01418CF5FE90088D168 /* ActivityItem+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ActivityItem+Utils.m"; sourceTree = "<group>"; };
 		01A1DEE8183E9A1F00DBBE68 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		01A6786E195778E5002FDE1F /* TabbedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabbedViewController.h; sourceTree = "<group>"; };
+		01A6786F195778E5002FDE1F /* TabbedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabbedViewController.m; sourceTree = "<group>"; };
+		01A6787219577E1C002FDE1F /* TabbedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabbedViewController.xib; sourceTree = "<group>"; };
+		01A678751957B1D4002FDE1F /* NewActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewActivityViewController.h; sourceTree = "<group>"; };
+		01A678761957B1D4002FDE1F /* NewActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewActivityViewController.m; sourceTree = "<group>"; };
+		01A678791957B4B5002FDE1F /* WinActivityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WinActivityTableViewCell.h; sourceTree = "<group>"; };
+		01A6787A1957B4B5002FDE1F /* WinActivityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WinActivityTableViewCell.m; sourceTree = "<group>"; };
+		01A6787D1957B4C2002FDE1F /* WinActivityTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WinActivityTableViewCell.xib; sourceTree = "<group>"; };
 		01B67BA718DB4BDE00D22D2B /* MemberTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MemberTableViewCell.xib; sourceTree = "<group>"; };
 		01B67BAA18DB5CA300D22D2B /* InvitationSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitationSearchView.h; sourceTree = "<group>"; };
 		01B67BAB18DB5CA300D22D2B /* InvitationSearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitationSearchView.m; sourceTree = "<group>"; };
@@ -740,7 +760,6 @@
 		01E2576E18E0750C009D3782 /* RankingsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RankingsTableViewCell.m; sourceTree = "<group>"; };
 		01E2577118E07D9B009D3782 /* RankingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankingsViewController.h; sourceTree = "<group>"; };
 		01E2577218E07D9B009D3782 /* RankingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RankingsViewController.m; sourceTree = "<group>"; };
-		01E2577318E07D9B009D3782 /* RankingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RankingsViewController.xib; sourceTree = "<group>"; };
 		01E8CB541875757E003AE018 /* RightSideButtonsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RightSideButtonsView.h; sourceTree = "<group>"; };
 		01E8CB551875757E003AE018 /* RightSideButtonsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightSideButtonsView.m; sourceTree = "<group>"; };
 		01E8CB57187575EB003AE018 /* RightSideButtonsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RightSideButtonsView.xib; sourceTree = "<group>"; };
@@ -1024,6 +1043,9 @@
 				01E8CB541875757E003AE018 /* RightSideButtonsView.h */,
 				01E8CB551875757E003AE018 /* RightSideButtonsView.m */,
 				01E8CB57187575EB003AE018 /* RightSideButtonsView.xib */,
+				01A6786E195778E5002FDE1F /* TabbedViewController.h */,
+				01A6786F195778E5002FDE1F /* TabbedViewController.m */,
+				01A6787219577E1C002FDE1F /* TabbedViewController.xib */,
 			);
 			path = "Core Views";
 			sourceTree = "<group>";
@@ -1276,10 +1298,6 @@
 				01BFDC7118E4B9AB0098F81F /* InvitationCodeDetails.m */,
 				01C4A4AA190E61B300E08031 /* SocialAccount.h */,
 				01C4A4AB190E61B300E08031 /* SocialAccount.m */,
-				7B5AE8AC19509E42004167CF /* NotificationSettings.h */,
-				7B5AE8AD19509E42004167CF /* NotificationSettings.m */,
-				7B0DB02219549B380066EF6D /* Settings.h */,
-				7B0DB02319549B380066EF6D /* Settings.m */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -1389,7 +1407,6 @@
 				01E2576E18E0750C009D3782 /* RankingsTableViewCell.m */,
 				01E2577118E07D9B009D3782 /* RankingsViewController.h */,
 				01E2577218E07D9B009D3782 /* RankingsViewController.m */,
-				01E2577318E07D9B009D3782 /* RankingsViewController.xib */,
 			);
 			path = Groups;
 			sourceTree = "<group>";
@@ -1402,6 +1419,11 @@
 				018DF79D1858F42F004FEDA6 /* AlertCell.h */,
 				018DF79E1858F42F004FEDA6 /* AlertCell.m */,
 				018DF7A41858F496004FEDA6 /* AlertCell.xib */,
+				01A678751957B1D4002FDE1F /* NewActivityViewController.h */,
+				01A678761957B1D4002FDE1F /* NewActivityViewController.m */,
+				01A678791957B4B5002FDE1F /* WinActivityTableViewCell.h */,
+				01A6787A1957B4B5002FDE1F /* WinActivityTableViewCell.m */,
+				01A6787D1957B4C2002FDE1F /* WinActivityTableViewCell.xib */,
 			);
 			path = Alerts;
 			sourceTree = "<group>";
@@ -1614,6 +1636,7 @@
 				013DA8111853002200B507E4 /* SideNavCell.xib in Resources */,
 				013DA8531853002200B507E4 /* PredictionCell.xib in Resources */,
 				013DA82D1853002200B507E4 /* SignUpViewController.xib in Resources */,
+				01A6787419577E1C002FDE1F /* TabbedViewController.xib in Resources */,
 				018DF7A61858F496004FEDA6 /* AlertCell.xib in Resources */,
 				01DBEACC18DA4033000F2E50 /* InvitationTableViewCell.xib in Resources */,
 				01DBEAC218DA3BE2000F2E50 /* InvitationsViewController.xib in Resources */,
@@ -1622,6 +1645,7 @@
 				013DA8071853002200B507E4 /* NewBadgeView.xib in Resources */,
 				01E8CB8318767D5D003AE018 /* UserCell.xib in Resources */,
 				013DA86B1853002200B507E4 /* WebViewController.xib in Resources */,
+				01A6787F1957B4C2002FDE1F /* WinActivityTableViewCell.xib in Resources */,
 				01F82CD718DD3E430000E96B /* CreateGroupViewController.xib in Resources */,
 				013DA8311853002200B507E4 /* WelcomeViewController.xib in Resources */,
 				013DA8751853002200B507E4 /* HelveticaNeue.dfont in Resources */,
@@ -1643,7 +1667,6 @@
 				013DA9131854759200B507E4 /* CreateCommentView.xib in Resources */,
 				013DA87D1853002200B507E4 /* IntroOverlay@2x-568h.png in Resources */,
 				013DA80D1853002200B507E4 /* NavigationViewController.xib in Resources */,
-				01E2577718E07D9B009D3782 /* RankingsViewController.xib in Resources */,
 				013DA8AD1853002200B507E4 /* Localizable.strings in Resources */,
 				01B67BB018DB5D8E00D22D2B /* InvitationSearchView.xib in Resources */,
 				013DA8031853002200B507E4 /* BadgesCollectionViewController.xib in Resources */,
@@ -1676,6 +1699,7 @@
 			files = (
 				01E8CB58187575EB003AE018 /* RightSideButtonsView.xib in Resources */,
 				013DA8241853002200B507E4 /* ForgotPasswordViewController.xib in Resources */,
+				01A6787E1957B4C2002FDE1F /* WinActivityTableViewCell.xib in Resources */,
 				014A9F08185DA04400A96678 /* release_notes.md in Resources */,
 				013DA89E1853002200B507E4 /* Media.xcassets in Resources */,
 				013DA8101853002200B507E4 /* SideNavCell.xib in Resources */,
@@ -1693,7 +1717,6 @@
 				013DA8741853002200B507E4 /* HelveticaNeue.dfont in Resources */,
 				013DA7FA1853002200B507E4 /* AddPredictionViewController.xib in Resources */,
 				01DBEAA918D9F44F000F2E50 /* CreateGroupCell.xib in Resources */,
-				01E2577618E07D9B009D3782 /* RankingsViewController.xib in Resources */,
 				013DA87A1853002200B507E4 /* IntroOverlay.png in Resources */,
 				013DA8481853002200B507E4 /* PredictorHeaderCell.xib in Resources */,
 				01B67BA818DB4BDE00D22D2B /* MemberTableViewCell.xib in Resources */,
@@ -1730,6 +1753,7 @@
 				013DA8AA1853002200B507E4 /* InfoPlist.strings in Resources */,
 				013DA81E1853002200B507E4 /* NoContentCell.xib in Resources */,
 				013DA87E1853002200B507E4 /* IntroOverlay@2x.png in Resources */,
+				01A6787319577E1C002FDE1F /* TabbedViewController.xib in Resources */,
 				013DA8701853002200B507E4 /* Avatars.xcassets in Resources */,
 				013DA8441853002200B507E4 /* PredictorCell.xib in Resources */,
 				013DA8201853002200B507E4 /* DatePickerView.xib in Resources */,
@@ -1815,6 +1839,7 @@
 				013DA7C71853002200B507E4 /* NSDictionary+Utils.m in Sources */,
 				01E8CB751876693B003AE018 /* CategoriesDatasource.m in Sources */,
 				01871E1018D75D6900A2B809 /* Group.m in Sources */,
+				01A6787C1957B4B5002FDE1F /* WinActivityTableViewCell.m in Sources */,
 				013DA906185438E600B507E4 /* CreateCommentView.m in Sources */,
 				01DBEAD418DA4D0B000F2E50 /* Member.m in Sources */,
 				013DA8CE1853004000B507E4 /* LoginResponse.m in Sources */,
@@ -1846,6 +1871,7 @@
 				01F82CD518DD3E430000E96B /* CreateGroupViewController.m in Sources */,
 				013DA7D91853002200B507E4 /* User+Utils.m in Sources */,
 				013DA7D71853002200B507E4 /* Prediction+Utils.m in Sources */,
+				01A678781957B1D4002FDE1F /* NewActivityViewController.m in Sources */,
 				013DA8551853002200B507E4 /* PredictionsViewController.m in Sources */,
 				013DA8091853002200B507E4 /* BaseTableViewController.m in Sources */,
 				01C4A49E190E3D2F00E08031 /* TWSignedRequest.m in Sources */,
@@ -1903,8 +1929,10 @@
 				013DA8231853002200B507E4 /* ForgotPasswordViewController.m in Sources */,
 				013DA8FA185432A200B507E4 /* PagingDatasource.m in Sources */,
 				01C4A4A0190E3D2F00E08031 /* NSData+Base64.m in Sources */,
+				01A67871195778E5002FDE1F /* TabbedViewController.m in Sources */,
 				01DBEAD018DA4194000F2E50 /* InvitationTableViewCell.m in Sources */,
 				013DA86D1853002200B507E4 /* UserProfileHeaderView.m in Sources */,
+				018A66AB1950AC8D00D4C832 /* NotificationSettings.m in Sources */,
 				013DA7D51853002200B507E4 /* Comment+Utils.m in Sources */,
 				013DA8331853002200B507E4 /* PredictionDetailsHeaderCell.m in Sources */,
 				013DA8011853002200B507E4 /* BadgesCollectionViewController.m in Sources */,
@@ -1945,6 +1973,7 @@
 				013DA7C61853002200B507E4 /* NSDictionary+Utils.m in Sources */,
 				01E8CB741876693B003AE018 /* CategoriesDatasource.m in Sources */,
 				01871E0F18D75D6900A2B809 /* Group.m in Sources */,
+				01A6787B1957B4B5002FDE1F /* WinActivityTableViewCell.m in Sources */,
 				013DA905185438E600B507E4 /* CreateCommentView.m in Sources */,
 				01DBEAD318DA4D0B000F2E50 /* Member.m in Sources */,
 				013DA8CD1853004000B507E4 /* LoginResponse.m in Sources */,
@@ -1977,6 +2006,7 @@
 				01F82CD418DD3E430000E96B /* CreateGroupViewController.m in Sources */,
 				013DA7D81853002200B507E4 /* User+Utils.m in Sources */,
 				013DA7D61853002200B507E4 /* Prediction+Utils.m in Sources */,
+				01A678771957B1D4002FDE1F /* NewActivityViewController.m in Sources */,
 				013DA8541853002200B507E4 /* PredictionsViewController.m in Sources */,
 				013DA8081853002200B507E4 /* BaseTableViewController.m in Sources */,
 				01C4A49D190E3D2F00E08031 /* TWSignedRequest.m in Sources */,
@@ -2036,9 +2066,11 @@
 				013DA8221853002200B507E4 /* ForgotPasswordViewController.m in Sources */,
 				013DA8F9185432A200B507E4 /* PagingDatasource.m in Sources */,
 				01C4A49F190E3D2F00E08031 /* NSData+Base64.m in Sources */,
+				01A67870195778E5002FDE1F /* TabbedViewController.m in Sources */,
 				01DBEACF18DA4194000F2E50 /* InvitationTableViewCell.m in Sources */,
 				7B5AE8AE19509E42004167CF /* NotificationSettings.m in Sources */,
 				013DA86C1853002200B507E4 /* UserProfileHeaderView.m in Sources */,
+				018A66AA1950AC8D00D4C832 /* NotificationSettings.m in Sources */,
 				013DA7D41853002200B507E4 /* Comment+Utils.m in Sources */,
 				013DA8321853002200B507E4 /* PredictionDetailsHeaderCell.m in Sources */,
 				013DA8001853002200B507E4 /* BadgesCollectionViewController.m in Sources */,

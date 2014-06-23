@@ -16,6 +16,8 @@
 #import "ActivityItem+Utils.h"
 #import "NSString+Utils.h"
 #import "GroupSettingsViewController.h"
+#import "WinActivityTableViewCell.h"
+#import "UserManager.h"
 
 @implementation ActivityViewController
 
@@ -45,7 +47,7 @@
     if (indexPath.row >= self.pagingDatasource.objects.count)
         return [super tableView:tableView heightForRowAtIndexPath:indexPath];
     
-    return AlertCellHeight;
+    return 140;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -54,15 +56,27 @@
     
     ActivityItem *alert = [self.pagingDatasource.objects objectAtIndex:indexPath.row];
     
-    AlertCell *cell = [AlertCell alertCellForTableView:tableView];
+    if (alert.type == ActivityTypeWon) {
+        WinActivityTableViewCell *cell = [WinActivityTableViewCell cellForTableView:tableView onIndexPath:indexPath delegate:nil];
+        
+        cell.avatarImageView.image = [_imageLoader lazyLoadImage:[UserManager sharedInstance].user.avatar.big onIndexPath:indexPath];
+        
+        cell.titleLabel.attributedText = [alert attributedText];
+        
+        return cell;
+        
+    } else {
     
+        AlertCell *cell = [AlertCell alertCellForTableView:tableView];
+        
 
-    cell.bodyLabel.attributedText = [alert attributedText];
-    
-    cell.iconImageView.image = [self imageForActivityItem:alert];
-    cell.createdAtLabel.text = [alert creationString];
-    
-    return cell;
+        cell.bodyLabel.attributedText = [alert attributedText];
+        
+        cell.iconImageView.image = [self imageForActivityItem:alert];
+        cell.createdAtLabel.text = [alert creationString];
+        
+        return cell;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -130,6 +144,13 @@
             return nil;
             break;
     }
+}
+
+- (void)imageLoader:(ImageLoader *)loader finishedLoadingImage:(UIImage *)image forIndexPath:(NSIndexPath *)indexPath {
+    WinActivityTableViewCell *cell = (WinActivityTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+    if (![cell isKindOfClass:WinActivityTableViewCell.class])
+        return;
+    cell.avatarImageView.image = image;
 }
 
 @end

@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "ActivityExpiredIcon.png"
+      "filename" : "NotificationSettleBtn.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "ActivityExpiredIcon@2x.png"
+      "filename" : "NotificationSettleBtn@2x.png"
     }
   ],
   "info" : {

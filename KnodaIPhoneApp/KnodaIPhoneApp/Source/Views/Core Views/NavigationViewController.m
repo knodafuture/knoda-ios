@@ -17,7 +17,6 @@
 #import "BadgesCollectionViewController.h"
 #import "SideNavCell.h"
 #import "PredictionsViewController.h"
-#import "ActivityViewController.h"
 #import "SideNavBarButtonItem.h"
 #import "AddPredictionViewController.h"
 #import "RightSideButtonsView.h"
@@ -26,8 +25,12 @@
 #import "UserManager.h"
 #import "GroupsViewController.h"
 #import "NavigationScrollView.h"
+<<<<<<< HEAD
 #import "GroupSettingsViewController.h"
 #import "NotificationSettingsViewController.h"
+=======
+#import "NewActivityViewController.h"
+>>>>>>> work
 
 CGFloat const SideNavBezelWidth = 20.0f;
 
@@ -238,7 +241,7 @@ CGFloat const SideNavBezelWidth = 20.0f;
                 viewController = [[HomeViewController alloc] initWithStyle:UITableViewStylePlain];
                 break;
             case MenuAlerts:
-                viewController = [[ActivityViewController alloc] initWithStyle:UITableViewStylePlain];
+                viewController = [[NewActivityViewController alloc] init];
                 break;
             case MenuBadges:
                 viewController = [[BadgesCollectionViewController alloc] initWithNibName:@"BadgesCollectionViewController" bundle:[NSBundle mainBundle]];

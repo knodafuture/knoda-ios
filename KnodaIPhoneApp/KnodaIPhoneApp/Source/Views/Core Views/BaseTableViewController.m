@@ -96,6 +96,9 @@
     
 }
 
+- (UIImage *)imageLoader:(ImageLoader *)loader willCacheImage:(UIImage *)image forIndexPath:(NSIndexPath *)indexPath {
+    return image;
+}
 - (void)handleNewObjectNotification:(NSNotification *)notification {
     
 }

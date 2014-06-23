@@ -7,11 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-@class Group;
-@interface RankingsViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UIView *headerView;
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+#import "TabbedViewController.h"
 
+@class Group;
+@interface RankingsViewController : TabbedViewController;
 - (id)initWithGroup:(Group *)group;
 
 @end

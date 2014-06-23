@@ -82,7 +82,7 @@
 
 - (void)settingsChanged:(NotificationSettings *)notificationSetting inCell:(SettingTableViewCell *)cell {
     
-    NSLog(@"%d", notificationSetting.Id);
+    //NSLog(@"%d", notificationSetting.Id);
     if(notificationSetting.active){
         notificationSetting.active = NO;
     }

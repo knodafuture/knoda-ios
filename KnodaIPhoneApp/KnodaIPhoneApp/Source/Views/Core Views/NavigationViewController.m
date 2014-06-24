@@ -86,6 +86,7 @@ CGFloat const SideNavBezelWidth = 20.0f;
     
     self.rightSideBarButtonsView = [[RightSideButtonsView alloc] init];
     
+    
     [self.rightSideBarButtonsView setSearchTarget:self action:@selector(search)];
     [self.rightSideBarButtonsView setAddPredictionTarget:self action:@selector(presentAddPredictionViewController)];
     
@@ -354,6 +355,7 @@ CGFloat const SideNavBezelWidth = 20.0f;
     [self.rightSideBarButtonsView setSearchButtonHidden:YES];
     [self.visibleViewController pushViewController:vc animated:YES];
 }
+
 
 - (void)searchViewControllerDidFinish:(SearchViewController *)searchViewController {
     [self.rightSideBarButtonsView setSearchButtonHidden:NO];

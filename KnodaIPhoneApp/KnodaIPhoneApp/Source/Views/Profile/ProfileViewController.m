@@ -21,6 +21,8 @@
 #import "TwitterManager.h"
 #import "FacebookManager.h" 
 #import "UIActionSheet+Blocks.h"
+#import "RightSideButtonsView.h"
+#import "NotificationSettingsViewController.h"
 
 static NSString* const kChangeEmailUsernameSegue = @"UsernameEmailSegue";
 static NSString* const kChangePasswordSegue = @"ChangePasswordSegue";
@@ -88,6 +90,13 @@ static const float kAvatarSize = 344.0;
     self.twitterSwitch.tintColor = [UIColor colorFromHex:@"efefef"];
     self.facebookSwitch.tintColor = [UIColor colorFromHex:@"efefef"];
     self.facebookSwitch.onTintColor = [UIColor colorFromHex:@"3B5998"];
+    
+}
+
+- (void)showSettings {
+    NotificationSettingsViewController *vc = [[NotificationSettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -101,6 +110,11 @@ static const float kAvatarSize = 344.0;
     }];
 
     [Flurry logEvent: @"Profile_Screen" withParameters: nil timed: YES];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem rightBarButtonItemWithImage:[UIImage imageNamed:@"SettingsIcon"] target:self action:@selector(showSettings)];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

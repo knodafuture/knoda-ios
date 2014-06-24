@@ -19,5 +19,4 @@
 - (void)setSearchTarget:(id)target action:(SEL)action;
 
 - (void)setSearchButtonHidden:(BOOL)hidden;
-
 @end

@@ -30,6 +30,4 @@
     self.searchButton.hidden = hidden;
     self.searchImageView.hidden = hidden;
 }
-
-
 @end

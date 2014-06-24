@@ -10,6 +10,7 @@
 #import "User.h"
 #import "SocialAccount.h"
 
+
 @implementation User
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
@@ -31,4 +32,5 @@
 + (NSValueTransformer *)socialAccountsJSONTransformer {
     return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:SocialAccount.class];
 }
+
 @end

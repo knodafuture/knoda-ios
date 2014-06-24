@@ -18,7 +18,7 @@ NSString *const HttpForbiddenNotification = @"HttpForbiddenNotification";
 NSString *const DeprecatedAPI = @"DeprecatedAPI";
 NSInteger PageLimit = 50;
 #ifdef TESTFLIGHT
-NSString const *baseURL = @"http://captaincold.knoda/api/";  // Old server=54.213.86.248
+NSString const *baseURL = @"http://captaincold.knoda.com/api/";  // Old server=54.213.86.248
 #else
 NSString const *baseURL = @"http://api.knoda.com/api/";
 #endif
@@ -77,6 +77,26 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
         completionHandler([LoginResponse instanceFromData:responseData], error);
     }];
 }
+
+- (void)getSettingsCompletion:(void (^)(NSArray *, NSError *))completionHandler {
+    NSString *url = [self buildUrl:@"settings.json" parameters:nil];
+    NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+        completionHandler([Settings arrayFromData:responseData], error);
+    }];
+}
+-(void)updateNotificationStatus:(NotificationSettings *)setting completion:(void (^)(NotificationSettings *, NSError *))completionHandler {
+    NSString *path = [NSString stringWithFormat:@"settings/%ld.json", (long)setting.Id];
+    NSString *url = [self buildUrl:path parameters:nil];
+    NSURLRequest *request = [self requestWithUrl:url method:@"PUT" payload:setting];
+    
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+        completionHandler([NotificationSettings instanceFromData:responseData], error);
+    }];
+
+}
+
+
 
 - (void)getCurrentUser:(void (^)(User *, NSError *))completionHandler {
 

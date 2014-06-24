@@ -24,7 +24,7 @@ static UINib *nib;
     
     cell.switchIndicator.onTintColor = [UIColor colorFromHex:@"2BA9E1"];
     cell.switchIndicator.tintColor = [UIColor colorFromHex:@"efefef"];
-    cell.descriptionView.font = [UIFont fontWithName:@"HelveticaNeue" size:10.0];
+    //cell.descriptionView.font = [UIFont fontWithName:@"HelveticaNeue" size:10.0];
     return cell;
 }
 

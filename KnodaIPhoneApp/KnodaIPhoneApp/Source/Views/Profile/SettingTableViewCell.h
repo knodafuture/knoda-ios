@@ -20,7 +20,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *switchIndicator;
 @property (weak, nonatomic) id<SettingsDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UILabel *displayName;
-@property (weak, nonatomic) IBOutlet UITextView *descriptionView;
+@property (weak, nonatomic) IBOutlet UILabel *descriptionView;
 @property (weak, nonatomic) NotificationSettings *notificationSettings;
 @property (assign, nonatomic) BOOL changed;
 - (IBAction)switchChanged:(id)sender;

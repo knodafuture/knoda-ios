@@ -73,9 +73,9 @@
     cell.displayName.text = [setting displayName];
     cell.descriptionView.text = [setting description];
     [cell.descriptionView sizeToFit];
+    
     cell.switchIndicator.on = [setting active];
     cell.switchIndicator.tag = indexPath.row;
-    cell.switchIndicator.selected = false;
     cell.notificationSettings = setting;
     cell.delegate = self;
     return cell;

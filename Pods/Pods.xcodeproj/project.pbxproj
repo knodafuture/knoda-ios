@@ -421,7 +421,7 @@
 		8403406536674A37BA61E2FB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 			};
 			buildConfigurationList = B4764995AE6C4AD195ADF944 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -626,10 +626,6 @@
 			baseConfigurationReference = A766553B06F54335AB901D4A /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					"$(ARCHS_STANDARD)",
-					i386,
-				);
 				COPY_PHASE_STRIP = YES;
 				DSTROOT = /tmp/xcodeproj.dst;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -690,10 +686,6 @@
 			baseConfigurationReference = A766553B06F54335AB901D4A /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					"$(ARCHS_STANDARD)",
-					i386,
-				);
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/xcodeproj.dst;
 				GCC_C_LANGUAGE_STANDARD = gnu99;

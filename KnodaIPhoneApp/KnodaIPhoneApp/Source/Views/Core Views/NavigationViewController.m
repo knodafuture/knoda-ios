@@ -137,8 +137,9 @@ CGFloat const SideNavBezelWidth = 20.0f;
     [[WebApi sharedInstance] getInvitationDetails:inviteId completion:^(InvitationCodeDetails *details, NSError *error) {
         [[LoadingView sharedInstance] hide];
         if (!error) {
+            [self openMenuItem:MenuHome];
             GroupSettingsViewController *vc = [[GroupSettingsViewController alloc] initWithGroup:details.group invitationCode:inviteId];
-            [self.navigationController pushViewController:vc animated:YES];
+            [self.visibleViewController pushViewController:vc animated:YES];
         } else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"An unknown error occured." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
             [alert show];
@@ -152,6 +153,7 @@ CGFloat const SideNavBezelWidth = 20.0f;
         [[LoadingView sharedInstance] hide];
         if (error)
             return;
+        [self openMenuItem:MenuHome];
         PredictionDetailsViewController *vc = [[PredictionDetailsViewController alloc] initWithPrediction:prediction];
         [self.visibleViewController pushViewController:vc animated:YES];
     }];

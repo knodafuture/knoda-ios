@@ -142,7 +142,6 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
     NSString *alertString = [[userInfo objectForKey: @"aps"] objectForKey: @"alert"];
     
     if (application.applicationState == UIApplicationStateActive) {
-    
         if (alertString.length != 0) {
             self.pushInfo = userInfo;
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:alertString delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"") otherButtonTitles:NSLocalizedString(@"Show", @""), nil];

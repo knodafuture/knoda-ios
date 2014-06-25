@@ -27,6 +27,7 @@
 #import "GroupsViewController.h"
 #import "NavigationScrollView.h"
 #import "GroupSettingsViewController.h"
+#import "NotificationSettingsViewController.h"
 
 CGFloat const SideNavBezelWidth = 20.0f;
 
@@ -99,8 +100,7 @@ CGFloat const SideNavBezelWidth = 20.0f;
 	self.scrollView.contentSize = CGSizeMake(self.sideNavView.frame.size.width + self.scrollView.frame.size.width, 0);
 	self.scrollView.contentOffset = CGPointMake(self.sideNavView.frame.size.width, 0);
     
-
-    [self handlePushInfo:self.pushInfo];
+    
 }
 
 - (void)handleOpenUrl:(NSURL *)url {
@@ -122,18 +122,18 @@ CGFloat const SideNavBezelWidth = 20.0f;
 
 - (void)handlePushInfo:(NSDictionary *)pushInfo {
     self.pushInfo = pushInfo;
-    
     if (self.pushInfo) {
-        if (self.pushInfo[@"p"]) {
-            [self showPrediction:[self.pushInfo[@"p"] integerValue]];
-        } else if (self.pushInfo[@"gic"]) {
-            [self showInvite:[self.pushInfo[@"gic"] stringValue]];
+        if ([self.pushInfo[@"type"] isEqualToString:@"p"]) {
+            [self showPrediction:[self.pushInfo[@"id"] integerValue]];
+        } else if ([self.pushInfo[@"type"] isEqualToString:@"gic"]) {
+            [self showInvite:[self.pushInfo[@"id"] stringValue]];
         }
     }
     
 }
 
 - (void)showInvite:(NSString *)inviteId {
+    [[LoadingView sharedInstance] show];
     [[WebApi sharedInstance] getInvitationDetails:inviteId completion:^(InvitationCodeDetails *details, NSError *error) {
         [[LoadingView sharedInstance] hide];
         if (!error) {
@@ -200,6 +200,7 @@ CGFloat const SideNavBezelWidth = 20.0f;
         if (self.launchUrl) {
             [self handleOpenUrl:self.launchUrl];
         }
+        [self handlePushInfo:self.pushInfo];
     }
 }
 
@@ -341,7 +342,7 @@ CGFloat const SideNavBezelWidth = 20.0f;
 
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
     
-    if (![viewController isKindOfClass:SearchViewController.class])
+    if (![viewController isKindOfClass:SearchViewController.class] && ![viewController isKindOfClass:NotificationSettingsViewController.class])
         viewController.navigationItem.rightBarButtonItem = self.rightSideBarButtonItem;
 }
 

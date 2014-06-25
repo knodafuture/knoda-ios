@@ -94,9 +94,8 @@ static const float kAvatarSize = 344.0;
 }
 
 - (void)showSettings {
-    NotificationSettingsViewController *vc = [[NotificationSettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-    [self presentViewController:nav animated:YES completion:nil];
+    NotificationSettingsViewController *vc = [[NotificationSettingsViewController alloc] initWithStyle:UITableViewStylePlain];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

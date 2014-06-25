@@ -6,25 +6,24 @@
 //  Copyright (c) 2014 Knoda. All rights reserved.
 //
 
-#import "SettingTableViewCell.h"
+#import "SettingsTableViewCell.h"
 
 static UINib *nib;
 
-@implementation SettingTableViewCell
+@implementation SettingsTableViewCell
 
 + (void)initialize {
     nib = [UINib nibWithNibName:@"SettingsTableViewCell" bundle:[NSBundle mainBundle]];
 }
 
-+ (SettingTableViewCell *)cellForTableView:(UITableView *)tableView {
-    SettingTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
++ (SettingsTableViewCell *)cellForTableView:(UITableView *)tableView {
+    SettingsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     
     if (!cell)
         cell = [[nib instantiateWithOwner:nil options:nil] firstObject];
     
-    cell.switchIndicator.onTintColor = [UIColor colorFromHex:@"2BA9E1"];
+    cell.switchIndicator.onTintColor = [UIColor colorFromHex:@"235C37"];
     cell.switchIndicator.tintColor = [UIColor colorFromHex:@"efefef"];
-    //cell.descriptionView.font = [UIFont fontWithName:@"HelveticaNeue" size:10.0];
     return cell;
 }
 

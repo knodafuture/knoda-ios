@@ -71,7 +71,7 @@ static UIFont *font = nil;
     [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     [button setImage:image forState:UIControlStateHighlighted];
     [button setImage:image forState:UIControlStateNormal];
-    [button setImageEdgeInsets:UIEdgeInsetsMake(0, image.size.width/2.0 + 3.0, 0, -image.size.width/2.0 - 3.0)];
+    [button setImageEdgeInsets:UIEdgeInsetsMake(0, image.size.width/2.0 + 3.0, 0, 0)];
 	return [[UIBarButtonItem alloc] initWithCustomView:button];
 }
 

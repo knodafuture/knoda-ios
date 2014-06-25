@@ -8,14 +8,14 @@
 
 #import <UIKit/UIKit.h>
 @class NotificationSettings;
-@class SettingTableViewCell;
+@class SettingsTableViewCell;
 @protocol SettingsDelegate <NSObject>
-- (void)settingsChanged:(NotificationSettings *)notificationSetting inCell:(SettingTableViewCell *)cell;
+- (void)settingsChanged:(NotificationSettings *)notificationSetting inCell:(SettingsTableViewCell *)cell;
 @end
 
-@interface SettingTableViewCell : UITableViewCell
+@interface SettingsTableViewCell : UITableViewCell
 
-+ (SettingTableViewCell *)cellForTableView:(UITableView *)tableView;
++ (SettingsTableViewCell *)cellForTableView:(UITableView *)tableView;
 
 @property (weak, nonatomic) IBOutlet UISwitch *switchIndicator;
 @property (weak, nonatomic) id<SettingsDelegate> delegate;

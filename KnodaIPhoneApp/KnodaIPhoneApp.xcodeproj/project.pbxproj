@@ -413,10 +413,10 @@
 		7B0DB0251954AC170066EF6D /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DB02319549B380066EF6D /* Settings.m */; };
 		7B5AE8AE19509E42004167CF /* NotificationSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5AE8AD19509E42004167CF /* NotificationSettings.m */; };
 		7B5AE8AF1950A47A004167CF /* NotificationSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5AE8AD19509E42004167CF /* NotificationSettings.m */; };
-		7B5AE8B71950BA06004167CF /* SettingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5AE8B51950BA06004167CF /* SettingTableViewCell.m */; };
+		7B5AE8B71950BA06004167CF /* SettingsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5AE8B51950BA06004167CF /* SettingsTableViewCell.m */; };
 		7B5AE8B81950BA06004167CF /* SettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B5AE8B61950BA06004167CF /* SettingsTableViewCell.xib */; };
 		7BC9A2641951DF2600483305 /* SettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B5AE8B61950BA06004167CF /* SettingsTableViewCell.xib */; };
-		7BC9A2661951DF9200483305 /* SettingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5AE8B51950BA06004167CF /* SettingTableViewCell.m */; };
+		7BC9A2661951DF9200483305 /* SettingsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5AE8B51950BA06004167CF /* SettingsTableViewCell.m */; };
 		7BC9A2691951EADB00483305 /* NotificationSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC9A2681951EADB00483305 /* NotificationSettingsViewController.m */; };
 		7BC9A26A1951EB8100483305 /* NotificationSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC9A2681951EADB00483305 /* NotificationSettingsViewController.m */; };
 		9E28686F17C659940033FB3C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E28686E17C659930033FB3C /* Security.framework */; };
@@ -771,8 +771,8 @@
 		7B0DB02319549B380066EF6D /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
 		7B5AE8AC19509E42004167CF /* NotificationSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationSettings.h; sourceTree = "<group>"; };
 		7B5AE8AD19509E42004167CF /* NotificationSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationSettings.m; sourceTree = "<group>"; };
-		7B5AE8B41950BA06004167CF /* SettingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingTableViewCell.h; sourceTree = "<group>"; };
-		7B5AE8B51950BA06004167CF /* SettingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingTableViewCell.m; sourceTree = "<group>"; };
+		7B5AE8B41950BA06004167CF /* SettingsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewCell.h; sourceTree = "<group>"; };
+		7B5AE8B51950BA06004167CF /* SettingsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewCell.m; sourceTree = "<group>"; };
 		7B5AE8B61950BA06004167CF /* SettingsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsTableViewCell.xib; sourceTree = "<group>"; };
 		7BC9A2671951EADB00483305 /* NotificationSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationSettingsViewController.h; sourceTree = "<group>"; };
 		7BC9A2681951EADB00483305 /* NotificationSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationSettingsViewController.m; sourceTree = "<group>"; };
@@ -1123,8 +1123,8 @@
 			children = (
 				7BC9A2671951EADB00483305 /* NotificationSettingsViewController.h */,
 				7BC9A2681951EADB00483305 /* NotificationSettingsViewController.m */,
-				7B5AE8B41950BA06004167CF /* SettingTableViewCell.h */,
-				7B5AE8B51950BA06004167CF /* SettingTableViewCell.m */,
+				7B5AE8B41950BA06004167CF /* SettingsTableViewCell.h */,
+				7B5AE8B51950BA06004167CF /* SettingsTableViewCell.m */,
 				7B5AE8B61950BA06004167CF /* SettingsTableViewCell.xib */,
 				013DA77A1853002100B507E4 /* ChangePasswordViewController.h */,
 				013DA77B1853002100B507E4 /* ChangePasswordViewController.m */,
@@ -1810,7 +1810,7 @@
 			files = (
 				7B0DB0251954AC170066EF6D /* Settings.m in Sources */,
 				7BC9A26A1951EB8100483305 /* NotificationSettingsViewController.m in Sources */,
-				7BC9A2661951DF9200483305 /* SettingTableViewCell.m in Sources */,
+				7BC9A2661951DF9200483305 /* SettingsTableViewCell.m in Sources */,
 				7B5AE8AF1950A47A004167CF /* NotificationSettings.m in Sources */,
 				013DA7C71853002200B507E4 /* NSDictionary+Utils.m in Sources */,
 				01E8CB751876693B003AE018 /* CategoriesDatasource.m in Sources */,
@@ -1986,7 +1986,7 @@
 				013DA8F7185432A200B507E4 /* EmptyDatasource.m in Sources */,
 				013DA8601853002200B507E4 /* ProfileViewController.m in Sources */,
 				013DA8401853002200B507E4 /* PredictionDetailsViewController.m in Sources */,
-				7B5AE8B71950BA06004167CF /* SettingTableViewCell.m in Sources */,
+				7B5AE8B71950BA06004167CF /* SettingsTableViewCell.m in Sources */,
 				0159B76919210A1A008B28E7 /* NavigationScrollView.m in Sources */,
 				013DA8261853002200B507E4 /* LoginViewController.m in Sources */,
 				018DF7981858F1FB004FEDA6 /* ActivityItem.m in Sources */,
@@ -2102,7 +2102,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Nick Rellihan (9TAA35K5AK)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/KnodaIPhoneApp/Thirdparty",
@@ -2140,7 +2140,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Knoda, LLC (F489V4H5F6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Knoda, LLC (F489V4H5F6)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/KnodaIPhoneApp/Thirdparty",

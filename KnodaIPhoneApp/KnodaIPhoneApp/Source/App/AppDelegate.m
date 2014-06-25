@@ -58,6 +58,7 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
         if ([launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]) {
             NSDictionary *notification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
             self.pushInfo = notification;
+
         } else if ([launchOptions objectForKey:UIApplicationLaunchOptionsURLKey]) {
             self.launchUrl = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
         }
@@ -137,18 +138,24 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    
     NSString *alertString = [[userInfo objectForKey: @"aps"] objectForKey: @"alert"];
     
-    if (alertString.length != 0) {
-        self.pushInfo = userInfo;
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:alertString delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"") otherButtonTitles:NSLocalizedString(@"Show", @""), nil];
-        [alertView show];
+    if (application.applicationState == UIApplicationStateActive) {
+    
+        if (alertString.length != 0) {
+            self.pushInfo = userInfo;
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:alertString delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"") otherButtonTitles:NSLocalizedString(@"Show", @""), nil];
+            [alertView show];
+        }
+    } else {
+        [self.navigationViewController handlePushInfo:userInfo];
     }
 }
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     if (buttonIndex != alertView.cancelButtonIndex)
-        [self.navigationViewController openMenuItem:MenuAlerts];
+        [self.navigationViewController handlePushInfo:self.pushInfo];
 }
 
 - (void)newBadge:(NSNotification *)notifcation {

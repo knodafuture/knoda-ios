@@ -7,9 +7,10 @@
 //
 
 #import "NotificationSettingsViewController.h"
-#import "SettingTableViewCell.h"
+#import "SettingsTableViewCell.h"
 #import "WebApi.h"
 #import "NotificationSettings.h"
+#import "LoadingView.h"
 
 @interface NotificationSettingsViewController ()
 
@@ -22,8 +23,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTitle:@"Cancel" target:self action:@selector(cancel) color:[UIColor whiteColor]];
-    self.title = @"SETTINGS";
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem backButtonWithTarget:self action:@selector(back)];
+    self.title = @"PUSH NOTIFICATIONS";
     if (self.tableView.contentSize.height < self.tableView.frame.size.height) {
         self.tableView.scrollEnabled = NO;
     }
@@ -31,7 +32,19 @@
         self.tableView.scrollEnabled = YES;
     }
     
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    self.tableView.backgroundColor = [UIColor colorFromHex:@"efefef"];
+    self.tableView.tableFooterView = [[UIView alloc] init];
     [self refresh];
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationItem.rightBarButtonItem = nil;
 }
 
 - (void)refresh {
@@ -44,11 +57,6 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.settings.count;
 }
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return [self.settings[0] name];
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSInteger ret = [self.settings[section] settings].count;
     return ret;
@@ -56,7 +64,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    SettingTableViewCell *cell = [SettingTableViewCell cellForTableView:tableView];
+    SettingsTableViewCell *cell = [SettingsTableViewCell cellForTableView:tableView];
     
     Settings *settings = self.settings[indexPath.section];
     
@@ -64,6 +72,7 @@
     
     cell.displayName.text = [setting displayName];
     cell.descriptionView.text = [setting description];
+    [cell.descriptionView sizeToFit];
     cell.switchIndicator.on = [setting active];
     cell.switchIndicator.tag = indexPath.row;
     cell.switchIndicator.selected = false;
@@ -73,29 +82,27 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0)
-        return 59.0;
-    else {
-        return 59.0;
-    }
+    return 62.0;
 }
 
-- (void)settingsChanged:(NotificationSettings *)notificationSetting inCell:(SettingTableViewCell *)cell {
+- (void)settingsChanged:(NotificationSettings *)notificationSetting inCell:(SettingsTableViewCell *)cell {
     
-    //NSLog(@"%d", notificationSetting.Id);
     if(notificationSetting.active){
         notificationSetting.active = NO;
     }
     else {
         notificationSetting.active = YES;
     }
+    
+    [[LoadingView sharedInstance] show];
         
     [[WebApi sharedInstance]updateNotificationStatus:notificationSetting completion:^(NotificationSettings *set, NSError *err) {
+        [[LoadingView sharedInstance] hide];
     }];
 }
 
-- (void)cancel {
-    [self dismissViewControllerAnimated:YES completion:nil];
+- (void)back {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

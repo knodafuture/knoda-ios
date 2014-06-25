@@ -34,7 +34,7 @@ NSString *NewObjectNotification = @"NewPredictionNotification";
 NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
 
 @interface AppDelegate() <UIAlertViewDelegate>
-@property (assign, nonatomic) BOOL launchedFromPush;
+@property (strong, nonatomic) NSDictionary *pushInfo;
 @property (strong, nonatomic) NavigationViewController *navigationViewController;
 @property (strong, nonatomic) NSURL *launchUrl;
 @end
@@ -57,7 +57,7 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
         // Launched from push notification
         if ([launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]) {
             NSDictionary *notification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-            self.launchedFromPush = notification != nil;
+            self.pushInfo = notification;
         } else if ([launchOptions objectForKey:UIApplicationLaunchOptionsURLKey]) {
             self.launchUrl = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
         }
@@ -139,8 +139,8 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     NSString *alertString = [[userInfo objectForKey: @"aps"] objectForKey: @"alert"];
     
-    if (alertString.length != 0)
-    {
+    if (alertString.length != 0) {
+        self.pushInfo = userInfo;
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:alertString delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"") otherButtonTitles:NSLocalizedString(@"Show", @""), nil];
         [alertView show];
     }
@@ -196,16 +196,7 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
 }
 
 - (void)showHomeScreen:(BOOL)animated {
-    
-    MenuItem startingMenuItem;
-    if (self.launchedFromPush) {
-        startingMenuItem = MenuAlerts;
-        self.launchedFromPush = NO;
-    } else
-        startingMenuItem = MenuHome;
-    
-    
-    self.navigationViewController = [[NavigationViewController alloc] initWithFirstMenuItem:startingMenuItem];
+    self.navigationViewController = [[NavigationViewController alloc] initWithPushInfo:self.pushInfo];
     
     if (self.launchUrl)
         self.navigationViewController.launchUrl = self.launchUrl;

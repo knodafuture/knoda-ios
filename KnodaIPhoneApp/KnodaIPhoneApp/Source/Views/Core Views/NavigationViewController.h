@@ -20,9 +20,10 @@ typedef NS_ENUM(NSInteger, MenuItem) {
 @property (strong, nonatomic) NSURL *launchUrl;
 
 
-- (id)initWithFirstMenuItem:(MenuItem)menuItem;
+- (id)initWithPushInfo:(NSDictionary *)pushInfo;
 - (void)toggleSideNav;
 - (void)openMenuItem:(MenuItem)menuItem;
 - (void)handleOpenUrl:(NSURL *)url;
+- (void)handlePushInfo:(NSDictionary *)pushInfo;
 - (void)hackAnimationFinished;
 @end

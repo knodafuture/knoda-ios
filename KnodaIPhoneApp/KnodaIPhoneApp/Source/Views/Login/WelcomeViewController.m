@@ -39,9 +39,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [Flurry logEvent:@"LANDING"];
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:LoginResponseKey])
+        self.termsLabel.hidden = YES;
+    
+    
     NSDictionary *allAttributes = @{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:10.0]};
     NSDictionary *underlined = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
-    
     
     NSMutableAttributedString *termsString = [[NSMutableAttributedString alloc] initWithString:@"By signing up, I agree to the "];
     
@@ -52,6 +56,8 @@
     [termsString addAttributes:allAttributes range:NSMakeRange(0, termsString.length)];
     
     self.termsLabel.attributedText = termsString;
+    
+    
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];

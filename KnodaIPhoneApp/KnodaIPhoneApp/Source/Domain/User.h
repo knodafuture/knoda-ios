@@ -28,5 +28,5 @@
 @property (assign, nonatomic) BOOL verifiedAccount;
 
 @property (strong, nonatomic) NSArray *socialAccounts;
-@property (assign, nonatomic) NSDate *createdAt;
+@property (strong, nonatomic) NSDate *createdAt;
 @end

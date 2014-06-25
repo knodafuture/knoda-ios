@@ -26,6 +26,7 @@
 #import "UserManager.h"
 #import "GroupsViewController.h"
 #import "NavigationScrollView.h"
+#import "GroupSettingsViewController.h"
 
 CGFloat const SideNavBezelWidth = 20.0f;
 
@@ -55,22 +56,21 @@ CGFloat const SideNavBezelWidth = 20.0f;
 @property (strong, nonatomic) NSTimer *pingTimer;
 @property (strong, nonatomic) UINavigationController *visibleViewController;
 
-@property (assign, nonatomic) MenuItem firstMenuItem;
 @property (readonly, nonatomic) UserManager *userManger;
 
 @property (strong, nonatomic) Group *activeGroup;
 
+@property (strong, nonatomic) NSDictionary *pushInfo;
 @end
 
 @implementation NavigationViewController
 
-
-- (id)initWithFirstMenuItem:(MenuItem)menuItem {
+- (id)initWithPushInfo:(NSDictionary *)pushInfo {
     self = [super initWithNibName:@"NavigationViewController" bundle:[NSBundle mainBundle]];
     self.itemNames = @[@"Home", @"Activity", @"Groups", @"History",  @"Badges", @"Profile"];
     self.masterShown = NO;
     self.vcCache = [[NSMutableDictionary alloc] init];
-    self.firstMenuItem = MenuHome;
+    self.pushInfo = pushInfo;
     _userManger = [UserManager sharedInstance];
     return self;
     
@@ -98,6 +98,9 @@ CGFloat const SideNavBezelWidth = 20.0f;
 	self.scrollView.bezelWidth = SideNavBezelWidth;
 	self.scrollView.contentSize = CGSizeMake(self.sideNavView.frame.size.width + self.scrollView.frame.size.width, 0);
 	self.scrollView.contentOffset = CGPointMake(self.sideNavView.frame.size.width, 0);
+    
+
+    [self handlePushInfo:self.pushInfo];
 }
 
 - (void)handleOpenUrl:(NSURL *)url {
@@ -115,6 +118,32 @@ CGFloat const SideNavBezelWidth = 20.0f;
         NSString *newUrl = [NSString stringWithFormat:@"knoda:/%@", [url.path substringToIndex:[url.path rangeOfString:@"/share"].location]];
         [self handleOpenUrl:[NSURL URLWithString:newUrl]];
     }
+}
+
+- (void)handlePushInfo:(NSDictionary *)pushInfo {
+    self.pushInfo = pushInfo;
+    
+    if (self.pushInfo) {
+        if (self.pushInfo[@"p"]) {
+            [self showPrediction:[self.pushInfo[@"p"] integerValue]];
+        } else if (self.pushInfo[@"gic"]) {
+            [self showInvite:[self.pushInfo[@"gic"] stringValue]];
+        }
+    }
+    
+}
+
+- (void)showInvite:(NSString *)inviteId {
+    [[WebApi sharedInstance] getInvitationDetails:inviteId completion:^(InvitationCodeDetails *details, NSError *error) {
+        [[LoadingView sharedInstance] hide];
+        if (!error) {
+            GroupSettingsViewController *vc = [[GroupSettingsViewController alloc] initWithGroup:details.group invitationCode:inviteId];
+            [self.navigationController pushViewController:vc animated:YES];
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"An unknown error occured." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+            [alert show];
+        }
+    }];
 }
 
 - (void)showPrediction:(NSInteger)predictionId {
@@ -167,7 +196,7 @@ CGFloat const SideNavBezelWidth = 20.0f;
         [self showSelectPictureViewController];
     else {
         self.sideNavView.hidden = NO;
-        [self openMenuItem: self.firstMenuItem];
+        [self openMenuItem:MenuHome];
         if (self.launchUrl) {
             [self handleOpenUrl:self.launchUrl];
         }
@@ -328,7 +357,7 @@ CGFloat const SideNavBezelWidth = 20.0f;
 - (void)hideViewController:(SelectPictureViewController *)vc {
     [[LoadingView sharedInstance] hide];
     [[WebApi sharedInstance] checkNewBadges];
-    [self openMenuItem:self.firstMenuItem];
+    [self openMenuItem:MenuHome];
     self.sideNavView.hidden = NO;
 }
 

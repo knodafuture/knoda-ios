@@ -44,13 +44,12 @@
     UIImage *buttonImage = [UIImage imageNamed:@"SearchClearIcon"];
 
     CGRect frame = button.frame;
-    frame.size = buttonImage.size;
-    frame.origin.x = self.frame.size.width - frame.size.width - 20.0;
+    frame.size = CGSizeMake(buttonImage.size.width * 4, buttonImage.size.height * 4);
+    frame.origin.x = self.frame.size.width - frame.size.width;
     frame.origin.y = self.frame.size.height / 2.0 - frame.size.height / 2.0;
     
     button.frame = frame;
-    
-    [button setBackgroundImage:buttonImage forState:UIControlStateNormal];
+    [button setImage:buttonImage forState:UIControlStateNormal];
     
     [self addSubview:button];
     

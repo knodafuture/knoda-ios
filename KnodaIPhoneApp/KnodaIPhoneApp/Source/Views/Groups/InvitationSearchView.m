@@ -200,7 +200,7 @@
     NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(Contact* evaluatedObject, NSDictionary *bindings) {
         
         NSRange prefixRange = [evaluatedObject.name rangeOfString:query
-                    options:(NSAnchoredSearch | NSCaseInsensitiveSearch)];
+                    options:(NSCaseInsensitiveSearch)];
         if (prefixRange.location != NSNotFound)
             return YES;
         

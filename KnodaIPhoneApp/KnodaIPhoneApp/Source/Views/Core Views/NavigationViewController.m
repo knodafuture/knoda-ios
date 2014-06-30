@@ -137,7 +137,7 @@ CGFloat const SideNavBezelWidth = 20.0f;
     [[WebApi sharedInstance] getInvitationDetails:inviteId completion:^(InvitationCodeDetails *details, NSError *error) {
         [[LoadingView sharedInstance] hide];
         if (!error) {
-            [self openMenuItem:MenuHome];
+            [self openMenuItem:MenuAlerts];
             GroupSettingsViewController *vc = [[GroupSettingsViewController alloc] initWithGroup:details.group invitationCode:inviteId];
             [self.visibleViewController pushViewController:vc animated:YES];
         } else {
@@ -153,7 +153,7 @@ CGFloat const SideNavBezelWidth = 20.0f;
         [[LoadingView sharedInstance] hide];
         if (error)
             return;
-        [self openMenuItem:MenuHome];
+        [self openMenuItem:MenuAlerts];
         PredictionDetailsViewController *vc = [[PredictionDetailsViewController alloc] initWithPrediction:prediction];
         [self.visibleViewController pushViewController:vc animated:YES];
     }];

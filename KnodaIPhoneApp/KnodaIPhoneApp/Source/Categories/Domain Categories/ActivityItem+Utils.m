@@ -24,7 +24,7 @@
     
     if (interval < secondsInMinute)
     {
-        result = [NSString stringWithFormat: NSLocalizedString(@"made %ds ago", @""), (NSInteger)interval];
+        result = [NSString stringWithFormat: NSLocalizedString(@"%ds ago", @""), (NSInteger)interval];
     }
     else if (interval < (secondsInMinute * minutesInHour * hoursInDay))
     {
@@ -36,17 +36,17 @@
         NSString* minutesString = (minutes != 0) ? [NSString stringWithFormat: NSLocalizedString(@"%dm", @""), minutes] : @"";
         NSString* space = (hours != 0 && minutes != 0) ? @" " : @"";
         
-        result = [NSString stringWithFormat: NSLocalizedString(@"made %@%@%@ ago", @""), hoursString, space, minutesString];
+        result = [NSString stringWithFormat: NSLocalizedString(@"%@%@%@ ago", @""), hoursString, space, minutesString];
     }
     else if (interval < (secondsInMinute * minutesInHour * hoursInDay * daysInMonth))
     {
         NSInteger days = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay));
-        result = [NSString stringWithFormat: NSLocalizedString(@"made %dd ago", @""), days];
+        result = [NSString stringWithFormat: NSLocalizedString(@"%dd ago", @""), days];
     }
     else if (interval < (secondsInMinute * minutesInHour * hoursInDay * daysInMonth * monthInYear))
     {
         NSInteger month = ((NSInteger)interval / (secondsInMinute * minutesInHour * hoursInDay * daysInMonth));
-        result = [NSString stringWithFormat: NSLocalizedString(@"made %dmo ago", @""), month];
+        result = [NSString stringWithFormat: NSLocalizedString(@"%dmo ago", @""), month];
     }
     else
     {
@@ -56,39 +56,5 @@
     
     return result;
 }
-
-- (NSString *)stripTag:(NSString *)tag fromString:(NSString *)string {
-    NSString *openP = [string stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"<%@>", tag] withString:@""];
-    return [openP stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"</%@>", tag] withString:@""];
-}
-
-- (NSAttributedString *)attributedText {
-    NSString *stripped = [self stripTag:@"p" fromString:self.text];
-    
-    NSRange openRange = [stripped rangeOfString:@"<b>"];
-    
-    if (openRange.location == NSNotFound)
-        return nil;
-    
-    NSRange endRange = [stripped rangeOfString:@"</b>"];
-    
-    if (endRange.location == NSNotFound)
-        return nil;
-    
-    NSRange boldRange = NSMakeRange(openRange.location, endRange.location - 2);
-    
-    stripped = [self stripTag:@"b" fromString:stripped];
-    
-    NSDictionary *titleAttributes = @{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:13.0]};
-    NSDictionary *bodyAttributes = @{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Light" size:13.0]};
-    
-    NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:stripped attributes:nil];
-    [string setAttributes:bodyAttributes range:NSMakeRange(0, string.length)];
-    [string setAttributes:titleAttributes range:boldRange];
-
-    return string;
-}
-
-
 
 @end

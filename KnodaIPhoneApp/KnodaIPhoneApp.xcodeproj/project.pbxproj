@@ -289,15 +289,9 @@
 		01871E1018D75D6900A2B809 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 01871E0E18D75D6900A2B809 /* Group.m */; };
 		01871E1418D75DF500A2B809 /* GroupsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01871E1318D75DF500A2B809 /* GroupsViewController.m */; };
 		01871E1518D75DF500A2B809 /* GroupsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01871E1318D75DF500A2B809 /* GroupsViewController.m */; };
-		018A66AA1950AC8D00D4C832 /* NotificationSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 018A66A91950AC8D00D4C832 /* NotificationSettings.m */; };
-		018A66AB1950AC8D00D4C832 /* NotificationSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 018A66A91950AC8D00D4C832 /* NotificationSettings.m */; };
 		018DF7981858F1FB004FEDA6 /* ActivityItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 018DF7971858F1FB004FEDA6 /* ActivityItem.m */; };
 		018DF79C1858F41A004FEDA6 /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 018DF79B1858F41A004FEDA6 /* ActivityViewController.m */; };
-		018DF79F1858F42F004FEDA6 /* AlertCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 018DF79E1858F42F004FEDA6 /* AlertCell.m */; };
-		018DF7A21858F481004FEDA6 /* AlertCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 018DF79E1858F42F004FEDA6 /* AlertCell.m */; };
 		018DF7A31858F484004FEDA6 /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 018DF79B1858F41A004FEDA6 /* ActivityViewController.m */; };
-		018DF7A51858F496004FEDA6 /* AlertCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 018DF7A41858F496004FEDA6 /* AlertCell.xib */; };
-		018DF7A61858F496004FEDA6 /* AlertCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 018DF7A41858F496004FEDA6 /* AlertCell.xib */; };
 		018DF7A718590699004FEDA6 /* ActivityItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 018DF7971858F1FB004FEDA6 /* ActivityItem.m */; };
 		01939FFD18CE54330088D168 /* RemoteImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 01939FFC18CE54330088D168 /* RemoteImage.m */; };
 		01939FFE18CE54350088D168 /* RemoteImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 01939FFC18CE54330088D168 /* RemoteImage.m */; };
@@ -320,10 +314,28 @@
 		01A6787419577E1C002FDE1F /* TabbedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A6787219577E1C002FDE1F /* TabbedViewController.xib */; };
 		01A678771957B1D4002FDE1F /* NewActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A678761957B1D4002FDE1F /* NewActivityViewController.m */; };
 		01A678781957B1D4002FDE1F /* NewActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A678761957B1D4002FDE1F /* NewActivityViewController.m */; };
-		01A6787B1957B4B5002FDE1F /* WinActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A6787A1957B4B5002FDE1F /* WinActivityTableViewCell.m */; };
-		01A6787C1957B4B5002FDE1F /* WinActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A6787A1957B4B5002FDE1F /* WinActivityTableViewCell.m */; };
-		01A6787E1957B4C2002FDE1F /* WinActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A6787D1957B4C2002FDE1F /* WinActivityTableViewCell.xib */; };
-		01A6787F1957B4C2002FDE1F /* WinActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A6787D1957B4C2002FDE1F /* WinActivityTableViewCell.xib */; };
+		01A6787B1957B4B5002FDE1F /* ResultActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A6787A1957B4B5002FDE1F /* ResultActivityTableViewCell.m */; };
+		01A6787C1957B4B5002FDE1F /* ResultActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A6787A1957B4B5002FDE1F /* ResultActivityTableViewCell.m */; };
+		01A6787E1957B4C2002FDE1F /* ResultActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A6787D1957B4C2002FDE1F /* ResultActivityTableViewCell.xib */; };
+		01A6787F1957B4C2002FDE1F /* ResultActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A6787D1957B4C2002FDE1F /* ResultActivityTableViewCell.xib */; };
+		01ACCE651961F2E800D3ABE9 /* NotificationSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ACCE621961F2E800D3ABE9 /* NotificationSettings.m */; };
+		01ACCE661961F2E800D3ABE9 /* NotificationSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ACCE621961F2E800D3ABE9 /* NotificationSettings.m */; };
+		01ACCE671961F2E800D3ABE9 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ACCE641961F2E800D3ABE9 /* Settings.m */; };
+		01ACCE681961F2E800D3ABE9 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ACCE641961F2E800D3ABE9 /* Settings.m */; };
+		01ACCE6A196417BE00D3ABE9 /* CommentActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01ACCE69196417BE00D3ABE9 /* CommentActivityTableViewCell.xib */; };
+		01ACCE6B196417BE00D3ABE9 /* CommentActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01ACCE69196417BE00D3ABE9 /* CommentActivityTableViewCell.xib */; };
+		01ACCE6E196417C800D3ABE9 /* CommentActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ACCE6D196417C800D3ABE9 /* CommentActivityTableViewCell.m */; };
+		01ACCE6F196417C800D3ABE9 /* CommentActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ACCE6D196417C800D3ABE9 /* CommentActivityTableViewCell.m */; };
+		01ACCE7219642B7F00D3ABE9 /* SettleActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ACCE7119642B7F00D3ABE9 /* SettleActivityTableViewCell.m */; };
+		01ACCE7319642B7F00D3ABE9 /* SettleActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ACCE7119642B7F00D3ABE9 /* SettleActivityTableViewCell.m */; };
+		01ACCE7819642B9700D3ABE9 /* SettleActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01ACCE7719642B9700D3ABE9 /* SettleActivityTableViewCell.xib */; };
+		01ACCE7919642B9700D3ABE9 /* SettleActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01ACCE7719642B9700D3ABE9 /* SettleActivityTableViewCell.xib */; };
+		01ACCE7B1964306900D3ABE9 /* InviteActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01ACCE7A1964306900D3ABE9 /* InviteActivityTableViewCell.xib */; };
+		01ACCE7C1964306900D3ABE9 /* InviteActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01ACCE7A1964306900D3ABE9 /* InviteActivityTableViewCell.xib */; };
+		01ACCE7F1964307800D3ABE9 /* InviteActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ACCE7E1964307800D3ABE9 /* InviteActivityTableViewCell.m */; };
+		01ACCE801964307800D3ABE9 /* InviteActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ACCE7E1964307800D3ABE9 /* InviteActivityTableViewCell.m */; };
+		01ACCE831964343200D3ABE9 /* BragItemProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ACCE821964343200D3ABE9 /* BragItemProvider.m */; };
+		01ACCE841964343200D3ABE9 /* BragItemProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ACCE821964343200D3ABE9 /* BragItemProvider.m */; };
 		01B67BA818DB4BDE00D22D2B /* MemberTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01B67BA718DB4BDE00D22D2B /* MemberTableViewCell.xib */; };
 		01B67BA918DB4BDE00D22D2B /* MemberTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01B67BA718DB4BDE00D22D2B /* MemberTableViewCell.xib */; };
 		01B67BAC18DB5CA300D22D2B /* InvitationSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B67BAB18DB5CA300D22D2B /* InvitationSearchView.m */; };
@@ -419,10 +431,6 @@
 		01FFE52C187B7432001C9893 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01FFE52B187B7432001C9893 /* StoreKit.framework */; };
 		129025DD2FFF4D9FA85D4A70 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D053512337C4121BADACAB9 /* libPods.a */; };
 		50D776ADE5CA49A68908C526 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D053512337C4121BADACAB9 /* libPods.a */; };
-		7B0DB02419549B380066EF6D /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DB02319549B380066EF6D /* Settings.m */; };
-		7B0DB0251954AC170066EF6D /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0DB02319549B380066EF6D /* Settings.m */; };
-		7B5AE8AE19509E42004167CF /* NotificationSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5AE8AD19509E42004167CF /* NotificationSettings.m */; };
-		7B5AE8AF1950A47A004167CF /* NotificationSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5AE8AD19509E42004167CF /* NotificationSettings.m */; };
 		7B5AE8B71950BA06004167CF /* SettingsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5AE8B51950BA06004167CF /* SettingsTableViewCell.m */; };
 		7B5AE8B81950BA06004167CF /* SettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B5AE8B61950BA06004167CF /* SettingsTableViewCell.xib */; };
 		7BC9A2641951DF2600483305 /* SettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B5AE8B61950BA06004167CF /* SettingsTableViewCell.xib */; };
@@ -677,15 +685,10 @@
 		01871E0E18D75D6900A2B809 /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
 		01871E1218D75DF500A2B809 /* GroupsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupsViewController.h; sourceTree = "<group>"; };
 		01871E1318D75DF500A2B809 /* GroupsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupsViewController.m; sourceTree = "<group>"; };
-		018A66A81950AC8D00D4C832 /* NotificationSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationSettings.h; sourceTree = "<group>"; };
-		018A66A91950AC8D00D4C832 /* NotificationSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationSettings.m; sourceTree = "<group>"; };
 		018DF7961858F1FB004FEDA6 /* ActivityItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityItem.h; sourceTree = "<group>"; };
 		018DF7971858F1FB004FEDA6 /* ActivityItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityItem.m; sourceTree = "<group>"; };
 		018DF79A1858F41A004FEDA6 /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewController.h; sourceTree = "<group>"; };
 		018DF79B1858F41A004FEDA6 /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewController.m; sourceTree = "<group>"; };
-		018DF79D1858F42F004FEDA6 /* AlertCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertCell.h; sourceTree = "<group>"; };
-		018DF79E1858F42F004FEDA6 /* AlertCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertCell.m; sourceTree = "<group>"; };
-		018DF7A41858F496004FEDA6 /* AlertCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertCell.xib; sourceTree = "<group>"; };
 		01939FFB18CE54330088D168 /* RemoteImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteImage.h; sourceTree = "<group>"; };
 		01939FFC18CE54330088D168 /* RemoteImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteImage.m; sourceTree = "<group>"; };
 		01939FFF18CE564D0088D168 /* PredictionPoints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PredictionPoints.h; sourceTree = "<group>"; };
@@ -706,9 +709,24 @@
 		01A6787219577E1C002FDE1F /* TabbedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabbedViewController.xib; sourceTree = "<group>"; };
 		01A678751957B1D4002FDE1F /* NewActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewActivityViewController.h; sourceTree = "<group>"; };
 		01A678761957B1D4002FDE1F /* NewActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewActivityViewController.m; sourceTree = "<group>"; };
-		01A678791957B4B5002FDE1F /* WinActivityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WinActivityTableViewCell.h; sourceTree = "<group>"; };
-		01A6787A1957B4B5002FDE1F /* WinActivityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WinActivityTableViewCell.m; sourceTree = "<group>"; };
-		01A6787D1957B4C2002FDE1F /* WinActivityTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WinActivityTableViewCell.xib; sourceTree = "<group>"; };
+		01A678791957B4B5002FDE1F /* ResultActivityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultActivityTableViewCell.h; sourceTree = "<group>"; };
+		01A6787A1957B4B5002FDE1F /* ResultActivityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultActivityTableViewCell.m; sourceTree = "<group>"; };
+		01A6787D1957B4C2002FDE1F /* ResultActivityTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultActivityTableViewCell.xib; sourceTree = "<group>"; };
+		01ACCE611961F2E800D3ABE9 /* NotificationSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationSettings.h; sourceTree = "<group>"; };
+		01ACCE621961F2E800D3ABE9 /* NotificationSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationSettings.m; sourceTree = "<group>"; };
+		01ACCE631961F2E800D3ABE9 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
+		01ACCE641961F2E800D3ABE9 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
+		01ACCE69196417BE00D3ABE9 /* CommentActivityTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentActivityTableViewCell.xib; sourceTree = "<group>"; };
+		01ACCE6C196417C800D3ABE9 /* CommentActivityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentActivityTableViewCell.h; sourceTree = "<group>"; };
+		01ACCE6D196417C800D3ABE9 /* CommentActivityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentActivityTableViewCell.m; sourceTree = "<group>"; };
+		01ACCE7019642B7F00D3ABE9 /* SettleActivityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettleActivityTableViewCell.h; sourceTree = "<group>"; };
+		01ACCE7119642B7F00D3ABE9 /* SettleActivityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettleActivityTableViewCell.m; sourceTree = "<group>"; };
+		01ACCE7719642B9700D3ABE9 /* SettleActivityTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettleActivityTableViewCell.xib; sourceTree = "<group>"; };
+		01ACCE7A1964306900D3ABE9 /* InviteActivityTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteActivityTableViewCell.xib; sourceTree = "<group>"; };
+		01ACCE7D1964307800D3ABE9 /* InviteActivityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteActivityTableViewCell.h; sourceTree = "<group>"; };
+		01ACCE7E1964307800D3ABE9 /* InviteActivityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteActivityTableViewCell.m; sourceTree = "<group>"; };
+		01ACCE811964343200D3ABE9 /* BragItemProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BragItemProvider.h; sourceTree = "<group>"; };
+		01ACCE821964343200D3ABE9 /* BragItemProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BragItemProvider.m; sourceTree = "<group>"; };
 		01B67BA718DB4BDE00D22D2B /* MemberTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MemberTableViewCell.xib; sourceTree = "<group>"; };
 		01B67BAA18DB5CA300D22D2B /* InvitationSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitationSearchView.h; sourceTree = "<group>"; };
 		01B67BAB18DB5CA300D22D2B /* InvitationSearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitationSearchView.m; sourceTree = "<group>"; };
@@ -786,10 +804,6 @@
 		01F82CDA18DD451D0000E96B /* libFlurry_4.3.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_4.3.2.a; sourceTree = "<group>"; };
 		01FFE52B187B7432001C9893 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		2D053512337C4121BADACAB9 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		7B0DB02219549B380066EF6D /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
-		7B0DB02319549B380066EF6D /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
-		7B5AE8AC19509E42004167CF /* NotificationSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationSettings.h; sourceTree = "<group>"; };
-		7B5AE8AD19509E42004167CF /* NotificationSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationSettings.m; sourceTree = "<group>"; };
 		7B5AE8B41950BA06004167CF /* SettingsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewCell.h; sourceTree = "<group>"; };
 		7B5AE8B51950BA06004167CF /* SettingsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewCell.m; sourceTree = "<group>"; };
 		7B5AE8B61950BA06004167CF /* SettingsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsTableViewCell.xib; sourceTree = "<group>"; };
@@ -1254,6 +1268,10 @@
 		013DA8B01853004000B507E4 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				01ACCE611961F2E800D3ABE9 /* NotificationSettings.h */,
+				01ACCE621961F2E800D3ABE9 /* NotificationSettings.m */,
+				01ACCE631961F2E800D3ABE9 /* Settings.h */,
+				01ACCE641961F2E800D3ABE9 /* Settings.m */,
 				013DA8B11853004000B507E4 /* Badge.h */,
 				013DA8B21853004000B507E4 /* Badge.m */,
 				013DA8B31853004000B507E4 /* Comment.h */,
@@ -1364,6 +1382,8 @@
 			children = (
 				01598B2E18583F82002E2534 /* PredictionItemProvider.h */,
 				01598B2F18583F82002E2534 /* PredictionItemProvider.m */,
+				01ACCE811964343200D3ABE9 /* BragItemProvider.h */,
+				01ACCE821964343200D3ABE9 /* BragItemProvider.m */,
 			);
 			path = Sharing;
 			sourceTree = "<group>";
@@ -1416,14 +1436,20 @@
 			children = (
 				018DF79A1858F41A004FEDA6 /* ActivityViewController.h */,
 				018DF79B1858F41A004FEDA6 /* ActivityViewController.m */,
-				018DF79D1858F42F004FEDA6 /* AlertCell.h */,
-				018DF79E1858F42F004FEDA6 /* AlertCell.m */,
-				018DF7A41858F496004FEDA6 /* AlertCell.xib */,
 				01A678751957B1D4002FDE1F /* NewActivityViewController.h */,
 				01A678761957B1D4002FDE1F /* NewActivityViewController.m */,
-				01A678791957B4B5002FDE1F /* WinActivityTableViewCell.h */,
-				01A6787A1957B4B5002FDE1F /* WinActivityTableViewCell.m */,
-				01A6787D1957B4C2002FDE1F /* WinActivityTableViewCell.xib */,
+				01A678791957B4B5002FDE1F /* ResultActivityTableViewCell.h */,
+				01A6787A1957B4B5002FDE1F /* ResultActivityTableViewCell.m */,
+				01A6787D1957B4C2002FDE1F /* ResultActivityTableViewCell.xib */,
+				01ACCE69196417BE00D3ABE9 /* CommentActivityTableViewCell.xib */,
+				01ACCE6C196417C800D3ABE9 /* CommentActivityTableViewCell.h */,
+				01ACCE6D196417C800D3ABE9 /* CommentActivityTableViewCell.m */,
+				01ACCE7019642B7F00D3ABE9 /* SettleActivityTableViewCell.h */,
+				01ACCE7119642B7F00D3ABE9 /* SettleActivityTableViewCell.m */,
+				01ACCE7719642B9700D3ABE9 /* SettleActivityTableViewCell.xib */,
+				01ACCE7A1964306900D3ABE9 /* InviteActivityTableViewCell.xib */,
+				01ACCE7D1964307800D3ABE9 /* InviteActivityTableViewCell.h */,
+				01ACCE7E1964307800D3ABE9 /* InviteActivityTableViewCell.m */,
 			);
 			path = Alerts;
 			sourceTree = "<group>";
@@ -1631,21 +1657,22 @@
 			files = (
 				7BC9A2641951DF2600483305 /* SettingsTableViewCell.xib in Resources */,
 				013DA8251853002200B507E4 /* ForgotPasswordViewController.xib in Resources */,
+				01ACCE6B196417BE00D3ABE9 /* CommentActivityTableViewCell.xib in Resources */,
 				014A9F09185DA04400A96678 /* release_notes.md in Resources */,
 				013DA89F1853002200B507E4 /* Media.xcassets in Resources */,
 				013DA8111853002200B507E4 /* SideNavCell.xib in Resources */,
 				013DA8531853002200B507E4 /* PredictionCell.xib in Resources */,
 				013DA82D1853002200B507E4 /* SignUpViewController.xib in Resources */,
 				01A6787419577E1C002FDE1F /* TabbedViewController.xib in Resources */,
-				018DF7A61858F496004FEDA6 /* AlertCell.xib in Resources */,
 				01DBEACC18DA4033000F2E50 /* InvitationTableViewCell.xib in Resources */,
 				01DBEAC218DA3BE2000F2E50 /* InvitationsViewController.xib in Resources */,
 				013DA7FF1853002200B507E4 /* BadgesCollectionViewCell.xib in Resources */,
 				013DA8351853002200B507E4 /* PredictionDetailsHeaderCell.xib in Resources */,
 				013DA8071853002200B507E4 /* NewBadgeView.xib in Resources */,
+				01ACCE7C1964306900D3ABE9 /* InviteActivityTableViewCell.xib in Resources */,
 				01E8CB8318767D5D003AE018 /* UserCell.xib in Resources */,
 				013DA86B1853002200B507E4 /* WebViewController.xib in Resources */,
-				01A6787F1957B4C2002FDE1F /* WinActivityTableViewCell.xib in Resources */,
+				01A6787F1957B4C2002FDE1F /* ResultActivityTableViewCell.xib in Resources */,
 				01F82CD718DD3E430000E96B /* CreateGroupViewController.xib in Resources */,
 				013DA8311853002200B507E4 /* WelcomeViewController.xib in Resources */,
 				013DA8751853002200B507E4 /* HelveticaNeue.dfont in Resources */,
@@ -1662,6 +1689,7 @@
 				013DA8791853002200B507E4 /* Default@2x-568h.png in Resources */,
 				013DA85B1853002200B507E4 /* ChangePasswordViewController.xib in Resources */,
 				013DA85F1853002200B507E4 /* ImageCropperViewController.xib in Resources */,
+				01ACCE7919642B9700D3ABE9 /* SettleActivityTableViewCell.xib in Resources */,
 				01598B3C1858E4B3002E2534 /* ZoomingImageViewController.xib in Resources */,
 				013DA8631853002200B507E4 /* ProfileViewController.xib in Resources */,
 				013DA9131854759200B507E4 /* CreateCommentView.xib in Resources */,
@@ -1699,13 +1727,12 @@
 			files = (
 				01E8CB58187575EB003AE018 /* RightSideButtonsView.xib in Resources */,
 				013DA8241853002200B507E4 /* ForgotPasswordViewController.xib in Resources */,
-				01A6787E1957B4C2002FDE1F /* WinActivityTableViewCell.xib in Resources */,
+				01A6787E1957B4C2002FDE1F /* ResultActivityTableViewCell.xib in Resources */,
 				014A9F08185DA04400A96678 /* release_notes.md in Resources */,
 				013DA89E1853002200B507E4 /* Media.xcassets in Resources */,
 				013DA8101853002200B507E4 /* SideNavCell.xib in Resources */,
 				013DA8521853002200B507E4 /* PredictionCell.xib in Resources */,
 				013DA82C1853002200B507E4 /* SignUpViewController.xib in Resources */,
-				018DF7A51858F496004FEDA6 /* AlertCell.xib in Resources */,
 				013DA7FE1853002200B507E4 /* BadgesCollectionViewCell.xib in Resources */,
 				014FDF6B18D7721F006B51D9 /* GroupTableViewCell.xib in Resources */,
 				013DA8341853002200B507E4 /* PredictionDetailsHeaderCell.xib in Resources */,
@@ -1714,6 +1741,7 @@
 				013DA86A1853002200B507E4 /* WebViewController.xib in Resources */,
 				01DBEABA18DA29C6000F2E50 /* GroupSettingsViewController.xib in Resources */,
 				013DA8301853002200B507E4 /* WelcomeViewController.xib in Resources */,
+				01ACCE7819642B9700D3ABE9 /* SettleActivityTableViewCell.xib in Resources */,
 				013DA8741853002200B507E4 /* HelveticaNeue.dfont in Resources */,
 				013DA7FA1853002200B507E4 /* AddPredictionViewController.xib in Resources */,
 				01DBEAA918D9F44F000F2E50 /* CreateGroupCell.xib in Resources */,
@@ -1727,6 +1755,7 @@
 				013DA8781853002200B507E4 /* Default@2x-568h.png in Resources */,
 				01E2576B18E0743A009D3782 /* RankingsTableViewCell.xib in Resources */,
 				013DA85A1853002200B507E4 /* ChangePasswordViewController.xib in Resources */,
+				01ACCE6A196417BE00D3ABE9 /* CommentActivityTableViewCell.xib in Resources */,
 				013DA85E1853002200B507E4 /* ImageCropperViewController.xib in Resources */,
 				01B67BAF18DB5D8E00D22D2B /* InvitationSearchView.xib in Resources */,
 				01598B3B1858E4B3002E2534 /* ZoomingImageViewController.xib in Resources */,
@@ -1756,6 +1785,7 @@
 				01A6787319577E1C002FDE1F /* TabbedViewController.xib in Resources */,
 				013DA8701853002200B507E4 /* Avatars.xcassets in Resources */,
 				013DA8441853002200B507E4 /* PredictorCell.xib in Resources */,
+				01ACCE7B1964306900D3ABE9 /* InviteActivityTableViewCell.xib in Resources */,
 				013DA8201853002200B507E4 /* DatePickerView.xib in Resources */,
 				013DA8661853002200B507E4 /* SelectPictureViewController.xib in Resources */,
 				01F82CD618DD3E430000E96B /* CreateGroupViewController.xib in Resources */,
@@ -1832,14 +1862,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B0DB0251954AC170066EF6D /* Settings.m in Sources */,
 				7BC9A26A1951EB8100483305 /* NotificationSettingsViewController.m in Sources */,
 				7BC9A2661951DF9200483305 /* SettingsTableViewCell.m in Sources */,
-				7B5AE8AF1950A47A004167CF /* NotificationSettings.m in Sources */,
 				013DA7C71853002200B507E4 /* NSDictionary+Utils.m in Sources */,
 				01E8CB751876693B003AE018 /* CategoriesDatasource.m in Sources */,
 				01871E1018D75D6900A2B809 /* Group.m in Sources */,
-				01A6787C1957B4B5002FDE1F /* WinActivityTableViewCell.m in Sources */,
+				01A6787C1957B4B5002FDE1F /* ResultActivityTableViewCell.m in Sources */,
 				013DA906185438E600B507E4 /* CreateCommentView.m in Sources */,
 				01DBEAD418DA4D0B000F2E50 /* Member.m in Sources */,
 				013DA8CE1853004000B507E4 /* LoginResponse.m in Sources */,
@@ -1847,15 +1875,18 @@
 				013DA80B1853002200B507E4 /* NavigationViewController.m in Sources */,
 				0193A01218CF55140088D168 /* DeviceToken.m in Sources */,
 				013DA8A51853002200B507E4 /* BJImageCropper.m in Sources */,
+				01ACCE7319642B7F00D3ABE9 /* SettleActivityTableViewCell.m in Sources */,
 				01E2576918E0741A009D3782 /* RankingsTableViewController.m in Sources */,
 				0193A00618CE6AE90088D168 /* ParamBuilder.m in Sources */,
 				013DA8CA1853004000B507E4 /* Comment.m in Sources */,
+				01ACCE801964307800D3ABE9 /* InviteActivityTableViewCell.m in Sources */,
 				013DA7F51853002200B507E4 /* MultipartRequest.m in Sources */,
 				013DA8051853002200B507E4 /* NewBadgeView.m in Sources */,
 				01C4A4AD190E61B300E08031 /* SocialAccount.m in Sources */,
 				013DA7C91853002200B507E4 /* NSString+Utils.m in Sources */,
 				01C4A4A2190E3D2F00E08031 /* OAuth+Additions.m in Sources */,
 				01B67BAD18DB5CA300D22D2B /* InvitationSearchView.m in Sources */,
+				01ACCE841964343200D3ABE9 /* BragItemProvider.m in Sources */,
 				01939FFE18CE54350088D168 /* RemoteImage.m in Sources */,
 				01DBEAAE18DA036E000F2E50 /* GroupSettingsViewController.m in Sources */,
 				01DBEAC918DA3CBF000F2E50 /* AddressBookHelper.m in Sources */,
@@ -1873,6 +1904,7 @@
 				013DA7D71853002200B507E4 /* Prediction+Utils.m in Sources */,
 				01A678781957B1D4002FDE1F /* NewActivityViewController.m in Sources */,
 				013DA8551853002200B507E4 /* PredictionsViewController.m in Sources */,
+				01ACCE681961F2E800D3ABE9 /* Settings.m in Sources */,
 				013DA8091853002200B507E4 /* BaseTableViewController.m in Sources */,
 				01C4A49E190E3D2F00E08031 /* TWSignedRequest.m in Sources */,
 				013DA7F11853002200B507E4 /* FileCache.m in Sources */,
@@ -1921,8 +1953,8 @@
 				013DA7CB1853002200B507E4 /* UIBarButtonItem+Utils.m in Sources */,
 				013DA8371853002200B507E4 /* CommentCell.m in Sources */,
 				01E8CB8018767D21003AE018 /* UserCell.m in Sources */,
+				01ACCE661961F2E800D3ABE9 /* NotificationSettings.m in Sources */,
 				01598B2C1858365A002E2534 /* FirstStartView.m in Sources */,
-				018DF7A21858F481004FEDA6 /* AlertCell.m in Sources */,
 				013DA8CC1853004000B507E4 /* LoginRequest.m in Sources */,
 				013DA84F1853002200B507E4 /* HistoryViewController.m in Sources */,
 				013DA7CF1853002200B507E4 /* UIImage+Utils.m in Sources */,
@@ -1932,10 +1964,10 @@
 				01A67871195778E5002FDE1F /* TabbedViewController.m in Sources */,
 				01DBEAD018DA4194000F2E50 /* InvitationTableViewCell.m in Sources */,
 				013DA86D1853002200B507E4 /* UserProfileHeaderView.m in Sources */,
-				018A66AB1950AC8D00D4C832 /* NotificationSettings.m in Sources */,
 				013DA7D51853002200B507E4 /* Comment+Utils.m in Sources */,
 				013DA8331853002200B507E4 /* PredictionDetailsHeaderCell.m in Sources */,
 				013DA8011853002200B507E4 /* BadgesCollectionViewController.m in Sources */,
+				01ACCE6F196417C800D3ABE9 /* CommentActivityTableViewCell.m in Sources */,
 				0101F56119139E8700623417 /* UIActionSheet+Blocks.m in Sources */,
 				01598B3518584645002E2534 /* UINavigationBar+AppearanceUtils.m in Sources */,
 				013DA81D1853002200B507E4 /* NoContentCell.m in Sources */,
@@ -1973,7 +2005,7 @@
 				013DA7C61853002200B507E4 /* NSDictionary+Utils.m in Sources */,
 				01E8CB741876693B003AE018 /* CategoriesDatasource.m in Sources */,
 				01871E0F18D75D6900A2B809 /* Group.m in Sources */,
-				01A6787B1957B4B5002FDE1F /* WinActivityTableViewCell.m in Sources */,
+				01A6787B1957B4B5002FDE1F /* ResultActivityTableViewCell.m in Sources */,
 				013DA905185438E600B507E4 /* CreateCommentView.m in Sources */,
 				01DBEAD318DA4D0B000F2E50 /* Member.m in Sources */,
 				013DA8CD1853004000B507E4 /* LoginResponse.m in Sources */,
@@ -1983,15 +2015,18 @@
 				7BC9A2691951EADB00483305 /* NotificationSettingsViewController.m in Sources */,
 				013DA8A41853002200B507E4 /* BJImageCropper.m in Sources */,
 				01E2576818E0741A009D3782 /* RankingsTableViewController.m in Sources */,
+				01ACCE7219642B7F00D3ABE9 /* SettleActivityTableViewCell.m in Sources */,
 				0193A00518CE6AE90088D168 /* ParamBuilder.m in Sources */,
 				013DA8C91853004000B507E4 /* Comment.m in Sources */,
 				013DA7F41853002200B507E4 /* MultipartRequest.m in Sources */,
+				01ACCE7F1964307800D3ABE9 /* InviteActivityTableViewCell.m in Sources */,
 				013DA8041853002200B507E4 /* NewBadgeView.m in Sources */,
 				01C4A4AC190E61B300E08031 /* SocialAccount.m in Sources */,
 				013DA7C81853002200B507E4 /* NSString+Utils.m in Sources */,
 				01C4A4A1190E3D2F00E08031 /* OAuth+Additions.m in Sources */,
 				01B67BAC18DB5CA300D22D2B /* InvitationSearchView.m in Sources */,
 				01939FFD18CE54330088D168 /* RemoteImage.m in Sources */,
+				01ACCE831964343200D3ABE9 /* BragItemProvider.m in Sources */,
 				01DBEAAD18DA036E000F2E50 /* GroupSettingsViewController.m in Sources */,
 				01DBEAC818DA3CBF000F2E50 /* AddressBookHelper.m in Sources */,
 				013DA7D01853002200B507E4 /* UILabel+Utils.m in Sources */,
@@ -2011,6 +2046,7 @@
 				013DA8081853002200B507E4 /* BaseTableViewController.m in Sources */,
 				01C4A49D190E3D2F00E08031 /* TWSignedRequest.m in Sources */,
 				013DA7F01853002200B507E4 /* FileCache.m in Sources */,
+				01ACCE671961F2E800D3ABE9 /* Settings.m in Sources */,
 				013DA8141853002200B507E4 /* LoadingCell.m in Sources */,
 				013DA84A1853002200B507E4 /* CategoryPredictionsViewController.m in Sources */,
 				013DA8F7185432A200B507E4 /* EmptyDatasource.m in Sources */,
@@ -2029,12 +2065,10 @@
 				01E2577418E07D9B009D3782 /* RankingsViewController.m in Sources */,
 				013DA8D31853004000B507E4 /* User.m in Sources */,
 				01D7340B19126B230070481E /* TwitterManager.m in Sources */,
-				018DF79F1858F42F004FEDA6 /* AlertCell.m in Sources */,
 				013DA9091854417D00B507E4 /* DetailsTableViewController.m in Sources */,
 				01B67BB318DB630300D22D2B /* Invitation.m in Sources */,
 				013DA7C41853002200B507E4 /* NSDate+Utils.m in Sources */,
 				01E8CB62187648D1003AE018 /* SearchBar.m in Sources */,
-				7B0DB02419549B380066EF6D /* Settings.m in Sources */,
 				01E2576F18E0750C009D3782 /* RankingsTableViewCell.m in Sources */,
 				01E8CB5E1876480F003AE018 /* SearchViewController.m in Sources */,
 				013DA8DB1853004000B507E4 /* WebObject.m in Sources */,
@@ -2059,6 +2093,7 @@
 				013DA7CA1853002200B507E4 /* UIBarButtonItem+Utils.m in Sources */,
 				01E8CB7F18767D21003AE018 /* UserCell.m in Sources */,
 				013DA8361853002200B507E4 /* CommentCell.m in Sources */,
+				01ACCE651961F2E800D3ABE9 /* NotificationSettings.m in Sources */,
 				01598B2B1858365A002E2534 /* FirstStartView.m in Sources */,
 				013DA8CB1853004000B507E4 /* LoginRequest.m in Sources */,
 				013DA84E1853002200B507E4 /* HistoryViewController.m in Sources */,
@@ -2068,12 +2103,11 @@
 				01C4A49F190E3D2F00E08031 /* NSData+Base64.m in Sources */,
 				01A67870195778E5002FDE1F /* TabbedViewController.m in Sources */,
 				01DBEACF18DA4194000F2E50 /* InvitationTableViewCell.m in Sources */,
-				7B5AE8AE19509E42004167CF /* NotificationSettings.m in Sources */,
 				013DA86C1853002200B507E4 /* UserProfileHeaderView.m in Sources */,
-				018A66AA1950AC8D00D4C832 /* NotificationSettings.m in Sources */,
 				013DA7D41853002200B507E4 /* Comment+Utils.m in Sources */,
 				013DA8321853002200B507E4 /* PredictionDetailsHeaderCell.m in Sources */,
 				013DA8001853002200B507E4 /* BadgesCollectionViewController.m in Sources */,
+				01ACCE6E196417C800D3ABE9 /* CommentActivityTableViewCell.m in Sources */,
 				0101F56019139E8700623417 /* UIActionSheet+Blocks.m in Sources */,
 				01598B3418584645002E2534 /* UINavigationBar+AppearanceUtils.m in Sources */,
 				013DA81C1853002200B507E4 /* NoContentCell.m in Sources */,
@@ -2138,7 +2172,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/KnodaIPhoneApp/Thirdparty",
 				);
-				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KnodaIPhoneApp/KnodaIPhoneApp-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (

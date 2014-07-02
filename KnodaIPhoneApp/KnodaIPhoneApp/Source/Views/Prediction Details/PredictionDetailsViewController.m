@@ -194,7 +194,7 @@ static const int kBSAlertTag = 1001;
 - (void)shareWithSocialAccount:(SocialAccount *)account {
     [[LoadingView sharedInstance] show];
     if ([account.providerName isEqualToString:@"twitter"])
-        [[WebApi sharedInstance] postPredictionToTwitter:self.prediction completion:^(NSError *error){
+        [[WebApi sharedInstance] postPredictionToTwitter:self.prediction brag:NO completion:^(NSError *error){
             [[LoadingView sharedInstance] hide];
             if (error) {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"An unknown error occured." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
@@ -202,7 +202,7 @@ static const int kBSAlertTag = 1001;
             }
         }];
     else if ([account.providerName isEqualToString:@"facebook"])
-        [[FacebookManager sharedInstance] share:self.prediction completion:^(NSError *error){
+        [[FacebookManager sharedInstance] share:self.prediction brag:NO completion:^(NSError *error){
             [[LoadingView sharedInstance] hide];
             if (error) {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"An unknown error occured." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];

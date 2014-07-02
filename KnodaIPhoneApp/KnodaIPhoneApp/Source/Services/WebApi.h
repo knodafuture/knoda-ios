@@ -70,8 +70,8 @@ extern NSInteger PageLimit;
 - (void)addSocialAccount:(SocialAccount *)account completion:(void(^)(SocialAccount *account, NSError *error))completionHandler;
 - (void)deleteSocialAccount:(SocialAccount *)account completion:(void(^)(NSError *error))completionHandler;
 - (void)updateSocialAccount:(SocialAccount *)socialAccount completion:(void(^)(SocialAccount *account, NSError *error))completionHandler;
-- (void)postPredictionToFacebook:(Prediction *)prediction completion:(void(^)(NSError *error))completionHandler;
-- (void)postPredictionToTwitter:(Prediction *)prediction completion:(void(^)(NSError *error))completionHandler;
+- (void)postPredictionToFacebook:(Prediction *)prediction brag:(BOOL)brag completion:(void(^)(NSError *error))completionHandler;
+- (void)postPredictionToTwitter:(Prediction *)prediction brag:(BOOL)brag completion:(void(^)(NSError *error))completionHandler;
 
 // -- Predictions -- //
 
@@ -110,6 +110,7 @@ extern NSInteger PageLimit;
 
 // -- Activity -- //
 - (void)getActivityAfter:(NSInteger)lastId completion:(void(^)(NSArray *activityItems, NSError *error))completionHandler;
+- (void)getActivityAfter:(NSInteger)lastId filter:(NSString *)filter completion:(void(^)(NSArray *activityItems, NSError *error))completionHandler;
 - (void)getUnseenActivity:(void(^)(NSArray *activityItems, NSError *error))completionHandler;
 
 

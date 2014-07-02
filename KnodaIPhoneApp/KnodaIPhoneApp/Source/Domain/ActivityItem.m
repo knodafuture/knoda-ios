@@ -14,7 +14,10 @@
     return @{
              @"activityItemId": @"id",
              @"creationDate": @"created_at",
-             @"type" : @"activity_type"
+             @"type" : @"activity_type",
+             @"title" : @"title",
+             @"body" : @"body",
+             @"imageUrl" : @"image_url"
              };
 }
 

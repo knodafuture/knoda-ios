@@ -9,12 +9,7 @@
 
 #import "User.h"
 #import "SocialAccount.h"
-<<<<<<< HEAD
-
-
-=======
 #import "NotificationSettings.h"
->>>>>>> work
 @implementation User
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
@@ -37,12 +32,7 @@
 + (NSValueTransformer *)socialAccountsJSONTransformer {
     return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:SocialAccount.class];
 }
-
-<<<<<<< HEAD
-=======
 + (NSValueTransformer *)notificationSettingsJSONTransformer {
-    NSLog(@"notification SETTINGS");
     return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:NotificationSettings.class];
 }
->>>>>>> work
 @end

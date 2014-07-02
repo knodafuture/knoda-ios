@@ -20,6 +20,9 @@
 
 @property (strong, nonatomic) NSArray *categories;
 
+@property (strong, nonatomic) NSString *creationString;
+@property (strong, nonatomic) NSString *expirationString;
+
 @property (strong, nonatomic) NSDate *creationDate;
 @property (strong, nonatomic) NSDate *expirationDate;
 @property (strong, nonatomic) NSDate *resolutionDate;

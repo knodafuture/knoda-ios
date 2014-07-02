@@ -24,4 +24,8 @@ typedef NS_ENUM(NSInteger, ActivityItemType) {
 @property (strong, nonatomic) NSDate *creationDate;
 @property (strong, nonatomic) NSString *text;
 
+@property (strong, nonatomic) NSString *title;
+@property (strong, nonatomic) NSString *body;
+@property (strong, nonatomic) NSString *imageUrl;
+
 @end

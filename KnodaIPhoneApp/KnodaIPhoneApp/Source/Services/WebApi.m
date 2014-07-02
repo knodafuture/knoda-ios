@@ -61,7 +61,7 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
 - (id)init {
     self = [super init];
     self.fileCache = [[FileCache alloc] init];
-    self.headers = @{@"Accept": @"application/json; api_version=3;", @"Content-Type" : @"application/json; charset=utf-8;"};
+    self.headers = @{@"Accept": @"application/json; api_version=4;", @"Content-Type" : @"application/json; charset=utf-8;"};
     return self;
 }
 
@@ -161,8 +161,8 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
     }];
 }
 
-- (void)postPredictionToFacebook:(Prediction *)prediction completion:(void (^)(NSError *))completionHandler {
-    NSDictionary *params = @{@"prediction_id": @(prediction.predictionId)};
+- (void)postPredictionToFacebook:(Prediction *)prediction brag:(BOOL)brag completion:(void (^)(NSError *))completionHandler {
+    NSDictionary *params = @{@"prediction_id": @(prediction.predictionId), @"type" : brag ? @"brag" : @""};
     NSString *url = [self buildUrl:@"facebook.json" parameters:params];
     NSURLRequest *request = [self requestWithUrl:url method:@"POST" payload:nil];
 
@@ -171,8 +171,8 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
     }];
 }
 
-- (void)postPredictionToTwitter:(Prediction *)prediction completion:(void (^)(NSError *))completionHandler  {
-    NSDictionary *params = @{@"prediction_id": @(prediction.predictionId)};
+- (void)postPredictionToTwitter:(Prediction *)prediction brag:(BOOL)brag completion:(void (^)(NSError *))completionHandler  {
+    NSDictionary *params = @{@"prediction_id": @(prediction.predictionId), @"type" : brag ? @"brag" : @""};
     NSString *url = [self buildUrl:@"twitter.json" parameters:params];
     NSURLRequest *request = [self requestWithUrl:url method:@"POST" payload:nil];
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
@@ -512,16 +512,23 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
     }];
 }
 - (void)getActivityAfter:(NSInteger)lastId completion:(void (^)(NSArray *, NSError *))completionHandler {
-    NSDictionary *parameters = @{@"limit": @(PageLimit)};
 
-    parameters = [self parametersDictionary:parameters withLastId:lastId];
+
+}
+
+- (void)getActivityAfter:(NSInteger)lastId filter:(NSString *)filter completion:(void (^)(NSArray *, NSError *))completionHandler {
+    NSMutableDictionary *parameters = [@{@"limit": @(PageLimit)} mutableCopy];
+    
+    if (filter)
+        parameters[@"filter"] = filter;
+    
+    parameters = [[self parametersDictionary:[NSDictionary dictionaryWithDictionary:parameters] withLastId:lastId] mutableCopy];
     NSString *url = [self buildUrl:@"activityfeed.json" parameters:parameters];
     NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
-
+    
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler([ActivityItem arrayFromData:responseData], error);
     }];
-
 }
 
 - (void)searchForPredictions:(NSString *)searchText completion:(void (^)(NSArray *, NSError *))completionHandler {

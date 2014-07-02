@@ -37,6 +37,7 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
 @property (strong, nonatomic) NSDictionary *pushInfo;
 @property (strong, nonatomic) NavigationViewController *navigationViewController;
 @property (strong, nonatomic) NSURL *launchUrl;
+@property (assign, nonatomic) BOOL notificationAlertShown;
 @end
 
 @implementation AppDelegate
@@ -141,8 +142,9 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
     
     NSString *alertString = [[userInfo objectForKey: @"aps"] objectForKey: @"alert"];
     
-    if (application.applicationState == UIApplicationStateActive) {
+    if (application.applicationState == UIApplicationStateActive && !self.notificationAlertShown) {
         if (alertString.length != 0) {
+            self.notificationAlertShown = YES;
             self.pushInfo = userInfo;
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:alertString delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"") otherButtonTitles:NSLocalizedString(@"Show", @""), nil];
             [alertView show];
@@ -153,6 +155,7 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
 }
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    self.notificationAlertShown = NO;
     if (buttonIndex != alertView.cancelButtonIndex)
         [self.navigationViewController handlePushInfo:self.pushInfo];
 }

@@ -28,10 +28,6 @@
 @property (assign, nonatomic) BOOL verifiedAccount;
 
 @property (strong, nonatomic) NSArray *socialAccounts;
-<<<<<<< HEAD
 @property (strong, nonatomic) NSDate *createdAt;
-=======
 @property (strong, nonatomic) NSArray *notificationSettings;
-@property (assign, nonatomic) NSDate *createdAt;
->>>>>>> work
 @end

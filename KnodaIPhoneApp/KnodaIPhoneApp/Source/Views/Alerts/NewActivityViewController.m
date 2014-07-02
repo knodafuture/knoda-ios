@@ -21,10 +21,10 @@
     self.title = @"ACTIVITY";
     
     
-    ActivityViewController *allActivityItems = [[ActivityViewController alloc] initWithStyle:UITableViewStylePlain];
-    ActivityViewController *expiredItems = [[ActivityViewController alloc] initWithStyle:UITableViewStylePlain];
-    ActivityViewController *commentItems = [[ActivityViewController alloc] initWithStyle:UITableViewStylePlain];
-    ActivityViewController *inviteItems = [[ActivityViewController alloc] initWithStyle:UITableViewStylePlain];
+    ActivityViewController *allActivityItems = [[ActivityViewController alloc] initWithFilter:nil];
+    ActivityViewController *expiredItems = [[ActivityViewController alloc] initWithFilter:@"expired"];
+    ActivityViewController *commentItems = [[ActivityViewController alloc] initWithFilter:@"comments"];
+    ActivityViewController *inviteItems = [[ActivityViewController alloc] initWithFilter:@"invites"];
     
     
     [self addViewController:allActivityItems title:@"All"];

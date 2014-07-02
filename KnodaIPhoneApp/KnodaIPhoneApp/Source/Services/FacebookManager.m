@@ -56,9 +56,9 @@ static FacebookManager *sharedSingleton;
     }];
 }
 
-- (void)share:(Prediction *)prediction completion:(void (^)(NSError *))completion {
+- (void)share:(Prediction *)prediction brag:(BOOL)brag completion:(void (^)(NSError *))completion {
     [self reauthorizeWithPublishIfNecessary:FBSession.activeSession completion:^{
-        [[WebApi sharedInstance] postPredictionToFacebook:prediction completion:completion];
+        [[WebApi sharedInstance] postPredictionToFacebook:prediction brag:brag completion:completion];
     }];
 }
 

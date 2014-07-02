@@ -10,4 +10,6 @@
 
 @interface ActivityViewController : BaseTableViewController
 
+- (id)initWithFilter:(NSString *)filter;
+
 @end

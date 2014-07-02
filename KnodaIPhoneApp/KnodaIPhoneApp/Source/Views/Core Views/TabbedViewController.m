@@ -54,9 +54,10 @@
 
 - (UILabel *)headerLabel {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.headerView.frame.size.width * .25, self.headerView.frame.size.height)];
-    label.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:11.0];
+    label.font = [UIFont fontWithName:@"HelveticaNeue" size:14.0];
     label.textColor = [UIColor whiteColor];
     label.userInteractionEnabled = YES;
+    label.backgroundColor = [UIColor clearColor];
     label.textAlignment = NSTextAlignmentCenter;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelTapped:)];
     [label addGestureRecognizer:tap];
@@ -101,7 +102,6 @@
     for (int i =0; i < self.viewControllers.count; i++) {
         UIViewController *vc = [self.viewControllers objectAtIndex:i];
         
-        [vc willMoveToParentViewController:self];
         
         CGRect frame = vc.view.frame;
         frame.origin.y = 0;
@@ -111,7 +111,6 @@
         vc.view.frame = frame;
         
         [self addChildViewController:vc];
-        [vc didMoveToParentViewController:self];
     }
     
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * self.viewControllers.count, self.scrollView.frame.size.height);
@@ -120,19 +119,33 @@
     if (self.buttons.count == 0)
         return;
     
+    CGFloat totalTextWidth;
+    
+    for (UILabel *button in self.buttons) {
+        [button sizeToFit];
+        totalTextWidth = totalTextWidth + button.frame.size.width;
+    }
+    
+    CGFloat width = self.view.frame.size.width - 40.0;
+    CGFloat diff = width - totalTextWidth;
+    diff = diff / 3;
+    
     CGRect frame = self.headerView.frame;
     
-    frame.size.width = [self.buttons[0] frame].size.width * self.buttons.count;
+    frame.size.width = width;
     frame.origin.x = (self.headerView.frame.size.width / 2.0) - (frame.size.width / 2.0);
     
     self.buttonsContainer = [[UIView alloc] initWithFrame:frame];
+    
+    CGFloat currentOffset = 0;
     
     for (int i = 0; i < self.buttons.count; i++) {
         UILabel *button = self.buttons[i];
         
         frame = button.frame;
+        frame.origin.x = currentOffset;
         
-        frame.origin.x = i * frame.size.width;
+        currentOffset = currentOffset + frame.size.width + diff;
         
         [self.buttonsContainer addSubview:button];
         button.frame = frame;

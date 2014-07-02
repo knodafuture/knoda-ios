@@ -15,7 +15,7 @@
 - (void)handleAppLaunch;
 
 - (void)openSession:(void(^)(NSDictionary *data, NSError *error))completionHandler;
-- (void)share:(Prediction *)prediction completion:(void(^)(NSError *error))completion;
+- (void)share:(Prediction *)prediction brag:(BOOL)brag completion:(void(^)(NSError *error))completion;
 - (NSString *)accessTokenForCurrentSession;
 
 @end

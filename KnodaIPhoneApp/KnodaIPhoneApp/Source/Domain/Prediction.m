@@ -33,7 +33,9 @@
              @"verifiedAccount" : @"verified_account",
              @"outcome" : @"outcome",
              @"groupId" : @"group_id",
-             @"groupName" : @"group_name"
+             @"groupName" : @"group_name",
+             @"expirationString" : @"expired_text",
+             @"creationString" : @"predicted_text"
              };
 }
 + (NSValueTransformer *)groupIdJSONTransformer {

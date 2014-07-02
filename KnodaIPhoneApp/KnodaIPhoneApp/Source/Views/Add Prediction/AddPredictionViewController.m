@@ -288,9 +288,9 @@ static NSDateFormatter *dateFormatter;
         [[LoadingView sharedInstance] hide];
         if (!error) {
             if (self.shouldShareToTwitter)
-                [[WebApi sharedInstance] postPredictionToTwitter:prediction completion:^(NSError *error){}];
+                [[WebApi sharedInstance] postPredictionToTwitter:prediction brag:NO completion:^(NSError *error){}];
             if (self.shouldShareToFacebook)
-                [[FacebookManager sharedInstance] share:prediction completion:^(NSError *error){}];
+                [[FacebookManager sharedInstance] share:prediction brag:NO completion:^(NSError *error){}];
             [self.delegate addPredictionViewController:self didCreatePrediction:prediction];
         } else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message:@"Unable to create prediction at this time" delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil];

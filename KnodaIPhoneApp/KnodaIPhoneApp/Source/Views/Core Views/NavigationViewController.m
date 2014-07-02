@@ -25,12 +25,9 @@
 #import "UserManager.h"
 #import "GroupsViewController.h"
 #import "NavigationScrollView.h"
-<<<<<<< HEAD
 #import "GroupSettingsViewController.h"
 #import "NotificationSettingsViewController.h"
-=======
 #import "NewActivityViewController.h"
->>>>>>> work
 
 CGFloat const SideNavBezelWidth = 20.0f;
 

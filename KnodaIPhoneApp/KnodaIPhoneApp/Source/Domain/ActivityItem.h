@@ -27,5 +27,6 @@ typedef NS_ENUM(NSInteger, ActivityItemType) {
 @property (strong, nonatomic) NSString *title;
 @property (strong, nonatomic) NSString *body;
 @property (strong, nonatomic) NSString *imageUrl;
+@property (assign, nonatomic) BOOL shareable;
 
 @end

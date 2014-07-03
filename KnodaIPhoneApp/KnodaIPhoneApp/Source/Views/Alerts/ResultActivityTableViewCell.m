@@ -62,7 +62,7 @@ static ResultActivityTableViewCell *defaultCell;
     
     height = padding + titleSize.height + padding + bodySize.height + padding;
     
-    if (activityItem.type == ActivityTypeWon)
+    if (activityItem.type == ActivityTypeWon && activityItem.shareable)
         height = height + buttonHeight + padding;
     
     cellHeightCache[@(activityItem.activityItemId)] = @(height);
@@ -103,8 +103,8 @@ static ResultActivityTableViewCell *defaultCell;
     size = [self.bodyLabel.text sizeWithFont:self.bodyLabel.font
                                   constrainedToSize:CGSizeMake(self.bodyLabel.frame.size.width, MAXFLOAT)
                                       lineBreakMode:NSLineBreakByWordWrapping];
-    
-    self.bragButton.hidden = activityItem.type != ActivityTypeWon;
+
+    self.bragButton.hidden = ((activityItem.type != ActivityTypeWon) || (!activityItem.shareable));
     
     frame = self.bodyLabel.frame;
     CGFloat padding = self.titleLabel.frame.origin.y;
@@ -114,7 +114,7 @@ static ResultActivityTableViewCell *defaultCell;
     
     self.bodyLabel.frame = frame;
     
-    if (activityItem.type != ActivityTypeWon)
+    if ((activityItem.type != ActivityTypeWon))
         return;
     
     frame = self.bragButton.frame;

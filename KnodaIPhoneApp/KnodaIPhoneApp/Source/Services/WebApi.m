@@ -779,7 +779,7 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
 }
 
 - (void)executeRequest:(NSURLRequest *)request completion:(void (^)(NSData *, NSError *))completionHandler {
-    NSLog(@"Executing request url: %@", request.URL.absoluteString);
+    //NSLog(@"Executing request url: %@", request.URL.absoluteString);
     //NSLog(@"Body: %@", [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         [self handleResponse:response withData:data error:connectionError completion:completionHandler];
@@ -844,7 +844,7 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
     else if (httpResponse == nil) {
         NSLog(@"no connection");
         [[NSNotificationCenter defaultCenter] postNotificationName:NoConnection object:nil];
-        return;
+        //return;
         
     }
 	else

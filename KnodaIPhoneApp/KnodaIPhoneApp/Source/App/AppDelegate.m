@@ -242,6 +242,9 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
     {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://itunes.apple.com/us/app/knoda/id764642995?mt=8"]];
     }
+    if ([title isEqualToString:@"Retry"]) {
+        [self showWelcomeScreenAnimated:YES];
+    }
 }
 
 - (void)deprecatedApi {
@@ -258,10 +261,11 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
 }
 
 - (void)noConnection {
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You are not connected." message:@"You are offline, you must be connected to the internet to enjoy Knoda." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-    [alert show];
     [[LoadingView sharedInstance] reset];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You are not connected." message:@"You are offline, you must be connected to the internet to enjoy Knoda." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Retry",nil];
+    [alert show];
+    
+
 }
 
 

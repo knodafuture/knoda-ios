@@ -43,6 +43,7 @@ typedef NS_ENUM(NSInteger, HttpStatus) {
 
 extern NSString *const HttpForbiddenNotification;
 extern NSString *const DeprecatedAPI;
+extern NSString *const NoConnection;
 extern NSInteger PageLimit;
 
 @interface WebApi : NSObject

@@ -16,6 +16,7 @@ static WebApi *sharedSingleton;
 
 NSString *const HttpForbiddenNotification = @"HttpForbiddenNotification";
 NSString *const DeprecatedAPI = @"DeprecatedAPI";
+NSString *const NoConnection = @"NoConnection";
 NSInteger PageLimit = 50;
 #ifdef TESTFLIGHT
 NSString const *baseURL = @"http://captaincold.knoda.com/api/";  // Old server=54.213.86.248
@@ -840,6 +841,12 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
 
         completionHandler(nil, [NSError errorWithDomain:@"" code:[httpResponse statusCode] userInfo:userInfo]);
 	}
+    else if (httpResponse == nil) {
+        NSLog(@"no connection");
+        [[NSNotificationCenter defaultCenter] postNotificationName:NoConnection object:nil];
+        return;
+        
+    }
 	else
 		completionHandler(data, error);
 }

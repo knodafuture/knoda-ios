@@ -335,7 +335,6 @@ static const int kBSAlertTag = 1001;
                     self.prediction = prediction;
                     self.tableViewController.prediction = self.prediction;
                 }
-                [[WebApi sharedInstance] checkNewBadges];
             }];
         } else {
             [[LoadingView sharedInstance] hide];

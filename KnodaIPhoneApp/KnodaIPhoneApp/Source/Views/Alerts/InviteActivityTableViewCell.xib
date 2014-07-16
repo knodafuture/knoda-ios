@@ -24,7 +24,7 @@
                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="11"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="o1w-Uu-Ekr">
+                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="o1w-Uu-Ekr">
                         <rect key="frame" x="15" y="39" width="291" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
@@ -33,15 +33,21 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ActivityDot" id="rct-qZ-AP3">
+                        <rect key="frame" x="25" y="49" width="8" height="8"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
                 </subviews>
             </tableViewCellContentView>
             <connections>
+                <outlet property="avatarImageView" destination="wl6-gJ-vqd" id="rmB-N7-5PA"/>
                 <outlet property="inviteButton" destination="o1w-Uu-Ekr" id="OlF-8H-gkh"/>
                 <outlet property="titleLabel" destination="9T1-2D-yJA" id="Xsj-qw-MJf"/>
             </connections>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="ActivityDot" width="8" height="8"/>
         <image name="NotificationGroupBtn" width="291" height="32"/>
         <image name="NotificationGroupIcon" width="24" height="24"/>
     </resources>

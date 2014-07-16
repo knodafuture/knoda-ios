@@ -9,19 +9,23 @@ typedef NS_ENUM(NSInteger, MenuItem) {
     MenuHome,
     MenuAlerts,
     MenuGroups,
-    MenuHistory,
-    MenuBadges,
     MenuProfile,
     MenuItemsCount
 };
 
-@interface NavigationViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@class NavigationViewController;
+
+@protocol NavigationViewControllerDelegate <NSObject>
+
+- (void)viewDidAppearInNavigationViewController:(NavigationViewController *)viewController;
+- (void)viewDidDisappearInNavigationViewController:(NavigationViewController *)viewController;
+@end
+
+@interface NavigationViewController : UIViewController
 
 @property (strong, nonatomic) NSURL *launchUrl;
 
-
 - (id)initWithPushInfo:(NSDictionary *)pushInfo;
-- (void)toggleSideNav;
 - (void)openMenuItem:(MenuItem)menuItem;
 - (void)handleOpenUrl:(NSURL *)url;
 - (void)handlePushInfo:(NSDictionary *)pushInfo;

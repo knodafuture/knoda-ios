@@ -28,6 +28,10 @@
                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="11"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ActivityDot" id="Ial-6r-zJh">
+                        <rect key="frame" x="49" y="20" width="8" height="8"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" id="FGp-fD-TRg">
                         <rect key="frame" x="39" y="61" width="256" height="52"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -49,11 +53,13 @@
                 <outlet property="bodyLabel" destination="FGp-fD-TRg" id="Gm5-u0-yFA"/>
                 <outlet property="bubbleImageView" destination="6Iy-Cs-Ibr" id="5M6-pQ-mvN"/>
                 <outlet property="createdLabel" destination="dnD-sP-H19" id="y5m-m7-3LC"/>
+                <outlet property="dotImageView" destination="Ial-6r-zJh" id="Jg3-Gk-5fX"/>
                 <outlet property="titleLabel" destination="l8r-Zq-CMl" id="FOL-mr-rGv"/>
             </connections>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="ActivityDot" width="8" height="8"/>
         <image name="NotificationAvatar" width="24" height="24"/>
     </resources>
 </document>

@@ -43,9 +43,7 @@
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem backButtonWithTarget:self action:@selector(backPressed:)];
     
     self.headerView = [[UserProfileHeaderView alloc] init];
-    
-    [self.headerView.avatarButton addTarget:self action:@selector(profileTapped) forControlEvents:UIControlEventTouchUpInside];
-    
+        
     self.headerCell = [[UITableViewCell alloc] init];
     self.headerCell.selectionStyle = UITableViewCellSelectionStyleNone;
     self.headerCell.frame = self.headerView.bounds;

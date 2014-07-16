@@ -23,7 +23,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *bodyLabel;
 @property (weak, nonatomic) IBOutlet UIButton *bragButton;
-
+@property (weak, nonatomic) IBOutlet UIImageView *dotImageView;
 @property (strong, nonatomic) ActivityItem *activityItem;
 @property (weak, nonatomic) id<ResultActivityTableViewCellDelegate> delegate;
 

@@ -17,7 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *bodyLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *bubbleImageView;
 @property (weak, nonatomic) IBOutlet UILabel *createdLabel;
-
+@property (weak, nonatomic) IBOutlet UIImageView *dotImageView;
 
 + (CommentActivityTableViewCell *)cellForTableView:(UITableView *)tableView;
 + (CGFloat)heightForActivityItem:(ActivityItem *)activityItem;

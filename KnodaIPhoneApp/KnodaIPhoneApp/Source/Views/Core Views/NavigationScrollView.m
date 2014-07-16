@@ -15,7 +15,7 @@
 		self.scrollEnabled = NO;
 	else {
 		CGPoint adjustedPoint = CGPointMake(point.x - self.contentOffset.x, point.y - self.contentOffset.y);
-		self.scrollEnabled = adjustedPoint.x < self.bezelWidth;
+		self.scrollEnabled = adjustedPoint.x < self.bezelWidth || adjustedPoint.x > self.frame.size.width - self.bezelWidth;
 	}
 	
 	return [super hitTest:point withEvent:event];

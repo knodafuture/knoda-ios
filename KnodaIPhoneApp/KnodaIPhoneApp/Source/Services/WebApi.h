@@ -14,7 +14,6 @@
 #import "Prediction+Utils.h"
 #import "Challenge.h"
 #import "Tag.h"
-#import "Badge.h"
 #import "Comment.h"
 #import "ActivityItem.h"
 #import "PasswordResetRequest.h"
@@ -77,9 +76,10 @@ extern NSInteger PageLimit;
 // -- Predictions -- //
 
 - (void)getPredictionsAfter:(NSInteger)lastId completion:(void(^)(NSArray *predictions, NSError *error))completionHandler;
-
 - (void)getPredictionsAfter:(NSInteger)lastId tag:(NSString *)tag completion:(void(^)(NSArray *predictions, NSError *error))completionHandler;
 - (void)addPrediction:(Prediction *)prediction completion:(void(^)(Prediction *prediction, NSError *error))completionHandler;
+
+
 
 - (void)getPrediction:(NSInteger)predictionId completion:(void(^)(Prediction *prediction, NSError *error))completionHandler;
 - (void)getPredictionsForUser:(NSInteger)userId after:(NSInteger)lastId completion:(void(^)(NSArray *predictions, NSError *error))completionHandler;
@@ -91,7 +91,7 @@ extern NSInteger PageLimit;
 
 - (void)setPredictionOutcome:(NSInteger)predictionId correct:(BOOL)correct completion:(void(^)(NSError *error))completionHandler;
 
-- (void)getHistoryAfter:(NSInteger)lastId completion:(void(^)(NSArray *predictions, NSError *error))completionHandler;
+- (void)getHistoryAfter:(NSInteger)lastId challenged:(BOOL)challenged completion:(void(^)(NSArray *predictions, NSError *error))completionHandler;
 - (void)getChallengeForPrediction:(NSInteger)predictionId completion:(void(^)(Challenge *challenge, NSError *error))completionHandler;
 - (void)getCategoriesCompletion:(void(^)(NSArray *categories, NSError *error))completionHandler;
 - (void)updatePrediction:(Prediction *)prediction completion:(void(^)(Prediction *prediction, NSError *error))completionHandler;
@@ -101,13 +101,6 @@ extern NSInteger PageLimit;
 - (void)createComment:(Comment *)comment completion:(void(^)(Comment *createdComment, NSError *error))completionHandler;
 
 - (void)getImage:(NSString *)imageUrl completion:(void(^)(UIImage *image, NSError *error))completionHandler;
-
-// -- Badges -- //
-
-- (void)checkNewBadges;
-- (void)getNewBadgesCompletion:(void(^)(NSArray *badges, NSError *error))completionHandler;
-- (void)getAllBadgesCompletion:(void(^)(NSArray *badges, NSError *error))completionHandler;
-
 
 // -- Activity -- //
 - (void)getActivityAfter:(NSInteger)lastId completion:(void(^)(NSArray *activityItems, NSError *error))completionHandler;

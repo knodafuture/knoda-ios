@@ -53,8 +53,8 @@ static ResultActivityTableViewCell *defaultCell;
     defaultCell.titleLabel.text = [NSString stringWithFormat:@"%@—%@", prefix, activityItem.title];
     CGSize titleSize = [defaultCell.titleLabel sizeThatFits:CGSizeMake(defaultCell.titleLabel.frame.size.width, CGFLOAT_MAX)];
     
-    CGSize bodySize = [defaultCell.bodyLabel sizeThatFits:CGSizeMake(defaultCell.bodyLabel.frame.size.width, CGFLOAT_MAX)];
     defaultCell.bodyLabel.text = [NSString stringWithFormat:@"\"%@\"", activityItem.body];
+    CGSize bodySize = [defaultCell.bodyLabel sizeThatFits:CGSizeMake(defaultCell.bodyLabel.frame.size.width, CGFLOAT_MAX)];
     
     CGFloat padding =  defaultCell.titleLabel.frame.origin.y;
     
@@ -86,6 +86,16 @@ static ResultActivityTableViewCell *defaultCell;
         titleAttributes = @{NSForegroundColorAttributeName: [UIColor colorFromHex:@"FE3232"]};
     }
 
+    
+    if (activityItem.seen) {
+        self.dotImageView.hidden = YES;
+    } else {
+        CGRect frame = self.dotImageView.frame;
+        frame.origin.x = self.avatarImageView.frame.origin.x + self.avatarImageView.frame.size.width - frame.size.width;
+        frame.origin.y = self.avatarImageView.frame.origin.y + self.avatarImageView.frame.size.height - frame.size.height;
+        self.dotImageView.frame = frame;
+    }
+    
     [title appendAttributedString:[[NSAttributedString alloc] initWithString:prefix attributes:titleAttributes]];
     [title appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"—%@",activityItem.title] attributes:@{NSForegroundColorAttributeName : [UIColor colorFromHex:@"235C37"]}]];
     

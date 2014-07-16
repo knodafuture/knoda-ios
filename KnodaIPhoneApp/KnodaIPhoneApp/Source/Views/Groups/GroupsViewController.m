@@ -12,9 +12,10 @@
 #import "GroupTableViewCell.h"
 #import "GroupPredictionsViewController.h"
 #import "CreateGroupViewController.h"
-#import "NoContentCell.h"   
+#import "NoContentCell.h"
+#import "NavigationViewController.h"
 
-@interface GroupsViewController ()
+@interface GroupsViewController () <NavigationViewControllerDelegate>
 @property (strong, nonatomic) UITableViewCell *createGroupsCell;
 
 @end
@@ -33,9 +34,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self.pagingDatasource loadPage:0 completion:^{
-        [self.tableView reloadData];
-    }];
+
 }
 
 - (void)groupChanged:(NSNotification *)notification {
@@ -145,5 +144,13 @@
         return;
     cell.groupImage.image = image;
 }
+
+- (void)viewDidAppearInNavigationViewController:(NavigationViewController *)viewController {
+    [self.pagingDatasource loadPage:0 completion:^{
+        [self.tableView reloadData];
+    }];
+}
+
+- (void)viewDidDisappearInNavigationViewController:(NavigationViewController *)viewController {}
 
 @end

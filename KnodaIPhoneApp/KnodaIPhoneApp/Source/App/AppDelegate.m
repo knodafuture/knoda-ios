@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "SignUpRequest.h"
-#import "NewBadgeView.h"
 #import "LoadingView.h"
 #import "KeychainItemWrapper.h"
 #import "WelcomeViewController.h"
@@ -28,8 +27,6 @@ static NSString *kDeviceTokenKey = @"DeviceToken";
 static NSString *kDeviceTokenIdKey = @"DeviceTokenID";
 
 NSString *FirstLaunchKey = @"FirstLaunch";
-NSString *BadgeNotification = @"BadgeNotification";
-NSString *BadgeNotificationKey = @"BadgeNotificationKey";
 NSString *NewObjectNotification = @"NewPredictionNotification";
 NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
 
@@ -86,8 +83,6 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
     
     [self showWelcomeScreenAnimated:NO];
     
-    NSLog(@"launched'");
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newBadge:) name:BadgeNotification object:nil];
     return YES;
 }
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication
@@ -160,33 +155,6 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
     if (buttonIndex != alertView.cancelButtonIndex)
         [self.navigationViewController handlePushInfo:self.pushInfo];
 }
-
-- (void)newBadge:(NSNotification *)notifcation {
-    NSArray *badges = notifcation.userInfo[BadgeNotificationKey];
-    
-    Badge *badge = [badges firstObject];
-    
-    [NewBadgeView showWithBadge:[UIImage imageNamed:badge.name] animated:YES];
-    
-#ifndef TESTFLIGHT
-    [self sendshittotapjoyifnecessarybadcodehere:badge.name];
-#endif
-
-}
-
-
-#ifndef TESTFLIGHT
-
-- (void)sendshittotapjoyifnecessarybadcodehere:(NSString *)badgeName {
-    
-    if ([badgeName isEqualToString:@"1_prediction"]) {
-        [Tapjoy actionComplete:TJC_CREATE_FIRST_PREDICTION];
-    }
-    if ([badgeName isEqualToString:@"1_challenge"])
-        [Tapjoy actionComplete:TJC_CREATE_FIRST_CHALLENGE];
-}
-#endif
-
 
 
 - (void)showWelcomeScreenAnimated:(BOOL)animated {

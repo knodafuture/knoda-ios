@@ -32,6 +32,15 @@ static UINib *nib;
     [self.inviteButton setTitle:item.body forState:UIControlStateNormal];
 
     self.titleLabel.textColor = [UIColor colorFromHex:@"235C37"];
+    
+    if (item.seen) {
+        self.dotImageView.hidden = YES;
+    } else {
+        CGRect frame = self.dotImageView.frame;
+        frame.origin.x = self.avatarImageView.frame.origin.x + self.avatarImageView.frame.size.width - frame.size.width;
+        frame.origin.y = self.avatarImageView.frame.origin.y + self.avatarImageView.frame.size.height - frame.size.height;
+        self.dotImageView.frame = frame;
+    }
 }
 
 @end

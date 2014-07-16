@@ -81,12 +81,16 @@
         self.searchBar.frame = frame;
 }
 
-- (void)back {
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
     [self removeSearchBar];
-    [self.navigationController popViewControllerAnimated:YES];
     
     if ([self.delegate respondsToSelector:@selector(searchViewControllerDidFinish:)])
         [self.delegate searchViewControllerDidFinish:self];
+}
+
+- (void)back {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)removeSearchBar {

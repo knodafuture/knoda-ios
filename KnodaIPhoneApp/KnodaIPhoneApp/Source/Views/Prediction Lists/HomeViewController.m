@@ -13,8 +13,9 @@
 #import "AppDelegate.h"
 #import "FirstStartView.h"
 #import "UserManager.h"
+#import "SearchViewController.h"
 
-@interface HomeViewController () <FirstStartViewDelegate>
+@interface HomeViewController () <FirstStartViewDelegate, NavigationViewControllerDelegate>
 
 @property (strong, nonatomic) NSArray *predictions;
 @property (strong, nonatomic) FirstStartView *firstStartView;
@@ -30,7 +31,16 @@
     }
     
     self.title = @"HOME";
+    
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem rightBarButtonItemWithImage:[UIImage imageNamed:@"NavSearchIcon"] target:self action:@selector(search)];
 }
+
+
+- (void)search {
+    SearchViewController *vc = [[SearchViewController alloc] initWithStyle:UITableViewStylePlain];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear: animated];    
@@ -57,8 +67,14 @@
     self.firstStartView = nil;
     self.view.userInteractionEnabled = YES;
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:FirstLaunchKey];
-    
-    //Check badges
-    //[BadgesWebRequest checkNewBadges];
 }
+
+- (void)viewDidAppearInNavigationViewController:(NavigationViewController *)viewController {
+    [self appeared];
+}
+
+- (void)viewDidDisappearInNavigationViewController:(NavigationViewController *)viewController {
+    [self disappeared];
+}
+
 @end

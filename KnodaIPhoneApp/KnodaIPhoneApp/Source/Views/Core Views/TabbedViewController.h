@@ -18,5 +18,5 @@
 
 
 - (void)addViewController:(UIViewController *)viewController title:(NSString *)title;
-
+- (void)selectIndex:(NSInteger)index;
 @end

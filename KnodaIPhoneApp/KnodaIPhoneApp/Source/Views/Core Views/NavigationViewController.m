@@ -12,14 +12,9 @@
 #import "LoadingView.h" 
 #import "User+Utils.h"
 #import "HomeViewController.h"
-#import "ProfileViewController.h"
-#import "HistoryViewController.h"
-#import "BadgesCollectionViewController.h"
-#import "SideNavCell.h"
+#import "MeViewController.h"
 #import "PredictionsViewController.h"
-#import "SideNavBarButtonItem.h"
 #import "AddPredictionViewController.h"
-#import "RightSideButtonsView.h"
 #import <QuartzCore/QuartzCore.h>
 #import "SearchViewController.h"
 #import "UserManager.h"
@@ -29,30 +24,15 @@
 #import "NotificationSettingsViewController.h"
 #import "NewActivityViewController.h"
 
-CGFloat const SideNavBezelWidth = 20.0f;
+CGFloat const SideNavBezelWidth = 50.0f;
 
-@interface NavigationViewController () <UIScrollViewDelegate, SearchViewControllerDelegate, SelectPictureDelegate, AddPredictionViewControllerDelegate, UINavigationControllerDelegate, UISearchBarDelegate>
-
-@property (weak, nonatomic) IBOutlet UILabel *pointsLabel;
-@property (weak, nonatomic) IBOutlet UILabel *wonLostLabel;
-@property (weak, nonatomic) IBOutlet UILabel *wonPercantageLabel;
-@property (weak, nonatomic) IBOutlet UILabel *steakLabel;
-@property (weak, nonatomic) IBOutlet UITableView *menuItemsTableView;
-@property (assign, nonatomic) BOOL sideNavVisible;
-@property (weak, nonatomic) IBOutlet NavigationScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet UIView *sideNavView;
+@interface NavigationViewController () <UIScrollViewDelegate, SelectPictureDelegate, AddPredictionViewControllerDelegate, UINavigationControllerDelegate, UISearchBarDelegate>
 
 @property (assign, nonatomic) BOOL appeared;
-@property (assign, nonatomic) BOOL masterShown;
 @property (assign, nonatomic) MenuItem activeMenuItem;
-@property (strong, nonatomic) NSArray *itemNames;
 @property (strong, nonatomic) SelectPictureViewController *selectVc;
 @property (readonly, nonatomic) AppDelegate *appDelegate;
 @property (strong, nonatomic) NSMutableDictionary *vcCache;
-
-@property (strong, nonatomic) SideNavBarButtonItem *sideNavBarButtonItem;
-@property (strong, nonatomic) RightSideButtonsView *rightSideBarButtonsView;
-@property (strong, nonatomic) UIBarButtonItem *rightSideBarButtonItem;
 
 @property (strong, nonatomic) NSTimer *pingTimer;
 @property (strong, nonatomic) UINavigationController *visibleViewController;
@@ -62,46 +42,33 @@ CGFloat const SideNavBezelWidth = 20.0f;
 @property (strong, nonatomic) Group *activeGroup;
 
 @property (strong, nonatomic) NSDictionary *pushInfo;
+
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *buttons;
+@property (weak, nonatomic) IBOutlet UIView *tabBarView;
+@property (weak, nonatomic) IBOutlet NavigationScrollView *scrollView;
+@property (strong, nonatomic) NSArray *buttonNames;
+@property (assign, nonatomic) NSInteger unseenAlertsCount;
 @end
 
 @implementation NavigationViewController
 
 - (id)initWithPushInfo:(NSDictionary *)pushInfo {
     self = [super initWithNibName:@"NavigationViewController" bundle:[NSBundle mainBundle]];
-    self.itemNames = @[@"Home", @"Activity", @"Groups", @"History",  @"Badges", @"Profile"];
-    self.masterShown = NO;
     self.vcCache = [[NSMutableDictionary alloc] init];
     self.pushInfo = pushInfo;
     _userManger = [UserManager sharedInstance];
+    
+    self.buttonNames = @[@"NavHome", @"NavActivity", @"NavGroups", @"NavMe"];
     return self;
     
 }
 - (void) viewDidLoad {
     [super viewDidLoad];
-    
-    if (SYSTEM_VERSION_GREATER_THAN(@"7.0"))
-        [self.menuItemsTableView setSeparatorInset:UIEdgeInsetsZero];
-    
-    [self updateUserInfo];
-    self.sideNavBarButtonItem = [[SideNavBarButtonItem alloc] initWithTarget:self action:@selector(toggleSideNav)];
-    
-    self.rightSideBarButtonsView = [[RightSideButtonsView alloc] init];
-    
-    
-    [self.rightSideBarButtonsView setSearchTarget:self action:@selector(search)];
-    [self.rightSideBarButtonsView setAddPredictionTarget:self action:@selector(presentAddPredictionViewController)];
-    
-    self.rightSideBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.rightSideBarButtonsView];
-    
     [self updateAlerts];
+    self.scrollView.disabled = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(activeGroupChanged:) name:ActiveGroupChangedNotificationName object:nil];
-    
-	self.scrollView.bezelWidth = SideNavBezelWidth;
-	self.scrollView.contentSize = CGSizeMake(self.sideNavView.frame.size.width + self.scrollView.frame.size.width, 0);
-	self.scrollView.contentOffset = CGPointMake(self.sideNavView.frame.size.width, 0);
-    
-    
 }
+
 
 - (void)handleOpenUrl:(NSURL *)url {
     
@@ -149,6 +116,8 @@ CGFloat const SideNavBezelWidth = 20.0f;
 
 - (void)showPrediction:(NSInteger)predictionId {
     [[LoadingView sharedInstance] show];
+    if ([self.visibleViewController.topViewController isKindOfClass:PredictionDetailsViewController.class])
+        return;
     [[WebApi sharedInstance] getPrediction:predictionId completion:^(Prediction *prediction, NSError *error) {
         [[LoadingView sharedInstance] hide];
         if (error)
@@ -167,9 +136,6 @@ CGFloat const SideNavBezelWidth = 20.0f;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self observeNotification:UserChangedNotificationName withBlock:^(__weak id self, NSNotification *notification) {
-        [self updateUserInfo];
-    }];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -182,6 +148,22 @@ CGFloat const SideNavBezelWidth = 20.0f;
 
     if (!self.appeared) {
         self.appeared = YES;
+        
+        self.scrollView.bezelWidth = SideNavBezelWidth;
+        self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * 4, self.scrollView.frame.size.height);
+    
+        for (int i = 0; i < MenuItemsCount; i++) {
+            UINavigationController *vc = [self navigationControllerForMenuItem:i];
+            CGRect frame = vc.view.frame;
+            frame.size = self.scrollView.frame.size;
+            frame.origin.x = i * frame.size.width;
+            frame.origin.y = 0;
+            vc.view.frame = frame;
+            
+            [self.scrollView addSubview:vc.view];
+
+        }
+    
     }
     
     [self.pingTimer invalidate];
@@ -197,7 +179,6 @@ CGFloat const SideNavBezelWidth = 20.0f;
     if(![UserManager sharedInstance].user.hasAvatar)
         [self showSelectPictureViewController];
     else {
-        self.sideNavView.hidden = NO;
         [self openMenuItem:MenuHome];
         if (self.launchUrl) {
             [self handleOpenUrl:self.launchUrl];
@@ -211,28 +192,53 @@ CGFloat const SideNavBezelWidth = 20.0f;
 }
 
 - (void)openMenuItem:(MenuItem)menuItem {
-    
-    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:menuItem inSection:0];
-    [self.menuItemsTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-
+    UINavigationController *previousNavigationController = self.visibleViewController;
     self.activeMenuItem = menuItem;
-    [self presentViewControllerForMenuItem:menuItem];
-    
-    if (menuItem == MenuAlerts) {
-        SideNavCell *cell = (SideNavCell *)[self.menuItemsTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:MenuAlerts - 1 inSection:0]];
-        cell.rightInfoLabel.hidden = YES;
-        [self.sideNavBarButtonItem setAlertsCount:0];
+    self.visibleViewController = [self navigationControllerForMenuItem:self.activeMenuItem];
+    for (int i = 0; i < self.buttons.count; i++) {
+        UIButton *button = [self.buttons objectAtIndex:i];
+        UIImage *image;
+        if (i != self.activeMenuItem && i != MenuAlerts)
+            image = [UIImage imageNamed:self.buttonNames[i]];
+        else if (i == MenuAlerts && i != self.activeMenuItem) {
+            image = self.unseenAlertsCount == 0 ? [UIImage imageNamed:@"NavActivity"] : [UIImage imageNamed:@"NavActivityNotifications"];
+        } else {
+            NSString *name = [NSString stringWithFormat:@"%@Active", self.buttonNames[i]];
+            image = [UIImage imageNamed:name];
+        }
+        [button setImage:image forState:UIControlStateNormal];
     }
+    
+    [self.scrollView setContentOffset:CGPointMake(self.activeMenuItem * self.scrollView.frame.size.width, 0) animated:YES];
+    
+    UIViewController<NavigationViewControllerDelegate> *vc = (UIViewController<NavigationViewControllerDelegate> *)self.visibleViewController.visibleViewController;
+    
+    if ([vc respondsToSelector:@selector(viewDidAppearInNavigationViewController:)])
+        [vc viewDidAppearInNavigationViewController:self];
+    
+    vc = (UIViewController<NavigationViewControllerDelegate> *)previousNavigationController.visibleViewController;
+    
+    if ([vc respondsToSelector:@selector(viewDidDisappearInNavigationViewController:)])
+        [vc viewDidDisappearInNavigationViewController:self];
+    
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [previousNavigationController popToRootViewControllerAnimated:NO];
+    });
+
 }
 
-- (void)presentViewControllerForMenuItem:(MenuItem)menuItem {
-    UINavigationController *controller = [self navigationControllerForMenuItem:menuItem];
-    [self showViewController:controller];
+- (IBAction)tabBarButtonPressed:(id)sender {
+    if (![self.buttons containsObject:sender])
+        return;
+    
+    [self openMenuItem:[self.buttons indexOfObject:sender]];
 }
 
 - (UINavigationController *)navigationControllerForMenuItem:(MenuItem)menuItem {
-    UIViewController *viewController = [self.vcCache objectForKey:@(menuItem)];
-    if (!viewController) {
+    UINavigationController *navigationController = [self.vcCache objectForKey:@(menuItem)];
+    UIViewController *viewController;
+    if (!navigationController) {
         switch (menuItem) {
             case MenuHome:
                 viewController = [[HomeViewController alloc] initWithStyle:UITableViewStylePlain];
@@ -240,14 +246,8 @@ CGFloat const SideNavBezelWidth = 20.0f;
             case MenuAlerts:
                 viewController = [[NewActivityViewController alloc] init];
                 break;
-            case MenuBadges:
-                viewController = [[BadgesCollectionViewController alloc] initWithNibName:@"BadgesCollectionViewController" bundle:[NSBundle mainBundle]];
-                break;
-            case MenuHistory:
-                viewController = [[HistoryViewController alloc] initWithStyle:UITableViewStylePlain];
-                break;
             case MenuProfile:
-                viewController = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:[NSBundle mainBundle]];
+                viewController = [[MeViewController alloc] initWithNibName:@"MeViewController" bundle:[NSBundle mainBundle]];
                 break;
             case MenuGroups:
                 viewController = [[GroupsViewController alloc] initWithStyle:UITableViewStylePlain];
@@ -256,18 +256,15 @@ CGFloat const SideNavBezelWidth = 20.0f;
                 viewController = [[HomeViewController alloc] initWithStyle:UITableViewStylePlain];
                 break;
         }
-
-        [self.vcCache setObject:viewController forKey:@(menuItem)];
-        
-    }
+    } else
+        return navigationController;
     
     if (menuItem != MenuGroups)
         self.activeGroup = nil;
     
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
-    navigationController.delegate = self;
-    viewController.navigationItem.leftBarButtonItem = self.sideNavBarButtonItem;
-    
+    navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    [self.vcCache setObject:navigationController forKey:@(menuItem)];
+
     return navigationController;
 }
 
@@ -276,78 +273,27 @@ CGFloat const SideNavBezelWidth = 20.0f;
         if (error)
             return;
         
-        SideNavCell *cell = (SideNavCell *)[self.menuItemsTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:MenuAlerts inSection:0]];
-        if (alerts.count) {
-            cell.rightInfoLabel.hidden = NO;
-            cell.rightInfoLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)alerts.count];
-        }
-        else
-            cell.rightInfoLabel.hidden = YES;
-        
-        [self.sideNavBarButtonItem setAlertsCount:alerts.count];
+        self.unseenAlertsCount = alerts.count;
         
         [[UIApplication sharedApplication] setApplicationIconBadgeNumber:alerts.count];
         
+        if (self.activeMenuItem == MenuAlerts)
+            return;
+        
+        UIButton *activityButton = self.buttons[MenuAlerts];
+        UIImage *image;
+        
+        if (self.unseenAlertsCount == 0)
+            image = [UIImage imageNamed:self.buttonNames[MenuAlerts]];
+        else
+            image = [UIImage imageNamed:@"NavActivityNotifications"];
+        [activityButton setImage:image forState:UIControlStateNormal];
     }];
 }
 
 - (AppDelegate *)appDelegate {
     return [UIApplication sharedApplication].delegate;
 }
-
-- (void)updateUserInfo {
-    User * user = [UserManager sharedInstance].user;
-    
-    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-    [formatter setGroupingSeparator:[[NSLocale currentLocale] objectForKey:NSLocaleGroupingSeparator]];
-    
-    self.pointsLabel.text = [NSString stringWithFormat:@"%@",[formatter stringFromNumber:[NSNumber numberWithInteger:user.points]]];
-    self.wonLostLabel.text = [NSString stringWithFormat:@"%lu-%lu",(unsigned long)user.won,(unsigned long)
-                              user.lost];
-    if ([user.winningPercentage isEqual:@0])
-        self.wonPercantageLabel.text = @"0%";
-    else if ([user.winningPercentage isEqual:@100])
-        self.wonPercantageLabel.text = @"100%";
-    else
-        self.wonPercantageLabel.text = [NSString stringWithFormat:@"%@%@",user.winningPercentage,@"%"];
-    self.steakLabel.text = [user.streak length] > 0 ? user.streak : @"W0";
-    
-    SideNavCell *cell = (SideNavCell *)[self.menuItemsTableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:MenuProfile inSection:0]];
-    cell.titleLabel.text = user.name;
-}
-
-#pragma mark - UITableViewDataSource
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return MenuItemsCount;
-}
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    SideNavCell *cell = [SideNavCell sideNavCellForTableView:tableView];
-    
-    cell.icon.image = [UIImage imageNamed:[NSString stringWithFormat:@"SideNav%@Icon", self.itemNames[indexPath.row]]];
-    
-    if (indexPath.row == MenuProfile)
-        cell.titleLabel.text = [UserManager sharedInstance].user.name;
-    else
-        cell.titleLabel.text = self.itemNames[indexPath.row];
-    
-    if (indexPath.row != MenuAlerts)
-        cell.rightInfoLabel.hidden = YES;
-
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self openMenuItem:indexPath.row];
-}
-
-- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    
-    if (![viewController isKindOfClass:SearchViewController.class] && ![viewController isKindOfClass:NotificationSettingsViewController.class])
-        viewController.navigationItem.rightBarButtonItem = self.rightSideBarButtonItem;
-}
-
 #pragma mark SelectPictureDelegate
 
 - (void)showSelectPictureViewController {
@@ -359,13 +305,11 @@ CGFloat const SideNavBezelWidth = 20.0f;
 }
 - (void)hideViewController:(SelectPictureViewController *)vc {
     [[LoadingView sharedInstance] hide];
-    [[WebApi sharedInstance] checkNewBadges];
     [self openMenuItem:MenuHome];
-    self.sideNavView.hidden = NO;
 }
 
 
-- (void)presentAddPredictionViewController {
+- (IBAction)presentAddPredictionViewController {
     AddPredictionViewController *vc = [[AddPredictionViewController alloc] initWithActiveGroup:self.activeGroup];
     vc.delegate = self;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
@@ -377,20 +321,7 @@ CGFloat const SideNavBezelWidth = 20.0f;
     [[NSNotificationCenter defaultCenter] postNotificationName:NewObjectNotification object:nil userInfo:@{NewPredictionNotificationKey: prediction}];
     
     [self dismissViewControllerAnimated:YES completion:^{
-        [[WebApi sharedInstance] checkNewBadges];
     }];
-}
-
-- (void)search {
-    SearchViewController *vc = [[SearchViewController alloc] initWithStyle:UITableViewStylePlain];
-    vc.delegate = self;
-    [self.rightSideBarButtonsView setSearchButtonHidden:YES];
-    [self.visibleViewController pushViewController:vc animated:YES];
-}
-
-
-- (void)searchViewControllerDidFinish:(SearchViewController *)searchViewController {
-    [self.rightSideBarButtonsView setSearchButtonHidden:NO];
 }
 
 - (void)dealloc {
@@ -398,60 +329,11 @@ CGFloat const SideNavBezelWidth = 20.0f;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)showViewController:(UINavigationController *)navigationController {
-	if (self.visibleViewController)
-		[self.visibleViewController.view removeFromSuperview];
-	
-	navigationController.view.frame = CGRectMake(self.sideNavView.frame.size.width, 0, self.view.frame.size.width, self.view.frame.size.height);
-	
-	self.visibleViewController = navigationController;
-	self.scrollView.detailsView = navigationController.view;
-	
-	[self.scrollView addSubview:navigationController.view];
-	[self hideSideNav];
-}
-
-- (void)toggleSideNav {
-	if (self.sideNavVisible)
-		[self hideSideNav];
-	else
-		[self showSideNav];
-}
-
-- (void)showSideNav {
-	[self.scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
-}
-
-- (void)hideSideNav {
-//    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
-//        [[self appDelegate] window].backgroundColor = [UIColor colorFromHex:@"77BC1F"];
-//    }
-	[self.scrollView setContentOffset:CGPointMake(self.sideNavView.frame.size.width, 0) animated:YES];
-}
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-	CGRect frame = self.sideNavView.frame;
-	frame.origin.x = scrollView.contentOffset.x;
-	self.sideNavView.frame = frame;
-
-	if (scrollView.contentOffset.x == 0) {
-		self.sideNavVisible = YES;
-		self.scrollView.bezelWidth = self.view.frame.size.width;
-		self.visibleViewController.topViewController.view.userInteractionEnabled = NO;
-	}
-	else if (scrollView.contentOffset.x == self.sideNavView.frame.size.width) {
-		self.sideNavVisible = NO;
-		self.scrollView.bezelWidth = SideNavBezelWidth;
-		self.visibleViewController.topViewController.view.userInteractionEnabled = YES;
-	}
-}
-
-- (CGFloat)sideNavDistanceFromClosed {
-	return self.scrollView.contentOffset.x;
-}
-
-- (CGFloat)sideNavDistanceFromOpen {
-	return ABS(self.sideNavView.frame.size.width - self.scrollView.contentOffset.x);
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    CGFloat pageWidth = scrollView.frame.size.width;
+    float fractionalPage = scrollView.contentOffset.x / pageWidth;
+    NSInteger page = lround(fractionalPage);
+    [self openMenuItem:page];
 }
 
 @end

@@ -72,6 +72,7 @@ static NSMutableDictionary *cellHeights;
     frame.size.height = size.height;
     self.titleLabel.frame = frame;
     
+    CGSize titleSize = size;
     self.bodyLabel.text = [NSString stringWithFormat:@"\"%@\"",activityItem.body];
     size = [self.bodyLabel.text sizeWithFont:self.bodyLabel.font
                                   constrainedToSize:CGSizeMake(self.bodyLabel.frame.size.width, MAXFLOAT)
@@ -80,6 +81,10 @@ static NSMutableDictionary *cellHeights;
     frame = self.bodyLabel.frame;
     
     frame.origin.y = self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + self.titleLabel.frame.origin.y * 2;
+    
+    if (titleSize.height < 27.0)
+        frame.origin.y += 2;
+    
     frame.size.height = size.height;
     self.bodyLabel.frame = frame;
     self.titleLabel.textColor = [UIColor colorFromHex:@"235C37"];
@@ -93,9 +98,18 @@ static NSMutableDictionary *cellHeights;
     frame.size.height = self.bodyLabel.frame.size.height + self.titleLabel.frame.origin.y * 2;
     frame.origin.y = self.bodyLabel.frame.origin.y - self.titleLabel.frame.origin.y;
     frame.origin.x = self.bodyLabel.frame.origin.x - 7.0 - self.titleLabel.frame.origin.y;
-    frame.size.width = self.frame.size.width - frame.origin.x - self.titleLabel.frame.origin.y * 2;
+    frame.size.width = self.frame.size.width - frame.origin.x - self.titleLabel.frame.origin.y * 2 + 7;
 
     self.bubbleImageView.frame = frame;
+    
+    if (activityItem.seen) {
+        self.dotImageView.hidden = YES;
+    } else {
+        CGRect frame = self.dotImageView.frame;
+        frame.origin.x = self.avatarImageView.frame.origin.x + self.avatarImageView.frame.size.width - frame.size.width;
+        frame.origin.y = self.avatarImageView.frame.origin.y + self.avatarImageView.frame.size.height - frame.size.height;
+        self.dotImageView.frame = frame;
+    }
 }
 
 @end

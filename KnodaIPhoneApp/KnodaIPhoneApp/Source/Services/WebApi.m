@@ -375,8 +375,12 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
     }];
 }
 
-- (void)getHistoryAfter:(NSInteger)lastId completion:(void (^)(NSArray *, NSError *))completionHandler {
-    NSDictionary *parameters = @{@"challenged": @"true", @"limit" : @(PageLimit)};
+- (void)getHistoryAfter:(NSInteger)lastId challenged:(BOOL)challenged completion:(void (^)(NSArray *, NSError *))completionHandler {
+    NSDictionary *parameters;
+    if (challenged)
+        parameters = @{@"challenged": @"true", @"limit" : @(PageLimit)};
+    else
+        parameters = @{@"limit": @(PageLimit)};
     parameters = [self parametersDictionary:parameters withLastId:lastId];
     NSString *url = [self buildUrl:@"predictions" parameters:parameters];
     NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
@@ -462,33 +466,6 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
         completionHandler([Comment instanceFromData:responseData], error);
     }];
 }
-
-- (void)checkNewBadges {
-    [self getNewBadgesCompletion:^(NSArray *badges, NSError *error) {
-        if (badges.count > 0 && !error)
-            [[NSNotificationCenter defaultCenter] postNotificationName:BadgeNotification object:nil userInfo:@{BadgeNotificationKey: badges}];
-    }];
-}
-
-- (void)getNewBadgesCompletion:(void (^)(NSArray *, NSError *))completionHandler {
-    NSLog(@"CHECKING NEW BADGES");
-    NSString *url = [self buildUrl:@"badges/recent.json" parameters:nil];
-    NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
-
-    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
-        completionHandler([Badge arrayFromData:responseData], error);
-    }];
-}
-
-- (void)getAllBadgesCompletion:(void (^)(NSArray *, NSError *))completionHandler {
-    NSString *url = [self buildUrl:@"badges.json" parameters:nil];
-    NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
-
-    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
-        completionHandler([Badge arrayFromData:responseData], error);
-    }];
-}
-
 - (void)getImage:(NSString *)imageUrl completion:(void (^)(UIImage *, NSError *))completionHandler {
 
     [self getCachedObjectForKey:imageUrl timeout:FileCacheTimeInfinite inCache:self.fileCache requestForMiss:^NSURLRequest *{

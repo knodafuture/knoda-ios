@@ -61,6 +61,15 @@ static NSMutableDictionary *cellheights;
     frame.origin.y = self.bodyLabel.frame.origin.y + self.bodyLabel.frame.size.height + padding;
     
     self.settleButton.frame = frame;
+    
+    if (item.seen) {
+        self.dotImageView.hidden = YES;
+    } else {
+        frame = self.dotImageView.frame;
+        frame.origin.x = self.avatarImageView.frame.origin.x + self.avatarImageView.frame.size.width - frame.size.width;
+        frame.origin.y = self.avatarImageView.frame.origin.y + self.avatarImageView.frame.size.height - frame.size.height;
+        self.dotImageView.frame = frame;
+    }
 }
 
 + (CGFloat)heightForActivityItem:(ActivityItem *)item {

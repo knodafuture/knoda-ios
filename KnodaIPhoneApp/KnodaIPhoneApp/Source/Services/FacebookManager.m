@@ -101,7 +101,6 @@ static FacebookManager *sharedSingleton;
         [self getUserProfile];
         return;
     }
-
     
     if (error){
         NSLog(@"Error");

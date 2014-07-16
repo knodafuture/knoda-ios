@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PredictionDetailsViewController.h"
 #import "PredictionsViewController.h"
 
 @interface HomeViewController : PredictionsViewController

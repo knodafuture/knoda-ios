@@ -24,6 +24,10 @@
                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="11"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ActivityDot" id="Bhr-hS-uaG">
+                        <rect key="frame" x="49" y="20" width="8" height="8"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" id="N2p-8D-RXV">
                         <rect key="frame" x="39" y="52" width="256" height="52"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -31,7 +35,7 @@
                         <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="vCJ-32-dFn">
+                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="vCJ-32-dFn">
                         <rect key="frame" x="15" y="101" width="291" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
@@ -43,13 +47,16 @@
                 </subviews>
             </tableViewCellContentView>
             <connections>
+                <outlet property="avatarImageView" destination="XFn-nV-n0l" id="ZDv-op-x5g"/>
                 <outlet property="bodyLabel" destination="N2p-8D-RXV" id="SAG-ty-Odh"/>
+                <outlet property="dotImageView" destination="Bhr-hS-uaG" id="hYp-QV-jcA"/>
                 <outlet property="settleButton" destination="vCJ-32-dFn" id="zWU-fK-1LV"/>
                 <outlet property="titleLabel" destination="lll-g3-C5S" id="5iZ-jz-MzJ"/>
             </connections>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="ActivityDot" width="8" height="8"/>
         <image name="NotificationSettleBtn" width="291" height="32"/>
         <image name="NotificationSettleIcon" width="24" height="24"/>
     </resources>

@@ -25,7 +25,7 @@
 #import "UserManager.h"
 #import "BragItemProvider.h"
 
-@interface ActivityViewController () <ResultActivityTableViewCellDelegate>
+@interface ActivityViewController () <ResultActivityTableViewCellDelegate, NavigationViewControllerDelegate>
 @property (strong, nonatomic) NSString *filter;
 @property (strong, nonatomic) Prediction *predictionToShare;
 @end
@@ -49,23 +49,14 @@
     
     
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
-        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 6, 0, 0)];
     }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    [self beginRefreshing];
     [Flurry logEvent:@"ActivityFeed" timed:YES];
 }
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    
-    [Flurry endTimedEvent:@"ActivityFeed" withParameters:nil];
-}
-
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row >= self.pagingDatasource.objects.count)
@@ -166,7 +157,7 @@
 }
 
 - (void)noObjectsRetrievedInPagingDatasource:(PagingDatasource *)pagingDatasource {
-    NoContentCell *cell = [NoContentCell noContentWithMessage:@"No Activity" forTableView:self.tableView];
+    NoContentCell *cell = [NoContentCell noContentWithMessage:@"Sorry, you don't have any activity to view.\nGet things started and make a prediction." forTableView:self.tableView];
     [self showNoContent:cell];
 }
 
@@ -223,12 +214,6 @@
 
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    [super tableView:tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
-    
-    [cell layoutIfNeeded];
-}
-
 - (void)shareWithSocialAccount:(SocialAccount *)account {
     [[LoadingView sharedInstance] show];
     if ([account.providerName isEqualToString:@"twitter"])
@@ -268,6 +253,13 @@
     [vc setValue:[NSString stringWithFormat:@"%@ shared a Knoda prediction with you", [UserManager sharedInstance].user.name] forKey:@"subject"];
     
     [self presentViewController:vc animated:YES completion:nil];
+}
+
+- (void)viewDidDisappearInNavigationViewController:(NavigationViewController *)viewController {
+}
+
+- (void)viewDidAppearInNavigationViewController:(NavigationViewController *)viewController {
+    [self beginRefreshing];
 }
 
 @end

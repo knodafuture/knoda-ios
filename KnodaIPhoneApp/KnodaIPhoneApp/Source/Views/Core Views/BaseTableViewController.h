@@ -24,4 +24,7 @@
 
 - (void)handleNewObjectNotification:(NSNotification *)notification;
 
+- (void)appeared;
+- (void)disappeared;
+
 @end

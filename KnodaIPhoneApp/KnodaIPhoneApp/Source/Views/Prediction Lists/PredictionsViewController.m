@@ -31,6 +31,12 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
+    [self appeared];
+    
+}
+
+- (void)appeared {
+    [super appeared];
     [self.refreshTimer invalidate];
     self.refreshTimer = nil;
     self.refreshTimer = [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(refreshVisibleCells) userInfo:nil repeats:YES];
@@ -38,10 +44,14 @@
     [self observeNotification:UserChangedNotificationName withBlock:^(__weak PredictionsViewController *self, NSNotification *notification) {
         [self.tableView reloadData];
     }];
-    
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
+    [self disappeared];
+}
+
+- (void)disappeared {
+    [super disappeared];
     [self.refreshTimer invalidate];
     self.refreshTimer = nil;
     [self removeAllObservations];
@@ -118,7 +128,6 @@
         if (!error) {
             prediction.challenge = challenge;
             [cell fillWithPrediction:prediction];
-            [[WebApi sharedInstance] checkNewBadges];
         }
         else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message:@"Unable to agree at this time" delegate: nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles: nil];
@@ -133,7 +142,6 @@
         if (!error) {
             prediction.challenge = challenge;
             [cell fillWithPrediction:prediction];
-            [[WebApi sharedInstance] checkNewBadges];
         }
         else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message:@"Unable to disagree at this time" delegate: nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles: nil];

@@ -58,7 +58,7 @@
     label.textColor = [UIColor whiteColor];
     label.userInteractionEnabled = YES;
     label.backgroundColor = [UIColor clearColor];
-    label.textAlignment = NSTextAlignmentCenter;
+    label.textAlignment = NSTextAlignmentLeft;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelTapped:)];
     [label addGestureRecognizer:tap];
     label.alpha = 0.25;
@@ -143,9 +143,10 @@
         UILabel *button = self.buttons[i];
         
         frame = button.frame;
+        frame.size.width = frame.size.width + diff;
         frame.origin.x = currentOffset;
-        
-        currentOffset = currentOffset + frame.size.width + diff;
+        frame.size.height = self.headerView.frame.size.height;
+        currentOffset = currentOffset + frame.size.width;
         
         [self.buttonsContainer addSubview:button];
         button.frame = frame;

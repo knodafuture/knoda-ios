@@ -12,15 +12,21 @@
 
 static UINib *nib;
 
+@interface UserProfileHeaderView ()
+@property (weak, nonatomic) id<UserProfileHeaderViewDelegate> delegate;
+@end
+
 @implementation UserProfileHeaderView
 
 + (void)initialize {
     nib = [UINib nibWithNibName:@"UserProfileHeaderView" bundle:[NSBundle mainBundle]];
 }
 
-- (id)init {
+- (id)initWithDelegate:(id<UserProfileHeaderViewDelegate>)delegate {
     self = [[nib instantiateWithOwner:nil options:nil] lastObject];
-    
+    self.avatarImageView.layer.cornerRadius = self.avatarImageView.frame.size.height / 2.0;
+    self.avatarImageView.clipsToBounds = YES;
+    self.delegate = delegate;
     return self;
 }
 
@@ -39,38 +45,21 @@ static UINib *nib;
         self.winPercentLabel.text = [NSString stringWithFormat:@"%@%@",user.winningPercentage,@"%"];    self.streakLabel.text = [user.streak length] > 0 ? user.streak : @"W0";
     self.winLossLabel.text = [NSString stringWithFormat:@"%lu-%lu",(unsigned long)user.won,(unsigned long)user.lost];
     
-    
-    
-    CGSize textSize = [self.pointsLabel sizeThatFits:self.pointsLabel.frame.size];
-    
-    CGRect frame = self.smallPointsLabel.frame;
-    frame.origin.x = self.pointsLabel.frame.origin.x + textSize.width + 2.0;
-    self.smallPointsLabel.frame = frame;
-    
-    textSize = [self.winPercentLabel sizeThatFits:self.winPercentLabel.frame.size];
-    
-    frame = self.streakLabel.frame;
-    frame.origin.x = self.winPercentLabel.frame.origin.x + textSize.width + 20.0;
-    self.streakLabel.frame = frame;
-    
-    frame = self.smallStreakLabel.frame;
-    frame.origin.x = self.streakLabel.frame.origin.x + 1.0;
-    self.smallStreakLabel.frame = frame;
-    
-    textSize = [self.streakLabel sizeThatFits:self.streakLabel.frame.size];
-    
-    frame = self.winLossLabel.frame;
-    frame.origin.x = self.streakLabel.frame.origin.x + textSize.width + 20.0;
-    self.winLossLabel.frame = frame;
-    
-    frame = self.smallWLLabel.frame;
-    frame.origin.x = self.winLossLabel.frame.origin.x + 1.0;
-    self.smallWLLabel.frame = frame;
-    
     [[WebApi sharedInstance] getImage:user.avatar.big completion:^(UIImage *image, NSError *error) {
         if (!error)
             self.avatarImageView.image = image;
     }];
+    
+    
+    if (user.facebookAccount)
+        self.facebookImageView.image = [UIImage imageNamed:@"ProfileFacebookActive"];
+    else
+        self.facebookImageView.image = [UIImage imageNamed:@"ProfileFacebook"];
+    
+    if (user.twitterAccount)
+        self.twitterImageView.image = [UIImage imageNamed:@"ProfileTwitterActive"];
+    else
+        self.twitterImageView.image = [UIImage imageNamed:@"ProfileTwitter"];
     
 }
 @end

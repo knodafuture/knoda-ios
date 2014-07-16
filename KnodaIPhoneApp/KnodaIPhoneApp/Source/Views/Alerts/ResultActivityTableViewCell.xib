@@ -24,7 +24,7 @@
                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="11"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" id="LDg-Nk-x4a">
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" id="LDg-Nk-x4a">
                         <rect key="frame" x="39" y="52" width="256" height="52"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
@@ -33,7 +33,7 @@
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="Hp0-4a-Loy">
                         <rect key="frame" x="15" y="101" width="291" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                         <state key="normal" title="Brag" backgroundImage="NotificationBragBtn">
                             <color key="titleColor" red="0.46666666670000001" green="0.73725490199999999" blue="0.1215686275" alpha="1" colorSpace="calibratedRGB"/>
@@ -43,17 +43,23 @@
                             <action selector="brag:" destination="EhF-vd-o1m" eventType="touchUpInside" id="pN7-76-tMt"/>
                         </connections>
                     </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ActivityDot" id="OwG-d7-Q00">
+                        <rect key="frame" x="0.0" y="5" width="8" height="8"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="avatarImageView" destination="vp7-rT-wvT" id="LwI-VK-fTP"/>
                 <outlet property="bodyLabel" destination="LDg-Nk-x4a" id="f4a-Wq-wit"/>
                 <outlet property="bragButton" destination="Hp0-4a-Loy" id="j4H-V9-jx4"/>
+                <outlet property="dotImageView" destination="OwG-d7-Q00" id="Sxi-e5-CWa"/>
                 <outlet property="titleLabel" destination="9Gd-2X-psi" id="fuy-cg-8cg"/>
             </connections>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="ActivityDot" width="8" height="8"/>
         <image name="NotificationAvatar" width="24" height="24"/>
         <image name="NotificationBragBtn" width="291" height="32"/>
     </resources>

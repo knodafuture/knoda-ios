@@ -17,7 +17,7 @@
 @property (strong, nonatomic) EmptyDatasource *emptyDatasource;
 @property (strong, nonatomic) NSTimer *graceTimer;
 @property (assign, nonatomic) BOOL refreshEnded;
-@property (assign, nonatomic) BOOL appeared;
+@property (assign, nonatomic) BOOL hasAppeared;
 @end
 
 @implementation BaseTableViewController
@@ -45,15 +45,23 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    if (!self.appeared) {
+    [self appeared];
+
+}
+
+- (void)appeared {
+    if (!self.hasAppeared) {
         [self.pagingDatasource loadPage:0 completion:^{
             [self.tableView reloadData];
         }];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNewObjectNotification:) name:NewObjectNotification object:nil];
     }
     
-    self.appeared = YES;
+    self.hasAppeared = YES;
+}
+
+- (void)disappeared {
+    
 }
 
 - (void)dealloc {

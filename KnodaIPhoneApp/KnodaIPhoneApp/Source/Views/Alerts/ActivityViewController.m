@@ -57,6 +57,8 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [self beginRefreshing];
+
     [Flurry logEvent:@"ActivityFeed" timed:YES];
 }
 
@@ -261,7 +263,6 @@
 }
 
 - (void)viewDidAppearInNavigationViewController:(NavigationViewController *)viewController {
-    [self beginRefreshing];
 }
 
 @end

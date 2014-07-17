@@ -66,10 +66,6 @@ CGFloat const SideNavBezelWidth = 50.0f;
     self.scrollView.disabled = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(activeGroupChanged:) name:ActiveGroupChangedNotificationName object:nil];
     self.scrollView.scrollsToTop = NO;
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 10 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [[UIApplication sharedApplication].keyWindow findScrollViews];
-    });
 }
 
 

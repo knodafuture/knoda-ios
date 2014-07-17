@@ -45,6 +45,14 @@
     self.tableView.showsVerticalScrollIndicator = NO;
     [self.headerCell addSubview:self.headerView];
     
+    self.refreshControl.tintColor = [UIColor whiteColor];
+    
+    UIView *refreshBackground = [[UIView alloc] initWithFrame:CGRectMake(0, -self.refreshControl.frame.size.height * 2, self.view.frame.size.width, self.refreshControl.frame.size.height * 2)];
+    refreshBackground.backgroundColor = [UIColor colorFromHex:@"77bc1f"];
+    
+    [self.tableView insertSubview:refreshBackground atIndex:0];
+    self.tableView.scrollsToTop = NO;
+    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

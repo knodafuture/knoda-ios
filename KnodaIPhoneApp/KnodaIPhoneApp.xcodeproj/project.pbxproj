@@ -339,6 +339,8 @@
 		01BECA5E19763EDA00E75CBA /* MeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01BECA5C19763EDA00E75CBA /* MeViewController.xib */; };
 		01BECA6119766B6700E75CBA /* MeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BECA6019766B6700E75CBA /* MeTableViewController.m */; };
 		01BECA6219766B6700E75CBA /* MeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BECA6019766B6700E75CBA /* MeTableViewController.m */; };
+		01BECAA919782D5400E75CBA /* UIView+Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BECAA819782D5400E75CBA /* UIView+Test.m */; };
+		01BECAAA19782D5400E75CBA /* UIView+Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BECAA819782D5400E75CBA /* UIView+Test.m */; };
 		01BFDC7218E4B9AB0098F81F /* InvitationCodeDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BFDC7118E4B9AB0098F81F /* InvitationCodeDetails.m */; };
 		01BFDC7318E4B9AB0098F81F /* InvitationCodeDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BFDC7118E4B9AB0098F81F /* InvitationCodeDetails.m */; };
 		01BFDC7518E5C8110098F81F /* GroupAvatars.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01BFDC7418E5C8110098F81F /* GroupAvatars.xcassets */; };
@@ -711,6 +713,8 @@
 		01BECA5C19763EDA00E75CBA /* MeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MeViewController.xib; sourceTree = "<group>"; };
 		01BECA5F19766B6700E75CBA /* MeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeTableViewController.h; sourceTree = "<group>"; };
 		01BECA6019766B6700E75CBA /* MeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeTableViewController.m; sourceTree = "<group>"; };
+		01BECAA719782D5400E75CBA /* UIView+Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Test.h"; sourceTree = "<group>"; };
+		01BECAA819782D5400E75CBA /* UIView+Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Test.m"; sourceTree = "<group>"; };
 		01BFDC7018E4B9AB0098F81F /* InvitationCodeDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitationCodeDetails.h; sourceTree = "<group>"; };
 		01BFDC7118E4B9AB0098F81F /* InvitationCodeDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitationCodeDetails.m; sourceTree = "<group>"; };
 		01BFDC7418E5C8110098F81F /* GroupAvatars.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = GroupAvatars.xcassets; sourceTree = "<group>"; };
@@ -908,6 +912,8 @@
 				013DA6FE1853002100B507E4 /* UINavigationItem+iOS7Spacing.m */,
 				01598B3218584645002E2534 /* UINavigationBar+AppearanceUtils.h */,
 				01598B3318584645002E2534 /* UINavigationBar+AppearanceUtils.m */,
+				01BECAA719782D5400E75CBA /* UIView+Test.h */,
+				01BECAA819782D5400E75CBA /* UIView+Test.m */,
 			);
 			path = "Core Categories";
 			sourceTree = "<group>";
@@ -1816,6 +1822,7 @@
 				01A6787C1957B4B5002FDE1F /* ResultActivityTableViewCell.m in Sources */,
 				013DA906185438E600B507E4 /* CreateCommentView.m in Sources */,
 				01DBEAD418DA4D0B000F2E50 /* Member.m in Sources */,
+				01BECAAA19782D5400E75CBA /* UIView+Test.m in Sources */,
 				013DA8CE1853004000B507E4 /* LoginResponse.m in Sources */,
 				01E8CB6D18765F71003AE018 /* SearchDatasource.m in Sources */,
 				013DA80B1853002200B507E4 /* NavigationViewController.m in Sources */,
@@ -1951,6 +1958,7 @@
 				01A6787B1957B4B5002FDE1F /* ResultActivityTableViewCell.m in Sources */,
 				013DA905185438E600B507E4 /* CreateCommentView.m in Sources */,
 				01DBEAD318DA4D0B000F2E50 /* Member.m in Sources */,
+				01BECAA919782D5400E75CBA /* UIView+Test.m in Sources */,
 				013DA8CD1853004000B507E4 /* LoginResponse.m in Sources */,
 				01E8CB6C18765F71003AE018 /* SearchDatasource.m in Sources */,
 				013DA80A1853002200B507E4 /* NavigationViewController.m in Sources */,
@@ -2104,7 +2112,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Nick Rellihan (9TAA35K5AK)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Nick Rellihan (9TAA35K5AK)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2142,7 +2150,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Knoda, LLC (F489V4H5F6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Knoda, LLC (F489V4H5F6)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/KnodaIPhoneApp/Thirdparty",
@@ -2162,7 +2170,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "Knoda Test";
-				PROVISIONING_PROFILE = "F229B453-5DF5-4DB8-8405-F705FD241E1F";
+				PROVISIONING_PROFILE = "9D526CA8-AAA3-4DC0-B485-D2C71C17BC9E";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};

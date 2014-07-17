@@ -23,10 +23,9 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.scrollView.scrollsToTop = NO;
 }
 
 - (void)addViewController:(UIViewController *)viewController title:(NSString *)title {
@@ -76,10 +75,14 @@
         current.alpha = 0.25;
         next.alpha = 1.0;
     }];
-    
+    [self didMoveFromIndex:self.activePage toIndex:index];
     self.activePage = index;
     NSString *event = [NSString stringWithFormat:@"%@", next.text];
     [Flurry logEvent:event];
+    
+}
+
+- (void)didMoveFromIndex:(NSInteger)index toIndex:(NSInteger)newIndex {
     
 }
 

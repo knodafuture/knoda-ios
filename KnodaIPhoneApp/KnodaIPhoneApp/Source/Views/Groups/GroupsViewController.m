@@ -29,7 +29,8 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupChanged:) name:GroupChangedNotificationName object:nil];
     
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTitle:@"Create" target:self action:@selector(createGroup:) color:[UIColor whiteColor]];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem rightBarButtonItemWithImage:[UIImage imageNamed:@"CreateGroupIcon"] target:self action:@selector(createGroup:)];
+    self.tableView.scrollsToTop = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated {

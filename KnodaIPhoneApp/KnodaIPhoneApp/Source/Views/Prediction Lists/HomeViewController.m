@@ -26,6 +26,7 @@
     self.title = @"HOME";
     
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem rightBarButtonItemWithImage:[UIImage imageNamed:@"NavSearchIcon"] target:self action:@selector(search)];
+    self.tableView.scrollsToTop = NO;
 }
 
 
@@ -46,12 +47,8 @@
     [Flurry endTimedEvent: @"Home_Screen" withParameters: nil];
 }
 
-- (void)viewDidAppearInNavigationViewController:(NavigationViewController *)viewController {
-    //[self appeared];
-}
-
-- (void)viewDidDisappearInNavigationViewController:(NavigationViewController *)viewController {
-    //[self disappeared];
+- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView {
+    return YES;
 }
 
 @end

@@ -67,8 +67,13 @@ CGFloat const SwipeBezel = 30.0f;
     
     self.tableViewControllers = @[myPredictions, myVotes];
     
-
     self.scrollView.bezelWidth = SwipeBezel;
+    
+    self.scrollView.scrollsToTop = NO;
+}
+
+- (UITableView *)tableView {
+    return self.visibleTableViewController.tableView;
 }
 
 - (void)onSettings {
@@ -219,6 +224,8 @@ CGFloat const SwipeBezel = 30.0f;
     if (self.activePage == index)
         return;
     
+    MeTableViewController *previous = self.tableViewControllers[self.activePage];
+    previous.tableView.scrollsToTop = NO;
     UILabel *current = [self.buttons objectAtIndex:self.activePage];
     UILabel *next = [self.buttons objectAtIndex:index];
     
@@ -230,6 +237,7 @@ CGFloat const SwipeBezel = 30.0f;
     self.activePage = index;
     
     self.visibleTableViewController = self.tableViewControllers[index];
+    self.visibleTableViewController.tableView.scrollsToTop = YES;
 }
 
 - (void)showImagePickerWithSource:(UIImagePickerControllerSourceType)sourceType {

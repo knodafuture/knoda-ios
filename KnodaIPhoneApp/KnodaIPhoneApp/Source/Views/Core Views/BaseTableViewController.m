@@ -27,7 +27,7 @@
     self.emptyDatasource = [[EmptyDatasource alloc] init];
 	self.tableView.backgroundColor = [UIColor whiteColor];
 	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    //self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.tableView.showsVerticalScrollIndicator = YES;
 
 	_imageLoader = [[ImageLoader alloc] initForTable:self.tableView delegate:self];
@@ -41,6 +41,7 @@
         self.pagingDatasource = [[PagingDatasource alloc] initWithTableView:self.tableView];
     
     self.pagingDatasource.delegate = self;
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {

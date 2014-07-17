@@ -43,4 +43,12 @@
         return nil;
 }
 
+- (void)didMoveFromIndex:(NSInteger)index toIndex:(NSInteger)newIndex {
+    ActivityViewController *previous = self.viewControllers[index];
+    ActivityViewController *next = self.viewControllers[newIndex];
+    
+    next.tableView.scrollsToTop = YES;
+    previous.tableView.scrollsToTop = NO;
+}
+
 @end

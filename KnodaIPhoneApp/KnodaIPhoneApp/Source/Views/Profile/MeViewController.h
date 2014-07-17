@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface MeViewController : UIViewController
-
+- (UITableView *)tableView;
 @end

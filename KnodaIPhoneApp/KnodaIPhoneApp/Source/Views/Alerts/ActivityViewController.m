@@ -51,6 +51,8 @@
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
         [self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 6, 0, 0)];
     }
+    
+    self.tableView.scrollsToTop = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated {

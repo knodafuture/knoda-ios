@@ -23,6 +23,7 @@
 #import "GroupSettingsViewController.h"
 #import "NotificationSettingsViewController.h"
 #import "NewActivityViewController.h"
+#import "UIView+Test.h"
 
 CGFloat const SideNavBezelWidth = 50.0f;
 
@@ -38,11 +39,8 @@ CGFloat const SideNavBezelWidth = 50.0f;
 @property (strong, nonatomic) UINavigationController *visibleViewController;
 
 @property (readonly, nonatomic) UserManager *userManger;
-
 @property (strong, nonatomic) Group *activeGroup;
-
 @property (strong, nonatomic) NSDictionary *pushInfo;
-
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *buttons;
 @property (weak, nonatomic) IBOutlet UIView *tabBarView;
 @property (weak, nonatomic) IBOutlet NavigationScrollView *scrollView;
@@ -68,6 +66,10 @@ CGFloat const SideNavBezelWidth = 50.0f;
     self.scrollView.disabled = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(activeGroupChanged:) name:ActiveGroupChangedNotificationName object:nil];
     self.scrollView.scrollsToTop = NO;
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 10 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [[UIApplication sharedApplication].keyWindow findScrollViews];
+    });
 }
 
 
@@ -240,6 +242,12 @@ CGFloat const SideNavBezelWidth = 50.0f;
         if ([self.visibleViewController.visibleViewController respondsToSelector:@selector(tableView)])
             [[(id)self.visibleViewController.visibleViewController tableView] setContentOffset:CGPointZero animated:YES];
     }
+    
+    if ([previousNavigationController.visibleViewController respondsToSelector:@selector(tableView)])
+        [[(id)previousNavigationController.visibleViewController tableView] setScrollsToTop:NO];
+    
+    if ([self.visibleViewController.visibleViewController respondsToSelector:@selector(tableView)])
+        [[(id)self.visibleViewController.visibleViewController tableView] setScrollsToTop:YES];
 
 }
 
@@ -351,11 +359,5 @@ CGFloat const SideNavBezelWidth = 50.0f;
     [self openMenuItem:page];
 }
 
-- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView {
-    if (scrollView != self.scrollView)
-        return YES;
-    
-    return NO;
-}
 
 @end

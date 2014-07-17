@@ -10,5 +10,5 @@
 
 @interface UIView (Test)
 - (void)findScrollViews;
-
+- (UIImage *)captureView;
 @end

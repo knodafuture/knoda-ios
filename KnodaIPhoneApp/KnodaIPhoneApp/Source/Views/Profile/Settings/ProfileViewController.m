@@ -187,7 +187,8 @@ static const float kAvatarSize = 344.0;
                               cancelButtonTitle:NSLocalizedString(@"OK", @"")
                               otherButtonTitles:nil] show];
             self.avatarImageView.image = temporary;
-        }
+        } else
+            self.avatarImageView.image = image;
     }];
 }
 

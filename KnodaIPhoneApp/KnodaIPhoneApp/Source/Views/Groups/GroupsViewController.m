@@ -76,11 +76,6 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (indexPath.section == 0) {
-        [self createGroup:nil];
-        return;
-    }
     if (indexPath.row == self.pagingDatasource.objects.count)
         return;
 

@@ -24,6 +24,7 @@
 #import "NotificationSettingsViewController.h"
 #import "NewActivityViewController.h"
 #import "UIView+Test.h"
+#import "WalkthroughController.h"   
 
 CGFloat const SideNavBezelWidth = 50.0f;
 
@@ -334,6 +335,8 @@ CGFloat const SideNavBezelWidth = 50.0f;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     
     [self presentViewController:nav animated:YES completion:nil];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:PredictWalkthroughCompleteNotificationName object:nil];
 }
 
 - (void)addPredictionViewController:(AddPredictionViewController *)viewController didCreatePrediction:(Prediction *)prediction {

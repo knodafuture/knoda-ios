@@ -99,6 +99,7 @@ CGFloat const SwipeBezel = 30.0f;
         frame.origin.y = 0;
         frame.origin.x = i * frame.size.width;
         vc.view.frame = frame;
+        [self addChildViewController:vc];
         [self.scrollView addSubview:vc.view];
     }
     
@@ -254,7 +255,7 @@ CGFloat const SwipeBezel = 30.0f;
     pickerVC.delegate      = self;
     [UINavigationBar setDefaultAppearance];
     
-    [self presentViewController:pickerVC animated:YES completion:nil];
+    [[[[UIApplication sharedApplication] delegate] window].rootViewController presentViewController:pickerVC animated:YES completion:nil];
 }
 
 - (void)sendAvatar:(UIImage *)image {
@@ -277,7 +278,7 @@ CGFloat const SwipeBezel = 30.0f;
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [UINavigationBar setCustomAppearance];
-    [self dismissViewControllerAnimated:YES completion:^{
+    [picker dismissViewControllerAnimated:YES completion:^{
         UIImage *img = info[UIImagePickerControllerOriginalImage];
         if(img) {
             if(img.size.width < kAvatarSize || img.size.height < kAvatarSize) {
@@ -300,7 +301,7 @@ CGFloat const SwipeBezel = 30.0f;
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [UINavigationBar setCustomAppearance];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark ImageCropperDelegate

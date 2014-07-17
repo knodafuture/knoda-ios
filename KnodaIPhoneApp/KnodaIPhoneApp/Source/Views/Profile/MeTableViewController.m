@@ -11,6 +11,8 @@
 #import "UserProfileHeaderView.h"
 #import "UserManager.h"
 #import "NoContentCell.h"
+#import "ProfileViewController.h"
+#import "AnotherUsersProfileViewController.h"
 
 @interface MeTableViewController ()
 @property (assign, nonatomic) BOOL challenged;
@@ -116,4 +118,24 @@
     self.headerView.hidden = hidden;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == self.pagingDatasource.objects.count)
+        return;
+    
+    Prediction *prediction = [self.pagingDatasource.objects objectAtIndex:indexPath.row];
+    
+    PredictionDetailsViewController *vc = [[PredictionDetailsViewController alloc] initWithPrediction:prediction];
+    vc.delegate = self;
+    
+    [self.parentViewController.navigationController pushViewController:vc animated:YES];
+    
+}
+
+- (void)profileSelectedWithUserId:(NSInteger)userId inCell:(PredictionCell *)cell {
+    if (userId == [UserManager sharedInstance].user.userId) {
+    } else {
+        AnotherUsersProfileViewController *vc = [[AnotherUsersProfileViewController alloc] initWithUserId:userId];
+        [self.parentViewController.navigationController pushViewController:vc animated:YES];
+    }
+}
 @end

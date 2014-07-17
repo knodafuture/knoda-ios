@@ -10,6 +10,7 @@
 #import "WebApi.h"
 #import "UserProfileHeaderView.h"
 #import "UserManager.h"
+#import "NoContentCell.h"
 
 @interface MeTableViewController ()
 @property (assign, nonatomic) BOOL challenged;
@@ -43,6 +44,7 @@
     self.headerCell.frame = frame;
     self.tableView.showsVerticalScrollIndicator = NO;
     [self.headerCell addSubview:self.headerView];
+    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -69,6 +71,16 @@
         return self.headerCell;
     
     return [super tableView:tableView cellForRowAtIndexPath:indexPath];
+}
+- (void)noObjectsRetrievedInPagingDatasource:(PagingDatasource *)pagingDatasource {
+    NoContentCell *cell = [NoContentCell noContentWithMessage:@"No Predictions." forTableView:self.tableView height:self.view.frame.size.height - self.headerCell.frame.size.height];
+    [self showNoContent:cell];
+    self.tableView.tableHeaderView = self.headerCell;
+    [self showNoContent:cell];
+}
+- (void)restoreContent {
+    self.tableView.tableHeaderView = nil;
+    [super restoreContent];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {

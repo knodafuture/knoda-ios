@@ -26,7 +26,6 @@
     [super viewDidLoad];
     self.title = @"PASSWORD";
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem backButtonWithTarget:self action:@selector(backButtonPress:)];
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTitle:@"Submit" target:self action:@selector(changeButtonPressed:) color:[UIColor whiteColor]];
 }
 
 - (IBAction)backButtonPress:(id)sender {

@@ -67,6 +67,7 @@ CGFloat const SideNavBezelWidth = 50.0f;
     [self updateAlerts];
     self.scrollView.disabled = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(activeGroupChanged:) name:ActiveGroupChangedNotificationName object:nil];
+    self.scrollView.scrollsToTop = NO;
 }
 
 
@@ -134,17 +135,14 @@ CGFloat const SideNavBezelWidth = 50.0f;
         self.activeGroup = newGroup;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [self.pingTimer invalidate];
     self.pingTimer = nil;    
 }
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
 
     if (!self.appeared) {
         self.appeared = YES;
@@ -152,16 +150,14 @@ CGFloat const SideNavBezelWidth = 50.0f;
         self.scrollView.bezelWidth = SideNavBezelWidth;
         self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * 4, self.scrollView.frame.size.height);
     
-        for (int i = 0; i < MenuItemsCount; i++) {
+        for (int i = 0; i < 1; i++) {
             UINavigationController *vc = [self navigationControllerForMenuItem:i];
             CGRect frame = vc.view.frame;
             frame.size = self.scrollView.frame.size;
             frame.origin.x = i * frame.size.width;
             frame.origin.y = 0;
             vc.view.frame = frame;
-            
             [self.scrollView addSubview:vc.view];
-
         }
     
     }
@@ -170,6 +166,20 @@ CGFloat const SideNavBezelWidth = 50.0f;
     self.pingTimer = nil;
     self.pingTimer = [NSTimer scheduledTimerWithTimeInterval:15 target:self selector:@selector(serverPing) userInfo:nil repeats:YES];
     
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    for (int i = 1; i < MenuItemsCount; i++) {
+        UINavigationController *vc = [self navigationControllerForMenuItem:i];
+        CGRect frame = vc.view.frame;
+        frame.size = self.scrollView.frame.size;
+        frame.origin.x = i * frame.size.width;
+        frame.origin.y = 0;
+        vc.view.frame = frame;
+        [self.scrollView addSubview:vc.view];
+    }
 }
 
 - (void)serverPing {
@@ -225,6 +235,11 @@ CGFloat const SideNavBezelWidth = 50.0f;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [previousNavigationController popToRootViewControllerAnimated:NO];
     });
+    
+    if (previousNavigationController == self.visibleViewController) {
+        if ([self.visibleViewController.visibleViewController respondsToSelector:@selector(tableView)])
+            [[(id)self.visibleViewController.visibleViewController tableView] setContentOffset:CGPointZero animated:YES];
+    }
 
 }
 
@@ -334,6 +349,13 @@ CGFloat const SideNavBezelWidth = 50.0f;
     float fractionalPage = scrollView.contentOffset.x / pageWidth;
     NSInteger page = lround(fractionalPage);
     [self openMenuItem:page];
+}
+
+- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView {
+    if (scrollView != self.scrollView)
+        return YES;
+    
+    return NO;
 }
 
 @end

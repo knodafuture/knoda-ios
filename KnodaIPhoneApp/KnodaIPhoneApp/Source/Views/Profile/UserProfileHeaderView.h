@@ -14,7 +14,7 @@
 
 - (void)twitterButtonPressedInHeaderView:(UserProfileHeaderView *)headerView;
 - (void)facebookButtonPressedInHeaderView:(UserProfileHeaderView *)headerView;
-
+- (void)avatarButtonPressedInHeaderView:(UserProfileHeaderView *)headerView;
 @end
 
 @interface UserProfileHeaderView : UIView

@@ -135,6 +135,9 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (tableView.dataSource == self.emptyDatasource)
+        return [self.emptyDatasource tableView:tableView heightForRowAtIndexPath:indexPath];
     return [self.pagingDatasource tableView:tableView heightForRowAtIndexPath:indexPath];
 }
 
@@ -166,15 +169,16 @@
 
 - (void)showNoContent:(UITableViewCell *)noContentCell {
     self.emptyDatasource.cell = noContentCell;
-    self.tableView.delegate = self.emptyDatasource;
     self.tableView.dataSource = self.emptyDatasource;
     [self.tableView reloadData];
 }
 
 - (void)restoreContent {
-    self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.tableView reloadData];
+}
+- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView {
+    return YES;
 }
 
 

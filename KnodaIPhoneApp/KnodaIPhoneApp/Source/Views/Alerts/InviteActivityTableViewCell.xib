@@ -41,6 +41,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="avatarImageView" destination="wl6-gJ-vqd" id="rmB-N7-5PA"/>
+                <outlet property="dotImageView" destination="rct-qZ-AP3" id="sky-vo-upb"/>
                 <outlet property="inviteButton" destination="o1w-Uu-Ekr" id="OlF-8H-gkh"/>
                 <outlet property="titleLabel" destination="9T1-2D-yJA" id="Xsj-qw-MJf"/>
             </connections>

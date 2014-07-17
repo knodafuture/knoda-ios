@@ -97,7 +97,10 @@ static UserManager *sharedSingleton;
             completionHandler(_user, error);
             return;
         }
-        [self refreshUser:completionHandler];
+        [self refreshUser:^(User *user, NSError *error) {
+            [self sendNotification];
+            completionHandler(user, error);
+        }];
     }];
 }
 
@@ -107,7 +110,10 @@ static UserManager *sharedSingleton;
             completionHandler(_user, error);
             return;
         }
-        [self refreshUser:completionHandler];
+        [self refreshUser:^(User *user, NSError *error) {
+            [self sendNotification];
+            completionHandler(user, error);
+        }];
     }];
 }
 
@@ -247,7 +253,10 @@ static UserManager *sharedSingleton;
 
 - (void)uploadProfileImage:(UIImage *)profileImage completion:(void (^)(User *, NSError *))completionHandler {
     [[WebApi sharedInstance] uploadProfileImage:profileImage completion:^(NSError *error) {
-        [self refreshUser:completionHandler];
+        [self refreshUser:^(User *user, NSError *error) {
+            [self sendNotification];
+            completionHandler(user, error);
+        }];
     }];
 }
 

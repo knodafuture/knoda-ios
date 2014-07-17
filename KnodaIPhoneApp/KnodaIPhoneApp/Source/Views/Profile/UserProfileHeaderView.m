@@ -9,6 +9,7 @@
 #import "UserProfileHeaderView.h"
 #import "User.h"
 #import "WebApi.h"
+#import "UserManager.h"
 
 static UINib *nib;
 
@@ -27,6 +28,11 @@ static UINib *nib;
     self.avatarImageView.layer.cornerRadius = self.avatarImageView.frame.size.height / 2.0;
     self.avatarImageView.clipsToBounds = YES;
     self.delegate = delegate;
+    
+    [self observeNotification:UserChangedNotificationName withBlock:^(__weak UserProfileHeaderView *self, NSNotification *notification) {
+        [self populateWithUser:[UserManager sharedInstance].user];
+    }];
+    
     return self;
 }
 
@@ -60,6 +66,24 @@ static UINib *nib;
         self.twitterImageView.image = [UIImage imageNamed:@"ProfileTwitterActive"];
     else
         self.twitterImageView.image = [UIImage imageNamed:@"ProfileTwitter"];
-    
+}
+
+- (IBAction)avatarPress:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(avatarButtonPressedInHeaderView:)])
+        [self.delegate avatarButtonPressedInHeaderView:self];
+}
+
+- (IBAction)twitterPress:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(twitterButtonPressedInHeaderView:)])
+        [self.delegate twitterButtonPressedInHeaderView:self];
+}
+
+- (IBAction)facebookPress:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(facebookButtonPressedInHeaderView:)])
+        [self.delegate facebookButtonPressedInHeaderView:self];
+}
+
+- (void)dealloc {
+    [self removeAllObservations];
 }
 @end

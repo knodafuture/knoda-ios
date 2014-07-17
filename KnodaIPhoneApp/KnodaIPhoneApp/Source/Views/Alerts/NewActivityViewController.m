@@ -34,4 +34,13 @@
     
 }
 
+- (UITableView *)tableView {
+    UIViewController *vc = [self.viewControllers objectAtIndex:self.activePage];
+    
+    if ([vc respondsToSelector:@selector(tableView)])
+        return [(id)vc tableView];
+    else
+        return nil;
+}
+
 @end

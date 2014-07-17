@@ -62,7 +62,7 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
 - (id)init {
     self = [super init];
     self.fileCache = [[FileCache alloc] init];
-    self.headers = @{@"Accept": @"application/json; api_version=4;", @"Content-Type" : @"application/json; charset=utf-8;"};
+    self.headers = @{@"Accept": @"application/json; api_version=5;", @"Content-Type" : @"application/json; charset=utf-8;"};
     return self;
 }
 
@@ -756,7 +756,7 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
 }
 
 - (void)executeRequest:(NSURLRequest *)request completion:(void (^)(NSData *, NSError *))completionHandler {
-    //NSLog(@"Executing request url: %@", request.URL.absoluteString);
+    NSLog(@"Executing request url: %@", request.URL.absoluteString);
     //NSLog(@"Body: %@", [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         [self handleResponse:response withData:data error:connectionError completion:completionHandler];
@@ -818,12 +818,12 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
 
         completionHandler(nil, [NSError errorWithDomain:@"" code:[httpResponse statusCode] userInfo:userInfo]);
 	}
-    else if (httpResponse == nil) {
-        NSLog(@"no connection");
-        [[NSNotificationCenter defaultCenter] postNotificationName:NoConnection object:nil];
-        //return;
-        
-    }
+//    else if (httpResponse == nil) {
+//        NSLog(@"no connection");
+//        [[NSNotificationCenter defaultCenter] postNotificationName:NoConnection object:nil];
+//        //return;
+//        
+//    }
 	else
 		completionHandler(data, error);
 }

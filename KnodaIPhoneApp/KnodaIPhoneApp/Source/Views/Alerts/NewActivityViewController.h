@@ -10,5 +10,5 @@
 #import "TabbedViewController.h"
 
 @interface NewActivityViewController : TabbedViewController
-
+@property (weak, nonatomic) UITableView *tableView;
 @end

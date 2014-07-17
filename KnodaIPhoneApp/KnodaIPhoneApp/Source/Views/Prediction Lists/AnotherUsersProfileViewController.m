@@ -42,7 +42,7 @@
     self.navigationController.navigationBar.translucent = NO;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem backButtonWithTarget:self action:@selector(backPressed:)];
     
-    self.headerView = [[UserProfileHeaderView alloc] init];
+    self.headerView = [[UserProfileHeaderView alloc] initWithDelegate:nil];
         
     self.headerCell = [[UITableViewCell alloc] init];
     self.headerCell.selectionStyle = UITableViewCellSelectionStyleNone;

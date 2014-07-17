@@ -74,6 +74,10 @@
         imageView.frame = frame;
         
         [cell.contentView addSubview:imageView];
+        
+        frame = cell.textLabel.frame;
+        frame.origin.x = 10.0;
+        cell.textLabel.frame = frame;
     }
     
     if (indexPath.row == 0)

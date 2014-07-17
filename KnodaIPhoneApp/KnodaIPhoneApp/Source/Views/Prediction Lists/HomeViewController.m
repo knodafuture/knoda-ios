@@ -15,20 +15,13 @@
 #import "UserManager.h"
 #import "SearchViewController.h"
 
-@interface HomeViewController () <FirstStartViewDelegate, NavigationViewControllerDelegate>
-
-@property (strong, nonatomic) NSArray *predictions;
-@property (strong, nonatomic) FirstStartView *firstStartView;
+@interface HomeViewController () <NavigationViewControllerDelegate>
 @end
 
 @implementation HomeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:FirstLaunchKey] || ![UserManager sharedInstance].user) {
-        [self showFirstStartOverlay];
-    }
     
     self.title = @"HOME";
     
@@ -53,28 +46,12 @@
     [Flurry endTimedEvent: @"Home_Screen" withParameters: nil];
 }
 
-- (void)showFirstStartOverlay {
-    [Flurry logEvent: @"First_Screen_Overlay" timed: YES];
-    
-    self.firstStartView = [[FirstStartView alloc] initWithDelegate:self];
-    [[[[UIApplication sharedApplication] delegate] window] addSubview:self.firstStartView];
-}
-
-- (void)firstStartViewDidClose:(FirstStartView *)firstStartView {
-    [Flurry endTimedEvent: @"First_Screen_Overlay" withParameters: nil];
-    
-    [self.firstStartView removeFromSuperview];
-    self.firstStartView = nil;
-    self.view.userInteractionEnabled = YES;
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:FirstLaunchKey];
-}
-
 - (void)viewDidAppearInNavigationViewController:(NavigationViewController *)viewController {
-    [self appeared];
+    //[self appeared];
 }
 
 - (void)viewDidDisappearInNavigationViewController:(NavigationViewController *)viewController {
-    [self disappeared];
+    //[self disappeared];
 }
 
 @end

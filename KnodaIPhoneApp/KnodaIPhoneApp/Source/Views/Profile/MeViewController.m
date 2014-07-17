@@ -12,10 +12,20 @@
 #import "UserProfileHeaderView.h"
 #import "MeTableViewController.h"
 #import "NavigationScrollView.h"
+#import "ImageCropperViewController.h"
+#import "LoadingView.h"
+#import "FacebookManager.h"
+#import "TwitterManager.h"
+#import "UIActionSheet+Blocks.h"
+
+static const float kAvatarSize = 344.0;
+#define AVATAR_SIZE CGSizeMake(kAvatarSize, kAvatarSize)
+static const int kDefaultAvatarsCount = 5;
+
 
 CGFloat const SwipeBezel = 30.0f;
 
-@interface MeViewController () <UIScrollViewDelegate, MeTableViewControllerDelegate>
+@interface MeViewController () <UIScrollViewDelegate, MeTableViewControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ImageCropperDelegate, UIActionSheetDelegate>
 @property (weak, nonatomic) IBOutlet NavigationScrollView *scrollView;
 @property (strong, nonatomic) UserProfileHeaderView *headerView;
 @property (strong, nonatomic) NSArray *buttons;
@@ -25,15 +35,19 @@ CGFloat const SwipeBezel = 30.0f;
 @property (strong, nonatomic) UIView *buttonsContainer;
 @property (assign, nonatomic) NSInteger activePage;
 @property (assign, nonatomic) BOOL setup;
+@property (strong, nonatomic) UIActionSheet *avatarChangeAcitonSheet;
 @end
 
 @implementation MeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = [UserManager sharedInstance].user.name;
+    self.title = [UserManager sharedInstance].user.name.uppercaseString;
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem rightBarButtonItemWithImage:[UIImage imageNamed:@"SettingsIcon"] target:self action:@selector(onSettings)];
 
+    self.selectionView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 36)];
+    self.selectionView.backgroundColor = [UIColor colorFromHex:@"77bc1f"];
+    
     UILabel *myPredictionsLabel = [self headerLabel];
     myPredictionsLabel.text = @"My Predictions";
     
@@ -53,9 +67,7 @@ CGFloat const SwipeBezel = 30.0f;
     
     self.tableViewControllers = @[myPredictions, myVotes];
     
-    self.selectionView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 36)];
-    self.selectionView.backgroundColor = [UIColor colorFromHex:@"77bc1f"];
-    
+
     self.scrollView.bezelWidth = SwipeBezel;
 }
 
@@ -98,52 +110,23 @@ CGFloat const SwipeBezel = 30.0f;
     if (self.buttons.count == 0)
         return;
     
-    CGFloat totalTextWidth;
+    UILabel *firstButton = self.buttons[0];
+    UILabel *secondButton = self.buttons[1];
     
-    for (UILabel *button in self.buttons) {
-        [button sizeToFit];
-        totalTextWidth = totalTextWidth + button.frame.size.width;
-    }
+    frame = firstButton.frame;
+    frame.origin.x = 0;
+    frame.size.width = self.selectionView.frame.size.width / 2.0;
+    firstButton.frame = frame;
     
-    CGFloat width = self.view.frame.size.width - 80.0;
-    CGFloat diff = width - totalTextWidth;
-    diff = diff / 3;
+    frame = secondButton.frame;
+    frame.origin.x = self.selectionView.frame.size.width / 2.0;
+    frame.size.width = frame.origin.x;
+    secondButton.frame = frame;
     
-    frame = self.selectionView.bounds;
-    
-    frame.size.width = width;
-    frame.origin.x = (self.selectionView.frame.size.width / 2.0) - (frame.size.width / 2.0);
-    
-    self.buttonsContainer = [[UIView alloc] initWithFrame:frame];
-    
-    CGFloat currentOffset = 0;
-    
-    for (int i = 0; i < self.buttons.count; i++) {
-        UILabel *button = self.buttons[i];
-        
-        frame = button.frame;
-        frame.size.width = frame.size.width + diff;
-        frame.origin.x = currentOffset;
-        frame.size.height = self.selectionView.frame.size.height;
-        currentOffset = currentOffset + frame.size.width;
-        
-        [self.buttonsContainer addSubview:button];
-        button.frame = frame;
-    }
-    
-    UILabel *lastButton = [self.buttons lastObject];
-    
-    if (lastButton.frame.origin.x + lastButton.frame.size.width != self.buttonsContainer.frame.size.width) {
-        CGRect frame = lastButton.frame;
-        frame.origin.x = self.buttonsContainer.frame.size.width - frame.size.width;
-        lastButton.frame = frame;
-    }
-    
-    [[self.buttons lastObject] setTextAlignment:NSTextAlignmentRight];
+    [self.selectionView addSubview:firstButton];
+    [self.selectionView addSubview:secondButton];
     
     [self.buttons[0] setAlpha:1.0];
-    [self.selectionView addSubview:self.buttonsContainer];
-
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -210,12 +193,12 @@ CGFloat const SwipeBezel = 30.0f;
 }
 
 - (UILabel *)headerLabel {
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.selectionView.frame.size.width * .25, self.selectionView.frame.size.height)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.selectionView.frame.size.width * .5, self.selectionView.frame.size.height)];
     label.font = [UIFont fontWithName:@"HelveticaNeue" size:14.0];
     label.textColor = [UIColor whiteColor];
     label.userInteractionEnabled = YES;
     label.backgroundColor = [UIColor clearColor];
-    label.textAlignment = NSTextAlignmentLeft;
+    label.textAlignment = NSTextAlignmentCenter;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelTapped:)];
     [label addGestureRecognizer:tap];
     label.alpha = 0.25;
@@ -249,4 +232,230 @@ CGFloat const SwipeBezel = 30.0f;
     self.visibleTableViewController = self.tableViewControllers[index];
 }
 
+- (void)showImagePickerWithSource:(UIImagePickerControllerSourceType)sourceType {
+    
+    if(![UIImagePickerController isSourceTypeAvailable:sourceType]) {
+        DLog(@"UIImagePickerController sourceType (%ld) unavailable", (long)sourceType);
+        return;
+    }
+    
+    UIImagePickerController *pickerVC = [UIImagePickerController new];
+    
+    pickerVC.sourceType    = sourceType;
+    pickerVC.allowsEditing = NO;
+    pickerVC.delegate      = self;
+    [UINavigationBar setDefaultAppearance];
+    
+    [self presentViewController:pickerVC animated:YES completion:nil];
+}
+
+- (void)sendAvatar:(UIImage *)image {
+    [[LoadingView sharedInstance] show];
+    
+    [[UserManager sharedInstance] uploadProfileImage:image completion:^(User *user, NSError *error) {
+        [[LoadingView sharedInstance] hide];
+        
+        if (error) {
+            [[[UIAlertView alloc] initWithTitle:nil
+                                        message:error.localizedDescription
+                                       delegate:nil
+                              cancelButtonTitle:NSLocalizedString(@"OK", @"")
+                              otherButtonTitles:nil] show];
+        }
+    }];
+}
+
+#pragma mark UIImagePickerControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    [UINavigationBar setCustomAppearance];
+    [self dismissViewControllerAnimated:YES completion:^{
+        UIImage *img = info[UIImagePickerControllerOriginalImage];
+        if(img) {
+            if(img.size.width < kAvatarSize || img.size.height < kAvatarSize) {
+                img = [img scaledToSize:AVATAR_SIZE autoScale:NO];
+            }
+            if(CGSizeEqualToSize(img.size, AVATAR_SIZE)) {
+                [self sendAvatar:img];
+            }
+            else {
+                ImageCropperViewController *vc = [[ImageCropperViewController alloc] initWithNibName:@"ImageCropperViewController" bundle:[NSBundle mainBundle]];
+                vc.image    = img;
+                vc.delegate = self;
+                vc.cropSize = AVATAR_SIZE;
+                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+                [self presentViewController:nav animated:YES completion:nil];
+            }
+        }
+    }];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [UINavigationBar setCustomAppearance];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark ImageCropperDelegate
+
+- (void)imageCropperDidCancel:(ImageCropperViewController *)vc {
+    [vc dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imageCropper:(ImageCropperViewController *)vc didCroppedImage:(UIImage *)image {
+    if(!CGSizeEqualToSize(image.size, AVATAR_SIZE)) {
+        image = [image scaledToSize:AVATAR_SIZE autoScale:NO];
+    }
+    [self sendAvatar:image];
+    [vc dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - UIActionSheet delegate
+
+- (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (actionSheet == self.avatarChangeAcitonSheet) {
+        switch (buttonIndex) {
+            case 0: //take photo
+            case 1: //choose existing photo
+                [self showImagePickerWithSource:(buttonIndex ? UIImagePickerControllerSourceTypePhotoLibrary : UIImagePickerControllerSourceTypeCamera)];
+                break;
+            case 2: //skip
+            {
+                NSString *imgName = [NSString stringWithFormat:@"avatar_%d.png", (arc4random() % kDefaultAvatarsCount + 1)];
+                [self sendAvatar:[UIImage imageNamed:imgName]];
+            }
+            default: //continue
+                break;
+        }
+    }
+}
+
+- (void)avatarButtonPressedInHeaderView:(UserProfileHeaderView *)headerView {
+    if (!self.avatarChangeAcitonSheet) {
+        self.avatarChangeAcitonSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                                   delegate:self
+                                                          cancelButtonTitle:NSLocalizedString(@"Cancel", @"")
+                                                     destructiveButtonTitle:nil
+                                                          otherButtonTitles:NSLocalizedString(@"Take Photo", @""), NSLocalizedString(@"Choose Existing Photo", @""), NSLocalizedString(@"Set Default", @""), nil];
+    }
+    [self.avatarChangeAcitonSheet showInView:[UIApplication sharedApplication].keyWindow];
+}
+
+
+- (void)twitterButtonPressedInHeaderView:(UserProfileHeaderView *)headerView {
+    if ([UserManager sharedInstance].user.twitterAccount)
+        [self removeTwitterAccount];
+    else
+        [self addTwitterAccount];
+}
+- (void)facebookButtonPressedInHeaderView:(UserProfileHeaderView *)headerView {
+    if ([UserManager sharedInstance].user.facebookAccount)
+        [self removeFacebookAccount];
+    else
+        [self addFacebookAccount];
+}
+
+- (void)addTwitterAccount {
+    [[LoadingView sharedInstance] show];
+    [[TwitterManager sharedInstance] performReverseAuth:^(SocialAccount *request, NSError *error) {
+        if (error) {
+            [[LoadingView sharedInstance] hide];
+            return;
+        }
+        
+        [[UserManager sharedInstance] addSocialAccount:request completion:^(User *user, NSError *error) {
+            [[LoadingView sharedInstance] hide];
+            if (error)
+                [[[UIAlertView alloc] initWithTitle:nil
+                                            message:error.localizedDescription
+                                           delegate:nil
+                                  cancelButtonTitle:NSLocalizedString(@"OK", @"")
+                                  otherButtonTitles:nil] show];
+        }];
+    }];
+}
+
+- (void)removeTwitterAccount {
+    
+    User *user = [UserManager sharedInstance].user;
+    
+    if ((!user.email || [user.email isEqualToString:@""]) && !user.facebookAccount) {
+        [[[UIAlertView alloc] initWithTitle:@"Error" message:@"You must enter an email address before removing your last social account, or your account will be lost forever." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+        return;
+    }
+    
+    [UIActionSheet showInView:[UIApplication sharedApplication].keyWindow withTitle:@"Are you sure?" cancelButtonTitle:@"No" destructiveButtonTitle:@"Yes, remove this account." otherButtonTitles:nil tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+        if (buttonIndex == actionSheet.cancelButtonIndex) {
+            return;
+        }
+        [self twitterAccountRemovalConfirm];
+    }];
+}
+
+- (void)twitterAccountRemovalConfirm {
+    [[LoadingView sharedInstance] show];
+    [[UserManager sharedInstance] deleteSocialAccount:[UserManager sharedInstance].user.twitterAccount completion:^(User *user, NSError *error) {
+        [[LoadingView sharedInstance] hide];
+        if (error)
+            [[[UIAlertView alloc] initWithTitle:nil
+                                        message:error.localizedDescription
+                                       delegate:nil
+                              cancelButtonTitle:NSLocalizedString(@"OK", @"")
+                              otherButtonTitles:nil] show];
+    }];
+}
+
+- (void)addFacebookAccount {
+    [[LoadingView sharedInstance] show];
+    [[FacebookManager sharedInstance] openSession:^(NSDictionary *data, NSError *error) {
+        if (error) {
+            [[LoadingView sharedInstance] hide];
+            [[[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+            return;
+        }
+        SocialAccount *request = [[SocialAccount alloc] init];
+        request.providerName = @"facebook";
+        request.providerId = data[@"id"];
+        request.accessToken = [[FacebookManager sharedInstance] accessTokenForCurrentSession];
+        
+        
+        [[UserManager sharedInstance] addSocialAccount:request completion:^(User *user, NSError *error) {
+            [[LoadingView sharedInstance] hide];
+            if (error)
+                [[[UIAlertView alloc] initWithTitle:nil
+                                            message:error.localizedDescription
+                                           delegate:nil
+                                  cancelButtonTitle:NSLocalizedString(@"OK", @"")
+                                  otherButtonTitles:nil] show];
+        }];
+    }];
+}
+
+- (void)removeFacebookAccount {
+    User *user = [UserManager sharedInstance].user;
+    
+    if ((!user.email || [user.email isEqualToString:@""]) && !user.twitterAccount) {
+        [[[UIAlertView alloc] initWithTitle:@"Error" message:@"You must enter an email address before removing your last social account, or your account will be lost forever." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+        return;
+    }
+    
+    [UIActionSheet showInView:[UIApplication sharedApplication].keyWindow withTitle:@"Are you sure?" cancelButtonTitle:@"No" destructiveButtonTitle:@"Yes, remove this account." otherButtonTitles:nil tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+        if (buttonIndex == actionSheet.cancelButtonIndex) {
+            return;
+        }
+        [self facebokAccountRemovalConfirm];
+    }];
+}
+
+- (void)facebokAccountRemovalConfirm {
+    [[LoadingView sharedInstance] show];
+    [[UserManager sharedInstance] deleteSocialAccount:[UserManager sharedInstance].user.facebookAccount completion:^(User *user, NSError *error) {
+        [[LoadingView sharedInstance] hide];
+        if (error)
+            [[[UIAlertView alloc] initWithTitle:nil
+                                        message:error.localizedDescription
+                                       delegate:nil
+                              cancelButtonTitle:NSLocalizedString(@"OK", @"")
+                              otherButtonTitles:nil] show];
+    }];
+}
 @end

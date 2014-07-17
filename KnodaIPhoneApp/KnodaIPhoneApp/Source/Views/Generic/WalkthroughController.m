@@ -28,8 +28,6 @@ NSString *PredictWalkthroughCompleteKey = @"PREDICT_COMPLETE_KEY";
     self = [super init];
     self.viewController = viewController;
     
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:VotingWalkthroughCompleteKey];
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:PredictWalkthroughCompleteKey];
     return self;
 }
 

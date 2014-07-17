@@ -66,14 +66,11 @@
 - (void)predictionAgreed:(Prediction *)prediction inCell:(PredictionCell *) cell {
     [super predictionAgreed:prediction inCell:cell];
     
-    if ([self.pagingDatasource.objects indexOfObject:prediction] == 0)
-        [[NSNotificationCenter defaultCenter] postNotificationName:VotingWalkthroughCompleteNotificationName object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:VotingWalkthroughCompleteNotificationName object:nil];
 }
 
 - (void)predictionDisagreed:(Prediction *)prediction inCell:(PredictionCell *) cell {
     [super predictionDisagreed:prediction inCell:cell];
-    
-    if ([self.pagingDatasource.objects indexOfObject:prediction] == 0)
-        [[NSNotificationCenter defaultCenter] postNotificationName:VotingWalkthroughCompleteNotificationName object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:VotingWalkthroughCompleteNotificationName object:nil];
 }
 @end

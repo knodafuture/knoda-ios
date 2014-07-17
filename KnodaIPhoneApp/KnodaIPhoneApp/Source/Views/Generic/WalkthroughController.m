@@ -81,7 +81,7 @@ NSString *PredictWalkthroughCompleteKey = @"PREDICT_COMPLETE_KEY";
 
 - (void)completeVotingWalkthrough {
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:VotingWalkthroughCompleteKey];
-    [self removeAllObservations];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     [UIView animateWithDuration:0.5 animations:^{
         self.currentWalkthrough.alpha = 0.0;
@@ -92,10 +92,8 @@ NSString *PredictWalkthroughCompleteKey = @"PREDICT_COMPLETE_KEY";
 }
 
 - (void)showPredictionWalkthrough {
-    [self observeNotification:PredictWalkthroughCompleteNotificationName withBlock:^(__weak WalkthroughController *self, NSNotification *notification) {
-        [self completePredictWalkthrough];
-    }];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(completePredictWalkthrough) name:PredictWalkthroughCompleteNotificationName object:nil];
     UIImage *capture = [self.viewController.view captureView];
     
     UIImage *walkthroughImage = [UIImage imageNamed:@"PredictWalkthru"];
@@ -108,7 +106,11 @@ NSString *PredictWalkthroughCompleteKey = @"PREDICT_COMPLETE_KEY";
     CGImageRelease(croppedRef);
     
     croppedImage = [croppedImage applyExtraLightEffect];
-    UIView *walkthroughView = [[UIView alloc] initWithFrame:CGRectMake(0, rect.origin.y, walkthroughImage.size.width, walkthroughImage.size.height)];
+    
+    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+    CGPoint convertedPoint = [window convertPoint:rect.origin fromView:self.viewController.view];
+    UIView *walkthroughView = [[UIView alloc] initWithFrame:CGRectMake(0, convertedPoint.y, walkthroughImage.size.width, walkthroughImage.size.height)];
+    
     UIImageView *background = [[UIImageView alloc] initWithImage:croppedImage];
     [walkthroughView addSubview:background];
     
@@ -119,9 +121,13 @@ NSString *PredictWalkthroughCompleteKey = @"PREDICT_COMPLETE_KEY";
     
     walkthroughView.alpha = 1.0;
     
-    [self.viewController.view addSubview:walkthroughView];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(completePredictWalkthrough)];
+    [walkthroughView addGestureRecognizer:tap];
+    
+    [window.rootViewController.view addSubview:walkthroughView];
     self.currentWalkthrough = walkthroughView;
     self.viewController.tableView.userInteractionEnabled = NO;
+    
     [UIView animateWithDuration:1.0 animations:^{
         walkthroughView.alpha = 1.0;
     }];
@@ -130,7 +136,7 @@ NSString *PredictWalkthroughCompleteKey = @"PREDICT_COMPLETE_KEY";
 - (void)completePredictWalkthrough {
     self.viewController.tableView.userInteractionEnabled = YES;
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:PredictWalkthroughCompleteKey];
-    [self removeAllObservations];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     [UIView animateWithDuration:0.5 animations:^{
         self.currentWalkthrough.alpha = 0.0;

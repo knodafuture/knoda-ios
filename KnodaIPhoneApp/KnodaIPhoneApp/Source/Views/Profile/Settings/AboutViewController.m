@@ -30,6 +30,7 @@
     
     self.view.backgroundColor = [UIColor colorFromHex:@"efefef"];
     self.tableView.separatorColor = [UIColor colorFromHex:@"efefef"];
+    self.tableView.scrollEnabled = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -104,6 +105,9 @@
             [composeViewController setToRecipients:@[@"support@knoda.com"]];
             [composeViewController setSubject:@"Knoda iOS Feedback"];
             [self presentViewController:composeViewController animated:YES completion:nil];
+        } else {
+            WebViewController *vc = [[WebViewController alloc] initWithURL:@"http://knoda.zendesk.com"];
+            [self.navigationController pushViewController:vc animated:YES];
         }
     }
 }

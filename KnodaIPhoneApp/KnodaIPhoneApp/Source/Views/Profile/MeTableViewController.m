@@ -48,12 +48,13 @@
     [self.headerCell addSubview:self.headerView];
     
     self.refreshControl.tintColor = [UIColor whiteColor];
-    
-    UIView *refreshBackground = [[UIView alloc] initWithFrame:CGRectMake(0, -self.refreshControl.frame.size.height * 2, self.view.frame.size.width, self.refreshControl.frame.size.height * 2)];
+    self.tableView.backgroundColor = [UIColor clearColor];
+    UIView *refreshBackground = [[UIView alloc] initWithFrame:CGRectMake(0, -self.refreshControl.frame.size.height * 5, self.view.frame.size.width, self.refreshControl.frame.size.height * 5)];
     refreshBackground.backgroundColor = [UIColor colorFromHex:@"77bc1f"];
-    
     [self.tableView insertSubview:refreshBackground atIndex:0];
     self.tableView.scrollsToTop = NO;
+    
+    self.headerCell.backgroundColor = [UIColor clearColor];
     
 }
 
@@ -99,9 +100,8 @@
     
         UITableViewCell *stickyCell = self.headerCell;
         CGRect frame = stickyCell.frame;
-        if (scrollView.contentOffset.y < 0)
-            return;
-        frame.origin.y = scrollView.contentOffset.y * 0.5;
+
+        frame.origin.y = MAX(scrollView.contentOffset.y * 0.5, 0);
         
         stickyCell.frame = frame;
         

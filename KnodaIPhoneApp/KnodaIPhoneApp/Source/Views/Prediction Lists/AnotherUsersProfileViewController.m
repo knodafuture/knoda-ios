@@ -179,9 +179,7 @@
     
     UITableViewCell *stickyCell = self.headerCell;
     CGRect frame = stickyCell.frame;
-    if (scrollView.contentOffset.y < 0)
-        return;
-    frame.origin.y = scrollView.contentOffset.y * 0.5;
+    frame.origin.y = MAX(scrollView.contentOffset.y * 0.5, 0);
     
     stickyCell.frame = frame;
     

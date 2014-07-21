@@ -56,6 +56,8 @@
     
     self.headerCell.backgroundColor = [UIColor clearColor];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatePrediction:) name:PredictionChangedNotificationName object:nil];
+    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -109,6 +111,23 @@
         [stickyCell.superview sendSubviewToBack:self.refreshControl];
 }
 
+- (void)updatePrediction:(NSNotification *)notification {
+    
+    Prediction *prediction = notification.userInfo[PredictionChangedNotificationKey];
+    NSInteger indexToExchange = NSNotFound;
+    
+    for (Prediction *oldPrediction in self.pagingDatasource.objects) {
+        if (prediction.predictionId == oldPrediction.predictionId)
+            indexToExchange = [self.pagingDatasource.objects indexOfObject:oldPrediction];
+    }
+    
+    if (indexToExchange == NSNotFound)
+        return;
+    
+    [self.pagingDatasource.objects replaceObjectAtIndex:indexToExchange withObject:prediction];
+    [self.tableView reloadData];
+}
+
 - (void)objectsAfterObject:(id)object completion:(void (^)(NSArray *, NSError *))completionHandler {
     NSInteger lastId = [(Prediction *)object predictionId];
     [[WebApi sharedInstance] getHistoryAfter:lastId challenged:self.challenged completion:completionHandler];
@@ -137,5 +156,9 @@
         AnotherUsersProfileViewController *vc = [[AnotherUsersProfileViewController alloc] initWithUserId:userId];
         [self.parentViewController.navigationController pushViewController:vc animated:YES];
     }
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 @end

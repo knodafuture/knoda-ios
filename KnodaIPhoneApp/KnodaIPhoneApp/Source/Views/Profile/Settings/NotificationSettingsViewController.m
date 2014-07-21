@@ -36,6 +36,8 @@
         [self.tableView setSeparatorInset:UIEdgeInsetsZero];
     }
     
+    self.tableView.separatorColor = [UIColor colorFromHex:@"efefef"];
+    
     self.tableView.backgroundColor = [UIColor colorFromHex:@"efefef"];
     self.tableView.tableFooterView = [[UIView alloc] init];
     [self refresh];
@@ -73,6 +75,20 @@
     cell.displayName.text = [setting displayName];
     cell.descriptionView.text = [setting description];
     [cell.descriptionView sizeToFit];
+    
+    CGFloat totalHeight = cell.descriptionView.frame.origin.y + cell.descriptionView.frame.size.height - cell.displayName.frame.origin.y;
+    
+    CGFloat spacing = cell.descriptionView.frame.origin.y - (cell.displayName.frame.origin.y + cell.displayName.frame.size.height);
+    
+    CGFloat center = (cell.frame.size.height / 2.0);
+    
+    CGRect frame = cell.displayName.frame;
+    frame.origin.y = center - (totalHeight / 2.0);
+    cell.displayName.frame = frame;
+    
+    frame = cell.descriptionView.frame;
+    frame.origin.y = cell.displayName.frame.origin.y + cell.displayName.frame.size.height + spacing;
+    cell.descriptionView.frame = frame;
     
     cell.switchIndicator.on = [setting active];
     cell.switchIndicator.tag = indexPath.row;

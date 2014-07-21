@@ -27,6 +27,8 @@ static UINib *nib;
     self = [[nib instantiateWithOwner:nil options:nil] lastObject];
     self.avatarImageView.layer.cornerRadius = self.avatarImageView.frame.size.height / 2.0;
     self.avatarImageView.clipsToBounds = YES;
+    self.avatarImageView.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.avatarImageView.layer.borderWidth = 1.0;
     self.delegate = delegate;
     
     [self observeNotification:UserChangedNotificationName withBlock:^(__weak UserProfileHeaderView *self, NSNotification *notification) {

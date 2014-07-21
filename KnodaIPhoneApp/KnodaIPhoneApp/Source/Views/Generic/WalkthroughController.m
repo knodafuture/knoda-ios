@@ -10,6 +10,8 @@
 #import "HomeViewController.h"
 #import "UIImage+ImageEffects.h"
 #import "UIView+Test.h" 
+#import "AppDelegate.h"
+#import "NavigationViewController.h"
 
 NSString *VotingWalkthroughCompleteNotificationName = @"VOTING_COMPLETE";
 NSString *PredictWalkthroughCompleteNotificationName = @"PREDICTION_COMPLETE";
@@ -32,6 +34,12 @@ NSString *PredictWalkthroughCompleteKey = @"PREDICT_COMPLETE_KEY";
 }
 
 - (void)beginShowingWalkthroughIfNeeded {
+    
+    BOOL firstLaunch = [[NSUserDefaults standardUserDefaults] boolForKey:FirstLaunchKey];
+    NSLog(@"FIRST LAUNCH = %i", firstLaunch);
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:FirstLaunchKey])
+        return;
+    
     if (![[NSUserDefaults standardUserDefaults] boolForKey:VotingWalkthroughCompleteKey])
         [self showVotingWalkthrough];
     else if (![[NSUserDefaults standardUserDefaults] boolForKey:PredictWalkthroughCompleteKey])
@@ -39,11 +47,6 @@ NSString *PredictWalkthroughCompleteKey = @"PREDICT_COMPLETE_KEY";
 }
 
 - (void)showVotingWalkthrough {
-    
-    [self observeNotification:VotingWalkthroughCompleteNotificationName withBlock:^(__weak WalkthroughController *self, NSNotification *notification) {
-        //[self completeVotingWalkthrough];
-    }];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(completeVotingWalkthrough) name:VotingWalkthroughCompleteNotificationName object:nil];
     
     UIImage *capture = [self.viewController.view captureView];
@@ -70,11 +73,12 @@ NSString *PredictWalkthroughCompleteKey = @"PREDICT_COMPLETE_KEY";
 
     walkthroughView.backgroundColor = [UIColor clearColor];
     
-    walkthroughView.alpha = 1.0;
+    walkthroughView.alpha = 0.0;
     
-    [self.viewController.tableView addSubview:walkthroughView];
+    [self.viewController.view addSubview:walkthroughView];
     self.currentWalkthrough = walkthroughView;
-    [UIView animateWithDuration:1.0 animations:^{
+    
+    [UIView animateWithDuration:0.5 animations:^{
         walkthroughView.alpha = 1.0;
     }];
 }
@@ -108,7 +112,7 @@ NSString *PredictWalkthroughCompleteKey = @"PREDICT_COMPLETE_KEY";
     croppedImage = [croppedImage applyExtraLightEffect];
     
     UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
-    CGPoint convertedPoint = [window convertPoint:rect.origin fromView:self.viewController.view];
+    CGPoint convertedPoint = CGPointMake(0, rect.origin.y + 20 + 44);//[window convertPoint:rect.origin fromView:self.viewController.view];
     UIView *walkthroughView = [[UIView alloc] initWithFrame:CGRectMake(0, convertedPoint.y, walkthroughImage.size.width, walkthroughImage.size.height)];
     
     UIImageView *background = [[UIImageView alloc] initWithImage:croppedImage];
@@ -119,7 +123,7 @@ NSString *PredictWalkthroughCompleteKey = @"PREDICT_COMPLETE_KEY";
     
     walkthroughView.backgroundColor = [UIColor clearColor];
     
-    walkthroughView.alpha = 1.0;
+    walkthroughView.alpha = 0.0;
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(completePredictWalkthrough)];
     [walkthroughView addGestureRecognizer:tap];
@@ -127,15 +131,19 @@ NSString *PredictWalkthroughCompleteKey = @"PREDICT_COMPLETE_KEY";
     [window.rootViewController.view addSubview:walkthroughView];
     self.currentWalkthrough = walkthroughView;
     self.viewController.tableView.userInteractionEnabled = NO;
-    
-    [UIView animateWithDuration:1.0 animations:^{
+    [(NavigationViewController *)window.rootViewController setTabBarEnabled:NO];
+    [UIView animateWithDuration:0.5 animations:^{
         walkthroughView.alpha = 1.0;
     }];
 }
 
 - (void)completePredictWalkthrough {
     self.viewController.tableView.userInteractionEnabled = YES;
+    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+    [(NavigationViewController *)window.rootViewController setTabBarEnabled:YES];
+    
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:PredictWalkthroughCompleteKey];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:FirstLaunchKey];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     [UIView animateWithDuration:0.5 animations:^{

@@ -56,7 +56,7 @@ CGFloat const SideNavBezelWidth = 50.0f;
     self.vcCache = [[NSMutableDictionary alloc] init];
     self.pushInfo = pushInfo;
     _userManger = [UserManager sharedInstance];
-    
+    self.tabBarEnabled = YES;
     self.buttonNames = @[@"NavHome", @"NavActivity", @"NavGroups", @"NavMe"];
     return self;
     
@@ -249,7 +249,7 @@ CGFloat const SideNavBezelWidth = 50.0f;
 }
 
 - (IBAction)tabBarButtonPressed:(id)sender {
-    if (![self.buttons containsObject:sender])
+    if (![self.buttons containsObject:sender] || !self.tabBarEnabled)
         return;
     
     [self openMenuItem:[self.buttons indexOfObject:sender]];

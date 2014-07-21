@@ -11,8 +11,10 @@
 @class HomeViewController;
 UIKIT_EXTERN NSString *VotingWalkthroughCompleteNotificationName;
 UIKIT_EXTERN NSString *PredictWalkthroughCompleteNotificationName;
-
+UIKIT_EXTERN NSString *VotingWalkthroughCompleteKey;
+UIKIT_EXTERN NSString *PredictWalkthroughCompleteKey;
 @interface WalkthroughController : NSObject
+
 
 - (id)initWithTargetViewController:(HomeViewController *)viewController;
 - (void)beginShowingWalkthroughIfNeeded;

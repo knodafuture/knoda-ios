@@ -12,6 +12,10 @@
 #import "FileCache.h"
 #import "AppDelegate.h"
 
+NSString *PredictionChangedNotificationName = @"P_CHANGED";
+NSString *PredictionChangedNotificationKey = @"P_CHANGED_KEY";
+
+
 static WebApi *sharedSingleton;
 
 NSString *const HttpForbiddenNotification = @"HttpForbiddenNotification";
@@ -433,6 +437,13 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
 
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler(error);
+        
+        if (!error) {
+            [self getPrediction:predictionId completion:^(Prediction *prediction, NSError *error) {
+                if (!error)
+                    [[NSNotificationCenter defaultCenter] postNotificationName:PredictionChangedNotificationName object:nil userInfo:@{PredictionChangedNotificationKey: prediction}];
+            }];
+        }
     }];
 }
 
@@ -443,6 +454,8 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
 
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler([Prediction instanceFromData:responseData], error);
+        if (!error)
+            [[NSNotificationCenter defaultCenter] postNotificationName:PredictionChangedNotificationName object:nil userInfo:@{PredictionChangedNotificationKey: [Prediction instanceFromData:responseData]}];
     }];
 }
 

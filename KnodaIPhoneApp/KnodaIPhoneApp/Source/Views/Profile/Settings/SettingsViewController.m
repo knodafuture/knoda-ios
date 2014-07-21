@@ -64,7 +64,7 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"asd"];
         cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:17.0];
-        cell.textLabel.textColor = [UIColor colorFromHex:@"797979"];
+        cell.textLabel.textColor = [UIColor colorFromHex:@"666666"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"SettingsArrow"]];

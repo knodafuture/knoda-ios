@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Knoda. All rights reserved.
 //
 
+
+
 @class Prediction;
 
 @protocol PredictionDetailsDelegate <NSObject>

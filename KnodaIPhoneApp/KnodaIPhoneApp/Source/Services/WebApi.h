@@ -44,7 +44,8 @@ extern NSString *const HttpForbiddenNotification;
 extern NSString *const DeprecatedAPI;
 extern NSString *const NoConnection;
 extern NSInteger PageLimit;
-
+UIKIT_EXTERN NSString *PredictionChangedNotificationName;
+UIKIT_EXTERN NSString *PredictionChangedNotificationKey;
 @interface WebApi : NSObject
 
 + (WebApi *)sharedInstance;

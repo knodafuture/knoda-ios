@@ -15,6 +15,7 @@
 #ifndef TESTFLIGHT
 #import <Tapjoy/Tapjoy.h>
 #endif
+#import "WalkthroughController.h"
 
 static const NSInteger kMaxUsernameLength = 15;
 static const NSInteger kMinPasswordLength = 6;
@@ -130,7 +131,6 @@ static const NSInteger kMaxPasswordLength = 20;
     
     [[UserManager sharedInstance] signup:request completion:^(User *user, NSError *error) {
         [[LoadingView sharedInstance] hide];
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:FirstLaunchKey];
         if (!error) {
             AppDelegate *test = (AppDelegate *)[UIApplication sharedApplication].delegate;
             [test login];
@@ -139,6 +139,10 @@ static const NSInteger kMaxPasswordLength = 20;
 #ifndef TESTFLIGHT
             [Tapjoy actionComplete:TJC_SIGN_UP_FOR_KNODA_];
 #endif
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:FirstLaunchKey];
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:PredictWalkthroughCompleteKey];
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:VotingWalkthroughCompleteKey];
+            [[NSUserDefaults standardUserDefaults] synchronize];
         }
         
         else

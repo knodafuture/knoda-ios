@@ -24,10 +24,11 @@ typedef NS_ENUM(NSInteger, MenuItem) {
 @interface NavigationViewController : UIViewController
 
 @property (strong, nonatomic) NSURL *launchUrl;
-
+@property (assign, nonatomic) BOOL tabBarEnabled;
 - (id)initWithPushInfo:(NSDictionary *)pushInfo;
 - (void)openMenuItem:(MenuItem)menuItem;
 - (void)handleOpenUrl:(NSURL *)url;
 - (void)handlePushInfo:(NSDictionary *)pushInfo;
 - (void)hackAnimationFinished;
+
 @end

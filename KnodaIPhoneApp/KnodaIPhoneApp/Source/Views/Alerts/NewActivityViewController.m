@@ -8,8 +8,9 @@
 
 #import "NewActivityViewController.h"
 #import "ActivityViewController.h"
+#import "NavigationViewController.h"
 
-@interface NewActivityViewController ()
+@interface NewActivityViewController () <NavigationViewControllerDelegate>
 
 @end
 
@@ -49,6 +50,12 @@
     
     next.tableView.scrollsToTop = YES;
     previous.tableView.scrollsToTop = NO;
+}
+
+- (void)viewDidAppearInNavigationViewController:(NavigationViewController *)viewController {
+    ActivityViewController *vc = self.viewControllers[self.activePage];
+    
+    [vc beginRefreshing]; 
 }
 
 @end

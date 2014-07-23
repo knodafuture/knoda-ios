@@ -56,7 +56,7 @@
     
     self.headerCell.backgroundColor = [UIColor clearColor];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatePrediction:) name:PredictionChangedNotificationName object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(predictionChanged:) name:PredictionChangedNotificationName object:nil];
     
 }
 
@@ -111,7 +111,7 @@
         [stickyCell.superview sendSubviewToBack:self.refreshControl];
 }
 
-- (void)updatePrediction:(NSNotification *)notification {
+- (void)predictionChanged:(NSNotification *)notification {
     
     Prediction *prediction = notification.userInfo[PredictionChangedNotificationKey];
     NSInteger indexToExchange = NSNotFound;

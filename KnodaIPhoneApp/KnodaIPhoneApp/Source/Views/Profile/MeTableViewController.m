@@ -138,7 +138,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == self.pagingDatasource.objects.count)
+    if (indexPath.row == self.pagingDatasource.objects.count || indexPath.section == 0)
         return;
     
     Prediction *prediction = [self.pagingDatasource.objects objectAtIndex:indexPath.row];

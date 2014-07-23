@@ -15,6 +15,7 @@ static UINib *nib;
 
 @interface UserProfileHeaderView ()
 @property (weak, nonatomic) id<UserProfileHeaderViewDelegate> delegate;
+@property (strong, nonatomic) User *user;
 @end
 
 @implementation UserProfileHeaderView
@@ -32,7 +33,9 @@ static UINib *nib;
     self.delegate = delegate;
     
     [self observeNotification:UserChangedNotificationName withBlock:^(__weak UserProfileHeaderView *self, NSNotification *notification) {
-        [self populateWithUser:[UserManager sharedInstance].user];
+        
+        if (self.user.user_id == [UserManager sharedInstance].user.user_id)
+            [self populateWithUser:[UserManager sharedInstance].user];
     }];
     
     return self;
@@ -41,6 +44,7 @@ static UINib *nib;
 
 - (void)populateWithUser:(User *)user {
     
+    self.user = user;
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     [formatter setGroupingSeparator:[[NSLocale currentLocale] objectForKey:NSLocaleGroupingSeparator]];
     

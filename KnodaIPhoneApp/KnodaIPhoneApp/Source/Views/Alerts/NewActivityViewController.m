@@ -53,9 +53,7 @@
 }
 
 - (void)viewDidAppearInNavigationViewController:(NavigationViewController *)viewController {
-    ActivityViewController *vc = self.viewControllers[self.activePage];
-    
-    [vc beginRefreshing]; 
+    [self.viewControllers makeObjectsPerformSelector:@selector(beginRefreshing)];
 }
 
 @end

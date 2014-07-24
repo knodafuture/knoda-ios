@@ -29,7 +29,6 @@ static NSDateFormatter *dateFormatter;
 @property (weak, nonatomic) IBOutlet UIPickerView *categoryPicker;
 @property (weak, nonatomic) IBOutlet UILabel *categoryLabel;
 @property (weak, nonatomic) IBOutlet UILabel *expirationLabel;
-@property (weak, nonatomic) IBOutlet UILabel *resolutionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *charsLabel;
 @property (weak, nonatomic) IBOutlet UIPickerView *groupPicker;
 @property (weak, nonatomic) IBOutlet UILabel *groupsLabel;
@@ -39,7 +38,6 @@ static NSDateFormatter *dateFormatter;
 @property (weak, nonatomic) IBOutlet UIView *categoryPickerContainerView;
 @property (weak, nonatomic) IBOutlet UIView *expirationBar;
 @property (weak, nonatomic) IBOutlet UIView *categoryBar;
-@property (weak, nonatomic) IBOutlet UIView *resolutionBar;
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (weak, nonatomic) IBOutlet UIImageView *avatarView;
 @property (weak, nonatomic) UIBarButtonItem *predictBarButtonItem;
@@ -54,12 +52,10 @@ static NSDateFormatter *dateFormatter;
 @property (strong, nonatomic) DatePickerView *datePickerView;
 
 @property (weak, nonatomic) DatePickerView *expirationPickerView;
-@property (weak, nonatomic) DatePickerView *resolutionPickerView;
 @property (weak, nonatomic) UIView *activePickerView;
 @property (assign, nonatomic) BOOL pickersAnimating;
 
 @property (strong, nonatomic) NSDate *expirationDate;
-@property (strong, nonatomic) NSDate *resolutionDate;
 
 @property (weak, nonatomic) IBOutlet UIImageView *facebookShareImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *twitterShareImageView;
@@ -154,23 +150,7 @@ static NSDateFormatter *dateFormatter;
     self.textView.font = _showPlaceholder ? PLACEHOLDER_FONT : TEXT_FONT;
 }
 
-- (IBAction)selectResolutionPressed:(id)sender {
-    self.expirationPickerView = nil;
-    self.resolutionPickerView = self.datePickerView;
-    
-    if (self.expirationDate)
-        self.datePickerView.minimumDate = [NSDate dateWithTimeInterval:60 sinceDate:self.expirationDate];
-    else
-        self.datePickerView.minimumDate = [NSDate date];
-
-    
-    [self datePickerView:self.resolutionPickerView didChangeToDate:self.resolutionPickerView.date];
-    
-    [self showPickerView:self.resolutionPickerView under:self.resolutionBar completion:nil];
-}
-
 - (IBAction)selectExpirationPressed:(id)sender {
-    self.resolutionPickerView = nil;
     self.expirationPickerView = self.datePickerView;
     
     self.datePickerView.minimumDate = [NSDate date];
@@ -246,13 +226,9 @@ static NSDateFormatter *dateFormatter;
         errorMessage = NSLocalizedString(@"Please enter your prediction", @"");
     else if ([self expirationDate] == nil)
         errorMessage = NSLocalizedString(@"Please select a voting end date", @"");
-    else if ([self resolutionDate] == nil)
-        errorMessage = @"Please select a resolution date";
     else if (self.categoryText.length == 0)
         errorMessage = NSLocalizedString(@"Please select a category", @"");
-    else if ([[self expirationDate] timeIntervalSince1970] > [[self resolutionDate] timeIntervalSince1970])
-        errorMessage = @"You can't Knoda Future before the voting deadline";
-    else if ([[self expirationDate] timeIntervalSinceNow] < 0 || [[self resolutionDate] timeIntervalSinceNow] < 0)
+    else if ([[self expirationDate] timeIntervalSinceNow] < 0)
         errorMessage = @"You can't end voting or resolve your prediction in the past";
     
     if (errorMessage != nil) {
@@ -278,7 +254,6 @@ static NSDateFormatter *dateFormatter;
     Prediction *prediction = [[Prediction alloc] init];
     prediction.body = self.textView.text;
     prediction.expirationDate = [self expirationDate];
-    prediction.resolutionDate = [self resolutionDate];
     prediction.categories = @[self.categoryText];
     
     if (self.selectedGroup)
@@ -472,9 +447,6 @@ static NSDateFormatter *dateFormatter;
     if (pickerView == self.expirationPickerView) {
         self.expirationDate = date;
         self.expirationLabel.text = [NSString stringWithFormat:@"Voting ends on %@ at %@", [dateFormatter stringFromDate:date], [timeFormatter stringFromDate:date]];
-    } else {
-        self.resolutionDate = date;
-        self.resolutionLabel.text = [NSString stringWithFormat:@"I'll know on %@ at %@", [dateFormatter stringFromDate:date], [timeFormatter stringFromDate:date]];
     }
 }
 
@@ -482,9 +454,6 @@ static NSDateFormatter *dateFormatter;
     if (pickerView == self.expirationPickerView) {
         self.expirationDate = nil;
         self.expirationLabel.text = @"Voting Ends On...";
-    } else {
-        self.resolutionDate = nil;
-        self.resolutionLabel.text = @"I'll Knoda Result On...";
     }
     
     [self hideActivePickerCompletion:nil];

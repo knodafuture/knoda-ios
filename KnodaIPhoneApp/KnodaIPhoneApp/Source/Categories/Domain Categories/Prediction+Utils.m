@@ -18,11 +18,11 @@
 }
 
 - (BOOL)isFinished {
-    return self.challenge.isOwn && [self.resolutionDate timeIntervalSinceNow] < 0;
+    return self.challenge.isOwn && [self.expirationDate timeIntervalSinceNow] < 0;
 }
 
 - (BOOL)passed72HoursSinceExpiration {
-    NSTimeInterval timeInterval = [[NSDate date] timeIntervalSinceDate:self.resolutionDate];
+    NSTimeInterval timeInterval = [[NSDate date] timeIntervalSinceDate:self.expirationDate];
     NSTimeInterval secondsIn72Hours = 60 * 60 * 72;
     
     if (timeInterval > secondsIn72Hours)

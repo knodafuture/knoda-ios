@@ -19,7 +19,6 @@
              @"creationDate": @"created_at",
              @"expirationDate" : @"expires_at",
              @"closeDate": @"closed_at",
-             @"resolutionDate": @"resolution_date",
              @"shortUrl": @"short_url",
              @"agreeCount" : @"agreed_count",
              @"disagreeCount": @"disagreed_count",

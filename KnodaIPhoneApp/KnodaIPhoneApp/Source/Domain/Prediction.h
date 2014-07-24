@@ -25,7 +25,6 @@
 
 @property (strong, nonatomic) NSDate *creationDate;
 @property (strong, nonatomic) NSDate *expirationDate;
-@property (strong, nonatomic) NSDate *resolutionDate;
 @property (strong, nonatomic) NSDate *closeDate;
 
 @property (assign, nonatomic) NSInteger agreeCount;

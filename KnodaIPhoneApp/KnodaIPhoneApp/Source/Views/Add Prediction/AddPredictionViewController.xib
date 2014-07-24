@@ -22,8 +22,6 @@
                 <outlet property="groupPickerContainerView" destination="ppB-Zs-QWY" id="nwS-7m-JNe"/>
                 <outlet property="groupsBar" destination="5oB-R4-WnC" id="Hra-G2-Zys"/>
                 <outlet property="groupsLabel" destination="1lJ-yB-zKh" id="ZfQ-CI-ogw"/>
-                <outlet property="resolutionBar" destination="0Sz-la-xPl" id="Pbc-G2-aWN"/>
-                <outlet property="resolutionLabel" destination="qui-US-xoS" id="E1t-fy-rbT"/>
                 <outlet property="textView" destination="TEJ-Px-Rob" id="Z9v-1f-Hwe"/>
                 <outlet property="twitterShareImageView" destination="Vgc-ZC-Bf7" id="cSV-fm-PsS"/>
                 <outlet property="twitterShareLabel" destination="sMd-5Z-Wg2" id="DDx-HF-X1d"/>
@@ -67,7 +65,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="xSi-SO-kx0">
-                                    <rect key="frame" x="0.0" y="248" width="320" height="44"/>
+                                    <rect key="frame" x="0.0" y="200" width="320" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <state key="normal">
@@ -88,17 +86,6 @@
                                         <action selector="selectExpirationPressed:" destination="-1" eventType="touchUpInside" id="lhW-Ei-w7T"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="kyx-Df-753">
-                                    <rect key="frame" x="0.0" y="204" width="320" height="44"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <state key="normal">
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="selectResolutionPressed:" destination="-1" eventType="touchUpInside" id="lgm-fP-bqu"/>
-                                    </connections>
-                                </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="BXJ-xc-F6R">
                                     <rect key="frame" x="0.0" y="104" width="320" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -111,16 +98,16 @@
                                     </connections>
                                 </button>
                                 <view userInteractionEnabled="NO" contentMode="scaleToFill" id="3nH-jL-m6k">
-                                    <rect key="frame" x="0.0" y="248" width="320" height="44"/>
+                                    <rect key="frame" x="0.0" y="200" width="320" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 </view>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PredictCategoryIcon" id="djw-jm-RWv">
-                                    <rect key="frame" x="10" y="263" width="13" height="13"/>
+                                    <rect key="frame" x="10" y="215" width="13" height="13"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a Category" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rtx-Ym-JPk">
-                                    <rect key="frame" x="33" y="260" width="194" height="21"/>
+                                    <rect key="frame" x="33" y="212" width="194" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -132,7 +119,7 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 </view>
                                 <view contentMode="scaleToFill" id="aMv-Ra-QLs">
-                                    <rect key="frame" x="162" y="296" width="158" height="44"/>
+                                    <rect key="frame" x="162" y="248" width="158" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="me1-Sv-GJ7">
@@ -160,7 +147,7 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 </view>
                                 <view contentMode="scaleToFill" id="kLC-wf-1Tv">
-                                    <rect key="frame" x="0.0" y="296" width="158" height="44"/>
+                                    <rect key="frame" x="0.0" y="248" width="158" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mmn-9a-G18">
@@ -214,22 +201,6 @@
                                     <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <view userInteractionEnabled="NO" contentMode="scaleToFill" id="0Sz-la-xPl">
-                                    <rect key="frame" x="0.0" y="200" width="320" height="44"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                </view>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I'll Knoda Result On..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" id="qui-US-xoS">
-                                    <rect key="frame" x="33" y="212" width="287" height="21"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PredictCalendarIcon" id="V5f-XD-bga">
-                                    <rect key="frame" x="10" y="216" width="13" height="13"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                </imageView>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="dVA-HR-JMV">
                                     <rect key="frame" x="10" y="10" width="36" height="36"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

@@ -12,6 +12,7 @@
 #import "LoadingView.h"
 #import "WebApi.h"
 #import "UserManager.h"
+#import "NavigationViewController.h"
 
 @interface LoginViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
@@ -24,15 +25,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:NO];
+    self.title = @"Welcome Back";
 
 }
 
 - (void) viewWillAppear:(BOOL) animated {
     [super viewWillAppear: animated];
     
-    self.navigationController.navigationBar.translucent = NO;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem backButtonWithTarget:self action:@selector(backPressed)];
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTitle:@"Sign In" target:self action:@selector(loginButtonPressed:) color:[UIColor whiteColor]];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap)];
     [self.view addGestureRecognizer:tap];
@@ -54,25 +54,27 @@
 
 - (BOOL) checkTextFields {
     if (self.usernameTextField.text.length == 0) {
-        return NO;
         
         [self showError: NSLocalizedString(@"Username should not be empty", @"")];
         
         [self.usernameTextField becomeFirstResponder];
+        return NO;
+
     }
     else if (self.passwordTextField.text.length == 0) {
-        return NO;
         
         [self showError: NSLocalizedString(@"Password should not be empty", @"")];
         
         [self.passwordTextField becomeFirstResponder];
+        return NO;
+
     }
 
     return YES;
 }
 
 
-- (void)loginButtonPressed:(id) sender {
+- (IBAction)loginButtonPressed:(id) sender {
     
     if (![self checkTextFields])
         return;
@@ -88,13 +90,13 @@
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     [[UserManager sharedInstance] login:request completion:^(User *user, NSError *error) {
+        [[LoadingView sharedInstance] hide];
         if (!error) {
-            [appDelegate login];
+            [[NSNotificationCenter defaultCenter] postNotificationName:UserLoggedInNotificationName object:nil];
         NSString *inStr = [@(user.userId) stringValue];
         [Flurry setUserID:inStr];
          }
         else {
-            [[LoadingView sharedInstance] hide];
             if (error.code == HttpStatusForbidden)
                 [self showError:NSLocalizedString(@"Invalid username or password", @"")];
             else if (error.code == HttpStatusGone) {

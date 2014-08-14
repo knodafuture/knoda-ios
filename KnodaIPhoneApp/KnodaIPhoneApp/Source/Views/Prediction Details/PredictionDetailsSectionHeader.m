@@ -31,6 +31,8 @@ const CGFloat PredictionDetailsSectionHeaderHeight = 55.0;
         header.similarLabel.text = @"VIEW GROUP";
         header.similarImageView.image = [UIImage imageNamed:@"ActionGroupIcon"];
         header.shareImageView.image = [UIImage imageNamed:@"ActionShareIconInactive"];
+    } else if (prediction.contestName) {
+        header.similarLabel.text = @"VIEW CONTEST";
     }
     
     return header;

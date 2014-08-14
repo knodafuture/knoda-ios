@@ -362,26 +362,26 @@ static const int kBSAlertTag = 1001;
 }
 
 - (void)sendNewResolutionDate:(NSDate *)date {
-//    [[LoadingView sharedInstance] show];
-//    
-//    self.prediction.resolutionDate = date;
-//    
-//    [[WebApi sharedInstance] updatePrediction:self.prediction completion:^(Prediction *prediction, NSError *error) {
-//        if (!error) {
-//            [[WebApi sharedInstance] getPrediction:self.prediction.predictionId completion:^(Prediction *prediction, NSError *error) {
-//                [[LoadingView sharedInstance] hide];
-//                if (!error) {
-//                    self.prediction = prediction;
-//                    self.tableViewController.prediction = prediction;
-//                }
-//            }];
-//
-//        } else {
-//            [[LoadingView sharedInstance] hide];
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message:@"Unable to update prediction at this time" delegate: nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles: nil];
-//            [alert show];
-//        }
-//    }];
+    [[LoadingView sharedInstance] show];
+    
+    self.prediction.resolutionDate = date;
+    
+    [[WebApi sharedInstance] updatePrediction:self.prediction completion:^(Prediction *prediction, NSError *error) {
+        if (!error) {
+            [[WebApi sharedInstance] getPrediction:self.prediction.predictionId completion:^(Prediction *prediction, NSError *error) {
+                [[LoadingView sharedInstance] hide];
+                if (!error) {
+                    self.prediction = prediction;
+                    self.tableViewController.prediction = prediction;
+                }
+            }];
+
+        } else {
+            [[LoadingView sharedInstance] hide];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message:@"Unable to update prediction at this time" delegate: nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles: nil];
+            [alert show];
+        }
+    }];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {

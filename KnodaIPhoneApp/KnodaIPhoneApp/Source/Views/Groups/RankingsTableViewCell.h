@@ -13,9 +13,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *rankLabel;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *verifiedCheckmark;
-@property (weak, nonatomic) IBOutlet UILabel *winLossLabel;
-@property (weak, nonatomic) IBOutlet UILabel *winPercentLabel;
-
+@property (weak, nonatomic) IBOutlet UILabel *winsLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 
 + (RankingsTableViewCell *)cellForTableView:(UITableView *)tableView;
 @end

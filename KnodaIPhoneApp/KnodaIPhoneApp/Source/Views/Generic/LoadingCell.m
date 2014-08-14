@@ -35,6 +35,9 @@ static UINib *nib;
     if (!cell)
         cell = [[nib instantiateWithOwner:nil options:nil] lastObject];
     
+    cell.backgroundColor = [UIColor clearColor];
+    cell.contentView.backgroundColor = [UIColor clearColor];
+    
     return cell;
 }
 

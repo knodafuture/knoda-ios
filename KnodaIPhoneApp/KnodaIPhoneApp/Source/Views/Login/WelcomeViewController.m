@@ -20,6 +20,8 @@
 #import "FacebookManager.h"
 #import "WebViewController.h"
 #import "TwitterManager.h"  
+#import "NavigationViewController.h"
+#import "StartPredictingViewController.h"
 
 #define ERROR_TITLE_MSG @"Whoa, there cowboy"
 #define ERROR_NO_ACCOUNTS @"You must add a Twitter account in your iPhone's settings to continue."
@@ -40,10 +42,11 @@
     [super viewDidLoad];
     [Flurry logEvent:@"LANDING"];
     
+    self.title = @"WELCOME";
+    
     if ([[NSUserDefaults standardUserDefaults] objectForKey:LoginResponseKey])
         self.termsLabel.hidden = YES;
-    
-    
+        
     NSDictionary *allAttributes = @{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:10.0]};
     NSDictionary *underlined = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
     
@@ -54,34 +57,36 @@
     [termsString appendAttributedString:[[NSAttributedString alloc] initWithString:@"Privacy Policy" attributes:underlined]];
     
     [termsString addAttributes:allAttributes range:NSMakeRange(0, termsString.length)];
-    
     self.termsLabel.attributedText = termsString;
     
+    self.view.backgroundColor = [UIColor clearColor];
+    
     
 }
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES];
-
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewWillAppear:YES];
-    [self.navigationController setNavigationBarHidden:NO];
-}
+//- (void)viewWillAppear:(BOOL)animated {
+//    [super viewWillAppear:animated];
+//    [self.navigationController setNavigationBarHidden:YES];
+//
+//}
+//
+//- (void)viewDidDisappear:(BOOL)animated {
+//    [super viewWillAppear:YES];
+//    [self.navigationController setNavigationBarHidden:NO];
+//}
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    
-    [[UserManager sharedInstance] authenticateSavedUser:^(User *user, NSError *error) {
-        if (error)
-            [self showLoginSignup];
-        else
-            [appDelegate login];
-    }];
+    [self showLoginSignup];
+//    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+//    
+//    
+//    [[UserManager sharedInstance] authenticateSavedUser:^(User *user, NSError *error) {
+//        if (error)
+//            [self showLoginSignup];
+//        else
+//            [appDelegate login];
+//    }];
 
 }
 - (IBAction)termsPressed:(id)sender {
@@ -121,19 +126,21 @@
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     [[UserManager sharedInstance] socialSignIn:request completion:^(User *user, NSError *error) {
-        
+        [[LoadingView sharedInstance] hide];
         if (!error) {
             NSDate *today = [NSDate date];
             NSDate *newDate = [today dateByAddingTimeInterval:-60];
             if (user.createdAt <= newDate) {
                 [Flurry logEvent:@"SIGNUP_TWITTER"];
+                StartPredictingViewController *vc = [[StartPredictingViewController alloc] initWithImage:nil];
+                [self.navigationController pushViewController:vc animated:YES];
                 
             } else {
                 [Flurry logEvent:@"LOGIN_TWITTER"];
+                [[NSNotificationCenter defaultCenter] postNotificationName:UserLoggedInNotificationName object:nil];
             }
             NSString *inStr = [@(user.userId) stringValue];
             [Flurry setUserID:inStr];
-            [appDelegate login];
         }
         else {
             [[LoadingView sharedInstance] hide];
@@ -173,20 +180,23 @@
         
         NSLog(@"%@", [MTLJSONAdapter JSONDictionaryFromModel:request]);
         
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        
         [[UserManager sharedInstance] socialSignIn:request completion:^(User *user, NSError *error) {
+            [[LoadingView sharedInstance] hide];
             if (!error) {
+                
                 NSDate *today = [NSDate date];
                 NSDate *newDate = [today dateByAddingTimeInterval:-60];
                 if (user.createdAt <= newDate) {
                     [Flurry logEvent:@"SIGNUP_FACEBOOK"];
+                    
+                    StartPredictingViewController *vc = [[StartPredictingViewController alloc] initWithImage:nil];
+                    [self.navigationController pushViewController:vc animated:YES];
                 } else {
                     [Flurry logEvent:@"LOGIN_FACEBOOK"];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:UserLoggedInNotificationName object:nil];
                 }
                 NSString *inStr = [@(user.userId) stringValue];
                 [Flurry setUserID:inStr];
-                [appDelegate login];
             }
             else {
                 [[LoadingView sharedInstance] hide];

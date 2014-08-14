@@ -11,7 +11,6 @@
 #import "NavigationViewController.h"
 
 @interface NewActivityViewController () <NavigationViewControllerDelegate>
-
 @end
 
 @implementation NewActivityViewController
@@ -35,6 +34,10 @@
     
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
+
 - (UITableView *)tableView {
     UIViewController *vc = [self.viewControllers objectAtIndex:self.activePage];
     
@@ -53,7 +56,9 @@
 }
 
 - (void)viewDidAppearInNavigationViewController:(NavigationViewController *)viewController {
-    [self.viewControllers makeObjectsPerformSelector:@selector(beginRefreshing)];
+    if (viewController.unseenAlertsCount == 0)
+        [self.viewControllers makeObjectsPerformSelector:@selector(beginRefreshing)];
+    viewController.unseenAlertsCount = 0;
 }
 
 @end

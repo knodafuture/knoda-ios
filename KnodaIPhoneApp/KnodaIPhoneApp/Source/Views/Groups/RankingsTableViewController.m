@@ -9,19 +9,24 @@
 #import "RankingsTableViewController.h"
 #import "RankingsTableViewCell.h"
 #import "WebApi.h"
+#import "ImageLoader.h"
 
-@interface RankingsTableViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface RankingsTableViewController () <UITableViewDataSource, UITableViewDelegate, ImageLoaderDelegate>
 
 @property (strong, nonatomic) NSString *leaderBoardLocation;
 @property (strong, nonatomic) Group *group;
-@property (strong, nonatomic) NSArray *leaders;
+@property (strong, nonatomic) ImageLoader *imageLoader;
 @end
 
 @implementation RankingsTableViewController
 
+- (id)init {
+    self = [super initWithStyle:UITableViewStylePlain];
+    return self;
+}
 
 - (id)initWithGroup:(Group *)group location:(NSString *)location {
-    self = [super initWithStyle:UITableViewStylePlain];
+    self = [self init];
     self.group = group;
     self.leaderBoardLocation = location;
     return self;
@@ -31,6 +36,7 @@
     [super viewDidLoad];
     [self refresh];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.imageLoader = [[ImageLoader alloc] initForTable:self.tableView delegate:self];
 }
 
 
@@ -48,7 +54,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 36.0;
+    return 44.0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -58,17 +64,9 @@
     
     cell.rankLabel.text = [NSString stringWithFormat:@"%ld", (long)leader.rank];
     cell.usernameLabel.text = leader.username;
-    cell.winLossLabel.text = [NSString stringWithFormat:@"%ld-%ld", (long)leader.won, (long)leader.lost];
-    double total = leader.won + leader.lost;
-    if (total > 0) {
-        double percent = (double)leader.won / total * 100.0;
-        if (percent == 100.0)
-            cell.winPercentLabel.text = @"100%";
-        else
-            cell.winPercentLabel.text = [NSString stringWithFormat:@"%2.2f%%", percent];
-    }
-    else
-        cell.winPercentLabel.text = @"-";
+    cell.winsLabel.text = [NSString stringWithFormat:@"%ld", (long)leader.won];
+    
+    cell.avatarImageView.image = [self.imageLoader lazyLoadImage:leader.avatar.big onIndexPath:indexPath];
     
     if (!leader.verifiedAccount)
         cell.verifiedCheckmark.hidden = YES;
@@ -88,6 +86,16 @@
     
     return cell;
     
+}
+
+- (void)imageLoader:(ImageLoader *)loader finishedLoadingImage:(UIImage *)image forIndexPath:(NSIndexPath *)indexPath {
+    RankingsTableViewCell *cell = (RankingsTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+    
+    cell.avatarImageView.image = image;
+}
+
+- (UIImage *)imageLoader:(ImageLoader *)loader willCacheImage:(UIImage *)image forIndexPath:(NSIndexPath *)indexPath {
+    return image;
 }
 
 

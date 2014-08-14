@@ -18,6 +18,7 @@
              @"predictionId": @"id",
              @"creationDate": @"created_at",
              @"expirationDate" : @"expires_at",
+             @"resolutionDate" : @"resolution_date",
              @"closeDate": @"closed_at",
              @"shortUrl": @"short_url",
              @"agreeCount" : @"agreed_count",
@@ -34,7 +35,9 @@
              @"groupId" : @"group_id",
              @"groupName" : @"group_name",
              @"expirationString" : @"expired_text",
-             @"creationString" : @"predicted_text"
+             @"creationString" : @"predicted_text",
+             @"contestId" : @"contest_id",
+             @"contestName" : @"contest_name"
              };
 }
 + (NSValueTransformer *)groupIdJSONTransformer {

@@ -105,7 +105,7 @@ static NSMutableDictionary *cellHeightCache;
     else
         height = defaultHeight + (textSize.height - defaultBodyLabel.frame.size.height);
     
-    if (prediction.groupName)
+    if (prediction.groupName || prediction.contestName)
         height = height + referenceCell.groupNameLabel.frame.size.height;
     
     [cellHeightCache setObject:@(height) forKey:@(prediction.predictionId)];
@@ -190,7 +190,7 @@ static NSMutableDictionary *cellHeightCache;
     frame.size.height = [PredictionCell heightForPrediction:self.prediction];
     self.frame = frame;
     
-    if (!self.prediction.groupName) {
+    if (!self.prediction.groupName && !self.prediction.contestName) {
         self.groupImageView.hidden = YES;
         self.groupNameLabel.hidden = YES;
         
@@ -207,7 +207,15 @@ static NSMutableDictionary *cellHeightCache;
                 self.bodyLabel.frame = frame;
                 self.groupNameLabel.hidden = NO;
                 self.groupImageView.hidden = NO;
-                self.groupNameLabel.text = self.prediction.groupName;
+                
+                
+                if (self.prediction.groupName) {
+                    self.groupImageView.image = [UIImage imageNamed:@"PredictGroupsIcon"];
+                    self.groupNameLabel.text = self.prediction.groupName;
+                } else {
+                    self.groupNameLabel.text = self.prediction.contestName;
+                    self.groupImageView.image = [UIImage imageNamed:@"ContestPredictionBadge"];
+                }
                 self.frameAdjusted = YES;
             }
     }

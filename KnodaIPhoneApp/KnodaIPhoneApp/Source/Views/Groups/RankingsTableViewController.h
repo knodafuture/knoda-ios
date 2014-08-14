@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 @class Group;
 @interface RankingsTableViewController : UITableViewController
+@property (strong, nonatomic) NSArray *leaders;
 
 - (id)initWithGroup:(Group *)group location:(NSString *)location;
 

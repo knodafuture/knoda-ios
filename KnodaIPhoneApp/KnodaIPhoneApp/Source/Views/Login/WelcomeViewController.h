@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LoginOverlayViewController.h"
 
-@interface WelcomeViewController : UIViewController
+@interface WelcomeViewController : LoginOverlayViewController
 
 @end

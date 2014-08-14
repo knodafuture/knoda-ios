@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LoginOverlayViewController.h"
 
-@interface LoginViewController : UIViewController <UITextFieldDelegate>
+@interface LoginViewController : LoginOverlayViewController <UITextFieldDelegate>
 
 @end

@@ -15,6 +15,10 @@
 #import "UserManager.h"
 #import "SearchViewController.h"
 #import "WalkthroughController.h"   
+#import "UIView+Utils.h"
+
+NSString *HomeViewLoadedNotificationName = @"HOMEVIEWLOADED";
+NSString *HomeViewCaptureKey = @"HOMEVIEWCAPUTRE";
 
 @interface HomeViewController () <NavigationViewControllerDelegate>
 @property (strong, nonatomic) WalkthroughController *walkthroughController;
@@ -31,6 +35,8 @@
     self.tableView.scrollsToTop = NO;
     
     self.walkthroughController = [[WalkthroughController alloc] initWithTargetViewController:self];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginRefreshing) name:UserLoggedInNotificationName object:nil];
 }
 
 
@@ -58,8 +64,10 @@
     [super pagingDatasource:pagingDatasource willDisplayObjects:objects];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        if (self.pagingDatasource.currentPage == 0)
+        if (self.pagingDatasource.currentPage == 0) {
             [self.walkthroughController beginShowingWalkthroughIfNeeded];
+            [[NSNotificationCenter defaultCenter] postNotificationName:HomeViewLoadedNotificationName object:nil userInfo:nil];
+        }
     });
 }
 
@@ -72,5 +80,9 @@
 - (void)predictionDisagreed:(Prediction *)prediction inCell:(PredictionCell *) cell {
     [super predictionDisagreed:prediction inCell:cell];
     [[NSNotificationCenter defaultCenter] postNotificationName:VotingWalkthroughCompleteNotificationName object:nil];
+}
+
+- (void)dealloc {
+    [self removeAllObservations];
 }
 @end

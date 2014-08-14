@@ -16,8 +16,14 @@
 
 @implementation RankingsViewController
 
+- (id)init {
+    self = [super initWithNibName:@"RankingsViewController" bundle:[NSBundle mainBundle]];
+    self.viewControllers = @[];
+    self.buttons = @[];
+    return self;
+}
 - (id)initWithGroup:(Group *)group {
-    self = [super init];
+    self = [self init];
     self.group = group;
     return self;
 }
@@ -27,6 +33,10 @@
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem backButtonWithTarget:self action:@selector(back)];
     self.title = @"RANKINGS";
+    [self setupViews];
+}
+
+- (void)setupViews {
     RankingsTableViewController *weekly = [[RankingsTableViewController alloc] initWithGroup:self.group location:nil];
     RankingsTableViewController *monthly = [[RankingsTableViewController alloc] initWithGroup:self.group location:@"monthly"];
     RankingsTableViewController *allTime = [[RankingsTableViewController alloc] initWithGroup:self.group location:@"alltime"];
@@ -41,6 +51,9 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (BOOL)shouldScrollHeader {
+    return YES;
+}
 
 
 @end

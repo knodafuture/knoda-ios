@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LoginOverlayViewController.h"
 
-@interface ForgotPasswordViewController : UIViewController <UITextFieldDelegate>
+@interface ForgotPasswordViewController : LoginOverlayViewController <UITextFieldDelegate>
 
 -(id)initWithEmail:(NSString *)email;
 

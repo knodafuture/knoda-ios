@@ -34,9 +34,8 @@
     if (self.email)
         self.textField.text = self.email;
     
-    self.navigationController.navigationBar.translucent = NO;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem backButtonWithTarget:self action:@selector(backButtonPressed)];
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTitle:@"Submit" target:self action:@selector(sendButtonPressed) color:[UIColor whiteColor]];
+    self.title = @"FORGOT PASSWORD";
 }
 
 #pragma mark - Actions
@@ -47,7 +46,7 @@
 
 
 
-- (void)sendButtonPressed {
+- (IBAction)sendButtonPressed {
     if (self.textField.text.length == 0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please enter your email" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         [alert show];

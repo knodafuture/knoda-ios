@@ -12,7 +12,6 @@
 
 - (BOOL)isExpired;
 - (BOOL)isFinished;
-- (BOOL)passed72HoursSinceExpiration;
 - (BOOL)canSetOutcome;
 
 - (NSString *)metaDataString;

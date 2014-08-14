@@ -20,7 +20,4 @@ UIKIT_EXTERN NSString *NewPredictionNotificationKey;
 
 @property (strong, nonatomic) UIWindow *window;
 
-- (void)login;
-- (void)logout;
-
 @end

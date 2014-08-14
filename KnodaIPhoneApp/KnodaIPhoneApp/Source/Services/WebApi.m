@@ -687,6 +687,85 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
     }];
 }
 
+- (void)getContest:(NSInteger)contestId completion:(void (^)(Contest *, NSError *))completionHandler {
+    NSString *path = [NSString stringWithFormat:@"contests/%ld.json", (long)contestId];
+    NSString *url = [self buildUrl:path parameters:nil];
+    
+    NSURLRequest *request = [self requestWithUrl:url method:@"GET" data:nil];
+    
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+        completionHandler([Contest instanceFromData:responseData], error);
+    }];
+}
+
+- (void)getContestsAfter:(NSInteger)lastId completion:(void (^)(NSArray *, NSError *))completionHandler {
+    NSDictionary *parameters = @{@"limit" : @(PageLimit)};
+    parameters = [self parametersDictionary:parameters withLastId:lastId];
+    
+    NSString *url = [self buildUrl:@"contests.json" parameters:parameters];
+    NSURLRequest *request = [self requestWithUrl:url method:@"GET" data:nil];
+    
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+        completionHandler([Contest arrayFromData:responseData], error);
+    }];
+}
+
+- (void)getMyContestsAfter:(NSInteger)lastId completion:(void (^)(NSArray *, NSError *))completionHandler {
+    NSDictionary *parameters = @{@"limit" : @(PageLimit), @"list" : @"entered"};
+    parameters = [self parametersDictionary:parameters withLastId:lastId];
+    
+    NSString *url = [self buildUrl:@"contests.json" parameters:parameters];
+    NSURLRequest *request = [self requestWithUrl:url method:@"GET" data:nil];
+    
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+        completionHandler([Contest arrayFromData:responseData], error);
+    }];
+}
+
+- (void)getExploreContestsAfter:(NSInteger)lastId completion:(void (^)(NSArray *, NSError *))completionHandler {
+    NSDictionary *parameters = @{@"limit" : @(PageLimit), @"list" : @"explore"};
+    parameters = [self parametersDictionary:parameters withLastId:lastId];
+    
+    NSString *url = [self buildUrl:@"contests.json" parameters:parameters];
+    NSURLRequest *request = [self requestWithUrl:url method:@"GET" data:nil];
+    
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+        completionHandler([Contest arrayFromData:responseData], error);
+    }];
+}
+
+- (void)getPredictionsForContest:(NSInteger)contestId after:(NSInteger)lastId expired:(BOOL)expired completion:(void (^)(NSArray *, NSError *))completionHandler {
+    NSString *path = [NSString stringWithFormat:@"contests/%ld/predictions.json", (long)contestId];
+    NSDictionary *parameters = [self parametersDictionary:@{@"limit": @(PageLimit)} withLastId:lastId];
+    
+    if (expired) {
+        NSMutableDictionary *mutable = [parameters mutableCopy];
+        mutable[@"list"] = @"expired";
+        parameters = mutable;
+    }
+    
+    NSString *url = [self buildUrl:path parameters:parameters];
+    NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+        completionHandler([Prediction arrayFromData:responseData], error);
+    }];
+}
+
+- (void)getLeaderBoardForContest:(NSInteger)contestId stage:(NSInteger)stageId completion:(void (^)(NSArray *, NSError *))completionHandler {
+    NSString *path = [NSString stringWithFormat:@"contests/%ld/leaderboard.json", (long)contestId];
+    NSDictionary *parameters = @{@"stage": @(stageId)};
+    
+    if (stageId == 0)
+        parameters = nil;
+    
+    NSString *url = [self buildUrl:path parameters:parameters];
+    NSURLRequest *request = [self requestWithUrl:url method:@"GET" data:nil];
+    
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+        completionHandler([Leader arrayFromData:responseData], error);
+    }];
+}
+
 - (NSString *)getCreatedObjectId:(NSData *)data {
     if (!data)
         return nil;

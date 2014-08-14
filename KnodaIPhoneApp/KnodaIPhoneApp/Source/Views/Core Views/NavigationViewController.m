@@ -18,15 +18,19 @@
 #import <QuartzCore/QuartzCore.h>
 #import "SearchViewController.h"
 #import "UserManager.h"
-#import "GroupsViewController.h"
 #import "NavigationScrollView.h"
 #import "GroupSettingsViewController.h"
 #import "NotificationSettingsViewController.h"
 #import "NewActivityViewController.h"
-#import "UIView+Test.h"
+#import "UIView+Utils.h"
 #import "WalkthroughController.h"   
+#import "CGViewController.h"
+#import "WelcomeViewController.h"   
+#import "UIImage+ImageEffects.h"
 
 CGFloat const SideNavBezelWidth = 50.0f;
+NSString *UserLoggedInNotificationName = @"USERLOGGEDIN";
+NSString *UserLoggedOutNotificationName = @"USERLOGGEDOUT";
 
 @interface NavigationViewController () <UIScrollViewDelegate, SelectPictureDelegate, AddPredictionViewControllerDelegate, UINavigationControllerDelegate, UISearchBarDelegate>
 
@@ -46,7 +50,8 @@ CGFloat const SideNavBezelWidth = 50.0f;
 @property (weak, nonatomic) IBOutlet UIView *tabBarView;
 @property (weak, nonatomic) IBOutlet NavigationScrollView *scrollView;
 @property (strong, nonatomic) NSArray *buttonNames;
-@property (assign, nonatomic) NSInteger unseenAlertsCount;
+@property (strong, nonatomic) UINavigationController *welcomeNavigationController;
+@property (strong, nonatomic) UIImageView *blurImageView;
 @end
 
 @implementation NavigationViewController
@@ -67,6 +72,12 @@ CGFloat const SideNavBezelWidth = 50.0f;
     self.scrollView.disabled = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(activeGroupChanged:) name:ActiveGroupChangedNotificationName object:nil];
     self.scrollView.scrollsToTop = NO;
+    
+    self.tabBarEnabled = [UserManager sharedInstance].user != nil;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processImage:) name:HomeViewLoadedNotificationName object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleLogin) name:UserLoggedInNotificationName object:nil];
+
 }
 
 
@@ -164,12 +175,9 @@ CGFloat const SideNavBezelWidth = 50.0f;
     [self.pingTimer invalidate];
     self.pingTimer = nil;
     self.pingTimer = [NSTimer scheduledTimerWithTimeInterval:15 target:self selector:@selector(serverPing) userInfo:nil repeats:YES];
-    
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
+- (void)addExtraViewControllers {
     for (int i = 1; i < MenuItemsCount; i++) {
         UINavigationController *vc = [self navigationControllerForMenuItem:i];
         CGRect frame = vc.view.frame;
@@ -179,13 +187,17 @@ CGFloat const SideNavBezelWidth = 50.0f;
         vc.view.frame = frame;
         [self.scrollView addSubview:vc.view];
     }
+    
 }
 
-- (void)serverPing {
-    [self updateAlerts];
-}
-- (void)hackAnimationFinished {
-    if(![UserManager sharedInstance].user.hasAvatar)
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if ([UserManager sharedInstance].user) {
+        [self addExtraViewControllers];
+    }
+    
+    if(![UserManager sharedInstance].user.hasAvatar && [UserManager sharedInstance].user)
         [self showSelectPictureViewController];
     else {
         [self openMenuItem:MenuHome];
@@ -194,6 +206,26 @@ CGFloat const SideNavBezelWidth = 50.0f;
         }
         [self handlePushInfo:self.pushInfo];
     }
+    
+    if (![UserManager sharedInstance].user) {
+        WelcomeViewController *vc = [[WelcomeViewController alloc] initWithNibName:@"WelcomeViewController" bundle:[NSBundle mainBundle]];
+        self.welcomeNavigationController = [[UINavigationController alloc] initWithRootViewController:vc];
+        
+        CGRect frame = self.welcomeNavigationController.view.frame;
+        frame.origin.y = self.view.frame.size.height;
+        self.welcomeNavigationController.view.frame = frame;
+        frame.origin.y = 0;
+        
+        [self.view.window addSubview:self.welcomeNavigationController.view];
+        
+        [UIView animateWithDuration:0.5 animations:^{
+            self.welcomeNavigationController.view.frame = frame;
+        }];
+    }
+}
+
+- (void)serverPing {
+    [self updateAlerts];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -270,7 +302,7 @@ CGFloat const SideNavBezelWidth = 50.0f;
                 viewController = [[MeViewController alloc] initWithNibName:@"MeViewController" bundle:[NSBundle mainBundle]];
                 break;
             case MenuGroups:
-                viewController = [[GroupsViewController alloc] initWithStyle:UITableViewStylePlain];
+                viewController = [[CGViewController alloc] init];
                 break;
             default:
                 viewController = [[HomeViewController alloc] initWithStyle:UITableViewStylePlain];
@@ -293,7 +325,8 @@ CGFloat const SideNavBezelWidth = 50.0f;
         if (error)
             return;
         
-        self.unseenAlertsCount = alerts.count;
+        if (!(self.unseenAlertsCount > 0 && alerts.count == 0))
+            _unseenAlertsCount = alerts.count;
         
         [[UIApplication sharedApplication] setApplicationIconBadgeNumber:alerts.count];
         
@@ -309,6 +342,9 @@ CGFloat const SideNavBezelWidth = 50.0f;
             image = [UIImage imageNamed:@"NavActivityNotifications"];
         [activityButton setImage:image forState:UIControlStateNormal];
     }];
+}
+- (void)setUnseenAlertsCount:(NSInteger)unseenAlertsCount {
+    [self updateAlerts];
 }
 
 - (AppDelegate *)appDelegate {
@@ -358,5 +394,34 @@ CGFloat const SideNavBezelWidth = 50.0f;
     [self openMenuItem:page];
 }
 
+- (void)processImage:(NSNotification *)notification {
+    UIImage *image = [self.view captureView];
+    image = [image applyExtraLightEffect];
+    self.blurImageView = [[UIImageView alloc] initWithImage:image];
+    self.blurImageView.alpha = 0;
+    
+    [self.view insertSubview:self.blurImageView belowSubview:self.welcomeNavigationController.view];
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        self.blurImageView.alpha = 1.0;
+    }];
+}
 
+- (void)handleLogin {
+    [self addExtraViewControllers];
+    self.tabBarEnabled = YES;
+    CGRect frame = self.welcomeNavigationController.view.frame;
+    
+    frame.origin.y = self.view.frame.size.height;
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        self.welcomeNavigationController.view.frame = frame;
+        self.blurImageView.frame = frame;
+        [self.welcomeNavigationController.view removeFromSuperview];
+        [self.blurImageView removeFromSuperview];
+        self.blurImageView = nil;
+        self.welcomeNavigationController = nil;
+    }];
+    
+}
 @end

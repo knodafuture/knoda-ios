@@ -23,6 +23,7 @@
 - (id)initWithActiveGroup:(Group *)group;
 
 @property (nonatomic, weak) id<AddPredictionViewControllerDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UIView *expirationBar;
 
 
 @end

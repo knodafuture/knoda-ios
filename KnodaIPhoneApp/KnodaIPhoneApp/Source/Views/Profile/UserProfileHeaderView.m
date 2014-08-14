@@ -54,7 +54,7 @@ static UINib *nib;
     else if ([user.winningPercentage isEqual:@100])
         self.winPercentLabel.text = @"100%";
     else
-        self.winPercentLabel.text = [NSString stringWithFormat:@"%@%@",user.winningPercentage,@"%"];    self.streakLabel.text = [user.streak length] > 0 ? user.streak : @"W0";
+        self.winPercentLabel.text = [NSString stringWithFormat:@"%3.2f%@",user.winningPercentage.floatValue,@"%"];    self.streakLabel.text = [user.streak length] > 0 ? user.streak : @"W0";
     self.winLossLabel.text = [NSString stringWithFormat:@"%lu-%lu",(unsigned long)user.won,(unsigned long)user.lost];
     
     [[WebApi sharedInstance] getImage:user.avatar.big completion:^(UIImage *image, NSError *error) {

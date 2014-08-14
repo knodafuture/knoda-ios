@@ -19,8 +19,12 @@ static UINib *nib;
 + (RankingsTableViewCell *)cellForTableView:(UITableView *)tableView {
     RankingsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"rankingsCell"];
     
-    if (!cell)
+    if (!cell)  {
         cell = [[nib instantiateWithOwner:nil options:nil] lastObject];
+        cell.avatarImageView.layer.cornerRadius = cell.avatarImageView.frame.size.width / 2.0;
+        cell.avatarImageView.clipsToBounds = YES;
+        
+    }
     
     return cell;
 }

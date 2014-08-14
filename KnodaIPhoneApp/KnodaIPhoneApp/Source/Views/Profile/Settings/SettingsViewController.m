@@ -12,6 +12,7 @@
 #import "AboutViewController.h"
 #import "NotificationSettingsViewController.h"
 #import "ProfileViewController.h"
+#import "NavigationViewController.h"
 
 @interface SettingsViewController () <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *signOutButton;
@@ -113,7 +114,7 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 0) {
         [[UserManager sharedInstance] signout:^(NSError *error) {
-            [(AppDelegate *)[UIApplication sharedApplication].delegate logout];
+            [[NSNotificationCenter defaultCenter] postNotificationName:UserLoggedOutNotificationName object:nil userInfo:nil];
         }];
     }
 }

@@ -18,10 +18,14 @@
 @property (strong, nonatomic) NSString *groupName;
 @property (strong, nonatomic) NSString *body;
 
+@property (strong, nonatomic) NSNumber *contestId;
+@property (strong, nonatomic) NSString *contestName;
+
 @property (strong, nonatomic) NSArray *categories;
 
 @property (strong, nonatomic) NSString *creationString;
 @property (strong, nonatomic) NSString *expirationString;
+@property (strong, nonatomic) NSDate *resolutionDate;
 
 @property (strong, nonatomic) NSDate *creationDate;
 @property (strong, nonatomic) NSDate *expirationDate;

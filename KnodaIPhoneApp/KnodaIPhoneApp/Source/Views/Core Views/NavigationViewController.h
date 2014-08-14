@@ -13,6 +13,9 @@ typedef NS_ENUM(NSInteger, MenuItem) {
     MenuItemsCount
 };
 
+
+UIKIT_EXTERN NSString *UserLoggedInNotificationName;
+UIKIT_EXTERN NSString *UserLoggedOutNotificationName;
 @class NavigationViewController;
 
 @protocol NavigationViewControllerDelegate <NSObject>
@@ -25,10 +28,11 @@ typedef NS_ENUM(NSInteger, MenuItem) {
 
 @property (strong, nonatomic) NSURL *launchUrl;
 @property (assign, nonatomic) BOOL tabBarEnabled;
+@property (assign, nonatomic) NSInteger unseenAlertsCount;
+
 - (id)initWithPushInfo:(NSDictionary *)pushInfo;
 - (void)openMenuItem:(MenuItem)menuItem;
 - (void)handleOpenUrl:(NSURL *)url;
 - (void)handlePushInfo:(NSDictionary *)pushInfo;
-- (void)hackAnimationFinished;
 
 @end

@@ -11,13 +11,16 @@
 @interface TabbedViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet UIView *headerView;
+@property (weak, nonatomic) IBOutlet UIScrollView *headerView;
 @property (assign, nonatomic) NSInteger activePage;
 @property (strong, nonatomic) NSArray *viewControllers;
 @property (strong, nonatomic) NSArray *buttons;
+@property (assign, nonatomic) BOOL isSetup;
 
 
 - (void)addViewController:(UIViewController *)viewController title:(NSString *)title;
 - (void)selectIndex:(NSInteger)index;
 - (void)didMoveFromIndex:(NSInteger)index toIndex:(NSInteger)newIndex;
+
+- (BOOL)shouldScrollHeader;
 @end

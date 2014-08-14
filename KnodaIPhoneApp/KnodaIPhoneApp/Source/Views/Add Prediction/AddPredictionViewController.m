@@ -14,6 +14,7 @@
 #import "FacebookManager.h"
 #import "UIActionSheet+Blocks.h"
 #import "TwitterManager.h"
+#import "WalkthroughController.h"
 
 #define TEXT_FONT        [UIFont fontWithName:@"HelveticaNeue" size:15]
 #define PLACEHOLDER_FONT [UIFont fontWithName:@"HelveticaNeue-Italic" size:15]
@@ -36,7 +37,6 @@ static NSDateFormatter *dateFormatter;
 @property (weak, nonatomic) IBOutlet UIView *groupPickerContainerView;
 
 @property (weak, nonatomic) IBOutlet UIView *categoryPickerContainerView;
-@property (weak, nonatomic) IBOutlet UIView *expirationBar;
 @property (weak, nonatomic) IBOutlet UIView *categoryBar;
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (weak, nonatomic) IBOutlet UIImageView *avatarView;
@@ -64,6 +64,8 @@ static NSDateFormatter *dateFormatter;
 
 @property (assign, nonatomic) BOOL shouldShareToFacebook;
 @property (assign, nonatomic) BOOL shouldShareToTwitter;
+
+@property (strong, nonatomic) WalkthroughController *walkthroughController;
 
 @end
 
@@ -105,6 +107,8 @@ static NSDateFormatter *dateFormatter;
         [self pickerView:self.groupPicker didSelectRow:[[UserManager sharedInstance].groups indexOfObject:self.selectedGroup] + 1 inComponent:0];
         [self.groupPicker selectRow:[[UserManager sharedInstance].groups indexOfObject:self.selectedGroup] + 1 inComponent:0 animated:NO];
     }
+    
+    self.walkthroughController = [[WalkthroughController alloc] initForAddPredictionViewController:self];
 }
 
 - (void)didTap {
@@ -134,6 +138,8 @@ static NSDateFormatter *dateFormatter;
         [timeFormatter setDateStyle:NSDateFormatterNoStyle];
         [timeFormatter setTimeStyle:NSDateFormatterShortStyle];
     }
+    
+    [self.walkthroughController beginShowingWalkthroughIfNeeded];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -151,6 +157,9 @@ static NSDateFormatter *dateFormatter;
 }
 
 - (IBAction)selectExpirationPressed:(id)sender {
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:VotingDateWalkthroughCompleteNotificationName object:nil];
+    
     self.expirationPickerView = self.datePickerView;
     
     self.datePickerView.minimumDate = [NSDate date];

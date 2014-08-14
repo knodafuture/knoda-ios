@@ -26,6 +26,7 @@
 #import "SocialAccount.h" 
 #import "NotificationSettings.h"
 #import "Settings.h"
+#import "Contest.h"
 
 typedef NS_ENUM(NSInteger, HttpStatus) {
 	HttpStatusOk				= 200,
@@ -136,4 +137,10 @@ UIKIT_EXTERN NSString *PredictionChangedNotificationKey;
 - (void)getSettingsCompletion:(void (^)(NSArray *settings, NSError *error))completionHandler;
 - (void)updateNotificationStatus:(NotificationSettings *)settings completion:(void (^)(NotificationSettings *, NSError *))completionHandler;
 
+- (void)getContest:(NSInteger)contestId completion:(void(^)(Contest *contest, NSError *error))completionHandler;
+- (void)getContestsAfter:(NSInteger)lastId completion:(void(^)(NSArray *contests, NSError *error))completionHandler;
+- (void)getMyContestsAfter:(NSInteger)lastId completion:(void(^)(NSArray *contests, NSError *error))completionHandler;
+- (void)getExploreContestsAfter:(NSInteger)lastId completion:(void(^)(NSArray *contests, NSError *error))completionHandler;
+- (void)getPredictionsForContest:(NSInteger)contestId after:(NSInteger)lastId expired:(BOOL)expired completion:(void(^)(NSArray *predictions, NSError *error))completionHandler;
+- (void)getLeaderBoardForContest:(NSInteger)contestId stage:(NSInteger)stageId completion:(void(^)(NSArray *leaders, NSError *error))completionHandler;
 @end

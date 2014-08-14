@@ -10,7 +10,5 @@
 
 @interface GroupsViewController : BaseTableViewController
 
-- (IBAction)createGroup:(id)sender;
-
 
 @end

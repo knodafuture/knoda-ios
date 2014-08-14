@@ -14,6 +14,7 @@
 #import "NavigationViewController.h"
 #import "UserManager.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import "UserManager.h"
 
 #ifdef TESTFLIGHT
 #import "TestFlight.h"
@@ -35,6 +36,7 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
 @property (strong, nonatomic) NavigationViewController *navigationViewController;
 @property (strong, nonatomic) NSURL *launchUrl;
 @property (assign, nonatomic) BOOL notificationAlertShown;
+@property (strong, nonatomic) UIImageView *splashImageView;
 @end
 
 @implementation AppDelegate
@@ -71,19 +73,49 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
     [UIApplication sharedApplication].delegate.window.backgroundColor = navBackgroundColor;
     
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logout) name:HttpForbiddenNotification object:nil];
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logout) name:HttpForbiddenNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deprecatedApi) name: DeprecatedAPI object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name: NoConnection object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logout) name:UserLoggedOutNotificationName object:nil];
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor colorFromHex:@"77bc1f"];
+    [self showSplash];
     [self.window makeKeyAndVisible];
     
-    [self showWelcomeScreenAnimated:NO];
+    [[UserManager sharedInstance] authenticateSavedUser:^(User *user, NSError *error) {
+        [self showHomeScreen];
+        [self.splashImageView removeFromSuperview];
+    }];
     
     return YES;
+}
+
+- (void)showSplash {
+    NSString *launchImage;
+    if  ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) &&
+         ([UIScreen mainScreen].bounds.size.height > 480.0f)) {
+        launchImage = @"LaunchImage-700-568h";
+    } else {
+        launchImage = @"LaunchImage-700";
+    }
+    UIImage *bgImage = [UIImage imageNamed:launchImage];
+    self.splashImageView = [[UIImageView alloc] initWithImage:bgImage];
+    [self.window addSubview:self.splashImageView];
+}
+
+- (void)logout {
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.backgroundColor = [UIColor colorFromHex:@"77bc1f"];
+    [self showSplash];
+    [self.window makeKeyAndVisible];
+    
+    [self showHomeScreen];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [self.splashImageView removeFromSuperview];
+
+    });
+    
 }
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
@@ -156,86 +188,35 @@ NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
         [self.navigationViewController handlePushInfo:self.pushInfo];
 }
 
-
-- (void)showWelcomeScreenAnimated:(BOOL)animated {
-    WelcomeViewController *welcome = [[WelcomeViewController alloc] initWithNibName:@"WelcomeViewController" bundle:[NSBundle mainBundle]];
-    UINavigationController *vc = [[UINavigationController alloc] initWithRootViewController:welcome];
-    
-    if (!animated) {
-        self.window.rootViewController = vc;
-        return;
-    }
-    
-    [UIView transitionFromView:self.window.rootViewController.view toView:vc.view duration:0.5
-                       options:UIViewAnimationOptionTransitionCrossDissolve completion:^(BOOL finished) {
-         self.window.rootViewController = vc;
-                           self.navigationViewController = nil;
-     }];
-}
-
-- (void)showHomeScreen:(BOOL)animated {
+- (void)showHomeScreen {
     self.navigationViewController = [[NavigationViewController alloc] initWithPushInfo:self.pushInfo];
     
     if (self.launchUrl)
         self.navigationViewController.launchUrl = self.launchUrl;
     
-    if (!animated) {
-        self.window.rootViewController = self.navigationViewController;
-        return;
-    }
-    
-    [UIView transitionFromView:self.window.rootViewController.view toView:self.navigationViewController.view duration:0.5
-                       options:UIViewAnimationOptionTransitionCrossDissolve completion:^(BOOL finished) {
-        self.window.rootViewController = self.navigationViewController;
-       [self.navigationViewController hackAnimationFinished];
-    }];
+    self.window.rootViewController = self.navigationViewController;
 }
 
-- (void)login {
-    [[LoadingView sharedInstance] reset];
-    [self showHomeScreen:YES];
-}
-
-- (void)logout {
-    
-    [[LoadingView sharedInstance] reset];
-    
-    [self showWelcomeScreenAnimated:YES];
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
-    if([title isEqualToString:@"Update"])
-    {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://itunes.apple.com/us/app/knoda/id764642995?mt=8"]];
-    }
-    if ([title isEqualToString:@"Retry"]) {
-        [self showWelcomeScreenAnimated:YES];
-    }
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    //TODO deprecation
+//    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+//    if([title isEqualToString:@"Update"])
+//    {
+//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://itunes.apple.com/us/app/knoda/id764642995?mt=8"]];
+//    }
+//    if ([title isEqualToString:@"Retry"]) {
+//        [self showWelcomeScreenAnimated:YES];
+//    }
 }
 
 - (void)deprecatedApi {
     [[LoadingView sharedInstance] reset];
     
-    
-    
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"App Version No Longer Accessible." message:@"This version of the app is no longer supported, please update now to the current verison to continue enjoying Knoda." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Update", nil];
     [[UserManager sharedInstance] clearSavedCredentials];
-    [self showWelcomeScreenAnimated:YES];
+    //[self showWelcomeScreenAnimated:YES];
     [alert show];
-    
-    
 }
-
-- (void)noConnection {
-    [[LoadingView sharedInstance] reset];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You are not connected." message:@"You are offline, you must be connected to the internet to enjoy Knoda." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Retry",nil];
-    [alert show];
-    
-
-}
-
 
 
 @end

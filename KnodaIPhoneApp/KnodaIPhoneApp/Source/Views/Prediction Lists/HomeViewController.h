@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "PredictionsViewController.h"
 
+UIKIT_EXTERN NSString *HomeViewLoadedNotificationName;
+UIKIT_EXTERN NSString *HomeViewCaptureKey;
 @interface HomeViewController : PredictionsViewController
 
 

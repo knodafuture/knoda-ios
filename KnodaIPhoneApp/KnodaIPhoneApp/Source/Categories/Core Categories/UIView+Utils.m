@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Knoda. All rights reserved.
 //
 
-#import "UIView+Test.h"
+#import "UIView+Utils.h"
 
-@implementation UIView (Test)
+@implementation UIView (Utils)
 
 - (void)findScrollViews {
     if ([self respondsToSelector:@selector(scrollsToTop)]) {

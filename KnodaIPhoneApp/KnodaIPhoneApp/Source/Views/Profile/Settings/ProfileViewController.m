@@ -240,14 +240,7 @@ static const float kAvatarSize = 344.0;
 
 - (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (actionSheet != self.avatarChangeAcitonSheet) {
-        if (buttonIndex == 0) {
-            [[UserManager sharedInstance] signout:^(NSError *error) {
-                [self.appDelegate logout];
-            }];
-        }
-        else {
-            [actionSheet dismissWithClickedButtonIndex:1 animated:YES];
-        }
+
     }
     else {
         switch (buttonIndex) {

@@ -13,4 +13,5 @@
 @interface RankingsViewController : TabbedViewController;
 - (id)initWithGroup:(Group *)group;
 
+- (void)setupViews;
 @end

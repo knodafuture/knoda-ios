@@ -23,14 +23,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationController.navigationBar.translucent = NO;
     self.title = @"GROUPS";
-    self.view.backgroundColor = [UIColor colorFromHex:@"EFEFEF"];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(groupChanged:) name:GroupChangedNotificationName object:nil];
     
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem rightBarButtonItemWithImage:[UIImage imageNamed:@"CreateGroupIcon"] target:self action:@selector(createGroup:)];
     self.tableView.scrollsToTop = NO;
+    self.refreshControl.backgroundColor = [UIColor colorFromHex:@"efefef"];
+    self.tableView.backgroundColor = [UIColor colorFromHex:@"efefef"];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -83,7 +82,7 @@
     Group *group = [UserManager sharedInstance].groups[indexPath.row];
     
     GroupPredictionsViewController *vc = [[GroupPredictionsViewController alloc] initWithGroup:group];
-    [self.navigationController pushViewController:vc animated:YES];
+    [self.parentViewController.navigationController pushViewController:vc animated:YES];
     
 }
 
@@ -91,16 +90,6 @@
     completionHandler([UserManager sharedInstance].groups, nil);
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-}
-
-
-- (IBAction)createGroup:(id)sender {
-    [Flurry logEvent: @"CREATE_GROUP_START"];
-
-    CreateGroupViewController *vc = [[CreateGroupViewController alloc] initWithGroup:nil];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-    [self presentViewController:nav animated:YES completion:nil];
-    [Flurry logEvent: @"CREATE_GROUP_SUCCESS"];
 }
 
 - (void)noObjectsRetrievedInPagingDatasource:(PagingDatasource *)pagingDatasource {

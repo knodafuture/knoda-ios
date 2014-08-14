@@ -54,13 +54,13 @@ static UINib *nib;
     self.viewPredictionsView.hidden = explore;
     self.exploreInfoView.hidden = YES;
     
-    self.rankingsArrow.hidden = !self.contest.rank.integerValue;
+    self.rankingsArrow.hidden = self.contest.myInfo == nil;
     
 }
 
 - (void)populateUI:(Contest *)contest {
     self.descriptionLabel.text = contest.description;
-    self.rankLabel.text = [contest.rank ordinalString];
+    self.rankLabel.text = [contest.rank ordinalString] != nil ? [contest.rank ordinalString] : [NSString stringWithFormat:@"%ld", (long)contest.participants.integerValue];
     self.overallLabel.text = [NSString stringWithFormat:@"overall (%ld)", (long)contest.participants.integerValue];
     
     self.nameLabel.text = contest.name;
@@ -100,7 +100,7 @@ static UINib *nib;
     self.viewPredictionsView.hidden = YES;
     
     
-    if (contest.rank.integerValue) {
+    if (contest.myInfo) {
         self.exploreInfoView.hidden = YES;
         self.leaderInfoView.hidden = NO;
         self.rankingsArrow.hidden = NO;

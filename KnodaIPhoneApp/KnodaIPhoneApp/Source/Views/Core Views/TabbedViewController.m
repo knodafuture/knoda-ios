@@ -148,7 +148,7 @@
     } else {
         for (int i = 0; i < self.buttons.count; i++) {
             UILabel *button = self.buttons[i];
-            CGRect frame = button.frame;
+            CGRect frame;
             frame = button.frame;
             frame.size.width = self.headerView.frame.size.width / self.buttons.count;
             frame.origin.x = frame.size.width * i;

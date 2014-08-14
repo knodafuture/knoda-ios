@@ -52,21 +52,6 @@ static UIImage *backgroundImage;
 }
 
 - (void)processImage:(NSNotification *)notification {
-    if (backgroundImage)
-        return;
-    
-    UIImage *capture = notification.userInfo[HomeViewCaptureKey];
-    
-    CGImageRef croppedRef = CGImageCreateWithImageInRect(capture.CGImage, CGRectMake(0, 0, self.navigationController.navigationBar.frame.size.width, self.navigationController.navigationBar.frame.size.height));
-    
-    UIImage *croppedImage = [UIImage imageWithCGImage:croppedRef];
-    CGImageRelease(croppedRef);
-    
-    UIImage *navBackground = [croppedImage applyExtraLightEffectWithTintColor:[UIColor colorFromHex:@"77bc1f"]];
-    
-    //[self.navigationController.navigationBar setBackgroundImage:cropped forBarMetrics:UIBarMetricsDefault];
-    
-    //[self setupBackground];
 }
 
 - (void)dealloc {

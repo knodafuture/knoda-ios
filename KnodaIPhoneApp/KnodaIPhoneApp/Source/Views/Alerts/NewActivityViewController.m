@@ -61,4 +61,7 @@
     viewController.unseenAlertsCount = 0;
 }
 
+- (void)viewDidDisappearInNavigationViewController:(NavigationViewController *)viewController {
+    
+}
 @end

@@ -86,9 +86,7 @@
     LoginRequest *request = [[LoginRequest alloc] init];
     request.login = self.usernameTextField.text;
     request.password = self.passwordTextField.text;
-    
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
+        
     [[UserManager sharedInstance] login:request completion:^(User *user, NSError *error) {
         [[LoadingView sharedInstance] hide];
         if (!error) {

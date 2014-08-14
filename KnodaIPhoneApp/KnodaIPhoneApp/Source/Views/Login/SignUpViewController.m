@@ -183,7 +183,6 @@ static const NSInteger kMaxPasswordLength = 20;
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (IBAction)signUpPressed {
-    
     if (![self checkTextFields])
         return;
     

@@ -28,7 +28,7 @@
                 </scrollView>
                 <view contentMode="scaleToFill" id="tNm-KZ-Aru">
                     <rect key="frame" x="0.0" y="36" width="320" height="24"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                     <subviews>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RANK" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="c19-B1-aIt">
                             <rect key="frame" x="10" y="0.0" width="42" height="24"/>

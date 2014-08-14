@@ -57,19 +57,23 @@ static const float kAvatarSize = 344.0;
 
 - (void)sendAvatar {
     [[LoadingView sharedInstance] show];
-    [[UserManager sharedInstance] uploadProfileImage:self.cropView.image completion:^(User *user, NSError *error) {
-        [[LoadingView sharedInstance] hide];
-        if (error) {
-            [[[UIAlertView alloc] initWithTitle:nil
-                                        message:error.localizedDescription
-                                       delegate:nil
-                              cancelButtonTitle:NSLocalizedString(@"OK", @"")
-                              otherButtonTitles:nil] show];
-            return;
-        }
-        //start predicting
-        StartPredictingViewController *vc = [[StartPredictingViewController alloc] initWithImage:self.cropView.image];
-        [self.navigationController pushViewController:vc animated:YES];
-    }];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [[UserManager sharedInstance] uploadProfileImage:[self.cropView getCroppedImage] completion:^(User *user, NSError *error) {
+            [[LoadingView sharedInstance] hide];
+            if (error) {
+                [[[UIAlertView alloc] initWithTitle:nil
+                                            message:error.localizedDescription
+                                           delegate:nil
+                                  cancelButtonTitle:NSLocalizedString(@"OK", @"")
+                                  otherButtonTitles:nil] show];
+                return;
+            }
+            //start predicting
+            StartPredictingViewController *vc = [[StartPredictingViewController alloc] initWithImage:[self.cropView getCroppedImage]];
+            [self.navigationController pushViewController:vc animated:YES];
+        }];
+        
+    });
+
 }
 @end

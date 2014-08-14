@@ -122,9 +122,7 @@
 
 - (void)twitterSignIn:(SocialAccount *)request {
     [[LoadingView sharedInstance] show];
-    
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
+        
     [[UserManager sharedInstance] socialSignIn:request completion:^(User *user, NSError *error) {
         [[LoadingView sharedInstance] hide];
         if (!error) {

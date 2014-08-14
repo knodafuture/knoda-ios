@@ -246,7 +246,7 @@
     
     [vc setValue:[NSString stringWithFormat:@"%@ invited you to join a group on Knoda", [UserManager sharedInstance].user.name] forKey:@"subject"];
     
-    [self presentViewController:vc animated:YES completion:nil];
+    [self.view.window.rootViewController presentViewController:vc animated:YES completion:nil];
 }
 
 - (IBAction)editGroup:(id)sender {

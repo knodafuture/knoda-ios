@@ -22,7 +22,8 @@
              @"contestStages" : @"contest_stages",
              @"leader" : @"leader_info",
              @"rank" : @"my_info.rank",
-             @"participants" : @"participants"
+             @"participants" : @"participants",
+             @"myInfo" : @"my_info"
              };
 }
 

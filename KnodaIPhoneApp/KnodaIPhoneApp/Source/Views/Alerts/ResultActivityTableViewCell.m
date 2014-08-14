@@ -76,7 +76,7 @@ static ResultActivityTableViewCell *defaultCell;
     NSMutableAttributedString *title = [[NSMutableAttributedString alloc] init];
     
     NSString *prefix = @"";
-    NSDictionary *titleAttributes = @{};
+    NSDictionary *titleAttributes;
     
     if (activityItem.type == ActivityTypeWon) {
         prefix = @"You Won";

@@ -72,7 +72,7 @@
     CFStringRef lastNameRef = ABRecordCopyValue(person, kABPersonLastNameProperty);
     
     if (firstNameRef != NULL)
-        firstName = (__bridge NSString *)(firstNameRef);
+        firstName = CFBridgingRelease(firstNameRef);
     if (lastNameRef != NULL)
         lastName = CFBridgingRelease(lastNameRef);
     

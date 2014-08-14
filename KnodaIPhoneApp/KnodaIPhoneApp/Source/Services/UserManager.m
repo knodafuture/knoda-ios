@@ -253,6 +253,10 @@ static UserManager *sharedSingleton;
 
 - (void)uploadProfileImage:(UIImage *)profileImage completion:(void (^)(User *, NSError *))completionHandler {
     [[WebApi sharedInstance] uploadProfileImage:profileImage completion:^(NSError *error) {
+        if (error) {
+            completionHandler(self.user, error);
+            return;
+        }
         [self refreshUser:^(User *user, NSError *error) {
             [self sendNotification];
             completionHandler(user, error);

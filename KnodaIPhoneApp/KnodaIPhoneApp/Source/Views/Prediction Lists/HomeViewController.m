@@ -82,6 +82,14 @@ NSString *HomeViewCaptureKey = @"HOMEVIEWCAPUTRE";
     [[NSNotificationCenter defaultCenter] postNotificationName:VotingWalkthroughCompleteNotificationName object:nil];
 }
 
+- (void)viewDidAppearInNavigationViewController:(NavigationViewController *)viewController {
+    
+}
+
+- (void)viewDidDisappearInNavigationViewController:(NavigationViewController *)viewController {
+    
+}
+
 - (void)dealloc {
     [self removeAllObservations];
 }

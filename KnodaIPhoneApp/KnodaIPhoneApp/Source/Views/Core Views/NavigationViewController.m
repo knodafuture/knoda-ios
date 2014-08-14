@@ -197,6 +197,9 @@ NSString *UserLoggedOutNotificationName = @"USERLOGGEDOUT";
         [self addExtraViewControllers];
     }
     
+    if (self.appeared)
+        return;
+    
     if(![UserManager sharedInstance].user.hasAvatar && [UserManager sharedInstance].user)
         [self showSelectPictureViewController];
     else {

@@ -25,5 +25,6 @@
 
 @property (strong, nonatomic) NSNumber *rank;
 @property (strong, nonatomic) NSNumber *participants;
+@property (strong, nonatomic) NSDictionary *myInfo;
 
 @end

@@ -17,7 +17,6 @@
 
 static const int kDefaultAvatarsCount = 5;
 
-static const float kAvatarSize = 344.0;
 #define AVATAR_SIZE CGSizeMake(kAvatarSize, kAvatarSize)
 
 

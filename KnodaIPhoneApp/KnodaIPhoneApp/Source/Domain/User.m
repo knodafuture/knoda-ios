@@ -22,7 +22,10 @@
              @"name" : @"username",
              @"socialAccounts" : @"social_accounts",
              @"createdAt" : @"created_at",
-             @"notificationSettings" : @"notification_settings"};
+             @"notificationSettings" : @"notification_settings",
+             @"followerCount" : @"follower_count",
+             @"followingCount" : @"following_count",
+             @"followingId" : @"following_id"};
 }
 
 + (NSValueTransformer *)avatarJSONTransformer {

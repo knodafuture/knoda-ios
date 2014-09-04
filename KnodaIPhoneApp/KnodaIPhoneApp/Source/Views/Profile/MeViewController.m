@@ -17,6 +17,7 @@
 #import "FacebookManager.h"
 #import "TwitterManager.h"
 #import "UIActionSheet+Blocks.h"
+#import "FollowersViewController.h"
 
 static const float kAvatarSize = 344.0;
 #define AVATAR_SIZE CGSizeMake(kAvatarSize, kAvatarSize)
@@ -293,7 +294,7 @@ CGFloat const SwipeBezel = 30.0f;
                 vc.delegate = self;
                 vc.cropSize = AVATAR_SIZE;
                 UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-                [self presentViewController:nav animated:YES completion:nil];
+                [self.view.window.rootViewController presentViewController:nav animated:YES completion:nil];
             }
         }
     }];
@@ -349,20 +350,13 @@ CGFloat const SwipeBezel = 30.0f;
     [self.avatarChangeAcitonSheet showInView:[UIApplication sharedApplication].keyWindow];
 }
 
-
-- (void)twitterButtonPressedInHeaderView:(UserProfileHeaderView *)headerView {
-    if ([UserManager sharedInstance].user.twitterAccount)
-        [self removeTwitterAccount];
-    else
-        [self addTwitterAccount];
+- (void)followersPressedInHeaderView:(UserProfileHeaderView *)headerView {
+    
+    FollowersViewController *vc = [[FollowersViewController alloc] initForUser:[UserManager sharedInstance].user.userId name:[UserManager sharedInstance].user.name];
+    
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
-- (void)facebookButtonPressedInHeaderView:(UserProfileHeaderView *)headerView {
-    if ([UserManager sharedInstance].user.facebookAccount)
-        [self removeFacebookAccount];
-    else
-        [self addFacebookAccount];
-}
-
 - (void)addTwitterAccount {
     [[LoadingView sharedInstance] show];
     [[TwitterManager sharedInstance] performReverseAuth:^(SocialAccount *request, NSError *error) {

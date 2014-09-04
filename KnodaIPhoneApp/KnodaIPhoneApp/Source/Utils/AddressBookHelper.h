@@ -12,6 +12,7 @@
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSArray *emailAddresses;
 @property (strong, nonatomic) NSArray *phoneNumbers;
+@property (assign, nonatomic) BOOL selected;
 @end
 
 

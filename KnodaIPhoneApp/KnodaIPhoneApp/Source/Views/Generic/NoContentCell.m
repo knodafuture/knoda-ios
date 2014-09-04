@@ -43,4 +43,14 @@ static UINib *nib;
     return cell;
 }
 
+- (void)shiftDown:(CGFloat)points {
+    CGRect frame = self.blahImageView.frame;
+    frame.origin.y += points;
+    self.blahImageView.frame = frame;
+    
+    frame = self.messageLabel.frame;
+    frame.origin.y += points;
+    self.messageLabel.frame = frame;
+}
+
 @end

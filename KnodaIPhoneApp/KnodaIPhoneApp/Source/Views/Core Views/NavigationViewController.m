@@ -27,10 +27,13 @@
 #import "CGViewController.h"
 #import "WelcomeViewController.h"   
 #import "UIImage+ImageEffects.h"
+#import "NewHomeViewController.h"
+#import "SocialInvitationsViewController.h"
 
 CGFloat const SideNavBezelWidth = 50.0f;
 NSString *UserLoggedInNotificationName = @"USERLOGGEDIN";
 NSString *UserLoggedOutNotificationName = @"USERLOGGEDOUT";
+NSString *GetStartedNotificationName = @"GETSTARTED";
 
 @interface NavigationViewController () <UIScrollViewDelegate, SelectPictureDelegate, AddPredictionViewControllerDelegate, UINavigationControllerDelegate, UISearchBarDelegate>
 
@@ -77,7 +80,7 @@ NSString *UserLoggedOutNotificationName = @"USERLOGGEDOUT";
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processImage:) name:HomeViewLoadedNotificationName object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleLogin) name:UserLoggedInNotificationName object:nil];
-
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getStarted) name:GetStartedNotificationName object:nil];
 }
 
 
@@ -154,22 +157,18 @@ NSString *UserLoggedOutNotificationName = @"USERLOGGEDOUT";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
-    if (!self.appeared) {
-        self.appeared = YES;
-        
-        self.scrollView.bezelWidth = SideNavBezelWidth;
-        self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * 4, self.scrollView.frame.size.height);
-    
-        for (int i = 0; i < 1; i++) {
-            UINavigationController *vc = [self navigationControllerForMenuItem:i];
-            CGRect frame = vc.view.frame;
-            frame.size = self.scrollView.frame.size;
-            frame.origin.x = i * frame.size.width;
-            frame.origin.y = 0;
-            vc.view.frame = frame;
-            [self.scrollView addSubview:vc.view];
-        }
-    
+
+    self.scrollView.bezelWidth = SideNavBezelWidth;
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * 4, self.scrollView.frame.size.height);
+
+    for (int i = 0; i < 1; i++) {
+        UINavigationController *vc = [self navigationControllerForMenuItem:i];
+        CGRect frame = vc.view.frame;
+        frame.size = self.scrollView.frame.size;
+        frame.origin.x = i * frame.size.width;
+        frame.origin.y = 0;
+        vc.view.frame = frame;
+        [self.scrollView addSubview:vc.view];
     }
     
     [self.pingTimer invalidate];
@@ -199,6 +198,9 @@ NSString *UserLoggedOutNotificationName = @"USERLOGGEDOUT";
     
     if (self.appeared)
         return;
+    
+    self.appeared = YES;
+    
     
     if(![UserManager sharedInstance].user.hasAvatar && [UserManager sharedInstance].user)
         [self showSelectPictureViewController];
@@ -280,6 +282,9 @@ NSString *UserLoggedOutNotificationName = @"USERLOGGEDOUT";
     
     if ([self.visibleViewController.visibleViewController respondsToSelector:@selector(tableView)])
         [[(id)self.visibleViewController.visibleViewController tableView] setScrollsToTop:YES];
+    
+    if (menuItem == MenuAlerts)
+        _unseenAlertsCount = 0;
 
 }
 
@@ -296,7 +301,7 @@ NSString *UserLoggedOutNotificationName = @"USERLOGGEDOUT";
     if (!navigationController) {
         switch (menuItem) {
             case MenuHome:
-                viewController = [[HomeViewController alloc] initWithStyle:UITableViewStylePlain];
+                viewController = [[NewHomeViewController alloc] initWithNibName:@"NewHomeViewController" bundle:[NSBundle mainBundle]];
                 break;
             case MenuAlerts:
                 viewController = [[NewActivityViewController alloc] init];
@@ -426,5 +431,15 @@ NSString *UserLoggedOutNotificationName = @"USERLOGGEDOUT";
         self.welcomeNavigationController = nil;
     }];
     
+
+    
+}
+
+- (void)getStarted {
+    SocialInvitationsViewController *vc = [[SocialInvitationsViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [self.view.window.rootViewController presentViewController:nav animated:YES completion:nil];
+    });
 }
 @end

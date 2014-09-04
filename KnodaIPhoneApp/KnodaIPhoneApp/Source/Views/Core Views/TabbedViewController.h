@@ -17,6 +17,7 @@
 @property (strong, nonatomic) NSArray *buttons;
 @property (assign, nonatomic) BOOL isSetup;
 
+@property (strong, nonatomic) UIView *scrollIndicator;
 
 - (void)addViewController:(UIViewController *)viewController title:(NSString *)title;
 - (void)selectIndex:(NSInteger)index;

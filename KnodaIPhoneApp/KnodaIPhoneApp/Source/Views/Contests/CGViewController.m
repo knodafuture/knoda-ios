@@ -29,6 +29,9 @@
     
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
 - (UITableView *)tableView {
     UIViewController *vc = [self.viewControllers objectAtIndex:self.activePage];
     
@@ -71,8 +74,7 @@
     [Flurry logEvent: @"CREATE_GROUP_START"];
     
     CreateGroupViewController *vc = [[CreateGroupViewController alloc] initWithGroup:nil];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-    [self presentViewController:nav animated:YES completion:nil];
+    [self.navigationController pushViewController:vc animated:YES];
     [Flurry logEvent: @"CREATE_GROUP_SUCCESS"];
 }
 @end

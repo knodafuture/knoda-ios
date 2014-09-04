@@ -17,6 +17,7 @@
 #import "LoadingView.h"
 #import "ContestRankingsViewController.h"
 #import "ContestRankingsTableViewController.h"
+#import "SingleContestRankingsViewController.h"
 
 CGFloat const SwipeBezelll = 30.0f;
 
@@ -275,8 +276,7 @@ IBOutlet NavigationScrollView *scrollView;
         ContestRankingsViewController *vc = [[ContestRankingsViewController alloc] initWithContest:self.contest];
         [self.navigationController pushViewController:vc animated:YES];
     } else {
-        ContestRankingsTableViewController *vc = [[ContestRankingsTableViewController alloc] initWithContest:self.contest stage:nil];
-        vc.title = @"LEADERBOARD";
+        SingleContestRankingsViewController *vc = [[SingleContestRankingsViewController alloc] initWithContest:self.contest];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

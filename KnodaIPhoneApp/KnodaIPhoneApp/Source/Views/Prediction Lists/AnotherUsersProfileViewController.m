@@ -16,13 +16,16 @@
 #import "WebApi.h"
 #import "ZoomingImageViewController.h"
 #import "NoContentCell.h"
+#import "Follower.h"    
+#import "FollowersViewController.h"
 
-@interface AnotherUsersProfileViewController ()
+@interface AnotherUsersProfileViewController () <UserProfileHeaderViewDelegate>
 
 @property (strong, nonatomic) UserProfileHeaderView *headerView;
 @property (strong, nonatomic) UITableViewCell *headerCell;
 @property (assign, nonatomic) NSInteger userId;
 @property (assign, nonatomic) BOOL userInfoLoaded;
+@property (strong, nonatomic) User *user;
 
 @end
 
@@ -42,7 +45,8 @@
     self.navigationController.navigationBar.translucent = NO;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem backButtonWithTarget:self action:@selector(backPressed:)];
     
-    self.headerView = [[UserProfileHeaderView alloc] initWithDelegate:nil];
+    
+    self.headerView = [[UserProfileHeaderView alloc] initWithDelegate:self];
         
     self.headerCell = [[UITableViewCell alloc] init];
     self.headerCell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -81,7 +85,36 @@
 
 - (void)setUpUserProfileInformationWithUser:(User *) user {
     [self.headerView populateWithUser:user];
+    self.user = user;
     self.title = user.name.uppercaseString;
+    
+    if (user.followingId) {
+        self.navigationItem.rightBarButtonItem = [UIBarButtonItem rightBarButtonItemWithImage:[UIImage imageNamed:@"FollowBtnActive"] target:self action:@selector(toggleFollowing)];
+    } else {
+        self.navigationItem.rightBarButtonItem = [UIBarButtonItem rightBarButtonItemWithImage:[UIImage imageNamed:@"FollowBtn"] target:self action:@selector(toggleFollowing)];
+    }
+}
+
+- (void)toggleFollowing {
+    
+    [[LoadingView sharedInstance] show];
+    
+    if (self.user.followingId) {
+        [[WebApi sharedInstance] unfollowUser:[self.user.followingId intValue] completion:^(NSError *error) {
+            [self loadUserInfo:^{
+                [[LoadingView sharedInstance] hide];
+
+            }];
+        }];
+    } else {
+        Follower *follower = [[Follower alloc] init];
+        follower.leaderId = [NSString stringWithFormat:@"%ld", (long)self.userId];
+        [[WebApi sharedInstance] followUsers:@[follower] completion:^(NSArray *results, NSError *error) {
+            [self loadUserInfo:^{
+                [[LoadingView sharedInstance] hide];
+            }];
+        }];
+    }
 }
 
 - (void)profileTapped {
@@ -185,5 +218,14 @@
     
     [stickyCell.superview sendSubviewToBack:stickyCell];
     [stickyCell.superview sendSubviewToBack:self.refreshControl];
+}
+
+- (void)avatarButtonPressedInHeaderView:(UserProfileHeaderView *)headerView {
+    
+}
+
+- (void)followersPressedInHeaderView:(UserProfileHeaderView *)headerView {
+    FollowersViewController *vc = [[FollowersViewController alloc] initForUser:self.userId name:self.user.name];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 @end

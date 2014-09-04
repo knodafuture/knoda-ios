@@ -24,8 +24,10 @@
 #import "FacebookManager.h"
 #import "UserManager.h"
 #import "BragItemProvider.h"
+#import "FollowingActivityTableViewCell.h"
+#import "Follower.h"
 
-@interface ActivityViewController () <ResultActivityTableViewCellDelegate, NavigationViewControllerDelegate>
+@interface ActivityViewController () <ResultActivityTableViewCellDelegate, NavigationViewControllerDelegate, FollowingActivityTableViewCellDelegate>
 @property (strong, nonatomic) NSString *filter;
 @property (strong, nonatomic) Prediction *predictionToShare;
 @end
@@ -114,6 +116,17 @@
     } else if (alert.type == ActivityTypeExpired) {
         SettleActivityTableViewCell *cell = [SettleActivityTableViewCell cellForTableView:tableView];
         [cell populate:alert];
+        return cell;
+    } else if (alert.type == ActivityTypeFollow) {
+        
+        FollowingActivityTableViewCell *cell = [FollowingActivityTableViewCell cellForTableView:tableView delegate:self indexPath:indexPath];
+        UIImage *image = [_imageLoader lazyLoadImage:alert.imageUrl onIndexPath:indexPath];
+        if (image)
+            cell.avatarImageView.image = image;
+        else
+            cell.avatarImageView.image = [UIImage imageNamed:@"NotificationAvatar"];
+        [cell populate:alert];
+        
         return cell;
     } else {
     
@@ -263,6 +276,18 @@
 }
 
 - (void)viewDidAppearInNavigationViewController:(NavigationViewController *)viewController {
+}
+
+- (void)didFollowInCell:(FollowingActivityTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    ActivityItem *item = [self.pagingDatasource.objects objectAtIndex:indexPath.row];
+    
+    Follower *follower = [[Follower alloc] init];
+    follower.leaderId = item.target;
+    [[LoadingView sharedInstance] show];
+    
+    [[WebApi sharedInstance] followUsers:@[follower] completion:^(NSArray *results, NSError *error) {
+        [[LoadingView sharedInstance] hide];
+    }];
 }
 
 @end

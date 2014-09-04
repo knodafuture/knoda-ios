@@ -28,8 +28,15 @@
 
 - (UIImage *)captureView {
     UIGraphicsBeginImageContext(self.bounds.size);
-    [self drawViewHierarchyInRect:self.bounds afterScreenUpdates:YES];
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
+        [self drawViewHierarchyInRect:self.bounds afterScreenUpdates:YES];
+    else {
+        UIGraphicsBeginImageContextWithOptions(self.bounds.size, YES, 0.0f);
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        [self.layer renderInContext:context];
+    }
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
     return image;
 }
 @end

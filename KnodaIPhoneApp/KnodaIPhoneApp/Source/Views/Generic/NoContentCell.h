@@ -11,8 +11,10 @@
 @interface NoContentCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *messageLabel;
-
+@property (weak, nonatomic) IBOutlet UIImageView *blahImageView;
 
 + (NoContentCell *)noContentWithMessage:(NSString *)message forTableView:(UITableView *)tableView;
 + (NoContentCell *)noContentWithMessage:(NSString *)message forTableView:(UITableView *)tableView height:(CGFloat)height;
+
+- (void)shiftDown:(CGFloat)points;
 @end

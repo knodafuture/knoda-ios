@@ -30,6 +30,17 @@ static UserManager *sharedSingleton;
     return self;
 }
 
+- (BOOL)userHasAccountForProvider:(NSString *)provider {
+    
+    if ([provider isEqualToString:@"twitter"] && self.user.twitterAccount)
+        return YES;
+    else if ([provider isEqualToString:@"facebook"] && self.user.facebookAccount)
+        return YES;
+    
+    return NO;
+    
+}
+
 + (UserManager *)sharedInstance {
     static dispatch_once_t once;
     

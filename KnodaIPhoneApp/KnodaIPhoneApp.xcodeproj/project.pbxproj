@@ -255,6 +255,72 @@
 		01598B3C1858E4B3002E2534 /* ZoomingImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01598B3A1858E4B3002E2534 /* ZoomingImageViewController.xib */; };
 		0159B76919210A1A008B28E7 /* NavigationScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0159B76819210A1A008B28E7 /* NavigationScrollView.m */; };
 		0159B76A19210EB4008B28E7 /* NavigationScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0159B76819210A1A008B28E7 /* NavigationScrollView.m */; };
+		017565E219B7A31000D14EE4 /* FollowFacebookConnectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017565E119B7A31000D14EE4 /* FollowFacebookConnectCell.xib */; };
+		017565E419B7A50C00D14EE4 /* FollowTwitterConnectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017565E319B7A50C00D14EE4 /* FollowTwitterConnectCell.xib */; };
+		017565E519B7A7AA00D14EE4 /* FollowFacebookConnectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017565E119B7A31000D14EE4 /* FollowFacebookConnectCell.xib */; };
+		017565E619B7A7AC00D14EE4 /* FollowTwitterConnectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017565E319B7A50C00D14EE4 /* FollowTwitterConnectCell.xib */; };
+		017565E919B7AB8300D14EE4 /* ContactMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 017565E819B7AB8300D14EE4 /* ContactMatch.m */; };
+		017565EA19B7AB8300D14EE4 /* ContactMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 017565E819B7AB8300D14EE4 /* ContactMatch.m */; };
+		017565ED19B7AF5E00D14EE4 /* SocialFollowTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 017565EC19B7AF5E00D14EE4 /* SocialFollowTableViewCell.m */; };
+		017565EE19B7AF5E00D14EE4 /* SocialFollowTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 017565EC19B7AF5E00D14EE4 /* SocialFollowTableViewCell.m */; };
+		017565F019B7B02A00D14EE4 /* SocialFollowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017565EF19B7B02A00D14EE4 /* SocialFollowTableViewCell.xib */; };
+		017565F119B7B02A00D14EE4 /* SocialFollowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017565EF19B7B02A00D14EE4 /* SocialFollowTableViewCell.xib */; };
+		017565F319B7C82300D14EE4 /* FollowTwitterHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017565F219B7C82300D14EE4 /* FollowTwitterHeaderView.xib */; };
+		017565F419B7C82300D14EE4 /* FollowTwitterHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017565F219B7C82300D14EE4 /* FollowTwitterHeaderView.xib */; };
+		017565F619B7CAFF00D14EE4 /* FollowFacebookHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017565F519B7CAFF00D14EE4 /* FollowFacebookHeaderView.xib */; };
+		017565F719B7CAFF00D14EE4 /* FollowFacebookHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017565F519B7CAFF00D14EE4 /* FollowFacebookHeaderView.xib */; };
+		017565F919B7CF3500D14EE4 /* SocialInvitationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017565F819B7CF3500D14EE4 /* SocialInvitationsViewController.xib */; };
+		017565FA19B7CF3500D14EE4 /* SocialInvitationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017565F819B7CF3500D14EE4 /* SocialInvitationsViewController.xib */; };
+		017565FC19B7D82D00D14EE4 /* NoTwitterFriendsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017565FB19B7D82D00D14EE4 /* NoTwitterFriendsCell.xib */; };
+		017565FD19B7D82D00D14EE4 /* NoTwitterFriendsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017565FB19B7D82D00D14EE4 /* NoTwitterFriendsCell.xib */; };
+		017565FF19B7D87700D14EE4 /* NoFacebookFriendsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017565FE19B7D87700D14EE4 /* NoFacebookFriendsCell.xib */; };
+		0175660019B7D87700D14EE4 /* NoFacebookFriendsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017565FE19B7D87700D14EE4 /* NoFacebookFriendsCell.xib */; };
+		0175660319B7DA2D00D14EE4 /* SocialContactsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0175660219B7DA2D00D14EE4 /* SocialContactsTableViewCell.m */; };
+		0175660419B7DA2D00D14EE4 /* SocialContactsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0175660219B7DA2D00D14EE4 /* SocialContactsTableViewCell.m */; };
+		0175660619B7DA4C00D14EE4 /* SocialContactsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0175660519B7DA4C00D14EE4 /* SocialContactsTableViewCell.xib */; };
+		0175660719B7DA4C00D14EE4 /* SocialContactsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0175660519B7DA4C00D14EE4 /* SocialContactsTableViewCell.xib */; };
+		0175660E19B7DAED00D14EE4 /* SocialContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0175660D19B7DAED00D14EE4 /* SocialContactsViewController.m */; };
+		0175660F19B7DAED00D14EE4 /* SocialContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0175660D19B7DAED00D14EE4 /* SocialContactsViewController.m */; };
+		0175661119B7DB1500D14EE4 /* SocialContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0175661019B7DB1500D14EE4 /* SocialContactsViewController.xib */; };
+		0175661219B7DB1500D14EE4 /* SocialContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0175661019B7DB1500D14EE4 /* SocialContactsViewController.xib */; };
+		0175661419B7DF5900D14EE4 /* SocialContactsHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0175661319B7DF5900D14EE4 /* SocialContactsHeaderView.xib */; };
+		0175661519B7DF5900D14EE4 /* SocialContactsHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0175661319B7DF5900D14EE4 /* SocialContactsHeaderView.xib */; };
+		0175661A19B7E58200D14EE4 /* NoContactsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0175661919B7E58200D14EE4 /* NoContactsCell.xib */; };
+		0175661B19B7E58200D14EE4 /* NoContactsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0175661919B7E58200D14EE4 /* NoContactsCell.xib */; };
+		0175661D19B7EA0600D14EE4 /* NoContactResultsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0175661C19B7EA0600D14EE4 /* NoContactResultsCell.xib */; };
+		0175661E19B7EA0600D14EE4 /* NoContactResultsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0175661C19B7EA0600D14EE4 /* NoContactResultsCell.xib */; };
+		0175662019B7EC0800D14EE4 /* KnodaContactsHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0175661F19B7EC0800D14EE4 /* KnodaContactsHeaderView.xib */; };
+		0175662119B7EC0800D14EE4 /* KnodaContactsHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0175661F19B7EC0800D14EE4 /* KnodaContactsHeaderView.xib */; };
+		0175662419B7FB5500D14EE4 /* FollowingActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0175662319B7FB5500D14EE4 /* FollowingActivityTableViewCell.m */; };
+		0175662519B7FB5500D14EE4 /* FollowingActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0175662319B7FB5500D14EE4 /* FollowingActivityTableViewCell.m */; };
+		0175662719B7FC5D00D14EE4 /* FollowingActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0175662619B7FC5D00D14EE4 /* FollowingActivityTableViewCell.xib */; };
+		0175662819B7FC5D00D14EE4 /* FollowingActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0175662619B7FC5D00D14EE4 /* FollowingActivityTableViewCell.xib */; };
+		0175662B19B7FE0000D14EE4 /* Follower.m in Sources */ = {isa = PBXBuildFile; fileRef = 0175662A19B7FE0000D14EE4 /* Follower.m */; };
+		0175662C19B7FE0000D14EE4 /* Follower.m in Sources */ = {isa = PBXBuildFile; fileRef = 0175662A19B7FE0000D14EE4 /* Follower.m */; };
+		0175662F19B80E1400D14EE4 /* FollowersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0175662E19B80E1400D14EE4 /* FollowersViewController.m */; };
+		0175663019B80E1400D14EE4 /* FollowersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0175662E19B80E1400D14EE4 /* FollowersViewController.m */; };
+		0175663319B80E2A00D14EE4 /* FollowersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0175663219B80E2A00D14EE4 /* FollowersTableViewController.m */; };
+		0175663419B80E2A00D14EE4 /* FollowersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0175663219B80E2A00D14EE4 /* FollowersTableViewController.m */; };
+		0175663719B80E4400D14EE4 /* FollowersTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0175663619B80E4400D14EE4 /* FollowersTableViewCell.m */; };
+		0175663819B80E4400D14EE4 /* FollowersTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0175663619B80E4400D14EE4 /* FollowersTableViewCell.m */; };
+		0175663D19B80EEB00D14EE4 /* FollowersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0175663C19B80EEB00D14EE4 /* FollowersTableViewCell.xib */; };
+		0175663E19B80EEB00D14EE4 /* FollowersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0175663C19B80EEB00D14EE4 /* FollowersTableViewCell.xib */; };
+		0175664019B81E3300D14EE4 /* SingleContestsRankingsContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0175663F19B81E3300D14EE4 /* SingleContestsRankingsContainerView.xib */; };
+		0175664119B81E3300D14EE4 /* SingleContestsRankingsContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0175663F19B81E3300D14EE4 /* SingleContestsRankingsContainerView.xib */; };
+		0175664419B81E4200D14EE4 /* SingleContestRankingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0175664319B81E4200D14EE4 /* SingleContestRankingsViewController.m */; };
+		0175664519B81E4200D14EE4 /* SingleContestRankingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0175664319B81E4200D14EE4 /* SingleContestRankingsViewController.m */; };
+		0175664819B8235E00D14EE4 /* HomeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0175664719B8235E00D14EE4 /* HomeHeaderView.m */; };
+		0175664919B8235E00D14EE4 /* HomeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0175664719B8235E00D14EE4 /* HomeHeaderView.m */; };
+		0175664B19B8238F00D14EE4 /* HomeHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0175664A19B8238F00D14EE4 /* HomeHeaderView.xib */; };
+		0175664C19B8238F00D14EE4 /* HomeHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0175664A19B8238F00D14EE4 /* HomeHeaderView.xib */; };
+		0175664F19B824D100D14EE4 /* NewHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0175664E19B824D100D14EE4 /* NewHomeViewController.m */; };
+		0175665019B824D100D14EE4 /* NewHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0175664E19B824D100D14EE4 /* NewHomeViewController.m */; };
+		0175665219B824EF00D14EE4 /* NewHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0175665119B824EF00D14EE4 /* NewHomeViewController.xib */; };
+		0175665319B824EF00D14EE4 /* NewHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0175665119B824EF00D14EE4 /* NewHomeViewController.xib */; };
+		0175665619B8299C00D14EE4 /* HomeFollowingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0175665519B8299C00D14EE4 /* HomeFollowingViewController.m */; };
+		0175665719B8299C00D14EE4 /* HomeFollowingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0175665519B8299C00D14EE4 /* HomeFollowingViewController.m */; };
+		0175665919B82C2300D14EE4 /* NoSocialPredictionsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0175665819B82C2300D14EE4 /* NoSocialPredictionsCell.xib */; };
+		0175665A19B82C2300D14EE4 /* NoSocialPredictionsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0175665819B82C2300D14EE4 /* NoSocialPredictionsCell.xib */; };
 		01871E0F18D75D6900A2B809 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 01871E0E18D75D6900A2B809 /* Group.m */; };
 		01871E1018D75D6900A2B809 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 01871E0E18D75D6900A2B809 /* Group.m */; };
 		01871E1418D75DF500A2B809 /* GroupsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01871E1318D75DF500A2B809 /* GroupsViewController.m */; };
@@ -277,6 +343,10 @@
 		0193A01218CF55140088D168 /* DeviceToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193A01018CF55140088D168 /* DeviceToken.m */; };
 		0193A01518CF5FE90088D168 /* ActivityItem+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193A01418CF5FE90088D168 /* ActivityItem+Utils.m */; };
 		0193A01618CF5FE90088D168 /* ActivityItem+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193A01418CF5FE90088D168 /* ActivityItem+Utils.m */; };
+		019CF39419B7A0C000C734E0 /* SocialInvitationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 019CF39319B7A0C000C734E0 /* SocialInvitationsViewController.m */; };
+		019CF39519B7A0C000C734E0 /* SocialInvitationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 019CF39319B7A0C000C734E0 /* SocialInvitationsViewController.m */; };
+		019CF39819B7A11100C734E0 /* SocialFollowTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 019CF39719B7A11100C734E0 /* SocialFollowTableViewController.m */; };
+		019CF39919B7A11100C734E0 /* SocialFollowTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 019CF39719B7A11100C734E0 /* SocialFollowTableViewController.m */; };
 		01A1DEE9183E9A1F00DBBE68 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 01A1DEE8183E9A1F00DBBE68 /* libz.dylib */; };
 		01A1F663199830CC00371751 /* Contest.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A1F662199830CC00371751 /* Contest.m */; };
 		01A1F664199830CC00371751 /* Contest.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A1F662199830CC00371751 /* Contest.m */; };
@@ -690,6 +760,52 @@
 		01598B3A1858E4B3002E2534 /* ZoomingImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZoomingImageViewController.xib; sourceTree = "<group>"; };
 		0159B76719210A1A008B28E7 /* NavigationScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationScrollView.h; sourceTree = "<group>"; };
 		0159B76819210A1A008B28E7 /* NavigationScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationScrollView.m; sourceTree = "<group>"; };
+		017565E119B7A31000D14EE4 /* FollowFacebookConnectCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowFacebookConnectCell.xib; sourceTree = "<group>"; };
+		017565E319B7A50C00D14EE4 /* FollowTwitterConnectCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowTwitterConnectCell.xib; sourceTree = "<group>"; };
+		017565E719B7AB8300D14EE4 /* ContactMatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactMatch.h; sourceTree = "<group>"; };
+		017565E819B7AB8300D14EE4 /* ContactMatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactMatch.m; sourceTree = "<group>"; };
+		017565EB19B7AF5E00D14EE4 /* SocialFollowTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialFollowTableViewCell.h; sourceTree = "<group>"; };
+		017565EC19B7AF5E00D14EE4 /* SocialFollowTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialFollowTableViewCell.m; sourceTree = "<group>"; };
+		017565EF19B7B02A00D14EE4 /* SocialFollowTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SocialFollowTableViewCell.xib; sourceTree = "<group>"; };
+		017565F219B7C82300D14EE4 /* FollowTwitterHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowTwitterHeaderView.xib; sourceTree = "<group>"; };
+		017565F519B7CAFF00D14EE4 /* FollowFacebookHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowFacebookHeaderView.xib; sourceTree = "<group>"; };
+		017565F819B7CF3500D14EE4 /* SocialInvitationsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SocialInvitationsViewController.xib; sourceTree = "<group>"; };
+		017565FB19B7D82D00D14EE4 /* NoTwitterFriendsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoTwitterFriendsCell.xib; sourceTree = "<group>"; };
+		017565FE19B7D87700D14EE4 /* NoFacebookFriendsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoFacebookFriendsCell.xib; sourceTree = "<group>"; };
+		0175660119B7DA2D00D14EE4 /* SocialContactsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialContactsTableViewCell.h; sourceTree = "<group>"; };
+		0175660219B7DA2D00D14EE4 /* SocialContactsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialContactsTableViewCell.m; sourceTree = "<group>"; };
+		0175660519B7DA4C00D14EE4 /* SocialContactsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SocialContactsTableViewCell.xib; sourceTree = "<group>"; };
+		0175660C19B7DAED00D14EE4 /* SocialContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialContactsViewController.h; sourceTree = "<group>"; };
+		0175660D19B7DAED00D14EE4 /* SocialContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialContactsViewController.m; sourceTree = "<group>"; };
+		0175661019B7DB1500D14EE4 /* SocialContactsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SocialContactsViewController.xib; sourceTree = "<group>"; };
+		0175661319B7DF5900D14EE4 /* SocialContactsHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SocialContactsHeaderView.xib; sourceTree = "<group>"; };
+		0175661919B7E58200D14EE4 /* NoContactsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoContactsCell.xib; sourceTree = "<group>"; };
+		0175661C19B7EA0600D14EE4 /* NoContactResultsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoContactResultsCell.xib; sourceTree = "<group>"; };
+		0175661F19B7EC0800D14EE4 /* KnodaContactsHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KnodaContactsHeaderView.xib; sourceTree = "<group>"; };
+		0175662219B7FB5500D14EE4 /* FollowingActivityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowingActivityTableViewCell.h; sourceTree = "<group>"; };
+		0175662319B7FB5500D14EE4 /* FollowingActivityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowingActivityTableViewCell.m; sourceTree = "<group>"; };
+		0175662619B7FC5D00D14EE4 /* FollowingActivityTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowingActivityTableViewCell.xib; sourceTree = "<group>"; };
+		0175662919B7FE0000D14EE4 /* Follower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Follower.h; sourceTree = "<group>"; };
+		0175662A19B7FE0000D14EE4 /* Follower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Follower.m; sourceTree = "<group>"; };
+		0175662D19B80E1400D14EE4 /* FollowersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowersViewController.h; sourceTree = "<group>"; };
+		0175662E19B80E1400D14EE4 /* FollowersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowersViewController.m; sourceTree = "<group>"; };
+		0175663119B80E2A00D14EE4 /* FollowersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowersTableViewController.h; sourceTree = "<group>"; };
+		0175663219B80E2A00D14EE4 /* FollowersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowersTableViewController.m; sourceTree = "<group>"; };
+		0175663519B80E4400D14EE4 /* FollowersTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowersTableViewCell.h; sourceTree = "<group>"; };
+		0175663619B80E4400D14EE4 /* FollowersTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowersTableViewCell.m; sourceTree = "<group>"; };
+		0175663C19B80EEB00D14EE4 /* FollowersTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowersTableViewCell.xib; sourceTree = "<group>"; };
+		0175663F19B81E3300D14EE4 /* SingleContestsRankingsContainerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SingleContestsRankingsContainerView.xib; sourceTree = "<group>"; };
+		0175664219B81E4200D14EE4 /* SingleContestRankingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleContestRankingsViewController.h; sourceTree = "<group>"; };
+		0175664319B81E4200D14EE4 /* SingleContestRankingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleContestRankingsViewController.m; sourceTree = "<group>"; };
+		0175664619B8235E00D14EE4 /* HomeHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeHeaderView.h; sourceTree = "<group>"; };
+		0175664719B8235E00D14EE4 /* HomeHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeHeaderView.m; sourceTree = "<group>"; };
+		0175664A19B8238F00D14EE4 /* HomeHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeHeaderView.xib; sourceTree = "<group>"; };
+		0175664D19B824D100D14EE4 /* NewHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewHomeViewController.h; sourceTree = "<group>"; };
+		0175664E19B824D100D14EE4 /* NewHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewHomeViewController.m; sourceTree = "<group>"; };
+		0175665119B824EF00D14EE4 /* NewHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewHomeViewController.xib; sourceTree = "<group>"; };
+		0175665419B8299C00D14EE4 /* HomeFollowingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeFollowingViewController.h; sourceTree = "<group>"; };
+		0175665519B8299C00D14EE4 /* HomeFollowingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeFollowingViewController.m; sourceTree = "<group>"; };
+		0175665819B82C2300D14EE4 /* NoSocialPredictionsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoSocialPredictionsCell.xib; sourceTree = "<group>"; };
 		01871E0D18D75D6900A2B809 /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
 		01871E0E18D75D6900A2B809 /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
 		01871E1218D75DF500A2B809 /* GroupsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupsViewController.h; sourceTree = "<group>"; };
@@ -712,6 +828,10 @@
 		0193A01018CF55140088D168 /* DeviceToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceToken.m; sourceTree = "<group>"; };
 		0193A01318CF5FE90088D168 /* ActivityItem+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ActivityItem+Utils.h"; sourceTree = "<group>"; };
 		0193A01418CF5FE90088D168 /* ActivityItem+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ActivityItem+Utils.m"; sourceTree = "<group>"; };
+		019CF39219B7A0C000C734E0 /* SocialInvitationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialInvitationsViewController.h; sourceTree = "<group>"; };
+		019CF39319B7A0C000C734E0 /* SocialInvitationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialInvitationsViewController.m; sourceTree = "<group>"; };
+		019CF39619B7A11100C734E0 /* SocialFollowTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialFollowTableViewController.h; sourceTree = "<group>"; };
+		019CF39719B7A11100C734E0 /* SocialFollowTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialFollowTableViewController.m; sourceTree = "<group>"; };
 		01A1DEE8183E9A1F00DBBE68 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		01A1F661199830CC00371751 /* Contest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contest.h; sourceTree = "<group>"; };
 		01A1F662199830CC00371751 /* Contest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contest.m; sourceTree = "<group>"; };
@@ -1065,6 +1185,7 @@
 		013DA7271853002100B507E4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				019CF39119B7A0B200C734E0 /* Invite */,
 				01A1F66F199833F600371751 /* Contests */,
 				01871E1118D75DE900A2B809 /* Groups */,
 				01E8CB5B18764800003AE018 /* Search */,
@@ -1203,6 +1324,15 @@
 				013DA7741853002100B507E4 /* PredictionCell.xib */,
 				013DA7751853002100B507E4 /* PredictionsViewController.h */,
 				013DA7761853002100B507E4 /* PredictionsViewController.m */,
+				0175664619B8235E00D14EE4 /* HomeHeaderView.h */,
+				0175664719B8235E00D14EE4 /* HomeHeaderView.m */,
+				0175664A19B8238F00D14EE4 /* HomeHeaderView.xib */,
+				0175664D19B824D100D14EE4 /* NewHomeViewController.h */,
+				0175664E19B824D100D14EE4 /* NewHomeViewController.m */,
+				0175665119B824EF00D14EE4 /* NewHomeViewController.xib */,
+				0175665419B8299C00D14EE4 /* HomeFollowingViewController.h */,
+				0175665519B8299C00D14EE4 /* HomeFollowingViewController.m */,
+				0175665819B82C2300D14EE4 /* NoSocialPredictionsCell.xib */,
 			);
 			path = "Prediction Lists";
 			sourceTree = "<group>";
@@ -1369,6 +1499,10 @@
 				01A1F662199830CC00371751 /* Contest.m */,
 				01A1F6651998317400371751 /* ContestStage.h */,
 				01A1F6661998317400371751 /* ContestStage.m */,
+				017565E719B7AB8300D14EE4 /* ContactMatch.h */,
+				017565E819B7AB8300D14EE4 /* ContactMatch.m */,
+				0175662919B7FE0000D14EE4 /* Follower.h */,
+				0175662A19B7FE0000D14EE4 /* Follower.m */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -1503,8 +1637,49 @@
 				01ACCE7A1964306900D3ABE9 /* InviteActivityTableViewCell.xib */,
 				01ACCE7D1964307800D3ABE9 /* InviteActivityTableViewCell.h */,
 				01ACCE7E1964307800D3ABE9 /* InviteActivityTableViewCell.m */,
+				0175662219B7FB5500D14EE4 /* FollowingActivityTableViewCell.h */,
+				0175662319B7FB5500D14EE4 /* FollowingActivityTableViewCell.m */,
+				0175662619B7FC5D00D14EE4 /* FollowingActivityTableViewCell.xib */,
 			);
 			path = Alerts;
+			sourceTree = "<group>";
+		};
+		019CF39119B7A0B200C734E0 /* Invite */ = {
+			isa = PBXGroup;
+			children = (
+				019CF39219B7A0C000C734E0 /* SocialInvitationsViewController.h */,
+				019CF39319B7A0C000C734E0 /* SocialInvitationsViewController.m */,
+				019CF39619B7A11100C734E0 /* SocialFollowTableViewController.h */,
+				019CF39719B7A11100C734E0 /* SocialFollowTableViewController.m */,
+				017565E119B7A31000D14EE4 /* FollowFacebookConnectCell.xib */,
+				017565E319B7A50C00D14EE4 /* FollowTwitterConnectCell.xib */,
+				017565EB19B7AF5E00D14EE4 /* SocialFollowTableViewCell.h */,
+				017565EC19B7AF5E00D14EE4 /* SocialFollowTableViewCell.m */,
+				017565EF19B7B02A00D14EE4 /* SocialFollowTableViewCell.xib */,
+				017565F219B7C82300D14EE4 /* FollowTwitterHeaderView.xib */,
+				017565F519B7CAFF00D14EE4 /* FollowFacebookHeaderView.xib */,
+				017565F819B7CF3500D14EE4 /* SocialInvitationsViewController.xib */,
+				017565FB19B7D82D00D14EE4 /* NoTwitterFriendsCell.xib */,
+				017565FE19B7D87700D14EE4 /* NoFacebookFriendsCell.xib */,
+				0175660119B7DA2D00D14EE4 /* SocialContactsTableViewCell.h */,
+				0175660219B7DA2D00D14EE4 /* SocialContactsTableViewCell.m */,
+				0175660519B7DA4C00D14EE4 /* SocialContactsTableViewCell.xib */,
+				0175660C19B7DAED00D14EE4 /* SocialContactsViewController.h */,
+				0175660D19B7DAED00D14EE4 /* SocialContactsViewController.m */,
+				0175661019B7DB1500D14EE4 /* SocialContactsViewController.xib */,
+				0175661319B7DF5900D14EE4 /* SocialContactsHeaderView.xib */,
+				0175661919B7E58200D14EE4 /* NoContactsCell.xib */,
+				0175661C19B7EA0600D14EE4 /* NoContactResultsCell.xib */,
+				0175661F19B7EC0800D14EE4 /* KnodaContactsHeaderView.xib */,
+				0175662D19B80E1400D14EE4 /* FollowersViewController.h */,
+				0175662E19B80E1400D14EE4 /* FollowersViewController.m */,
+				0175663119B80E2A00D14EE4 /* FollowersTableViewController.h */,
+				0175663219B80E2A00D14EE4 /* FollowersTableViewController.m */,
+				0175663519B80E4400D14EE4 /* FollowersTableViewCell.h */,
+				0175663619B80E4400D14EE4 /* FollowersTableViewCell.m */,
+				0175663C19B80EEB00D14EE4 /* FollowersTableViewCell.xib */,
+			);
+			path = Invite;
 			sourceTree = "<group>";
 		};
 		01A1F66F199833F600371751 /* Contests */ = {
@@ -1531,6 +1706,9 @@
 				01A1F6A01999F44400371751 /* ContestRankingsViewController.m */,
 				01A1F6A31999F50000371751 /* ContestRankingsTableViewController.h */,
 				01A1F6A41999F50000371751 /* ContestRankingsTableViewController.m */,
+				0175663F19B81E3300D14EE4 /* SingleContestsRankingsContainerView.xib */,
+				0175664219B81E4200D14EE4 /* SingleContestRankingsViewController.h */,
+				0175664319B81E4200D14EE4 /* SingleContestRankingsViewController.m */,
 			);
 			path = Contests;
 			sourceTree = "<group>";
@@ -1757,27 +1935,37 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0175662119B7EC0800D14EE4 /* KnodaContactsHeaderView.xib in Resources */,
 				01A1F6AF199A821800371751 /* RankingsViewController.xib in Resources */,
 				01BECA5719763C2F00E75CBA /* ProfileViewController.xib in Resources */,
 				013DA8251853002200B507E4 /* ForgotPasswordViewController.xib in Resources */,
+				0175662819B7FC5D00D14EE4 /* FollowingActivityTableViewCell.xib in Resources */,
+				017565F119B7B02A00D14EE4 /* SocialFollowTableViewCell.xib in Resources */,
+				017565FD19B7D82D00D14EE4 /* NoTwitterFriendsCell.xib in Resources */,
 				01ACCE6B196417BE00D3ABE9 /* CommentActivityTableViewCell.xib in Resources */,
+				0175661E19B7EA0600D14EE4 /* NoContactResultsCell.xib in Resources */,
 				014A9F09185DA04400A96678 /* release_notes.md in Resources */,
 				01BECA411976282000E75CBA /* SettingsViewController.xib in Resources */,
 				013DA89F1853002200B507E4 /* Media.xcassets in Resources */,
+				017565E519B7A7AA00D14EE4 /* FollowFacebookConnectCell.xib in Resources */,
 				013DA8531853002200B507E4 /* PredictionCell.xib in Resources */,
 				013DA82D1853002200B507E4 /* SignUpViewController.xib in Resources */,
 				01A6787419577E1C002FDE1F /* TabbedViewController.xib in Resources */,
 				01DBEACC18DA4033000F2E50 /* InvitationTableViewCell.xib in Resources */,
 				01DBEAC218DA3BE2000F2E50 /* InvitationsViewController.xib in Resources */,
+				0175661219B7DB1500D14EE4 /* SocialContactsViewController.xib in Resources */,
 				013DA8351853002200B507E4 /* PredictionDetailsHeaderCell.xib in Resources */,
 				01ACCE7C1964306900D3ABE9 /* InviteActivityTableViewCell.xib in Resources */,
 				01E8CB8318767D5D003AE018 /* UserCell.xib in Resources */,
+				017565F419B7C82300D14EE4 /* FollowTwitterHeaderView.xib in Resources */,
 				013DA86B1853002200B507E4 /* WebViewController.xib in Resources */,
 				01A6787F1957B4C2002FDE1F /* ResultActivityTableViewCell.xib in Resources */,
 				01F82CD718DD3E430000E96B /* CreateGroupViewController.xib in Resources */,
 				013DA8311853002200B507E4 /* WelcomeViewController.xib in Resources */,
 				01BECA3A1976259600E75CBA /* NotificationSettingsTableViewCell.xib in Resources */,
+				017565E619B7A7AC00D14EE4 /* FollowTwitterConnectCell.xib in Resources */,
 				013DA8751853002200B507E4 /* HelveticaNeue.dfont in Resources */,
+				0175661519B7DF5900D14EE4 /* SocialContactsHeaderView.xib in Resources */,
 				01A1F6C1199CAD9800371751 /* NewSelectPictureViewController.xib in Resources */,
 				013DA7FB1853002200B507E4 /* AddPredictionViewController.xib in Resources */,
 				014FDF6C18D7721F006B51D9 /* GroupTableViewCell.xib in Resources */,
@@ -1787,22 +1975,30 @@
 				013DA8771853002200B507E4 /* KronaOne-Regular.ttf in Resources */,
 				01A1F69E1999E9A100371751 /* ContestNoContentCell.xib in Resources */,
 				01BECA5E19763EDA00E75CBA /* MeViewController.xib in Resources */,
+				017565F719B7CAFF00D14EE4 /* FollowFacebookHeaderView.xib in Resources */,
+				017565FA19B7CF3500D14EE4 /* SocialInvitationsViewController.xib in Resources */,
 				014FDF8918D9F103006B51D9 /* GroupPredictionsHeaderCell.xib in Resources */,
+				0175663E19B80EEB00D14EE4 /* FollowersTableViewCell.xib in Resources */,
 				013DA8731853002200B507E4 /* Badges.xcassets in Resources */,
 				013DA8391853002200B507E4 /* CommentCell.xib in Resources */,
 				01E2576C18E0743A009D3782 /* RankingsTableViewCell.xib in Resources */,
 				01598B281858364F002E2534 /* FirstStartView.xib in Resources */,
+				0175664119B81E3300D14EE4 /* SingleContestsRankingsContainerView.xib in Resources */,
 				013DA8791853002200B507E4 /* Default@2x-568h.png in Resources */,
 				01BECA44197635C800E75CBA /* AboutViewController.xib in Resources */,
 				013DA85B1853002200B507E4 /* ChangePasswordViewController.xib in Resources */,
 				013DA85F1853002200B507E4 /* ImageCropperViewController.xib in Resources */,
+				0175660019B7D87700D14EE4 /* NoFacebookFriendsCell.xib in Resources */,
 				01ACCE7919642B9700D3ABE9 /* SettleActivityTableViewCell.xib in Resources */,
 				01598B3C1858E4B3002E2534 /* ZoomingImageViewController.xib in Resources */,
+				0175665319B824EF00D14EE4 /* NewHomeViewController.xib in Resources */,
+				0175664C19B8238F00D14EE4 /* HomeHeaderView.xib in Resources */,
 				013DA9131854759200B507E4 /* CreateCommentView.xib in Resources */,
 				013DA87D1853002200B507E4 /* IntroOverlay@2x-568h.png in Resources */,
 				01A1F688199940B800371751 /* ContestDetailsViewController.xib in Resources */,
 				013DA80D1853002200B507E4 /* NavigationViewController.xib in Resources */,
 				013DA8AD1853002200B507E4 /* Localizable.strings in Resources */,
+				0175665A19B82C2300D14EE4 /* NoSocialPredictionsCell.xib in Resources */,
 				01B67BB018DB5D8E00D22D2B /* InvitationSearchView.xib in Resources */,
 				01B67BA918DB4BDE00D22D2B /* MemberTableViewCell.xib in Resources */,
 				013DA86F1853002200B507E4 /* UserProfileHeaderView.xib in Resources */,
@@ -1813,6 +2009,7 @@
 				01DBEABB18DA29C6000F2E50 /* GroupSettingsViewController.xib in Resources */,
 				01E8CB7C187678E0003AE018 /* NoSearchResultsCell.xib in Resources */,
 				013DA83F1853002200B507E4 /* PredictionDetailsSectionHeader.xib in Resources */,
+				0175661B19B7E58200D14EE4 /* NoContactsCell.xib in Resources */,
 				013DA8291853002200B507E4 /* LoginViewController.xib in Resources */,
 				01A1F6BE199CA7FC00371751 /* StartPredictingViewController.xib in Resources */,
 				013DA8AB1853002200B507E4 /* InfoPlist.strings in Resources */,
@@ -1822,6 +2019,7 @@
 				013DA8451853002200B507E4 /* PredictorCell.xib in Resources */,
 				013DA8211853002200B507E4 /* DatePickerView.xib in Resources */,
 				013DA8671853002200B507E4 /* SelectPictureViewController.xib in Resources */,
+				0175660719B7DA4C00D14EE4 /* SocialContactsTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1829,13 +2027,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				017565F019B7B02A00D14EE4 /* SocialFollowTableViewCell.xib in Resources */,
 				01BECA5619763C2F00E75CBA /* ProfileViewController.xib in Resources */,
 				01A1F69D1999E9A100371751 /* ContestNoContentCell.xib in Resources */,
 				013DA8241853002200B507E4 /* ForgotPasswordViewController.xib in Resources */,
 				01A6787E1957B4C2002FDE1F /* ResultActivityTableViewCell.xib in Resources */,
 				014A9F08185DA04400A96678 /* release_notes.md in Resources */,
 				013DA89E1853002200B507E4 /* Media.xcassets in Resources */,
+				0175662719B7FC5D00D14EE4 /* FollowingActivityTableViewCell.xib in Resources */,
 				013DA8521853002200B507E4 /* PredictionCell.xib in Resources */,
+				0175661119B7DB1500D14EE4 /* SocialContactsViewController.xib in Resources */,
+				017565FF19B7D87700D14EE4 /* NoFacebookFriendsCell.xib in Resources */,
 				01A1F6AE199A821800371751 /* RankingsViewController.xib in Resources */,
 				01A1F687199940B800371751 /* ContestDetailsViewController.xib in Resources */,
 				013DA82C1853002200B507E4 /* SignUpViewController.xib in Resources */,
@@ -1854,8 +2056,11 @@
 				01BECA371976258400E75CBA /* NotificationSettingsTableViewCell.xib in Resources */,
 				013DA8761853002200B507E4 /* KronaOne-Regular.ttf in Resources */,
 				013DA8721853002200B507E4 /* Badges.xcassets in Resources */,
+				0175662019B7EC0800D14EE4 /* KnodaContactsHeaderView.xib in Resources */,
 				013DA8381853002200B507E4 /* CommentCell.xib in Resources */,
+				0175661419B7DF5900D14EE4 /* SocialContactsHeaderView.xib in Resources */,
 				01BECA401976282000E75CBA /* SettingsViewController.xib in Resources */,
+				0175661A19B7E58200D14EE4 /* NoContactsCell.xib in Resources */,
 				01598B271858364F002E2534 /* FirstStartView.xib in Resources */,
 				013DA8781853002200B507E4 /* Default@2x-568h.png in Resources */,
 				01E2576B18E0743A009D3782 /* RankingsTableViewCell.xib in Resources */,
@@ -1866,10 +2071,13 @@
 				01B67BAF18DB5D8E00D22D2B /* InvitationSearchView.xib in Resources */,
 				01598B3B1858E4B3002E2534 /* ZoomingImageViewController.xib in Resources */,
 				01DBEACB18DA4033000F2E50 /* InvitationTableViewCell.xib in Resources */,
+				0175661D19B7EA0600D14EE4 /* NoContactResultsCell.xib in Resources */,
 				013DA9121854759200B507E4 /* CreateCommentView.xib in Resources */,
+				0175660619B7DA4C00D14EE4 /* SocialContactsTableViewCell.xib in Resources */,
 				014FDF8818D9F103006B51D9 /* GroupPredictionsHeaderCell.xib in Resources */,
 				013DA87C1853002200B507E4 /* IntroOverlay@2x-568h.png in Resources */,
 				01BFDC7518E5C8110098F81F /* GroupAvatars.xcassets in Resources */,
+				0175664019B81E3300D14EE4 /* SingleContestsRankingsContainerView.xib in Resources */,
 				013DA80C1853002200B507E4 /* NavigationViewController.xib in Resources */,
 				013DA8AC1853002200B507E4 /* Localizable.strings in Resources */,
 				01E8CB8218767D5D003AE018 /* UserCell.xib in Resources */,
@@ -1879,19 +2087,29 @@
 				01E8CB7B187678E0003AE018 /* NoSearchResultsCell.xib in Resources */,
 				014A9F06185DA04400A96678 /* README.md in Resources */,
 				013DA81A1853002200B507E4 /* LoadingView.xib in Resources */,
+				0175663D19B80EEB00D14EE4 /* FollowersTableViewCell.xib in Resources */,
 				013DA8161853002200B507E4 /* LoadingCell.xib in Resources */,
 				013DA83E1853002200B507E4 /* PredictionDetailsSectionHeader.xib in Resources */,
 				01A1F6BD199CA7FC00371751 /* StartPredictingViewController.xib in Resources */,
+				017565F919B7CF3500D14EE4 /* SocialInvitationsViewController.xib in Resources */,
+				017565E219B7A31000D14EE4 /* FollowFacebookConnectCell.xib in Resources */,
+				0175665219B824EF00D14EE4 /* NewHomeViewController.xib in Resources */,
 				013DA8281853002200B507E4 /* LoginViewController.xib in Resources */,
 				013DA8AA1853002200B507E4 /* InfoPlist.strings in Resources */,
 				01BECA5D19763EDA00E75CBA /* MeViewController.xib in Resources */,
+				0175665919B82C2300D14EE4 /* NoSocialPredictionsCell.xib in Resources */,
+				017565E419B7A50C00D14EE4 /* FollowTwitterConnectCell.xib in Resources */,
 				013DA81E1853002200B507E4 /* NoContentCell.xib in Resources */,
 				013DA87E1853002200B507E4 /* IntroOverlay@2x.png in Resources */,
 				01A6787319577E1C002FDE1F /* TabbedViewController.xib in Resources */,
+				017565F319B7C82300D14EE4 /* FollowTwitterHeaderView.xib in Resources */,
 				013DA8701853002200B507E4 /* Avatars.xcassets in Resources */,
 				013DA8441853002200B507E4 /* PredictorCell.xib in Resources */,
+				017565FC19B7D82D00D14EE4 /* NoTwitterFriendsCell.xib in Resources */,
+				017565F619B7CAFF00D14EE4 /* FollowFacebookHeaderView.xib in Resources */,
 				01A1F6811998574900371751 /* ContestTableViewCell.xib in Resources */,
 				01ACCE7B1964306900D3ABE9 /* InviteActivityTableViewCell.xib in Resources */,
+				0175664B19B8238F00D14EE4 /* HomeHeaderView.xib in Resources */,
 				013DA8201853002200B507E4 /* DatePickerView.xib in Resources */,
 				013DA8661853002200B507E4 /* SelectPictureViewController.xib in Resources */,
 				01F82CD618DD3E430000E96B /* CreateGroupViewController.xib in Resources */,
@@ -1972,11 +2190,13 @@
 				01E8CB751876693B003AE018 /* CategoriesDatasource.m in Sources */,
 				01871E1018D75D6900A2B809 /* Group.m in Sources */,
 				01A6787C1957B4B5002FDE1F /* ResultActivityTableViewCell.m in Sources */,
+				0175665019B824D100D14EE4 /* NewHomeViewController.m in Sources */,
 				013DA906185438E600B507E4 /* CreateCommentView.m in Sources */,
 				01DBEAD418DA4D0B000F2E50 /* Member.m in Sources */,
 				01BECAAA19782D5400E75CBA /* UIView+Utils.m in Sources */,
 				013DA8CE1853004000B507E4 /* LoginResponse.m in Sources */,
 				01E8CB6D18765F71003AE018 /* SearchDatasource.m in Sources */,
+				0175663819B80E4400D14EE4 /* FollowersTableViewCell.m in Sources */,
 				013DA80B1853002200B507E4 /* NavigationViewController.m in Sources */,
 				0193A01218CF55140088D168 /* DeviceToken.m in Sources */,
 				013DA8A51853002200B507E4 /* BJImageCropper.m in Sources */,
@@ -1989,6 +2209,8 @@
 				013DA7F51853002200B507E4 /* MultipartRequest.m in Sources */,
 				01C4A4AD190E61B300E08031 /* SocialAccount.m in Sources */,
 				013DA7C91853002200B507E4 /* NSString+Utils.m in Sources */,
+				0175660419B7DA2D00D14EE4 /* SocialContactsTableViewCell.m in Sources */,
+				0175662519B7FB5500D14EE4 /* FollowingActivityTableViewCell.m in Sources */,
 				01C4A4A2190E3D2F00E08031 /* OAuth+Additions.m in Sources */,
 				01B67BAD18DB5CA300D22D2B /* InvitationSearchView.m in Sources */,
 				01BECA4B197635DC00E75CBA /* AboutViewController.m in Sources */,
@@ -2002,6 +2224,7 @@
 				01A1F67F1998565400371751 /* NSNumber+Utils.m in Sources */,
 				01A1F6681998317400371751 /* ContestStage.m in Sources */,
 				01871E1518D75DF500A2B809 /* GroupsViewController.m in Sources */,
+				0175663019B80E1400D14EE4 /* FollowersViewController.m in Sources */,
 				01E8CB711876672C003AE018 /* SearchSectionHeader.m in Sources */,
 				01DBEAD818DA4E88000F2E50 /* MemberTableViewCell.m in Sources */,
 				0193A00218CE564D0088D168 /* PredictionPoints.m in Sources */,
@@ -2032,16 +2255,19 @@
 				013DA7D31853002200B507E4 /* UINavigationItem+iOS7Spacing.m in Sources */,
 				018DF7A718590699004FEDA6 /* ActivityItem.m in Sources */,
 				01A1F6731998340600371751 /* ContestViewController.m in Sources */,
+				0175665719B8299C00D14EE4 /* HomeFollowingViewController.m in Sources */,
 				014F4E2518D73F5900A2F764 /* UserManager.m in Sources */,
 				014FDF7018D7722F006B51D9 /* GroupTableViewCell.m in Sources */,
 				013DA8431853002200B507E4 /* PredictorCell.m in Sources */,
 				01E2577518E07D9B009D3782 /* RankingsViewController.m in Sources */,
 				013DA8D41853004000B507E4 /* User.m in Sources */,
 				01D7340C19126B230070481E /* TwitterManager.m in Sources */,
+				0175662C19B7FE0000D14EE4 /* Follower.m in Sources */,
 				013DA90A1854417D00B507E4 /* DetailsTableViewController.m in Sources */,
 				013DA7C51853002200B507E4 /* NSDate+Utils.m in Sources */,
 				01B67BB418DB630300D22D2B /* Invitation.m in Sources */,
 				013DA8DC1853004000B507E4 /* WebObject.m in Sources */,
+				017565EA19B7AB8300D14EE4 /* ContactMatch.m in Sources */,
 				01E8CB63187648D1003AE018 /* SearchBar.m in Sources */,
 				01E2577018E0750C009D3782 /* RankingsTableViewCell.m in Sources */,
 				01E8CB5F1876480F003AE018 /* SearchViewController.m in Sources */,
@@ -2057,6 +2283,7 @@
 				013DA8651853002200B507E4 /* SelectPictureViewController.m in Sources */,
 				013DA8511853002200B507E4 /* PredictionCell.m in Sources */,
 				014FDF8318D9EB5F006B51D9 /* EditGroupViewController.m in Sources */,
+				019CF39519B7A0C000C734E0 /* SocialInvitationsViewController.m in Sources */,
 				01E8CB791876786C003AE018 /* NoSearchResultsCell.m in Sources */,
 				013DA82B1853002200B507E4 /* SignUpViewController.m in Sources */,
 				013DA8D21853004000B507E4 /* Prediction.m in Sources */,
@@ -2081,9 +2308,11 @@
 				013DA86D1853002200B507E4 /* UserProfileHeaderView.m in Sources */,
 				013DA7D51853002200B507E4 /* Comment+Utils.m in Sources */,
 				013DA8331853002200B507E4 /* PredictionDetailsHeaderCell.m in Sources */,
+				0175664919B8235E00D14EE4 /* HomeHeaderView.m in Sources */,
 				01ACCE6F196417C800D3ABE9 /* CommentActivityTableViewCell.m in Sources */,
 				0101F56119139E8700623417 /* UIActionSheet+Blocks.m in Sources */,
 				01598B3518584645002E2534 /* UINavigationBar+AppearanceUtils.m in Sources */,
+				0175663419B80E2A00D14EE4 /* FollowersTableViewController.m in Sources */,
 				013DA81D1853002200B507E4 /* NoContentCell.m in Sources */,
 				013DA8FE185432B100B507E4 /* CommentsDatasource.m in Sources */,
 				01D73408190EC6200070481E /* FacebookManager.m in Sources */,
@@ -2097,6 +2326,7 @@
 				01BECA391976259100E75CBA /* NotificationSettingsTableViewCell.m in Sources */,
 				014FDF7418D77519006B51D9 /* Leader.m in Sources */,
 				01C4A49C190E3D2F00E08031 /* TWAPIManager.m in Sources */,
+				019CF39919B7A11100C734E0 /* SocialFollowTableViewController.m in Sources */,
 				013DA8691853002200B507E4 /* WebViewController.m in Sources */,
 				01A1F6A21999F44400371751 /* ContestRankingsViewController.m in Sources */,
 				0193A00A18CF50340088D168 /* PasswordResetRequest.m in Sources */,
@@ -2108,6 +2338,8 @@
 				013DA8471853002200B507E4 /* PredictorHeaderCell.m in Sources */,
 				0193A01618CF5FE90088D168 /* ActivityItem+Utils.m in Sources */,
 				013DA83D1853002200B507E4 /* PredictionDetailsSectionHeader.m in Sources */,
+				0175660F19B7DAED00D14EE4 /* SocialContactsViewController.m in Sources */,
+				017565EE19B7AF5E00D14EE4 /* SocialFollowTableViewCell.m in Sources */,
 				013DA7BF1853002200B507E4 /* AppDelegate.m in Sources */,
 				01BECA5519763C2F00E75CBA /* ProfileViewController.m in Sources */,
 				013DA8D61853004000B507E4 /* SignupRequest.m in Sources */,
@@ -2115,6 +2347,7 @@
 				01598B3118583F82002E2534 /* PredictionItemProvider.m in Sources */,
 				014FDF7818D782B8006B51D9 /* GroupPredictionsViewController.m in Sources */,
 				013DA8A71853002200B507E4 /* KeychainItemWrapper.m in Sources */,
+				0175664519B81E4200D14EE4 /* SingleContestRankingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2126,11 +2359,13 @@
 				01E8CB741876693B003AE018 /* CategoriesDatasource.m in Sources */,
 				01871E0F18D75D6900A2B809 /* Group.m in Sources */,
 				01A6787B1957B4B5002FDE1F /* ResultActivityTableViewCell.m in Sources */,
+				0175664F19B824D100D14EE4 /* NewHomeViewController.m in Sources */,
 				013DA905185438E600B507E4 /* CreateCommentView.m in Sources */,
 				01DBEAD318DA4D0B000F2E50 /* Member.m in Sources */,
 				01BECAA919782D5400E75CBA /* UIView+Utils.m in Sources */,
 				013DA8CD1853004000B507E4 /* LoginResponse.m in Sources */,
 				01E8CB6C18765F71003AE018 /* SearchDatasource.m in Sources */,
+				0175663719B80E4400D14EE4 /* FollowersTableViewCell.m in Sources */,
 				013DA80A1853002200B507E4 /* NavigationViewController.m in Sources */,
 				0193A01118CF55140088D168 /* DeviceToken.m in Sources */,
 				013DA8A41853002200B507E4 /* BJImageCropper.m in Sources */,
@@ -2143,6 +2378,8 @@
 				01ACCE7F1964307800D3ABE9 /* InviteActivityTableViewCell.m in Sources */,
 				01C4A4AC190E61B300E08031 /* SocialAccount.m in Sources */,
 				013DA7C81853002200B507E4 /* NSString+Utils.m in Sources */,
+				0175660319B7DA2D00D14EE4 /* SocialContactsTableViewCell.m in Sources */,
+				0175662419B7FB5500D14EE4 /* FollowingActivityTableViewCell.m in Sources */,
 				01C4A4A1190E3D2F00E08031 /* OAuth+Additions.m in Sources */,
 				01B67BAC18DB5CA300D22D2B /* InvitationSearchView.m in Sources */,
 				01BECA4A197635DC00E75CBA /* AboutViewController.m in Sources */,
@@ -2156,6 +2393,7 @@
 				01A1F67E1998565400371751 /* NSNumber+Utils.m in Sources */,
 				01A1F6671998317400371751 /* ContestStage.m in Sources */,
 				01871E1418D75DF500A2B809 /* GroupsViewController.m in Sources */,
+				0175662F19B80E1400D14EE4 /* FollowersViewController.m in Sources */,
 				01E8CB701876672C003AE018 /* SearchSectionHeader.m in Sources */,
 				01DBEAD718DA4E88000F2E50 /* MemberTableViewCell.m in Sources */,
 				0193A00118CE564D0088D168 /* PredictionPoints.m in Sources */,
@@ -2186,16 +2424,19 @@
 				018DF7981858F1FB004FEDA6 /* ActivityItem.m in Sources */,
 				013DA7D21853002200B507E4 /* UINavigationItem+iOS7Spacing.m in Sources */,
 				01A1F6721998340600371751 /* ContestViewController.m in Sources */,
+				0175665619B8299C00D14EE4 /* HomeFollowingViewController.m in Sources */,
 				014F4E2418D73F5600A2F764 /* UserManager.m in Sources */,
 				014FDF6F18D7722F006B51D9 /* GroupTableViewCell.m in Sources */,
 				013DA8421853002200B507E4 /* PredictorCell.m in Sources */,
 				01E2577418E07D9B009D3782 /* RankingsViewController.m in Sources */,
 				013DA8D31853004000B507E4 /* User.m in Sources */,
 				01D7340B19126B230070481E /* TwitterManager.m in Sources */,
+				0175662B19B7FE0000D14EE4 /* Follower.m in Sources */,
 				013DA9091854417D00B507E4 /* DetailsTableViewController.m in Sources */,
 				01B67BB318DB630300D22D2B /* Invitation.m in Sources */,
 				013DA7C41853002200B507E4 /* NSDate+Utils.m in Sources */,
 				01E8CB62187648D1003AE018 /* SearchBar.m in Sources */,
+				017565E919B7AB8300D14EE4 /* ContactMatch.m in Sources */,
 				01E2576F18E0750C009D3782 /* RankingsTableViewCell.m in Sources */,
 				01E8CB5E1876480F003AE018 /* SearchViewController.m in Sources */,
 				013DA8DB1853004000B507E4 /* WebObject.m in Sources */,
@@ -2211,6 +2452,7 @@
 				013DA8641853002200B507E4 /* SelectPictureViewController.m in Sources */,
 				014FDF8218D9EB5F006B51D9 /* EditGroupViewController.m in Sources */,
 				01E8CB781876786C003AE018 /* NoSearchResultsCell.m in Sources */,
+				019CF39419B7A0C000C734E0 /* SocialInvitationsViewController.m in Sources */,
 				013DA8501853002200B507E4 /* PredictionCell.m in Sources */,
 				013DA82A1853002200B507E4 /* SignUpViewController.m in Sources */,
 				013DA8D11853004000B507E4 /* Prediction.m in Sources */,
@@ -2235,9 +2477,11 @@
 				013DA86C1853002200B507E4 /* UserProfileHeaderView.m in Sources */,
 				013DA7D41853002200B507E4 /* Comment+Utils.m in Sources */,
 				013DA8321853002200B507E4 /* PredictionDetailsHeaderCell.m in Sources */,
+				0175664819B8235E00D14EE4 /* HomeHeaderView.m in Sources */,
 				01ACCE6E196417C800D3ABE9 /* CommentActivityTableViewCell.m in Sources */,
 				0101F56019139E8700623417 /* UIActionSheet+Blocks.m in Sources */,
 				01598B3418584645002E2534 /* UINavigationBar+AppearanceUtils.m in Sources */,
+				0175663319B80E2A00D14EE4 /* FollowersTableViewController.m in Sources */,
 				013DA81C1853002200B507E4 /* NoContentCell.m in Sources */,
 				013DA8FD185432B100B507E4 /* CommentsDatasource.m in Sources */,
 				01D73407190EC6200070481E /* FacebookManager.m in Sources */,
@@ -2251,6 +2495,7 @@
 				01BECA361976258400E75CBA /* NotificationSettingsTableViewCell.m in Sources */,
 				014FDF7318D77519006B51D9 /* Leader.m in Sources */,
 				01C4A49B190E3D2F00E08031 /* TWAPIManager.m in Sources */,
+				019CF39819B7A11100C734E0 /* SocialFollowTableViewController.m in Sources */,
 				013DA8681853002200B507E4 /* WebViewController.m in Sources */,
 				01A1F6A11999F44400371751 /* ContestRankingsViewController.m in Sources */,
 				0193A00918CF50340088D168 /* PasswordResetRequest.m in Sources */,
@@ -2262,6 +2507,8 @@
 				013DA8461853002200B507E4 /* PredictorHeaderCell.m in Sources */,
 				0193A01518CF5FE90088D168 /* ActivityItem+Utils.m in Sources */,
 				013DA83C1853002200B507E4 /* PredictionDetailsSectionHeader.m in Sources */,
+				0175660E19B7DAED00D14EE4 /* SocialContactsViewController.m in Sources */,
+				017565ED19B7AF5E00D14EE4 /* SocialFollowTableViewCell.m in Sources */,
 				013DA7BE1853002200B507E4 /* AppDelegate.m in Sources */,
 				01BECA5419763C2F00E75CBA /* ProfileViewController.m in Sources */,
 				013DA8D51853004000B507E4 /* SignupRequest.m in Sources */,
@@ -2269,6 +2516,7 @@
 				01598B3018583F82002E2534 /* PredictionItemProvider.m in Sources */,
 				014FDF7718D782B8006B51D9 /* GroupPredictionsViewController.m in Sources */,
 				013DA8A61853002200B507E4 /* KeychainItemWrapper.m in Sources */,
+				0175664419B81E4200D14EE4 /* SingleContestRankingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

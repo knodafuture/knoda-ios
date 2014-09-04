@@ -28,11 +28,12 @@
                              @"WON": @(ActivityTypeWon),
                              @"LOST": @(ActivityTypeLost),
                              @"COMMENT": @(ActivityTypeComment),
-                             @"INVITATION" : @(ActivityTypeInvitation)
+                             @"INVITATION" : @(ActivityTypeInvitation),
+                             @"FOLLOWING" : @(ActivityTypeFollow)
                              };
     
     return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSString *str) {
-        return states[str];
+        return states[str] ? states[str] : @(ActivityTypeComment);
     } reverseBlock:^(NSNumber *state) {
         return [states allKeysForObject:state].lastObject;
     }];

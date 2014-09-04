@@ -25,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:NO];
-    self.title = @"Welcome Back";
+    self.title = @"WELCOME BACK";
 
 }
 

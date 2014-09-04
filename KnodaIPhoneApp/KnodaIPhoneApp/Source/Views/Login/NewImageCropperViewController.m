@@ -58,18 +58,22 @@ static const float kAvatarSize = 344.0;
 - (void)sendAvatar {
     [[LoadingView sharedInstance] show];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [[UserManager sharedInstance] uploadProfileImage:[self.cropView getCroppedImage] completion:^(User *user, NSError *error) {
+        UIImage *image = [self.cropView getCroppedImage];
+        if(!CGSizeEqualToSize(image.size, AVATAR_SIZE)) {
+            image = [image scaledToSize:AVATAR_SIZE autoScale:NO];
+        }
+        [[UserManager sharedInstance] uploadProfileImage:image completion:^(User *user, NSError *error) {
             [[LoadingView sharedInstance] hide];
             if (error) {
                 [[[UIAlertView alloc] initWithTitle:nil
-                                            message:error.localizedDescription
+                                            message:error.localizedDescription != nil ? error.localizedDescription : @"An Unknown Error Occured."
                                            delegate:nil
                                   cancelButtonTitle:NSLocalizedString(@"OK", @"")
                                   otherButtonTitles:nil] show];
                 return;
             }
             //start predicting
-            StartPredictingViewController *vc = [[StartPredictingViewController alloc] initWithImage:[self.cropView getCroppedImage]];
+            StartPredictingViewController *vc = [[StartPredictingViewController alloc] initWithImage:image];
             [self.navigationController pushViewController:vc animated:YES];
         }];
         

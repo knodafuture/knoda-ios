@@ -17,6 +17,7 @@
 #import "ContestDetailsTableViewController.h"
 #import "ContestRankingsViewController.h"
 #import "ContestRankingsTableViewController.h"
+#import "SingleContestRankingsViewController.h"
 
 @interface ContestViewController () <ContestTableViewCellDelegate>
 @property (assign, nonatomic) BOOL shouldShowDetails;
@@ -130,8 +131,7 @@
         ContestRankingsViewController *vc = [[ContestRankingsViewController alloc] initWithContest:cell.contest];
         [self.navigationController pushViewController:vc animated:YES];
     } else {
-        ContestRankingsTableViewController *vc = [[ContestRankingsTableViewController alloc] initWithContest:cell.contest stage:nil];
-        vc.title = @"LEADERBOARD";
+        SingleContestRankingsViewController *vc = [[SingleContestRankingsViewController alloc] initWithContest:cell.contest];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

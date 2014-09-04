@@ -62,16 +62,8 @@ static UINib *nib;
             self.avatarImageView.image = image;
     }];
     
-    
-    if (user.facebookAccount)
-        self.facebookImageView.image = [UIImage imageNamed:@"ProfileFacebookActive"];
-    else
-        self.facebookImageView.image = [UIImage imageNamed:@"ProfileFacebook"];
-    
-    if (user.twitterAccount)
-        self.twitterImageView.image = [UIImage imageNamed:@"ProfileTwitterActive"];
-    else
-        self.twitterImageView.image = [UIImage imageNamed:@"ProfileTwitter"];
+    self.followerCountLabel.text = [NSString stringWithFormat:@"%ld", (long)user.followerCount];
+    self.followingCountLabel.text = [NSString stringWithFormat:@"%ld", (long)user.followingCount];
 }
 
 - (IBAction)avatarPress:(id)sender {
@@ -79,14 +71,8 @@ static UINib *nib;
         [self.delegate avatarButtonPressedInHeaderView:self];
 }
 
-- (IBAction)twitterPress:(id)sender {
-    if ([self.delegate respondsToSelector:@selector(twitterButtonPressedInHeaderView:)])
-        [self.delegate twitterButtonPressedInHeaderView:self];
-}
-
-- (IBAction)facebookPress:(id)sender {
-    if ([self.delegate respondsToSelector:@selector(facebookButtonPressedInHeaderView:)])
-        [self.delegate facebookButtonPressedInHeaderView:self];
+- (IBAction)followersPressed:(id)sender {
+    [self.delegate followersPressedInHeaderView:self];
 }
 
 - (void)dealloc {

@@ -53,9 +53,6 @@ static UINib *nib;
 
     self.viewPredictionsView.hidden = explore;
     self.exploreInfoView.hidden = YES;
-    
-    self.rankingsArrow.hidden = self.contest.myInfo == nil;
-    
 }
 
 - (void)populateUI:(Contest *)contest {
@@ -64,8 +61,16 @@ static UINib *nib;
     self.overallLabel.text = [NSString stringWithFormat:@"overall (%ld)", (long)contest.participants.integerValue];
     
     self.nameLabel.text = contest.name;
-    self.leaderNameLabel.text = contest.leader.username;
-    self.exploreLeaderLabel.text = contest.leader.username;
+    
+    if (contest.leader) {
+        self.leaderNameLabel.text = contest.leader.username;
+        self.exploreLeaderLabel.text = contest.leader.username;
+    } else {
+        self.rankingsArrow.hidden = YES;
+        self.rankingsArrow2.hidden = YES;
+        self.leaderNameLabel.text = @"No leader yet";
+        self.exploreLeaderLabel.text = @"No leader yet";
+    }
     self.exploreRankLabel.text = [NSString stringWithFormat:@"%ld", (long)contest.participants.integerValue];
     if (!contest.image) {
         CGFloat heightDiff = self.contestImageView.frame.origin.y + self.contestImageView.frame.size.width;
@@ -84,6 +89,7 @@ static UINib *nib;
         
         self.contestImageView.hidden = YES;
     }
+    
 }
 
 - (id)initWithContest:(Contest *)contest Delegate:(id<ContestTableViewCellDelegate>)delegate {
@@ -103,11 +109,9 @@ static UINib *nib;
     if (contest.myInfo) {
         self.exploreInfoView.hidden = YES;
         self.leaderInfoView.hidden = NO;
-        self.rankingsArrow.hidden = NO;
     }else {
         self.leaderInfoView.hidden = YES;
         self.exploreInfoView.hidden = NO;
-        self.rankingsArrow.hidden = NO;
     }
     
     CGSize beforeSize = self.descriptionLabel.frame.size;
@@ -131,10 +135,17 @@ static UINib *nib;
     self.exploreInfoView.frame = frame;
     self.viewPredictionsView.frame = frame;
     
+    frame = self.descriptionLabel.frame;
+    frame.origin.x = self.frame.size.width / 2.0 - frame.size.width / 2.0;
+    self.descriptionLabel.frame = frame;
     return self;
 }
 
 - (IBAction)rankingsSelected:(id)sender {
+    
+    if (!self.contest.leader)
+        return;
+    
     [self.delegate rankingsSelectedInTableViewCell:self];
 }
 

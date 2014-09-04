@@ -23,7 +23,7 @@
 #import "GroupPredictionsViewController.h"
 #import "UIActionSheet+Blocks.h"
 #import "FacebookManager.h"
-
+#import "ContestDetailsViewController.h"
 
 
 static const int kBSAlertTag = 1001;
@@ -225,7 +225,7 @@ static const int kBSAlertTag = 1001;
     
     [vc setValue:[NSString stringWithFormat:@"%@ shared a Knoda prediction with you", [UserManager sharedInstance].user.name] forKey:@"subject"];
     
-    [self presentViewController:vc animated:YES completion:nil];
+    [self.view.window.rootViewController presentViewController:vc animated:YES completion:nil];
 }
 
 - (void)backPressed:(UIButton *)sender {
@@ -265,7 +265,19 @@ static const int kBSAlertTag = 1001;
     if(self.shouldNotOpenCategory) {
         [self backPressed:nil];
     }
-    if (!self.prediction.groupName) {
+    if (self.prediction.contestName) {
+        [[LoadingView sharedInstance] show];
+        [[WebApi sharedInstance] getContest:self.prediction.contestId.integerValue completion:^(Contest *contest, NSError *error) {
+            if (error) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Sorry, something went wrong" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                [alert show];
+            } else {
+                ContestDetailsViewController *vc = [[ContestDetailsViewController alloc] initWithContest:contest];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+        }];
+    }
+    else if (!self.prediction.groupName) {
         CategoryPredictionsViewController *vc = [[CategoryPredictionsViewController alloc] initWithCategory:[self.prediction.categories firstObject]];
         vc.shouldNotOpenProfile = self.shouldNotOpenProfile;
         [self.navigationController pushViewController:vc animated:YES];

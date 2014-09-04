@@ -14,7 +14,8 @@ typedef NS_ENUM(NSInteger, ActivityItemType) {
     ActivityTypeWon,
     ActivityTypeExpired,
     ActivityTypeComment,
-    ActivityTypeInvitation
+    ActivityTypeInvitation,
+    ActivityTypeFollow
 };
 
 @interface ActivityItem : WebObject

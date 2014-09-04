@@ -72,6 +72,7 @@
 
 - (void)dismiss {
     [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)populate {
@@ -224,7 +225,7 @@
     InvitationsViewController *vc = [[InvitationsViewController alloc] initWithGroup:self.group];
     
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-    [self presentViewController:nav animated:YES completion:nil];
+    [self.view.window.rootViewController presentViewController:nav animated:YES completion:nil];
 }
 
 - (IBAction)shareLink:(id)sender {
@@ -246,13 +247,13 @@
     
     [vc setValue:[NSString stringWithFormat:@"%@ invited you to join a group on Knoda", [UserManager sharedInstance].user.name] forKey:@"subject"];
     
+    
     [self.view.window.rootViewController presentViewController:vc animated:YES completion:nil];
 }
 
 - (IBAction)editGroup:(id)sender {
     CreateGroupViewController *vc = [[CreateGroupViewController alloc] initWithGroup:self.group];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-    [self presentViewController:nav animated:YES completion:nil];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

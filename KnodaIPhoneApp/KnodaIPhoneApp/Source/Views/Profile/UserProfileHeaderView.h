@@ -11,10 +11,8 @@
 @class User;
 @class UserProfileHeaderView;
 @protocol UserProfileHeaderViewDelegate <NSObject>
-
-- (void)twitterButtonPressedInHeaderView:(UserProfileHeaderView *)headerView;
-- (void)facebookButtonPressedInHeaderView:(UserProfileHeaderView *)headerView;
 - (void)avatarButtonPressedInHeaderView:(UserProfileHeaderView *)headerView;
+- (void)followersPressedInHeaderView:(UserProfileHeaderView *)headerView;
 @end
 
 @interface UserProfileHeaderView : UIView
@@ -24,9 +22,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *streakLabel;
 @property (weak, nonatomic) IBOutlet UILabel *winPercentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *winLossLabel;
-
-@property (weak, nonatomic) IBOutlet UIImageView *twitterImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *facebookImageView;
+@property (weak, nonatomic) IBOutlet UILabel *followerCountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *followingCountLabel;
 
 - (id)initWithDelegate:(id<UserProfileHeaderViewDelegate>)delegate;
 

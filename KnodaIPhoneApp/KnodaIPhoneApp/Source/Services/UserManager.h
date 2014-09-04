@@ -20,6 +20,8 @@ extern NSString *ChangedUserKey;
 @property (readonly, nonatomic) User *user;
 @property (readonly, nonatomic) NSArray *groups;
 
+- (BOOL)userHasAccountForProvider:(NSString *)provider;
+
 - (void)authenticateSavedUser:(void(^)(User *user, NSError *error))completionHandler;
 - (void)refreshUser:(void(^)(User *user, NSError *error))completionHandler;
 - (void)updateUser:(User *)user completion:(void(^)(User *user, NSError *error))completionHandler;

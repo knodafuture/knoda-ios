@@ -16,6 +16,8 @@ typedef NS_ENUM(NSInteger, MenuItem) {
 
 UIKIT_EXTERN NSString *UserLoggedInNotificationName;
 UIKIT_EXTERN NSString *UserLoggedOutNotificationName;
+UIKIT_EXTERN NSString *GetStartedNotificationName;
+
 @class NavigationViewController;
 
 @protocol NavigationViewControllerDelegate <NSObject>

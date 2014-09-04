@@ -27,6 +27,7 @@
 #import "NotificationSettings.h"
 #import "Settings.h"
 #import "Contest.h"
+#import "ContactMatch.h"
 
 typedef NS_ENUM(NSInteger, HttpStatus) {
 	HttpStatusOk				= 200,
@@ -105,7 +106,6 @@ UIKIT_EXTERN NSString *PredictionChangedNotificationKey;
 - (void)getImage:(NSString *)imageUrl completion:(void(^)(UIImage *image, NSError *error))completionHandler;
 
 // -- Activity -- //
-- (void)getActivityAfter:(NSInteger)lastId completion:(void(^)(NSArray *activityItems, NSError *error))completionHandler;
 - (void)getActivityAfter:(NSInteger)lastId filter:(NSString *)filter completion:(void(^)(NSArray *activityItems, NSError *error))completionHandler;
 - (void)getUnseenActivity:(void(^)(NSArray *activityItems, NSError *error))completionHandler;
 
@@ -143,4 +143,16 @@ UIKIT_EXTERN NSString *PredictionChangedNotificationKey;
 - (void)getExploreContestsAfter:(NSInteger)lastId completion:(void(^)(NSArray *contests, NSError *error))completionHandler;
 - (void)getPredictionsForContest:(NSInteger)contestId after:(NSInteger)lastId expired:(BOOL)expired completion:(void(^)(NSArray *predictions, NSError *error))completionHandler;
 - (void)getLeaderBoardForContest:(NSInteger)contestId stage:(NSInteger)stageId completion:(void(^)(NSArray *leaders, NSError *error))completionHandler;
+
+
+//Followers
+
+- (void)matchFacebookFriends:(void(^)(NSArray *matches, NSError *error))completionHandler;
+- (void)matchTwitterFriends:(void(^)(NSArray *matches, NSError *error))completionHandler;
+- (void)matchContacts:(NSArray *)contacts completion:(void(^)(NSArray *matches, NSError *error))completionHandler;
+- (void)followUsers:(NSArray *)followers completion:(void(^)(NSArray *results, NSError *error))completionHandler;
+- (void)unfollowUser:(NSInteger)userId completion:(void(^)(NSError *error))completionHandler;
+- (void)getFollowers:(NSInteger)userId completion:(void(^)(NSArray *followers, NSError *error))completionHandler;
+- (void)getFollowing:(NSInteger)userId completion:(void(^)(NSArray *followers, NSError *error))completionHandler;
+- (void)getSocialFeedAfter:(NSInteger)lastId completion:(void(^)(NSArray *predictions, NSError *error))completionHandler;
 @end

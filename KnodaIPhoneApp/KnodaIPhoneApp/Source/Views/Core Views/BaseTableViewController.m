@@ -17,7 +17,6 @@
 @property (strong, nonatomic) EmptyDatasource *emptyDatasource;
 @property (strong, nonatomic) NSTimer *graceTimer;
 @property (assign, nonatomic) BOOL refreshEnded;
-@property (assign, nonatomic) BOOL hasAppeared;
 @end
 
 @implementation BaseTableViewController

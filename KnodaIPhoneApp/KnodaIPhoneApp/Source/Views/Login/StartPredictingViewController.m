@@ -32,8 +32,16 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationController.navigationBar.translucent = NO;
+
+    self.imageView.layer.cornerRadius = self.imageView.frame.size.height / 2.0;
+    self.imageView.clipsToBounds = YES;
+    
+    
+    self.imageView.layer.borderColor = [UIColor colorFromHex:@"efefef"].CGColor;
+    self.imageView.layer.borderWidth = 1.0;
     if (self.image)
         self.imageView.image = self.image;
+    
     else
         [[WebApi sharedInstance] getImage:[UserManager sharedInstance].user.avatar.big completion:^(UIImage *image, NSError *error) {
             self.imageView.image = image;
@@ -55,6 +63,7 @@
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:VotingDateWalkthroughCompleteKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [[NSNotificationCenter defaultCenter] postNotificationName:UserLoggedInNotificationName object:nil userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:GetStartedNotificationName object:nil];
 }
 
 @end

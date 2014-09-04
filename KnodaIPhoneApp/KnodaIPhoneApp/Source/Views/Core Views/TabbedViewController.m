@@ -9,7 +9,6 @@
 #import "TabbedViewController.h"
 
 @interface TabbedViewController () <UIScrollViewDelegate>
-@property (strong, nonatomic) UIView *scrollIndicator;
 @end
 
 @implementation TabbedViewController

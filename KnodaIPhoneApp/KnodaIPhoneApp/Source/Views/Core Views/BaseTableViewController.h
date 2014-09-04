@@ -15,6 +15,7 @@
 }
 
 @property (strong, nonatomic) PagingDatasource *pagingDatasource;
+@property (assign, nonatomic) BOOL hasAppeared;
 
 - (void)refresh;
 - (void)beginRefreshing;

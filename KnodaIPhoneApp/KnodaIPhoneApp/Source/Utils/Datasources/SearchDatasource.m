@@ -103,9 +103,10 @@
         
         User *user = [self.users objectAtIndex:indexPath.row];
         
-        UserCell *cell = [UserCell userCellForTableView:tableView];
+        UserCell *cell = [UserCell userCellForTableView:tableView indexPath:indexPath];
         cell.user = user;
         cell.nameLabel.text = user.name;
+        cell.following = user.followingId != nil;
         return cell;
     }
     

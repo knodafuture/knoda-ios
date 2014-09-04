@@ -66,7 +66,7 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
 - (id)init {
     self = [super init];
     self.fileCache = [[FileCache alloc] init];
-    self.headers = @{@"Accept": @"application/json; api_version=5;", @"Content-Type" : @"application/json; charset=utf-8;"};
+    self.headers = @{@"Accept": @"application/json; api_version=6;", @"Content-Type" : @"application/json; charset=utf-8;"};
     return self;
 }
 
@@ -502,10 +502,6 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
         completionHandler([ActivityItem arrayFromData:responseData], error);
     }];
 }
-- (void)getActivityAfter:(NSInteger)lastId completion:(void (^)(NSArray *, NSError *))completionHandler {
-
-
-}
 
 - (void)getActivityAfter:(NSInteger)lastId filter:(NSString *)filter completion:(void (^)(NSArray *, NSError *))completionHandler {
     NSMutableDictionary *parameters = [@{@"limit": @(PageLimit)} mutableCopy];
@@ -763,6 +759,100 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler([Leader arrayFromData:responseData], error);
+    }];
+}
+
+- (void)matchFacebookFriends:(void (^)(NSArray *, NSError *))completionHandler {
+    NSDictionary *parameters = @{@"facebook": @"true"};
+    
+    NSString *url = [self buildUrl:@"contact_matches.json" parameters:parameters];
+    NSURLRequest *request = [self requestWithUrl:url method:@"POST" data:nil];
+    
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+        completionHandler([ContactMatch arrayFromData:responseData], error);
+    }];
+}
+
+- (void)matchTwitterFriends:(void (^)(NSArray *, NSError *))completionHandler {
+    NSDictionary *parameters = @{@"twitter": @"true"};
+    NSString *url = [self buildUrl:@"contact_matches.json" parameters:parameters];
+    NSURLRequest *request = [self requestWithUrl:url method:@"POST" data:nil];
+    
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+        completionHandler([ContactMatch arrayFromData:responseData], error);
+    }];
+}
+
+- (void)matchContacts:(NSArray *)contacts completion:(void (^)(NSArray *, NSError *))completionHandler {
+    NSString *url = [self buildUrl:@"contact_matches.json" parameters:nil];
+    NSURLRequest *request = [self requestWithUrl:url method:@"POST" data:[WebObject dataFromArrayOfWebObjects:contacts]];
+    
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+        
+        NSArray *matches = [ContactMatch arrayFromData:responseData];
+        
+        NSMutableArray *actualMatches = [NSMutableArray arrayWithCapacity:matches.count];
+        
+        for (ContactMatch *match in matches) {
+            if (match.info)
+                [actualMatches addObject:match];
+        }
+        
+        completionHandler([NSArray arrayWithArray:actualMatches], error);
+    }];
+}
+
+- (void)followUsers:(NSArray *)followers completion:(void (^)(NSArray *, NSError *))completionHandler {
+    NSString *url = [self buildUrl:@"followings.json" parameters:nil];
+    NSURLRequest *request = [self requestWithUrl:url method:@"POST" data:[WebObject dataFromArrayOfWebObjects:followers]];
+    
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+        completionHandler(nil, error);
+    }];
+}
+
+- (void)unfollowUser:(NSInteger)userId completion:(void (^)(NSError *))completionHandler {
+    NSString *path = [NSString stringWithFormat:@"followings/%ld.json", (long)userId];
+    NSString *url = [self buildUrl:path parameters:nil];
+    
+    NSURLRequest *request = [self requestWithUrl:url method:@"DELETE" data:nil];
+    
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+        completionHandler(error);
+    }];
+}
+
+- (void)getFollowers:(NSInteger)userId completion:(void (^)(NSArray *, NSError *))completionHandler {
+    NSString *path = [NSString stringWithFormat:@"users/%ld/followers.json", (long)userId];
+    NSString *url = [self buildUrl:path parameters:nil];
+    
+    NSURLRequest *request = [self requestWithUrl:url method:@"GET" data:nil];
+    
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+        completionHandler([User arrayFromData:responseData], error);
+    }];
+}
+
+- (void)getFollowing:(NSInteger)userId completion:(void (^)(NSArray *, NSError *))completionHandler {
+    NSString *path = [NSString stringWithFormat:@"users/%ld/leaders.json", (long)userId];
+    NSString *url = [self buildUrl:path parameters:nil];
+    
+    NSURLRequest *request = [self requestWithUrl:url method:@"GET" data:nil];
+    
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+        completionHandler([User arrayFromData:responseData], error);
+    }];
+}
+
+- (void)getSocialFeedAfter:(NSInteger)lastId completion:(void (^)(NSArray *, NSError *))completionHandler {
+    NSMutableDictionary *params = [@{@"social" : @"true", @"limit"  : @(PageLimit)} mutableCopy];
+    NSDictionary *parameters = [self parametersDictionary:params withLastId:lastId];
+    
+    NSString *url = [self buildUrl:@"predictions.json" parameters:parameters];
+    NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
+    
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+        completionHandler([Prediction arrayFromData:responseData], error);
     }];
 }
 

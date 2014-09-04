@@ -30,6 +30,7 @@ static NSString *kDeviceTokenIdKey = @"DeviceTokenID";
 NSString *FirstLaunchKey = @"FirstLaunch";
 NSString *NewObjectNotification = @"NewPredictionNotification";
 NSString *NewPredictionNotificationKey = @"NewPredictionNotificationKey";
+NSString *NewGroupNotificationKey = @"NEWGROUPNOTIFICATIONKEY";
 
 @interface AppDelegate() <UIAlertViewDelegate>
 @property (strong, nonatomic) NSDictionary *pushInfo;

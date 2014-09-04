@@ -57,11 +57,6 @@
                         <rect key="frame" x="0.0" y="116" width="320" height="45"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="0Vy-rY-B4D">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vhZ-Jh-ltH">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -72,6 +67,11 @@
                                     <action selector="rankingsSelected:" destination="JZg-wd-1Ry" eventType="touchUpInside" id="JF3-Yk-yQY"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" id="0Vy-rY-B4D">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UtahStateAggies" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uY6-jc-vqT">
                                 <rect key="frame" x="126" y="5" width="194" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -114,7 +114,7 @@
                                 <color key="textColor" red="0.13725490200000001" green="0.36078431370000003" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SettingsArrow" id="PWQ-PE-D1n">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SettingsArrow" id="PWQ-PE-D1n">
                                 <rect key="frame" x="301" y="16" width="8" height="13"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -165,6 +165,20 @@
                                 <color key="textColor" red="0.13725490200000001" green="0.36078431370000003" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SettingsArrow" id="hRD-4y-5Xq">
+                                <rect key="frame" x="301" y="16" width="8" height="13"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="fqX-WY-kHE">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="rankingsSelected:" destination="JZg-wd-1Ry" eventType="touchUpInside" id="HSW-4b-BPL"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="current contest leader" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HDA-ms-95C">
                                 <rect key="frame" x="117" y="19" width="99" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -177,6 +191,7 @@
                     </view>
                 </subviews>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="contestImageView" destination="aHJ-CP-3p7" id="7k6-8m-9Qk"/>
                 <outlet property="descriptionLabel" destination="KMt-2r-bv1" id="GKf-UO-gzI"/>
@@ -188,7 +203,8 @@
                 <outlet property="nameLabel" destination="IRR-uy-Qu8" id="KEy-4l-Tvq"/>
                 <outlet property="overallLabel" destination="3aK-n8-7SU" id="0iZ-Ko-mx1"/>
                 <outlet property="rankLabel" destination="zI6-Yk-cI6" id="hVb-h2-95h"/>
-                <outlet property="rankingsArrow" destination="PWQ-PE-D1n" id="B0h-UP-Fax"/>
+                <outlet property="rankingsArrow" destination="PWQ-PE-D1n" id="IIn-jV-zT0"/>
+                <outlet property="rankingsArrow2" destination="hRD-4y-5Xq" id="qnN-3L-YVM"/>
                 <outlet property="seperatorView" destination="1M9-PJ-vIo" id="LVX-fX-rPr"/>
                 <outlet property="viewPredictionsView" destination="J1I-6b-h7k" id="Mgd-kT-42o"/>
             </connections>

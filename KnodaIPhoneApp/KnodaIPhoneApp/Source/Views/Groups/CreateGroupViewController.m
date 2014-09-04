@@ -49,7 +49,7 @@ static const float kAvatarSize = 344.0;
 
     self.placeholderText = NSLocalizedString(@"Group description...", @"");
     self.navigationController.navigationBar.translucent = NO;
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTitle:@"Cancel" target:self action:@selector(cancel) color:[UIColor whiteColor]];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem backButtonWithTarget:self action:@selector(back)];
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTitle:@"Submit" target:self action:@selector(submit) color:[UIColor whiteColor]];
     
     if (self.group) {
@@ -72,8 +72,8 @@ static const float kAvatarSize = 344.0;
     }
 }
 
-- (void)cancel {
-    [self dismissViewControllerAnimated:YES completion:nil];
+- (void)back {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 - (BOOL)validate {
     NSString *errorMessage = nil;
@@ -145,12 +145,16 @@ static const float kAvatarSize = 344.0;
 - (void)finish:(Group *)createdGroup {
     [[UserManager sharedInstance] refreshUser:^(User *user, NSError *error) {
         [[LoadingView sharedInstance] hide];
+        NSDictionary *userInfo;
+        if (self.group)
+            userInfo = @{GroupChangedNotificationKey: self.group};
+        [[NSNotificationCenter defaultCenter] postNotificationName:GroupChangedNotificationName object:self userInfo:userInfo];
         if (self.group) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:GroupChangedNotificationName object:self userInfo:@{GroupChangedNotificationKey: self.group}];
-            [self cancel];
+            [self back];
         } else {
             GroupSettingsViewController *vc = [[GroupSettingsViewController alloc] initWithNewlyCreatedGroup:createdGroup];
             [self.navigationController pushViewController:vc animated:YES];
+            
         }
     }];
 }
@@ -185,14 +189,16 @@ static const float kAvatarSize = 344.0;
     pickerVC.delegate      = self;
     [UINavigationBar setDefaultAppearance];
     
-    [self presentViewController:pickerVC animated:YES completion:nil];
+    [self.view.window.rootViewController presentViewController:pickerVC animated:YES completion:^{
+        [UINavigationBar setCustomAppearance];
+    }];
 }
 
 #pragma mark UIImagePickerControllerDelegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [UINavigationBar setCustomAppearance];
-    [self dismissViewControllerAnimated:YES completion:^{
+    [picker.presentingViewController dismissViewControllerAnimated:YES completion:^{
         UIImage *img = info[UIImagePickerControllerOriginalImage];
         if(img) {
             if(img.size.width < kAvatarSize || img.size.height < kAvatarSize) {
@@ -207,7 +213,7 @@ static const float kAvatarSize = 344.0;
                 vc.delegate = self;
                 vc.cropSize = AVATAR_SIZE;
                 UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-                [self presentViewController:nav animated:YES completion:nil];
+                [self.view.window.rootViewController presentViewController:nav animated:YES completion:nil];
             }
         }
     }];
@@ -215,7 +221,7 @@ static const float kAvatarSize = 344.0;
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [UINavigationBar setCustomAppearance];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [picker.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark ImageCropperDelegate

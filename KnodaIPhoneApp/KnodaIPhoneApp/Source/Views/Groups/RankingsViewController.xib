@@ -25,6 +25,9 @@
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="L98-t1-XE9">
                     <rect key="frame" x="0.0" y="60" width="320" height="420"/>
                     <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="YG3-Ep-dZO"/>
+                    </connections>
                 </scrollView>
                 <view contentMode="scaleToFill" id="tNm-KZ-Aru">
                     <rect key="frame" x="0.0" y="36" width="320" height="24"/>

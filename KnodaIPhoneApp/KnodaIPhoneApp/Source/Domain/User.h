@@ -30,4 +30,8 @@
 @property (strong, nonatomic) NSArray *socialAccounts;
 @property (strong, nonatomic) NSDate *createdAt;
 @property (strong, nonatomic) NSArray *notificationSettings;
+
+@property (assign, nonatomic) NSInteger followerCount;
+@property (assign, nonatomic) NSInteger followingCount;
+@property (strong, nonatomic) NSNumber *followingId;
 @end

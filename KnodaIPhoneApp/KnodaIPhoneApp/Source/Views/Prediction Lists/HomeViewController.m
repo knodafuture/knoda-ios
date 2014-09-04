@@ -16,6 +16,7 @@
 #import "SearchViewController.h"
 #import "WalkthroughController.h"   
 #import "UIView+Utils.h"
+#import "SocialInvitationsViewController.h"
 
 NSString *HomeViewLoadedNotificationName = @"HOMEVIEWLOADED";
 NSString *HomeViewCaptureKey = @"HOMEVIEWCAPUTRE";
@@ -31,20 +32,12 @@ NSString *HomeViewCaptureKey = @"HOMEVIEWCAPUTRE";
     
     self.title = @"HOME";
     
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem rightBarButtonItemWithImage:[UIImage imageNamed:@"NavSearchIcon"] target:self action:@selector(search)];
     self.tableView.scrollsToTop = NO;
     
     self.walkthroughController = [[WalkthroughController alloc] initWithTargetViewController:self];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginRefreshing) name:UserLoggedInNotificationName object:nil];
 }
-
-
-- (void)search {
-    SearchViewController *vc = [[SearchViewController alloc] initWithStyle:UITableViewStylePlain];
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear: animated];    

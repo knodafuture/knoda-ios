@@ -10,7 +10,7 @@
 #import "Contest.h"
 #import "ContestTableViewCell.h"
 #import "WebApi.h"
-#import "ContestNoContentCell.h"
+#import "NoContentCell.h"
 #import "PredictionDetailsViewController.h"
 #import "UserManager.h"
 #import "AnotherUsersProfileViewController.h"
@@ -102,10 +102,13 @@ NSString *ContestVotingEvent = @"CONTESTVOTINGEVENT";
 }
 
 - (void)noObjectsRetrievedInPagingDatasource:(PagingDatasource *)pagingDatasource {
-    ContestNoContentCell *cell = [ContestNoContentCell cellWithMessage:@"No Predictions right now, check back later."];
+    NoContentCell *cell = [NoContentCell noContentWithMessage:@"No Predictions right now, check back later." forTableView:self.tableView];
+    [cell shiftDown:50];
     [self showNoContent:cell];
     self.tableView.tableHeaderView = self.headerCell.contentView;
     [self showNoContent:cell];
+    
+
 }
 - (void)restoreContent {
     self.tableView.tableHeaderView = nil;

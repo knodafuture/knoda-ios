@@ -30,11 +30,11 @@
 @property (weak, nonatomic) IBOutlet UIView *viewPredictionsView;
 @property (weak, nonatomic) IBOutlet UIView *leaderInfoView;
 @property (weak, nonatomic) IBOutlet UIView *exploreInfoView;
-@property (weak, nonatomic) IBOutlet UIImageView *rankingsArrow;
 @property (weak, nonatomic) IBOutlet UILabel *exploreRankLabel;
 @property (weak, nonatomic) IBOutlet UILabel *exploreLeaderLabel;
 @property (weak, nonatomic) IBOutlet UIView *seperatorView;
-
+@property (weak, nonatomic) IBOutlet UIImageView *rankingsArrow;
+@property (weak, nonatomic) IBOutlet UIImageView *rankingsArrow2;
 @property (weak, nonatomic) id<ContestTableViewCellDelegate> delegate;
 
 - (id)initWithContest:(Contest *)contest Delegate:(id<ContestTableViewCellDelegate>)delegate;

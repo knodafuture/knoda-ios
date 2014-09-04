@@ -25,15 +25,6 @@
     return self;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem backButtonWithTarget:self action:@selector(back)];
-}
-
-- (void)back {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 - (void)refresh {
     [[WebApi sharedInstance] getLeaderBoardForContest:self.contest.contestId.integerValue stage:self.stage.contestStageId.integerValue completion:^(NSArray *leaders, NSError *error) {
         if (!error)

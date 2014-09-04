@@ -18,8 +18,11 @@
 #import "UserManager.h"
 #import "PredictionDetailsViewController.h"
 #import "UserCell.h"
+#import "FollowersTableViewCell.h"
+#import "Follower.h"
+#import "LoadingView.h"
 
-@interface SearchViewController () <SearchBarDelegate, SearchDatasourceDelegate, PredictionDetailsDelegate>
+@interface SearchViewController () <SearchBarDelegate, SearchDatasourceDelegate, PredictionDetailsDelegate, UserCellDelegate>
 @property (strong, nonatomic) SearchBar *searchBar;
 @property (strong, nonatomic) SearchDatasource *searchDatasource;
 @property (strong, nonatomic) CategoriesDatasource *categoriesDatasource;
@@ -129,6 +132,7 @@
     if ([cell isKindOfClass:UserCell.class]) {
         UserCell *uCell = (UserCell *)cell;
         uCell.avatarImageView.image = [_imageLoader lazyLoadImage:uCell.user.avatar.small onIndexPath:indexPath];
+        uCell.delegate = self;
     }
     
     return cell;
@@ -247,5 +251,26 @@
     if (![cell isKindOfClass:PredictionCell.class])
         return;
     cell.avatarImageView.image = image;
+}
+
+- (void)didFollowInCell:(UserCell *)cell onIndexPath:(NSIndexPath *)indexPath {
+    
+    User *user = [self.searchDatasource.users objectAtIndex:indexPath.row];
+    
+    [[LoadingView sharedInstance] show];
+    
+    if (user.followingId) {
+        [[WebApi sharedInstance] unfollowUser:user.followingId.integerValue completion:^(NSError *error) {
+            cell.following = NO;
+            [[LoadingView sharedInstance] hide];
+        }];
+    } else {
+        Follower *follower = [[Follower alloc] init];
+        follower.leaderId = [NSString stringWithFormat:@"%ld", (long)user.userId];
+        [[WebApi sharedInstance] followUsers:@[follower] completion:^(NSArray *results, NSError *error) {
+            cell.following = YES;
+            [[LoadingView sharedInstance] hide];
+        }];
+    }
 }
 @end

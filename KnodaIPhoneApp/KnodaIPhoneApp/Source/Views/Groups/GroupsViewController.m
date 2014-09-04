@@ -1,4 +1,4 @@
-//
+    //
 //  GroupsViewController.m
 //  KnodaIPhoneApp
 //

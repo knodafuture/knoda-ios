@@ -75,6 +75,10 @@ static UINib *nib;
     [self.delegate followersPressedInHeaderView:self];
 }
 
+- (IBAction)followingPressed:(id)sender {
+    [self.delegate followingPressedInHeaderView:self];  
+}
+
 - (void)dealloc {
     [self removeAllObservations];
 }

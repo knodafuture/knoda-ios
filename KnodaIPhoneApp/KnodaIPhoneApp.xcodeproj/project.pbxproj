@@ -531,6 +531,16 @@
 		01E8CB8018767D21003AE018 /* UserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E8CB7E18767D21003AE018 /* UserCell.m */; };
 		01E8CB8218767D5D003AE018 /* UserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E8CB8118767D5D003AE018 /* UserCell.xib */; };
 		01E8CB8318767D5D003AE018 /* UserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E8CB8118767D5D003AE018 /* UserCell.xib */; };
+		01F6660319BEDFF700992AEC /* EmptyFollowersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F6660219BEDFF700992AEC /* EmptyFollowersTableViewCell.xib */; };
+		01F6660419BEDFF700992AEC /* EmptyFollowersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F6660219BEDFF700992AEC /* EmptyFollowersTableViewCell.xib */; };
+		01F6660619BF12B100992AEC /* EmptyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F6660519BF12B100992AEC /* EmptyCell.xib */; };
+		01F6660719BF12B100992AEC /* EmptyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F6660519BF12B100992AEC /* EmptyCell.xib */; };
+		01F6660919BF873D00992AEC /* NoSocialPredictionsV2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F6660819BF873D00992AEC /* NoSocialPredictionsV2.xib */; };
+		01F6660A19BF873D00992AEC /* NoSocialPredictionsV2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F6660819BF873D00992AEC /* NoSocialPredictionsV2.xib */; };
+		01F6660C19BF8C7F00992AEC /* NoTwitterFriendsCellV2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F6660B19BF8C7F00992AEC /* NoTwitterFriendsCellV2.xib */; };
+		01F6660D19BF8C7F00992AEC /* NoTwitterFriendsCellV2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F6660B19BF8C7F00992AEC /* NoTwitterFriendsCellV2.xib */; };
+		01F6660F19BF8CB600992AEC /* NoFacebookFriendsCellV2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F6660E19BF8CB600992AEC /* NoFacebookFriendsCellV2.xib */; };
+		01F6661019BF8CB600992AEC /* NoFacebookFriendsCellV2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F6660E19BF8CB600992AEC /* NoFacebookFriendsCellV2.xib */; };
 		01F82CD418DD3E430000E96B /* CreateGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F82CD218DD3E430000E96B /* CreateGroupViewController.m */; };
 		01F82CD518DD3E430000E96B /* CreateGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F82CD218DD3E430000E96B /* CreateGroupViewController.m */; };
 		01F82CD618DD3E430000E96B /* CreateGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F82CD318DD3E430000E96B /* CreateGroupViewController.xib */; };
@@ -985,6 +995,11 @@
 		01E8CB7D18767D21003AE018 /* UserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCell.h; sourceTree = "<group>"; };
 		01E8CB7E18767D21003AE018 /* UserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCell.m; sourceTree = "<group>"; };
 		01E8CB8118767D5D003AE018 /* UserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCell.xib; sourceTree = "<group>"; };
+		01F6660219BEDFF700992AEC /* EmptyFollowersTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmptyFollowersTableViewCell.xib; sourceTree = "<group>"; };
+		01F6660519BF12B100992AEC /* EmptyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmptyCell.xib; sourceTree = "<group>"; };
+		01F6660819BF873D00992AEC /* NoSocialPredictionsV2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoSocialPredictionsV2.xib; sourceTree = "<group>"; };
+		01F6660B19BF8C7F00992AEC /* NoTwitterFriendsCellV2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoTwitterFriendsCellV2.xib; sourceTree = "<group>"; };
+		01F6660E19BF8CB600992AEC /* NoFacebookFriendsCellV2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoFacebookFriendsCellV2.xib; sourceTree = "<group>"; };
 		01F82CD118DD3E430000E96B /* CreateGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateGroupViewController.h; sourceTree = "<group>"; };
 		01F82CD218DD3E430000E96B /* CreateGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateGroupViewController.m; sourceTree = "<group>"; };
 		01F82CD318DD3E430000E96B /* CreateGroupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateGroupViewController.xib; sourceTree = "<group>"; };
@@ -1333,6 +1348,7 @@
 				0175665419B8299C00D14EE4 /* HomeFollowingViewController.h */,
 				0175665519B8299C00D14EE4 /* HomeFollowingViewController.m */,
 				0175665819B82C2300D14EE4 /* NoSocialPredictionsCell.xib */,
+				01F6660819BF873D00992AEC /* NoSocialPredictionsV2.xib */,
 			);
 			path = "Prediction Lists";
 			sourceTree = "<group>";
@@ -1678,6 +1694,10 @@
 				0175663519B80E4400D14EE4 /* FollowersTableViewCell.h */,
 				0175663619B80E4400D14EE4 /* FollowersTableViewCell.m */,
 				0175663C19B80EEB00D14EE4 /* FollowersTableViewCell.xib */,
+				01F6660219BEDFF700992AEC /* EmptyFollowersTableViewCell.xib */,
+				01F6660519BF12B100992AEC /* EmptyCell.xib */,
+				01F6660B19BF8C7F00992AEC /* NoTwitterFriendsCellV2.xib */,
+				01F6660E19BF8CB600992AEC /* NoFacebookFriendsCellV2.xib */,
 			);
 			path = Invite;
 			sourceTree = "<group>";
@@ -1951,6 +1971,7 @@
 				013DA8531853002200B507E4 /* PredictionCell.xib in Resources */,
 				013DA82D1853002200B507E4 /* SignUpViewController.xib in Resources */,
 				01A6787419577E1C002FDE1F /* TabbedViewController.xib in Resources */,
+				01F6661019BF8CB600992AEC /* NoFacebookFriendsCellV2.xib in Resources */,
 				01DBEACC18DA4033000F2E50 /* InvitationTableViewCell.xib in Resources */,
 				01DBEAC218DA3BE2000F2E50 /* InvitationsViewController.xib in Resources */,
 				0175661219B7DB1500D14EE4 /* SocialContactsViewController.xib in Resources */,
@@ -1972,7 +1993,9 @@
 				013DA87B1853002200B507E4 /* IntroOverlay.png in Resources */,
 				013DA8491853002200B507E4 /* PredictorHeaderCell.xib in Resources */,
 				01A1F6821998574900371751 /* ContestTableViewCell.xib in Resources */,
+				01F6660D19BF8C7F00992AEC /* NoTwitterFriendsCellV2.xib in Resources */,
 				013DA8771853002200B507E4 /* KronaOne-Regular.ttf in Resources */,
+				01F6660A19BF873D00992AEC /* NoSocialPredictionsV2.xib in Resources */,
 				01A1F69E1999E9A100371751 /* ContestNoContentCell.xib in Resources */,
 				01BECA5E19763EDA00E75CBA /* MeViewController.xib in Resources */,
 				017565F719B7CAFF00D14EE4 /* FollowFacebookHeaderView.xib in Resources */,
@@ -1989,7 +2012,9 @@
 				013DA85B1853002200B507E4 /* ChangePasswordViewController.xib in Resources */,
 				013DA85F1853002200B507E4 /* ImageCropperViewController.xib in Resources */,
 				0175660019B7D87700D14EE4 /* NoFacebookFriendsCell.xib in Resources */,
+				01F6660419BEDFF700992AEC /* EmptyFollowersTableViewCell.xib in Resources */,
 				01ACCE7919642B9700D3ABE9 /* SettleActivityTableViewCell.xib in Resources */,
+				01F6660719BF12B100992AEC /* EmptyCell.xib in Resources */,
 				01598B3C1858E4B3002E2534 /* ZoomingImageViewController.xib in Resources */,
 				0175665319B824EF00D14EE4 /* NewHomeViewController.xib in Resources */,
 				0175664C19B8238F00D14EE4 /* HomeHeaderView.xib in Resources */,
@@ -2031,6 +2056,7 @@
 				01BECA5619763C2F00E75CBA /* ProfileViewController.xib in Resources */,
 				01A1F69D1999E9A100371751 /* ContestNoContentCell.xib in Resources */,
 				013DA8241853002200B507E4 /* ForgotPasswordViewController.xib in Resources */,
+				01F6660F19BF8CB600992AEC /* NoFacebookFriendsCellV2.xib in Resources */,
 				01A6787E1957B4C2002FDE1F /* ResultActivityTableViewCell.xib in Resources */,
 				014A9F08185DA04400A96678 /* release_notes.md in Resources */,
 				013DA89E1853002200B507E4 /* Media.xcassets in Resources */,
@@ -2048,8 +2074,10 @@
 				01DBEABA18DA29C6000F2E50 /* GroupSettingsViewController.xib in Resources */,
 				013DA8301853002200B507E4 /* WelcomeViewController.xib in Resources */,
 				01ACCE7819642B9700D3ABE9 /* SettleActivityTableViewCell.xib in Resources */,
+				01F6660619BF12B100992AEC /* EmptyCell.xib in Resources */,
 				013DA8741853002200B507E4 /* HelveticaNeue.dfont in Resources */,
 				013DA7FA1853002200B507E4 /* AddPredictionViewController.xib in Resources */,
+				01F6660319BEDFF700992AEC /* EmptyFollowersTableViewCell.xib in Resources */,
 				013DA87A1853002200B507E4 /* IntroOverlay.png in Resources */,
 				013DA8481853002200B507E4 /* PredictorHeaderCell.xib in Resources */,
 				01B67BA818DB4BDE00D22D2B /* MemberTableViewCell.xib in Resources */,
@@ -2058,6 +2086,7 @@
 				013DA8721853002200B507E4 /* Badges.xcassets in Resources */,
 				0175662019B7EC0800D14EE4 /* KnodaContactsHeaderView.xib in Resources */,
 				013DA8381853002200B507E4 /* CommentCell.xib in Resources */,
+				01F6660919BF873D00992AEC /* NoSocialPredictionsV2.xib in Resources */,
 				0175661419B7DF5900D14EE4 /* SocialContactsHeaderView.xib in Resources */,
 				01BECA401976282000E75CBA /* SettingsViewController.xib in Resources */,
 				0175661A19B7E58200D14EE4 /* NoContactsCell.xib in Resources */,
@@ -2072,6 +2101,7 @@
 				01598B3B1858E4B3002E2534 /* ZoomingImageViewController.xib in Resources */,
 				01DBEACB18DA4033000F2E50 /* InvitationTableViewCell.xib in Resources */,
 				0175661D19B7EA0600D14EE4 /* NoContactResultsCell.xib in Resources */,
+				01F6660C19BF8C7F00992AEC /* NoTwitterFriendsCellV2.xib in Resources */,
 				013DA9121854759200B507E4 /* CreateCommentView.xib in Resources */,
 				0175660619B7DA4C00D14EE4 /* SocialContactsTableViewCell.xib in Resources */,
 				014FDF8818D9F103006B51D9 /* GroupPredictionsHeaderCell.xib in Resources */,

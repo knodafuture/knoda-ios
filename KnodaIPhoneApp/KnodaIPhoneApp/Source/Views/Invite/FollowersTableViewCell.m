@@ -7,6 +7,7 @@
 //
 
 #import "FollowersTableViewCell.h"
+#import "UserManager.h"
 
 static UINib *nib;
 
@@ -33,6 +34,12 @@ static UINib *nib;
 }
 
 - (void)populate:(User *)user {
+    
+    if ([UserManager sharedInstance].user.userId == user.userId)
+        self.followingButton.hidden = YES;
+    else
+        self.followingButton.hidden = NO;
+    
     self.usernameLabel.text = user.name;
     self.following = user.followingId != nil;
     if (!user.verifiedAccount) {

@@ -22,8 +22,8 @@
 @property (weak, nonatomic) id<FollowingActivityTableViewCellDelegate> delegate;
 @property (strong, nonatomic) NSIndexPath *indexPath;
 @property (weak, nonatomic) IBOutlet UIImageView *dotImageView;
-
-
+@property (assign, nonatomic) BOOL following;
+@property (weak, nonatomic) IBOutlet UIButton *followingButton;
 + (FollowingActivityTableViewCell *)cellForTableView:(UITableView *)tableView delegate:(id<FollowingActivityTableViewCellDelegate>)delegate indexPath:(NSIndexPath *)indexPath;
 
 - (void)populate:(ActivityItem *)activityItem;

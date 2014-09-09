@@ -15,13 +15,14 @@
 #import "WebApi.h"
 #import "SocialFollowTableViewCell.h"
 #import <FacebookSDK/FacebookSDK.h>
-
+#import <Social/Social.h>
 @interface SocialFollowTableViewController () <SocialFollowTableViewCellDelegate>
 @property (strong, nonatomic) NSString *provider;
 @property (strong, nonatomic) UITableViewCell *connectCell;
 @property (assign, nonatomic) BOOL shouldShowHeader;
 @property (assign, nonatomic) BOOL selectAll;
 @property (weak, nonatomic) IBOutlet UIButton *selectAllButton;
+@property (assign, nonatomic) NSInteger prefilteredCount;
 @end
 
 @implementation SocialFollowTableViewController
@@ -151,10 +152,18 @@
     
     UITableViewCell *cell = nil;
     
-    if ([self.provider isEqualToString:@"twitter"])
-        cell = [[[ UINib nibWithNibName:@"NoTwitterFriendsCell" bundle:[NSBundle mainBundle]] instantiateWithOwner:nil options:nil] lastObject];
-    else
-        cell = [[[UINib nibWithNibName:@"NoFacebookFriendsCell" bundle:[NSBundle mainBundle]] instantiateWithOwner:nil options:nil] lastObject];
+    if ([self.provider isEqualToString:@"twitter"]) {
+        if (self.prefilteredCount == 0)
+            cell = [[[ UINib nibWithNibName:@"NoTwitterFriendsCell" bundle:[NSBundle mainBundle]] instantiateWithOwner:nil options:nil] lastObject];
+        else
+            cell = [[[ UINib nibWithNibName:@"NoTwitterFriendsCellV2" bundle:[NSBundle mainBundle]] instantiateWithOwner:nil options:nil] lastObject];
+    } else {
+        if (self.prefilteredCount == 0) {
+            cell = [[[UINib nibWithNibName:@"NoFacebookFriendsCell" bundle:[NSBundle mainBundle]] instantiateWithOwner:nil options:nil] lastObject];
+        }
+        else
+            cell = [[[UINib nibWithNibName:@"NoFacebookFriendsCellV2" bundle:[NSBundle mainBundle]] instantiateWithOwner:nil options:nil] lastObject];
+    }
     
     [self showNoContent:cell];
 }
@@ -233,10 +242,28 @@
 
 - (void)objectsAfterObject:(id)object completion:(void (^)(NSArray *, NSError *))completionHandler {
     
+    void(^handler)(NSArray *, NSError*) = ^(NSArray *array, NSError *error) {
+        
+        NSArray *unfiltered = array;
+        NSArray *filtered = [unfiltered filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(ContactMatch *evaluatedObject, NSDictionary *bindings) {
+            return !evaluatedObject.info.following;
+        }]];
+        self.prefilteredCount = array.count;
+        completionHandler(filtered, error);
+
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            static dispatch_once_t once;
+            
+            dispatch_once(&once, ^{
+                [self selectAll:nil];
+            });
+        });
+    };
+    
     if ([self.provider isEqualToString:@"twitter"])
-        [[WebApi sharedInstance] matchTwitterFriends:completionHandler];
+        [[WebApi sharedInstance] matchTwitterFriends:handler];
     else if ([self.provider isEqualToString:@"facebook"])
-        [[WebApi sharedInstance] matchFacebookFriends:completionHandler];
+        [[WebApi sharedInstance] matchFacebookFriends:handler];
 }
 
 - (IBAction)selectAll:(id)sender {
@@ -351,7 +378,28 @@
     return params;
 }
 - (void)twitterShare {
-    
+    if([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
+        
+        SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+        
+        SLComposeViewControllerCompletionHandler myBlock = ^(SLComposeViewControllerResult result){
+            [controller dismissViewControllerAnimated:YES completion:Nil];
+        };
+        controller.completionHandler =myBlock;
+        
+        //Adding the Text to the facebook post value from iOS
+        [controller setInitialText:@"Test Post from knoda"];
+        
+        //Adding the URL to the facebook post value from iOS
+        
+        [controller addURL:[NSURL URLWithString:@"http://www.knoda.com/start"]];
+        
+        [self presentViewController:controller animated:YES completion:Nil];
+        
+    }
+    else{
+        NSLog(@"UnAvailable");
+    }
 }
 
 @end

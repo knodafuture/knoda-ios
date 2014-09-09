@@ -11,10 +11,14 @@
 #import "WebApi.h"
 #import "LoadingView.h"
 #import "Follower.h"
+#import "AnotherUsersProfileViewController.h"
+#import "UserManager.h"
+#import "SocialInvitationsViewController.h"
 
 @interface FollowersTableViewController () <FollowersTableViewCellDelegate>
 @property (assign, nonatomic) BOOL leader;
 @property (assign, nonatomic) NSInteger userId;
+@property (strong, nonatomic) IBOutlet UILabel *emptyLabel;
 @end
 
 @implementation FollowersTableViewController
@@ -43,6 +47,28 @@
     } else {
         [[WebApi sharedInstance] getFollowing:self.userId completion:completionHandler];
     }
+}
+
+- (void)noObjectsRetrievedInPagingDatasource:(PagingDatasource *)pagingDatasource {
+    UITableViewCell *cell = nil;
+    if (self.leader) {
+        if (self.userId == [UserManager sharedInstance].user.userId) {
+            cell = [[[UINib nibWithNibName:@"EmptyCell" bundle:[NSBundle mainBundle]] instantiateWithOwner:self options:nil] lastObject];
+            self.emptyLabel.text = @"You don't have any followers yet, but we know they're coming soon!";
+        } else {
+            cell = [[[UINib nibWithNibName:@"EmptyCell" bundle:[NSBundle mainBundle]] instantiateWithOwner:self options:nil] lastObject];
+            self.emptyLabel.text = [NSString stringWithFormat:@"Be a sport and follow %@ so this list is no longer empty!", self.parentViewController.title];
+        }
+    } else {
+        if (self.userId == [UserManager sharedInstance].user.userId) {
+            cell = [[[UINib nibWithNibName:@"EmptyFollowersTableViewCell" bundle:[NSBundle mainBundle]] instantiateWithOwner:self options:nil] lastObject];
+        } else {
+            cell = [[[UINib nibWithNibName:@"EmptyCell" bundle:[NSBundle mainBundle]] instantiateWithOwner:self options:nil] lastObject];
+            self.emptyLabel.text = [NSString stringWithFormat:@"%@ isn't following anyone yet. Maybe you'll be the first", self.parentViewController.title];
+        }
+    }
+    
+    [self showNoContent:cell];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -85,7 +111,7 @@
         }];
     } else {
         Follower *follower = [[Follower alloc] init];
-        follower.leaderId = [NSString stringWithFormat:@"%ld", (long)user.userId];
+        follower.leaderId = @(user.userId);
         [[WebApi sharedInstance] followUsers:@[follower] completion:^(NSArray *results, NSError *error) {
             [self beginRefreshing];
             cell.following = YES;
@@ -99,6 +125,24 @@
     if (![cell isKindOfClass:FollowersTableViewCell.class])
         return;
     cell.avatarImageView.image = image;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.row >= self.pagingDatasource.objects.count) {
+        if (self.pagingDatasource.objects.count == 0) {
+            SocialInvitationsViewController *vc = [[SocialInvitationsViewController alloc] init];
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+            [self.view.window.rootViewController presentViewController:nav animated:YES completion:nil];
+        }
+        return;
+    }
+    User *user = [self.pagingDatasource.objects objectAtIndex:indexPath.row];
+    
+    
+    AnotherUsersProfileViewController *vc = [[AnotherUsersProfileViewController alloc] initWithUserId:user.userId];
+    
+    [self.parentViewController.navigationController pushViewController:vc animated:YES];
 }
 
 @end

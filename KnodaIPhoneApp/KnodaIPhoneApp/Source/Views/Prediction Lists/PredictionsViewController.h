@@ -10,6 +10,9 @@
 #import "PredictionDetailsViewController.h"
 #import "PredictionCell.h"
 
+UIKIT_EXTERN NSString *PredictionVotedEvent;
+UIKIT_EXTERN NSString *PredictionVotedKey;
+
 @class Prediction;
 @interface PredictionsViewController : BaseTableViewController <PredictionDetailsDelegate, PredictionCellDelegate>
 

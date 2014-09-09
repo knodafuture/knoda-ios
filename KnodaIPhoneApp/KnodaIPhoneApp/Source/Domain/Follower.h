@@ -10,6 +10,6 @@
 
 @interface Follower : WebObject
 
-@property (strong, nonatomic) NSString *leaderId;
+@property (strong, nonatomic) NSNumber *leaderId;
 
 @end

@@ -779,6 +779,7 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
     NSURLRequest *request = [self requestWithUrl:url method:@"POST" data:nil];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+
         completionHandler([ContactMatch arrayFromData:responseData], error);
     }];
 }
@@ -794,7 +795,7 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
         NSMutableArray *actualMatches = [NSMutableArray arrayWithCapacity:matches.count];
         
         for (ContactMatch *match in matches) {
-            if (match.info)
+            if (match.info && !match.info.following)
                 [actualMatches addObject:match];
         }
         
@@ -807,7 +808,10 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
     NSURLRequest *request = [self requestWithUrl:url method:@"POST" data:[WebObject dataFromArrayOfWebObjects:followers]];
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
-        completionHandler(nil, error);
+        NSArray *result;
+        if (responseData != nil)
+            result = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
+        completionHandler(result, error);
     }];
 }
 
@@ -853,6 +857,20 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler([Prediction arrayFromData:responseData], error);
+    }];
+}
+
+- (void)getShortLeaders:(void (^)(NSArray *, NSError *))completionHandler {
+    NSDictionary *parameters = @{@"mode": @"as_follower"};
+    
+    NSString *url = [self buildUrl:@"followings.json" parameters:parameters];
+    NSURLRequest *request = [self requestWithUrl:url method:@"GET" data:nil];
+    
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+        NSArray *array = nil;
+        if (responseData)
+            array = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
+        completionHandler(array, nil);
     }];
 }
 

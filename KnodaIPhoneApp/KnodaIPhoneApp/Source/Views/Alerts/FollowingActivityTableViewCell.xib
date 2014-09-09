@@ -18,7 +18,7 @@
                         <rect key="frame" x="10" y="5" width="24" height="24"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </imageView>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hey-Oh! You have a new folloer on Knoda." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="267" translatesAutoresizingMaskIntoConstraints="NO" id="3ny-1T-ghp">
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hey-Oh! You have a new follower on Knoda." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="267" translatesAutoresizingMaskIntoConstraints="NO" id="3ny-1T-ghp">
                         <rect key="frame" x="39" y="10" width="267" height="19"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="11"/>
@@ -51,6 +51,7 @@
             <connections>
                 <outlet property="avatarImageView" destination="RaP-VH-mBL" id="ggQ-RL-GSA"/>
                 <outlet property="dotImageView" destination="0yE-VB-8Y1" id="vMP-zK-pVe"/>
+                <outlet property="followingButton" destination="ga7-k3-GMX" id="jCT-rM-He8"/>
                 <outlet property="usernameLabel" destination="nyo-Td-tmW" id="god-8Q-yHy"/>
             </connections>
         </tableViewCell>

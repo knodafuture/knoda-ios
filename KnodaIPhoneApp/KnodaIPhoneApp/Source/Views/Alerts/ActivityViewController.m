@@ -30,6 +30,7 @@
 @interface ActivityViewController () <ResultActivityTableViewCellDelegate, NavigationViewControllerDelegate, FollowingActivityTableViewCellDelegate>
 @property (strong, nonatomic) NSString *filter;
 @property (strong, nonatomic) Prediction *predictionToShare;
+@property (strong, nonatomic) NSArray *shortLeaders;
 @end
 
 @implementation ActivityViewController
@@ -55,6 +56,12 @@
     }
     
     self.tableView.scrollsToTop = NO;
+    
+    [[WebApi sharedInstance] getShortLeaders:^(NSArray *leaders, NSError *error) {
+        if (!error)
+            self.shortLeaders = leaders;
+        [self.tableView reloadData];
+    }];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -127,6 +134,17 @@
             cell.avatarImageView.image = [UIImage imageNamed:@"NotificationAvatar"];
         [cell populate:alert];
         
+        BOOL found = NO;
+        for (NSDictionary *dictionary in self.shortLeaders) {
+            if ([dictionary[@"leader_id"] integerValue] == alert.target.integerValue) {
+                found = YES;
+                [cell setFollowing:YES];
+            }
+        }
+        
+        if (!found)
+            [cell setFollowing:NO];
+        
         return cell;
     } else {
     
@@ -144,7 +162,7 @@
     ActivityItem *alert = [self.pagingDatasource.objects objectAtIndex:indexPath.row];
     [[LoadingView sharedInstance] show];
     
-    if (alert.type != ActivityTypeInvitation) {
+    if (alert.type != ActivityTypeInvitation && alert.type != ActivityTypeFollow) {
     
         [[WebApi sharedInstance] getPrediction:[alert.target integerValue] completion:^(Prediction *prediction, NSError *error) {
             [[LoadingView sharedInstance] hide];
@@ -158,7 +176,7 @@
             }
             
         }];
-    } else {
+    } else if (alert.type != ActivityTypeFollow) {
         
         [[WebApi sharedInstance] getInvitationDetails:alert.target completion:^(InvitationCodeDetails *details, NSError *error) {
             [[LoadingView sharedInstance] hide];
@@ -282,11 +300,12 @@
     ActivityItem *item = [self.pagingDatasource.objects objectAtIndex:indexPath.row];
     
     Follower *follower = [[Follower alloc] init];
-    follower.leaderId = item.target;
+    follower.leaderId = @(item.target.integerValue);
     [[LoadingView sharedInstance] show];
     
     [[WebApi sharedInstance] followUsers:@[follower] completion:^(NSArray *results, NSError *error) {
         [[LoadingView sharedInstance] hide];
+        [cell setFollowing:YES];
     }];
 }
 

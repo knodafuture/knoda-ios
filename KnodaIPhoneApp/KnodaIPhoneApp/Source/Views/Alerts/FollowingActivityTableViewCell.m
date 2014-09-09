@@ -43,6 +43,15 @@ static UINib *nib;
     }
 }
 
+- (void)setFollowing:(BOOL)following {
+    _following = following;
+    
+    if (following)
+        [self.followingButton setImage:[UIImage imageNamed:@"FollowBtnActive"] forState:UIControlStateNormal];
+    else
+        [self.followingButton setImage:[UIImage imageNamed:@"FollowBtn"] forState:UIControlStateNormal];
+}
+
 - (IBAction)follow:(id)sender {
     [self.delegate didFollowInCell:self atIndexPath:self.indexPath];
 }

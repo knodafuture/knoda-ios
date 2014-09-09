@@ -155,4 +155,5 @@ UIKIT_EXTERN NSString *PredictionChangedNotificationKey;
 - (void)getFollowers:(NSInteger)userId completion:(void(^)(NSArray *followers, NSError *error))completionHandler;
 - (void)getFollowing:(NSInteger)userId completion:(void(^)(NSArray *followers, NSError *error))completionHandler;
 - (void)getSocialFeedAfter:(NSInteger)lastId completion:(void(^)(NSArray *predictions, NSError *error))completionHandler;
+- (void)getShortLeaders:(void(^)(NSArray *leaders, NSError *error))completionHandler;
 @end

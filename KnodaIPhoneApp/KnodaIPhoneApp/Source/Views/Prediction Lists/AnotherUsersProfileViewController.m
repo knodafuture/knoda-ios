@@ -108,7 +108,7 @@
         }];
     } else {
         Follower *follower = [[Follower alloc] init];
-        follower.leaderId = [NSString stringWithFormat:@"%ld", (long)self.userId];
+        follower.leaderId = @(self.userId);
         [[WebApi sharedInstance] followUsers:@[follower] completion:^(NSArray *results, NSError *error) {
             [self loadUserInfo:^{
                 [[LoadingView sharedInstance] hide];
@@ -226,6 +226,11 @@
 
 - (void)followersPressedInHeaderView:(UserProfileHeaderView *)headerView {
     FollowersViewController *vc = [[FollowersViewController alloc] initForUser:self.userId name:self.user.name];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+- (void)followingPressedInHeaderView:(UserProfileHeaderView *)headerView {
+    FollowersViewController *vc = [[FollowersViewController alloc] initForUser:self.userId name:self.user.name];
+    vc.shouldShowSecondPage = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 @end

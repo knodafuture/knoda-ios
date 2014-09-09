@@ -43,6 +43,7 @@ static const float kAvatarSize = 344.0;
 @property (weak, nonatomic) IBOutlet UILabel *twitterLabel;
 @property (weak, nonatomic) IBOutlet UILabel *facebookLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
+@property (weak, nonatomic) IBOutlet UITextField *phoneNumberField;
 
 @end
 
@@ -108,6 +109,11 @@ static const float kAvatarSize = 344.0;
     else
         self.emailField.text = @"Add email";
     self.userNameField.text = user.name;
+    
+    if (user.phone && ![user.phone isEqualToString:@""])
+        self.phoneNumberField.text = user.phone;
+    else
+        self.phoneNumberField.text = @"Add phone";
     
     
     if (user.twitterAccount != nil) {
@@ -265,8 +271,10 @@ static const float kAvatarSize = 344.0;
     if (!self.canceledEntry) {
         if (textField == self.userNameField)
             [self saveUsername];
-        else
+        else if (textField == self.emailField)
             [self saveEmail];
+        else
+            [self savePhone];
     }
     
     self.canceledEntry = NO;
@@ -287,6 +295,23 @@ static const float kAvatarSize = 344.0;
     [[LoadingView sharedInstance] show];
     User *user = [[UserManager sharedInstance].user copy];
     user.name = self.userNameField.text;
+    [[UserManager sharedInstance] updateUser:user completion:^(User *user, NSError *error) {
+        if (error)
+            [[[UIAlertView alloc] initWithTitle:nil
+                                        message:error.localizedDescription
+                                       delegate:nil
+                              cancelButtonTitle:NSLocalizedString(@"OK", @"")
+                              otherButtonTitles:nil] show];
+        
+        [[LoadingView sharedInstance] hide];
+    }];
+}
+
+- (void)savePhone {
+    User *user = [[UserManager sharedInstance].user copy];
+    user.phone = self.phoneNumberField.text;
+    
+    [[LoadingView sharedInstance] show];
     [[UserManager sharedInstance] updateUser:user completion:^(User *user, NSError *error) {
         if (error)
             [[[UIAlertView alloc] initWithTitle:nil

@@ -30,7 +30,12 @@
 }
 
 - (void)noObjectsRetrievedInPagingDatasource:(PagingDatasource *)pagingDatasource {
-    UITableViewCell *cell = [[[UINib nibWithNibName:@"NoSocialPredictionsCell" bundle:[NSBundle mainBundle]] instantiateWithOwner:nil options:nil] lastObject];
+    
+    UITableViewCell *cell = nil;
+    if ([UserManager sharedInstance].user.followingCount == 0)
+        cell = [[[UINib nibWithNibName:@"NoSocialPredictionsCell" bundle:[NSBundle mainBundle]] instantiateWithOwner:nil options:nil] lastObject];
+    else
+        cell = [[[UINib nibWithNibName:@"NoSocialPredictionsV2" bundle:[NSBundle mainBundle]] instantiateWithOwner:nil options:nil] lastObject];
     [self showNoContent:cell];
 }
 

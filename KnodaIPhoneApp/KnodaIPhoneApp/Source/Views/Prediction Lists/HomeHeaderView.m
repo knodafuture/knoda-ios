@@ -31,20 +31,22 @@
     
     NSDictionary *leftAttributes;
     NSDictionary *rightAttributes;
-    
-    NSDictionary *middleAttributes = @{NSForegroundColorAttributeName: [UIColor colorFromHex:@"235C37"], UITextAttributeFont : [UIFont fontWithName:@"Krona One" size: 13]};
+        
+    NSDictionary *middleAttributes = @{NSForegroundColorAttributeName: [UIColor colorFromHex:@"235C37"], UITextAttributeFont : [UIFont fontWithName:@"HelveticaNeue-Medium" size: 13]};
     if (leftSideSelected) {
-        leftAttributes = @{NSForegroundColorAttributeName: [UIColor colorFromHex:@"235C37"], UITextAttributeFont : [UIFont fontWithName:@"Krona One" size: 13]};
-        rightAttributes = @{NSForegroundColorAttributeName: [UIColor colorFromHex:@"52951D"], UITextAttributeFont : [UIFont fontWithName:@"Krona One" size: 13]};
+        leftAttributes = @{NSForegroundColorAttributeName: [UIColor colorFromHex:@"235C37"], UITextAttributeFont : [UIFont fontWithName:@"HelveticaNeue-Medium" size: 13]};
+        rightAttributes = @{NSForegroundColorAttributeName: [UIColor colorFromHex:@"62a325"], UITextAttributeFont : [UIFont fontWithName:@"HelveticaNeue-Medium" size: 13]};
     } else {
-        rightAttributes = @{NSForegroundColorAttributeName: [UIColor colorFromHex:@"235C37"], UITextAttributeFont : [UIFont fontWithName:@"Krona One" size: 13]};
-        leftAttributes = @{NSForegroundColorAttributeName: [UIColor colorFromHex:@"52951D"], UITextAttributeFont : [UIFont fontWithName:@"Krona One" size: 13]};
+        rightAttributes = @{NSForegroundColorAttributeName: [UIColor colorFromHex:@"235C37"], UITextAttributeFont : [UIFont fontWithName:@"HelveticaNeue-Medium" size: 13]};
+        leftAttributes = @{NSForegroundColorAttributeName: [UIColor colorFromHex:@"62a325"], UITextAttributeFont : [UIFont fontWithName:@"HelveticaNeue-Medium" size: 13]};
     }
     
     [text appendAttributedString:[[NSAttributedString alloc] initWithString:self.name attributes:leftAttributes]];
     [text appendAttributedString:[[NSAttributedString alloc] initWithString:@" | " attributes:middleAttributes]];
     [text appendAttributedString:[[NSAttributedString alloc] initWithString:self.name1 attributes:rightAttributes]];
-    
+    NSMutableParagraphStyle *style = NSMutableParagraphStyle.new;
+    style.alignment = NSTextAlignmentCenter;
+    [text addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, text.length)];
     self.label.attributedText = text;
 }
 

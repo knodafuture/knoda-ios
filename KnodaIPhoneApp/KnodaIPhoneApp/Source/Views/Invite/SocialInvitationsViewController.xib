@@ -38,9 +38,12 @@
                     <rect key="frame" x="0.0" y="436" width="320" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                     <color key="backgroundColor" red="0.13725490200000001" green="0.36078431370000003" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal" title="Find your Friends!">
+                    <state key="normal" title="Follow (0) &amp; Invite (0)">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="submit:" destination="-1" eventType="touchUpInside" id="Wa0-0y-tb9"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

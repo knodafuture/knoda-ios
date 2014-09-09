@@ -12,6 +12,7 @@
 #import "NoSearchResultsCell.h" 
 #import "UserCell.h"
 #import "User.h"
+#import "UserManager.h"
 
 @interface SearchDatasource ()
 @property (assign, nonatomic) BOOL loading;
@@ -107,6 +108,10 @@
         cell.user = user;
         cell.nameLabel.text = user.name;
         cell.following = user.followingId != nil;
+        
+        if (user.userId == [UserManager sharedInstance].user.userId)
+            cell.followingButton.hidden = YES;
+        
         return cell;
     }
     

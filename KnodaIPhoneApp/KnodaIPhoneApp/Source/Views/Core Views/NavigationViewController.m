@@ -35,7 +35,7 @@ NSString *UserLoggedInNotificationName = @"USERLOGGEDIN";
 NSString *UserLoggedOutNotificationName = @"USERLOGGEDOUT";
 NSString *GetStartedNotificationName = @"GETSTARTED";
 
-@interface NavigationViewController () <UIScrollViewDelegate, SelectPictureDelegate, AddPredictionViewControllerDelegate, UINavigationControllerDelegate, UISearchBarDelegate>
+@interface NavigationViewController () <UIScrollViewDelegate, SelectPictureDelegate, AddPredictionViewControllerDelegate, UINavigationControllerDelegate, UISearchBarDelegate, UIAlertViewDelegate>
 
 @property (assign, nonatomic) BOOL appeared;
 @property (assign, nonatomic) MenuItem activeMenuItem;
@@ -81,6 +81,7 @@ NSString *GetStartedNotificationName = @"GETSTARTED";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processImage:) name:HomeViewLoadedNotificationName object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleLogin) name:UserLoggedInNotificationName object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getStarted) name:GetStartedNotificationName object:nil];
+
 }
 
 
@@ -226,6 +227,29 @@ NSString *GetStartedNotificationName = @"GETSTARTED";
         [UIView animateWithDuration:0.5 animations:^{
             self.welcomeNavigationController.view.frame = frame;
         }];
+    } else {
+        if (![UserManager sharedInstance].user.phone || [[UserManager sharedInstance].user.phone isEqualToString:@""]) {
+            
+            
+            NSInteger count = [[[NSUserDefaults standardUserDefaults] objectForKey:@"PhoneNumberNagCount"] integerValue];
+            
+            if (count >= 2)
+                return;
+            
+            
+            NSString *cancelButtonTitle;
+            
+            if (count == 0)
+                cancelButtonTitle = @"No Thanks";
+            else
+                cancelButtonTitle = @"Never";
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Phone Number" message:@"Make it easier for friends to find you on Knoda by entering your phone number. You can always add or remove your number in Profile Settings." delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:@"Save", nil];
+            alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+            
+            [alert show];
+            
+        }
     }
 }
 
@@ -431,8 +455,62 @@ NSString *GetStartedNotificationName = @"GETSTARTED";
         self.welcomeNavigationController = nil;
     }];
     
-
     
+    if (![UserManager sharedInstance].user.phone || [[UserManager sharedInstance].user.phone isEqualToString:@""]) {
+        
+        
+        NSInteger count = [[[NSUserDefaults standardUserDefaults] objectForKey:@"PhoneNumberNagCount"] integerValue];
+        
+       if (count >= 2)
+           return;
+        
+        
+        NSString *cancelButtonTitle;
+        
+        if (count == 0)
+            cancelButtonTitle = @"No Thanks";
+        else
+            cancelButtonTitle = @"Never";
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Phone Number" message:@"Make it easier for friends to find you on Knoda by entering your phone number. You can always add or remove your number in Profile Settings." delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:@"Save", nil];
+        alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+        
+        [alert show];
+        
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == alertView.cancelButtonIndex) {
+        NSInteger count = [[[NSUserDefaults standardUserDefaults] objectForKey:@"PhoneNumberNagCount"] integerValue];
+        count++;
+        [[NSUserDefaults standardUserDefaults] setObject:@(count) forKey:@"PhoneNumberNagCount"];
+    } else {
+        NSString *phone = [[alertView textFieldAtIndex:0] text];
+        [self savePhone:phone];
+    }
+}
+- (BOOL)alertViewShouldEnableFirstOtherButton:(UIAlertView *)alertView {
+    if ([alertView textFieldAtIndex:0].text.length == 0)
+        return NO;
+    return YES;
+}
+
+- (void)savePhone:(NSString *)phone {
+    User *user = [[UserManager sharedInstance].user copy];
+    user.phone = phone;
+    
+    [[LoadingView sharedInstance] show];
+    [[UserManager sharedInstance] updateUser:user completion:^(User *user, NSError *error) {
+        if (error)
+            [[[UIAlertView alloc] initWithTitle:nil
+                                        message:error.localizedDescription
+                                       delegate:nil
+                              cancelButtonTitle:NSLocalizedString(@"OK", @"")
+                              otherButtonTitles:nil] show];
+        
+        [[LoadingView sharedInstance] hide];
+    }];
 }
 
 - (void)getStarted {

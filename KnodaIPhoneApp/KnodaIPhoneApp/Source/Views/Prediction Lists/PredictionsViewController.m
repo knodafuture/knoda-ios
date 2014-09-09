@@ -15,6 +15,9 @@
 #import "PredictionDetailsViewController.h"
 #import "UserManager.h"
 
+NSString *PredictionVotedEvent = @"PREDICTIONVOTED";
+NSString *PredictionVotedKey = @"PREDICTIONVOTEDKEY";
+
 @interface PredictionsViewController ()
 @property (strong, nonatomic) NSTimer *refreshTimer;
 @end
@@ -44,6 +47,12 @@
     [self observeNotification:UserChangedNotificationName withBlock:^(__weak PredictionsViewController *self, NSNotification *notification) {
         [self.tableView reloadData];
     }];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(predictionVoted:) name:PredictionVotedEvent object:nil];
+}
+
+- (void)predictionVoted:(NSNotification *)notification {
+    [self updatePrediction:notification.userInfo[PredictionVotedKey]];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -128,6 +137,7 @@
         if (!error) {
             prediction.challenge = challenge;
             [cell fillWithPrediction:prediction];
+            [[NSNotificationCenter defaultCenter] postNotificationName:PredictionVotedKey object:nil userInfo:@{PredictionVotedKey: prediction}];
         }
         else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message:@"Unable to agree at this time" delegate: nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles: nil];
@@ -142,6 +152,7 @@
         if (!error) {
             prediction.challenge = challenge;
             [cell fillWithPrediction:prediction];
+            [[NSNotificationCenter defaultCenter] postNotificationName:PredictionVotedKey object:nil userInfo:@{PredictionVotedKey: prediction}];
         }
         else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message:@"Unable to disagree at this time" delegate: nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles: nil];

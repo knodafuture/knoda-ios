@@ -57,7 +57,19 @@
     self.headerCell.backgroundColor = [UIColor clearColor];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(predictionChanged:) name:PredictionChangedNotificationName object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userChanged:) name:UserChangedNotificationName object:nil];
+}
+
+- (void)userChanged:(NSNotification *)notification {
+    [self.headerView populateWithUser:[UserManager sharedInstance].user];
+}
+
+- (void)beginRefreshing {
+    [[UserManager sharedInstance] refreshUser:^(User *user, NSError *error) {
+        
+    }];
     
+    [super beginRefreshing];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

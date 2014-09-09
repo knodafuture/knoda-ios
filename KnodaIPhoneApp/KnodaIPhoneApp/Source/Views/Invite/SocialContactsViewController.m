@@ -14,7 +14,7 @@
 #import "WebApi.h"  
 #import "SocialFollowTableViewCell.h"
 
-@interface SocialContactsViewController () <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, SocialContactsTableViewCellDelegate, SocialFollowTableViewCellDelegate, ImageLoaderDelegate>
+@interface SocialContactsViewController () <UIActionSheetDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, SocialContactsTableViewCellDelegate, SocialFollowTableViewCellDelegate, ImageLoaderDelegate>
 @property (strong, nonatomic) NSArray *allContacts;
 @property (strong, nonatomic) NSMutableArray *searchedContacts;
 @property (strong, nonatomic) NSArray *knodaContacts;
@@ -23,6 +23,8 @@
 @property (strong, nonatomic) ImageLoader *imageLoader;
 @property (assign, nonatomic) BOOL selectAll;
 @property (weak, nonatomic) IBOutlet UIButton *selectAllButton;
+@property (assign, nonatomic) BOOL hasKnodaResults;
+@property (strong, nonatomic) Contact *actionSheetContact;
 @end
 
 @implementation SocialContactsViewController
@@ -30,6 +32,8 @@
 - (id)initWithDelegate:(id<SocialFollowTableViewControllerDelegate>)delegate {
     self = [super initWithNibName:@"SocialContactsViewController" bundle:[NSBundle mainBundle]];
     self.delegate = delegate;
+    self.selectAll = YES;
+    self.hasKnodaResults = YES;
     return self;
 }
 
@@ -55,9 +59,33 @@
         [self showNoContent];
     else {
         [[WebApi sharedInstance] matchContacts:[ContactMatch arrayFromContacts:self.allContacts] completion:^(NSArray *matches, NSError *error) {
+            
+            NSMutableArray *filtered = [NSMutableArray arrayWithCapacity:self.allContacts.count];
+            
+            for (Contact *contact in self.allContacts) {
+                BOOL found = NO;
+                for (ContactMatch *match in matches) {
+                    if ([contact.name isEqualToString:match.contactId])
+                        found = YES;
+                }
+                if (!found)
+                    [filtered addObject:contact];
+            }
+            self.allContacts = [NSArray arrayWithArray:filtered];
+            self.searchedContacts = self.allContacts.mutableCopy;
             self.knodaContacts = matches;
             self.searchedKnodaContacts = matches.mutableCopy;
+            
+            self.hasKnodaResults = self.knodaContacts.count > 0;
             [self.tableView reloadData];
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                static dispatch_once_t once;
+                
+                dispatch_once(&once, ^{
+                    [self selectAll:nil];
+                });
+            });
         }];
     }
     
@@ -73,7 +101,10 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    if (self.hasKnodaResults)
+        return 2;
+    else
+        return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -81,20 +112,32 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if (section == 0)
-        return [[[UINib nibWithNibName:@"KnodaContactsHeaderView" bundle:[NSBundle mainBundle]] instantiateWithOwner:self options:nil] lastObject];
-    else
+    
+    if (self.hasKnodaResults) {
+        if (section == 0)
+            return [[[UINib nibWithNibName:@"KnodaContactsHeaderView" bundle:[NSBundle mainBundle]] instantiateWithOwner:self options:nil] lastObject];
+        else
+            return [[[UINib nibWithNibName:@"SocialContactsHeaderView" bundle:[NSBundle mainBundle]] instantiateWithOwner:nil options:nil] lastObject];
+    } else
         return [[[UINib nibWithNibName:@"SocialContactsHeaderView" bundle:[NSBundle mainBundle]] instantiateWithOwner:nil options:nil] lastObject];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    if (section == 0) {
-        if (self.searchedKnodaContacts.count == 0)
-            return 1;
-        return self.searchedKnodaContacts.count;
-    } else {
+    if (self.hasKnodaResults) {
     
+        if (section == 0) {
+            if (self.searchedKnodaContacts.count == 0)
+                return 1;
+            return self.searchedKnodaContacts.count;
+        } else {
+        
+            if (self.searchedContacts.count == 0)
+                return 1;
+            
+            return self.searchedContacts.count;
+        }
+    } else {
         if (self.searchedContacts.count == 0)
             return 1;
         
@@ -104,13 +147,21 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.section == 0) {
-        if (self.searchedKnodaContacts.count == 0 && self.knodaContacts)
-            return 165;
-        else if (self.searchedKnodaContacts.count == 0)
-            return loadingCellHeight;
-        else
+    if (self.hasKnodaResults) {
+        if (indexPath.section == 0) {
+            if (self.searchedKnodaContacts.count == 0 && self.knodaContacts)
+                return 54;
+            else if (self.searchedKnodaContacts.count == 0)
+                return loadingCellHeight;
+            else
+                return 44.0;
+        } else {
+            if (self.searchedContacts.count == 0 && self.allContacts.count != 0)
+                return 165;
+            else if (self.searchedContacts.count == 0)
+                return loadingCellHeight;
             return 44.0;
+        }
     } else {
         if (self.searchedContacts.count == 0 && self.allContacts.count != 0)
             return 165;
@@ -122,26 +173,70 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.section == 0) {
-        if (self.searchedKnodaContacts.count == 0) {
-            if (self.knodaContacts)
-                return [[[UINib nibWithNibName:@"NoContactResultsCell" bundle:[NSBundle mainBundle]] instantiateWithOwner:nil options:nil] lastObject];
+    if (self.hasKnodaResults) {
+        if (indexPath.section == 0) {
+            if (self.searchedKnodaContacts.count == 0) {
+                if (self.knodaContacts)
+                    return [[[UINib nibWithNibName:@"NoContactResultsCell" bundle:[NSBundle mainBundle]] instantiateWithOwner:nil options:nil] lastObject];
+                else
+                    return [LoadingCell loadingCellForTableView:tableView];
+            }
+            
+            SocialFollowTableViewCell *cell = [SocialFollowTableViewCell cellForTableView:tableView delegate:self indexPath:indexPath];
+            
+            ContactMatch *match = [self.searchedKnodaContacts objectAtIndex:indexPath.row];
+            
+            cell.contactIdLabel.text = match.contactId;
+            cell.usernameLabel.text = match.info.username;
+            cell.avatarImageView.image = [_imageLoader lazyLoadImage:match.info.avatar.small onIndexPath:indexPath];
+            cell.checked = match.selected;
+            return cell;
+            
+        } else {
+            
+            if (self.searchedContacts.count == 0) {
+                if (self.allContacts.count != 0)
+                    return [[[UINib nibWithNibName:@"NoContactResultsCell" bundle:[NSBundle mainBundle]] instantiateWithOwner:nil options:nil] lastObject];
+                else
+                    return [LoadingCell loadingCellForTableView:tableView];
+            }
+            
+            SocialContactsTableViewCell *cell = [SocialContactsTableViewCell cellForTableView:tableView delegate:self indexPath:indexPath];
+            
+            Contact *contact = self.searchedContacts[indexPath.row];
+            
+            cell.nameLabel.text = contact.name;
+            
+            NSMutableString *contactMethods = [[NSMutableString alloc] init];
+            BOOL foundFirst = NO;
+            for (int i = 0; i < contact.phoneNumbers.count; i++) {
+                if (foundFirst)
+                    [contactMethods appendFormat:@", %@", contact.phoneNumbers[i]];
+                else
+                    [contactMethods appendFormat:@"%@", contact.phoneNumbers[i]];
+                foundFirst = YES;
+            }
+            
+            for (int i = 0; i < contact.emailAddresses.count; i++) {
+                if (foundFirst)
+                    [contactMethods appendFormat:@", %@", contact.emailAddresses[i]];
+                else
+                    [contactMethods appendFormat:@"%@", contact.emailAddresses[i]];
+                foundFirst = YES;
+            }
+            
+            if (contact.selectedEmailAddress)
+                cell.contactMethodsLabel.text = contact.selectedEmailAddress;
+            else if (contact.selectedPhoneNumber)
+                cell.contactMethodsLabel.text = contact.selectedPhoneNumber;
             else
-                return [LoadingCell loadingCellForTableView:tableView];
+                cell.contactMethodsLabel.text = contactMethods;
+            
+            cell.contactSelected = contact.selected;
+            
+            return cell;
         }
-        
-        SocialFollowTableViewCell *cell = [SocialFollowTableViewCell cellForTableView:tableView delegate:self indexPath:indexPath];
-        
-        ContactMatch *match = [self.searchedKnodaContacts objectAtIndex:indexPath.row];
-        
-        cell.contactIdLabel.text = match.contactId;
-        cell.usernameLabel.text = match.info.username;
-        cell.avatarImageView.image = [_imageLoader lazyLoadImage:match.info.avatar.small onIndexPath:indexPath];
-        cell.checked = match.selected;
-        return cell;
-        
     } else {
-    
         if (self.searchedContacts.count == 0) {
             if (self.allContacts.count != 0)
                 return [[[UINib nibWithNibName:@"NoContactResultsCell" bundle:[NSBundle mainBundle]] instantiateWithOwner:nil options:nil] lastObject];
@@ -179,15 +274,46 @@
         
         return cell;
     }
+    
+
 }
 
 - (void)contactSelectedInCell:(SocialContactsTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+
     Contact *contact = self.searchedContacts[indexPath.row];
     contact.selected = YES;
     NSString *contactId = contact.name;
+
+    
+    NSArray *values = [self arrayOfValuesFromContact:contact];
+    
+    if (values.count == 1) {
+        NSString *phoneNumber = [contact.phoneNumbers firstObject];
+        if (phoneNumber) {
+            contact.selectedPhoneNumber = phoneNumber;
+            contact.selectedEmailAddress = nil;
+        }
+        NSString *email = [contact.emailAddresses firstObject];
+        if (email) {
+            contact.selectedEmailAddress = email;
+            contact.selectedPhoneNumber = nil;
+        }
+    } else {
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Choose a contact method" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
+        
+        for (NSString *value in values) {
+            [actionSheet addButtonWithTitle:value];
+        }
+        actionSheet.cancelButtonIndex = [actionSheet addButtonWithTitle:@"Cancel"];
+        self.actionSheetContact = contact;
+        [actionSheet showInView:[UIApplication sharedApplication].keyWindow];
+    }
     for (Contact *c in self.allContacts) {
-        if ([c.name isEqualToString:contactId])
+        if ([c.name isEqualToString:contactId]) {
             c.selected = YES;
+            c.selectedEmailAddress = contact.selectedEmailAddress;
+            c.selectedPhoneNumber = contact.selectedPhoneNumber;
+        }
     }
     [self notifyParent];
 }
@@ -233,6 +359,10 @@
 
 - (IBAction)textFieldValueDidChange:(id)sender {
     [self refreshResults:self.searchField.text];
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    self.clearButton.hidden = NO;
 }
 
 - (void)refreshResults:(NSString *)query {
@@ -284,6 +414,7 @@
 
 - (IBAction)clearSearch:(id)sender {
     [self.view endEditing:YES];
+    self.clearButton.hidden = YES;
     self.searchField.text = @"";
     self.searchedContacts = [self.allContacts mutableCopy];
     self.searchedKnodaContacts = [self.knodaContacts mutableCopy];
@@ -365,5 +496,54 @@
     cell.avatarImageView.image = image;
 }
 
+- (NSArray *)arrayOfValuesFromContact:(Contact *)contact {
+    NSMutableArray *result = [NSMutableArray arrayWithCapacity:contact.phoneNumbers.count + contact.emailAddresses.count];
+    
+    for (NSString *phoneNumber in contact.phoneNumbers) {
+        [result addObject:phoneNumber];
+    }
+    
+    for (NSString *email in contact.emailAddresses)
+        [result addObject:email];
+    
+    return result;
+    
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == actionSheet.cancelButtonIndex)
+        return;
+    
+    NSArray *values = [self arrayOfValuesFromContact:self.actionSheetContact];
+    
+    Contact *contact = nil;
+    
+    for (Contact *c in self.allContacts) {
+        if ([c.name isEqualToString:self.actionSheetContact.name])
+            contact = c;
+    }
+    
+    contact.selectedPhoneNumber = nil;
+    contact.selectedEmailAddress = nil;
+    NSString *selectedValue = [values objectAtIndex:buttonIndex];
+    
+    if ([selectedValue rangeOfString:@"%@"].location != NSNotFound)
+        contact.selectedEmailAddress = selectedValue;
+    else
+        contact.selectedPhoneNumber = selectedValue;
+    
+    self.actionSheetContact = nil;
+    for (Contact *c in self.searchedContacts) {
+        if ([c.name isEqualToString:contact.name]) {
+            c.selected = YES;
+            c.selectedEmailAddress = contact.selectedEmailAddress;
+            c.selectedPhoneNumber = contact.selectedPhoneNumber;
+        }
+    }
+    
+    [self.tableView reloadData];
+    
+    
+}
 
 @end

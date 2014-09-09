@@ -18,7 +18,7 @@
 #import "TwitterManager.h"
 #import "UIActionSheet+Blocks.h"
 #import "FollowersViewController.h"
-
+#import "NavigationViewController.h"
 static const float kAvatarSize = 344.0;
 #define AVATAR_SIZE CGSizeMake(kAvatarSize, kAvatarSize)
 static const int kDefaultAvatarsCount = 5;
@@ -26,7 +26,7 @@ static const int kDefaultAvatarsCount = 5;
 
 CGFloat const SwipeBezel = 30.0f;
 
-@interface MeViewController () <UIScrollViewDelegate, MeTableViewControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ImageCropperDelegate, UIActionSheetDelegate>
+@interface MeViewController () <NavigationViewControllerDelegate, UIScrollViewDelegate, MeTableViewControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ImageCropperDelegate, UIActionSheetDelegate>
 @property (weak, nonatomic) IBOutlet NavigationScrollView *scrollView;
 @property (strong, nonatomic) UserProfileHeaderView *headerView;
 @property (strong, nonatomic) NSArray *buttons;
@@ -64,6 +64,8 @@ CGFloat const SwipeBezel = 30.0f;
     self.headerView.hidden = YES;
     [self.headerView populateWithUser:[UserManager sharedInstance].user];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userChanged:) name:UserChangedNotificationName object:nil];
+    
     [self.view insertSubview:self.headerView atIndex:0];
     
     self.tableViewControllers = @[myPredictions, myVotes];
@@ -71,6 +73,10 @@ CGFloat const SwipeBezel = 30.0f;
     self.scrollView.bezelWidth = SwipeBezel;
     
     self.scrollView.scrollsToTop = NO;
+}
+
+- (void)userChanged:(NSNotification *)notification {
+    [self.headerView populateWithUser:[UserManager sharedInstance].user];
 }
 
 - (UITableView *)tableView {
@@ -141,6 +147,13 @@ CGFloat const SwipeBezel = 30.0f;
     self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width * self.tableViewControllers.count, self.view.frame.size.height);
 }
 
+- (void)viewDidAppearInNavigationViewController:(NavigationViewController *)viewController {
+    [[UserManager sharedInstance] refreshUser:^(User *user, NSError *error) {}];
+}
+
+- (void)viewDidDisappearInNavigationViewController:(NavigationViewController *)viewController {
+    
+}
 - (void)tableViewDidScroll:(UIScrollView *)scrollView inTableViewController:(MeTableViewController *)viewController {
     if (viewController != self.visibleTableViewController)
         return;
@@ -357,6 +370,12 @@ CGFloat const SwipeBezel = 30.0f;
     [self.navigationController pushViewController:vc animated:YES];
     
 }
+
+- (void)followingPressedInHeaderView:(UserProfileHeaderView *)headerView {
+    FollowersViewController *vc = [[FollowersViewController alloc] initForUser:[UserManager sharedInstance].user.userId name:[UserManager sharedInstance].user.name];
+    vc.shouldShowSecondPage = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 - (void)addTwitterAccount {
     [[LoadingView sharedInstance] show];
     [[TwitterManager sharedInstance] performReverseAuth:^(SocialAccount *request, NSError *error) {
@@ -460,5 +479,9 @@ CGFloat const SwipeBezel = 30.0f;
                               cancelButtonTitle:NSLocalizedString(@"OK", @"")
                               otherButtonTitles:nil] show];
     }];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 @end

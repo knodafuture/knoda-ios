@@ -13,6 +13,7 @@
 @property (strong, nonatomic) NSNumber *userId;
 @property (strong, nonatomic) NSString *username;
 @property (strong, nonatomic) RemoteImage *avatar;
+@property (assign, nonatomic) BOOL following;
 @end
 
 @interface ContactMatch : WebObject

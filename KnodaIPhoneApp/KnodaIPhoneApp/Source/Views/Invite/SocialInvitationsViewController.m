@@ -6,12 +6,19 @@
 //  Copyright (c) 2014 Knoda. All rights reserved.
 //
 
+#import "AddressBookHelper.h"
 #import "SocialInvitationsViewController.h"
 #import "SocialFollowTableViewController.h"
 #import "SocialContactsViewController.h"
+#import "Invitation.h"
+#import "WebApi.h"
+#import "Follower.h"
+#import "LoadingView.h"
 
-@interface SocialInvitationsViewController () <SocialFollowTableViewControllerDelegate>
+@interface SocialInvitationsViewController () <SocialFollowTableViewControllerDelegate, UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *followButton;
+@property (assign, nonatomic) NSInteger followCount;
+@property (assign, nonatomic) NSInteger inviteCount;
 @end
 
 @implementation SocialInvitationsViewController
@@ -39,13 +46,24 @@
     [self addViewController:twitter title:@"Twitter"];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     self.scrollIndicator.hidden = YES;
 }
 
 - (void)close {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Hold Up!" message:[NSString stringWithFormat:@"You have %ld pending invites & %ld follows, would you like to send these now?", (long)self.inviteCount, (long)self.followCount] delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Send", nil];
+    [alert show];
+    
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    
+    if (buttonIndex == alertView.cancelButtonIndex)
+        [self dismissViewControllerAnimated:YES completion:nil];
+    else
+        [self submit:nil];
 }
 
 - (void)selectionUpdatedInViewController:(SocialFollowTableViewController *)viewController {
@@ -59,7 +77,58 @@
             invitations += [(id) vc invitations].count;
     }
     
+    self.followCount = selectedMatches;
+    self.inviteCount = invitations;
     [self.followButton setTitle:[NSString stringWithFormat:@"Follow (%ld) & Invite (%ld)", (long)selectedMatches, (long)invitations] forState:UIControlStateNormal];
+}
+
+- (IBAction)submit:(id)sender {
+    NSMutableArray *invitations = [NSMutableArray array];
+    
+    for (id vc in self.viewControllers) {
+        if ([vc respondsToSelector:@selector(invitations)]) {
+            NSArray *pending = [vc invitations];
+            for (Contact *contact in pending) {
+                Invitation *inv = [[Invitation alloc] init];
+                inv.email = contact.selectedEmailAddress;
+                inv.phoneNumber = contact.selectedPhoneNumber;
+                [invitations addObject:inv];
+            }
+        }
+        
+    }
+    
+    NSMutableArray *followers = [NSMutableArray array];
+    
+    for (id vc in self.viewControllers) {
+        if ([vc respondsToSelector:@selector(selectedMatches)]) {
+            NSArray *pending = [vc selectedMatches];
+            for (ContactMatch *match in pending) {
+                Follower *follower = [[Follower alloc] init];
+                follower.leaderId = match.info.userId;
+                [followers addObject:follower];
+            }
+        }
+        
+    }
+    
+    [[LoadingView sharedInstance] show];
+    
+    [[WebApi sharedInstance] followUsers:followers completion:^(NSArray *results, NSError *error) {
+        [[WebApi sharedInstance] sendInvites:invitations completion:^(NSArray *invitations, NSError *error) {
+            [[LoadingView sharedInstance] hide];
+            if (error) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                [alert show];
+            } else {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Your invitations are on their way" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                [alert show];
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
+        }];
+    }];
+    
+
 }
 
 @end

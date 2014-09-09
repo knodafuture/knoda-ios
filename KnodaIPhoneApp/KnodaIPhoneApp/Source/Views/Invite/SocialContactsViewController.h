@@ -13,7 +13,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *searchField;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak ,nonatomic) id<SocialFollowTableViewControllerDelegate> delegate;
-
+@property (weak, nonatomic) IBOutlet UIButton *clearButton;
 - (id)initWithDelegate:(id<SocialFollowTableViewControllerDelegate>)delegate;
 
 @property (readonly, nonatomic) NSArray *selectedMatches;

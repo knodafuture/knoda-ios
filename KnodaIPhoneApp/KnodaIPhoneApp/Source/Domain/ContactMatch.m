@@ -45,7 +45,8 @@
     return @{
              @"userId": @"user_id",
              @"username": @"username",
-             @"avatar" : @"avatar_image"};
+             @"avatar" : @"avatar_image",
+             @"following" : @"following"};
 }
 
 + (NSValueTransformer *)avatarJSONTransformer {

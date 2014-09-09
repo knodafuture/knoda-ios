@@ -10,6 +10,7 @@
 
 @interface FollowersViewController : TabbedViewController
 
+@property (assign, nonatomic) BOOL shouldShowSecondPage;
 - (id)initForUser:(NSInteger)userId name:(NSString *)name;
 
 @end

@@ -262,13 +262,15 @@
     if (user.followingId) {
         [[WebApi sharedInstance] unfollowUser:user.followingId.integerValue completion:^(NSError *error) {
             cell.following = NO;
+            user.followingId = nil;
             [[LoadingView sharedInstance] hide];
         }];
     } else {
         Follower *follower = [[Follower alloc] init];
-        follower.leaderId = [NSString stringWithFormat:@"%ld", (long)user.userId];
+        follower.leaderId = @(user.userId);
         [[WebApi sharedInstance] followUsers:@[follower] completion:^(NSArray *results, NSError *error) {
             cell.following = YES;
+            user.followingId = [results firstObject][@"id"];
             [[LoadingView sharedInstance] hide];
         }];
     }

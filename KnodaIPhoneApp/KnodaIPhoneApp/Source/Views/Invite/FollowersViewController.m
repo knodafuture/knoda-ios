@@ -38,6 +38,15 @@
     
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if (self.shouldShowSecondPage) {
+        self.scrollView.contentOffset = CGPointMake(self.view.frame.size.width, 0);
+        [self selectIndex:1];
+    }
+}
+
 - (void)back {
     [self.navigationController popViewControllerAnimated:YES];
 }

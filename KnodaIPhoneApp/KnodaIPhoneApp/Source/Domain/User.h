@@ -34,4 +34,6 @@
 @property (assign, nonatomic) NSInteger followerCount;
 @property (assign, nonatomic) NSInteger followingCount;
 @property (strong, nonatomic) NSNumber *followingId;
+
+@property (strong, nonatomic) NSString *phone;
 @end

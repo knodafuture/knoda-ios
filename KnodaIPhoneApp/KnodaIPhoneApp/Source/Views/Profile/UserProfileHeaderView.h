@@ -13,6 +13,7 @@
 @protocol UserProfileHeaderViewDelegate <NSObject>
 - (void)avatarButtonPressedInHeaderView:(UserProfileHeaderView *)headerView;
 - (void)followersPressedInHeaderView:(UserProfileHeaderView *)headerView;
+- (void)followingPressedInHeaderView:(UserProfileHeaderView *)headerView;
 @end
 
 @interface UserProfileHeaderView : UIView

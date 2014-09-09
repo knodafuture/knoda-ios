@@ -13,6 +13,8 @@
 @property (strong, nonatomic) NSArray *emailAddresses;
 @property (strong, nonatomic) NSArray *phoneNumbers;
 @property (assign, nonatomic) BOOL selected;
+@property (strong, nonatomic) NSString *selectedPhoneNumber;
+@property (strong, nonatomic) NSString *selectedEmailAddress;
 @end
 
 

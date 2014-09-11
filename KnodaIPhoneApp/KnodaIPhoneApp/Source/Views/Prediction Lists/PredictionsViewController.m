@@ -52,7 +52,9 @@ NSString *PredictionVotedKey = @"PREDICTIONVOTEDKEY";
 }
 
 - (void)predictionVoted:(NSNotification *)notification {
-    [self updatePrediction:notification.userInfo[PredictionVotedKey]];
+   dispatch_async(dispatch_get_main_queue(), ^{
+        [self updatePrediction:notification.userInfo[PredictionVotedKey]];
+   });
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -137,7 +139,7 @@ NSString *PredictionVotedKey = @"PREDICTIONVOTEDKEY";
         if (!error) {
             prediction.challenge = challenge;
             [cell fillWithPrediction:prediction];
-            [[NSNotificationCenter defaultCenter] postNotificationName:PredictionVotedKey object:nil userInfo:@{PredictionVotedKey: prediction}];
+            [[NSNotificationCenter defaultCenter] postNotificationName:PredictionVotedEvent object:nil userInfo:@{PredictionVotedKey: prediction}];
         }
         else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message:@"Unable to agree at this time" delegate: nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles: nil];
@@ -152,7 +154,7 @@ NSString *PredictionVotedKey = @"PREDICTIONVOTEDKEY";
         if (!error) {
             prediction.challenge = challenge;
             [cell fillWithPrediction:prediction];
-            [[NSNotificationCenter defaultCenter] postNotificationName:PredictionVotedKey object:nil userInfo:@{PredictionVotedKey: prediction}];
+            [[NSNotificationCenter defaultCenter] postNotificationName:PredictionVotedEvent object:nil userInfo:@{PredictionVotedKey: prediction}];
         }
         else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message:@"Unable to disagree at this time" delegate: nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles: nil];

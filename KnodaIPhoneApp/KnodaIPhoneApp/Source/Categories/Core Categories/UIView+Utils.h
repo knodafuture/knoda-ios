@@ -9,6 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface UIView (Utils)
-- (void)findScrollViews;
 - (UIImage *)captureView;
 @end

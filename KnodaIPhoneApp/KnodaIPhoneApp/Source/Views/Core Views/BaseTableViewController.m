@@ -17,6 +17,7 @@
 @property (strong, nonatomic) EmptyDatasource *emptyDatasource;
 @property (strong, nonatomic) NSTimer *graceTimer;
 @property (assign, nonatomic) BOOL refreshEnded;
+@property (assign, nonatomic) UITableViewCellSeparatorStyle backupStyle;
 @end
 
 @implementation BaseTableViewController
@@ -170,11 +171,14 @@
 - (void)showNoContent:(UITableViewCell *)noContentCell {
     self.emptyDatasource.cell = noContentCell;
     self.tableView.dataSource = self.emptyDatasource;
+    self.backupStyle = self.tableView.separatorStyle;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView reloadData];
 }
 
 - (void)restoreContent {
     self.tableView.dataSource = self;
+    self.tableView.separatorStyle = self.backupStyle;
     [self.tableView reloadData];
 }
 - (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView {

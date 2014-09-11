@@ -42,16 +42,6 @@
                             <action selector="toggleChecked:" destination="ryI-Md-PtM" eventType="touchUpInside" id="hfq-dr-fZY"/>
                         </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="82i-2V-AOf">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal">
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                        <connections>
-                            <action selector="toggleChecked:" destination="ryI-Md-PtM" eventType="touchUpInside" id="cxb-8h-fV4"/>
-                        </connections>
-                    </button>
                 </subviews>
             </tableViewCellContentView>
             <connections>

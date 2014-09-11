@@ -10,4 +10,5 @@
 
 @interface SocialInvitationsViewController : TabbedViewController
 
+- (id)initWithDelegate:(id<UIAlertViewDelegate>)delegate;
 @end

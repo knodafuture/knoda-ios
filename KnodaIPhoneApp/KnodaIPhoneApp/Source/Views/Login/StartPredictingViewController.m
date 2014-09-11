@@ -13,6 +13,7 @@
 #import "AppDelegate.h"
 #import "WalkthroughController.h"
 #import "ContestWalkthroughController.h"
+
 @interface StartPredictingViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *label;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -47,6 +48,7 @@
             self.imageView.image = image;
         }];
     self.label.text = [NSString stringWithFormat:@"%@,", [UserManager sharedInstance].user.name];
+    self.title = [UserManager sharedInstance].user.name;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -62,7 +64,7 @@
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:ContestVoteWalkthroughNotificationKey];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:VotingDateWalkthroughCompleteKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    [[NSNotificationCenter defaultCenter] postNotificationName:UserLoggedInNotificationName object:nil userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:UserLoggedInNotificationName object:nil userInfo:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:GetStartedNotificationName object:nil];
 }
 

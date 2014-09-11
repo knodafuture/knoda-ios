@@ -29,4 +29,6 @@
 
 + (SocialContactsTableViewCell *)cellForTableView:(UITableView *)tableView delegate:(id<SocialContactsTableViewCellDelegate>)delegate indexPath:(NSIndexPath *)indexPath;
 
+
+- (IBAction)toggleSelected:(id)sender;
 @end

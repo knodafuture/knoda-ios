@@ -10,6 +10,12 @@
 #import <AddressBook/AddressBook.h>
 
 @implementation Contact
+- (id)init {
+    self = [super init];
+    self.phoneNumbers = @[];
+    self.emailAddresses = @[];
+    return self;
+}
 @end
 
 @interface AddressBookHelper () {
@@ -38,33 +44,75 @@
     }
     
     if (accessGranted) {
-        NSMutableArray* items = [NSMutableArray array];
+//        NSMutableArray* items = [NSMutableArray array];
+//
+//        CFArrayRef allSources = ABAddressBookCopyArrayOfAllSources(addressBook);
+//        for (CFIndex i = 0; i < CFArrayGetCount(allSources); i++) {
+//            ABRecordRef source = (ABRecordRef)CFArrayGetValueAtIndex(allSources, i);
+//            CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeopleInSourceWithSortOrdering(addressBook, source, kABPersonSortByFirstName);
+//            NSArray *sortedPeople = CFBridgingRelease(allPeople);
+        //            for (int i = 0; i < sortedPeople.count; i++) {
+        //                ABRecordRef person = (__bridge ABRecordRef)([sortedPeople objectAtIndex:i]);
+        //                Contact *contact = [self processRecord:person];
+        //
+        //                if (contact)
+        //                    [items addObject:contact];
+        //            }
+//        }
+//        
+//        CFRelease(allSources);
+//        CFRelease(addressBook);
+//        return items;
+        
+        NSMutableArray *items = [NSMutableArray array];
+        NSMutableSet *unifiedRecordsSet = [NSMutableSet set];
+        CFArrayRef records = ABAddressBookCopyArrayOfAllPeople(addressBook);
+        for (CFIndex i = 0; i < CFArrayGetCount(records); i++)
+        {
+            NSMutableSet *contactSet = [NSMutableSet set];
+            
+            ABRecordRef record = CFArrayGetValueAtIndex(records, i);
+            [contactSet addObject:(__bridge id)record];
+            
+            NSArray *linkedRecordsArray = (__bridge NSArray *)ABPersonCopyArrayOfAllLinkedPeople(record);
+            [contactSet addObjectsFromArray:linkedRecordsArray];
+            [unifiedRecordsSet addObject:contactSet];
+            // Your own custom "unified record" class (or just an NSSet!)
 
-        CFArrayRef allSources = ABAddressBookCopyArrayOfAllSources(addressBook);
-        for (CFIndex i = 0; i < CFArrayGetCount(allSources); i++) {
-            ABRecordRef source = (ABRecordRef)CFArrayGetValueAtIndex(allSources, i);
-            CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeopleInSourceWithSortOrdering(addressBook, source, kABPersonSortByFirstName);
-            NSArray *sortedPeople = CFBridgingRelease(allPeople);
-            for (int i = 0; i < sortedPeople.count; i++) {
-                ABRecordRef person = (__bridge ABRecordRef)([sortedPeople objectAtIndex:i]);
-                Contact *contact = [self processRecord:person];
-                
-                if (contact)
-                    [items addObject:contact];
-            }
+            CFRelease(record);
+
         }
         
-        CFRelease(allSources);
+        for (NSSet *contactSet in unifiedRecordsSet) {
+            Contact *contact = [self processSet:contactSet];
+            if (contact)
+                [items addObject:contact];
+        }
+        
+        CFRelease(records);
         CFRelease(addressBook);
-        return items;
+        
+        return [items sortedArrayUsingComparator:^NSComparisonResult(Contact *obj1, Contact  *obj2) {
+            return [obj1.name compare:obj2.name];
+        }];;
+        
         
     } else {
         return nil;
     }
 }
 
-+ (Contact *)processRecord:(ABRecordRef)person {
++ (Contact *)processSet:(NSSet *)set {
     Contact *contact = [[Contact alloc] init];
+    id obj = [set anyObject];
+    //for (id obj in set) {
+        ABRecordRef person = (__bridge ABRecordRef)obj;
+        contact = [self processRecord:person withExistingContact:contact];
+    //}
+    return contact;
+}
+
++ (Contact *)processRecord:(ABRecordRef)person withExistingContact:(Contact *)contact {
     NSString *firstName;
     NSString *lastName;
     
@@ -83,34 +131,44 @@
             contact.name = firstName;
     } else if (lastName)
         contact.name = lastName;
-    else
+    
+    if (!contact.name)
         return nil;
     
-    NSMutableArray *phoneNumbers = [[NSMutableArray alloc] init];
+    
+    NSMutableArray *phoneNumbers = contact.phoneNumbers.mutableCopy;
     
     ABMultiValueRef multiPhones = ABRecordCopyValue(person, kABPersonPhoneProperty);
     for(CFIndex i=0;i<ABMultiValueGetCount(multiPhones);i++) {
         
         NSString *phoneNumber = CFBridgingRelease(ABMultiValueCopyValueAtIndex(multiPhones, i));
-        [phoneNumbers addObject:phoneNumber];
+        if (![phoneNumbers containsObject:phoneNumber])
+            [phoneNumbers addObject:phoneNumber];
     }
     
     contact.phoneNumbers = phoneNumbers;
     if (multiPhones != NULL)
         CFRelease(multiPhones);
     
-    NSMutableArray *contactEmails = [NSMutableArray new];
+    NSMutableArray *contactEmails = contact.emailAddresses.mutableCopy;
     ABMultiValueRef multiEmails = ABRecordCopyValue(person, kABPersonEmailProperty);
     
     for (CFIndex i=0; i<ABMultiValueGetCount(multiEmails); i++) {
         NSString *contactEmail = CFBridgingRelease(ABMultiValueCopyValueAtIndex(multiEmails, i));
-        [contactEmails addObject:contactEmail];
+        if (![contactEmails containsObject:contactEmail])
+            [contactEmails addObject:contactEmail];
     }
     contact.emailAddresses = contactEmails;
     if (multiEmails != NULL)
         CFRelease(multiEmails);
     
     return contact;
+}
+
++ (Contact *)processRecord:(ABRecordRef)person {
+    Contact *contact = [[Contact alloc] init];
+
+    return [self processRecord:person withExistingContact:contact];
 }
 
 @end

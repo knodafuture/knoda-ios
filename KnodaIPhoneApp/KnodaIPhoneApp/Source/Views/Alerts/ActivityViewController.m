@@ -57,6 +57,11 @@
     
     self.tableView.scrollsToTop = NO;
     
+    [self updateFollowerInformation];
+
+}
+
+- (void)updateFollowerInformation {
     [[WebApi sharedInstance] getShortLeaders:^(NSArray *leaders, NSError *error) {
         if (!error)
             self.shortLeaders = leaders;
@@ -306,6 +311,7 @@
     [[WebApi sharedInstance] followUsers:@[follower] completion:^(NSArray *results, NSError *error) {
         [[LoadingView sharedInstance] hide];
         [cell setFollowing:YES];
+        [self updateFollowerInformation];
     }];
 }
 

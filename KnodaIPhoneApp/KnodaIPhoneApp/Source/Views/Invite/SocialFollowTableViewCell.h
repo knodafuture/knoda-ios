@@ -25,6 +25,6 @@
 @property (strong, nonatomic) NSIndexPath *indexPath;
 @property (assign, nonatomic) BOOL checked;
 + (SocialFollowTableViewCell *)cellForTableView:(UITableView *)tableView delegate:(id<SocialFollowTableViewCellDelegate>)delegate indexPath:(NSIndexPath *)indexPath;
-
+- (IBAction)toggleChecked:(id)sender;
 
 @end

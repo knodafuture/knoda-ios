@@ -13,8 +13,10 @@
 #import "SearchViewController.h"
 #import "PredictionsViewController.h"
 #import "HomeFollowingViewController.h"
+#import "UserManager.h"
+#import "LoadingView.h"
 
-@interface NewHomeViewController () <HomeHeaderViewDelegate>
+@interface NewHomeViewController () <HomeHeaderViewDelegate, UIAlertViewDelegate>
 @property (strong, nonatomic) PredictionsViewController *leftViewController;
 @property (strong, nonatomic) PredictionsViewController *rightViewController;
 @property (strong, nonatomic) HomeHeaderView *headerView;
@@ -68,7 +70,7 @@
 
 - (void)invite {
     
-    SocialInvitationsViewController *vc = [[SocialInvitationsViewController alloc] init];
+    SocialInvitationsViewController *vc = [[SocialInvitationsViewController alloc] initWithDelegate:self];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     [self.view.window.rootViewController presentViewController:nav animated:YES completion:nil];
     
@@ -95,6 +97,39 @@
         return self.rightViewController.tableView;
     else
         return self.leftViewController.tableView;
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == alertView.cancelButtonIndex) {
+        NSInteger count = [[[NSUserDefaults standardUserDefaults] objectForKey:@"PhoneNumberNagCount"] integerValue];
+        count++;
+        [[NSUserDefaults standardUserDefaults] setObject:@(count) forKey:@"PhoneNumberNagCount"];
+    } else {
+        NSString *phone = [[alertView textFieldAtIndex:0] text];
+        [self savePhone:phone];
+    }
+}
+- (BOOL)alertViewShouldEnableFirstOtherButton:(UIAlertView *)alertView {
+    if ([alertView textFieldAtIndex:0].text.length == 0)
+        return NO;
+    return YES;
+}
+
+- (void)savePhone:(NSString *)phone {
+    User *user = [[UserManager sharedInstance].user copy];
+    user.phone = phone;
+    
+    [[LoadingView sharedInstance] show];
+    [[UserManager sharedInstance] updateUser:user completion:^(User *user, NSError *error) {
+        if (error)
+            [[[UIAlertView alloc] initWithTitle:nil
+                                        message:error.localizedDescription
+                                       delegate:nil
+                              cancelButtonTitle:NSLocalizedString(@"OK", @"")
+                              otherButtonTitles:nil] show];
+        
+        [[LoadingView sharedInstance] hide];
+    }];
 }
 
 @end

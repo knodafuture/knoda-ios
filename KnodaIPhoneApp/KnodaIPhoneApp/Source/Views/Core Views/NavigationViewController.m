@@ -185,6 +185,7 @@ NSString *GetStartedNotificationName = @"GETSTARTED";
         frame.origin.x = i * frame.size.width;
         frame.origin.y = 0;
         vc.view.frame = frame;
+        
         [self.scrollView addSubview:vc.view];
     }
     
@@ -227,29 +228,6 @@ NSString *GetStartedNotificationName = @"GETSTARTED";
         [UIView animateWithDuration:0.5 animations:^{
             self.welcomeNavigationController.view.frame = frame;
         }];
-    } else {
-        if (![UserManager sharedInstance].user.phone || [[UserManager sharedInstance].user.phone isEqualToString:@""]) {
-            
-            
-            NSInteger count = [[[NSUserDefaults standardUserDefaults] objectForKey:@"PhoneNumberNagCount"] integerValue];
-            
-            if (count >= 2)
-                return;
-            
-            
-            NSString *cancelButtonTitle;
-            
-            if (count == 0)
-                cancelButtonTitle = @"No Thanks";
-            else
-                cancelButtonTitle = @"Never";
-            
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Phone Number" message:@"Make it easier for friends to find you on Knoda by entering your phone number. You can always add or remove your number in Profile Settings." delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:@"Save", nil];
-            alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-            
-            [alert show];
-            
-        }
     }
 }
 
@@ -335,9 +313,6 @@ NSString *GetStartedNotificationName = @"GETSTARTED";
                 break;
             case MenuGroups:
                 viewController = [[CGViewController alloc] init];
-                break;
-            default:
-                viewController = [[HomeViewController alloc] initWithStyle:UITableViewStylePlain];
                 break;
         }
     } else
@@ -454,30 +429,6 @@ NSString *GetStartedNotificationName = @"GETSTARTED";
         self.blurImageView = nil;
         self.welcomeNavigationController = nil;
     }];
-    
-    
-    if (![UserManager sharedInstance].user.phone || [[UserManager sharedInstance].user.phone isEqualToString:@""]) {
-        
-        
-        NSInteger count = [[[NSUserDefaults standardUserDefaults] objectForKey:@"PhoneNumberNagCount"] integerValue];
-        
-       if (count >= 2)
-           return;
-        
-        
-        NSString *cancelButtonTitle;
-        
-        if (count == 0)
-            cancelButtonTitle = @"No Thanks";
-        else
-            cancelButtonTitle = @"Never";
-        
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Phone Number" message:@"Make it easier for friends to find you on Knoda by entering your phone number. You can always add or remove your number in Profile Settings." delegate:self cancelButtonTitle:cancelButtonTitle otherButtonTitles:@"Save", nil];
-        alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-        
-        [alert show];
-        
-    }
 }
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
@@ -514,10 +465,11 @@ NSString *GetStartedNotificationName = @"GETSTARTED";
 }
 
 - (void)getStarted {
-    SocialInvitationsViewController *vc = [[SocialInvitationsViewController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        SocialInvitationsViewController *vc = [[SocialInvitationsViewController alloc] initWithDelegate:self];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
         [self.view.window.rootViewController presentViewController:nav animated:YES completion:nil];
     });
+
 }
 @end

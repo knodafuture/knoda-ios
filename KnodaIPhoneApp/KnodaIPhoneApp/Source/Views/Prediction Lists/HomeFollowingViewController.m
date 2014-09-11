@@ -23,6 +23,9 @@
         UITableViewCell *cell = [[[UINib nibWithNibName:@"NoSocialPredictionsCell" bundle:[NSBundle mainBundle]] instantiateWithOwner:nil options:nil] lastObject];
         [self showNoContent:cell];
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginRefreshing) name:UserChangedNotificationName object:nil];
+
 }
 - (void)objectsAfterObject:(id)object completion:(void (^)(NSArray *, NSError *))completionHandler {
     NSInteger lastId = [(Prediction *)object predictionId];

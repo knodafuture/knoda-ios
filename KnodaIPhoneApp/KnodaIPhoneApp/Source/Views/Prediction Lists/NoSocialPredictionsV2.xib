@@ -28,8 +28,9 @@
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" id="E42-vo-Lj9">
                         <rect key="frame" x="20" y="125" width="280" height="79"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <string key="text">None of your followers have made predictions yet.
-View All prediction for now &amp; check back soon!</string>
+                        <string key="text">None of your followers have made
+predictions yet. View All predictions
+for now &amp; check back soon!</string>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.42745098040000001" green="0.42745098040000001" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>

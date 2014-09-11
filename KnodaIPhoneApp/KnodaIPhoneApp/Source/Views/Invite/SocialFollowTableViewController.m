@@ -41,14 +41,18 @@
     
     if (![[UserManager sharedInstance] userHasAccountForProvider:self.provider])
         [self showConnectCell];
-    else
+    else {
         [self hideConnectCell];
+
+        }
     
     self.tableView.separatorColor = [UIColor colorFromHex:@"efefef"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
         [self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 0, 0, 0)];
     }
+    
+
     
 }
 
@@ -73,31 +77,6 @@
         return [[[UINib nibWithNibName:@"FollowTwitterHeaderView" bundle:[NSBundle mainBundle]] instantiateWithOwner:self options:nil] lastObject];
     else
         return [[[UINib nibWithNibName:@"FollowFacebookHeaderView" bundle:[NSBundle mainBundle]] instantiateWithOwner:self options:nil] lastObject];
-    
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (self.connectCell)
-        return 0;
-    return 60;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    if (self.connectCell)
-        return nil;
-    
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(0, 0, self.view.frame.size.width, 60);
-    button.backgroundColor = [UIColor clearColor];
-    
-    if ([self.provider isEqualToString:@"twitter"])
-        [button setImage:[UIImage imageNamed:@"InviteTwitterShareBtn"] forState:UIControlStateNormal];
-    else
-        [button setImage:[UIImage imageNamed:@"InviteFacebookShareBtn"] forState:UIControlStateNormal];
-    
-    [button addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
-    
-    return button;
     
 }
 
@@ -148,21 +127,20 @@
 }
 
 - (void)noObjectsRetrievedInPagingDatasource:(PagingDatasource *)pagingDatasource {
+    if (![[UserManager sharedInstance] userHasAccountForProvider:self.provider]) {
+        [self showConnectCell];
+        return;
+    } else
+        [self hideConnectCell];
+    
     self.shouldShowHeader = NO;
     
     UITableViewCell *cell = nil;
     
     if ([self.provider isEqualToString:@"twitter"]) {
-        if (self.prefilteredCount == 0)
             cell = [[[ UINib nibWithNibName:@"NoTwitterFriendsCell" bundle:[NSBundle mainBundle]] instantiateWithOwner:nil options:nil] lastObject];
-        else
-            cell = [[[ UINib nibWithNibName:@"NoTwitterFriendsCellV2" bundle:[NSBundle mainBundle]] instantiateWithOwner:nil options:nil] lastObject];
     } else {
-        if (self.prefilteredCount == 0) {
             cell = [[[UINib nibWithNibName:@"NoFacebookFriendsCell" bundle:[NSBundle mainBundle]] instantiateWithOwner:nil options:nil] lastObject];
-        }
-        else
-            cell = [[[UINib nibWithNibName:@"NoFacebookFriendsCellV2" bundle:[NSBundle mainBundle]] instantiateWithOwner:nil options:nil] lastObject];
     }
     
     [self showNoContent:cell];
@@ -181,7 +159,28 @@
     
     [self beginRefreshing];
     
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(0, 0, self.view.frame.size.width, 60);
+    button.backgroundColor = [UIColor clearColor];
+    
+    if ([self.provider isEqualToString:@"twitter"])
+        [button setImage:[UIImage imageNamed:@"InviteTwitterShareBtn"] forState:UIControlStateNormal];
+    else
+        [button setImage:[UIImage imageNamed:@"InviteFacebookShareBtn"] forState:UIControlStateNormal];
+    
+    [button addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.tableView.tableFooterView = button;
+    
 }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    id cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    if ([cell respondsToSelector:@selector(toggleChecked:)]) {
+        [cell toggleChecked:nil];
+    }
+}
+
 
 - (IBAction)connectFacebook:(id)sender {
     [self addFacebookAccount];
@@ -276,6 +275,7 @@
     }
     
     for (SocialFollowTableViewCell *cell in self.tableView.visibleCells) {
+        if ([cell respondsToSelector:@selector(setChecked:)])
         [cell setChecked:self.selectAll];
     }
     
@@ -387,10 +387,7 @@
         };
         controller.completionHandler =myBlock;
         
-        //Adding the Text to the facebook post value from iOS
-        [controller setInitialText:@"Test Post from knoda"];
-        
-        //Adding the URL to the facebook post value from iOS
+        [controller setInitialText:@"Join me on Knoda!"];
         
         [controller addURL:[NSURL URLWithString:@"http://www.knoda.com/start"]];
         

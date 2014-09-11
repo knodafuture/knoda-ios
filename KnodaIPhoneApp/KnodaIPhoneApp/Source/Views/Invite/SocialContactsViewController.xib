@@ -37,7 +37,7 @@
                                 <outlet property="delegate" destination="-1" id="zNp-N2-Dny"/>
                             </connections>
                         </textField>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="JdL-qu-zKU">
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="JdL-qu-zKU">
                             <rect key="frame" x="294" y="0.0" width="26" height="36"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="SearchClearIcon">

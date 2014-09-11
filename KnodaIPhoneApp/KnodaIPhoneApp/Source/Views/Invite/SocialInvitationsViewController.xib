@@ -23,7 +23,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.46666666670000001" green="0.73725490199999999" blue="0.1215686275" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="UAY-hY-uvU">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="UAY-hY-uvU">
                     <rect key="frame" x="0.0" y="36" width="320" height="400"/>
                     <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                     <connections>

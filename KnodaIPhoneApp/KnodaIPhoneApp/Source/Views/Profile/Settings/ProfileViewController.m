@@ -22,6 +22,8 @@
 #import "UIActionSheet+Blocks.h"
 #import "SettingsViewController.h"
 
+
+#define ACCEPTABLE_CHARECTERS @"0123456789-()+"
 static const int kDefaultAvatarsCount = 5;
 
 static const float kAvatarSize = 344.0;
@@ -44,6 +46,7 @@ static const float kAvatarSize = 344.0;
 @property (weak, nonatomic) IBOutlet UILabel *facebookLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumberField;
+@property (weak, nonatomic) IBOutlet UILabel *phoneNumberLabel;
 
 @end
 
@@ -68,6 +71,8 @@ static const float kAvatarSize = 344.0;
     
     self.avatarImageView.layer.cornerRadius = self.avatarImageView.frame.size.width / 2.0;
     self.avatarImageView.clipsToBounds = YES;
+    
+    self.phoneNumberField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     
 }
 
@@ -110,10 +115,14 @@ static const float kAvatarSize = 344.0;
         self.emailField.text = @"Add email";
     self.userNameField.text = user.name;
     
-    if (user.phone && ![user.phone isEqualToString:@""])
-        self.phoneNumberField.text = user.phone;
-    else
-        self.phoneNumberField.text = @"Add phone";
+    if (user.phone && ![user.phone isEqualToString:@""]) {
+        self.phoneNumberField.text = [self formatPhoneNumber:user.phone deleteLastChar:NO];
+        self.phoneNumberLabel.text = @"phone number";
+    }
+    else {
+        self.phoneNumberField.text = @"Phone Number";
+        self.phoneNumberLabel.text = @"Allow your friends to find you easier on Knoda";
+    }
     
     
     if (user.twitterAccount != nil) {
@@ -287,6 +296,31 @@ static const float kAvatarSize = 344.0;
         return NO;
     }
     
+    if (textField == self.phoneNumberField) {
+//        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:ACCEPTABLE_CHARECTERS] invertedSet];
+//        
+//        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+//        
+//        NSUInteger oldLength = [textField.text length];
+//        NSUInteger replacementLength = [string length];
+//        NSUInteger rangeLength = range.length;
+//        
+//        NSUInteger newLength = oldLength - rangeLength + replacementLength;
+//        
+//        BOOL returnKey = [string rangeOfString: @"\n"].location != NSNotFound;
+//        
+//        return [string isEqualToString:filtered] && (newLength <= 15 || returnKey);
+        // Delete button was hit.. so tell the method to delete the last char.
+        NSString* totalString = [NSString stringWithFormat:@"%@%@",textField.text,string];
+        if (range.length == 1) {
+            textField.text = [self formatPhoneNumber:totalString deleteLastChar:YES];
+        } else {
+            textField.text = [self formatPhoneNumber:totalString deleteLastChar:NO ];
+        }
+
+        return NO;
+    }
+    
     return YES;
 }
 
@@ -321,6 +355,15 @@ static const float kAvatarSize = 344.0;
                               otherButtonTitles:nil] show];
         
         [[LoadingView sharedInstance] hide];
+        
+        if (user.phone && ![user.phone isEqualToString:@""]) {
+            self.phoneNumberField.text = [self formatPhoneNumber:user.phone deleteLastChar:NO];
+            self.phoneNumberLabel.text = @"phone number";
+        }
+        else {
+            self.phoneNumberField.text = @"Phone Number";
+            self.phoneNumberLabel.text = @"Allow your friends to find you easier on Knoda";
+        }
     }];
 }
 
@@ -493,5 +536,38 @@ static const float kAvatarSize = 344.0;
     }];
 }
 
+-(NSString*) formatPhoneNumber:(NSString*) simpleNumber deleteLastChar:(BOOL)deleteLastChar {
+    if(simpleNumber.length==0) return @"";
+    // use regex to remove non-digits(including spaces) so we are left with just the numbers
+    NSError *error = NULL;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[\\s-\\(\\)]" options:NSRegularExpressionCaseInsensitive error:&error];
+    simpleNumber = [regex stringByReplacingMatchesInString:simpleNumber options:0 range:NSMakeRange(0, [simpleNumber length]) withTemplate:@""];
+    
+    // check if the number is to long
+    if(simpleNumber.length>10) {
+        // remove last extra chars.
+        simpleNumber = [simpleNumber substringToIndex:10];
+    }
+    
+    if(deleteLastChar) {
+        // should we delete the last digit?
+        simpleNumber = [simpleNumber substringToIndex:[simpleNumber length] - 1];
+    }
+    
+    // 123 456 7890
+    // format the number.. if it's less then 7 digits.. then use this regex.
+    if(simpleNumber.length<7)
+        simpleNumber = [simpleNumber stringByReplacingOccurrencesOfString:@"(\\d{3})(\\d+)"
+                                                               withString:@"($1) $2"
+                                                                  options:NSRegularExpressionSearch
+                                                                    range:NSMakeRange(0, [simpleNumber length])];
+    
+    else   // else do this one..
+        simpleNumber = [simpleNumber stringByReplacingOccurrencesOfString:@"(\\d{3})(\\d{3})(\\d+)"
+                                                               withString:@"($1) $2-$3"
+                                                                  options:NSRegularExpressionSearch
+                                                                    range:NSMakeRange(0, [simpleNumber length])];
+    return simpleNumber;
+}
 
 @end

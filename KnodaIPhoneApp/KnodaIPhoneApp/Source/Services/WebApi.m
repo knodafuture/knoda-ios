@@ -11,6 +11,7 @@
 #import "NSData+Utils.h"
 #import "FileCache.h"
 #import "AppDelegate.h"
+#import "UserManager.h"
 
 NSString *PredictionChangedNotificationName = @"P_CHANGED";
 NSString *PredictionChangedNotificationKey = @"P_CHANGED_KEY";
@@ -812,6 +813,9 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
         if (responseData != nil)
             result = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
         completionHandler(result, error);
+        [[UserManager sharedInstance] refreshUser:^(User *user, NSError *error) {
+            
+        }];
     }];
 }
 
@@ -823,6 +827,9 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
     
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler(error);
+        [[UserManager sharedInstance] refreshUser:^(User *user, NSError *error) {
+            
+        }];
     }];
 }
 

@@ -161,18 +161,22 @@
     
     [self beginRefreshing];
     
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(0, 0, self.view.frame.size.width, 60);
-    button.backgroundColor = [UIColor clearColor];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+
     
-    if ([self.provider isEqualToString:@"twitter"])
-        [button setImage:[UIImage imageNamed:@"InviteTwitterShareBtn"] forState:UIControlStateNormal];
-    else
-        [button setImage:[UIImage imageNamed:@"InviteFacebookShareBtn"] forState:UIControlStateNormal];
-    
-    [button addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
-    
-    self.tableView.tableFooterView = button;
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.frame = CGRectMake(0, 0, self.view.frame.size.width, 60);
+        button.backgroundColor = [UIColor clearColor];
+        
+        if ([self.provider isEqualToString:@"twitter"])
+            [button setImage:[UIImage imageNamed:@"InviteTwitterShareBtn"] forState:UIControlStateNormal];
+        else
+            [button setImage:[UIImage imageNamed:@"InviteFacebookShareBtn"] forState:UIControlStateNormal];
+        
+        [button addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
+        
+        self.tableView.tableFooterView = button;
+    });
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -264,6 +264,7 @@ static const int kBSAlertTag = 1001;
 - (IBAction)categoryButtonTapped:(UIButton *)sender {
     if(self.shouldNotOpenCategory) {
         [self backPressed:nil];
+        return;
     }
     if (self.prediction.contestName) {
         [[LoadingView sharedInstance] show];

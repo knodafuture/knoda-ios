@@ -56,7 +56,7 @@ static UINib *nib;
 }
 
 - (void)populateUI:(Contest *)contest {
-    self.descriptionLabel.text = contest.description;
+    self.descriptionLabel.text = contest.contestDescription;
     self.rankLabel.text = [contest.rank ordinalString] != nil ? [contest.rank ordinalString] : [NSString stringWithFormat:@"%ld", (long)contest.participants.integerValue];
     self.overallLabel.text = [NSString stringWithFormat:@"overall (%ld)", (long)contest.participants.integerValue];
     

@@ -34,7 +34,7 @@ static UINib *nib;
     
     [self observeNotification:UserChangedNotificationName withBlock:^(__weak UserProfileHeaderView *self, NSNotification *notification) {
         
-        if (self.user.user_id == [UserManager sharedInstance].user.user_id)
+        if (self.user.user_id == [UserManager sharedInstance].user.userId)
             [self populateWithUser:[UserManager sharedInstance].user];
     }];
     

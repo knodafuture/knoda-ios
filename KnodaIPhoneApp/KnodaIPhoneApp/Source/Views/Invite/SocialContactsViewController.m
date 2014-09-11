@@ -77,14 +77,11 @@
             self.searchedKnodaContacts = matches.mutableCopy;
             
             self.hasKnodaResults = self.knodaContacts.count > 0;
-            [self.tableView reloadData];
+            [self sortAndReload];
             
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-                static dispatch_once_t once;
-                
-                dispatch_once(&once, ^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                if (!self.selectAll)
                     [self selectAll:nil];
-                });
             });
         }];
     }
@@ -357,6 +354,7 @@
             c.selectedPhoneNumber = contact.selectedPhoneNumber;
         }
     }
+    [self sortAndReload];
     [self notifyParent];
 }
 
@@ -374,7 +372,7 @@
         
     }
     
-    [self.tableView reloadData];
+    [self sortAndReload];
     [self notifyParent];
 }
 
@@ -463,7 +461,7 @@
     NSArray *knodaContactResults = [self.knodaContacts filteredArrayUsingPredicate:knodaPrediction];
     [self.searchedContacts addObjectsFromArray:contactsResults];
     [self.searchedKnodaContacts addObjectsFromArray:knodaContactResults];
-    [self.tableView reloadData];
+    [self sortAndReload];
 }
 
 - (IBAction)clearSearch:(id)sender {
@@ -472,7 +470,7 @@
     self.searchField.text = @"";
     self.searchedContacts = [self.allContacts mutableCopy];
     self.searchedKnodaContacts = [self.knodaContacts mutableCopy];
-    [self.tableView reloadData];
+    [self sortAndReload];
     
 }
 
@@ -525,8 +523,6 @@
 
 - (void)matchUnselectedInSocialFollowTableViewCell:(SocialFollowTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"match unselected");
-    if (self.selectAll)
-        [self selectAll:nil];
     
     ContactMatch *match = [self.searchedKnodaContacts objectAtIndex:indexPath.row];
     match.selected = NO;
@@ -535,6 +531,10 @@
     for (ContactMatch *match in self.knodaContacts) {
         if ([contactId isEqualToString:match.contactId])
             match.selected = NO;
+    }
+    if (self.selectAll) {
+    [self.selectAllButton setImage:[UIImage imageNamed:@"InviteCheckbox"] forState:UIControlStateNormal];
+        self.selectAll = NO;
     }
     [self notifyParent];
 }
@@ -597,7 +597,7 @@
         }
     }
     
-    [self.tableView reloadData];
+    [self sortAndReload];
     
     
 }
@@ -610,9 +610,9 @@
     simpleNumber = [regex stringByReplacingMatchesInString:simpleNumber options:0 range:NSMakeRange(0, [simpleNumber length]) withTemplate:@""];
     
     // check if the number is to long
-    if(simpleNumber.length>10) {
+    if(simpleNumber.length>11) {
         // remove last extra chars.
-        simpleNumber = [simpleNumber substringToIndex:10];
+        simpleNumber = [simpleNumber substringToIndex:11];
     }
     
     if(deleteLastChar) {
@@ -628,12 +628,41 @@
                                                                   options:NSRegularExpressionSearch
                                                                     range:NSMakeRange(0, [simpleNumber length])];
     
-    else   // else do this one..
+    else if (simpleNumber.length >= 7 && simpleNumber.length < 11)  // else do this one..
         simpleNumber = [simpleNumber stringByReplacingOccurrencesOfString:@"(\\d{3})(\\d{3})(\\d+)"
                                                                withString:@"($1) $2-$3"
                                                                   options:NSRegularExpressionSearch
                                                                     range:NSMakeRange(0, [simpleNumber length])];
+    else
+        simpleNumber = [simpleNumber stringByReplacingOccurrencesOfString:@"(\\d{1})(\\d{3})(\\d{3})(\\d+)"
+                                                               withString:@"+$1 ($2) $3-$4"
+                                                                  options:NSRegularExpressionSearch
+                                                                    range:NSMakeRange(0, [simpleNumber length])];
     return simpleNumber;
+}
+
+- (void)sortAndReload {
+    self.searchedContacts = [self.searchedContacts sortedArrayUsingComparator:^NSComparisonResult(Contact *obj1, Contact *obj2) {
+        if (obj1.selected && !obj2.selected)
+            return NSOrderedAscending;
+        else if (obj2.selected && !obj1.selected)
+            return NSOrderedDescending;
+        
+        else
+            return [obj1.name compare:obj2.name];
+    }].mutableCopy;
+    
+    self.allContacts = [self.allContacts sortedArrayUsingComparator:^NSComparisonResult(Contact *obj1, Contact *obj2) {
+        if (obj1.selected && !obj2.selected)
+            return NSOrderedAscending;
+        else if (obj2.selected && !obj1.selected)
+            return NSOrderedDescending;
+        
+        else
+            return [obj1.name compare:obj2.name];
+    }].mutableCopy;
+    
+    [self.tableView reloadData];
 }
 
 @end

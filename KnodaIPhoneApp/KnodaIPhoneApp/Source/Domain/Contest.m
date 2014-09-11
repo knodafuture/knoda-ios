@@ -16,7 +16,7 @@
     return @{
              @"contestId": @"id",
              @"name": @"name",
-             @"description": @"description",
+             @"contestDescription": @"description",
              @"detailsUrl" : @"detail_url",
              @"image" : @"avatar_image",
              @"contestStages" : @"contest_stages",

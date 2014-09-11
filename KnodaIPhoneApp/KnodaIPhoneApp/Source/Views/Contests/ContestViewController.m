@@ -104,7 +104,12 @@
 }
 
 - (void)noObjectsRetrievedInPagingDatasource:(PagingDatasource *)pagingDatasource {
-    ContestNoContentCell *cell = [ContestNoContentCell cellWithMessage:@"You're not participating in any contests, let's change that. Tap the compass icon (top right) to find new contests awaiting your votes"];
+    ContestNoContentCell *cell = nil;
+    if (self.shouldShowDetails) {
+            cell = [ContestNoContentCell cellWithMessage:@"You're not participating in any contests, let's change that. Tap the compass icon (top right) to find new contests awaiting your votes"];
+    } else {
+        cell = [ContestNoContentCell cellWithMessage:@"It looks like you're already participating in all our current contests!"];
+    }
     [self showNoContent:cell];
 }
 

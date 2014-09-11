@@ -42,6 +42,9 @@ NSString *HomeViewCaptureKey = @"HOMEVIEWCAPUTRE";
 
 - (void)predictionVoted:(NSNotification *)notification {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+
+        if (notification.userInfo[@"ViewController"] == self)
+            return;
         Prediction *prediction = notification.userInfo[PredictionVotedKey];
         
         for (Prediction *oldPrediction in self.pagingDatasource.objects) {

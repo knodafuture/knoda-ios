@@ -73,7 +73,7 @@
     NotificationSettings *setting = settings.settings[indexPath.row];
     
     cell.displayName.text = [setting displayName];
-    cell.descriptionView.text = [setting description];
+    cell.descriptionView.text = [setting settingDescription];
     [cell.descriptionView sizeToFit];
     
     CGFloat totalHeight = cell.descriptionView.frame.origin.y + cell.descriptionView.frame.size.height - cell.displayName.frame.origin.y;

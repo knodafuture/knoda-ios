@@ -11,6 +11,6 @@
 @property (assign, nonatomic) NSInteger Id;
 @property (strong, nonatomic) NSString *setting;
 @property (strong, nonatomic) NSString *displayName;
-@property (strong, nonatomic) NSString *description;
+@property (strong, nonatomic) NSString *settingDescription;
 @property (assign, nonatomic) BOOL active;
 @end

@@ -52,6 +52,8 @@
         [self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 0, 0, 0)];
     }
     
+    [self.refreshControl removeFromSuperview];
+    self.refreshControl = nil;
 
     
 }
@@ -251,11 +253,8 @@
         completionHandler(filtered, error);
 
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-            static dispatch_once_t once;
-            
-            dispatch_once(&once, ^{
+            if (!self.selectAll)
                 [self selectAll:nil];
-            });
         });
     };
     
@@ -295,11 +294,15 @@
 
 - (void)matchUnselectedInSocialFollowTableViewCell:(SocialFollowTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"match unselected");
-    if (self.selectAll)
-        [self selectAll:nil];
     
     ContactMatch *match = [self.pagingDatasource.objects objectAtIndex:indexPath.row];
     match.selected = NO;
+    
+    if (self.selectAll) {
+        [self.selectAllButton setImage:[UIImage imageNamed:@"InviteCheckbox"] forState:UIControlStateNormal];
+        self.selectAll = NO;
+    }
+    
     [self notifiyParent];
 }
 

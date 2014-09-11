@@ -13,7 +13,7 @@
              @"Id": @"id",
              @"setting" : @"setting",
              @"displayName" : @"display_name",
-             @"description" : @"description",
+             @"settingDescription" : @"description",
              @"active" : @"active"
              };
 }

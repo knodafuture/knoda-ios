@@ -16,7 +16,7 @@
 
 @property (strong, nonatomic) NSNumber *contestId;
 @property (strong, nonatomic) NSString *name;
-@property (strong, nonatomic) NSString *description;
+@property (strong, nonatomic) NSString *contestDescription;
 @property (strong, nonatomic) NSString *detailsUrl;
 @property (strong, nonatomic) RemoteImage *image;
 

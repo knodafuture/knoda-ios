@@ -545,9 +545,9 @@ static const float kAvatarSize = 344.0;
     simpleNumber = [regex stringByReplacingMatchesInString:simpleNumber options:0 range:NSMakeRange(0, [simpleNumber length]) withTemplate:@""];
     
     // check if the number is to long
-    if(simpleNumber.length>10) {
+    if(simpleNumber.length>11) {
         // remove last extra chars.
-        simpleNumber = [simpleNumber substringToIndex:10];
+        simpleNumber = [simpleNumber substringToIndex:11];
     }
     
     if(deleteLastChar) {
@@ -563,12 +563,16 @@ static const float kAvatarSize = 344.0;
                                                                   options:NSRegularExpressionSearch
                                                                     range:NSMakeRange(0, [simpleNumber length])];
     
-    else   // else do this one..
+    else if (simpleNumber.length >= 7 && simpleNumber.length < 11)  // else do this one..
         simpleNumber = [simpleNumber stringByReplacingOccurrencesOfString:@"(\\d{3})(\\d{3})(\\d+)"
                                                                withString:@"($1) $2-$3"
                                                                   options:NSRegularExpressionSearch
                                                                     range:NSMakeRange(0, [simpleNumber length])];
+    else
+        simpleNumber = [simpleNumber stringByReplacingOccurrencesOfString:@"(\\d{1})(\\d{3})(\\d{3})(\\d+)"
+                                                               withString:@"+$1 ($2) $3-$4"
+                                                                  options:NSRegularExpressionSearch
+                                                                    range:NSMakeRange(0, [simpleNumber length])];
     return simpleNumber;
 }
-
 @end

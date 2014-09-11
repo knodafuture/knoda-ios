@@ -387,7 +387,7 @@
         };
         controller.completionHandler =myBlock;
         
-        [controller setInitialText:@"Join me on Knoda!"];
+        [controller setInitialText:@"I'm on Knoda. Start following me to see all of my predictions."];
         
         [controller addURL:[NSURL URLWithString:@"http://www.knoda.com/start"]];
         

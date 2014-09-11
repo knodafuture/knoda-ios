@@ -16,4 +16,6 @@ UIKIT_EXTERN NSString *PredictionVotedKey;
 @class Prediction;
 @interface PredictionsViewController : BaseTableViewController <PredictionDetailsDelegate, PredictionCellDelegate>
 
+
+- (void)updatePrediction:(Prediction *)prediction;
 @end

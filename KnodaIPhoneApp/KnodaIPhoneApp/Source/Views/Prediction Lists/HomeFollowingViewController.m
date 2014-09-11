@@ -26,6 +26,21 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginRefreshing) name:UserChangedNotificationName object:nil];
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(predictionVoted:) name:PredictionVotedEvent object:nil];
+}
+
+- (void)predictionVoted:(NSNotification *)notification {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        Prediction *prediction = notification.userInfo[PredictionVotedKey];
+        
+        for (Prediction *oldPrediction in self.pagingDatasource.objects) {
+            if (prediction.predictionId == oldPrediction.predictionId)
+                oldPrediction.challenge = prediction.challenge;
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    });
 }
 - (void)objectsAfterObject:(id)object completion:(void (^)(NSArray *, NSError *))completionHandler {
     NSInteger lastId = [(Prediction *)object predictionId];

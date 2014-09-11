@@ -48,7 +48,7 @@
             self.imageView.image = image;
         }];
     self.label.text = [NSString stringWithFormat:@"%@,", [UserManager sharedInstance].user.name];
-    self.title = [UserManager sharedInstance].user.name;
+    self.title = [UserManager sharedInstance].user.name.uppercaseString;
 }
 
 - (void)viewWillAppear:(BOOL)animated {

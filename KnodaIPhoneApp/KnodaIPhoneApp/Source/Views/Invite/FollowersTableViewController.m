@@ -69,6 +69,7 @@
     }
     
     [self showNoContent:cell];
+    [self.tableView reloadData];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

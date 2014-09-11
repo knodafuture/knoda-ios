@@ -48,15 +48,7 @@ NSString *PredictionVotedKey = @"PREDICTIONVOTEDKEY";
         [self.tableView reloadData];
     }];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(predictionVoted:) name:PredictionVotedEvent object:nil];
 }
-
-- (void)predictionVoted:(NSNotification *)notification {
-   dispatch_async(dispatch_get_main_queue(), ^{
-        [self updatePrediction:notification.userInfo[PredictionVotedKey]];
-   });
-}
-
 - (void)viewDidDisappear:(BOOL)animated {
     [self disappeared];
 }
@@ -139,6 +131,7 @@ NSString *PredictionVotedKey = @"PREDICTIONVOTEDKEY";
         if (!error) {
             prediction.challenge = challenge;
             [cell fillWithPrediction:prediction];
+
             [[NSNotificationCenter defaultCenter] postNotificationName:PredictionVotedEvent object:nil userInfo:@{PredictionVotedKey: prediction}];
         }
         else {

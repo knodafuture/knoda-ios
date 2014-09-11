@@ -37,6 +37,22 @@ NSString *HomeViewCaptureKey = @"HOMEVIEWCAPUTRE";
     self.walkthroughController = [[WalkthroughController alloc] initWithTargetViewController:self];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginRefreshing) name:UserLoggedInNotificationName object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(predictionVoted:) name:PredictionVotedEvent object:nil];
+}
+
+- (void)predictionVoted:(NSNotification *)notification {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        Prediction *prediction = notification.userInfo[PredictionVotedKey];
+        
+        for (Prediction *oldPrediction in self.pagingDatasource.objects) {
+            if (prediction.predictionId == oldPrediction.predictionId)
+                oldPrediction.challenge = prediction.challenge;
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+            
+        });
+    });
 }
 
 - (void)viewDidAppear:(BOOL)animated {

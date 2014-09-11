@@ -107,6 +107,7 @@
     [self.delegate objectsAfterObject:lastObject completion:^(NSArray *objectsToAdd, NSError *error) {
         
         if (page == 0 && objectsToAdd.count == 0) {
+            [self.objects removeAllObjects];
             if ([self.delegate respondsToSelector:@selector(noObjectsRetrievedInPagingDatasource:)])
                 [self.delegate noObjectsRetrievedInPagingDatasource:self];
             completion();

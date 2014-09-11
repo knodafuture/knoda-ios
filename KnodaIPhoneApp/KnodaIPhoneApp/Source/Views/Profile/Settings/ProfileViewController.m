@@ -297,25 +297,26 @@ static const float kAvatarSize = 344.0;
     }
     
     if (textField == self.phoneNumberField) {
-//        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:ACCEPTABLE_CHARECTERS] invertedSet];
-//        
-//        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
-//        
-//        NSUInteger oldLength = [textField.text length];
-//        NSUInteger replacementLength = [string length];
-//        NSUInteger rangeLength = range.length;
-//        
-//        NSUInteger newLength = oldLength - rangeLength + replacementLength;
-//        
-//        BOOL returnKey = [string rangeOfString: @"\n"].location != NSNotFound;
-//        
-//        return [string isEqualToString:filtered] && (newLength <= 15 || returnKey);
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:ACCEPTABLE_CHARECTERS] invertedSet];
+        
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        
+        NSUInteger oldLength = [textField.text length];
+        NSUInteger replacementLength = [string length];
+        NSUInteger rangeLength = range.length;
+        
+        NSUInteger newLength = oldLength - rangeLength + replacementLength;
+        
+        BOOL returnKey = [string rangeOfString: @"\n"].location != NSNotFound;
+        
+        if ([string isEqualToString:filtered] && (newLength <= 15 || returnKey)) {
         // Delete button was hit.. so tell the method to delete the last char.
-        NSString* totalString = [NSString stringWithFormat:@"%@%@",textField.text,string];
-        if (range.length == 1) {
-            textField.text = [self formatPhoneNumber:totalString deleteLastChar:YES];
-        } else {
-            textField.text = [self formatPhoneNumber:totalString deleteLastChar:NO ];
+            NSString* totalString = [NSString stringWithFormat:@"%@%@",textField.text,string];
+            if (range.length == 1) {
+                textField.text = [self formatPhoneNumber:totalString deleteLastChar:YES];
+            } else {
+                textField.text = [self formatPhoneNumber:totalString deleteLastChar:NO ];
+            }
         }
 
         return NO;

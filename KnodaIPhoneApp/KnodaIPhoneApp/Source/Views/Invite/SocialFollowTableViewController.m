@@ -161,9 +161,7 @@
     
     [self beginRefreshing];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-
-    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.frame = CGRectMake(0, 0, self.view.frame.size.width, 60);
         button.backgroundColor = [UIColor clearColor];
@@ -337,41 +335,61 @@
 }
 
 - (void)facebookShare {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                   @"Knoda", @"name",
-                                   @"Predict Anything. Literally.", @"caption",
-                                   @"Join me on Knoda!", @"description",
-                                   @"http://knoda.com/start", @"link",
-                                   nil];
     
-    // Show the feed dialog
-    [FBWebDialogs presentFeedDialogModallyWithSession:FBSession.activeSession
-                                           parameters:params
-                                              handler:^(FBWebDialogResult result, NSURL *resultURL, NSError *error) {
-                                                  if (error) {
-                                                      // An error occurred, we need to handle the error
-                                                      // See: https://developers.facebook.com/docs/ios/errors
-                                                      NSLog(@"Error publishing story: %@", error.description);
-                                                  } else {
-                                                      if (result == FBWebDialogResultDialogNotCompleted) {
-                                                          // User cancelled.
-                                                          NSLog(@"User cancelled.");
+    if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
+        
+        SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+        
+        SLComposeViewControllerCompletionHandler myBlock = ^(SLComposeViewControllerResult result){
+            [controller dismissViewControllerAnimated:YES completion:Nil];
+        };
+        controller.completionHandler =myBlock;
+        
+        [controller setInitialText:@"I'm on Knoda. Start following me to see all of my predictions."];
+        
+        [controller addURL:[NSURL URLWithString:@"http://www.knoda.com/start"]];
+        
+        [self presentViewController:controller animated:YES completion:nil];
+        
+    }
+    else{
+        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                       @"Knoda", @"name",
+                                       @"Predict Anything. Literally.", @"caption",
+                                       @"I'm on Knoda. Start following me to see all of my predictions.", @"description",
+                                       @"http://knoda.com/start", @"link",
+                                       nil];
+        
+        // Show the feed dialog
+        [FBWebDialogs presentFeedDialogModallyWithSession:FBSession.activeSession
+                                               parameters:params
+                                                  handler:^(FBWebDialogResult result, NSURL *resultURL, NSError *error) {
+                                                      if (error) {
+                                                          // An error occurred, we need to handle the error
+                                                          // See: https://developers.facebook.com/docs/ios/errors
+                                                          NSLog(@"Error publishing story: %@", error.description);
                                                       } else {
-                                                          // Handle the publish feed callback
-                                                          NSDictionary *urlParams = [self parseURLParams:[resultURL query]];
-                                                          
-                                                          if (![urlParams valueForKey:@"post_id"]) {
+                                                          if (result == FBWebDialogResultDialogNotCompleted) {
                                                               // User cancelled.
                                                               NSLog(@"User cancelled.");
-                                                              
                                                           } else {
-                                                              // User clicked the Share button
-                                                              NSString *result = [NSString stringWithFormat: @"Posted story, id: %@", [urlParams valueForKey:@"post_id"]];
-                                                              NSLog(@"result %@", result);
+                                                              // Handle the publish feed callback
+                                                              NSDictionary *urlParams = [self parseURLParams:[resultURL query]];
+                                                              
+                                                              if (![urlParams valueForKey:@"post_id"]) {
+                                                                  // User cancelled.
+                                                                  NSLog(@"User cancelled.");
+                                                                  
+                                                              } else {
+                                                                  // User clicked the Share button
+                                                                  NSString *result = [NSString stringWithFormat: @"Posted story, id: %@", [urlParams valueForKey:@"post_id"]];
+                                                                  NSLog(@"result %@", result);
+                                                              }
                                                           }
                                                       }
-                                                  }
-                                              }];
+                                                  }];
+    }
+
 }
 - (NSDictionary*)parseURLParams:(NSString *)query {
     NSArray *pairs = [query componentsSeparatedByString:@"&"];
@@ -398,7 +416,7 @@
         
         [controller addURL:[NSURL URLWithString:@"http://www.knoda.com/start"]];
         
-        [self presentViewController:controller animated:YES completion:Nil];
+        [self presentViewController:controller animated:YES completion:nil];
         
     }
     else{

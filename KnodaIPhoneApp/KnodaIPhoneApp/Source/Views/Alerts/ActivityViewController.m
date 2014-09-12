@@ -26,6 +26,7 @@
 #import "BragItemProvider.h"
 #import "FollowingActivityTableViewCell.h"
 #import "Follower.h"
+#import "AnotherUsersProfileViewController.h"
 
 @interface ActivityViewController () <ResultActivityTableViewCellDelegate, NavigationViewControllerDelegate, FollowingActivityTableViewCellDelegate>
 @property (strong, nonatomic) NSString *filter;
@@ -165,10 +166,10 @@
         return;
     
     ActivityItem *alert = [self.pagingDatasource.objects objectAtIndex:indexPath.row];
-    [[LoadingView sharedInstance] show];
     
     if (alert.type != ActivityTypeInvitation && alert.type != ActivityTypeFollow) {
-    
+        [[LoadingView sharedInstance] show];
+
         [[WebApi sharedInstance] getPrediction:[alert.target integerValue] completion:^(Prediction *prediction, NSError *error) {
             [[LoadingView sharedInstance] hide];
             
@@ -182,7 +183,7 @@
             
         }];
     } else if (alert.type != ActivityTypeFollow) {
-        
+        [[LoadingView sharedInstance] show];
         [[WebApi sharedInstance] getInvitationDetails:alert.target completion:^(InvitationCodeDetails *details, NSError *error) {
             [[LoadingView sharedInstance] hide];
             if (!error) {
@@ -193,6 +194,9 @@
                 [alert show];
             }
         }];
+    } else if (alert.type == ActivityTypeFollow) {
+        AnotherUsersProfileViewController *vc = [[AnotherUsersProfileViewController alloc] initWithUserId:alert.target.integerValue];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

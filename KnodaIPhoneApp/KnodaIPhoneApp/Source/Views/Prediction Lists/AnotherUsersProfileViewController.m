@@ -55,10 +55,12 @@
     [self.headerCell addSubview:self.headerView];
     
     self.refreshControl.tintColor = [UIColor whiteColor];
-    self.tableView.backgroundColor = [UIColor clearColor];
-    UIView *refreshBackground = [[UIView alloc] initWithFrame:CGRectMake(0, -self.refreshControl.frame.size.height * 5, self.view.frame.size.width, self.refreshControl.frame.size.height * 5)];
+    self.tableView.backgroundColor = [UIColor whiteColor];
+    UIView *refreshBackground = [[UIView alloc] initWithFrame:CGRectMake(0, -self.refreshControl.frame.size.height * 5, self.view.frame.size.width, self.refreshControl.frame.size.height*5)];
     refreshBackground.backgroundColor = [UIColor colorFromHex:@"77bc1f"];
     [self.tableView insertSubview:refreshBackground atIndex:0];
+    self.tableView.scrollsToTop = NO;
+    
 }
 - (void)backPressed:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];

@@ -41,6 +41,12 @@
     self.tableView.tableFooterView = [[UIView alloc] init];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self beginRefreshing];
+    
+}
+
 - (void)objectsAfterObject:(id)object completion:(void (^)(NSArray *, NSError *))completionHandler {
     if (self.leader) {
         [[WebApi sharedInstance] getFollowers:self.userId completion:completionHandler];
@@ -132,7 +138,7 @@
     
     if (indexPath.row >= self.pagingDatasource.objects.count) {
         if (self.pagingDatasource.objects.count == 0) {
-            SocialInvitationsViewController *vc = [[SocialInvitationsViewController alloc] init];
+            SocialInvitationsViewController *vc = [[SocialInvitationsViewController alloc] initWithDelegate:((id<UIAlertViewDelegate>)self.view.window.rootViewController)];
             UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
             [self.view.window.rootViewController presentViewController:nav animated:YES completion:nil];
         }

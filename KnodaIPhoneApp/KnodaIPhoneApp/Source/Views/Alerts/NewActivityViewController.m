@@ -58,6 +58,8 @@
 - (void)viewDidAppearInNavigationViewController:(NavigationViewController *)viewController {
     if (viewController.unseenAlertsCount == 0)
         [self.viewControllers makeObjectsPerformSelector:@selector(beginRefreshing)];
+    else
+        [self.viewControllers[0] beginRefreshing];
     viewController.unseenAlertsCount = 0;
 }
 

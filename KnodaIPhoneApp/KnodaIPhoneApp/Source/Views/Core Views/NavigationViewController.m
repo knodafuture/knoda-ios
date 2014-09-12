@@ -109,7 +109,8 @@ NSString *GetStartedNotificationName = @"GETSTARTED";
             [self showPrediction:[self.pushInfo[@"id"] integerValue]];
         } else if ([self.pushInfo[@"type"] isEqualToString:@"gic"]) {
             [self showInvite:[self.pushInfo[@"id"] stringValue]];
-        }
+        } else if ([self.pushInfo[@"type"] isEqualToString:@"f"])
+            [self showActivity:0];
     }
     
 }
@@ -127,6 +128,10 @@ NSString *GetStartedNotificationName = @"GETSTARTED";
             [alert show];
         }
     }];
+}
+
+- (void)showActivity:(NSInteger)predictionid {
+    [self openMenuItem:MenuAlerts];
 }
 
 - (void)showPrediction:(NSInteger)predictionId {

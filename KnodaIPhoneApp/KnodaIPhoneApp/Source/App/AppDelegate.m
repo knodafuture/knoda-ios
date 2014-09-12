@@ -168,7 +168,7 @@ NSString *NewGroupNotificationKey = @"NEWGROUPNOTIFICATIONKEY";
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    
+
     NSString *alertString = [[userInfo objectForKey: @"aps"] objectForKey: @"alert"];
     
     if (application.applicationState == UIApplicationStateActive && !self.notificationAlertShown) {

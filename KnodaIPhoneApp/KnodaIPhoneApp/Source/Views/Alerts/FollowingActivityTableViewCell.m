@@ -40,6 +40,8 @@ static UINib *nib;
         CGRect frame = self.dotImageView.frame;
         frame.origin.x = self.avatarImageView.frame.origin.x + self.avatarImageView.frame.size.width - frame.size.width;
         frame.origin.y = self.avatarImageView.frame.origin.y + self.avatarImageView.frame.size.height - frame.size.height;
+        self.dotImageView.frame = frame;
+        self.dotImageView.hidden = NO;
     }
 }
 

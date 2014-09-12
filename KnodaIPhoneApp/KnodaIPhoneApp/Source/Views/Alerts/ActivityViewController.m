@@ -308,15 +308,35 @@
 - (void)didFollowInCell:(FollowingActivityTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     ActivityItem *item = [self.pagingDatasource.objects objectAtIndex:indexPath.row];
     
-    Follower *follower = [[Follower alloc] init];
-    follower.leaderId = @(item.target.integerValue);
-    [[LoadingView sharedInstance] show];
+
     
-    [[WebApi sharedInstance] followUsers:@[follower] completion:^(NSArray *results, NSError *error) {
-        [[LoadingView sharedInstance] hide];
-        [cell setFollowing:YES];
-        [self updateFollowerInformation];
-    }];
+    BOOL found = NO;
+    NSInteger foundId = NSNotFound;
+    for (NSDictionary *dictionary in self.shortLeaders) {
+        if ([dictionary[@"leader_id"] integerValue] == item.target.integerValue) {
+            found = YES;
+            foundId = [dictionary[@"id"] integerValue];
+        }
+    }
+    
+    if (!found) {
+        Follower *follower = [[Follower alloc] init];
+        follower.leaderId = @(item.target.integerValue);
+        [[LoadingView sharedInstance] show];
+        
+        [[WebApi sharedInstance] followUsers:@[follower] completion:^(NSArray *results, NSError *error) {
+            [[LoadingView sharedInstance] hide];
+            [cell setFollowing:YES];
+            [self updateFollowerInformation];
+        }];
+    } else {
+        [[LoadingView sharedInstance] show];
+        [[WebApi sharedInstance] unfollowUser:foundId completion:^(NSError *error) {
+            [[LoadingView sharedInstance] hide];
+            [cell setFollowing:NO];
+            [self updateFollowerInformation];
+        }];
+    }
 }
 
 @end

@@ -927,8 +927,10 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
     NSData *data;
     if (payload) {
         NSDictionary *dictionary = [MTLJSONAdapter JSONDictionaryFromModel:payload];
+        NSLog(@"%@", dictionary);
         data = [NSJSONSerialization dataWithJSONObject:dictionary options:0 error:nil];
     }
+
     return [self requestWithUrl:url method:method data:data];
 }
 

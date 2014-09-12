@@ -348,7 +348,7 @@
         [actionSheet showInView:[UIApplication sharedApplication].keyWindow];
     }
     for (Contact *c in self.allContacts) {
-        if ([c.name isEqualToString:contactId]) {
+        if ([c.name isEqualToString:contactId] && c.phoneNumbers == contact.phoneNumbers && c.emailAddresses == contact.emailAddresses) {
             c.selected = YES;
             c.selectedEmailAddress = contact.selectedEmailAddress;
             c.selectedPhoneNumber = contact.selectedPhoneNumber;
@@ -364,7 +364,7 @@
     NSString *contactId = contact.name;
     
     for (Contact *c in self.allContacts) {
-        if ([c.name isEqualToString:contactId]) {
+        if ([c.name isEqualToString:contactId] && c.phoneNumbers == contact.phoneNumbers && c.emailAddresses == contact.emailAddresses) {
             c.selected = NO;
             c.selectedEmailAddress = nil;
             c.selectedPhoneNumber = nil;
@@ -565,8 +565,11 @@
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == actionSheet.cancelButtonIndex)
+    if (buttonIndex == actionSheet.cancelButtonIndex) {
+        self.actionSheetContact.selected = NO;
+        [self sortAndReload];
         return;
+    }
     
     NSArray *values = [self arrayOfValuesFromContact:self.actionSheetContact];
     
@@ -590,7 +593,7 @@
     
     self.actionSheetContact = nil;
     for (Contact *c in self.searchedContacts) {
-        if ([c.name isEqualToString:contact.name]) {
+    if ([c.name isEqualToString:contact.name] && c.phoneNumbers == contact.phoneNumbers && c.emailAddresses == contact.emailAddresses) {
             c.selected = YES;
             c.selectedEmailAddress = contact.selectedEmailAddress;
             c.selectedPhoneNumber = contact.selectedPhoneNumber;
@@ -608,6 +611,10 @@
     NSError *error = NULL;
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[\\s-\\(\\)]" options:NSRegularExpressionCaseInsensitive error:&error];
     simpleNumber = [regex stringByReplacingMatchesInString:simpleNumber options:0 range:NSMakeRange(0, [simpleNumber length]) withTemplate:@""];
+    
+    if ([simpleNumber rangeOfString:@"+"].location != NSNotFound) {
+        simpleNumber = [simpleNumber stringByReplacingOccurrencesOfString:@"+" withString:@""];
+    }
     
     // check if the number is to long
     if(simpleNumber.length>11) {

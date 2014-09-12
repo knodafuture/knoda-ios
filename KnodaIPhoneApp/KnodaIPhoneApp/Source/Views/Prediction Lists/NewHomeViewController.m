@@ -20,6 +20,7 @@
 @property (strong, nonatomic) PredictionsViewController *leftViewController;
 @property (strong, nonatomic) PredictionsViewController *rightViewController;
 @property (strong, nonatomic) HomeHeaderView *headerView;
+@property (assign, nonatomic) BOOL appeared;
 @end
 
 @implementation NewHomeViewController
@@ -45,27 +46,31 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    CGRect frame = self.leftViewController.view.frame;
-    frame.size.height = self.scrollView.frame.size.height;
-    frame.origin.y = 0;
-    self.leftViewController.view.frame = frame;
+    if (!self.appeared) {
+        self.appeared = YES;
+        
+        CGRect frame = self.leftViewController.view.frame;
+        frame.size.height = self.scrollView.frame.size.height;
+        frame.origin.y = 0;
+        self.leftViewController.view.frame = frame;
+        [self.scrollView addSubview:self.leftViewController.view];
+
+        [self addChildViewController:self.leftViewController];
+        
+        
+        frame = self.rightViewController.view.frame;
+        frame.origin.x = self.view.frame.size.width;
+        frame.size.height = self.scrollView.frame.size.height;
+        frame.origin.y = 0;
+        self.rightViewController.view.frame = frame;
+        [self.scrollView addSubview:self.rightViewController.view];
+
+        [self addChildViewController:self.rightViewController];
+        
+        self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width * 2.0, self.scrollView.frame.size.height);
+    }
     
-    [self addChildViewController:self.leftViewController];
-    
-    [self.scrollView addSubview:self.leftViewController.view];
-    
-    frame = self.rightViewController.view.frame;
-    frame.origin.x = self.view.frame.size.width;
-    frame.size.height = self.scrollView.frame.size.height;
-    frame.origin.y = 0;
-    self.rightViewController.view.frame = frame;
-    
-    [self addChildViewController:self.rightViewController];
-    
-    [self.scrollView addSubview:self.rightViewController.view];
-    
-    
-    self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width * 2.0, self.scrollView.frame.size.height);
+
 }
 
 - (void)invite {

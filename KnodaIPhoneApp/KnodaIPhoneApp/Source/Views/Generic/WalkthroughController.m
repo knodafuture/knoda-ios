@@ -128,7 +128,7 @@ NSString *VotingDateWalkthroughCompleteKey = @"VOTING_DATE_COMPLETE_KEY";
 - (void)showVotingWalkthrough {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(completeVotingWalkthrough) name:VotingWalkthroughCompleteNotificationName object:nil];
     
-    UIImage *capture = [self.homeViewController.view captureView];
+    UIImage *capture = [self.homeViewController.parentViewController.view captureView];
     
     UIImage *walkthroughImage = [UIImage imageNamed:@"VoteWalkthru"];
     
@@ -177,7 +177,7 @@ NSString *VotingDateWalkthroughCompleteKey = @"VOTING_DATE_COMPLETE_KEY";
 - (void)showPredictionWalkthrough {
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(completePredictWalkthrough) name:PredictWalkthroughCompleteNotificationName object:nil];
-    UIImage *capture = [self.homeViewController.view captureView];
+    UIImage *capture = [self.homeViewController.parentViewController.view captureView];
     
     UIImage *walkthroughImage = [UIImage imageNamed:@"PredictWalkthru"];
     

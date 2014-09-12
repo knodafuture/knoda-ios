@@ -120,7 +120,8 @@ static const float kAvatarSize = 344.0;
         self.phoneNumberLabel.text = @"phone number";
     }
     else {
-        self.phoneNumberField.text = @"Phone Number";
+        self.phoneNumberField.text = @"";
+        self.phoneNumberField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Phone Number" attributes:@{NSFontAttributeName : self.phoneNumberField.font, NSForegroundColorAttributeName: self.phoneNumberField.textColor}];
         self.phoneNumberLabel.text = @"Allow your friends to find you easier on Knoda";
     }
     
@@ -362,7 +363,8 @@ static const float kAvatarSize = 344.0;
             self.phoneNumberLabel.text = @"phone number";
         }
         else {
-            self.phoneNumberField.text = @"Phone Number";
+            self.phoneNumberField.text = @"";
+            self.phoneNumberField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Phone Number" attributes:@{NSFontAttributeName : self.phoneNumberField.font, NSForegroundColorAttributeName: self.phoneNumberField.textColor}];
             self.phoneNumberLabel.text = @"Allow your friends to find you easier on Knoda";
         }
     }];
@@ -543,6 +545,11 @@ static const float kAvatarSize = 344.0;
     NSError *error = NULL;
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[\\s-\\(\\)]" options:NSRegularExpressionCaseInsensitive error:&error];
     simpleNumber = [regex stringByReplacingMatchesInString:simpleNumber options:0 range:NSMakeRange(0, [simpleNumber length]) withTemplate:@""];
+    
+    
+    if ([simpleNumber rangeOfString:@"+"].location != NSNotFound) {
+        simpleNumber = [simpleNumber stringByReplacingOccurrencesOfString:@"+" withString:@""];
+    }
     
     // check if the number is to long
     if(simpleNumber.length>11) {

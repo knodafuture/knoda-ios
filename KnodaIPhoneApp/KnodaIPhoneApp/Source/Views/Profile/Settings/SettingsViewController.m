@@ -32,6 +32,8 @@
         [self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 0, 0, 0)];
     }
     
+    self.tableView.scrollEnabled = NO;
+    
     self.view.backgroundColor = [UIColor colorFromHex:@"efefef"];
     self.tableView.separatorColor = [UIColor colorFromHex:@"efefef"];
     

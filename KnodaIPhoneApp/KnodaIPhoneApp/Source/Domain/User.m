@@ -25,7 +25,8 @@
              @"notificationSettings" : @"notification_settings",
              @"followerCount" : @"follower_count",
              @"followingCount" : @"following_count",
-             @"followingId" : @"following_id"};
+             @"followingId" : @"following_id",
+             @"rivalry" : @"rivalry"};
 }
 
 + (NSValueTransformer *)avatarJSONTransformer {
@@ -38,4 +39,9 @@
 + (NSValueTransformer *)notificationSettingsJSONTransformer {
     return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:NotificationSettings.class];
 }
+
++ (NSValueTransformer *)rivalryJSONTransformer {
+    return [NSValueTransformer mtl_JSONDictionaryTransformerWithModelClass:Rivalry.class];
+}
+
 @end

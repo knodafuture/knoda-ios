@@ -8,6 +8,7 @@
 
 #import "WebObject.h"
 #import "RemoteImage.h"
+#import "Rivalry.h" 
 
 @interface User : WebObject
 
@@ -36,4 +37,6 @@
 @property (strong, nonatomic) NSNumber *followingId;
 
 @property (strong, nonatomic) NSString *phone;
+
+@property (strong, nonatomic) Rivalry *rivalry;
 @end

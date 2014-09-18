@@ -26,7 +26,16 @@
 @property (weak, nonatomic) IBOutlet UILabel *followerCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *followingCountLabel;
 
-- (id)initWithDelegate:(id<UserProfileHeaderViewDelegate>)delegate;
+@property (strong, nonatomic) IBOutlet UIView *statsView;
+@property (strong, nonatomic) IBOutlet UIView *headToHeadView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
+@property (weak, nonatomic) IBOutlet UIImageView *headToHeadMyImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *headToHeadRivalImageView;
+
+- (id)initWithDelegate:(id<UserProfileHeaderViewDelegate>)delegate showHeadToHead:(BOOL)showHeadToHead;
+
+
 
 - (void)populateWithUser:(User *)user;
 

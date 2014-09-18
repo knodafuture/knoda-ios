@@ -155,6 +155,10 @@
 }
 
 - (BOOL)canLoadNextPage {
+    
+    if (self.singlePage)
+        return NO;
+    
     CGFloat numberOfServerObjects = _objects.count - self.localObjectsCount;
     
     if (numberOfServerObjects <= 0)

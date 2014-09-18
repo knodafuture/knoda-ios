@@ -9,6 +9,18 @@
 /* Begin PBXBuildFile section */
 		0101F56019139E8700623417 /* UIActionSheet+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 0101F55F19139E8700623417 /* UIActionSheet+Blocks.m */; };
 		0101F56119139E8700623417 /* UIActionSheet+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 0101F55F19139E8700623417 /* UIActionSheet+Blocks.m */; };
+		010D395119CB2B90007AC4DF /* HeadToHeadBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 010D395019CB2B90007AC4DF /* HeadToHeadBarView.xib */; };
+		010D395219CB2B90007AC4DF /* HeadToHeadBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 010D395019CB2B90007AC4DF /* HeadToHeadBarView.xib */; };
+		010D395519CB2BA2007AC4DF /* HeadToHeadBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 010D395419CB2BA2007AC4DF /* HeadToHeadBarView.m */; };
+		010D395619CB2BA2007AC4DF /* HeadToHeadBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 010D395419CB2BA2007AC4DF /* HeadToHeadBarView.m */; };
+		010D395819CB2F75007AC4DF /* RivalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 010D395719CB2F75007AC4DF /* RivalTableViewCell.xib */; };
+		010D395919CB2F75007AC4DF /* RivalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 010D395719CB2F75007AC4DF /* RivalTableViewCell.xib */; };
+		010D395C19CB321C007AC4DF /* RivalTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 010D395B19CB321C007AC4DF /* RivalTableViewCell.m */; };
+		010D395D19CB321C007AC4DF /* RivalTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 010D395B19CB321C007AC4DF /* RivalTableViewCell.m */; };
+		010D396019CB32D9007AC4DF /* RivalsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 010D395F19CB32D9007AC4DF /* RivalsViewController.m */; };
+		010D396119CB32D9007AC4DF /* RivalsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 010D395F19CB32D9007AC4DF /* RivalsViewController.m */; };
+		010D396419CB36B4007AC4DF /* Rivalry.m in Sources */ = {isa = PBXBuildFile; fileRef = 010D396319CB36B4007AC4DF /* Rivalry.m */; };
+		010D396519CB36B4007AC4DF /* Rivalry.m in Sources */ = {isa = PBXBuildFile; fileRef = 010D396319CB36B4007AC4DF /* Rivalry.m */; };
 		0121E83B184FDBC700B7C5CA /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 01A1DEE8183E9A1F00DBBE68 /* libz.dylib */; };
 		0121E83C184FDBC700B7C5CA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6F4C5917D8CCFA00EAB4A0 /* SystemConfiguration.framework */; };
 		0121E83D184FDBC700B7C5CA /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E28686E17C659930033FB3C /* Security.framework */; };
@@ -557,6 +569,16 @@
 /* Begin PBXFileReference section */
 		0101F55E19139E8700623417 /* UIActionSheet+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+Blocks.h"; sourceTree = "<group>"; };
 		0101F55F19139E8700623417 /* UIActionSheet+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+Blocks.m"; sourceTree = "<group>"; };
+		010D395019CB2B90007AC4DF /* HeadToHeadBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeadToHeadBarView.xib; sourceTree = "<group>"; };
+		010D395319CB2BA2007AC4DF /* HeadToHeadBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadToHeadBarView.h; sourceTree = "<group>"; };
+		010D395419CB2BA2007AC4DF /* HeadToHeadBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadToHeadBarView.m; sourceTree = "<group>"; };
+		010D395719CB2F75007AC4DF /* RivalTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RivalTableViewCell.xib; sourceTree = "<group>"; };
+		010D395A19CB321C007AC4DF /* RivalTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RivalTableViewCell.h; sourceTree = "<group>"; };
+		010D395B19CB321C007AC4DF /* RivalTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RivalTableViewCell.m; sourceTree = "<group>"; };
+		010D395E19CB32D9007AC4DF /* RivalsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RivalsViewController.h; sourceTree = "<group>"; };
+		010D395F19CB32D9007AC4DF /* RivalsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RivalsViewController.m; sourceTree = "<group>"; };
+		010D396219CB36B4007AC4DF /* Rivalry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rivalry.h; sourceTree = "<group>"; };
+		010D396319CB36B4007AC4DF /* Rivalry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rivalry.m; sourceTree = "<group>"; };
 		0121E86C184FDBC700B7C5CA /* Knoda Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Knoda Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		013DA6E41852D4F800B507E4 /* libcommonCrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcommonCrypto.dylib; path = usr/lib/system/libcommonCrypto.dylib; sourceTree = SDKROOT; };
 		013DA6E81853002100B507E4 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1374,6 +1396,14 @@
 				01BECA5C19763EDA00E75CBA /* MeViewController.xib */,
 				01BECA5F19766B6700E75CBA /* MeTableViewController.h */,
 				01BECA6019766B6700E75CBA /* MeTableViewController.m */,
+				010D395019CB2B90007AC4DF /* HeadToHeadBarView.xib */,
+				010D395319CB2BA2007AC4DF /* HeadToHeadBarView.h */,
+				010D395419CB2BA2007AC4DF /* HeadToHeadBarView.m */,
+				010D395719CB2F75007AC4DF /* RivalTableViewCell.xib */,
+				010D395A19CB321C007AC4DF /* RivalTableViewCell.h */,
+				010D395B19CB321C007AC4DF /* RivalTableViewCell.m */,
+				010D395E19CB32D9007AC4DF /* RivalsViewController.h */,
+				010D395F19CB32D9007AC4DF /* RivalsViewController.m */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -1513,6 +1543,8 @@
 				017565E819B7AB8300D14EE4 /* ContactMatch.m */,
 				0175662919B7FE0000D14EE4 /* Follower.h */,
 				0175662A19B7FE0000D14EE4 /* Follower.m */,
+				010D396219CB36B4007AC4DF /* Rivalry.h */,
+				010D396319CB36B4007AC4DF /* Rivalry.m */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -1954,6 +1986,7 @@
 				0175662819B7FC5D00D14EE4 /* FollowingActivityTableViewCell.xib in Resources */,
 				017565F119B7B02A00D14EE4 /* SocialFollowTableViewCell.xib in Resources */,
 				017565FD19B7D82D00D14EE4 /* NoTwitterFriendsCell.xib in Resources */,
+				010D395219CB2B90007AC4DF /* HeadToHeadBarView.xib in Resources */,
 				01ACCE6B196417BE00D3ABE9 /* CommentActivityTableViewCell.xib in Resources */,
 				0175661E19B7EA0600D14EE4 /* NoContactResultsCell.xib in Resources */,
 				014A9F09185DA04400A96678 /* release_notes.md in Resources */,
@@ -1994,6 +2027,7 @@
 				0175663E19B80EEB00D14EE4 /* FollowersTableViewCell.xib in Resources */,
 				013DA8731853002200B507E4 /* Badges.xcassets in Resources */,
 				013DA8391853002200B507E4 /* CommentCell.xib in Resources */,
+				010D395919CB2F75007AC4DF /* RivalTableViewCell.xib in Resources */,
 				01E2576C18E0743A009D3782 /* RankingsTableViewCell.xib in Resources */,
 				01598B281858364F002E2534 /* FirstStartView.xib in Resources */,
 				0175664119B81E3300D14EE4 /* SingleContestsRankingsContainerView.xib in Resources */,
@@ -2071,6 +2105,7 @@
 				013DA8481853002200B507E4 /* PredictorHeaderCell.xib in Resources */,
 				01B67BA818DB4BDE00D22D2B /* MemberTableViewCell.xib in Resources */,
 				01BECA371976258400E75CBA /* NotificationSettingsTableViewCell.xib in Resources */,
+				010D395119CB2B90007AC4DF /* HeadToHeadBarView.xib in Resources */,
 				013DA8761853002200B507E4 /* KronaOne-Regular.ttf in Resources */,
 				013DA8721853002200B507E4 /* Badges.xcassets in Resources */,
 				0175662019B7EC0800D14EE4 /* KnodaContactsHeaderView.xib in Resources */,
@@ -2083,6 +2118,7 @@
 				013DA8781853002200B507E4 /* Default@2x-568h.png in Resources */,
 				01E2576B18E0743A009D3782 /* RankingsTableViewCell.xib in Resources */,
 				01A1F6C0199CAD9800371751 /* NewSelectPictureViewController.xib in Resources */,
+				010D395819CB2F75007AC4DF /* RivalTableViewCell.xib in Resources */,
 				013DA85A1853002200B507E4 /* ChangePasswordViewController.xib in Resources */,
 				01ACCE6A196417BE00D3ABE9 /* CommentActivityTableViewCell.xib in Resources */,
 				013DA85E1853002200B507E4 /* ImageCropperViewController.xib in Resources */,
@@ -2222,6 +2258,7 @@
 				01ACCE7319642B7F00D3ABE9 /* SettleActivityTableViewCell.m in Sources */,
 				01E2576918E0741A009D3782 /* RankingsTableViewController.m in Sources */,
 				0193A00618CE6AE90088D168 /* ParamBuilder.m in Sources */,
+				010D396119CB32D9007AC4DF /* RivalsViewController.m in Sources */,
 				013DA8CA1853004000B507E4 /* Comment.m in Sources */,
 				01ACCE801964307800D3ABE9 /* InviteActivityTableViewCell.m in Sources */,
 				013DA7F51853002200B507E4 /* MultipartRequest.m in Sources */,
@@ -2290,6 +2327,7 @@
 				01E2577018E0750C009D3782 /* RankingsTableViewCell.m in Sources */,
 				01E8CB5F1876480F003AE018 /* SearchViewController.m in Sources */,
 				013DA7CD1853002200B507E4 /* UIColor+Utils.m in Sources */,
+				010D395619CB2BA2007AC4DF /* HeadToHeadBarView.m in Sources */,
 				018DF7A31858F484004FEDA6 /* ActivityViewController.m in Sources */,
 				013DA85D1853002200B507E4 /* ImageCropperViewController.m in Sources */,
 				01598B391858E483002E2534 /* ZoomingImageViewController.m in Sources */,
@@ -2303,6 +2341,7 @@
 				014FDF8318D9EB5F006B51D9 /* EditGroupViewController.m in Sources */,
 				019CF39519B7A0C000C734E0 /* SocialInvitationsViewController.m in Sources */,
 				01E8CB791876786C003AE018 /* NoSearchResultsCell.m in Sources */,
+				010D395D19CB321C007AC4DF /* RivalTableViewCell.m in Sources */,
 				013DA82B1853002200B507E4 /* SignUpViewController.m in Sources */,
 				013DA8D21853004000B507E4 /* Prediction.m in Sources */,
 				013DA8591853002200B507E4 /* ChangePasswordViewController.m in Sources */,
@@ -2316,6 +2355,7 @@
 				01A1F69419998A5900371751 /* ContestWalkthroughController.m in Sources */,
 				01A1F6A61999F50000371751 /* ContestRankingsTableViewController.m in Sources */,
 				013DA8CC1853004000B507E4 /* LoginRequest.m in Sources */,
+				010D396519CB36B4007AC4DF /* Rivalry.m in Sources */,
 				01A1F6901999416B00371751 /* ContestDetailsTableViewController.m in Sources */,
 				013DA7CF1853002200B507E4 /* UIImage+Utils.m in Sources */,
 				013DA8231853002200B507E4 /* ForgotPasswordViewController.m in Sources */,
@@ -2391,6 +2431,7 @@
 				01E2576818E0741A009D3782 /* RankingsTableViewController.m in Sources */,
 				01ACCE7219642B7F00D3ABE9 /* SettleActivityTableViewCell.m in Sources */,
 				0193A00518CE6AE90088D168 /* ParamBuilder.m in Sources */,
+				010D396019CB32D9007AC4DF /* RivalsViewController.m in Sources */,
 				013DA8C91853004000B507E4 /* Comment.m in Sources */,
 				013DA7F41853002200B507E4 /* MultipartRequest.m in Sources */,
 				01ACCE7F1964307800D3ABE9 /* InviteActivityTableViewCell.m in Sources */,
@@ -2459,6 +2500,7 @@
 				01E8CB5E1876480F003AE018 /* SearchViewController.m in Sources */,
 				013DA8DB1853004000B507E4 /* WebObject.m in Sources */,
 				018DF79C1858F41A004FEDA6 /* ActivityViewController.m in Sources */,
+				010D395519CB2BA2007AC4DF /* HeadToHeadBarView.m in Sources */,
 				013DA7CC1853002200B507E4 /* UIColor+Utils.m in Sources */,
 				013DA85C1853002200B507E4 /* ImageCropperViewController.m in Sources */,
 				01598B381858E483002E2534 /* ZoomingImageViewController.m in Sources */,
@@ -2472,6 +2514,7 @@
 				01E8CB781876786C003AE018 /* NoSearchResultsCell.m in Sources */,
 				019CF39419B7A0C000C734E0 /* SocialInvitationsViewController.m in Sources */,
 				013DA8501853002200B507E4 /* PredictionCell.m in Sources */,
+				010D395C19CB321C007AC4DF /* RivalTableViewCell.m in Sources */,
 				013DA82A1853002200B507E4 /* SignUpViewController.m in Sources */,
 				013DA8D11853004000B507E4 /* Prediction.m in Sources */,
 				013DA8581853002200B507E4 /* ChangePasswordViewController.m in Sources */,
@@ -2485,6 +2528,7 @@
 				01A1F69319998A5900371751 /* ContestWalkthroughController.m in Sources */,
 				01A1F6A51999F50000371751 /* ContestRankingsTableViewController.m in Sources */,
 				013DA8CB1853004000B507E4 /* LoginRequest.m in Sources */,
+				010D396419CB36B4007AC4DF /* Rivalry.m in Sources */,
 				01A1F68F1999416B00371751 /* ContestDetailsTableViewController.m in Sources */,
 				013DA7CE1853002200B507E4 /* UIImage+Utils.m in Sources */,
 				013DA8221853002200B507E4 /* ForgotPasswordViewController.m in Sources */,
@@ -2695,8 +2739,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Knoda, LLC (F489V4H5F6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Knoda, LLC (F489V4H5F6)";
 				EXCLUDED_SOURCE_FILE_NAMES = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2734,7 +2778,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Knoda, LLC (F489V4H5F6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Knoda, LLC (F489V4H5F6)";
 				EXCLUDED_SOURCE_FILE_NAMES = libTestFlight.a;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

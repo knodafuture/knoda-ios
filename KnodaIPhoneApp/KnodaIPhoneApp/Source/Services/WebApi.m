@@ -186,6 +186,16 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
     }];
 }
 
+- (void)getRivals:(NSInteger)userId completion:(void (^)(NSArray *, NSError *))completionHandler {
+    NSString *path = [NSString stringWithFormat:@"users/%ld/rivals.json",(long)userId];
+    NSString *url = [self buildUrl:path parameters:nil];
+    NSURLRequest *request = [self requestWithUrl:url method:@"GET" data:nil];
+    
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+        completionHandler([User arrayFromData:responseData], error);
+    }];
+}
+
 - (void)uploadProfileImage:(UIImage *)profileImage completion:(void (^)(NSError *))completionHandler {
 
     NSData *profileData = UIImagePNGRepresentation(profileImage);

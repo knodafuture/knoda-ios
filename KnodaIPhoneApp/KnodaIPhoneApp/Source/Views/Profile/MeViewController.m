@@ -19,6 +19,9 @@
 #import "UIActionSheet+Blocks.h"
 #import "FollowersViewController.h"
 #import "NavigationViewController.h"
+#import "RivalsViewController.h"
+
+
 static const float kAvatarSize = 344.0;
 #define AVATAR_SIZE CGSizeMake(kAvatarSize, kAvatarSize)
 static const int kDefaultAvatarsCount = 5;
@@ -60,7 +63,7 @@ CGFloat const SwipeBezel = 30.0f;
     MeTableViewController *myPredictions = [[MeTableViewController alloc] initForChallenged:NO delegate:self];
     MeTableViewController *myVotes = [[MeTableViewController alloc] initForChallenged:YES delegate:self];
     
-    self.headerView = [[UserProfileHeaderView alloc] initWithDelegate:self];
+    self.headerView = [[UserProfileHeaderView alloc] initWithDelegate:self showHeadToHead:NO];
     self.headerView.hidden = YES;
     [self.headerView populateWithUser:[UserManager sharedInstance].user];
     
@@ -73,6 +76,8 @@ CGFloat const SwipeBezel = 30.0f;
     self.scrollView.bezelWidth = SwipeBezel;
     
     self.scrollView.scrollsToTop = NO;
+    
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem leftBarButtonItemWithImage:[UIImage imageNamed:@"HeadtoHeadIcon"] target:self action:@selector(onRivals)];
 }
 
 - (void)userChanged:(NSNotification *)notification {
@@ -88,6 +93,11 @@ CGFloat const SwipeBezel = 30.0f;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     
     [[[[UIApplication sharedApplication] delegate] window].rootViewController presentViewController:nav animated:YES completion:nil];
+}
+
+- (void)onRivals {
+    RivalsViewController *vc = [[RivalsViewController alloc] initWithStyle:UITableViewStylePlain];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

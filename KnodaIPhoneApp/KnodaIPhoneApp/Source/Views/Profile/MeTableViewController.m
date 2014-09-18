@@ -33,7 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.headerView = [[UserProfileHeaderView alloc] initWithDelegate:self.delegate];
+    self.headerView = [[UserProfileHeaderView alloc] initWithDelegate:self.delegate showHeadToHead:NO];
     
     [self.headerView populateWithUser:[UserManager sharedInstance].user];
     self.headerCell = [[UITableViewCell alloc] init];

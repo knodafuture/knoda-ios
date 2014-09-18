@@ -46,7 +46,7 @@
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem backButtonWithTarget:self action:@selector(backPressed:)];
     
     
-    self.headerView = [[UserProfileHeaderView alloc] initWithDelegate:self];
+    self.headerView = [[UserProfileHeaderView alloc] initWithDelegate:self showHeadToHead:YES];
         
     self.headerCell = [[UITableViewCell alloc] init];
     self.headerCell.selectionStyle = UITableViewCellSelectionStyleNone;

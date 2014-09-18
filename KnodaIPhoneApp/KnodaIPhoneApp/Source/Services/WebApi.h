@@ -75,7 +75,7 @@ UIKIT_EXTERN NSString *PredictionChangedNotificationKey;
 - (void)updateSocialAccount:(SocialAccount *)socialAccount completion:(void(^)(SocialAccount *account, NSError *error))completionHandler;
 - (void)postPredictionToFacebook:(Prediction *)prediction brag:(BOOL)brag completion:(void(^)(NSError *error))completionHandler;
 - (void)postPredictionToTwitter:(Prediction *)prediction brag:(BOOL)brag completion:(void(^)(NSError *error))completionHandler;
-
+- (void)getRivals:(NSInteger)userId completion:(void(^)(NSArray *rivals, NSError *error))completionHandler;
 // -- Predictions -- //
 
 - (void)getPredictionsAfter:(NSInteger)lastId completion:(void(^)(NSArray *predictions, NSError *error))completionHandler;

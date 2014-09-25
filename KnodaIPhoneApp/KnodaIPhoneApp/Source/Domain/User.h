@@ -17,7 +17,6 @@
 @property (assign, nonatomic) NSUInteger points;
 @property (assign, nonatomic) NSUInteger won;
 @property (assign, nonatomic) NSUInteger lost;
-@property (assign, nonatomic) NSUInteger totalPredictions;
 
 @property (strong, nonatomic) NSNumber *winningPercentage;
 @property (strong, nonatomic) NSString *streak;

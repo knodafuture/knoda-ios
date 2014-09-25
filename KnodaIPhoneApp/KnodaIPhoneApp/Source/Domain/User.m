@@ -17,7 +17,6 @@
              @"userId": @"id",
              @"avatar": @"avatar_image",
              @"winningPercentage" : @"winning_percentage",
-             @"totalPredictions": @"total_predictions",
              @"verifiedAccount" : @"verified_account",
              @"name" : @"username",
              @"socialAccounts" : @"social_accounts",

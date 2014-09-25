@@ -12,9 +12,6 @@
 #import "WebApi.h"
 #import "WebViewController.h"
 #import "UserManager.h"
-#ifndef TESTFLIGHT
-#import <Tapjoy/Tapjoy.h>
-#endif
 #import "WalkthroughController.h"
 #import "ContestWalkthroughController.h"
 #import "LoginViewController.h"
@@ -201,9 +198,6 @@ static const NSInteger kMaxPasswordLength = 20;
         if (!error) {
             NSString *inStr = [@(user.userId) stringValue];
             [Flurry setUserID:inStr];
-#ifndef TESTFLIGHT
-            [Tapjoy actionComplete:TJC_SIGN_UP_FOR_KNODA_];
-#endif
 
             
             NewSelectPictureViewController *vc = [[NewSelectPictureViewController alloc] initWithNibName:@"NewSelectPictureViewController" bundle:[NSBundle mainBundle]];

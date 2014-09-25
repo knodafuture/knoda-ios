@@ -222,8 +222,6 @@
 		014A9F07185DA04400A96678 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 014A9EFF185DA04400A96678 /* README.md */; };
 		014A9F08185DA04400A96678 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 014A9F00185DA04400A96678 /* release_notes.md */; };
 		014A9F09185DA04400A96678 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 014A9F00185DA04400A96678 /* release_notes.md */; };
-		014A9F14185DA1C700A96678 /* TapjoyResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 014A9F12185DA1C700A96678 /* TapjoyResources.bundle */; };
-		014A9F15185DA1C700A96678 /* Tapjoy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A9F13185DA1C700A96678 /* Tapjoy.framework */; };
 		014A9F17185DA35000A96678 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A9F16185DA35000A96678 /* AdSupport.framework */; };
 		014A9F19185DA35500A96678 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A9F18185DA35500A96678 /* CFNetwork.framework */; };
 		014A9F1D185DA36A00A96678 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A9F1A185DA36A00A96678 /* CoreLocation.framework */; };
@@ -749,8 +747,6 @@
 		014A9F01185DA04400A96678 /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
 		014A9F02185DA04400A96678 /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
 		014A9F03185DA04400A96678 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
-		014A9F12185DA1C700A96678 /* TapjoyResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TapjoyResources.bundle; sourceTree = "<group>"; };
-		014A9F13185DA1C700A96678 /* Tapjoy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Tapjoy.framework; sourceTree = "<group>"; };
 		014A9F16185DA35000A96678 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		014A9F18185DA35500A96678 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		014A9F1A185DA36A00A96678 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -1089,7 +1085,6 @@
 				9E28686F17C659940033FB3C /* Security.framework in Frameworks */,
 				9E76A557179FFF11004F8FC1 /* QuartzCore.framework in Frameworks */,
 				01F82CDB18DD451D0000E96B /* libFlurry_4.3.2.a in Frameworks */,
-				014A9F15185DA1C700A96678 /* Tapjoy.framework in Frameworks */,
 				9E708824178AF68E00F036A8 /* UIKit.framework in Frameworks */,
 				129025DD2FFF4D9FA85D4A70 /* libPods.a in Frameworks */,
 			);
@@ -1453,7 +1448,6 @@
 				01C4A48F190E3D2F00E08031 /* ReverseAuth */,
 				01C4A494190E3D2F00E08031 /* ABOAuthCore */,
 				01F82CD818DD451D0000E96B /* Flurry */,
-				014A9F0F185DA1C700A96678 /* TapjoySDK_iOS_v9.1.2 */,
 				014A9EFD185DA04400A96678 /* TestFlightSDK2.0.2 */,
 				013DA7AC1853002100B507E4 /* ImageCropper */,
 				013DA7AF1853002100B507E4 /* KeychainWrapper */,
@@ -1583,31 +1577,6 @@
 				014A9F03185DA04400A96678 /* TestFlight.h */,
 			);
 			path = TestFlightSDK2.0.2;
-			sourceTree = "<group>";
-		};
-		014A9F0F185DA1C700A96678 /* TapjoySDK_iOS_v9.1.2 */ = {
-			isa = PBXGroup;
-			children = (
-				014A9F10185DA1C700A96678 /* Tapjoy.embeddedframework */,
-			);
-			path = TapjoySDK_iOS_v9.1.2;
-			sourceTree = "<group>";
-		};
-		014A9F10185DA1C700A96678 /* Tapjoy.embeddedframework */ = {
-			isa = PBXGroup;
-			children = (
-				014A9F11185DA1C700A96678 /* Resources */,
-				014A9F13185DA1C700A96678 /* Tapjoy.framework */,
-			);
-			path = Tapjoy.embeddedframework;
-			sourceTree = "<group>";
-		};
-		014A9F11185DA1C700A96678 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				014A9F12185DA1C700A96678 /* TapjoyResources.bundle */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		01598B2D18583F46002E2534 /* Sharing */ = {
@@ -2141,7 +2110,6 @@
 				013DA8AC1853002200B507E4 /* Localizable.strings in Resources */,
 				01E8CB8218767D5D003AE018 /* UserCell.xib in Resources */,
 				01BECA43197635C800E75CBA /* AboutViewController.xib in Resources */,
-				014A9F14185DA1C700A96678 /* TapjoyResources.bundle in Resources */,
 				013DA86E1853002200B507E4 /* UserProfileHeaderView.xib in Resources */,
 				01E8CB7B187678E0003AE018 /* NoSearchResultsCell.xib in Resources */,
 				014A9F06185DA04400A96678 /* README.md in Resources */,
@@ -2674,7 +2642,7 @@
 					"$(SRCROOT)/KnodaIPhoneApp/ThirdParty/TestFlightSDK2.0.2",
 					"$(PROJECT_DIR)/KnodaIPhoneApp/Thirdparty/Flurry",
 				);
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "Knoda Test";
 				PROVISIONING_PROFILE = "9D526CA8-AAA3-4DC0-B485-D2C71C17BC9E";
 				VALID_ARCHS = "arm64 armv7 armv7s";
@@ -2768,10 +2736,10 @@
 					"$(SDKROOT)/usr/lib/system",
 					"$(PROJECT_DIR)/KnodaIPhoneApp/Thirdparty/Flurry",
 				);
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "C7D5D64C-8517-43C5-B622-F058660C65A1";
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2807,7 +2775,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "C7D5D64C-8517-43C5-B622-F058660C65A1";
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

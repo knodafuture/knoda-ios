@@ -16,11 +16,6 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "UserManager.h"
 
-#ifdef TESTFLIGHT
-#import "TestFlight.h"
-#else
-#import <Tapjoy/Tapjoy.h>
-#endif
 
 static NSString *kFlurryKey = @"QTDYWKWSJXK9YNDHKN5Z";
 static NSString *kTestFlightKey = @"9bbf4e38-5f9a-427f-b4ca-23625ccee3a0";
@@ -49,7 +44,6 @@ NSString *NewGroupNotificationKey = @"NEWGROUPNOTIFICATIONKEY";
 #ifdef TESTFLIGHT
     //[TestFlight takeOff:kTestFlightKey];
 #else
-   [Tapjoy requestTapjoyConnect:@"e22aa80e-473f-4015-88b6-c8fa717ca9bd" secretKey:@"c6hlD8xuRyo3acWyfUl8" options:@{TJC_OPTION_ENABLE_LOGGING:@(YES)}];
     [Flurry setCrashReportingEnabled: YES];
     [Flurry startSession: kFlurryKey];
 #endif

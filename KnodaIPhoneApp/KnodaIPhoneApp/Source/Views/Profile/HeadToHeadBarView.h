@@ -18,7 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIView *rightView;
 
 @property (weak, nonatomic) IBOutlet UILabel *visitingUserLabel;
-
+@property (weak, nonatomic) IBOutlet UILabel *homeUserLabel;
 
 - (void)populateWithLeftUser:(User *)leftUser rightUser:(User *)rightUser animated:(BOOL)animated;
 

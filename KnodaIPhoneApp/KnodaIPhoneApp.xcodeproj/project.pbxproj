@@ -493,6 +493,8 @@
 		01C4A4AD190E61B300E08031 /* SocialAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C4A4AB190E61B300E08031 /* SocialAccount.m */; };
 		01C4A4AF190E6A1D00E08031 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C4A4AE190E6A1D00E08031 /* FacebookSDK.framework */; };
 		01C4A4B0190E6A1D00E08031 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C4A4AE190E6A1D00E08031 /* FacebookSDK.framework */; };
+		01CBF77019D32DF300D6AA42 /* RivalEmptyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01CBF76F19D32DF300D6AA42 /* RivalEmptyCell.xib */; };
+		01CBF77119D32DF300D6AA42 /* RivalEmptyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01CBF76F19D32DF300D6AA42 /* RivalEmptyCell.xib */; };
 		01D73407190EC6200070481E /* FacebookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D73406190EC6200070481E /* FacebookManager.m */; };
 		01D73408190EC6200070481E /* FacebookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D73406190EC6200070481E /* FacebookManager.m */; };
 		01D7340B19126B230070481E /* TwitterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D7340A19126B230070481E /* TwitterManager.m */; };
@@ -970,6 +972,7 @@
 		01C4A4AA190E61B300E08031 /* SocialAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialAccount.h; sourceTree = "<group>"; };
 		01C4A4AB190E61B300E08031 /* SocialAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialAccount.m; sourceTree = "<group>"; };
 		01C4A4AE190E6A1D00E08031 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		01CBF76F19D32DF300D6AA42 /* RivalEmptyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RivalEmptyCell.xib; sourceTree = "<group>"; };
 		01D73405190EC6200070481E /* FacebookManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookManager.h; sourceTree = "<group>"; };
 		01D73406190EC6200070481E /* FacebookManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookManager.m; sourceTree = "<group>"; };
 		01D7340919126B230070481E /* TwitterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterManager.h; sourceTree = "<group>"; };
@@ -1404,6 +1407,7 @@
 				010D395B19CB321C007AC4DF /* RivalTableViewCell.m */,
 				010D395E19CB32D9007AC4DF /* RivalsViewController.h */,
 				010D395F19CB32D9007AC4DF /* RivalsViewController.m */,
+				01CBF76F19D32DF300D6AA42 /* RivalEmptyCell.xib */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -1994,6 +1998,7 @@
 				013DA89F1853002200B507E4 /* Media.xcassets in Resources */,
 				017565E519B7A7AA00D14EE4 /* FollowFacebookConnectCell.xib in Resources */,
 				013DA8531853002200B507E4 /* PredictionCell.xib in Resources */,
+				01CBF77119D32DF300D6AA42 /* RivalEmptyCell.xib in Resources */,
 				013DA82D1853002200B507E4 /* SignUpViewController.xib in Resources */,
 				01A6787419577E1C002FDE1F /* TabbedViewController.xib in Resources */,
 				01DBEACC18DA4033000F2E50 /* InvitationTableViewCell.xib in Resources */,
@@ -2156,6 +2161,7 @@
 				013DA81E1853002200B507E4 /* NoContentCell.xib in Resources */,
 				013DA87E1853002200B507E4 /* IntroOverlay@2x.png in Resources */,
 				01A6787319577E1C002FDE1F /* TabbedViewController.xib in Resources */,
+				01CBF77019D32DF300D6AA42 /* RivalEmptyCell.xib in Resources */,
 				017565F319B7C82300D14EE4 /* FollowTwitterHeaderView.xib in Resources */,
 				013DA8701853002200B507E4 /* Avatars.xcassets in Resources */,
 				013DA8441853002200B507E4 /* PredictorCell.xib in Resources */,
@@ -2611,8 +2617,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Nick Rellihan (9TAA35K5AK)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Nick Rellihan (9TAA35K5AK)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Knoda, LLC (F489V4H5F6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Knoda, LLC (F489V4H5F6)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/KnodaIPhoneApp/Thirdparty",
@@ -2636,7 +2642,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "Knoda Test";
-				PROVISIONING_PROFILE = "F229B453-5DF5-4DB8-8405-F705FD241E1F";
+				PROVISIONING_PROFILE = "9D526CA8-AAA3-4DC0-B485-D2C71C17BC9E";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};

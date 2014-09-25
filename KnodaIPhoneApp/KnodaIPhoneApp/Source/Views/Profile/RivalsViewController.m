@@ -29,11 +29,7 @@
     self.title = @"RIVALS";
     
     self.tableView.separatorColor = [UIColor colorFromHex:@"efefef"];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
-        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 10, 0, 10)];
-        
-    }
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     self.tableView.tableFooterView = [[UIView alloc] init];
     
@@ -48,10 +44,11 @@
     if (indexPath.row >= self.pagingDatasource.objects.count)
         return [super tableView:tableView heightForRowAtIndexPath:indexPath];
     
-    if ([self.openRows containsObject:indexPath])
+
+    if ([self.openRows containsObject:@(indexPath.row)])
         return 214;
     
-    return 76.0;
+    return 66.0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -83,15 +80,16 @@
     if (indexPath.row == self.pagingDatasource.objects.count)
         return;
     
-    if ([self.openRows containsObject:indexPath])
-        [self.openRows removeObject:indexPath];
+    if ([self.openRows containsObject:@(indexPath.row)])
+        [self.openRows removeObject:@(indexPath.row)];
     else
-        [self.openRows addObject:indexPath];
+        [self.openRows addObject:@(indexPath.row)];
     
-    [self.tableView beginUpdates];
-    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-    [self.tableView endUpdates];
-
+    //dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.tableView beginUpdates];
+        [self.tableView endUpdates];
+        NSLog(@"%@", self.openRows);
+    //});
 }
 
 - (void)objectsAfterObject:(id)object completion:(void (^)(NSArray *, NSError *))completionHandler {
@@ -99,8 +97,7 @@
 }
 
 - (void)noObjectsRetrievedInPagingDatasource:(PagingDatasource *)pagingDatasource {
-    
-    NoContentCell *cell = [NoContentCell noContentWithMessage:@"You don't have any rivals yet.\n Get out there and vote on some predictions!" forTableView:self.tableView];
+    UITableViewCell *cell = [[[UINib nibWithNibName:@"RivalEmptyCell" bundle:[NSBundle mainBundle]] instantiateWithOwner:nil options:nil] lastObject];
     [self showNoContent:cell];
 }
 

@@ -12,6 +12,5 @@
 
 @property (strong, nonatomic) NSString *big;
 @property (strong, nonatomic) NSString *small;
-@property (strong, nonatomic) NSString *thumb;
 
 @end

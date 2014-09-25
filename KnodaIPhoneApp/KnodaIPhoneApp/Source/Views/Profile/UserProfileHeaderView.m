@@ -41,13 +41,14 @@ static UINib *nib;
         CGRect frame = self.barView.frame;
         
         [self.headToHeadView addSubview:self.barView];
-        frame.origin.y = (self.headToHeadView.frame.size.height / 2.0) - (frame.size.height / 2.0) + 10.0;
+        frame.origin.y = (self.headToHeadView.frame.size.height / 2.0) - (frame.size.height / 2.0) + 20.0;
         frame.origin.x = (self.headToHeadView.frame.size.width / 2.0) - (frame.size.width / 2.0);
         self.barView.frame = frame;
         
         self.barView.leftLabel.textColor = [UIColor whiteColor];
         self.barView.rightLabel.textColor = [UIColor whiteColor];
         self.barView.visitingUserLabel.hidden = YES;
+        self.barView.homeUserLabel.hidden = YES;
         frame = self.statsView.frame;
         frame.origin.x = 0;
         [self.scrollView addSubview:self.statsView];
@@ -68,8 +69,7 @@ static UINib *nib;
         self.pageControl.hidden = YES;
         self.scrollView.scrollEnabled = NO;
         frame = self.frame;
-        frame.size.height -= self.pageControl.frame.size.height;
-        frame.size.height += 5.0;
+        frame.size.height -= 10;
         self.frame = frame;
     }
     
@@ -131,7 +131,12 @@ static UINib *nib;
         [[WebApi sharedInstance] getImage:user.avatar.small completion:^(UIImage *image, NSError *error) {
             if (image)
                 self.barView.rightImageView.image = image;
-        }];
+        }]; 
+        
+        if (user.rivalry.opponentWon != 0 || user.rivalry.userWon != 0) {
+            self.scrollView.contentOffset = CGPointMake(self.scrollView.frame.size.width, 0);
+            self.pageControl.currentPage = 1;
+        }
     }
     
     

@@ -158,9 +158,9 @@ NSString *PredictionVotedKey = @"PREDICTIONVOTEDKEY";
 
 - (void)profileSelectedWithUserId:(NSInteger)userId inCell:(PredictionCell *)cell {
     if (userId == [UserManager sharedInstance].user.userId) {
-        ProfileViewController *vc = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:[NSBundle mainBundle]];
-        vc.leftButtonItemReturnsBack = YES;
-        [self.navigationController pushViewController:vc animated:YES];
+//        ProfileViewController *vc = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:[NSBundle mainBundle]];
+//        vc.leftButtonItemReturnsBack = YES;
+//        [self.navigationController pushViewController:vc animated:YES];
     } else {
         AnotherUsersProfileViewController *vc = [[AnotherUsersProfileViewController alloc] initWithUserId:userId];
         [self.navigationController pushViewController:vc animated:YES];

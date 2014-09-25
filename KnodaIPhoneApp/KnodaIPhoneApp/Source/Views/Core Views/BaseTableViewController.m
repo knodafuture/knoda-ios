@@ -41,7 +41,6 @@
         self.pagingDatasource = [[PagingDatasource alloc] initWithTableView:self.tableView];
     
     self.pagingDatasource.delegate = self;
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated {

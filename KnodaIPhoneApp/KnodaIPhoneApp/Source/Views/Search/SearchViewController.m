@@ -207,10 +207,10 @@
 
 - (void)profileSelectedWithUserId:(NSInteger)userId inCell:(PredictionCell *)cell {
     if (userId == [UserManager sharedInstance].user.userId) {
-        ProfileViewController *vc = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:[NSBundle mainBundle]];
-        vc.leftButtonItemReturnsBack = YES;
-        [self.navigationController pushViewController:vc animated:YES];
-        [self removeSearchBar];
+//        ProfileViewController *vc = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:[NSBundle mainBundle]];
+//        vc.leftButtonItemReturnsBack = YES;
+//        [self.navigationController pushViewController:vc animated:YES];
+//        [self removeSearchBar];
     } else {
         AnotherUsersProfileViewController *vc = [[AnotherUsersProfileViewController alloc] initWithUserId:userId];
         [self.navigationController pushViewController:vc animated:YES];

@@ -31,7 +31,7 @@
     NSInteger rightWins = rightUser.rivalry.userWon;
     NSInteger totalWins = leftWins + rightWins;
     
-    CGFloat maxWidth = 106;
+    CGFloat maxWidth = 104;
     CGFloat leftWidth = 0, rightWidth = 0;
     
     if (totalWins != 0) {
@@ -51,5 +51,6 @@
     self.leftLabel.text = [NSString stringWithFormat:@"%ld", (long)leftWins];
     self.rightLabel.text = [NSString stringWithFormat:@"%ld", (long)rightWins];
     self.visitingUserLabel.text = rightUser.name;
+    self.homeUserLabel.text = leftUser.name;
 }
 @end

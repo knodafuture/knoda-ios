@@ -21,5 +21,5 @@
 
 @property (weak, nonatomic) id<SearchViewControllerDelegate> delegate;
 
-
+- (void)searchForTerm:(NSString *)term;
 @end

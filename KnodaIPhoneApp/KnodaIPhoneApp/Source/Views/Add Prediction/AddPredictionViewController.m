@@ -15,6 +15,8 @@
 #import "UIActionSheet+Blocks.h"
 #import "TwitterManager.h"
 #import "WalkthroughController.h"
+#import "TextViewWatcher.h"
+#import "AutoCompleteTableViewController.h"
 
 #define TEXT_FONT        [UIFont fontWithName:@"HelveticaNeue" size:15]
 #define PLACEHOLDER_FONT [UIFont fontWithName:@"HelveticaNeue-Italic" size:15]
@@ -24,7 +26,7 @@ static const int kPredictionCharsLimit = 300;
 static NSDateFormatter *timeFormatter;
 static NSDateFormatter *dateFormatter;
 
-@interface AddPredictionViewController () <DatePickerViewDelegate>
+@interface AddPredictionViewController () <DatePickerViewDelegate, TextViewWatcherDelegate, AutoCompleteTableViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UIPickerView *categoryPicker;
@@ -67,6 +69,8 @@ static NSDateFormatter *dateFormatter;
 
 @property (strong, nonatomic) WalkthroughController *walkthroughController;
 
+@property (strong, nonatomic) TextViewWatcher *textViewWatcher;
+@property (strong, nonatomic) AutoCompleteTableViewController *autoCompleteController;
 @end
 
 @implementation AddPredictionViewController
@@ -89,6 +93,12 @@ static NSDateFormatter *dateFormatter;
         [self.categoryPicker reloadAllComponents];
     }];
     
+    self.textViewWatcher = [[TextViewWatcher alloc] initForTextView:self.textView delegate:self];
+    
+    [self.textViewWatcher observePrefix:@"@"];
+    [self.textViewWatcher observePrefix:@"#"];
+
+    
     self.predictBarButtonItem.enabled = NO;
     self.navigationController.navigationBar.translucent = NO;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTitle:@"Cancel" target:self action:@selector(cancel) color:[UIColor whiteColor]];
@@ -96,7 +106,7 @@ static NSDateFormatter *dateFormatter;
     self.title = @"PREDICT";
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap)];
-    [self.view addGestureRecognizer:tap];
+    //[self.view addGestureRecognizer:tap];
     
     [[WebApi sharedInstance] getImage:[UserManager sharedInstance].user.avatar.big completion:^(UIImage *image, NSError *error) {
         if (!error)
@@ -142,6 +152,19 @@ static NSDateFormatter *dateFormatter;
     }
     
     [self.walkthroughController beginShowingWalkthroughIfNeeded];
+    
+    if (!self.autoCompleteController) {
+        self.autoCompleteController = [[AutoCompleteTableViewController alloc] initWithDelegate:self];
+        
+        CGRect frame = self.autoCompleteController.view.frame;
+        frame.size.height = self.view.frame.size.height - (self.textView.frame.origin.y + self.textView.frame.size.height);
+        frame.origin.y = self.view.frame.size.height;
+        self.autoCompleteController.view.frame = frame;
+        
+        [self.view addSubview:self.autoCompleteController.view];
+        [self.view bringSubviewToFront:self.autoCompleteController.view];
+    }
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -158,6 +181,48 @@ static NSDateFormatter *dateFormatter;
     self.textView.font = _showPlaceholder ? PLACEHOLDER_FONT : TEXT_FONT;
 }
 
+- (void)textViewWatcher:(TextViewWatcher *)textViewWatcher didEndObservingPrefix:(NSString *)prefix {
+    
+    CGRect frame = self.autoCompleteController.view.frame;
+    frame.origin.y = self.view.frame.size.height;
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        self.autoCompleteController.view.frame = frame;
+    }];
+    
+    [self refreshAutoCompleteResults:@"" prefix:@"#"];
+}
+- (void)textViewWatcher:(TextViewWatcher *)textViewWatcher didBeginObservingPrefix:(NSString *)prefix {
+    
+    CGRect frame = self.autoCompleteController.view.frame;
+    
+    frame.origin.y = self.textView.frame.origin.y + self.textView.frame.size.height + 23.0;
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        self.autoCompleteController.view.frame = frame;
+    }];
+    
+    [self refreshAutoCompleteResults:@"" prefix:prefix];
+}
+- (void)prefix:(NSString *)prefix wasUpdatedInTextViewWatcher:(TextViewWatcher *)textViewWatcher newValue:(NSString *)newValue {
+    
+    [self refreshAutoCompleteResults:newValue prefix:prefix];
+}
+
+
+- (void)refreshAutoCompleteResults:(NSString *)term prefix:(NSString *)prefix {
+    AutoCompleteItemType type = AutoCompleteItemTypeUnknown;
+    
+    if ([prefix isEqualToString:@"@"]) {
+        type = AutoCompleteItemTypeMention;
+    } else if ([prefix isEqualToString:@"#"]) {
+        type = AutoCompleteItemTypeHashtag;
+    }
+    
+    if (type != AutoCompleteItemTypeUnknown)
+        [self.autoCompleteController loadSuggestionsForTerm:term type:type completion:^(NSArray *results) {
+        }];
+}
 - (IBAction)selectExpirationPressed:(id)sender {
     
     [[NSNotificationCenter defaultCenter] postNotificationName:VotingDateWalkthroughCompleteNotificationName object:nil];
@@ -608,5 +673,18 @@ static NSDateFormatter *dateFormatter;
     }];
 }
 
+
+- (void)termSelected:(NSString *)term completionString:(NSString *)completionString withType:(AutoCompleteItemType)type inViewController:(AutoCompleteTableViewController *)viewController {
+
+    if (type == AutoCompleteItemTypeHashtag) {
+        completionString = [completionString stringByReplacingOccurrencesOfString:@"#" withString:@""];
+    }
+    
+    NSLog(@"term = %@", term);
+    NSLog(@"completed = %@", term);
+    NSLog(@"%ld", (long)self.textViewWatcher.currentPrefixLocation);
+    self.textView.text = [self.textView.text stringByReplacingCharactersInRange:NSMakeRange(self.textViewWatcher.currentPrefixLocation, term.length) withString:completionString];
+    [self.textViewWatcher endObserving];
+}
 
 @end

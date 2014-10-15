@@ -10,4 +10,5 @@
 @interface AnotherUsersProfileViewController : PredictionsViewController
 
 - (id)initWithUserId:(NSInteger)userId;
+- (id)initWithUSername:(NSString *)username;
 @end

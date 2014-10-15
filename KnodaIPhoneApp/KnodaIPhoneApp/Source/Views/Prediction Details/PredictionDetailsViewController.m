@@ -24,7 +24,7 @@
 #import "UIActionSheet+Blocks.h"
 #import "FacebookManager.h"
 #import "ContestDetailsViewController.h"
-
+#import "SearchViewController.h"
 
 static const int kBSAlertTag = 1001;
 
@@ -483,4 +483,27 @@ static const int kBSAlertTag = 1001;
 
     [self setDefaultBarButtonItems:NO];
 }
+
+- (void)userMentionSelected:(NSString *)username inCell:(PredictionCell *)cell {
+    NSLog(@"username %@", username);
+    AnotherUsersProfileViewController *vc = [[AnotherUsersProfileViewController alloc] initWithUSername:username];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)hashtagSelected:(NSString *)hashtag inCell:(PredictionCell *)cell {
+    SearchViewController *vc = [[SearchViewController alloc] initWithStyle:UITableViewStylePlain];
+    [self.navigationController pushViewController:vc animated:YES];
+    [vc searchForTerm:hashtag];
+}
+
+- (void)hashtagSelected:(NSString *)hashtag {
+    [self hashtagSelected:hashtag inCell:nil];
+}
+- (void)userMentionSelected:(NSString *)username {
+    [self userMentionSelected:username inCell:nil];
+}
+- (void)userClickedInCommentCellWithUserId:(NSInteger)userId {
+    [self profileSelectedWithUserId:userId inCell:nil];
+}
+
 @end

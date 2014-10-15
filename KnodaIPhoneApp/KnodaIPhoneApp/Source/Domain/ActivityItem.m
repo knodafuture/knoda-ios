@@ -29,7 +29,9 @@
                              @"LOST": @(ActivityTypeLost),
                              @"COMMENT": @(ActivityTypeComment),
                              @"INVITATION" : @(ActivityTypeInvitation),
-                             @"FOLLOWING" : @(ActivityTypeFollow)
+                             @"FOLLOWING" : @(ActivityTypeFollow),
+                             @"COMMENT_MENTION" : @(ActivityItemTypeCommentMention),
+                             @"PREDICTION_MENTION" : @(ActivityItemTypePredictionMention)
                              };
     
     return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSString *str) {

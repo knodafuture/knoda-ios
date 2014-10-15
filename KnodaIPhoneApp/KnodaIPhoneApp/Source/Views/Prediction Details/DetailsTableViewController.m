@@ -18,14 +18,11 @@
 #import "PredictorCell.h"
 #import "UserManager.h"
 
-static const float parallaxRatio = 0.5;
-
-@interface DetailsTableViewController () <TallyDatasourceDelegate, CommentCellDelegate, PredictorCellDelegate>
+@interface DetailsTableViewController () <TallyDatasourceDelegate, PredictorCellDelegate>
 @property (strong, nonatomic) PredictionDetailsSectionHeader *sectionHeader;
 @property (assign, nonatomic) BOOL showingComments;
-@property (weak, nonatomic) id<PredictionCellDelegate> owner;
+@property (weak, nonatomic) id<PredictionCellDelegate, CommentCellDelegate> owner;
 @property (strong, nonatomic) UITableViewCell *noContentCell;
-
 @property (strong, nonatomic) CommentsDatasource *commentsDatasource;
 @property (strong, nonatomic) TallyDatasource *tallyDatasource;
 
@@ -34,7 +31,7 @@ static const float parallaxRatio = 0.5;
 @implementation DetailsTableViewController
 
 
-- (id)initWithPrediction:(Prediction *)prediction andOwner:(id<PredictionCellDelegate>)owner {
+- (id)initWithPrediction:(Prediction *)prediction andOwner:(id<PredictionCellDelegate, CommentCellDelegate>)owner {
     self = [super initWithStyle:UITableViewStylePlain];
     _prediction = prediction;
     self.owner = owner;
@@ -146,7 +143,7 @@ static const float parallaxRatio = 0.5;
     
     
     if (self.showingComments && [cell isKindOfClass:CommentCell.class]) {
-        ((CommentCell *)cell).delegate = self;
+        ((CommentCell *)cell).delegate = self.owner;
         Comment *comment = [self.pagingDatasource.objects objectAtIndex:indexPath.row];
         if (comment.userId == [UserManager sharedInstance].user.userId)
             ((CommentCell *)cell).avatarView.image = [_imageLoader lazyLoadImage:[UserManager sharedInstance].user.avatar.small onIndexPath:indexPath];
@@ -179,7 +176,7 @@ static const float parallaxRatio = 0.5;
         return;
     
     CommentCell *cell = (CommentCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-    
+    cell.delegate = self.owner;
     if (![cell isKindOfClass:CommentCell.class])
         return;
     

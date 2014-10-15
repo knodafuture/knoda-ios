@@ -27,6 +27,7 @@
 @property (strong, nonatomic) SearchDatasource *searchDatasource;
 @property (strong, nonatomic) CategoriesDatasource *categoriesDatasource;
 @property (assign, nonatomic) BOOL shouldBeginEditingSearchText;
+@property (strong, nonatomic) NSString *searchTerm;
 @end
 
 @implementation SearchViewController
@@ -42,6 +43,8 @@
     self.searchBar.delegate = self;
     self.searchBar.backgroundColor = [UIColor colorFromHex:@"77BC1F"];
     
+    
+
     CGRect frame = self.searchBar.frame;
     frame.origin.x = self.view.frame.size.width;
     self.searchBar.frame = frame;
@@ -53,6 +56,14 @@
     self.searchDatasource = [[SearchDatasource alloc] initWithTableView:self.tableView];
     self.searchDatasource.delegate = self;
     
+    if (self.searchTerm) {
+        
+        self.searchBar.textField.text = self.searchTerm;
+        [self searchBar:self.searchBar didSearchForText:self.searchTerm];
+    }
+
+    
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -61,6 +72,8 @@
         [self.searchBar.textField becomeFirstResponder];
     self.shouldBeginEditingSearchText = NO;
 }
+
+
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -101,6 +114,9 @@
 
 }
 
+- (void)searchForTerm:(NSString *)term {
+    self.searchTerm = term;
+}
 - (void)searchBar:(SearchBar *)searchBar didSearchForText:(NSString *)searchText {
     self.pagingDatasource = self.searchDatasource;
     

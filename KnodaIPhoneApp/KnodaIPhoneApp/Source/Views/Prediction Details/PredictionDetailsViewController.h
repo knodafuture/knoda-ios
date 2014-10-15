@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Knoda. All rights reserved.
 //
 
+#import "CommentCell.h"
 
 
 @class Prediction;
@@ -16,7 +17,7 @@
 
 @end
 
-@interface PredictionDetailsViewController : UIViewController
+@interface PredictionDetailsViewController : UIViewController <CommentCellDelegate>
 
 @property (weak, nonatomic) id<PredictionDetailsDelegate> delegate;
 @property (assign, nonatomic) BOOL shouldNotOpenCategory;

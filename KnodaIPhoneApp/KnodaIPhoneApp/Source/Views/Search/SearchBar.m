@@ -34,7 +34,7 @@
 @implementation SearchBar
 
 - (id)init {
-    self = [super initWithFrame:CGRectMake(0, 0, 290, 44)];
+    self = [super initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width - 30, 44)];
     
     self.customTextField = [[SearchBarTextField alloc] initWithFrame:CGRectMake(10, self.frame.size.height / 2.0 - 15.0, self.frame.size.width - 20, 30)];
     [self addSubview:self.customTextField];

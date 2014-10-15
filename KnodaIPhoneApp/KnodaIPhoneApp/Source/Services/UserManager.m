@@ -26,6 +26,9 @@ static UserManager *sharedSingleton;
 
 - (id)init {
     self = [super init];
+    NSDictionary *userInfo = [[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentUserNEW"];
+    if (userInfo)
+        _user = [MTLJSONAdapter modelOfClass:User.class fromJSONDictionary:userInfo error:nil];
     self.keychain = [[KeychainItemWrapper alloc] initWithIdentifier: @"Password" accessGroup:nil];
     return self;
 }
@@ -55,6 +58,7 @@ static UserManager *sharedSingleton;
     [[WebApi sharedInstance] getCurrentUser:^(User *user, NSError *error) {
         if (!error) {
             _user = user;
+            [[NSUserDefaults standardUserDefaults] setObject:[MTLJSONAdapter JSONDictionaryFromModel:_user] forKey:@"CurrentUserNEW"];
             [self sendNotification];
             [[WebApi sharedInstance] getGroups:^(NSArray *groups, NSError *error) {
                 if (!error)
@@ -150,6 +154,7 @@ static UserManager *sharedSingleton;
 }
 
 - (void)clearSavedCredentials {
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"CurrentUserNEW"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey: @"User"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:LoginResponseKey];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SavedSocialAccount"];

@@ -10,13 +10,17 @@
 #import "WebApi.h"
 #import "LoadingView.h"
 #import "UserManager.h"
+#import "AutoCompleteTableViewController.h"
+#import "TextViewWatcher.h" 
 
 static NSString *const defaultCommentText = @"Add a comment...";
 static const NSInteger CommentMaxChars = 300;
 
-@interface CreateCommentView () <UITextViewDelegate>
+@interface CreateCommentView () <UITextViewDelegate, TextViewWatcherDelegate, AutoCompleteTableViewControllerDelegate>
 @property (assign, nonatomic) CGFloat initialOrigin;
 @property (assign, nonatomic) NSInteger predictionId;
+@property (strong, nonatomic) TextViewWatcher *textViewWatcher;
+@property (strong, nonatomic) AutoCompleteTableViewController *autoCompleteController;
 @end
 
 @implementation CreateCommentView
@@ -27,6 +31,11 @@ static const NSInteger CommentMaxChars = 300;
     view.delegate = delegate;
     view.predictionId = predictionId;
     [Flurry logEvent:@"CREATE_COMMENT"];
+    view.textViewWatcher = [[TextViewWatcher alloc] initForTextView:view.commentTextView delegate:view];
+    view.backgroundColor = [UIColor colorFromHex:@"efefef"];
+    [view.textViewWatcher observePrefix:@"@"];
+    [view.textViewWatcher observePrefix:@"#"];
+
     return view;
 }
 
@@ -41,6 +50,18 @@ static const NSInteger CommentMaxChars = 300;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willHideKeyBoard:) name:UIKeyboardWillHideNotification object:nil];
     } else
         [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    if (!self.autoCompleteController) {
+        self.autoCompleteController = [[AutoCompleteTableViewController alloc] initWithDelegate:self];
+        
+        CGRect frame = self.autoCompleteController.view.frame;
+        frame.size.height = self.frame.size.height - (self.commentTextView.frame.origin.y + self.commentTextView.frame.size.height);
+        frame.origin.y = self.frame.size.height;
+        self.autoCompleteController.view.frame = frame;
+        
+        [self addSubview:self.autoCompleteController.view];
+        [self bringSubviewToFront:self.autoCompleteController.view];
+    }
 }
 
 
@@ -153,4 +174,56 @@ static const NSInteger CommentMaxChars = 300;
     [self.delegate createCommentViewDidCancel:self];
 }
 
+- (void)termSelected:(NSString *)term completionString:(NSString *)completionString withType:(AutoCompleteItemType)type inViewController:(AutoCompleteTableViewController *)viewController {
+    
+    if (type == AutoCompleteItemTypeHashtag) {
+        completionString = [completionString stringByReplacingOccurrencesOfString:@"#" withString:@""];
+    }
+    
+    self.commentTextView.text = [self.commentTextView.text stringByReplacingCharactersInRange:NSMakeRange(self.textViewWatcher.currentPrefixLocation, term.length) withString:completionString];
+    [self.textViewWatcher endObserving];
+}
+
+- (void)textViewWatcher:(TextViewWatcher *)textViewWatcher didEndObservingPrefix:(NSString *)prefix {
+    
+    CGRect frame = self.autoCompleteController.view.frame;
+    frame.origin.y = self.frame.size.height;
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        self.autoCompleteController.view.frame = frame;
+    }];
+    
+    [self refreshAutoCompleteResults:@"" prefix:@"#"];
+}
+- (void)textViewWatcher:(TextViewWatcher *)textViewWatcher didBeginObservingPrefix:(NSString *)prefix {
+    
+    CGRect frame = self.autoCompleteController.view.frame;
+    
+    frame.origin.y = self.commentTextView.frame.origin.y + self.commentTextView.frame.size.height + 5.0;
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        self.autoCompleteController.view.frame = frame;
+    }];
+    
+    [self refreshAutoCompleteResults:@"" prefix:prefix];
+}
+- (void)prefix:(NSString *)prefix wasUpdatedInTextViewWatcher:(TextViewWatcher *)textViewWatcher newValue:(NSString *)newValue {
+    
+    [self refreshAutoCompleteResults:newValue prefix:prefix];
+}
+
+
+- (void)refreshAutoCompleteResults:(NSString *)term prefix:(NSString *)prefix {
+    AutoCompleteItemType type = AutoCompleteItemTypeUnknown;
+    
+    if ([prefix isEqualToString:@"@"]) {
+        type = AutoCompleteItemTypeMention;
+    } else if ([prefix isEqualToString:@"#"]) {
+        type = AutoCompleteItemTypeHashtag;
+    }
+    
+    if (type != AutoCompleteItemTypeUnknown)
+        [self.autoCompleteController loadSuggestionsForTerm:term type:type completion:^(NSArray *results) {
+        }];
+}
 @end

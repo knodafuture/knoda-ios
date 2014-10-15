@@ -24,13 +24,13 @@
     ActivityViewController *allActivityItems = [[ActivityViewController alloc] initWithFilter:nil];
     ActivityViewController *expiredItems = [[ActivityViewController alloc] initWithFilter:@"expired"];
     ActivityViewController *commentItems = [[ActivityViewController alloc] initWithFilter:@"comments"];
-    ActivityViewController *inviteItems = [[ActivityViewController alloc] initWithFilter:@"invites"];
+    ActivityViewController *inviteItems = [[ActivityViewController alloc] initWithFilter:@"social"];
     
     
     [self addViewController:allActivityItems title:@"All"];
     [self addViewController:expiredItems title:@"Expired"];
     [self addViewController:commentItems title:@"Comments"];
-    [self addViewController:inviteItems title:@"Invites"];
+    [self addViewController:inviteItems title:@"Social"];
     
 }
 

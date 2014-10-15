@@ -7,12 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TTTAttributedLabel.h"
 @class Comment;
 
 @protocol CommentCellDelegate <NSObject>
 
 - (void)userClickedInCommentCellWithUserId:(NSInteger)userId;
 
+- (void)userMentionSelected:(NSString *)username;
+- (void)hashtagSelected:(NSString *)hashtag;
 @end
 
 @interface CommentCell : UITableViewCell
@@ -21,7 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *avatarView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *voteImage;
-@property (weak, nonatomic) IBOutlet UILabel *bodyLabel;
+@property (weak, nonatomic) IBOutlet TTTAttributedLabel *bodyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *metaDataLabel;
 @property (weak, nonatomic) id<CommentCellDelegate>delegate;
 @property (weak, nonatomic) IBOutlet UIImageView *verifiedCheckmark;

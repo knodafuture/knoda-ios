@@ -27,6 +27,8 @@
 #import "FollowingActivityTableViewCell.h"
 #import "Follower.h"
 #import "AnotherUsersProfileViewController.h"
+#import "MentionActivityTableViewCell.h"
+#import "PredictionMentionTableViewCell.h"
 
 @interface ActivityViewController () <ResultActivityTableViewCellDelegate, NavigationViewControllerDelegate, FollowingActivityTableViewCellDelegate>
 @property (strong, nonatomic) NSString *filter;
@@ -92,6 +94,12 @@
     if (item.type == ActivityTypeExpired)
         return [SettleActivityTableViewCell heightForActivityItem:item];
     
+    if (item.type == ActivityItemTypeCommentMention)
+        return [MentionActivityTableViewCell heightForActivityItem:item];
+    
+    if (item.type == ActivityItemTypePredictionMention)
+        return [PredictionMentionTableViewCell heightForActivityItem:item];
+    
     return 81;
 }
 
@@ -150,6 +158,29 @@
         
         if (!found)
             [cell setFollowing:NO];
+        
+        return cell;
+    } else if (alert.type == ActivityItemTypeCommentMention) {
+        MentionActivityTableViewCell *cell = [MentionActivityTableViewCell cellForTableView:tableView];
+        
+        UIImage *image = [_imageLoader lazyLoadImage:alert.imageUrl onIndexPath:indexPath];
+        if (image)
+            cell.avatarImageView.image = image;
+        else
+            cell.avatarImageView.image = [UIImage imageNamed:@"NotificationAvatar"];
+        [cell populate:alert];
+        
+        return cell;
+        
+    } else if (alert.type == ActivityItemTypePredictionMention) {
+        PredictionMentionTableViewCell *cell = [PredictionMentionTableViewCell cellForTableView:tableView];
+        
+        UIImage *image = [_imageLoader lazyLoadImage:alert.imageUrl onIndexPath:indexPath];
+        if (image)
+            cell.avatarImageView.image = image;
+        else
+            cell.avatarImageView.image = [UIImage imageNamed:@"NotificationAvatar"];
+        [cell populate:alert];
         
         return cell;
     } else {

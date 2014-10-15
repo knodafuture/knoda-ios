@@ -23,10 +23,12 @@
     GroupsViewController *groups = [[GroupsViewController alloc] initWithStyle:UITableViewStylePlain];
     ContestViewController *contests = [[ContestViewController alloc] initWithDetails:YES];
     
-    self.view.backgroundColor = [UIColor colorFromHex:@"efefef"];
+    self.view.backgroundColor = [UIColor colorFromHex:@"000000"];
     [self addViewController:contests title:@"My Contests"];
     [self addViewController:groups title:@"My Groups"];
     
+    groups.tableView.backgroundColor = [UIColor whiteColor];
+    contests.tableView.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

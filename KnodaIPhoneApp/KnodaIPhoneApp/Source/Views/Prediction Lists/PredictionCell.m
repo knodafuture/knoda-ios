@@ -634,6 +634,12 @@ static inline NSRegularExpression * HashtagRegularExpression() {
 
 - (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithTextCheckingResult:(NSTextCheckingResult *)result  {
     NSString *selectedText = [self.prediction.body substringWithRange:result.range];
-    NSLog(@"clicked %@", selectedText);
+    NSString *stripped = [selectedText stringByReplacingOccurrencesOfString:@"@" withString:@""];
+    stripped = [stripped stringByReplacingOccurrencesOfString:@"#" withString:@""];
+    if ([selectedText rangeOfString:@"@"].location != NSNotFound) {
+        [self.delegate userMentionSelected:stripped inCell:self];
+    } else if ([selectedText rangeOfString:@"#"].location != NSNotFound) {
+        [self.delegate hashtagSelected:stripped inCell:self];
+    }
 }
 @end

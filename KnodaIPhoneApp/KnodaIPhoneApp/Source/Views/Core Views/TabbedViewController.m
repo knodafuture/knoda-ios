@@ -122,7 +122,7 @@
         
         CGRect frame = vc.view.frame;
         frame.origin.y = 0;
-        frame.size.height = self.scrollView.frame.size.height;
+        frame.size = self.scrollView.frame.size;
         [self.scrollView addSubview:vc.view];
         frame.origin.x = self.scrollView.frame.size.width * i;
         vc.view.frame = frame;

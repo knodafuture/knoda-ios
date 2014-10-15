@@ -26,6 +26,7 @@
 @property (assign, nonatomic) NSInteger userId;
 @property (assign, nonatomic) BOOL userInfoLoaded;
 @property (strong, nonatomic) User *user;
+@property (strong, nonatomic) NSString *username;
 
 @end
 
@@ -36,6 +37,13 @@
     self.userId = userId;
     return self;
 }
+
+- (id)initWithUSername:(NSString *)username {
+    self = [super initWithStyle:UITableViewStylePlain];
+    self.username = username;
+    return self;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -77,7 +85,9 @@
 }
 
 - (void)loadUserInfo:(void(^)(void))completion {
-    [[WebApi sharedInstance] getUser:self.userId completion:^(User *user, NSError *error) {
+    
+    void(^done)(User *, NSError *) = ^(User *user, NSError *error) {
+        self.userId = user.userId;
         if (!error) {
             self.userInfoLoaded = YES;
             [self setUpUserProfileInformationWithUser:user];
@@ -88,7 +98,12 @@
             [alert show];
             [self.navigationController popViewControllerAnimated:YES];
         }
-    }];
+    };
+    if (self.username) {
+        [[WebApi sharedInstance] getUserFromUsername:self.username completion:done];
+    } else {
+        [[WebApi sharedInstance] getUser:self.userId completion:done];
+    }
 }
 
 - (void)setUpUserProfileInformationWithUser:(User *) user {

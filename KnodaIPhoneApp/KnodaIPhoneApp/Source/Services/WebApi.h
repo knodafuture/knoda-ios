@@ -68,7 +68,7 @@ UIKIT_EXTERN NSString *PredictionChangedNotificationKey;
 - (void)deleteToken:(NSString *)tokenId completion:(void(^)(NSError *error))completionHandler;
 - (void)getUser:(NSInteger)userId completion:(void(^)(User *user, NSError *error))completionHandler;
 - (void)autoCompleteUsers:(NSString *)query completion:(void(^)(NSArray *users, NSError *error))completionHandler;
-
+- (void)getUserFromUsername:(NSString *)username completion:(void(^)(User *user, NSError *error))completionHandler;
 - (void)socialSignIn:(SocialAccount *)request completion:(void(^)(LoginResponse *response, NSError *error))completionHandler;
 - (void)addSocialAccount:(SocialAccount *)account completion:(void(^)(SocialAccount *account, NSError *error))completionHandler;
 - (void)deleteSocialAccount:(SocialAccount *)account completion:(void(^)(NSError *error))completionHandler;
@@ -156,4 +156,8 @@ UIKIT_EXTERN NSString *PredictionChangedNotificationKey;
 - (void)getFollowing:(NSInteger)userId completion:(void(^)(NSArray *followers, NSError *error))completionHandler;
 - (void)getSocialFeedAfter:(NSInteger)lastId completion:(void(^)(NSArray *predictions, NSError *error))completionHandler;
 - (void)getShortLeaders:(void(^)(NSArray *leaders, NSError *error))completionHandler;
+
+//Hashtags
+
+- (void)searchForHashtags:(NSString *)term completion:(void(^)(NSArray *results, NSError *error))completionHandler;
 @end

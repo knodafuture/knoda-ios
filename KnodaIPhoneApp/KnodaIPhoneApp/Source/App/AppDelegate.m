@@ -71,19 +71,34 @@ NSString *NewGroupNotificationKey = @"NEWGROUPNOTIFICATIONKEY";
     //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logout) name:HttpForbiddenNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deprecatedApi) name: DeprecatedAPI object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logout) name:UserLoggedOutNotificationName object:nil];
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
-    
+    if ([application respondsToSelector:@selector(isRegisteredForRemoteNotifications)])
+    {
+        // iOS 8 Notifications
+        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+        
+        [application registerForRemoteNotifications];
+    }
+    else
+    {
+        // iOS < 8 Notifications
+        [application registerForRemoteNotificationTypes:
+         (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
+    }
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor colorFromHex:@"77bc1f"];
-    [self showSplash];
+    
+    [self showHomeScreen];
     [self.window makeKeyAndVisible];
     
-    [[UserManager sharedInstance] authenticateSavedUser:^(User *user, NSError *error) {
-        [self showHomeScreen];
-        [self.splashImageView removeFromSuperview];
-    }];
-    
     return YES;
+}
+- (void)showHomeScreen {
+    self.navigationViewController = [[NavigationViewController alloc] initWithPushInfo:self.pushInfo];
+    
+    if (self.launchUrl)
+        self.navigationViewController.launchUrl = self.launchUrl;
+    
+    self.window.rootViewController = self.navigationViewController;
 }
 
 - (void)showSplash {
@@ -102,15 +117,9 @@ NSString *NewGroupNotificationKey = @"NEWGROUPNOTIFICATIONKEY";
 - (void)logout {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor colorFromHex:@"77bc1f"];
-    [self showSplash];
     [self.window makeKeyAndVisible];
     
     [self showHomeScreen];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [self.splashImageView removeFromSuperview];
-
-    });
-    
 }
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
@@ -183,14 +192,7 @@ NSString *NewGroupNotificationKey = @"NEWGROUPNOTIFICATIONKEY";
         [self.navigationViewController handlePushInfo:self.pushInfo];
 }
 
-- (void)showHomeScreen {
-    self.navigationViewController = [[NavigationViewController alloc] initWithPushInfo:self.pushInfo];
-    
-    if (self.launchUrl)
-        self.navigationViewController.launchUrl = self.launchUrl;
-    
-    self.window.rootViewController = self.navigationViewController;
-}
+
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     //TODO deprecation

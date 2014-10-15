@@ -8,6 +8,7 @@
 
 #import "BaseTableViewController.h"
 #import "PredictionCell.h"
+#import "CommentCell.h" 
 
 @class Prediction;
 @class Comment;
@@ -19,7 +20,7 @@
 @property (strong, nonatomic) PredictionDetailsHeaderCell *headerCell;
 
 
-- (id)initWithPrediction:(Prediction *)prediction andOwner:(id<PredictionCellDelegate>)owner;
+- (id)initWithPrediction:(Prediction *)prediction andOwner:(id<PredictionCellDelegate, CommentCellDelegate>)owner;
 
 - (void)showComments;
 - (void)showTally;

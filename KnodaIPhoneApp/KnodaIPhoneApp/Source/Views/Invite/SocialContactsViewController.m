@@ -55,6 +55,10 @@
     self.allContacts = [AddressBookHelper contactsWithEmailOrPhone];
     self.searchedContacts = [self.allContacts mutableCopy];
     [self.tableView reloadData];
+    CGRect frame = self.tableView.frame;
+    frame.size.width = self.view.frame.size.width;
+    frame.size.height = self.view.frame.size.height - self.searchField.frame.size.height;
+    self.tableView.frame = frame;
     if (!self.allContacts)
         [self showNoContent];
     else {

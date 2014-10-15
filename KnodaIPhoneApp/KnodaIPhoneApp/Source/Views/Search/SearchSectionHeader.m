@@ -11,7 +11,7 @@
 @implementation SearchSectionHeader
 
 - (id)init {
-    self = [super initWithFrame:CGRectMake(0, 0, 320, 20)];
+    self = [super initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 20)];
     
     self.backgroundColor = [UIColor whiteColor];
     

@@ -237,6 +237,24 @@
 		014A9F2F185DA3B200A96678 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A9F2E185DA3B200A96678 /* MobileCoreServices.framework */; };
 		014A9F31185DA3BB00A96678 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A9F30185DA3BB00A96678 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		014A9F35185DA3DC00A96678 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014A9F34185DA3DC00A96678 /* Twitter.framework */; };
+		014C018919EED514000B7573 /* AutocompleteMentionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 014C018819EED514000B7573 /* AutocompleteMentionTableViewCell.m */; };
+		014C018A19EED514000B7573 /* AutocompleteMentionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 014C018819EED514000B7573 /* AutocompleteMentionTableViewCell.m */; };
+		014C018D19EED51C000B7573 /* AutocompleteHashtagTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 014C018C19EED51C000B7573 /* AutocompleteHashtagTableViewCell.m */; };
+		014C018E19EED51C000B7573 /* AutocompleteHashtagTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 014C018C19EED51C000B7573 /* AutocompleteHashtagTableViewCell.m */; };
+		014C019019EED5B3000B7573 /* AutocompleteMentionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 014C018F19EED5B3000B7573 /* AutocompleteMentionTableViewCell.xib */; };
+		014C019119EED5B3000B7573 /* AutocompleteMentionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 014C018F19EED5B3000B7573 /* AutocompleteMentionTableViewCell.xib */; };
+		014C019319EED5EC000B7573 /* AutocompleteHastagTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 014C019219EED5EC000B7573 /* AutocompleteHastagTableViewCell.xib */; };
+		014C019419EED5EC000B7573 /* AutocompleteHastagTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 014C019219EED5EC000B7573 /* AutocompleteHastagTableViewCell.xib */; };
+		014C019719EF0A8C000B7573 /* MentionActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 014C019619EF0A8C000B7573 /* MentionActivityTableViewCell.m */; };
+		014C019819EF0A8C000B7573 /* MentionActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 014C019619EF0A8C000B7573 /* MentionActivityTableViewCell.m */; };
+		014C019A19EF0A97000B7573 /* MentionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 014C019919EF0A97000B7573 /* MentionTableViewCell.xib */; };
+		014C019B19EF0A97000B7573 /* MentionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 014C019919EF0A97000B7573 /* MentionTableViewCell.xib */; };
+		014C019D19EF114E000B7573 /* PredictionMentionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 014C019C19EF114E000B7573 /* PredictionMentionTableViewCell.xib */; };
+		014C019E19EF114E000B7573 /* PredictionMentionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 014C019C19EF114E000B7573 /* PredictionMentionTableViewCell.xib */; };
+		014C01A119EF1198000B7573 /* PredictionMentionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 014C01A019EF1198000B7573 /* PredictionMentionTableViewCell.m */; };
+		014C01A219EF1198000B7573 /* PredictionMentionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 014C01A019EF1198000B7573 /* PredictionMentionTableViewCell.m */; };
+		014C01A519EF1A99000B7573 /* AutoCompleteTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 014C01A319EF1A99000B7573 /* AutoCompleteTableViewController.m */; };
+		014C01A619EF1A99000B7573 /* AutoCompleteTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 014C01A319EF1A99000B7573 /* AutoCompleteTableViewController.m */; };
 		014F4E2418D73F5600A2F764 /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 014F4E2318D73F5600A2F764 /* UserManager.m */; };
 		014F4E2518D73F5900A2F764 /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 014F4E2318D73F5600A2F764 /* UserManager.m */; };
 		014FDF6B18D7721F006B51D9 /* GroupTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 014FDF6A18D7721F006B51D9 /* GroupTableViewCell.xib */; };
@@ -521,6 +539,8 @@
 		01DBEAD418DA4D0B000F2E50 /* Member.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DBEAD218DA4D0B000F2E50 /* Member.m */; };
 		01DBEAD718DA4E88000F2E50 /* MemberTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DBEAD618DA4E88000F2E50 /* MemberTableViewCell.m */; };
 		01DBEAD818DA4E88000F2E50 /* MemberTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DBEAD618DA4E88000F2E50 /* MemberTableViewCell.m */; };
+		01DC10BB19EE3F24001BA0F9 /* TextViewWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DC10BA19EE3F24001BA0F9 /* TextViewWatcher.m */; };
+		01DC10BC19EE3F24001BA0F9 /* TextViewWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DC10BA19EE3F24001BA0F9 /* TextViewWatcher.m */; };
 		01E2576818E0741A009D3782 /* RankingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E2576718E0741A009D3782 /* RankingsTableViewController.m */; };
 		01E2576918E0741A009D3782 /* RankingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E2576718E0741A009D3782 /* RankingsTableViewController.m */; };
 		01E2576B18E0743A009D3782 /* RankingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E2576A18E0743A009D3782 /* RankingsTableViewCell.xib */; };
@@ -766,6 +786,20 @@
 		014A9F2E185DA3B200A96678 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		014A9F30185DA3BB00A96678 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		014A9F34185DA3DC00A96678 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		014C018719EED514000B7573 /* AutocompleteMentionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutocompleteMentionTableViewCell.h; sourceTree = "<group>"; };
+		014C018819EED514000B7573 /* AutocompleteMentionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutocompleteMentionTableViewCell.m; sourceTree = "<group>"; };
+		014C018B19EED51C000B7573 /* AutocompleteHashtagTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutocompleteHashtagTableViewCell.h; sourceTree = "<group>"; };
+		014C018C19EED51C000B7573 /* AutocompleteHashtagTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutocompleteHashtagTableViewCell.m; sourceTree = "<group>"; };
+		014C018F19EED5B3000B7573 /* AutocompleteMentionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutocompleteMentionTableViewCell.xib; sourceTree = "<group>"; };
+		014C019219EED5EC000B7573 /* AutocompleteHastagTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutocompleteHastagTableViewCell.xib; sourceTree = "<group>"; };
+		014C019519EF0A8C000B7573 /* MentionActivityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MentionActivityTableViewCell.h; sourceTree = "<group>"; };
+		014C019619EF0A8C000B7573 /* MentionActivityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MentionActivityTableViewCell.m; sourceTree = "<group>"; };
+		014C019919EF0A97000B7573 /* MentionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MentionTableViewCell.xib; sourceTree = "<group>"; };
+		014C019C19EF114E000B7573 /* PredictionMentionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PredictionMentionTableViewCell.xib; sourceTree = "<group>"; };
+		014C019F19EF1198000B7573 /* PredictionMentionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PredictionMentionTableViewCell.h; path = ../../../../../../../Dropbox/PredictionMentionTableViewCell.h; sourceTree = "<group>"; };
+		014C01A019EF1198000B7573 /* PredictionMentionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PredictionMentionTableViewCell.m; path = ../../../../../../../Dropbox/PredictionMentionTableViewCell.m; sourceTree = "<group>"; };
+		014C01A319EF1A99000B7573 /* AutoCompleteTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoCompleteTableViewController.m; sourceTree = "<group>"; };
+		014C01A419EF1A99000B7573 /* AutoCompleteTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoCompleteTableViewController.h; sourceTree = "<group>"; };
 		014F4E2218D73F5600A2F764 /* UserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserManager.h; sourceTree = "<group>"; };
 		014F4E2318D73F5600A2F764 /* UserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserManager.m; sourceTree = "<group>"; };
 		014FDF6A18D7721F006B51D9 /* GroupTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupTableViewCell.xib; sourceTree = "<group>"; };
@@ -996,6 +1030,8 @@
 		01DBEAD218DA4D0B000F2E50 /* Member.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Member.m; sourceTree = "<group>"; };
 		01DBEAD518DA4E88000F2E50 /* MemberTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberTableViewCell.h; sourceTree = "<group>"; };
 		01DBEAD618DA4E88000F2E50 /* MemberTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberTableViewCell.m; sourceTree = "<group>"; };
+		01DC10B919EE3F24001BA0F9 /* TextViewWatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextViewWatcher.h; sourceTree = "<group>"; };
+		01DC10BA19EE3F24001BA0F9 /* TextViewWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextViewWatcher.m; sourceTree = "<group>"; };
 		01E2576618E0741A009D3782 /* RankingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankingsTableViewController.h; sourceTree = "<group>"; };
 		01E2576718E0741A009D3782 /* RankingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RankingsTableViewController.m; sourceTree = "<group>"; };
 		01E2576A18E0743A009D3782 /* RankingsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RankingsTableViewCell.xib; sourceTree = "<group>"; };
@@ -1240,9 +1276,19 @@
 		013DA7281853002100B507E4 /* Add Prediction */ = {
 			isa = PBXGroup;
 			children = (
+				014C01A319EF1A99000B7573 /* AutoCompleteTableViewController.m */,
+				014C01A419EF1A99000B7573 /* AutoCompleteTableViewController.h */,
 				013DA7291853002100B507E4 /* AddPredictionViewController.h */,
 				013DA72A1853002100B507E4 /* AddPredictionViewController.m */,
 				013DA72B1853002100B507E4 /* AddPredictionViewController.xib */,
+				01DC10B919EE3F24001BA0F9 /* TextViewWatcher.h */,
+				01DC10BA19EE3F24001BA0F9 /* TextViewWatcher.m */,
+				014C018719EED514000B7573 /* AutocompleteMentionTableViewCell.h */,
+				014C018819EED514000B7573 /* AutocompleteMentionTableViewCell.m */,
+				014C018B19EED51C000B7573 /* AutocompleteHashtagTableViewCell.h */,
+				014C018C19EED51C000B7573 /* AutocompleteHashtagTableViewCell.m */,
+				014C018F19EED5B3000B7573 /* AutocompleteMentionTableViewCell.xib */,
+				014C019219EED5EC000B7573 /* AutocompleteHastagTableViewCell.xib */,
 			);
 			path = "Add Prediction";
 			sourceTree = "<group>";
@@ -1673,6 +1719,12 @@
 				0175662219B7FB5500D14EE4 /* FollowingActivityTableViewCell.h */,
 				0175662319B7FB5500D14EE4 /* FollowingActivityTableViewCell.m */,
 				0175662619B7FC5D00D14EE4 /* FollowingActivityTableViewCell.xib */,
+				014C019519EF0A8C000B7573 /* MentionActivityTableViewCell.h */,
+				014C019619EF0A8C000B7573 /* MentionActivityTableViewCell.m */,
+				014C019919EF0A97000B7573 /* MentionTableViewCell.xib */,
+				014C019C19EF114E000B7573 /* PredictionMentionTableViewCell.xib */,
+				014C019F19EF1198000B7573 /* PredictionMentionTableViewCell.h */,
+				014C01A019EF1198000B7573 /* PredictionMentionTableViewCell.m */,
 			);
 			path = Alerts;
 			sourceTree = "<group>";
@@ -1971,6 +2023,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0175662119B7EC0800D14EE4 /* KnodaContactsHeaderView.xib in Resources */,
+				014C019B19EF0A97000B7573 /* MentionTableViewCell.xib in Resources */,
 				01A1F6AF199A821800371751 /* RankingsViewController.xib in Resources */,
 				01BECA5719763C2F00E75CBA /* ProfileViewController.xib in Resources */,
 				013DA8251853002200B507E4 /* ForgotPasswordViewController.xib in Resources */,
@@ -2006,6 +2059,7 @@
 				01A1F6C1199CAD9800371751 /* NewSelectPictureViewController.xib in Resources */,
 				013DA7FB1853002200B507E4 /* AddPredictionViewController.xib in Resources */,
 				014FDF6C18D7721F006B51D9 /* GroupTableViewCell.xib in Resources */,
+				014C019E19EF114E000B7573 /* PredictionMentionTableViewCell.xib in Resources */,
 				013DA87B1853002200B507E4 /* IntroOverlay.png in Resources */,
 				013DA8491853002200B507E4 /* PredictorHeaderCell.xib in Resources */,
 				01A1F6821998574900371751 /* ContestTableViewCell.xib in Resources */,
@@ -2021,6 +2075,7 @@
 				013DA8391853002200B507E4 /* CommentCell.xib in Resources */,
 				010D395919CB2F75007AC4DF /* RivalTableViewCell.xib in Resources */,
 				01E2576C18E0743A009D3782 /* RankingsTableViewCell.xib in Resources */,
+				014C019419EED5EC000B7573 /* AutocompleteHastagTableViewCell.xib in Resources */,
 				01598B281858364F002E2534 /* FirstStartView.xib in Resources */,
 				0175664119B81E3300D14EE4 /* SingleContestsRankingsContainerView.xib in Resources */,
 				013DA8791853002200B507E4 /* Default@2x-568h.png in Resources */,
@@ -2045,6 +2100,7 @@
 				013DA86F1853002200B507E4 /* UserProfileHeaderView.xib in Resources */,
 				014A9F07185DA04400A96678 /* README.md in Resources */,
 				013DA81B1853002200B507E4 /* LoadingView.xib in Resources */,
+				014C019119EED5B3000B7573 /* AutocompleteMentionTableViewCell.xib in Resources */,
 				013DA8171853002200B507E4 /* LoadingCell.xib in Resources */,
 				01BFDC7618E5C8110098F81F /* GroupAvatars.xcassets in Resources */,
 				01CBF78819DB3CED00D6AA42 /* LaunchView.xib in Resources */,
@@ -2070,6 +2126,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				017565F019B7B02A00D14EE4 /* SocialFollowTableViewCell.xib in Resources */,
+				014C019A19EF0A97000B7573 /* MentionTableViewCell.xib in Resources */,
 				01BECA5619763C2F00E75CBA /* ProfileViewController.xib in Resources */,
 				01A1F69D1999E9A100371751 /* ContestNoContentCell.xib in Resources */,
 				013DA8241853002200B507E4 /* ForgotPasswordViewController.xib in Resources */,
@@ -2105,6 +2162,7 @@
 				013DA8381853002200B507E4 /* CommentCell.xib in Resources */,
 				01F6660919BF873D00992AEC /* NoSocialPredictionsV2.xib in Resources */,
 				0175661419B7DF5900D14EE4 /* SocialContactsHeaderView.xib in Resources */,
+				014C019D19EF114E000B7573 /* PredictionMentionTableViewCell.xib in Resources */,
 				01BECA401976282000E75CBA /* SettingsViewController.xib in Resources */,
 				0175661A19B7E58200D14EE4 /* NoContactsCell.xib in Resources */,
 				01598B271858364F002E2534 /* FirstStartView.xib in Resources */,
@@ -2120,6 +2178,7 @@
 				01DBEACB18DA4033000F2E50 /* InvitationTableViewCell.xib in Resources */,
 				0175661D19B7EA0600D14EE4 /* NoContactResultsCell.xib in Resources */,
 				013DA9121854759200B507E4 /* CreateCommentView.xib in Resources */,
+				014C019319EED5EC000B7573 /* AutocompleteHastagTableViewCell.xib in Resources */,
 				0175660619B7DA4C00D14EE4 /* SocialContactsTableViewCell.xib in Resources */,
 				014FDF8818D9F103006B51D9 /* GroupPredictionsHeaderCell.xib in Resources */,
 				013DA87C1853002200B507E4 /* IntroOverlay@2x-568h.png in Resources */,
@@ -2144,6 +2203,7 @@
 				013DA8AA1853002200B507E4 /* InfoPlist.strings in Resources */,
 				01BECA5D19763EDA00E75CBA /* MeViewController.xib in Resources */,
 				0175665919B82C2300D14EE4 /* NoSocialPredictionsCell.xib in Resources */,
+				014C019019EED5B3000B7573 /* AutocompleteMentionTableViewCell.xib in Resources */,
 				017565E419B7A50C00D14EE4 /* FollowTwitterConnectCell.xib in Resources */,
 				013DA81E1853002200B507E4 /* NoContentCell.xib in Resources */,
 				01CBF78719DB3CED00D6AA42 /* LaunchView.xib in Resources */,
@@ -2259,6 +2319,7 @@
 				013DA7F51853002200B507E4 /* MultipartRequest.m in Sources */,
 				01C4A4AD190E61B300E08031 /* SocialAccount.m in Sources */,
 				013DA7C91853002200B507E4 /* NSString+Utils.m in Sources */,
+				014C01A619EF1A99000B7573 /* AutoCompleteTableViewController.m in Sources */,
 				0175660419B7DA2D00D14EE4 /* SocialContactsTableViewCell.m in Sources */,
 				0175662519B7FB5500D14EE4 /* FollowingActivityTableViewCell.m in Sources */,
 				01C4A4A2190E3D2F00E08031 /* OAuth+Additions.m in Sources */,
@@ -2300,13 +2361,16 @@
 				013DA84B1853002200B507E4 /* CategoryPredictionsViewController.m in Sources */,
 				013DA8F8185432A200B507E4 /* EmptyDatasource.m in Sources */,
 				013DA8411853002200B507E4 /* PredictionDetailsViewController.m in Sources */,
+				014C019819EF0A8C000B7573 /* MentionActivityTableViewCell.m in Sources */,
 				0159B76A19210EB4008B28E7 /* NavigationScrollView.m in Sources */,
 				013DA8271853002200B507E4 /* LoginViewController.m in Sources */,
 				013DA7D31853002200B507E4 /* UINavigationItem+iOS7Spacing.m in Sources */,
 				018DF7A718590699004FEDA6 /* ActivityItem.m in Sources */,
 				01A1F6731998340600371751 /* ContestViewController.m in Sources */,
+				014C018E19EED51C000B7573 /* AutocompleteHashtagTableViewCell.m in Sources */,
 				0175665719B8299C00D14EE4 /* HomeFollowingViewController.m in Sources */,
 				014F4E2518D73F5900A2F764 /* UserManager.m in Sources */,
+				014C01A219EF1198000B7573 /* PredictionMentionTableViewCell.m in Sources */,
 				014FDF7018D7722F006B51D9 /* GroupTableViewCell.m in Sources */,
 				013DA8431853002200B507E4 /* PredictorCell.m in Sources */,
 				01E2577518E07D9B009D3782 /* RankingsViewController.m in Sources */,
@@ -2332,6 +2396,7 @@
 				013DA7C31853002200B507E4 /* NSData+Utils.m in Sources */,
 				013DA8D81853004000B507E4 /* Tag.m in Sources */,
 				013DA8651853002200B507E4 /* SelectPictureViewController.m in Sources */,
+				01DC10BC19EE3F24001BA0F9 /* TextViewWatcher.m in Sources */,
 				013DA8511853002200B507E4 /* PredictionCell.m in Sources */,
 				014FDF8318D9EB5F006B51D9 /* EditGroupViewController.m in Sources */,
 				019CF39519B7A0C000C734E0 /* SocialInvitationsViewController.m in Sources */,
@@ -2360,6 +2425,7 @@
 				01DBEAD018DA4194000F2E50 /* InvitationTableViewCell.m in Sources */,
 				013DA86D1853002200B507E4 /* UserProfileHeaderView.m in Sources */,
 				013DA7D51853002200B507E4 /* Comment+Utils.m in Sources */,
+				014C018A19EED514000B7573 /* AutocompleteMentionTableViewCell.m in Sources */,
 				013DA8331853002200B507E4 /* PredictionDetailsHeaderCell.m in Sources */,
 				0175664919B8235E00D14EE4 /* HomeHeaderView.m in Sources */,
 				01ACCE6F196417C800D3ABE9 /* CommentActivityTableViewCell.m in Sources */,
@@ -2433,6 +2499,7 @@
 				01ACCE7F1964307800D3ABE9 /* InviteActivityTableViewCell.m in Sources */,
 				01C4A4AC190E61B300E08031 /* SocialAccount.m in Sources */,
 				013DA7C81853002200B507E4 /* NSString+Utils.m in Sources */,
+				014C01A519EF1A99000B7573 /* AutoCompleteTableViewController.m in Sources */,
 				0175660319B7DA2D00D14EE4 /* SocialContactsTableViewCell.m in Sources */,
 				0175662419B7FB5500D14EE4 /* FollowingActivityTableViewCell.m in Sources */,
 				01C4A4A1190E3D2F00E08031 /* OAuth+Additions.m in Sources */,
@@ -2474,13 +2541,16 @@
 				013DA84A1853002200B507E4 /* CategoryPredictionsViewController.m in Sources */,
 				013DA8F7185432A200B507E4 /* EmptyDatasource.m in Sources */,
 				013DA8401853002200B507E4 /* PredictionDetailsViewController.m in Sources */,
+				014C019719EF0A8C000B7573 /* MentionActivityTableViewCell.m in Sources */,
 				0159B76919210A1A008B28E7 /* NavigationScrollView.m in Sources */,
 				013DA8261853002200B507E4 /* LoginViewController.m in Sources */,
 				018DF7981858F1FB004FEDA6 /* ActivityItem.m in Sources */,
 				013DA7D21853002200B507E4 /* UINavigationItem+iOS7Spacing.m in Sources */,
 				01A1F6721998340600371751 /* ContestViewController.m in Sources */,
+				014C018D19EED51C000B7573 /* AutocompleteHashtagTableViewCell.m in Sources */,
 				0175665619B8299C00D14EE4 /* HomeFollowingViewController.m in Sources */,
 				014F4E2418D73F5600A2F764 /* UserManager.m in Sources */,
+				014C01A119EF1198000B7573 /* PredictionMentionTableViewCell.m in Sources */,
 				014FDF6F18D7722F006B51D9 /* GroupTableViewCell.m in Sources */,
 				013DA8421853002200B507E4 /* PredictorCell.m in Sources */,
 				01E2577418E07D9B009D3782 /* RankingsViewController.m in Sources */,
@@ -2506,6 +2576,7 @@
 				013DA7C21853002200B507E4 /* NSData+Utils.m in Sources */,
 				013DA8D71853004000B507E4 /* Tag.m in Sources */,
 				013DA8641853002200B507E4 /* SelectPictureViewController.m in Sources */,
+				01DC10BB19EE3F24001BA0F9 /* TextViewWatcher.m in Sources */,
 				014FDF8218D9EB5F006B51D9 /* EditGroupViewController.m in Sources */,
 				01E8CB781876786C003AE018 /* NoSearchResultsCell.m in Sources */,
 				019CF39419B7A0C000C734E0 /* SocialInvitationsViewController.m in Sources */,
@@ -2534,6 +2605,7 @@
 				01DBEACF18DA4194000F2E50 /* InvitationTableViewCell.m in Sources */,
 				013DA86C1853002200B507E4 /* UserProfileHeaderView.m in Sources */,
 				013DA7D41853002200B507E4 /* Comment+Utils.m in Sources */,
+				014C018919EED514000B7573 /* AutocompleteMentionTableViewCell.m in Sources */,
 				013DA8321853002200B507E4 /* PredictionDetailsHeaderCell.m in Sources */,
 				0175664819B8235E00D14EE4 /* HomeHeaderView.m in Sources */,
 				01ACCE6E196417C800D3ABE9 /* CommentActivityTableViewCell.m in Sources */,
@@ -2632,7 +2704,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "Knoda Test";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "9D526CA8-AAA3-4DC0-B485-D2C71C17BC9E";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2645,8 +2717,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-4";
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Knoda, LLC (F489V4H5F6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Knoda, LLC (F489V4H5F6)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/KnodaIPhoneApp/Thirdparty",
@@ -2666,7 +2738,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "Knoda Test";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "9D526CA8-AAA3-4DC0-B485-D2C71C17BC9E";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};

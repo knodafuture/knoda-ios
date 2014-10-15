@@ -14,6 +14,7 @@
 #import "AnotherUsersProfileViewController.h"
 #import "PredictionDetailsViewController.h"
 #import "UserManager.h"
+#import "SearchViewController.h"    
 
 NSString *PredictionVotedEvent = @"PREDICTIONVOTED";
 NSString *PredictionVotedKey = @"PREDICTIONVOTEDKEY";
@@ -194,6 +195,18 @@ NSString *PredictionVotedKey = @"PREDICTIONVOTEDKEY";
 
 - (void)dealloc {
     [self removeAllObservations];
+}
+
+- (void)userMentionSelected:(NSString *)username inCell:(PredictionCell *)cell {
+    NSLog(@"username %@", username);
+    AnotherUsersProfileViewController *vc = [[AnotherUsersProfileViewController alloc] initWithUSername:username];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)hashtagSelected:(NSString *)hashtag inCell:(PredictionCell *)cell {
+    SearchViewController *vc = [[SearchViewController alloc] initWithStyle:UITableViewStylePlain];
+    [self.navigationController pushViewController:vc animated:YES];
+    [vc searchForTerm:hashtag];
 }
 
 @end

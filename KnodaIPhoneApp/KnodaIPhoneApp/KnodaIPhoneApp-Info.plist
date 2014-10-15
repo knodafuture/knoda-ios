@@ -49,6 +49,8 @@
 		<string>HelveticaNeue.dfont</string>
 		<string>KronaOne-Regular.ttf</string>
 	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchView</string>
 	<key>UIPrerenderedIcon</key>
 	<true/>
 	<key>UIRequiredDeviceCapabilities</key>

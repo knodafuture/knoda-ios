@@ -67,7 +67,7 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
 - (id)init {
     self = [super init];
     self.fileCache = [[FileCache alloc] init];
-    self.headers = @{@"Accept": @"application/json; api_version=6;", @"Content-Type" : @"application/json; charset=utf-8;"};
+    self.headers = @{@"Accept": @"application/json; api_version=7;", @"Content-Type" : @"application/json; charset=utf-8;"};
     return self;
 }
 
@@ -289,6 +289,18 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
     [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
         completionHandler([User arrayFromData:responseData], error);
     }];
+}
+
+- (void)getUserFromUsername:(NSString *)username completion:(void (^)(User *, NSError *))completionHandler {
+    username = [username stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *path = [NSString stringWithFormat:@"users/%@.json", username];
+    NSString *url = [self buildUrl:path parameters:nil];
+    NSURLRequest *request = [self requestWithUrl:url method:@"GET" payload:nil];
+    
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+        completionHandler([User instanceFromData:responseData], error);
+    }];
+    
 }
 
 - (void)getPredictionsAfter:(NSInteger)lastId completion:(void (^)(NSArray *, NSError *))completionHandler {
@@ -889,6 +901,27 @@ NSString const *baseURL = @"http://api.knoda.com/api/";
             array = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
         completionHandler(array, nil);
     }];
+}
+
+- (void)searchForHashtags:(NSString *)term completion:(void (^)(NSArray *, NSError *))completionHandler {
+    
+    NSDictionary *parameters = nil;
+    
+    if (term)
+        parameters = @{@"q":term};
+    
+    NSString *url = [self buildUrl:@"hashtags/autocomplete.json" parameters:parameters];
+    NSURLRequest *request = [self requestWithUrl:url method:@"GET" data:nil];
+    
+    [self executeRequest:request completion:^(NSData *responseData, NSError *error) {
+        NSArray *results = nil;
+        
+        if (responseData)
+            results = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
+        
+        completionHandler(results, error);
+    }];
+    
 }
 
 - (NSString *)getCreatedObjectId:(NSData *)data {

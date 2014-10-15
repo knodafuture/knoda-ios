@@ -15,7 +15,32 @@ static UIFont *defaultBodyLabelFont;
 static CGFloat defaultHeight;
 static UILabel *defaultBodyLabel;
 static NSMutableDictionary *cellHeights;
+static NSDictionary *linkAttributes;
 
+static inline NSRegularExpression * MentionRegularExpression() {
+    static NSRegularExpression *_mentionRegularExpression = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _mentionRegularExpression = [[NSRegularExpression alloc] initWithPattern:@"((?:^|\\s)(?:@){1}[0-9a-zA-Z_]{1,15})" options:NSRegularExpressionCaseInsensitive error:nil];
+    });
+    
+    return _mentionRegularExpression;
+}
+
+static inline NSRegularExpression * HashtagRegularExpression() {
+    static NSRegularExpression *_hashtagRegularExpression = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _hashtagRegularExpression = [[NSRegularExpression alloc] initWithPattern:@"((?:#){1}[\\w\\d]{1,140})" options:NSRegularExpressionCaseInsensitive error:nil];
+    });
+    
+    return _hashtagRegularExpression;
+}
+
+
+@interface CommentCell () <TTTAttributedLabelDelegate>
+
+@end
 
 @implementation CommentCell
 
@@ -30,14 +55,23 @@ static NSMutableDictionary *cellHeights;
     defaultHeight = tmp.frame.size.height;
     defaultBodyLabel = tmp.bodyLabel;
     cellHeights = [[NSMutableDictionary alloc] init];
+    
+    NSArray *keys = [[NSArray alloc] initWithObjects:(id)kCTForegroundColorAttributeName,(id)kCTUnderlineStyleAttributeName, (__bridge NSString *)kCTFontAttributeName, nil];
+    NSArray *objects = [[NSArray alloc] initWithObjects:[UIColor colorFromHex:@"77BC1F"],[NSNumber numberWithInt:kCTUnderlineStyleNone], [UIFont fontWithName:@"HelveticaNeue-Medium" size:15.0], nil];
+    linkAttributes = [[NSDictionary alloc] initWithObjects:objects forKeys:keys];
+
 }
 
 + (CommentCell *)commentCellForTableView:(UITableView *)tableView {
     
     CommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentCell"];
     
-    if (!cell)
+    if (!cell) {
         cell = [[nib instantiateWithOwner:nil options:nil] lastObject];
+        cell.bodyLabel.delegate = cell;
+        cell.bodyLabel.enabledTextCheckingTypes = NSTextCheckingTypeLink;
+        cell.bodyLabel.activeLinkAttributes = nil;
+    }
     
     return cell;
 }
@@ -64,12 +98,32 @@ static NSMutableDictionary *cellHeights;
 }
 
 
+- (void)setBody:(NSString *)text {
+    self.bodyLabel.text = text;
+    
+    NSRegularExpression *mentionExpression = MentionRegularExpression();
+    
+    NSArray *matches = [mentionExpression matchesInString:text
+                                                  options:0
+                                                    range:NSMakeRange(0, [text length])];
+    for (NSTextCheckingResult *match in matches) {
+        [self.bodyLabel addLinkWithTextCheckingResult:match attributes:linkAttributes];
+    }
+    
+    NSRegularExpression *hashTagExpression = HashtagRegularExpression() ;
+    matches = [hashTagExpression matchesInString:text options:0 range:NSMakeRange(0, text.length)];
+    
+    for (NSTextCheckingResult *match in matches) {
+        [self.bodyLabel addLinkWithTextCheckingResult:match attributes:linkAttributes];
+    }
+}
+
 - (void)fillWithComment:(Comment *)comment {
     self.comment = comment;
     
     self.usernameLabel.text = comment.username;
-    self.bodyLabel.text = comment.body;
     self.metaDataLabel.text = [comment createdAtString];
+    [self setBody:comment.body];
     
     if (comment.challenge)
         self.voteImage.image = [UIImage imageNamed:comment.challenge.agree ? @"AgreeMarker" : @"DisagreeMarker"];
@@ -97,5 +151,16 @@ static NSMutableDictionary *cellHeights;
 
 - (IBAction)profileClicked:(id)sender {
     [self.delegate userClickedInCommentCellWithUserId:self.comment.userId];
+}
+
+- (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithTextCheckingResult:(NSTextCheckingResult *)result  {
+    NSString *selectedText = [self.comment.body substringWithRange:result.range];
+    NSString *stripped = [selectedText stringByReplacingOccurrencesOfString:@"@" withString:@""];
+    stripped = [stripped stringByReplacingOccurrencesOfString:@"#" withString:@""];
+    if ([selectedText rangeOfString:@"@"].location != NSNotFound) {
+        [self.delegate userMentionSelected:stripped];
+    } else if ([selectedText rangeOfString:@"#"].location != NSNotFound) {
+        [self.delegate hashtagSelected:stripped];
+    }
 }
 @end

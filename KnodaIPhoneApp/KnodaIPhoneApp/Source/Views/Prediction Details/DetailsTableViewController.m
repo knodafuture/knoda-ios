@@ -163,12 +163,12 @@ static const float parallaxRatio = 0.5;
         return;
     
     UITableViewCell *stickyCell = self.headerCell;
-    
     CGRect frame = stickyCell.frame;
     
-    frame.origin.y = scrollView.contentOffset.y * parallaxRatio;
+    frame.origin.y = MAX(scrollView.contentOffset.y * 0.5, 0);
     
     stickyCell.frame = frame;
+    
     [stickyCell.superview sendSubviewToBack:stickyCell];
     [stickyCell.superview sendSubviewToBack:self.refreshControl];
 

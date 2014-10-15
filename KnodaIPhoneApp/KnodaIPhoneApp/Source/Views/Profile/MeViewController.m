@@ -48,17 +48,6 @@ CGFloat const SwipeBezel = 30.0f;
     [super viewDidLoad];
     self.title = [UserManager sharedInstance].user.name.uppercaseString;
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem rightBarButtonItemWithImage:[UIImage imageNamed:@"SettingsIcon"] target:self action:@selector(onSettings)];
-
-    self.selectionView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 36)];
-    self.selectionView.backgroundColor = [UIColor colorFromHex:@"77bc1f"];
-    
-    UILabel *myPredictionsLabel = [self headerLabel];
-    myPredictionsLabel.text = @"My Predictions";
-    
-    UILabel *myVotesLabel = [self headerLabel];
-    myVotesLabel.text = @"My Votes";
-    
-    self.buttons = @[myPredictionsLabel, myVotesLabel];
     
     MeTableViewController *myPredictions = [[MeTableViewController alloc] initForChallenged:NO delegate:self];
     MeTableViewController *myVotes = [[MeTableViewController alloc] initForChallenged:YES delegate:self];
@@ -122,14 +111,23 @@ CGFloat const SwipeBezel = 30.0f;
     
     self.visibleTableViewController = self.tableViewControllers[0];
     
-    [self.view addSubview:self.selectionView];
     
+    self.selectionView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 36)];
+    self.selectionView.backgroundColor = [UIColor colorFromHex:@"77bc1f"];
+    UILabel *myPredictionsLabel = [self headerLabel];
+    myPredictionsLabel.text = @"My Predictions";
+    
+    UILabel *myVotesLabel = [self headerLabel];
+    myVotesLabel.text = @"My Votes";
+    
+    self.buttons = @[myPredictionsLabel, myVotesLabel];
     CGRect frame = self.selectionView.frame;
     
     frame.origin.y = self.headerView.frame.size.height + self.visibleTableViewController.tableView.contentOffset.y;
     
     self.selectionView.frame = frame;
-    
+    [self.view addSubview:self.selectionView];
+
     if (self.buttons.count == 0)
         return;
     

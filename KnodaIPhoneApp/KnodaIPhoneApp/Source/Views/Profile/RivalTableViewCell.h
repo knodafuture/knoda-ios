@@ -20,7 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *rightWinLossLabel;
 @property (weak, nonatomic) IBOutlet UILabel *rightWinPercentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *rightStreakLabel;
-
+@property (weak, nonatomic) IBOutlet UIView *innerView;
 @property (strong, nonatomic) HeadToHeadBarView *barView;
 
 + (RivalTableViewCell *)cellForTableView:(UITableView *)tableView;

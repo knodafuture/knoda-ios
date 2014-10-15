@@ -34,6 +34,8 @@ static const NSInteger kMaxPasswordLength = 20;
 @property (weak, nonatomic) IBOutlet UITextField *emailTextFiled;
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (weak, nonatomic) IBOutlet UIView *textFieldContainerView;
+@property (weak, nonatomic) IBOutlet UIButton *twitterButton;
+@property (weak, nonatomic) IBOutlet UIButton *knodaUserButton;
 @end
 
 @implementation SignUpViewController
@@ -54,6 +56,13 @@ static const NSInteger kMaxPasswordLength = 20;
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(willShowKeyboardNotificationDidRecieve:) name: UIKeyboardWillShowNotification object: nil];
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(willHideKeyboardNotificationDidRecieve:) name: UIKeyboardWillHideNotification object: nil];
     [super viewWillAppear: animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    CGRect frame = self.knodaUserButton.frame;
+    frame.origin.x = self.twitterButton.frame.origin.x + self.twitterButton.frame.size.width - frame.size.width;
+    self.knodaUserButton.frame = frame;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

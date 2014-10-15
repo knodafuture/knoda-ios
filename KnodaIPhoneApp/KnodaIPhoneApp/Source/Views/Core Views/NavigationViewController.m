@@ -49,7 +49,7 @@ NSString *GetStartedNotificationName = @"GETSTARTED";
 @property (readonly, nonatomic) UserManager *userManger;
 @property (strong, nonatomic) Group *activeGroup;
 @property (strong, nonatomic) NSDictionary *pushInfo;
-@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *buttons;
+@property (strong, nonatomic) NSArray *buttons;
 @property (weak, nonatomic) IBOutlet UIView *tabBarView;
 @property (weak, nonatomic) IBOutlet NavigationScrollView *scrollView;
 @property (strong, nonatomic) NSArray *buttonNames;
@@ -84,6 +84,66 @@ NSString *GetStartedNotificationName = @"GETSTARTED";
 
 }
 
+- (void)layoutTabBar {
+    
+    NSMutableArray *tmpButtons = [NSMutableArray arrayWithCapacity:5];
+    CGRect startingFrame = CGRectMake(0, 0, 64.0, 48.0);
+    
+    UIButton *homeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    homeButton.frame = startingFrame;
+    [homeButton setImage:[UIImage imageNamed:@"NavHome"] forState:UIControlStateNormal];
+    
+    CGRect frame = homeButton.frame;
+    frame.origin.x = 10.0;
+    [self.tabBarView addSubview:homeButton];
+    homeButton.frame = frame;
+    
+    UIButton *meButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    meButton.frame = startingFrame;
+    [meButton setImage:[UIImage imageNamed:@"NavMe"] forState:UIControlStateNormal];
+    
+    frame = meButton.frame;
+    frame.origin.x = self.tabBarView.frame.size.width - frame.size.width - 10.0;
+    meButton.frame = frame;
+    [self.tabBarView addSubview:meButton];
+    
+    UIButton *predictButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    predictButton.frame = startingFrame;
+    [predictButton setImage:[UIImage imageNamed:@"NavPredict"] forState:UIControlStateNormal];
+    frame = predictButton.frame;
+    frame.origin.x = (self.tabBarView.frame.size.width / 2.0) - (frame.size.width / 2.0);
+    predictButton.frame = frame;
+    [self.tabBarView addSubview:predictButton];
+    
+    UIButton *activityButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    activityButton.frame = startingFrame;
+    [activityButton setImage:[UIImage imageNamed:@"NavActivity"] forState:UIControlStateNormal];
+    frame = activityButton.frame;
+    frame.origin.x = ((homeButton.center.x + predictButton.center.x) / 2.0) - (frame.size.width / 2.0);
+    activityButton.frame = frame;
+    [self.tabBarView addSubview:activityButton];
+    
+    UIButton *groupsButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    groupsButton.frame = startingFrame;
+    [groupsButton setImage:[UIImage imageNamed:@"NavGroups"] forState:UIControlStateNormal];
+    frame = groupsButton.frame;
+    frame.origin.x = ((predictButton.center.x + meButton.center.x)/2.0) - (frame.size.width / 2.0);
+    groupsButton.frame = frame;
+    [self.tabBarView addSubview:groupsButton];
+    
+    [tmpButtons addObject:homeButton];
+    [tmpButtons addObject:activityButton];
+    [tmpButtons addObject:groupsButton];
+    [tmpButtons addObject:meButton];
+    
+    self.buttons = [NSArray arrayWithArray:tmpButtons];
+    
+    for (UIButton *button in self.buttons) {
+        [button addTarget:self action:@selector(tabBarButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    [predictButton addTarget:self action:@selector(presentAddPredictionViewController) forControlEvents:UIControlEventTouchUpInside];
+}
 
 - (void)handleOpenUrl:(NSURL *)url {
     
@@ -163,18 +223,21 @@ NSString *GetStartedNotificationName = @"GETSTARTED";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
+    if (!self.appeared) {
+        [self layoutTabBar];
 
-    self.scrollView.bezelWidth = SideNavBezelWidth;
-    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * 4, self.scrollView.frame.size.height);
+        self.scrollView.bezelWidth = SideNavBezelWidth;
+        self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * 4, self.scrollView.frame.size.height);
 
-    for (int i = 0; i < 1; i++) {
-        UINavigationController *vc = [self navigationControllerForMenuItem:i];
-        CGRect frame = vc.view.frame;
-        frame.size = self.scrollView.frame.size;
-        frame.origin.x = i * frame.size.width;
-        frame.origin.y = 0;
-        vc.view.frame = frame;
-        [self.scrollView addSubview:vc.view];
+        for (int i = 0; i < 1; i++) {
+            UINavigationController *vc = [self navigationControllerForMenuItem:i];
+            CGRect frame = vc.view.frame;
+            frame.size = self.scrollView.frame.size;
+            frame.origin.x = i * frame.size.width;
+            frame.origin.y = 0;
+            vc.view.frame = frame;
+            [self.scrollView addSubview:vc.view];
+        }
     }
     
     [self.pingTimer invalidate];

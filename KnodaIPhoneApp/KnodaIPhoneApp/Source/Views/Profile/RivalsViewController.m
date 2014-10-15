@@ -34,6 +34,7 @@
     self.tableView.tableFooterView = [[UIView alloc] init];
     
     self.openRows = [[NSMutableSet alloc] init];
+    
 }
 
 - (void)onBack {
@@ -72,6 +73,7 @@
         frame.size.height = 214;
     else
         frame.size.height = 76.0;
+    frame.size.width = self.view.frame.size.width;
     cell.frame = frame;
     return cell;
 }

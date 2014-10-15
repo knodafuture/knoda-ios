@@ -265,6 +265,8 @@
 		01598B3C1858E4B3002E2534 /* ZoomingImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01598B3A1858E4B3002E2534 /* ZoomingImageViewController.xib */; };
 		0159B76919210A1A008B28E7 /* NavigationScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0159B76819210A1A008B28E7 /* NavigationScrollView.m */; };
 		0159B76A19210EB4008B28E7 /* NavigationScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0159B76819210A1A008B28E7 /* NavigationScrollView.m */; };
+		015BC45519EB63510060AD82 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 015BC45419EB63510060AD82 /* TTTAttributedLabel.m */; };
+		015BC45619EB63510060AD82 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 015BC45419EB63510060AD82 /* TTTAttributedLabel.m */; };
 		017565E219B7A31000D14EE4 /* FollowFacebookConnectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017565E119B7A31000D14EE4 /* FollowFacebookConnectCell.xib */; };
 		017565E419B7A50C00D14EE4 /* FollowTwitterConnectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017565E319B7A50C00D14EE4 /* FollowTwitterConnectCell.xib */; };
 		017565E519B7A7AA00D14EE4 /* FollowFacebookConnectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017565E119B7A31000D14EE4 /* FollowFacebookConnectCell.xib */; };
@@ -493,6 +495,8 @@
 		01C4A4B0190E6A1D00E08031 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C4A4AE190E6A1D00E08031 /* FacebookSDK.framework */; };
 		01CBF77019D32DF300D6AA42 /* RivalEmptyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01CBF76F19D32DF300D6AA42 /* RivalEmptyCell.xib */; };
 		01CBF77119D32DF300D6AA42 /* RivalEmptyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01CBF76F19D32DF300D6AA42 /* RivalEmptyCell.xib */; };
+		01CBF78719DB3CED00D6AA42 /* LaunchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01CBF78619DB3CED00D6AA42 /* LaunchView.xib */; };
+		01CBF78819DB3CED00D6AA42 /* LaunchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01CBF78619DB3CED00D6AA42 /* LaunchView.xib */; };
 		01D73407190EC6200070481E /* FacebookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D73406190EC6200070481E /* FacebookManager.m */; };
 		01D73408190EC6200070481E /* FacebookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D73406190EC6200070481E /* FacebookManager.m */; };
 		01D7340B19126B230070481E /* TwitterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D7340A19126B230070481E /* TwitterManager.m */; };
@@ -786,6 +790,8 @@
 		01598B3A1858E4B3002E2534 /* ZoomingImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZoomingImageViewController.xib; sourceTree = "<group>"; };
 		0159B76719210A1A008B28E7 /* NavigationScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationScrollView.h; sourceTree = "<group>"; };
 		0159B76819210A1A008B28E7 /* NavigationScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationScrollView.m; sourceTree = "<group>"; };
+		015BC45319EB63510060AD82 /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
+		015BC45419EB63510060AD82 /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
 		017565E119B7A31000D14EE4 /* FollowFacebookConnectCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowFacebookConnectCell.xib; sourceTree = "<group>"; };
 		017565E319B7A50C00D14EE4 /* FollowTwitterConnectCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowTwitterConnectCell.xib; sourceTree = "<group>"; };
 		017565E719B7AB8300D14EE4 /* ContactMatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactMatch.h; sourceTree = "<group>"; };
@@ -969,6 +975,7 @@
 		01C4A4AB190E61B300E08031 /* SocialAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialAccount.m; sourceTree = "<group>"; };
 		01C4A4AE190E6A1D00E08031 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		01CBF76F19D32DF300D6AA42 /* RivalEmptyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RivalEmptyCell.xib; sourceTree = "<group>"; };
+		01CBF78619DB3CED00D6AA42 /* LaunchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchView.xib; sourceTree = "<group>"; };
 		01D73405190EC6200070481E /* FacebookManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookManager.h; sourceTree = "<group>"; };
 		01D73406190EC6200070481E /* FacebookManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookManager.m; sourceTree = "<group>"; };
 		01D7340919126B230070481E /* TwitterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterManager.h; sourceTree = "<group>"; };
@@ -1253,6 +1260,7 @@
 				01A6786E195778E5002FDE1F /* TabbedViewController.h */,
 				01A6786F195778E5002FDE1F /* TabbedViewController.m */,
 				01A6787219577E1C002FDE1F /* TabbedViewController.xib */,
+				01CBF78619DB3CED00D6AA42 /* LaunchView.xib */,
 			);
 			path = "Core Views";
 			sourceTree = "<group>";
@@ -1444,6 +1452,7 @@
 		013DA7A81853002100B507E4 /* Thirdparty */ = {
 			isa = PBXGroup;
 			children = (
+				015BC45219EB63510060AD82 /* TTTAtributedLabel */,
 				01C4A4AE190E6A1D00E08031 /* FacebookSDK.framework */,
 				01C4A48F190E3D2F00E08031 /* ReverseAuth */,
 				01C4A494190E3D2F00E08031 /* ABOAuthCore */,
@@ -1588,6 +1597,15 @@
 				01ACCE821964343200D3ABE9 /* BragItemProvider.m */,
 			);
 			path = Sharing;
+			sourceTree = "<group>";
+		};
+		015BC45219EB63510060AD82 /* TTTAtributedLabel */ = {
+			isa = PBXGroup;
+			children = (
+				015BC45319EB63510060AD82 /* TTTAttributedLabel.h */,
+				015BC45419EB63510060AD82 /* TTTAttributedLabel.m */,
+			);
+			path = TTTAtributedLabel;
 			sourceTree = "<group>";
 		};
 		01871E1118D75DE900A2B809 /* Groups */ = {
@@ -1914,7 +1932,7 @@
 				ORGANIZATIONNAME = Knoda;
 				TargetAttributes = {
 					0121E7D8184FDBC700B7C5CA = {
-						DevelopmentTeam = 3D247B7547;
+						DevelopmentTeam = F489V4H5F6;
 					};
 					9E70881F178AF68E00F036A8 = {
 						DevelopmentTeam = 3D247B7547;
@@ -2029,6 +2047,7 @@
 				013DA81B1853002200B507E4 /* LoadingView.xib in Resources */,
 				013DA8171853002200B507E4 /* LoadingCell.xib in Resources */,
 				01BFDC7618E5C8110098F81F /* GroupAvatars.xcassets in Resources */,
+				01CBF78819DB3CED00D6AA42 /* LaunchView.xib in Resources */,
 				01DBEABB18DA29C6000F2E50 /* GroupSettingsViewController.xib in Resources */,
 				01E8CB7C187678E0003AE018 /* NoSearchResultsCell.xib in Resources */,
 				013DA83F1853002200B507E4 /* PredictionDetailsSectionHeader.xib in Resources */,
@@ -2127,6 +2146,7 @@
 				0175665919B82C2300D14EE4 /* NoSocialPredictionsCell.xib in Resources */,
 				017565E419B7A50C00D14EE4 /* FollowTwitterConnectCell.xib in Resources */,
 				013DA81E1853002200B507E4 /* NoContentCell.xib in Resources */,
+				01CBF78719DB3CED00D6AA42 /* LaunchView.xib in Resources */,
 				013DA87E1853002200B507E4 /* IntroOverlay@2x.png in Resources */,
 				01A6787319577E1C002FDE1F /* TabbedViewController.xib in Resources */,
 				01CBF77019D32DF300D6AA42 /* RivalEmptyCell.xib in Resources */,
@@ -2232,6 +2252,7 @@
 				01ACCE7319642B7F00D3ABE9 /* SettleActivityTableViewCell.m in Sources */,
 				01E2576918E0741A009D3782 /* RankingsTableViewController.m in Sources */,
 				0193A00618CE6AE90088D168 /* ParamBuilder.m in Sources */,
+				015BC45619EB63510060AD82 /* TTTAttributedLabel.m in Sources */,
 				010D396119CB32D9007AC4DF /* RivalsViewController.m in Sources */,
 				013DA8CA1853004000B507E4 /* Comment.m in Sources */,
 				01ACCE801964307800D3ABE9 /* InviteActivityTableViewCell.m in Sources */,
@@ -2405,6 +2426,7 @@
 				01E2576818E0741A009D3782 /* RankingsTableViewController.m in Sources */,
 				01ACCE7219642B7F00D3ABE9 /* SettleActivityTableViewCell.m in Sources */,
 				0193A00518CE6AE90088D168 /* ParamBuilder.m in Sources */,
+				015BC45519EB63510060AD82 /* TTTAttributedLabel.m in Sources */,
 				010D396019CB32D9007AC4DF /* RivalsViewController.m in Sources */,
 				013DA8C91853004000B507E4 /* Comment.m in Sources */,
 				013DA7F41853002200B507E4 /* MultipartRequest.m in Sources */,
@@ -2583,10 +2605,10 @@
 			baseConfigurationReference = 8825C313D9324F9BA336C19A /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-4";
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Knoda, LLC (F489V4H5F6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Knoda, LLC (F489V4H5F6)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/KnodaIPhoneApp/Thirdparty",
@@ -2610,7 +2632,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "Knoda Test";
-				PROVISIONING_PROFILE = "9D526CA8-AAA3-4DC0-B485-D2C71C17BC9E";
+				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2621,10 +2643,10 @@
 			baseConfigurationReference = 8825C313D9324F9BA336C19A /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-4";
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Knoda, LLC (F489V4H5F6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Knoda, LLC (F489V4H5F6)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/KnodaIPhoneApp/Thirdparty",
@@ -2644,7 +2666,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "Knoda Test";
-				PROVISIONING_PROFILE = "9D526CA8-AAA3-4DC0-B485-D2C71C17BC9E";
+				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};

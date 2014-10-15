@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
+        <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
@@ -9,10 +10,6 @@
                 <outlet property="scrollView" destination="dmk-Rb-1aH" id="VN2-eT-6GB"/>
                 <outlet property="tabBarView" destination="28h-Gu-Xy8" id="cGG-fT-NSR"/>
                 <outlet property="view" destination="pin-4q-9Kd" id="Jha-Fa-hRI"/>
-                <outletCollection property="buttons" destination="7F0-FF-pHN" id="EHO-hD-sxE"/>
-                <outletCollection property="buttons" destination="nlT-Lc-VfF" id="QaC-97-1ZV"/>
-                <outletCollection property="buttons" destination="cQs-mh-UIk" id="0eV-pA-Ras"/>
-                <outletCollection property="buttons" destination="Fym-xI-sJE" id="Q6i-Su-6DZ"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -23,58 +20,6 @@
                 <view contentMode="scaleToFill" id="28h-Gu-Xy8">
                     <rect key="frame" x="0.0" y="520" width="320" height="48"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="7F0-FF-pHN">
-                            <rect key="frame" x="0.0" y="0.0" width="64" height="48"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" image="NavHome">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="tabBarButtonPressed:" destination="-1" eventType="touchUpInside" id="Q1f-k6-uB8"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="nlT-Lc-VfF">
-                            <rect key="frame" x="64" y="0.0" width="64" height="48"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" image="NavActivity">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="tabBarButtonPressed:" destination="-1" eventType="touchUpInside" id="DWR-Ja-2TM"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="TEB-58-CBN">
-                            <rect key="frame" x="128" y="0.0" width="64" height="48"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" image="NavPredict">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="presentAddPredictionViewController" destination="-1" eventType="touchUpInside" id="OeC-gA-5kO"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="cQs-mh-UIk">
-                            <rect key="frame" x="192" y="0.0" width="64" height="48"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" image="NavGroups">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="tabBarButtonPressed:" destination="-1" eventType="touchUpInside" id="b3A-Gk-mmk"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="Fym-xI-sJE">
-                            <rect key="frame" x="256" y="0.0" width="64" height="48"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" image="NavMe">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="tabBarButtonPressed:" destination="-1" eventType="touchUpInside" id="vVG-F7-Rro"/>
-                            </connections>
-                        </button>
-                    </subviews>
                     <color key="backgroundColor" red="0.16470588235294117" green="0.16470588235294117" blue="0.16470588235294117" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="dmk-Rb-1aH" customClass="NavigationScrollView">
@@ -91,13 +36,6 @@
             <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
         </view>
     </objects>
-    <resources>
-        <image name="NavActivity" width="36" height="48"/>
-        <image name="NavGroups" width="36" height="48"/>
-        <image name="NavHome" width="36" height="48"/>
-        <image name="NavMe" width="36" height="48"/>
-        <image name="NavPredict" width="36" height="48"/>
-    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

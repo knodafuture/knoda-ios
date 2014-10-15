@@ -81,7 +81,7 @@
         CGRect frame = label.frame;
         frame.size.width = 50;
         frame.size.height = cell.frame.size.height;
-        frame.origin.x = cell.frame.size.width - frame.size.width - 10.0;
+        frame.origin.x = self.view.frame.size.width - frame.size.width - 10.0;
         label.frame = frame;
         [cell.contentView addSubview:label];
         label.text = [NSString stringWithFormat:@"%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];

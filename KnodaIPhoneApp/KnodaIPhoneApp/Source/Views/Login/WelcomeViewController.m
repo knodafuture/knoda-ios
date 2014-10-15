@@ -32,6 +32,8 @@
 @property (strong, nonatomic) NSArray *twitterAccounts;
 @property (weak, nonatomic) IBOutlet UILabel *termsLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *splashImage;
+@property (weak, nonatomic) IBOutlet UIButton *knodaUserButton;
+@property (weak, nonatomic) IBOutlet UIButton *twitterButton;
 
 @end
 
@@ -61,22 +63,15 @@
     
     self.view.backgroundColor = [UIColor clearColor];
     
+
     
 }
-//- (void)viewWillAppear:(BOOL)animated {
-//    [super viewWillAppear:animated];
-//    [self.navigationController setNavigationBarHidden:YES];
-//
-//}
-//
-//- (void)viewDidDisappear:(BOOL)animated {
-//    [super viewWillAppear:YES];
-//    [self.navigationController setNavigationBarHidden:NO];
-//}
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
+    CGRect frame = self.knodaUserButton.frame;
+    frame.origin.x = self.twitterButton.frame.origin.x + self.twitterButton.frame.size.width - frame.size.width;
+    self.knodaUserButton.frame = frame;
     [self showLoginSignup];
 //    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 //    

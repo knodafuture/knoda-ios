@@ -10,6 +10,7 @@
 #import "Prediction+Utils.h"
 #import "Challenge.h"
 #import <QuartzCore/QuartzCore.h>
+#import "TTTAttributedLabel.h"
 
 static UINib *nib;
 static CGRect initialAgreeImageFrame;
@@ -31,9 +32,29 @@ static CGFloat fullGreenG = 188.0/256.0;
 static CGFloat fullGreenB = 31.0/256.0;
 
 static NSMutableDictionary *cellHeightCache;
+static NSDictionary *linkAttributes;
+static inline NSRegularExpression * MentionRegularExpression() {
+    static NSRegularExpression *_mentionRegularExpression = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _mentionRegularExpression = [[NSRegularExpression alloc] initWithPattern:@"((?:^|\\s)(?:@){1}[0-9a-zA-Z_]{1,15})" options:NSRegularExpressionCaseInsensitive error:nil];
+    });
+    
+    return _mentionRegularExpression;
+}
+
+static inline NSRegularExpression * HashtagRegularExpression() {
+    static NSRegularExpression *_hashtagRegularExpression = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _hashtagRegularExpression = [[NSRegularExpression alloc] initWithPattern:@"((?:#){1}[\\w\\d]{1,140})" options:NSRegularExpressionCaseInsensitive error:nil];
+    });
+    
+    return _hashtagRegularExpression;
+}
 
 @interface PredictionCell ()
-@property (weak, nonatomic) IBOutlet UILabel *bodyLabel;
+@property (weak, nonatomic) IBOutlet TTTAttributedLabel *bodyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *metadataLabel;
 @property (weak, nonatomic) IBOutlet UILabel *commentCountLabel;
 @property (weak, nonatomic) IBOutlet UIView *commentLabelContainer;
@@ -50,6 +71,7 @@ static NSMutableDictionary *cellHeightCache;
 @property (weak, nonatomic) IBOutlet UIImageView *groupImageView;
 @property (weak, nonatomic) IBOutlet UILabel *groupNameLabel;
 @property (assign, nonatomic) CGPoint initialTouchLocation;
+@property (strong, nonatomic) UITouch *initialTouch;
 @property (assign, nonatomic) NSTimeInterval initialTouchTimestamp;
 @property (assign, nonatomic) BOOL trackingTouch;
 @property (assign, nonatomic) BOOL finishingCellAnimation;
@@ -76,13 +98,20 @@ static NSMutableDictionary *cellHeightCache;
     defaultBodyLabel = tmp.bodyLabel;
     
     cellHeightCache = [[NSMutableDictionary alloc] init];
+    NSArray *keys = [[NSArray alloc] initWithObjects:(id)kCTForegroundColorAttributeName,(id)kCTUnderlineStyleAttributeName, (__bridge NSString *)kCTFontAttributeName, nil];
+    NSArray *objects = [[NSArray alloc] initWithObjects:[UIColor colorFromHex:@"77BC1F"],[NSNumber numberWithInt:kCTUnderlineStyleNone], [UIFont fontWithName:@"HelveticaNeue-Medium" size:15.0], nil];
+    linkAttributes = [[NSDictionary alloc] initWithObjects:objects forKeys:keys];
 }
 
 + (PredictionCell *)predictionCellForTableView:(UITableView *)tableView {
     PredictionCell *cell;
     
-    if (!cell)
+    if (!cell) {
         cell = [[nib instantiateWithOwner:nil options:nil] lastObject];
+        cell.bodyLabel.delegate = cell;
+        cell.bodyLabel.enabledTextCheckingTypes = NSTextCheckingTypeLink;
+        cell.bodyLabel.activeLinkAttributes = nil;
+    }
     
     cell.swipeEnabled = YES;
     
@@ -113,11 +142,60 @@ static NSMutableDictionary *cellHeightCache;
     return height;
 }
 
+- (void)updateBodyLabel:(NSString *)text {
+//    [self.bodyLabel setText:text afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+//        NSRange stringRange = NSMakeRange(0, [mutableAttributedString length]);
+//        
+//        NSRegularExpression *regexp = MentionRegularExpression();
+//        NSRange nameRange = [regexp rangeOfFirstMatchInString:[mutableAttributedString string] options:0 range:stringRange];
+//        UIFont *boldSystemFont = [UIFont fontWithName:@"HelveticaNeue-Medium" size:15.0];
+//        CTFontRef boldFont = CTFontCreateWithName((__bridge CFStringRef)boldSystemFont.fontName, boldSystemFont.pointSize, NULL);
+//        if (boldFont) {
+//            [mutableAttributedString removeAttribute:(__bridge NSString *)kCTFontAttributeName range:nameRange];
+//            [mutableAttributedString addAttribute:(__bridge NSString *)kCTFontAttributeName value:(__bridge id)boldFont range:nameRange];
+//            CFRelease(boldFont);
+//        }
+//        
+//        [mutableAttributedString replaceCharactersInRange:nameRange withString:[[[mutableAttributedString string] substringWithRange:nameRange] uppercaseString]];
+//        
+//        regexp = ParenthesisRegularExpression();
+//        [regexp enumerateMatchesInString:[mutableAttributedString string] options:0 range:stringRange usingBlock:^(NSTextCheckingResult *result, __unused NSMatchingFlags flags, __unused BOOL *stop) {
+//            UIFont *italicSystemFont = [UIFont italicSystemFontOfSize:kEspressoDescriptionTextFontSize];
+//            CTFontRef italicFont = CTFontCreateWithName((__bridge CFStringRef)italicSystemFont.fontName, italicSystemFont.pointSize, NULL);
+//            if (italicFont) {
+//                [mutableAttributedString removeAttribute:(NSString *)kCTFontAttributeName range:result.range];
+//                [mutableAttributedString addAttribute:(NSString *)kCTFontAttributeName value:(__bridge id)italicFont range:result.range];
+//                CFRelease(italicFont);
+//                
+//                [mutableAttributedString removeAttribute:(NSString *)kCTForegroundColorAttributeName range:result.range];
+//                [mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(__bridge id)[[UIColor grayColor] CGColor] range:result.range];
+//            }
+//        }];
+//        
+//        return mutableAttributedString;
+//    }];
+    self.bodyLabel.text = text;
+    
+    NSRegularExpression *mentionExpression = MentionRegularExpression();
+    
+    NSArray *matches = [mentionExpression matchesInString:text
+                                                  options:0
+                                                    range:NSMakeRange(0, [text length])];
+    for (NSTextCheckingResult *match in matches) {
+        [self.bodyLabel addLinkWithTextCheckingResult:match attributes:linkAttributes];
+    }
+    
+    NSRegularExpression *hashTagExpression = HashtagRegularExpression() ;
+    matches = [hashTagExpression matchesInString:text options:0 range:NSMakeRange(0, text.length)];
+    
+    for (NSTextCheckingResult *match in matches) {
+        [self.bodyLabel addLinkWithTextCheckingResult:match attributes:linkAttributes];
+    }
+}
 
 - (void)update {
     self.usernameLabel.text = self.prediction.username;
-    self.bodyLabel.text = self.prediction.body;
-    
+    [self updateBodyLabel:self.prediction.body];
     self.metadataLabel.text = [self.prediction metaDataString];
     
     agreed = [self.prediction iAgree];
@@ -194,6 +272,19 @@ static NSMutableDictionary *cellHeightCache;
         self.groupImageView.hidden = YES;
         self.groupNameLabel.hidden = YES;
         
+        if (!self.frameAdjusted) {
+            CGRect imageFrame = self.agreeImageView.frame;
+            imageFrame.origin.x = initialAgreeImageFrame.origin.x;
+            imageFrame.origin.y = (self.slidingContainer.frame.size.height / 2.0) - (initialAgreeImageFrame.size.height / 2.0);
+            self.agreeImageView.frame = imageFrame;
+            
+            imageFrame = self.disagreeImageView.frame;
+            imageFrame.origin.x = initialDisagreeImageFrame.origin.x;
+            imageFrame.origin.y = (self.slidingContainer.frame.size.height / 2.0) - (initialDisagreeImageFrame.size.height / 2.0);
+            self.disagreeImageView.frame = imageFrame;
+            self.frameAdjusted = YES;
+        }
+        
     } else {
             if (!self.frameAdjusted) {
                 frame = self.metadataLabel.frame;
@@ -216,6 +307,8 @@ static NSMutableDictionary *cellHeightCache;
                     self.groupNameLabel.text = self.prediction.contestName;
                     self.groupImageView.image = [UIImage imageNamed:@"ContestPredictionBadge"];
                 }
+                
+
                 self.frameAdjusted = YES;
             }
     }
@@ -295,13 +388,17 @@ static NSMutableDictionary *cellHeightCache;
 
     UITouch *touch = [touches anyObject];
     
+    self.initialTouch = touch;
     self.initialTouchLocation = [touch locationInView:self];
     self.initialTouchTimestamp = event.timestamp;
+    
+    [self.bodyLabel touchesBegan:touches withEvent:event];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     
     [super touchesMoved:touches withEvent:event];
+    [self.bodyLabel touchesBegan:touches withEvent:event];
     UITouch *touch = [touches anyObject];
     
     CGPoint currentLocation = [touch locationInView:self];
@@ -363,7 +460,7 @@ static NSMutableDictionary *cellHeightCache;
     
     if (slidingFrame.origin.x < 0) {
         self.agreeView.backgroundColor = [UIColor clearColor];
-        if (slidingFrame.origin.x + slidingFrame.size.width < initialDisagreeImageFrame.origin.x - iconTrackingDistance) {
+        if (slidingFrame.origin.x + slidingFrame.size.width < (self.slidingContainer.frame.size.width - self.disagreeImageView.frame.size.width - 5.0) - iconTrackingDistance) {
             disagreeImageFrame.origin.x = slidingFrame.origin.x + slidingFrame.size.width + iconTrackingDistance;
             self.disagreeImageView.frame = disagreeImageFrame;
         }
@@ -377,8 +474,9 @@ static NSMutableDictionary *cellHeightCache;
     closedSlidingFrame.origin.x = 0;
     
     CGRect closedAgreeImageFrame = initialAgreeImageFrame;
-    closedAgreeImageFrame.origin.x = 0 - closedAgreeImageFrame.origin.x - closedAgreeImageFrame.size.width;
-    
+    closedAgreeImageFrame.origin.x = 5.0;
+    closedAgreeImageFrame.origin.y = (self.slidingContainer.frame.size.height / 2.0) - (closedAgreeImageFrame.size.height / 2.0);
+
     [UIView animateWithDuration:.5 animations:^{
         self.slidingContainer.frame = closedSlidingFrame;
         self.agreeImageView.frame = closedAgreeImageFrame;
@@ -394,8 +492,14 @@ static NSMutableDictionary *cellHeightCache;
         [Flurry logEvent: @"Swiped_Agree"];
         [self.delegate predictionAgreed: self.prediction inCell: self];
     }
-    
 }
+
+//- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+//    if ([self.bodyLabel hitTest:point withEvent:event] == self.bodyLabel)
+//        return self.bodyLabel;
+//    
+//    return [super hitTest:point withEvent:event];
+//}
 
 - (void)doDisagreeAnimation:(NSTimeInterval)swipeDuration {
     
@@ -405,8 +509,8 @@ static NSMutableDictionary *cellHeightCache;
     closedSlidingFrame.origin.x = 0;
     
     CGRect closedDisagreeImageFrame = initialDisagreeImageFrame;
-    closedDisagreeImageFrame.origin.x = closedSlidingFrame.size.width + (closedSlidingFrame.size.width - initialDisagreeImageFrame.origin.x);
-    
+    closedDisagreeImageFrame.origin.x = self.slidingContainer.frame.size.width - closedDisagreeImageFrame.size.width - 5.0;
+    closedDisagreeImageFrame.origin.y = (self.slidingContainer.frame.size.height / 2.0) - (closedDisagreeImageFrame.size.height / 2.0);
     [UIView animateWithDuration:.5 animations:^{
         self.slidingContainer.frame = closedSlidingFrame;
         self.disagreeImageView.frame = closedDisagreeImageFrame;
@@ -438,14 +542,20 @@ static NSMutableDictionary *cellHeightCache;
         [self resetFrames:0.5 completion:nil];
 }
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-
+ 
     if (!self.touchMoved) {
         if ([self.profileButton hitTest:self.initialTouchLocation withEvent:event]) {
             [self.profileButton sendActionsForControlEvents:UIControlEventTouchUpInside];
             [self cleanupFromSwipe];
             [self resetFrames:0.5 completion:nil];
             return;
+        } else if (self.bodyLabel.activeLink){
+            [self.bodyLabel touchesEnded:touches withEvent:event];
+            [self cleanupFromSwipe];
+            [self resetFrames:0.5 completion:nil];
+            return;
         }
+
     }
     
     if (!self.trackingTouch) {
@@ -474,6 +584,7 @@ static NSMutableDictionary *cellHeightCache;
     self.trackingTouch = NO;
     self.initialTouchLocation = CGPointZero;
     self.initialTouchTimestamp = 0;
+    self.initialTouch = nil;
 }
 - (void)resetFrames:(NSTimeInterval)duration completion:(void(^)(void))completion {
     CGRect frame = self.slidingContainer.frame;
@@ -483,11 +594,13 @@ static NSMutableDictionary *cellHeightCache;
         self.slidingContainer.frame = frame;
         
         CGRect imageFrame = self.agreeImageView.frame;
-        imageFrame.origin.x = initialAgreeImageFrame.origin.x;
+        imageFrame.origin.x = 5.0;
+        imageFrame.origin.y = (self.slidingContainer.frame.size.height / 2.0) - (initialAgreeImageFrame.size.height / 2.0);
         self.agreeImageView.frame = imageFrame;
         
         imageFrame = self.disagreeImageView.frame;
-        imageFrame.origin.x = initialDisagreeImageFrame.origin.x;
+        imageFrame.origin.x = self.slidingContainer.frame.size.width - imageFrame.size.width - 5.0;
+        imageFrame.origin.y = (self.slidingContainer.frame.size.height / 2.0) - (initialDisagreeImageFrame.size.height / 2.0);
         self.disagreeImageView.frame = imageFrame;
         
         self.agreeView.backgroundColor = [UIColor blackColor];
@@ -518,4 +631,9 @@ static NSMutableDictionary *cellHeightCache;
     self.prediction = nil;
 }
 
+
+- (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithTextCheckingResult:(NSTextCheckingResult *)result  {
+    NSString *selectedText = [self.prediction.body substringWithRange:result.range];
+    NSLog(@"clicked %@", selectedText);
+}
 @end

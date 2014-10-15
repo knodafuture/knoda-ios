@@ -83,13 +83,17 @@ NSString *VotingDateWalkthroughCompleteKey = @"VOTING_DATE_COMPLETE_KEY";
     
     CGRect rect = self.addPredictionViewController.expirationBar.frame;
     
-    CGImageRef croppedRef = CGImageCreateWithImageInRect(capture.CGImage, CGRectMake(0, rect.origin.y + rect.size.height, walkthroughImage.size.width, walkthroughImage.size.height - 5.0));
+    CGFloat offset = 0;
+    if (rect.size.width > 320)
+        offset = (rect.size.width - 320) / 2.0;
+    
+    CGImageRef croppedRef = CGImageCreateWithImageInRect(capture.CGImage, CGRectMake(offset, rect.origin.y + rect.size.height, walkthroughImage.size.width, walkthroughImage.size.height - 5.0));
     
     UIImage *croppedImage = [UIImage imageWithCGImage:croppedRef];
     CGImageRelease(croppedRef);
     
     croppedImage = [croppedImage applyExtraLightEffect];
-    UIView *walkthroughView = [[UIView alloc] initWithFrame:CGRectMake(0, rect.origin.y + rect.size.height - 5.0, walkthroughImage.size.width, walkthroughImage.size.height)];
+    UIView *walkthroughView = [[UIView alloc] initWithFrame:CGRectMake(offset, rect.origin.y + rect.size.height - 5.0, walkthroughImage.size.width, walkthroughImage.size.height)];
     UIImageView *background = [[UIImageView alloc] initWithImage:croppedImage];
     CGRect frame = background.frame;
     frame.origin.y = 5.0;

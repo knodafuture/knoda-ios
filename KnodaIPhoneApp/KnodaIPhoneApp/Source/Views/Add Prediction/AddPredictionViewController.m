@@ -124,7 +124,9 @@ static NSDateFormatter *dateFormatter;
     
     CGRect frame = self.datePickerView.frame;
     frame.origin.y = self.view.frame.size.height;
+    frame.size.width = self.view.frame.size.width;
     self.datePickerView.frame = frame;
+    
     [self.view addSubview:self.datePickerView];
     
     if (!dateFormatter) {

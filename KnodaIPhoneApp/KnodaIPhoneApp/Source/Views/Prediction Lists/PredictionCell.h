@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TTTAttributedLabel.h"
 
 @class PredictionCell;
 @class Prediction;
@@ -15,11 +16,12 @@
 - (void)predictionAgreed:(Prediction *)prediction inCell:(PredictionCell *)cell;
 - (void)predictionDisagreed:(Prediction *)prediction inCell:(PredictionCell *)cell;
 - (void)profileSelectedWithUserId:(NSInteger) userId inCell:(PredictionCell *)cell;
-
+- (void)userMentionSelected:(NSString *)username inCell:(PredictionCell *)cell;
+- (void)hashtagSelected:(NSString *)hashtag inCell:(PredictionCell *)cell;
 @end
 
 
-@interface PredictionCell : UITableViewCell
+@interface PredictionCell : UITableViewCell <TTTAttributedLabelDelegate>
 
 @property (weak, nonatomic) id<PredictionCellDelegate> delegate;
 @property (nonatomic, assign) BOOL agreed;

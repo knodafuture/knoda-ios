@@ -73,7 +73,7 @@
         UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"SettingsArrow"]];
         CGRect frame = imageView.frame;
         frame.origin.y = (cell.frame.size.height / 2.0) - (frame.size.height / 2.0);
-        frame.origin.x = cell.frame.size.width - 10.0 - frame.size.width;
+        frame.origin.x = self.view.frame.size.width - 10.0 - frame.size.width;
         imageView.frame = frame;
         
         [cell.contentView addSubview:imageView];

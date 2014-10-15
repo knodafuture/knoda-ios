@@ -37,6 +37,7 @@ static UINib *nib;
     
     CGRect frame = cell.predictionCell.frame;
     frame.origin.y = 0;
+    frame.size.width = cell.frame.size.width;
     cell.predictionCell.frame = frame;
     
     return cell;

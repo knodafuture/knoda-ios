@@ -30,7 +30,7 @@ static UINib *nib;
         frame.origin.y = 0;
         cell.barView.frame = frame;
         
-        [cell.contentView addSubview:cell.barView];
+        [cell.innerView addSubview:cell.barView];
         
     }
     return cell;

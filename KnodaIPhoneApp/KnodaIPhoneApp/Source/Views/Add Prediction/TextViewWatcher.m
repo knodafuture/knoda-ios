@@ -112,7 +112,7 @@
 }
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeAllObservations];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 

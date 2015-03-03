@@ -382,6 +382,9 @@ NSString *GetStartedNotificationName = @"GETSTARTED";
             case MenuGroups:
                 viewController = [[CGViewController alloc] init];
                 break;
+            default:
+                viewController = [[NewHomeViewController alloc] initWithNibName:@"NewHomeViewController" bundle:[NSBundle mainBundle]];
+                break;
         }
     } else
         return navigationController;

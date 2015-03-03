@@ -39,7 +39,6 @@ static NSDateFormatter *dateFormatter;
 @property (weak, nonatomic) IBOutlet UIView *groupPickerContainerView;
 
 @property (weak, nonatomic) IBOutlet UIView *categoryPickerContainerView;
-@property (weak, nonatomic) IBOutlet UIView *categoryBar;
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (weak, nonatomic) IBOutlet UIImageView *avatarView;
 @property (weak, nonatomic) UIBarButtonItem *predictBarButtonItem;
@@ -105,8 +104,6 @@ static NSDateFormatter *dateFormatter;
     self.predictBarButtonItem = self.navigationItem.rightBarButtonItem = [UIBarButtonItem styledBarButtonItemWithTitle:@"Submit" target:self action:@selector(predict) color:[UIColor whiteColor]];
     self.title = @"PREDICT";
     
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap)];
-    //[self.view addGestureRecognizer:tap];
     
     [[WebApi sharedInstance] getImage:[UserManager sharedInstance].user.avatar.big completion:^(UIImage *image, NSError *error) {
         if (!error)

@@ -14,6 +14,7 @@
 #import "NavigationViewController.h"
 #import "AddPredictionViewController.h"
 #import "UserManager.h"
+#import "GenericWalkthroughView.h"
 
 NSString *VotingWalkthroughCompleteNotificationName = @"VOTING_COMPLETE";
 NSString *PredictWalkthroughCompleteNotificationName = @"PREDICTION_COMPLETE";
@@ -77,44 +78,24 @@ NSString *VotingDateWalkthroughCompleteKey = @"VOTING_DATE_COMPLETE_KEY";
 - (void)showVotingDateWalkthrough {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(completeVotingDateWalkthrough) name:VotingDateWalkthroughCompleteNotificationName object:nil];
     
-    UIImage *capture = [self.addPredictionViewController.view captureView];
+    GenericWalkthroughView *walkthrough = [[GenericWalkthroughView alloc] init];
     
-    UIImage *walkthroughImage = [UIImage imageNamed:@"VotingDateWalkThru"];
+    CGRect rect = self.addPredictionViewController.categoryBar.frame;
     
-    CGRect rect = self.addPredictionViewController.expirationBar.frame;
-    
-    CGFloat offset = 0;
-    if (rect.size.width > 320)
-        offset = (rect.size.width - 320) / 2.0;
-    
-    CGImageRef croppedRef = CGImageCreateWithImageInRect(capture.CGImage, CGRectMake(offset, rect.origin.y + rect.size.height, walkthroughImage.size.width, walkthroughImage.size.height - 5.0));
-    
-    UIImage *croppedImage = [UIImage imageWithCGImage:croppedRef];
-    CGImageRelease(croppedRef);
-    
-    croppedImage = [croppedImage applyExtraLightEffect];
-    UIView *walkthroughView = [[UIView alloc] initWithFrame:CGRectMake(offset, rect.origin.y + rect.size.height - 5.0, walkthroughImage.size.width, walkthroughImage.size.height)];
-    UIImageView *background = [[UIImageView alloc] initWithImage:croppedImage];
-    CGRect frame = background.frame;
-    frame.origin.y = 5.0;
-    background.frame = frame;
-    [walkthroughView addSubview:background];
-    
-    UIImageView *foreground = [[UIImageView alloc] initWithImage:walkthroughImage];
-    [walkthroughView addSubview:foreground];
-    
-    walkthroughView.backgroundColor = [UIColor clearColor];
-    
-    walkthroughView.alpha = 0.0;
+    [walkthrough addBlur:self.addPredictionViewController.view destinationRect:rect];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(completeVotingDateWalkthrough)];
-    [walkthroughView addGestureRecognizer:tap];
+    [walkthrough addGestureRecognizer:tap];
     
-    [self.addPredictionViewController.view addSubview:walkthroughView];
-    self.currentWalkthrough = walkthroughView;
+    [walkthrough prepareWithTitle:@"CHOOSING A VOTING DATE" body:@"Knoda users can vote on your prediction until this time. Be sure to choose a date before the result of your prediction is known." direction:YES];
+
+    [self.addPredictionViewController.view addSubview:walkthrough];
+    self.currentWalkthrough = walkthrough;
+    
+    [walkthrough smallerFont];
     
     [UIView animateWithDuration:0.5 animations:^{
-        walkthroughView.alpha = 1.0;
+        walkthrough.alpha = 1.0;
     }];
 }
 
@@ -123,7 +104,7 @@ NSString *VotingDateWalkthroughCompleteKey = @"VOTING_DATE_COMPLETE_KEY";
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     [UIView animateWithDuration:0.5 animations:^{
-        self.currentWalkthrough.alpha = 0.0;
+        ((UIView *)self.currentWalkthrough).alpha = 0.0;
     } completion:^(BOOL finished) {
         [self beginShowingWalkthroughIfNeeded];
     }];
@@ -132,38 +113,22 @@ NSString *VotingDateWalkthroughCompleteKey = @"VOTING_DATE_COMPLETE_KEY";
 - (void)showVotingWalkthrough {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(completeVotingWalkthrough) name:VotingWalkthroughCompleteNotificationName object:nil];
     
-    UIImage *capture = [self.homeViewController.parentViewController.view captureView];
-    
-    UIImage *walkthroughImage = [UIImage imageNamed:@"VoteWalkthru"];
-    
     CGRect rect =[self.homeViewController.tableView rectForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    rect.origin.y = rect.origin.y + rect.size.height;
     
-    CGImageRef croppedRef = CGImageCreateWithImageInRect(capture.CGImage, CGRectMake(0, rect.origin.y + rect.size.height, walkthroughImage.size.width, walkthroughImage.size.height - 5.0));
+    GenericWalkthroughView *walkthrough = [[GenericWalkthroughView alloc] init];
     
-    UIImage *croppedImage = [UIImage imageWithCGImage:croppedRef];
-    CGImageRelease(croppedRef);
-    
-    croppedImage = [croppedImage applyExtraLightEffect];
-    UIView *walkthroughView = [[UIView alloc] initWithFrame:CGRectMake(0, rect.origin.y + rect.size.height - 5.0, walkthroughImage.size.width, walkthroughImage.size.height)];
-    UIImageView *background = [[UIImageView alloc] initWithImage:croppedImage];
-    CGRect frame = background.frame;
-    frame.origin.y = 5.0;
-    background.frame = frame;
-    [walkthroughView addSubview:background];
-    
-    UIImageView *foreground = [[UIImageView alloc] initWithImage:walkthroughImage];
-    [walkthroughView addSubview:foreground];
+    [walkthrough addBlur:self.homeViewController.parentViewController.view destinationRect:rect];
+    [walkthrough prepareWithTitle:@"CHOOSE A SIDE" body:@"Swipe right to agree or swipe left to disagree with a prediction. Give it a try!" direction:YES];
 
-    walkthroughView.backgroundColor = [UIColor clearColor];
+    [self.homeViewController.tableView addSubview:walkthrough];
+    self.currentWalkthrough = walkthrough;
     
-    walkthroughView.alpha = 0.0;
-    
-    [self.homeViewController.view addSubview:walkthroughView];
-    self.currentWalkthrough = walkthroughView;
     
     [UIView animateWithDuration:0.5 animations:^{
-        walkthroughView.alpha = 1.0;
+        walkthrough.alpha = 1.0;
     }];
+
 }
 
 - (void)completeVotingWalkthrough {
@@ -171,7 +136,7 @@ NSString *VotingDateWalkthroughCompleteKey = @"VOTING_DATE_COMPLETE_KEY";
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     [UIView animateWithDuration:0.5 animations:^{
-        self.currentWalkthrough.alpha = 0.0;
+        ((UIView *)self.currentWalkthrough).alpha = 0.0;
     } completion:^(BOOL finished) {
         [self beginShowingWalkthroughIfNeeded];
     }];
@@ -181,42 +146,31 @@ NSString *VotingDateWalkthroughCompleteKey = @"VOTING_DATE_COMPLETE_KEY";
 - (void)showPredictionWalkthrough {
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(completePredictWalkthrough) name:PredictWalkthroughCompleteNotificationName object:nil];
-    UIImage *capture = [self.homeViewController.parentViewController.view captureView];
-    
-    UIImage *walkthroughImage = [UIImage imageNamed:@"PredictWalkthru"];
-    
-    CGRect rect = CGRectMake(0, self.homeViewController.view.frame.size.height - walkthroughImage.size.height - 5.0, walkthroughImage.size.width, walkthroughImage.size.height - 5.0);
-    
-    CGImageRef croppedRef = CGImageCreateWithImageInRect(capture.CGImage, rect);
-    
-    UIImage *croppedImage = [UIImage imageWithCGImage:croppedRef];
-    CGImageRelease(croppedRef);
-    
-    croppedImage = [croppedImage applyExtraLightEffect];
+    GenericWalkthroughView *walkthrough = [[GenericWalkthroughView alloc] init];
+
+    CGRect rect = CGRectMake(0, self.homeViewController.view.frame.size.height - walkthrough.frame.size.height, walkthrough.frame.size.width, walkthrough.frame.size.height - 5.0);
+
+    [walkthrough addBlur:self.homeViewController.parentViewController.view destinationRect:rect];
     
     UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
-    CGPoint convertedPoint = CGPointMake(0, rect.origin.y + 20 + 44);//[window convertPoint:rect.origin fromView:self.viewController.view];
-    UIView *walkthroughView = [[UIView alloc] initWithFrame:CGRectMake(0, convertedPoint.y, walkthroughImage.size.width, walkthroughImage.size.height)];
-    
-    UIImageView *background = [[UIImageView alloc] initWithImage:croppedImage];
-    [walkthroughView addSubview:background];
-    
-    UIImageView *foreground = [[UIImageView alloc] initWithImage:walkthroughImage];
-    [walkthroughView addSubview:foreground];
-    
-    walkthroughView.backgroundColor = [UIColor clearColor];
-    
-    walkthroughView.alpha = 0.0;
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(completePredictWalkthrough)];
-    [walkthroughView addGestureRecognizer:tap];
+    [walkthrough addGestureRecognizer:tap];
     
-    [window.rootViewController.view addSubview:walkthroughView];
-    self.currentWalkthrough = walkthroughView;
+    [walkthrough prepareWithTitle:@"MAKE A PREDICTION" body:@"Now that you're acquainted with Knoda, tap the predict icon to make your first prediction." direction:NO];
+    
+    [window.rootViewController.view addSubview:walkthrough];
+    
+    self.currentWalkthrough = walkthrough;
     self.homeViewController.tableView.userInteractionEnabled = NO;
+    
+    CGRect frame = walkthrough.frame;
+    frame.origin.y += 20 + 36;
+    walkthrough.frame = frame;
+    
     [(NavigationViewController *)window.rootViewController setTabBarEnabled:NO];
     [UIView animateWithDuration:0.5 animations:^{
-        walkthroughView.alpha = 1.0;
+        walkthrough.alpha = 1.0;
     }];
 }
 
@@ -230,7 +184,7 @@ NSString *VotingDateWalkthroughCompleteKey = @"VOTING_DATE_COMPLETE_KEY";
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     [UIView animateWithDuration:0.5 animations:^{
-        self.currentWalkthrough.alpha = 0.0;
+        ((UIView *)self.currentWalkthrough).alpha = 0.0;
     }];
 }
 

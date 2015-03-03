@@ -10,7 +10,7 @@
 
 @class HomeViewController;
 @class AddPredictionViewController;
-
+@class GenericWalkthroughView;
 UIKIT_EXTERN NSString *VotingWalkthroughCompleteNotificationName;
 UIKIT_EXTERN NSString *PredictWalkthroughCompleteNotificationName;
 UIKIT_EXTERN NSString *VotingDateWalkthroughCompleteNotificationName;
@@ -19,7 +19,7 @@ UIKIT_EXTERN NSString *PredictWalkthroughCompleteKey;
 UIKIT_EXTERN NSString *VotingDateWalkthroughCompleteKey;
 
 @interface WalkthroughController : NSObject
-@property (strong, nonatomic) UIView *currentWalkthrough;
+@property (strong, nonatomic) id currentWalkthrough;
 
 - (id)initWithTargetViewController:(HomeViewController *)viewController;
 - (id)initForAddPredictionViewController:(AddPredictionViewController *)viewController;

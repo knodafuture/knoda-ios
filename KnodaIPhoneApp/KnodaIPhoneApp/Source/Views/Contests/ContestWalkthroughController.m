@@ -11,6 +11,7 @@
 #import "UIView+Utils.h"
 #import "UIImage+ImageEffects.h"
 #import "ContestTableViewCell.h"
+#import "GenericWalkthroughView.h"
 
 NSString *ContestVoteWalkthroughCompleteNotificationName = @"CONTESTVOTEWALKTHROUGHCOMPLETE";
 NSString *ContestVoteWalkthroughNotificationKey = @"CONTESTVOTEWLAKTHROUGHCOMPLTEKEY";
@@ -44,37 +45,19 @@ NSString *ContestSuccessWalkthroughNotificationKey = @"CONTESTSUCCESSWALKTHROUGH
 - (void)showContestVoteWalkthrough {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(completeContestVoteWalkthrough) name:ContestVoteWalkthroughCompleteNotificationName object:nil];
     
-    UIImage *capture = [self.viewController.view captureView];
-    
-    UIImage *walkthroughImage = [UIImage imageNamed:@"ContestVoteWalkThru"];
+    GenericWalkthroughView *walkthrough = [[GenericWalkthroughView alloc] init];
     
     CGRect rect = [self.viewController rectForFirstTableViewCell];
+    rect.origin.y += rect.size.height;
     
-    CGImageRef croppedRef = CGImageCreateWithImageInRect(capture.CGImage, CGRectMake(0, rect.origin.y + rect.size.height, walkthroughImage.size.width, walkthroughImage.size.height - 5.0));
+    [walkthrough addBlur:self.viewController.view destinationRect:rect];
     
-    UIImage *croppedImage = [UIImage imageWithCGImage:croppedRef];
-    CGImageRelease(croppedRef);
-    
-    croppedImage = [croppedImage applyExtraLightEffect];
-    UIView *walkthroughView = [[UIView alloc] initWithFrame:CGRectMake(0, rect.origin.y + rect.size.height - 5.0, walkthroughImage.size.width, walkthroughImage.size.height)];
-    UIImageView *background = [[UIImageView alloc] initWithImage:croppedImage];
-    CGRect frame = background.frame;
-    frame.origin.y = 5.0;
-    background.frame = frame;
-    [walkthroughView addSubview:background];
-    
-    UIImageView *foreground = [[UIImageView alloc] initWithImage:walkthroughImage];
-    [walkthroughView addSubview:foreground];
-    
-    walkthroughView.backgroundColor = [UIColor clearColor];
-    
-    walkthroughView.alpha = 0.0;
-    
-    [self.viewController.tableView addSubview:walkthroughView];
-    self.currentWalkthrough = walkthroughView;
+    [walkthrough prepareWithTitle:@"HOW TO JOIN THE CONTEST" body:@"Vote on a Live Prediction and you're eligible to win. Boom! It's that easy" direction:YES];
+    [self.viewController.tableView addSubview:walkthrough];
+    self.currentWalkthrough = walkthrough;
     
     [UIView animateWithDuration:0.5 animations:^{
-        walkthroughView.alpha = 1.0;
+        walkthrough.alpha = 1.0;
     }];
 }
 
@@ -83,7 +66,7 @@ NSString *ContestSuccessWalkthroughNotificationKey = @"CONTESTSUCCESSWALKTHROUGH
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     [UIView animateWithDuration:0.5 animations:^{
-        self.currentWalkthrough.alpha = 0.0;
+        ((UIView *)self.currentWalkthrough).alpha = 0.0;
     } completion:^(BOOL finished) {
         [self beginShowingWalkthroughIfNeeded];
     }];
@@ -92,43 +75,25 @@ NSString *ContestSuccessWalkthroughNotificationKey = @"CONTESTSUCCESSWALKTHROUGH
 - (void)showContestSuccessWalkthrough {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(completeContestSuccessWalkthrough) name:ContestVoteWalkthroughCompleteNotificationName object:nil];
     
+    GenericWalkthroughView *walkthrough = [[GenericWalkthroughView alloc] init];
+    
     [self.viewController.tableView scrollRectToVisible:self.viewController.tableView.frame animated:NO];
-    
-    UIImage *capture = [self.viewController.view captureView];
-    
-    UIImage *walkthroughImage = [UIImage imageNamed:@"ContestAddedWalkThru"];
-    
     CGRect rect = self.viewController.headerView.frame;
+    rect.origin.y += rect.size.height;
+
+    [walkthrough addBlur:self.viewController.view destinationRect:rect];
     
-    CGImageRef croppedRef = CGImageCreateWithImageInRect(capture.CGImage, CGRectMake(0, rect.origin.y + rect.size.height, walkthroughImage.size.width, walkthroughImage.size.height - 5.0));
+    [walkthrough prepareWithTitle:@"RIGHT ON!" body:@"Now that you've voted, this contest will show up under your 'My Contests' tab." direction:YES];
     
-    UIImage *croppedImage = [UIImage imageWithCGImage:croppedRef];
-    CGImageRelease(croppedRef);
-    
-    croppedImage = [croppedImage applyExtraLightEffect];
-    UIView *walkthroughView = [[UIView alloc] initWithFrame:CGRectMake(0, rect.origin.y + rect.size.height - 5.0, walkthroughImage.size.width, walkthroughImage.size.height)];
-    UIImageView *background = [[UIImageView alloc] initWithImage:croppedImage];
-    CGRect frame = background.frame;
-    frame.origin.y = 5.0;
-    background.frame = frame;
-    [walkthroughView addSubview:background];
-    
-    UIImageView *foreground = [[UIImageView alloc] initWithImage:walkthroughImage];
-    [walkthroughView addSubview:foreground];
-    
-    walkthroughView.backgroundColor = [UIColor clearColor];
-    
-    walkthroughView.alpha = 0.0;
-    
-    [self.viewController.view addSubview:walkthroughView];
-    self.currentWalkthrough = walkthroughView;
+    [self.viewController.view addSubview:walkthrough];
+    self.currentWalkthrough = walkthrough;
     
     self.viewController.tableView.userInteractionEnabled = NO;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(completeContestSuccessWalkthrough)];
-    [walkthroughView addGestureRecognizer:tap];
+    [walkthrough addGestureRecognizer:tap];
     
     [UIView animateWithDuration:0.5 animations:^{
-        walkthroughView.alpha = 1.0;
+        walkthrough.alpha = 1.0;
     }];
 }
 
@@ -137,7 +102,7 @@ NSString *ContestSuccessWalkthroughNotificationKey = @"CONTESTSUCCESSWALKTHROUGH
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     self.viewController.tableView.userInteractionEnabled = YES;
     [UIView animateWithDuration:0.5 animations:^{
-        self.currentWalkthrough.alpha = 0.0;
+        ((UIView *)self.currentWalkthrough).alpha = 0.0;
     } completion:^(BOOL finished) {
         [self beginShowingWalkthroughIfNeeded];
     }];

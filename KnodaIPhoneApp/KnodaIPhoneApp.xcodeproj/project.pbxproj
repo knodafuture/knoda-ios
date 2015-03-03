@@ -579,6 +579,12 @@
 		01F82CD718DD3E430000E96B /* CreateGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F82CD318DD3E430000E96B /* CreateGroupViewController.xib */; };
 		01F82CDB18DD451D0000E96B /* libFlurry_4.3.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F82CDA18DD451D0000E96B /* libFlurry_4.3.2.a */; };
 		01F82CDC18DD451D0000E96B /* libFlurry_4.3.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F82CDA18DD451D0000E96B /* libFlurry_4.3.2.a */; };
+		01FEFD1F19F306D500968049 /* GenericWalkthroughView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01FEFD1E19F306D500968049 /* GenericWalkthroughView.xib */; };
+		01FEFD2019F306D500968049 /* GenericWalkthroughView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01FEFD1E19F306D500968049 /* GenericWalkthroughView.xib */; };
+		01FEFD2319F306E200968049 /* GenericWalkthroughView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01FEFD2219F306E200968049 /* GenericWalkthroughView.m */; };
+		01FEFD2419F306E200968049 /* GenericWalkthroughView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01FEFD2219F306E200968049 /* GenericWalkthroughView.m */; };
+		01FEFD2719F30E1800968049 /* Triangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 01FEFD2619F30E1800968049 /* Triangle.m */; };
+		01FEFD2819F30E1800968049 /* Triangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 01FEFD2619F30E1800968049 /* Triangle.m */; };
 		01FFE52C187B7432001C9893 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01FFE52B187B7432001C9893 /* StoreKit.framework */; };
 		129025DD2FFF4D9FA85D4A70 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D053512337C4121BADACAB9 /* libPods.a */; };
 		50D776ADE5CA49A68908C526 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D053512337C4121BADACAB9 /* libPods.a */; };
@@ -1063,6 +1069,11 @@
 		01F82CD318DD3E430000E96B /* CreateGroupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateGroupViewController.xib; sourceTree = "<group>"; };
 		01F82CD918DD451D0000E96B /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		01F82CDA18DD451D0000E96B /* libFlurry_4.3.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_4.3.2.a; sourceTree = "<group>"; };
+		01FEFD1E19F306D500968049 /* GenericWalkthroughView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GenericWalkthroughView.xib; sourceTree = "<group>"; };
+		01FEFD2119F306E200968049 /* GenericWalkthroughView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenericWalkthroughView.h; sourceTree = "<group>"; };
+		01FEFD2219F306E200968049 /* GenericWalkthroughView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenericWalkthroughView.m; sourceTree = "<group>"; };
+		01FEFD2519F30E1800968049 /* Triangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Triangle.h; sourceTree = "<group>"; };
+		01FEFD2619F30E1800968049 /* Triangle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Triangle.m; sourceTree = "<group>"; };
 		01FFE52B187B7432001C9893 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		2D053512337C4121BADACAB9 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8825C313D9324F9BA336C19A /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = "<group>"; };
@@ -1331,6 +1342,11 @@
 				01598B2A1858365A002E2534 /* FirstStartView.m */,
 				01BECAAB197854A400E75CBA /* WalkthroughController.h */,
 				01BECAAC197854A400E75CBA /* WalkthroughController.m */,
+				01FEFD1E19F306D500968049 /* GenericWalkthroughView.xib */,
+				01FEFD2119F306E200968049 /* GenericWalkthroughView.h */,
+				01FEFD2219F306E200968049 /* GenericWalkthroughView.m */,
+				01FEFD2519F30E1800968049 /* Triangle.h */,
+				01FEFD2619F30E1800968049 /* Triangle.m */,
 			);
 			path = Generic;
 			sourceTree = "<group>";
@@ -2063,6 +2079,7 @@
 				013DA87B1853002200B507E4 /* IntroOverlay.png in Resources */,
 				013DA8491853002200B507E4 /* PredictorHeaderCell.xib in Resources */,
 				01A1F6821998574900371751 /* ContestTableViewCell.xib in Resources */,
+				01FEFD2019F306D500968049 /* GenericWalkthroughView.xib in Resources */,
 				013DA8771853002200B507E4 /* KronaOne-Regular.ttf in Resources */,
 				01F6660A19BF873D00992AEC /* NoSocialPredictionsV2.xib in Resources */,
 				01A1F69E1999E9A100371751 /* ContestNoContentCell.xib in Resources */,
@@ -2166,6 +2183,7 @@
 				01BECA401976282000E75CBA /* SettingsViewController.xib in Resources */,
 				0175661A19B7E58200D14EE4 /* NoContactsCell.xib in Resources */,
 				01598B271858364F002E2534 /* FirstStartView.xib in Resources */,
+				01FEFD1F19F306D500968049 /* GenericWalkthroughView.xib in Resources */,
 				013DA8781853002200B507E4 /* Default@2x-568h.png in Resources */,
 				01E2576B18E0743A009D3782 /* RankingsTableViewCell.xib in Resources */,
 				01A1F6C0199CAD9800371751 /* NewSelectPictureViewController.xib in Resources */,
@@ -2349,6 +2367,7 @@
 				013DA7D71853002200B507E4 /* Prediction+Utils.m in Sources */,
 				01A678781957B1D4002FDE1F /* NewActivityViewController.m in Sources */,
 				013DA8551853002200B507E4 /* PredictionsViewController.m in Sources */,
+				01FEFD2419F306E200968049 /* GenericWalkthroughView.m in Sources */,
 				01BECA5B19763EC900E75CBA /* MeViewController.m in Sources */,
 				01ACCE681961F2E800D3ABE9 /* Settings.m in Sources */,
 				013DA8091853002200B507E4 /* BaseTableViewController.m in Sources */,
@@ -2398,6 +2417,7 @@
 				013DA8651853002200B507E4 /* SelectPictureViewController.m in Sources */,
 				01DC10BC19EE3F24001BA0F9 /* TextViewWatcher.m in Sources */,
 				013DA8511853002200B507E4 /* PredictionCell.m in Sources */,
+				01FEFD2819F30E1800968049 /* Triangle.m in Sources */,
 				014FDF8318D9EB5F006B51D9 /* EditGroupViewController.m in Sources */,
 				019CF39519B7A0C000C734E0 /* SocialInvitationsViewController.m in Sources */,
 				01E8CB791876786C003AE018 /* NoSearchResultsCell.m in Sources */,
@@ -2529,6 +2549,7 @@
 				013DA7D61853002200B507E4 /* Prediction+Utils.m in Sources */,
 				01A678771957B1D4002FDE1F /* NewActivityViewController.m in Sources */,
 				013DA8541853002200B507E4 /* PredictionsViewController.m in Sources */,
+				01FEFD2319F306E200968049 /* GenericWalkthroughView.m in Sources */,
 				01BECA5A19763EC900E75CBA /* MeViewController.m in Sources */,
 				013DA8081853002200B507E4 /* BaseTableViewController.m in Sources */,
 				01C4A49D190E3D2F00E08031 /* TWSignedRequest.m in Sources */,
@@ -2578,6 +2599,7 @@
 				013DA8641853002200B507E4 /* SelectPictureViewController.m in Sources */,
 				01DC10BB19EE3F24001BA0F9 /* TextViewWatcher.m in Sources */,
 				014FDF8218D9EB5F006B51D9 /* EditGroupViewController.m in Sources */,
+				01FEFD2719F30E1800968049 /* Triangle.m in Sources */,
 				01E8CB781876786C003AE018 /* NoSearchResultsCell.m in Sources */,
 				019CF39419B7A0C000C734E0 /* SocialInvitationsViewController.m in Sources */,
 				013DA8501853002200B507E4 /* PredictionCell.m in Sources */,

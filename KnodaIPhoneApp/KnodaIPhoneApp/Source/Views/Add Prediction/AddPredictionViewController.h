@@ -24,6 +24,7 @@
 
 @property (nonatomic, weak) id<AddPredictionViewControllerDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UIView *expirationBar;
+@property (weak, nonatomic) IBOutlet UIView *categoryBar;
 
 
 @end
